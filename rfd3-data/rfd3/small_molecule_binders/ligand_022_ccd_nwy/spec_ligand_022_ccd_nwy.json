@@ -1,0 +1,10 @@
+{
+  "ligand_022_ccd_nwy": {
+    "input": "./data/rfd3/ccd_ligands/structures/NWY.cif",
+    "ligand": "NWY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NWY": "ALL"
+    }
+  }
+}

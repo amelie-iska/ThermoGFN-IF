@@ -1,0 +1,10 @@
+{
+  "ligand_164_ccd_xwy": {
+    "input": "./data/rfd3/ccd_ligands/structures/XWY.cif",
+    "ligand": "XWY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XWY": "ALL"
+    }
+  }
+}

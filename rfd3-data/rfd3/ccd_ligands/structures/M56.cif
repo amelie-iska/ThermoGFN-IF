@@ -1,0 +1,44 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1 . M56 L 1 1 . 1 M56 L N1 ? 3.464  0.516  0.001  1 1
+HETATM C C4 . M56 L 1 1 . 1 M56 L C4 ? 0.77   1.457  -0.001 1 2
+HETATM C C5 . M56 L 1 1 . 1 M56 L C5 ? -0.515 1.896  -0.002 1 3
+HETATM C C6 . M56 L 1 1 . 1 M56 L C6 ? -1.589 0.978  0.0    1 4
+HETATM C C7 . M56 L 1 1 . 1 M56 L C7 ? -3.699 0.201  0.001  1 5
+HETATM C C8 . M56 L 1 1 . 1 M56 L C8 ? -1.303 -0.394 0.001  1 6
+HETATM C C1 . M56 L 1 1 . 1 M56 L C1 ? 4.854  0.054  0.008  1 7
+HETATM C C2 . M56 L 1 1 . 1 M56 L C2 ? 2.456  -0.38  -0.004 1 8
+HETATM O O1 . M56 L 1 1 . 1 M56 L O1 ? 2.702  -1.571 -0.007 1 9
+HETATM C C3 . M56 L 1 1 . 1 M56 L C3 ? 1.056  0.085  -0.005 1 10
+HETATM N N2 . M56 L 1 1 . 1 M56 L N2 ? -2.912 1.212  -0.001 1 11
+HETATM S S1 . M56 L 1 1 . 1 M56 L S1 ? -2.832 -1.268 0.002  1 12
+HETATM C C9 . M56 L 1 1 . 1 M56 L C9 ? 0.013  -0.838 0.002  1 13
+HETATM H H4 . M56 L 1 1 . 1 M56 L H4 ? 3.268  1.466  0.004  1 14
+HETATM H H5 . M56 L 1 1 . 1 M56 L H5 ? 1.579  2.172  -0.001 1 15
+HETATM H H6 . M56 L 1 1 . 1 M56 L H6 ? -0.718 2.957  -0.003 1 16
+HETATM H H7 . M56 L 1 1 . 1 M56 L H7 ? -4.777 0.27   0.001  1 17
+HETATM H H2 . M56 L 1 1 . 1 M56 L H2 ? 5.032  -0.548 0.899  1 18
+HETATM H H3 . M56 L 1 1 . 1 M56 L H3 ? 5.042  -0.548 -0.881 1 19
+HETATM H H1 . M56 L 1 1 . 1 M56 L H1 ? 5.523  0.915  0.011  1 20
+HETATM H H8 . M56 L 1 1 . 1 M56 L H8 ? 0.228  -1.896 0.008  1 21
+#

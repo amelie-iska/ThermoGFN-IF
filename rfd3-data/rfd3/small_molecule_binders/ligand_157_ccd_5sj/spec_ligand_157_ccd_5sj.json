@@ -1,0 +1,10 @@
+{
+  "ligand_157_ccd_5sj": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5SJ.cif",
+    "ligand": "5SJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5SJ": "ALL"
+    }
+  }
+}

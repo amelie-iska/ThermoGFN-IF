@@ -1,0 +1,10 @@
+{
+  "ligand_110_ccd_k9q": {
+    "input": "./data/rfd3/ccd_ligands/structures/K9Q.cif",
+    "ligand": "K9Q",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "K9Q": "ALL"
+    }
+  }
+}

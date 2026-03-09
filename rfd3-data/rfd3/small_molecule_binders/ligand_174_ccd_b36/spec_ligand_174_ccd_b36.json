@@ -1,0 +1,10 @@
+{
+  "ligand_174_ccd_b36": {
+    "input": "./data/rfd3/ccd_ligands/structures/B36.cif",
+    "ligand": "B36",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B36": "ALL"
+    }
+  }
+}

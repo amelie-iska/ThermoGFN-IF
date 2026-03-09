@@ -1,0 +1,77 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . J0W L 1 1 . 1 J0W L C1   ? -1.117 5.158  0.235  1 1
+HETATM C C2   . J0W L 1 1 . 1 J0W L C2   ? -1.671 3.855  -0.345 1 2
+HETATM C C3   . J0W L 1 1 . 1 J0W L C3   ? -0.992 3.563  -1.684 1 3
+HETATM C C4   . J0W L 1 1 . 1 J0W L C4   ? -1.394 2.706  0.628  1 4
+HETATM N N5   . J0W L 1 1 . 1 J0W L N5   ? -2.029 1.479  0.13   1 5
+HETATM C C6   . J0W L 1 1 . 1 J0W L C6   ? -3.485 1.517  0.336  1 6
+HETATM C C7   . J0W L 1 1 . 1 J0W L C7   ? -4.125 0.417  -0.511 1 7
+HETATM C C8   . J0W L 1 1 . 1 J0W L C8   ? -3.424 -0.895 -0.265 1 8
+HETATM C C9   . J0W L 1 1 . 1 J0W L C9   ? -4.058 -2.065 -0.652 1 9
+HETATM C C10  . J0W L 1 1 . 1 J0W L C10  ? -3.448 -3.292 -0.448 1 10
+HETATM C C11  . J0W L 1 1 . 1 J0W L C11  ? -2.195 -3.346 0.146  1 11
+HETATM C C12  . J0W L 1 1 . 1 J0W L C12  ? -1.567 -2.18  0.531  1 12
+HETATM C C13  . J0W L 1 1 . 1 J0W L C13  ? -2.18  -0.951 0.327  1 13
+HETATM C C14  . J0W L 1 1 . 1 J0W L C14  ? -1.456 0.292  0.774  1 14
+HETATM C C15  . J0W L 1 1 . 1 J0W L C15  ? -1.579 0.432  2.292  1 15
+HETATM C C16  . J0W L 1 1 . 1 J0W L C16  ? 0.001  0.18   0.404  1 16
+HETATM C C17  . J0W L 1 1 . 1 J0W L C17  ? 0.431  0.61   -0.839 1 17
+HETATM C C18  . J0W L 1 1 . 1 J0W L C18  ? 1.762  0.51   -1.184 1 18
+HETATM C C19  . J0W L 1 1 . 1 J0W L C19  ? 2.678  -0.028 -0.274 1 19
+HETATM C C20  . J0W L 1 1 . 1 J0W L C20  ? 2.236  -0.46  0.98   1 20
+HETATM C C21  . J0W L 1 1 . 1 J0W L C21  ? 0.902  -0.348 1.312  1 21
+HETATM C C22  . J0W L 1 1 . 1 J0W L C22  ? 4.101  -0.139 -0.635 1 22
+HETATM C C23  . J0W L 1 1 . 1 J0W L C23  ? 4.982  -0.658 0.245  1 23
+HETATM C C24  . J0W L 1 1 . 1 J0W L C24  ? 6.395  -0.768 -0.113 1 24
+HETATM O O25  . J0W L 1 1 . 1 J0W L O25  ? 6.777  -0.391 -1.205 1 25
+HETATM O O26  . J0W L 1 1 . 1 J0W L O26  ? 7.276  -1.287 0.767  1 26
+HETATM O O27  . J0W L 1 1 . 1 J0W L O27  ? -4.073 -4.437 -0.828 1 27
+HETATM H H11C . J0W L 1 1 . 1 J0W L H11C ? -1.314 5.976  -0.458 1 28
+HETATM H H12C . J0W L 1 1 . 1 J0W L H12C ? -1.601 5.366  1.189  1 29
+HETATM H H13C . J0W L 1 1 . 1 J0W L H13C ? -0.042 5.061  0.385  1 30
+HETATM H H2   . J0W L 1 1 . 1 J0W L H2   ? -2.746 3.952  -0.495 1 31
+HETATM H H31C . J0W L 1 1 . 1 J0W L H31C ? 0.083  3.466  -1.534 1 32
+HETATM H H32C . J0W L 1 1 . 1 J0W L H32C ? -1.387 2.634  -2.097 1 33
+HETATM H H33C . J0W L 1 1 . 1 J0W L H33C ? -1.189 4.381  -2.377 1 34
+HETATM H H41C . J0W L 1 1 . 1 J0W L H41C ? -0.318 2.551  0.71   1 35
+HETATM H H42C . J0W L 1 1 . 1 J0W L H42C ? -1.801 2.954  1.608  1 36
+HETATM H H61C . J0W L 1 1 . 1 J0W L H61C ? -3.71  1.346  1.389  1 37
+HETATM H H62C . J0W L 1 1 . 1 J0W L H62C ? -3.873 2.488  0.029  1 38
+HETATM H H71C . J0W L 1 1 . 1 J0W L H71C ? -5.177 0.32   -0.244 1 39
+HETATM H H72C . J0W L 1 1 . 1 J0W L H72C ? -4.043 0.679  -1.566 1 40
+HETATM H H9   . J0W L 1 1 . 1 J0W L H9   ? -5.033 -2.02  -1.115 1 41
+HETATM H H11  . J0W L 1 1 . 1 J0W L H11  ? -1.713 -4.299 0.307  1 42
+HETATM H H27  . J0W L 1 1 . 1 J0W L H27  ? -3.874 -4.711 -1.734 1 43
+HETATM H H12  . J0W L 1 1 . 1 J0W L H12  ? -0.592 -2.223 0.993  1 44
+HETATM H H151 . J0W L 1 1 . 1 J0W L H151 ? -2.631 0.523  2.565  1 45
+HETATM H H152 . J0W L 1 1 . 1 J0W L H152 ? -1.154 -0.449 2.774  1 46
+HETATM H H153 . J0W L 1 1 . 1 J0W L H153 ? -1.04  1.321  2.62   1 47
+HETATM H H17  . J0W L 1 1 . 1 J0W L H17  ? -0.277 1.025  -1.54  1 48
+HETATM H H21  . J0W L 1 1 . 1 J0W L H21  ? 0.559  -0.678 2.282  1 49
+HETATM H H18  . J0W L 1 1 . 1 J0W L H18  ? 2.097  0.846  -2.155 1 50
+HETATM H H20  . J0W L 1 1 . 1 J0W L H20  ? 2.937  -0.877 1.688  1 51
+HETATM H H22  . J0W L 1 1 . 1 J0W L H22  ? 4.44   0.196  -1.605 1 52
+HETATM H H23  . J0W L 1 1 . 1 J0W L H23  ? 4.643  -0.992 1.215  1 53
+HETATM H H26  . J0W L 1 1 . 1 J0W L H26  ? 8.186  -1.319 0.441  1 54
+#

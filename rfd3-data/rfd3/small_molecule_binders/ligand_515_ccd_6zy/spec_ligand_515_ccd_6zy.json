@@ -1,0 +1,10 @@
+{
+  "ligand_515_ccd_6zy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/6ZY.cif",
+    "ligand": "6ZY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "6ZY": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_441_ccd_f8m": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/F8M.cif",
+    "ligand": "F8M",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "F8M": "ALL"
+    }
+  }
+}

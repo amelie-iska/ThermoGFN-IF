@@ -1,0 +1,10 @@
+{
+  "ligand_070_ccd_sil": {
+    "input": "./data/rfd3/ccd_ligands/structures/SIL.cif",
+    "ligand": "SIL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SIL": "ALL"
+    }
+  }
+}

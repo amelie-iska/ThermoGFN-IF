@@ -1,0 +1,45 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . ZAW L 1 1 . 1 ZAW L C01 ? 1.324  -0.958 0.499  1 1
+HETATM C C06 . ZAW L 1 1 . 1 ZAW L C06 ? 2.546  -1.607 0.511  1 2
+HETATM C C05 . ZAW L 1 1 . 1 ZAW L C05 ? 3.674  -0.934 0.075  1 3
+HETATM N N01 . ZAW L 1 1 . 1 ZAW L N01 ? 3.602  0.313  -0.35  1 4
+HETATM C C03 . ZAW L 1 1 . 1 ZAW L C03 ? 2.463  0.973  -0.382 1 5
+HETATM C C04 . ZAW L 1 1 . 1 ZAW L C04 ? 1.279  0.365  0.041  1 6
+HETATM C C02 . ZAW L 1 1 . 1 ZAW L C02 ? 0.0    1.103  0.001  1 7
+HETATM O O01 . ZAW L 1 1 . 1 ZAW L O01 ? -0.001 2.319  0.001  1 8
+HETATM C C07 . ZAW L 1 1 . 1 ZAW L C07 ? -1.279 0.364  -0.038 1 9
+HETATM C C08 . ZAW L 1 1 . 1 ZAW L C08 ? -1.322 -0.961 -0.493 1 10
+HETATM C C09 . ZAW L 1 1 . 1 ZAW L C09 ? -2.545 -1.608 -0.509 1 11
+HETATM C C10 . ZAW L 1 1 . 1 ZAW L C10 ? -3.674 -0.934 -0.081 1 12
+HETATM N N02 . ZAW L 1 1 . 1 ZAW L N02 ? -3.604 0.314  0.342  1 13
+HETATM C C12 . ZAW L 1 1 . 1 ZAW L C12 ? -2.464 0.971  0.382  1 14
+HETATM H H1  . ZAW L 1 1 . 1 ZAW L H1  ? 0.427  -1.461 0.83   1 15
+HETATM H H2  . ZAW L 1 1 . 1 ZAW L H2  ? 2.619  -2.627 0.858  1 16
+HETATM H H3  . ZAW L 1 1 . 1 ZAW L H3  ? 4.629  -1.438 0.084  1 17
+HETATM H H4  . ZAW L 1 1 . 1 ZAW L H4  ? 2.444  1.992  -0.737 1 18
+HETATM H H5  . ZAW L 1 1 . 1 ZAW L H5  ? -0.425 -1.463 -0.822 1 19
+HETATM H H6  . ZAW L 1 1 . 1 ZAW L H6  ? -2.616 -2.629 -0.854 1 20
+HETATM H H7  . ZAW L 1 1 . 1 ZAW L H7  ? -4.63  -1.438 -0.093 1 21
+HETATM H H8  . ZAW L 1 1 . 1 ZAW L H8  ? -2.446 1.992  0.735  1 22
+#

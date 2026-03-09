@@ -1,0 +1,83 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C8   . HIE L 1 1 . 1 HIE L C8   ? 3.439  0.861  0.147  1 1
+HETATM C C5   . HIE L 1 1 . 1 HIE L C5   ? 2.384  -1.351 -0.179 1 2
+HETATM C C6   . HIE L 1 1 . 1 HIE L C6   ? 2.473  -2.718 -0.489 1 3
+HETATM N N1   . HIE L 1 1 . 1 HIE L N1   ? 3.872  -4.632 -1.081 1 4
+HETATM C C2   . HIE L 1 1 . 1 HIE L C2   ? 0.085  -2.889 -0.455 1 5
+HETATM O O2   . HIE L 1 1 . 1 HIE L O2   ? 4.805  -2.716 -0.453 1 6
+HETATM N N2   . HIE L 1 1 . 1 HIE L N2   ? 3.537  -0.588 -0.042 1 7
+HETATM N N3   . HIE L 1 1 . 1 HIE L N3   ? -1.267 -0.942 0.012  1 8
+HETATM C C3   . HIE L 1 1 . 1 HIE L C3   ? -0.01  -1.531 -0.159 1 9
+HETATM C C4   . HIE L 1 1 . 1 HIE L C4   ? 1.137  -0.765 -0.015 1 10
+HETATM N N4   . HIE L 1 1 . 1 HIE L N4   ? -2.348 -1.505 0.708  1 11
+HETATM C C10  . HIE L 1 1 . 1 HIE L C10  ? 3.133  2.683  1.829  1 12
+HETATM C C11  . HIE L 1 1 . 1 HIE L C11  ? 4.421  3.349  1.342  1 13
+HETATM C C12  . HIE L 1 1 . 1 HIE L C12  ? 4.624  3.041  -0.143 1 14
+HETATM C C13  . HIE L 1 1 . 1 HIE L C13  ? 4.727  1.527  -0.341 1 15
+HETATM C C14  . HIE L 1 1 . 1 HIE L C14  ? -3.361 -0.677 0.667  1 16
+HETATM C C15  . HIE L 1 1 . 1 HIE L C15  ? -2.959 0.451  -0.06  1 17
+HETATM C C16  . HIE L 1 1 . 1 HIE L C16  ? -1.639 0.252  -0.454 1 18
+HETATM C C19  . HIE L 1 1 . 1 HIE L C19  ? -2.825 2.806  -0.965 1 19
+HETATM C C21  . HIE L 1 1 . 1 HIE L C21  ? -1.046 3.329  -2.636 1 20
+HETATM C C1   . HIE L 1 1 . 1 HIE L C1   ? 1.306  -3.476 -0.624 1 21
+HETATM F F1   . HIE L 1 1 . 1 HIE L F1   ? -4.702 -2.085 2.028  1 22
+HETATM O O1   . HIE L 1 1 . 1 HIE L O1   ? -4.885 1.795  -0.252 1 23
+HETATM F F2   . HIE L 1 1 . 1 HIE L F2   ? -5.019 0.174  2.137  1 24
+HETATM F F3   . HIE L 1 1 . 1 HIE L F3   ? -5.683 -0.985 0.283  1 25
+HETATM O O3   . HIE L 1 1 . 1 HIE L O3   ? 5.53   2.845  2.089  1 26
+HETATM C C7   . HIE L 1 1 . 1 HIE L C7   ? 3.791  -3.35  -0.672 1 27
+HETATM C C9   . HIE L 1 1 . 1 HIE L C9   ? 3.236  1.169  1.632  1 28
+HETATM C C17  . HIE L 1 1 . 1 HIE L C17  ? -0.86  1.257  -1.261 1 29
+HETATM C C18  . HIE L 1 1 . 1 HIE L C18  ? -1.837 2.203  -1.967 1 30
+HETATM C C20  . HIE L 1 1 . 1 HIE L C20  ? -3.688 1.682  -0.408 1 31
+HETATM C C22  . HIE L 1 1 . 1 HIE L C22  ? -2.611 1.428  -3.035 1 32
+HETATM C C23  . HIE L 1 1 . 1 HIE L C23  ? -4.716 -0.897 1.29   1 33
+HETATM H H8   . HIE L 1 1 . 1 HIE L H8   ? 2.593  1.245  -0.423 1 34
+HETATM H HN1  . HIE L 1 1 . 1 HIE L HN1  ? 3.063  -5.138 -1.255 1 35
+HETATM H HN1A . HIE L 1 1 . 1 HIE L HN1A ? 4.74   -5.048 -1.201 1 36
+HETATM H H2   . HIE L 1 1 . 1 HIE L H2   ? -0.813 -3.479 -0.565 1 37
+HETATM H HN2  . HIE L 1 1 . 1 HIE L HN2  ? 4.407  -1.016 -0.072 1 38
+HETATM H H4   . HIE L 1 1 . 1 HIE L H4   ? 1.059  0.285  0.223  1 39
+HETATM H H10  . HIE L 1 1 . 1 HIE L H10  ? 2.988  2.902  2.887  1 40
+HETATM H H10A . HIE L 1 1 . 1 HIE L H10A ? 2.287  3.067  1.259  1 41
+HETATM H H11  . HIE L 1 1 . 1 HIE L H11  ? 4.348  4.427  1.483  1 42
+HETATM H H12  . HIE L 1 1 . 1 HIE L H12  ? 3.778  3.425  -0.713 1 43
+HETATM H H12A . HIE L 1 1 . 1 HIE L H12A ? 5.542  3.516  -0.49  1 44
+HETATM H H13  . HIE L 1 1 . 1 HIE L H13  ? 5.573  1.143  0.229  1 45
+HETATM H H13A . HIE L 1 1 . 1 HIE L H13A ? 4.872  1.308  -1.398 1 46
+HETATM H H19  . HIE L 1 1 . 1 HIE L H19  ? -2.277 3.286  -0.153 1 47
+HETATM H H19A . HIE L 1 1 . 1 HIE L H19A ? -3.456 3.539  -1.468 1 48
+HETATM H H21  . HIE L 1 1 . 1 HIE L H21  ? -0.5   3.889  -1.877 1 49
+HETATM H H21A . HIE L 1 1 . 1 HIE L H21A ? -0.341 2.903  -3.35  1 50
+HETATM H H21B . HIE L 1 1 . 1 HIE L H21B ? -1.733 3.996  -3.157 1 51
+HETATM H H1   . HIE L 1 1 . 1 HIE L H1   ? 1.37   -4.527 -0.863 1 52
+HETATM H HO3  . HIE L 1 1 . 1 HIE L HO3  ? 6.382  3.225  1.833  1 53
+HETATM H H9   . HIE L 1 1 . 1 HIE L H9   ? 2.318  0.694  1.979  1 54
+HETATM H H9A  . HIE L 1 1 . 1 HIE L H9A  ? 4.082  0.785  2.201  1 55
+HETATM H H17  . HIE L 1 1 . 1 HIE L H17  ? -0.211 1.831  -0.599 1 56
+HETATM H H17A . HIE L 1 1 . 1 HIE L H17A ? -0.255 0.737  -2.004 1 57
+HETATM H H22  . HIE L 1 1 . 1 HIE L H22  ? -3.29  2.105  -3.554 1 58
+HETATM H H22A . HIE L 1 1 . 1 HIE L H22A ? -1.911 0.997  -3.751 1 59
+HETATM H H22B . HIE L 1 1 . 1 HIE L H22B ? -3.184 0.631  -2.562 1 60
+#

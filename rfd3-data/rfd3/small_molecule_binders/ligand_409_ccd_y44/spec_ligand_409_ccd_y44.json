@@ -1,0 +1,10 @@
+{
+  "ligand_409_ccd_y44": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Y44.cif",
+    "ligand": "Y44",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Y44": "ALL"
+    }
+  }
+}

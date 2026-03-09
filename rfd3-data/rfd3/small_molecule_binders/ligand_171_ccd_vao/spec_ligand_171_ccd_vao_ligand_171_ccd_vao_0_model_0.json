@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.08357524871826172,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 2.828413486480713,
+        "non_loop_fraction": 0.6904024767801858,
+        "loop_fraction": 0.30959752321981426,
+        "helix_fraction": 0.5046439628482973,
+        "sheet_fraction": 0.18575851393188855,
+        "num_ss_elements": 23,
+        "radius_of_gyration": 19.24281207774762,
+        "alanine_content": 0.3188854489164087,
+        "glycine_content": 0.09287925696594428,
+        "num_residues": 323,
+        "diffused_com": [
+            -1.7921912670135498,
+            3.4483256340026855,
+            0.03919345885515213
+        ],
+        "fixed_com": [
+            0.0005425347480922937,
+            5.425347262644209e-05,
+            4.238552548940788e-07
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/VAO.cif",
+        "length": "20-400",
+        "ligand": "VAO",
+        "extra": {
+            "example": "ligand_171_ccd_vao",
+            "task_name": "spec_ligand_171_ccd_vao_ligand_171_ccd_vao",
+            "sampled_contig": "323",
+            "num_tokens_in": 324,
+            "num_residues_in": 324,
+            "num_chains": 2,
+            "num_atoms": 1633,
+            "num_residues": 326,
+            "example_id": "spec_ligand_171_ccd_vao_ligand_171_ccd_vao_0"
+        },
+        "select_fixed_atoms": {
+            "VAO": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

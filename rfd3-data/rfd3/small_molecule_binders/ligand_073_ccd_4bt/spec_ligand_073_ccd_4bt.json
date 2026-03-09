@@ -1,0 +1,10 @@
+{
+  "ligand_073_ccd_4bt": {
+    "input": "./data/rfd3/ccd_ligands/structures/4BT.cif",
+    "ligand": "4BT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4BT": "ALL"
+    }
+  }
+}

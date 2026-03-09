@@ -1,0 +1,10 @@
+{
+  "ligand_295_ccd_2ah": {
+    "input": "./data/rfd3/ccd_ligands/structures/2AH.cif",
+    "ligand": "2AH",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2AH": "ALL"
+    }
+  }
+}

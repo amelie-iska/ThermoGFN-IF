@@ -1,0 +1,10 @@
+{
+  "ligand_114_ccd_1tz": {
+    "input": "./data/rfd3/ccd_ligands/structures/1TZ.cif",
+    "ligand": "1TZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1TZ": "ALL"
+    }
+  }
+}

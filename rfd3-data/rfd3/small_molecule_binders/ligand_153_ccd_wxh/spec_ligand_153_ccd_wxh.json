@@ -1,0 +1,10 @@
+{
+  "ligand_153_ccd_wxh": {
+    "input": "./data/rfd3/ccd_ligands/structures/WXH.cif",
+    "ligand": "WXH",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WXH": "ALL"
+    }
+  }
+}

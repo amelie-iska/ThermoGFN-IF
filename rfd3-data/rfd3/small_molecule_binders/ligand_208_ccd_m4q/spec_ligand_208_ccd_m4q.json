@@ -1,0 +1,10 @@
+{
+  "ligand_208_ccd_m4q": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/M4Q.cif",
+    "ligand": "M4Q",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "M4Q": "ALL"
+    }
+  }
+}

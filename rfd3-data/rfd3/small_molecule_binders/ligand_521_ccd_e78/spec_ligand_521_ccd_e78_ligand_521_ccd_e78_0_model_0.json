@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.044823646545410156,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.767519950866699,
+        "non_loop_fraction": 0.7916666666666666,
+        "loop_fraction": 0.20833333333333334,
+        "helix_fraction": 0.7916666666666666,
+        "sheet_fraction": 0.0,
+        "num_ss_elements": 5,
+        "radius_of_gyration": 11.056998188211898,
+        "alanine_content": 0.18055555555555555,
+        "glycine_content": 0.06944444444444445,
+        "num_residues": 72,
+        "diffused_com": [
+            -2.750187635421753,
+            -1.9229823350906372,
+            0.4689306914806366
+        ],
+        "fixed_com": [
+            0.000732421875,
+            0.00033804087433964014,
+            -0.00017841045337263495
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/E78.cif",
+        "length": "20-400",
+        "ligand": "E78",
+        "extra": {
+            "example": "ligand_521_ccd_e78",
+            "task_name": "spec_ligand_521_ccd_e78_ligand_521_ccd_e78",
+            "sampled_contig": "72",
+            "num_tokens_in": 73,
+            "num_residues_in": 73,
+            "num_chains": 2,
+            "num_atoms": 386,
+            "num_residues": 75,
+            "example_id": "spec_ligand_521_ccd_e78_ligand_521_ccd_e78_0"
+        },
+        "select_fixed_atoms": {
+            "E78": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

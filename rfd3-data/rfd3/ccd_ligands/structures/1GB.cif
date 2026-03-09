@@ -1,0 +1,68 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O OB  . 1GB L 1 1 . 1 1GB L OB  ? 0.296  -1.511 2.323  1 1
+HETATM C CB  . 1GB L 1 1 . 1 1GB L CB  ? 0.084  -0.469 1.739  1 2
+HETATM C CAB . 1GB L 1 1 . 1 1GB L CAB ? -1.323 -0.147 1.333  1 3
+HETATM C CBB . 1GB L 1 1 . 1 1GB L CBB ? -1.668 -0.926 0.062  1 4
+HETATM C CGB . 1GB L 1 1 . 1 1GB L CGB ? -3.129 -0.74  -0.259 1 5
+HETATM C CD4 . 1GB L 1 1 . 1 1GB L CD4 ? -3.529 0.307  -1.069 1 6
+HETATM C CE4 . 1GB L 1 1 . 1 1GB L CE4 ? -4.867 0.48   -1.366 1 7
+HETATM C CZB . 1GB L 1 1 . 1 1GB L CZB ? -5.81  -0.397 -0.85  1 8
+HETATM O OHB . 1GB L 1 1 . 1 1GB L OHB ? -7.127 -0.229 -1.14  1 9
+HETATM C CE3 . 1GB L 1 1 . 1 1GB L CE3 ? -5.406 -1.447 -0.037 1 10
+HETATM C CD3 . 1GB L 1 1 . 1 1GB L CD3 ? -4.066 -1.619 0.252  1 11
+HETATM N NB  . 1GB L 1 1 . 1 1GB L NB  ? -1.486 1.278  1.078  1 12
+HETATM C CA  . 1GB L 1 1 . 1 1GB L CA  ? -0.457 2.092  0.828  1 13
+HETATM O OA  . 1GB L 1 1 . 1 1GB L OA  ? -0.68  3.267  0.624  1 14
+HETATM N NA  . 1GB L 1 1 . 1 1GB L NA  ? 1.113  0.346  1.488  1 15
+HETATM C CAA . 1GB L 1 1 . 1 1GB L CAA ? 0.964  1.614  0.788  1 16
+HETATM C CBA . 1GB L 1 1 . 1 1GB L CBA ? 1.393  1.441  -0.67  1 17
+HETATM C CGA . 1GB L 1 1 . 1 1GB L CGA ? 2.855  1.079  -0.724 1 18
+HETATM C CD2 . 1GB L 1 1 . 1 1GB L CD2 ? 3.425  -0.265 -0.599 1 19
+HETATM C CE2 . 1GB L 1 1 . 1 1GB L CE2 ? 2.881  -1.536 -0.409 1 20
+HETATM C CZ3 . 1GB L 1 1 . 1 1GB L CZ3 ? 3.706  -2.623 -0.333 1 21
+HETATM C CH2 . 1GB L 1 1 . 1 1GB L CH2 ? 5.082  -2.473 -0.442 1 22
+HETATM C CZ2 . 1GB L 1 1 . 1 1GB L CZ2 ? 5.64   -1.228 -0.63  1 23
+HETATM C CE1 . 1GB L 1 1 . 1 1GB L CE1 ? 4.819  -0.107 -0.71  1 24
+HETATM N NE1 . 1GB L 1 1 . 1 1GB L NE1 ? 5.063  1.236  -0.889 1 25
+HETATM C CD1 . 1GB L 1 1 . 1 1GB L CD1 ? 3.881  1.926  -0.9   1 26
+HETATM H H1  . 1GB L 1 1 . 1 1GB L H1  ? -2.002 -0.447 2.131  1 27
+HETATM H H2  . 1GB L 1 1 . 1 1GB L H2  ? -1.064 -0.557 -0.766 1 28
+HETATM H H3  . 1GB L 1 1 . 1 1GB L H3  ? -1.463 -1.985 0.219  1 29
+HETATM H H4  . 1GB L 1 1 . 1 1GB L H4  ? -2.795 0.989  -1.471 1 30
+HETATM H H5  . 1GB L 1 1 . 1 1GB L H5  ? -5.179 1.298  -1.998 1 31
+HETATM H H6  . 1GB L 1 1 . 1 1GB L H6  ? -7.417 -0.696 -1.935 1 32
+HETATM H H7  . 1GB L 1 1 . 1 1GB L H7  ? -6.138 -2.131 0.366  1 33
+HETATM H H8  . 1GB L 1 1 . 1 1GB L H8  ? -3.751 -2.436 0.883  1 34
+HETATM H H9  . 1GB L 1 1 . 1 1GB L H9  ? -2.381 1.651  1.09   1 35
+HETATM H H10 . 1GB L 1 1 . 1 1GB L H10 ? 1.998  0.08   1.783  1 36
+HETATM H H11 . 1GB L 1 1 . 1 1GB L H11 ? 1.604  2.358  1.261  1 37
+HETATM H H12 . 1GB L 1 1 . 1 1GB L H12 ? 0.805  0.646  -1.13  1 38
+HETATM H H13 . 1GB L 1 1 . 1 1GB L H13 ? 1.23   2.373  -1.211 1 39
+HETATM H H14 . 1GB L 1 1 . 1 1GB L H14 ? 1.812  -1.661 -0.322 1 40
+HETATM H H15 . 1GB L 1 1 . 1 1GB L H15 ? 3.284  -3.606 -0.185 1 41
+HETATM H H16 . 1GB L 1 1 . 1 1GB L H16 ? 5.721  -3.341 -0.379 1 42
+HETATM H H17 . 1GB L 1 1 . 1 1GB L H17 ? 6.711  -1.121 -0.713 1 43
+HETATM H H18 . 1GB L 1 1 . 1 1GB L H18 ? 5.941  1.633  -0.995 1 44
+HETATM H H19 . 1GB L 1 1 . 1 1GB L H19 ? 3.789  2.995  -1.025 1 45
+#

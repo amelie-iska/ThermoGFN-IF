@@ -1,0 +1,10 @@
+{
+  "ligand_331_ccd_d6a": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/D6A.cif",
+    "ligand": "D6A",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "D6A": "ALL"
+    }
+  }
+}

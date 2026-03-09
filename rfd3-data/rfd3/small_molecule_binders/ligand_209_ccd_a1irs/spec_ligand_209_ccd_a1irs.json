@@ -1,0 +1,10 @@
+{
+  "ligand_209_ccd_a1irs": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1IRS.cif",
+    "ligand": "A1IRS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IRS": "ALL"
+    }
+  }
+}

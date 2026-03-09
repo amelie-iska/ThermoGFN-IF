@@ -1,0 +1,10 @@
+{
+  "ligand_191_ccd_27f": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/27F.cif",
+    "ligand": "27F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "27F": "ALL"
+    }
+  }
+}

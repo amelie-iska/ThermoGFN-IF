@@ -1,0 +1,10 @@
+{
+  "ligand_067_ccd_ly0": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LY0.cif",
+    "ligand": "LY0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LY0": "ALL"
+    }
+  }
+}

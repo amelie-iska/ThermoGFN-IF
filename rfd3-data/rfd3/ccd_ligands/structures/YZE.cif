@@ -1,0 +1,76 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C2   . YZE L 1 1 . 1 YZE L C2   ? 8.741  0.828  -3.512 1 1
+HETATM C C4   . YZE L 1 1 . 1 YZE L C4   ? 9.066  0.9    -2.245 1 2
+HETATM C C5   . YZE L 1 1 . 1 YZE L C5   ? 8.53   2.02   -1.392 1 3
+HETATM C C6   . YZE L 1 1 . 1 YZE L C6   ? 7.817  1.435  -0.172 1 4
+HETATM C C7   . YZE L 1 1 . 1 YZE L C7   ? 7.388  2.554  0.743  1 5
+HETATM O O8   . YZE L 1 1 . 1 YZE L O8   ? 6.218  2.707  1.003  1 6
+HETATM O O9   . YZE L 1 1 . 1 YZE L O9   ? 8.306  3.38   1.269  1 7
+HETATM N N10  . YZE L 1 1 . 1 YZE L N10  ? 6.638  0.683  -0.609 1 8
+HETATM C C11  . YZE L 1 1 . 1 YZE L C11  ? 6.147  -0.308 0.161  1 9
+HETATM N N12  . YZE L 1 1 . 1 YZE L N12  ? 5.063  -1.0   -0.241 1 10
+HETATM C C13  . YZE L 1 1 . 1 YZE L C13  ? 4.53   -2.078 0.596  1 11
+HETATM C C14  . YZE L 1 1 . 1 YZE L C14  ? 3.043  -2.273 0.29   1 12
+HETATM C C15  . YZE L 1 1 . 1 YZE L C15  ? 2.269  -1.02  0.703  1 13
+HETATM C C16  . YZE L 1 1 . 1 YZE L C16  ? 0.783  -1.215 0.397  1 14
+HETATM C C17  . YZE L 1 1 . 1 YZE L C17  ? 0.009  0.039  0.809  1 15
+HETATM N N18  . YZE L 1 1 . 1 YZE L N18  ? -1.415 -0.148 0.517  1 16
+HETATM C C19  . YZE L 1 1 . 1 YZE L C19  ? -2.295 0.833  0.799  1 17
+HETATM C C20  . YZE L 1 1 . 1 YZE L C20  ? -3.731 0.645  0.503  1 18
+HETATM C C21  . YZE L 1 1 . 1 YZE L C21  ? -4.645 1.659  0.794  1 19
+HETATM C C22  . YZE L 1 1 . 1 YZE L C22  ? -5.984 1.477  0.516  1 20
+HETATM C C23  . YZE L 1 1 . 1 YZE L C23  ? -6.422 0.292  -0.05  1 21
+HETATM I I24  . YZE L 1 1 . 1 YZE L I24  ? -8.457 0.025  -0.468 1 22
+HETATM C C25  . YZE L 1 1 . 1 YZE L C25  ? -5.52  -0.718 -0.341 1 23
+HETATM C C26  . YZE L 1 1 . 1 YZE L C26  ? -4.178 -0.546 -0.072 1 24
+HETATM O O27  . YZE L 1 1 . 1 YZE L O27  ? -1.908 1.873  1.295  1 25
+HETATM C C28  . YZE L 1 1 . 1 YZE L C28  ? 5.274  -3.355 0.304  1 26
+HETATM O O29  . YZE L 1 1 . 1 YZE L O29  ? 6.16   -3.365 -0.518 1 27
+HETATM O O30  . YZE L 1 1 . 1 YZE L O30  ? 4.954  -4.483 0.959  1 28
+HETATM O O31  . YZE L 1 1 . 1 YZE L O31  ? 6.683  -0.578 1.219  1 29
+HETATM H H2   . YZE L 1 1 . 1 YZE L H2   ? 9.126  0.025  -4.124 1 30
+HETATM H H2A  . YZE L 1 1 . 1 YZE L H2A  ? 8.086  1.569  -3.945 1 31
+HETATM H H4   . YZE L 1 1 . 1 YZE L H4   ? 9.719  0.156  -1.812 1 32
+HETATM H H5   . YZE L 1 1 . 1 YZE L H5   ? 9.354  2.652  -1.063 1 33
+HETATM H H5A  . YZE L 1 1 . 1 YZE L H5A  ? 7.826  2.615  -1.974 1 34
+HETATM H H6   . YZE L 1 1 . 1 YZE L H6   ? 8.495  0.77   0.362  1 35
+HETATM H HO9  . YZE L 1 1 . 1 YZE L HO9  ? 7.983  4.082  1.85   1 36
+HETATM H HN10 . YZE L 1 1 . 1 YZE L HN10 ? 6.211  0.899  -1.453 1 37
+HETATM H HN12 . YZE L 1 1 . 1 YZE L HN12 ? 4.636  -0.785 -1.085 1 38
+HETATM H H13  . YZE L 1 1 . 1 YZE L H13  ? 4.654  -1.817 1.647  1 39
+HETATM H H14  . YZE L 1 1 . 1 YZE L H14  ? 2.912  -2.447 -0.778 1 40
+HETATM H H15  . YZE L 1 1 . 1 YZE L H15  ? 2.401  -0.846 1.771  1 41
+HETATM H H16  . YZE L 1 1 . 1 YZE L H16  ? 0.651  -1.388 -0.671 1 42
+HETATM H H16A . YZE L 1 1 . 1 YZE L H16A ? 0.407  -2.073 0.954  1 43
+HETATM H H17  . YZE L 1 1 . 1 YZE L H17  ? 0.14   0.212  1.878  1 44
+HETATM H H17A . YZE L 1 1 . 1 YZE L H17A ? 0.384  0.897  0.253  1 45
+HETATM H HN18 . YZE L 1 1 . 1 YZE L HN18 ? -1.724 -0.978 0.121  1 46
+HETATM H H21  . YZE L 1 1 . 1 YZE L H21  ? -4.305 2.584  1.236  1 47
+HETATM H H22  . YZE L 1 1 . 1 YZE L H22  ? -6.692 2.261  0.74   1 48
+HETATM H H25  . YZE L 1 1 . 1 YZE L H25  ? -5.867 -1.64  -0.782 1 49
+HETATM H H26  . YZE L 1 1 . 1 YZE L H26  ? -3.475 -1.333 -0.303 1 50
+HETATM H HO30 . YZE L 1 1 . 1 YZE L HO30 ? 5.46   -5.277 0.738  1 51
+HETATM H H23  . YZE L 1 1 . 1 YZE L H23  ? 2.668  -3.132 0.847  1 52
+HETATM H H24  . YZE L 1 1 . 1 YZE L H24  ? 2.645  -0.161 0.146  1 53
+#

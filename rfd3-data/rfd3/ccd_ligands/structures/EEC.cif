@@ -1,0 +1,83 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O2  . EEC L 1 1 . 1 EEC L O2  ? 0.316  0.321  1.834  1 1
+HETATM N N3  . EEC L 1 1 . 1 EEC L N3  ? 5.867  -2.115 0.734  1 2
+HETATM O O5  . EEC L 1 1 . 1 EEC L O5  ? 4.732  -2.057 1.148  1 3
+HETATM C C11 . EEC L 1 1 . 1 EEC L C11 ? 0.509  -0.08  0.705  1 4
+HETATM C C12 . EEC L 1 1 . 1 EEC L C12 ? 1.887  -0.526 0.289  1 5
+HETATM C C13 . EEC L 1 1 . 1 EEC L C13 ? 2.851  -0.372 1.468  1 6
+HETATM C C14 . EEC L 1 1 . 1 EEC L C14 ? 5.198  -0.046 0.51   1 7
+HETATM C C16 . EEC L 1 1 . 1 EEC L C16 ? 6.281  -0.947 0.309  1 8
+HETATM C C21 . EEC L 1 1 . 1 EEC L C21 ? 7.611  -0.627 -0.266 1 9
+HETATM C C22 . EEC L 1 1 . 1 EEC L C22 ? 7.905  0.674  -0.67  1 10
+HETATM C C23 . EEC L 1 1 . 1 EEC L C23 ? 9.143  0.965  -1.204 1 11
+HETATM C C24 . EEC L 1 1 . 1 EEC L C24 ? 10.093 -0.031 -1.338 1 12
+HETATM C C25 . EEC L 1 1 . 1 EEC L C25 ? 9.808  -1.324 -0.939 1 13
+HETATM C C26 . EEC L 1 1 . 1 EEC L C26 ? 8.574  -1.626 -0.398 1 14
+HETATM C C27 . EEC L 1 1 . 1 EEC L C27 ? 4.229  -0.818 1.052  1 15
+HETATM N N2  . EEC L 1 1 . 1 EEC L N2  ? -0.509 -0.126 -0.177 1 16
+HETATM C C7  . EEC L 1 1 . 1 EEC L C7  ? -1.849 0.307  0.228  1 17
+HETATM C C6  . EEC L 1 1 . 1 EEC L C6  ? -2.879 -0.375 -0.635 1 18
+HETATM O O1  . EEC L 1 1 . 1 EEC L O1  ? -2.529 -1.148 -1.502 1 19
+HETATM C C8  . EEC L 1 1 . 1 EEC L C8  ? -1.967 1.823  0.06   1 20
+HETATM C C9  . EEC L 1 1 . 1 EEC L C9  ? -1.007 2.519  1.027  1 21
+HETATM C C10 . EEC L 1 1 . 1 EEC L C10 ? -1.123 4.013  0.862  1 22
+HETATM O O4E . EEC L 1 1 . 1 EEC L O4E ? -1.894 4.473  0.054  1 23
+HETATM O O4  . EEC L 1 1 . 1 EEC L O4  ? -0.37  4.831  1.613  1 24
+HETATM N N1  . EEC L 1 1 . 1 EEC L N1  ? -4.19  -0.127 -0.442 1 25
+HETATM C C2  . EEC L 1 1 . 1 EEC L C2  ? -5.191 -0.791 -1.281 1 26
+HETATM C C1  . EEC L 1 1 . 1 EEC L C1  ? -5.378 -0.008 -2.555 1 27
+HETATM O O9  . EEC L 1 1 . 1 EEC L O9  ? -4.738 1.005  -2.744 1 28
+HETATM C C3  . EEC L 1 1 . 1 EEC L C3  ? -6.521 -0.863 -0.527 1 29
+HETATM C C4  . EEC L 1 1 . 1 EEC L C4  ? -6.363 -1.761 0.701  1 30
+HETATM C C5  . EEC L 1 1 . 1 EEC L C5  ? -7.672 -1.832 1.444  1 31
+HETATM O O8  . EEC L 1 1 . 1 EEC L O8  ? -8.633 -1.226 1.033  1 32
+HETATM O O8E . EEC L 1 1 . 1 EEC L O8E ? -7.77  -2.568 2.562  1 33
+HETATM N N9  . EEC L 1 1 . 1 EEC L N9  ? -6.257 -0.433 -3.484 1 34
+HETATM H H16 . EEC L 1 1 . 1 EEC L H16 ? 1.854  -1.571 -0.019 1 35
+HETATM H H17 . EEC L 1 1 . 1 EEC L H17 ? 2.232  0.088  -0.543 1 36
+HETATM H H18 . EEC L 1 1 . 1 EEC L H18 ? 2.884  0.673  1.776  1 37
+HETATM H H19 . EEC L 1 1 . 1 EEC L H19 ? 2.506  -0.986 2.301  1 38
+HETATM H H20 . EEC L 1 1 . 1 EEC L H20 ? 5.158  1.009  0.282  1 39
+HETATM H H21 . EEC L 1 1 . 1 EEC L H21 ? 7.163  1.452  -0.566 1 40
+HETATM H H22 . EEC L 1 1 . 1 EEC L H22 ? 9.371  1.973  -1.518 1 41
+HETATM H H23 . EEC L 1 1 . 1 EEC L H23 ? 11.061 0.201  -1.756 1 42
+HETATM H H24 . EEC L 1 1 . 1 EEC L H24 ? 10.553 -2.099 -1.046 1 43
+HETATM H H25 . EEC L 1 1 . 1 EEC L H25 ? 8.354  -2.635 -0.082 1 44
+HETATM H H3  . EEC L 1 1 . 1 EEC L H3  ? -0.355 -0.447 -1.079 1 45
+HETATM H H9  . EEC L 1 1 . 1 EEC L H9  ? -2.016 0.043  1.272  1 46
+HETATM H H10 . EEC L 1 1 . 1 EEC L H10 ? -1.712 2.096  -0.964 1 47
+HETATM H H11 . EEC L 1 1 . 1 EEC L H11 ? -2.989 2.134  0.276  1 48
+HETATM H H12 . EEC L 1 1 . 1 EEC L H12 ? -1.261 2.246  2.051  1 49
+HETATM H H13 . EEC L 1 1 . 1 EEC L H13 ? 0.015  2.208  0.812  1 50
+HETATM H H8  . EEC L 1 1 . 1 EEC L H8  ? -0.479 5.782  1.472  1 51
+HETATM H H1  . EEC L 1 1 . 1 EEC L H1  ? -4.47  0.49   0.251  1 52
+HETATM H H2  . EEC L 1 1 . 1 EEC L H2  ? -4.854 -1.799 -1.52  1 53
+HETATM H H4  . EEC L 1 1 . 1 EEC L H4  ? -6.813 0.138  -0.21  1 54
+HETATM H H5  . EEC L 1 1 . 1 EEC L H5  ? -7.288 -1.275 -1.182 1 55
+HETATM H H6  . EEC L 1 1 . 1 EEC L H6  ? -6.07  -2.762 0.384  1 56
+HETATM H H7  . EEC L 1 1 . 1 EEC L H7  ? -5.595 -1.348 1.357  1 57
+HETATM H H26 . EEC L 1 1 . 1 EEC L H26 ? -8.631 -2.582 3.004  1 58
+HETATM H H14 . EEC L 1 1 . 1 EEC L H14 ? -6.769 -1.242 -3.333 1 59
+HETATM H H15 . EEC L 1 1 . 1 EEC L H15 ? -6.377 0.072  -4.304 1 60
+#

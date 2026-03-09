@@ -1,0 +1,77 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . IHP L 1 1 . 1 IHP L C1  ? 1.283  -0.775 0.65   1 1
+HETATM C C2  . IHP L 1 1 . 1 IHP L C2  ? 0.077  -1.623 0.241  1 2
+HETATM C C3  . IHP L 1 1 . 1 IHP L C3  ? -1.212 -0.903 0.642  1 3
+HETATM C C4  . IHP L 1 1 . 1 IHP L C4  ? -1.28  0.454  -0.063 1 4
+HETATM C C5  . IHP L 1 1 . 1 IHP L C5  ? -0.073 1.301  0.347  1 5
+HETATM C C6  . IHP L 1 1 . 1 IHP L C6  ? 1.216  0.581  -0.054 1 6
+HETATM O O11 . IHP L 1 1 . 1 IHP L O11 ? 2.487  -1.447 0.275  1 7
+HETATM P P1  . IHP L 1 1 . 1 IHP L P1  ? 3.613  -1.887 1.339  1 8
+HETATM O O21 . IHP L 1 1 . 1 IHP L O21 ? 2.997  -2.723 2.393  1 9
+HETATM O O31 . IHP L 1 1 . 1 IHP L O31 ? 4.76   -2.73  0.587  1 10
+HETATM O O41 . IHP L 1 1 . 1 IHP L O41 ? 4.263  -0.573 2.006  1 11
+HETATM O O12 . IHP L 1 1 . 1 IHP L O12 ? 0.092  -1.82  -1.175 1 12
+HETATM P P2  . IHP L 1 1 . 1 IHP L P2  ? 0.169  -3.276 -1.856 1 13
+HETATM O O22 . IHP L 1 1 . 1 IHP L O22 ? -0.934 -4.12  -1.344 1 14
+HETATM O O32 . IHP L 1 1 . 1 IHP L O32 ? 0.034  -3.129 -3.454 1 15
+HETATM O O42 . IHP L 1 1 . 1 IHP L O42 ? 1.58   -3.963 -1.498 1 16
+HETATM O O13 . IHP L 1 1 . 1 IHP L O13 ? -2.339 -1.695 0.259  1 17
+HETATM P P3  . IHP L 1 1 . 1 IHP L P3  ? -3.421 -2.247 1.315  1 18
+HETATM O O23 . IHP L 1 1 . 1 IHP L O23 ? -2.729 -3.016 2.374  1 19
+HETATM O O33 . IHP L 1 1 . 1 IHP L O33 ? -4.206 -1.008 1.978  1 20
+HETATM O O43 . IHP L 1 1 . 1 IHP L O43 ? -4.471 -3.203 0.557  1 21
+HETATM O O14 . IHP L 1 1 . 1 IHP L O14 ? -2.484 1.126  0.312  1 22
+HETATM P P4  . IHP L 1 1 . 1 IHP L P4  ? -3.61  1.566  -0.751 1 23
+HETATM O O24 . IHP L 1 1 . 1 IHP L O24 ? -4.035 0.385  -1.535 1 24
+HETATM O O34 . IHP L 1 1 . 1 IHP L O34 ? -4.878 2.175  0.032  1 25
+HETATM O O44 . IHP L 1 1 . 1 IHP L O44 ? -3.005 2.68   -1.744 1 26
+HETATM O O15 . IHP L 1 1 . 1 IHP L O15 ? -0.136 2.568  -0.311 1 27
+HETATM P P5  . IHP L 1 1 . 1 IHP L P5  ? -0.211 3.966  0.484  1 28
+HETATM O O25 . IHP L 1 1 . 1 IHP L O25 ? 0.926  4.059  1.427  1 29
+HETATM O O35 . IHP L 1 1 . 1 IHP L O35 ? -0.137 5.185  -0.566 1 30
+HETATM O O45 . IHP L 1 1 . 1 IHP L O45 ? -1.595 4.046  1.302  1 31
+HETATM O O16 . IHP L 1 1 . 1 IHP L O16 ? 2.342  1.373  0.328  1 32
+HETATM P P6  . IHP L 1 1 . 1 IHP L P6  ? 3.424  1.926  -0.728 1 33
+HETATM O O26 . IHP L 1 1 . 1 IHP L O26 ? 2.733  2.695  -1.787 1 34
+HETATM O O36 . IHP L 1 1 . 1 IHP L O36 ? 4.475  2.882  0.031  1 35
+HETATM O O46 . IHP L 1 1 . 1 IHP L O46 ? 4.209  0.686  -1.391 1 36
+HETATM H H1  . IHP L 1 1 . 1 IHP L H1  ? 1.272  -0.625 1.73   1 37
+HETATM H H2  . IHP L 1 1 . 1 IHP L H2  ? 0.125  -2.589 0.743  1 38
+HETATM H H3  . IHP L 1 1 . 1 IHP L H3  ? -1.224 -0.752 1.721  1 39
+HETATM H H4  . IHP L 1 1 . 1 IHP L H4  ? -1.268 0.303  -1.142 1 40
+HETATM H H5  . IHP L 1 1 . 1 IHP L H5  ? -0.085 1.452  1.426  1 41
+HETATM H H6  . IHP L 1 1 . 1 IHP L H6  ? 1.227  0.431  -1.134 1 42
+HETATM H H31 . IHP L 1 1 . 1 IHP L H31 ? 5.474  -3.028 1.168  1 43
+HETATM H H41 . IHP L 1 1 . 1 IHP L H41 ? 4.686  0.022  1.372  1 44
+HETATM H H32 . IHP L 1 1 . 1 IHP L H32 ? 0.072  -3.969 -3.931 1 45
+HETATM H H42 . IHP L 1 1 . 1 IHP L H42 ? 2.349  -3.463 -1.804 1 46
+HETATM H H33 . IHP L 1 1 . 1 IHP L H33 ? -4.683 -0.458 1.342  1 47
+HETATM H H43 . IHP L 1 1 . 1 IHP L H43 ? -5.154 -3.573 1.133  1 48
+HETATM H H34 . IHP L 1 1 . 1 IHP L H34 ? -5.597 2.462  -0.548 1 49
+HETATM H H44 . IHP L 1 1 . 1 IHP L H44 ? -2.705 3.483  -1.297 1 50
+HETATM H H35 . IHP L 1 1 . 1 IHP L H35 ? -0.177 6.06   -0.156 1 51
+HETATM H H45 . IHP L 1 1 . 1 IHP L H45 ? -2.384 3.991  0.746  1 52
+HETATM H H36 . IHP L 1 1 . 1 IHP L H36 ? 5.157  3.252  -0.546 1 53
+HETATM H H46 . IHP L 1 1 . 1 IHP L H46 ? 4.687  0.137  -0.754 1 54
+#

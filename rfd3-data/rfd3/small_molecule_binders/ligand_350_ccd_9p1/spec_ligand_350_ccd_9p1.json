@@ -1,0 +1,10 @@
+{
+  "ligand_350_ccd_9p1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/9P1.cif",
+    "ligand": "9P1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9P1": "ALL"
+    }
+  }
+}

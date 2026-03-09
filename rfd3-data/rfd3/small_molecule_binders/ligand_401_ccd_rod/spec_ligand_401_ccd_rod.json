@@ -1,0 +1,10 @@
+{
+  "ligand_401_ccd_rod": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ROD.cif",
+    "ligand": "ROD",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ROD": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_286_ccd_ba7": {
+    "input": "./data/rfd3/ccd_ligands/structures/BA7.cif",
+    "ligand": "BA7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BA7": "ALL"
+    }
+  }
+}

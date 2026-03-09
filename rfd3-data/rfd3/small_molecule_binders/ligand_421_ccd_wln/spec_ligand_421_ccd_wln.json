@@ -1,0 +1,10 @@
+{
+  "ligand_421_ccd_wln": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WLN.cif",
+    "ligand": "WLN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WLN": "ALL"
+    }
+  }
+}

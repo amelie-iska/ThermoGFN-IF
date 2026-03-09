@@ -1,0 +1,10 @@
+{
+  "ligand_252_ccd_8b8": {
+    "input": "./data/rfd3/ccd_ligands/structures/8B8.cif",
+    "ligand": "8B8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8B8": "ALL"
+    }
+  }
+}

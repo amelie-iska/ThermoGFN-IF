@@ -1,0 +1,77 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM P P11  . 32Q L 1 1 . 1 32Q L P11  ? -1.178 0.839  -0.103 1 1
+HETATM C C1   . 32Q L 1 1 . 1 32Q L C1   ? -3.866 1.244  -0.467 1 2
+HETATM C C3   . 32Q L 1 1 . 1 32Q L C3   ? -2.591 1.989  -0.066 1 3
+HETATM C C6   . 32Q L 1 1 . 1 32Q L C6   ? -4.116 0.097  0.515  1 4
+HETATM C C8   . 32Q L 1 1 . 1 32Q L C8   ? -5.372 -0.637 0.12   1 5
+HETATM N N10  . 32Q L 1 1 . 1 32Q L N10  ? -2.351 3.09   -1.009 1 6
+HETATM C C11  . 32Q L 1 1 . 1 32Q L C11  ? 0.341  1.727  0.375  1 7
+HETATM O O12  . 32Q L 1 1 . 1 32Q L O12  ? -1.021 0.293  -1.47  1 8
+HETATM C C13  . 32Q L 1 1 . 1 32Q L C13  ? 1.545  0.795  0.224  1 9
+HETATM O O13  . 32Q L 1 1 . 1 32Q L O13  ? -1.441 -0.368 0.93   1 10
+HETATM C C15  . 32Q L 1 1 . 1 32Q L C15  ? 1.556  -0.199 1.356  1 11
+HETATM C C16  . 32Q L 1 1 . 1 32Q L C16  ? 2.834  1.619  0.257  1 12
+HETATM C C17  . 32Q L 1 1 . 1 32Q L C17  ? -5.301 -1.707 -0.753 1 13
+HETATM C C18  . 32Q L 1 1 . 1 32Q L C18  ? 4.012  0.719  -0.014 1 14
+HETATM C C19  . 32Q L 1 1 . 1 32Q L C19  ? -6.453 -2.38  -1.115 1 15
+HETATM C C20  . 32Q L 1 1 . 1 32Q L C20  ? -7.675 -1.984 -0.604 1 16
+HETATM C C21  . 32Q L 1 1 . 1 32Q L C21  ? -7.745 -0.915 0.269  1 17
+HETATM C C22  . 32Q L 1 1 . 1 32Q L C22  ? -6.593 -0.244 0.635  1 18
+HETATM C C23  . 32Q L 1 1 . 1 32Q L C23  ? 7.352  -1.832 -0.782 1 19
+HETATM O O23  . 32Q L 1 1 . 1 32Q L O23  ? 0.689  -0.166 2.197  1 20
+HETATM O O24  . 32Q L 1 1 . 1 32Q L O24  ? 2.528  -1.122 1.43   1 21
+HETATM N N24  . 32Q L 1 1 . 1 32Q L N24  ? 8.589  -1.042 -0.751 1 22
+HETATM C C36  . 32Q L 1 1 . 1 32Q L C36  ? 4.446  0.519  -1.311 1 23
+HETATM C C37  . 32Q L 1 1 . 1 32Q L C37  ? 5.527  -0.306 -1.56  1 24
+HETATM C C38  . 32Q L 1 1 . 1 32Q L C38  ? 6.174  -0.932 -0.511 1 25
+HETATM C C39  . 32Q L 1 1 . 1 32Q L C39  ? 5.74   -0.732 0.786  1 26
+HETATM C C40  . 32Q L 1 1 . 1 32Q L C40  ? 4.663  0.097  1.035  1 27
+HETATM H H11  . 32Q L 1 1 . 1 32Q L H11  ? -4.711 1.932  -0.445 1 28
+HETATM H H12  . 32Q L 1 1 . 1 32Q L H12  ? -3.751 0.842  -1.474 1 29
+HETATM H H31  . 32Q L 1 1 . 1 32Q L H31  ? -2.707 2.391  0.94   1 30
+HETATM H H61  . 32Q L 1 1 . 1 32Q L H61  ? -3.271 -0.591 0.493  1 31
+HETATM H H62  . 32Q L 1 1 . 1 32Q L H62  ? -4.232 0.499  1.521  1 32
+HETATM H H101 . 32Q L 1 1 . 1 32Q L H101 ? -2.241 2.743  -1.95  1 33
+HETATM H H102 . 32Q L 1 1 . 1 32Q L H102 ? -3.091 3.775  -0.96  1 34
+HETATM H H111 . 32Q L 1 1 . 1 32Q L H111 ? 0.471  2.596  -0.27  1 35
+HETATM H H112 . 32Q L 1 1 . 1 32Q L H112 ? 0.261  2.052  1.412  1 36
+HETATM H H131 . 32Q L 1 1 . 1 32Q L H131 ? 1.477  0.264  -0.725 1 37
+HETATM H H132 . 32Q L 1 1 . 1 32Q L H132 ? -1.553 -0.083 1.847  1 38
+HETATM H H161 . 32Q L 1 1 . 1 32Q L H161 ? 2.788  2.396  -0.506 1 39
+HETATM H H162 . 32Q L 1 1 . 1 32Q L H162 ? 2.947  2.079  1.238  1 40
+HETATM H H171 . 32Q L 1 1 . 1 32Q L H171 ? -4.347 -2.016 -1.152 1 41
+HETATM H H191 . 32Q L 1 1 . 1 32Q L H191 ? -6.398 -3.216 -1.797 1 42
+HETATM H H201 . 32Q L 1 1 . 1 32Q L H201 ? -8.575 -2.51  -0.887 1 43
+HETATM H H211 . 32Q L 1 1 . 1 32Q L H211 ? -8.7   -0.606 0.669  1 44
+HETATM H H221 . 32Q L 1 1 . 1 32Q L H221 ? -6.647 0.589  1.32   1 45
+HETATM H H231 . 32Q L 1 1 . 1 32Q L H231 ? 7.239  -2.293 -1.763 1 46
+HETATM H H232 . 32Q L 1 1 . 1 32Q L H232 ? 7.398  -2.609 -0.019 1 47
+HETATM H H3   . 32Q L 1 1 . 1 32Q L H3   ? 2.493  -1.738 2.174  1 48
+HETATM H H241 . 32Q L 1 1 . 1 32Q L H241 ? 8.685  -0.553 0.126  1 49
+HETATM H H242 . 32Q L 1 1 . 1 32Q L H242 ? 9.394  -1.624 -0.93  1 50
+HETATM H H361 . 32Q L 1 1 . 1 32Q L H361 ? 3.94   1.008  -2.131 1 51
+HETATM H H371 . 32Q L 1 1 . 1 32Q L H371 ? 5.865  -0.463 -2.573 1 52
+HETATM H H391 . 32Q L 1 1 . 1 32Q L H391 ? 6.246  -1.221 1.606  1 53
+HETATM H H401 . 32Q L 1 1 . 1 32Q L H401 ? 4.327  0.257  2.049  1 54
+#

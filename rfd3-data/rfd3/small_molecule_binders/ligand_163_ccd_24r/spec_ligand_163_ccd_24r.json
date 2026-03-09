@@ -1,0 +1,10 @@
+{
+  "ligand_163_ccd_24r": {
+    "input": "./data/rfd3/ccd_ligands/structures/24R.cif",
+    "ligand": "24R",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "24R": "ALL"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  CAJ  . UCT L 1 1 . 1 UCT L CAJ  ? 7.118  1.296  -2.501 1 1
+HETATM O  OAI  . UCT L 1 1 . 1 UCT L OAI  ? 7.734  0.212  -1.804 1 2
+HETATM C  CAB  . UCT L 1 1 . 1 UCT L CAB  ? 7.039  -0.331 -0.768 1 3
+HETATM C  CAC  . UCT L 1 1 . 1 UCT L CAC  ? 5.789  0.167  -0.435 1 4
+HETATM C  CAA  . UCT L 1 1 . 1 UCT L CAA  ? 7.578  -1.39  -0.045 1 5
+HETATM O  OAG  . UCT L 1 1 . 1 UCT L OAG  ? 8.802  -1.885 -0.372 1 6
+HETATM C  CAH  . UCT L 1 1 . 1 UCT L CAH  ? 9.293  -2.973 0.414  1 7
+HETATM C  CAF  . UCT L 1 1 . 1 UCT L CAF  ? 6.866  -1.939 1.009  1 8
+HETATM C  CAE  . UCT L 1 1 . 1 UCT L CAE  ? 5.623  -1.434 1.34   1 9
+HETATM C  CAD  . UCT L 1 1 . 1 UCT L CAD  ? 5.084  -0.385 0.618  1 10
+HETATM C  CAK  . UCT L 1 1 . 1 UCT L CAK  ? 3.726  0.157  0.98   1 11
+HETATM C  CAL  . UCT L 1 1 . 1 UCT L CAL  ? 2.65   -0.598 0.198  1 12
+HETATM C  CAM  . UCT L 1 1 . 1 UCT L CAM  ? 1.27   -0.047 0.565  1 13
+HETATM C  CAN  . UCT L 1 1 . 1 UCT L CAN  ? 0.204  -0.87  -0.111 1 14
+HETATM C  CAP  . UCT L 1 1 . 1 UCT L CAP  ? -0.473 -1.842 0.601  1 15
+HETATM C  CAT  . UCT L 1 1 . 1 UCT L CAT  ? -0.1   -0.649 -1.441 1 16
+HETATM C  CAS  . UCT L 1 1 . 1 UCT L CAS  ? -1.078 -1.402 -2.064 1 17
+HETATM C  CAR  . UCT L 1 1 . 1 UCT L CAR  ? -1.754 -2.378 -1.358 1 18
+HETATM C  CAQ  . UCT L 1 1 . 1 UCT L CAQ  ? -1.454 -2.599 -0.021 1 19
+HETATM O  OAU  . UCT L 1 1 . 1 UCT L OAU  ? -2.121 -3.555 0.677  1 20
+HETATM C  CAV  . UCT L 1 1 . 1 UCT L CAV  ? -3.119 -4.296 -0.029 1 21
+HETATM C  CAW  . UCT L 1 1 . 1 UCT L CAW  ? -3.747 -5.304 0.9    1 22
+HETATM O  OAY  . UCT L 1 1 . 1 UCT L OAY  ? -4.716 -6.117 0.451  1 23
+HETATM O  OAX  . UCT L 1 1 . 1 UCT L OAX  ? -3.378 -5.379 2.048  1 24
+HETATM O  OAO  . UCT L 1 1 . 1 UCT L OAO  ? 1.168  1.333  0.125  1 25
+HETATM C  C    . UCT L 1 1 . 1 UCT L C    ? 0.374  2.144  0.843  1 26
+HETATM O  O    . UCT L 1 1 . 1 UCT L O    ? -0.215 1.714  1.806  1 27
+HETATM C  CA   . UCT L 1 1 . 1 UCT L CA   ? 0.218  3.589  0.447  1 28
+HETATM C  CB   . UCT L 1 1 . 1 UCT L CB   ? 0.535  4.488  1.646  1 29
+HETATM C  CBD  . UCT L 1 1 . 1 UCT L CBD  ? 0.241  5.944  1.28   1 30
+HETATM C  CBE  . UCT L 1 1 . 1 UCT L CBE  ? -1.243 6.097  0.941  1 31
+HETATM C  CBF  . UCT L 1 1 . 1 UCT L CBF  ? -1.581 5.217  -0.266 1 32
+HETATM N  N    . UCT L 1 1 . 1 UCT L N    ? -1.167 3.837  0.023  1 33
+HETATM C  CBH  . UCT L 1 1 . 1 UCT L CBH  ? -2.041 2.819  -0.096 1 34
+HETATM O  OBI  . UCT L 1 1 . 1 UCT L OBI  ? -1.71  1.695  0.218  1 35
+HETATM C  CBJ  . UCT L 1 1 . 1 UCT L CBJ  ? -3.431 3.076  -0.621 1 36
+HETATM C  CBK  . UCT L 1 1 . 1 UCT L CBK  ? -4.223 3.884  0.409  1 37
+HETATM C  CBL  . UCT L 1 1 . 1 UCT L CBL  ? -4.124 1.762  -0.87  1 38
+HETATM S  SBP  . UCT L 1 1 . 1 UCT L SBP  ? -4.444 0.536  0.351  1 39
+HETATM C  CBO  . UCT L 1 1 . 1 UCT L CBO  ? -5.215 -0.497 -0.845 1 40
+HETATM CL CLBQ . UCT L 1 1 . 1 UCT L CLBQ ? -5.895 -2.062 -0.525 1 41
+HETATM C  CBN  . UCT L 1 1 . 1 UCT L CBN  ? -5.192 0.103  -2.037 1 42
+HETATM C  CBM  . UCT L 1 1 . 1 UCT L CBM  ? -4.595 1.352  -2.049 1 43
+HETATM H  HAL  . UCT L 1 1 . 1 UCT L HAL  ? 7.777  1.635  -3.301 1 44
+HETATM H  HAM  . UCT L 1 1 . 1 UCT L HAM  ? 6.171  0.964  -2.926 1 45
+HETATM H  HAK  . UCT L 1 1 . 1 UCT L HAK  ? 6.937  2.118  -1.808 1 46
+HETATM H  HAC  . UCT L 1 1 . 1 UCT L HAC  ? 5.366  0.986  -0.997 1 47
+HETATM H  HAH  . UCT L 1 1 . 1 UCT L HAH  ? 9.371  -2.662 1.455  1 48
+HETATM H  HAI  . UCT L 1 1 . 1 UCT L HAI  ? 8.606  -3.816 0.337  1 49
+HETATM H  HAJ  . UCT L 1 1 . 1 UCT L HAJ  ? 10.275 -3.271 0.048  1 50
+HETATM H  HAF  . UCT L 1 1 . 1 UCT L HAF  ? 7.282  -2.762 1.572  1 51
+HETATM H  HAE  . UCT L 1 1 . 1 UCT L HAE  ? 5.068  -1.863 2.162  1 52
+HETATM H  HAO  . UCT L 1 1 . 1 UCT L HAO  ? 3.556  0.028  2.049  1 53
+HETATM H  HAN  . UCT L 1 1 . 1 UCT L HAN  ? 3.68   1.217  0.731  1 54
+HETATM H  HAQ  . UCT L 1 1 . 1 UCT L HAQ  ? 2.82   -0.469 -0.871 1 55
+HETATM H  HAP  . UCT L 1 1 . 1 UCT L HAP  ? 2.696  -1.658 0.447  1 56
+HETATM H  HAR  . UCT L 1 1 . 1 UCT L HAR  ? 1.136  -0.095 1.646  1 57
+HETATM H  HAS  . UCT L 1 1 . 1 UCT L HAS  ? -0.238 -2.012 1.642  1 58
+HETATM H  HAV  . UCT L 1 1 . 1 UCT L HAV  ? 0.428  0.114  -1.995 1 59
+HETATM H  HAU  . UCT L 1 1 . 1 UCT L HAU  ? -1.314 -1.227 -3.103 1 60
+HETATM H  HAT  . UCT L 1 1 . 1 UCT L HAT  ? -2.519 -2.965 -1.844 1 61
+HETATM H  HAW  . UCT L 1 1 . 1 UCT L HAW  ? -3.885 -3.614 -0.397 1 62
+HETATM H  HAX  . UCT L 1 1 . 1 UCT L HAX  ? -2.659 -4.815 -0.87  1 63
+HETATM H  H1   . UCT L 1 1 . 1 UCT L H1   ? -5.088 -6.746 1.084  1 64
+HETATM H  HA   . UCT L 1 1 . 1 UCT L HA   ? 0.898  3.819  -0.374 1 65
+HETATM H  HB2  . UCT L 1 1 . 1 UCT L HB2  ? -0.083 4.194  2.494  1 66
+HETATM H  HB1  . UCT L 1 1 . 1 UCT L HB1  ? 1.588  4.384  1.91   1 67
+HETATM H  HBD  . UCT L 1 1 . 1 UCT L HBD  ? 0.49   6.588  2.123  1 68
+HETATM H  HB3  . UCT L 1 1 . 1 UCT L HB3  ? 0.842  6.229  0.416  1 69
+HETATM H  HBE  . UCT L 1 1 . 1 UCT L HBE  ? -1.845 5.788  1.796  1 70
+HETATM H  HB4  . UCT L 1 1 . 1 UCT L HB4  ? -1.457 7.139  0.703  1 71
+HETATM H  HB5  . UCT L 1 1 . 1 UCT L HB5  ? -2.655 5.245  -0.451 1 72
+HETATM H  HBF  . UCT L 1 1 . 1 UCT L HBF  ? -1.049 5.583  -1.145 1 73
+HETATM H  HBJ  . UCT L 1 1 . 1 UCT L HBJ  ? -3.369 3.637  -1.553 1 74
+HETATM H  HBK  . UCT L 1 1 . 1 UCT L HBK  ? -3.666 4.783  0.671  1 75
+HETATM H  HB6  . UCT L 1 1 . 1 UCT L HB6  ? -5.188 4.164  -0.014 1 76
+HETATM H  HB7  . UCT L 1 1 . 1 UCT L HB7  ? -4.379 3.28   1.303  1 77
+HETATM H  HBN  . UCT L 1 1 . 1 UCT L HBN  ? -5.611 -0.349 -2.924 1 78
+HETATM H  HBM  . UCT L 1 1 . 1 UCT L HBM  ? -4.51  1.947  -2.946 1 79
+#

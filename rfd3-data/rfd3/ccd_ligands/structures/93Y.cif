@@ -1,0 +1,81 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C5   . 93Y L 1 1 . 1 93Y L C5   ? -5.383 -1.191 -0.726 1 1
+HETATM C  C6   . 93Y L 1 1 . 1 93Y L C6   ? 5.655  -1.278 0.355  1 2
+HETATM C  C7   . 93Y L 1 1 . 1 93Y L C7   ? -8.289 -0.032 0.212  1 3
+HETATM C  C8   . 93Y L 1 1 . 1 93Y L C8   ? 8.463  0.376  0.558  1 4
+HETATM C  C14  . 93Y L 1 1 . 1 93Y L C14  ? 8.234  0.969  -0.669 1 5
+HETATM C  C13  . 93Y L 1 1 . 1 93Y L C13  ? -8.767 1.242  -0.032 1 6
+HETATM C  C19  . 93Y L 1 1 . 1 93Y L C19  ? -9.033 2.095  1.024  1 7
+HETATM C  C20  . 93Y L 1 1 . 1 93Y L C20  ? 8.413  2.333  -0.822 1 8
+HETATM C  C23  . 93Y L 1 1 . 1 93Y L C23  ? -8.077 -0.453 1.512  1 9
+HETATM C  C24  . 93Y L 1 1 . 1 93Y L C24  ? 8.871  1.145  1.633  1 10
+HETATM C  C25  . 93Y L 1 1 . 1 93Y L C25  ? -8.343 0.399  2.567  1 11
+HETATM C  C26  . 93Y L 1 1 . 1 93Y L C26  ? 9.05   2.507  1.48   1 12
+HETATM C  C27  . 93Y L 1 1 . 1 93Y L C27  ? 3.288  -1.126 -0.204 1 13
+HETATM C  C28  . 93Y L 1 1 . 1 93Y L C28  ? -3.016 -1.342 -0.168 1 14
+HETATM C  C29  . 93Y L 1 1 . 1 93Y L C29  ? -8.821 1.673  2.324  1 15
+HETATM C  C30  . 93Y L 1 1 . 1 93Y L C30  ? 8.821  3.101  0.254  1 16
+HETATM C  C31  . 93Y L 1 1 . 1 93Y L C31  ? -1.669 -1.033 -0.824 1 17
+HETATM C  C32  . 93Y L 1 1 . 1 93Y L C32  ? 1.941  -1.436 0.452  1 18
+HETATM C  C33  . 93Y L 1 1 . 1 93Y L C33  ? -0.538 -1.389 0.142  1 19
+HETATM C  C34  . 93Y L 1 1 . 1 93Y L C34  ? 0.809  -1.079 -0.514 1 20
+HETATM N  N17  . 93Y L 1 1 . 1 93Y L N17  ? -4.1   -1.001 -1.092 1 21
+HETATM N  N18  . 93Y L 1 1 . 1 93Y L N18  ? 4.372  -1.468 0.721  1 22
+HETATM N  N3   . 93Y L 1 1 . 1 93Y L N3   ? 6.652  -1.592 1.205  1 23
+HETATM N  N4   . 93Y L 1 1 . 1 93Y L N4   ? -6.38  -0.882 -1.579 1 24
+HETATM O  O10  . 93Y L 1 1 . 1 93Y L O10  ? 8.366  -1.932 -0.538 1 25
+HETATM O  O11  . 93Y L 1 1 . 1 93Y L O11  ? 9.024  -1.748 1.867  1 26
+HETATM O  O12  . 93Y L 1 1 . 1 93Y L O12  ? -8.029 -2.44  -0.607 1 27
+HETATM O  O15  . 93Y L 1 1 . 1 93Y L O15  ? -5.642 -1.646 0.371  1 28
+HETATM O  O16  . 93Y L 1 1 . 1 93Y L O16  ? 5.913  -0.823 -0.743 1 29
+HETATM O  O9   . 93Y L 1 1 . 1 93Y L O9   ? -8.755 -0.673 -2.219 1 30
+HETATM S  S1   . 93Y L 1 1 . 1 93Y L S1   ? -7.957 -1.121 -1.132 1 31
+HETATM S  S2   . 93Y L 1 1 . 1 93Y L S2   ? 8.228  -1.359 0.756  1 32
+HETATM CL CL21 . 93Y L 1 1 . 1 93Y L CL21 ? -9.633 3.695  0.717  1 33
+HETATM CL CL22 . 93Y L 1 1 . 1 93Y L CL22 ? 8.127  3.078  -2.363 1 34
+HETATM H  H1   . 93Y L 1 1 . 1 93Y L H1   ? 7.916  0.369  -1.508 1 35
+HETATM H  H2   . 93Y L 1 1 . 1 93Y L H2   ? -8.932 1.571  -1.048 1 36
+HETATM H  H3   . 93Y L 1 1 . 1 93Y L H3   ? -7.704 -1.449 1.702  1 37
+HETATM H  H4   . 93Y L 1 1 . 1 93Y L H4   ? 9.049  0.681  2.592  1 38
+HETATM H  H5   . 93Y L 1 1 . 1 93Y L H5   ? -8.177 0.069  3.582  1 39
+HETATM H  H6   . 93Y L 1 1 . 1 93Y L H6   ? 9.368  3.107  2.32   1 40
+HETATM H  H7   . 93Y L 1 1 . 1 93Y L H7   ? 3.391  -1.713 -1.117 1 41
+HETATM H  H8   . 93Y L 1 1 . 1 93Y L H8   ? 3.338  -0.065 -0.447 1 42
+HETATM H  H9   . 93Y L 1 1 . 1 93Y L H9   ? -3.067 -2.404 0.075  1 43
+HETATM H  H10  . 93Y L 1 1 . 1 93Y L H10  ? -3.119 -0.756 0.745  1 44
+HETATM H  H11  . 93Y L 1 1 . 1 93Y L H11  ? -9.028 2.339  3.149  1 45
+HETATM H  H12  . 93Y L 1 1 . 1 93Y L H12  ? 8.962  4.166  0.135  1 46
+HETATM H  H13  . 93Y L 1 1 . 1 93Y L H13  ? -1.567 -1.619 -1.737 1 47
+HETATM H  H14  . 93Y L 1 1 . 1 93Y L H14  ? -1.619 0.029  -1.066 1 48
+HETATM H  H15  . 93Y L 1 1 . 1 93Y L H15  ? 1.891  -2.498 0.694  1 49
+HETATM H  H16  . 93Y L 1 1 . 1 93Y L H16  ? 1.838  -0.85  1.365  1 50
+HETATM H  H17  . 93Y L 1 1 . 1 93Y L H17  ? -0.641 -0.803 1.055  1 51
+HETATM H  H18  . 93Y L 1 1 . 1 93Y L H18  ? -0.588 -2.451 0.385  1 52
+HETATM H  H19  . 93Y L 1 1 . 1 93Y L H19  ? 0.86   -0.018 -0.756 1 53
+HETATM H  H20  . 93Y L 1 1 . 1 93Y L H20  ? 0.912  -1.666 -1.427 1 54
+HETATM H  H21  . 93Y L 1 1 . 1 93Y L H21  ? -3.894 -0.638 -1.968 1 55
+HETATM H  H22  . 93Y L 1 1 . 1 93Y L H22  ? 4.166  -1.831 1.596  1 56
+HETATM H  H23  . 93Y L 1 1 . 1 93Y L H23  ? 6.446  -1.955 2.081  1 57
+HETATM H  H24  . 93Y L 1 1 . 1 93Y L H24  ? -6.174 -0.519 -2.455 1 58
+#

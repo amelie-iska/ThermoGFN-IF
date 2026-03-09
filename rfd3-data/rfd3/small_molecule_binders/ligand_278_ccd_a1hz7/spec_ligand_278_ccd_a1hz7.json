@@ -1,0 +1,10 @@
+{
+  "ligand_278_ccd_a1hz7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1HZ7.cif",
+    "ligand": "A1HZ7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1HZ7": "ALL"
+    }
+  }
+}

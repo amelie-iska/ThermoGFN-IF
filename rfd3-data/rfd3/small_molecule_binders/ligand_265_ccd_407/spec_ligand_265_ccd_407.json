@@ -1,0 +1,10 @@
+{
+  "ligand_265_ccd_407": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/407.cif",
+    "ligand": "407",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "407": "ALL"
+    }
+  }
+}

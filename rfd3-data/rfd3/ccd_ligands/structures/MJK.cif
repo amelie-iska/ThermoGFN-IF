@@ -1,0 +1,71 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C4  . MJK L 1 1 . 1 MJK L C4  ? 2.07    -0.451 -1.497 1 1
+HETATM C  C7  . MJK L 1 1 . 1 MJK L C7  ? 5.635   -1.027 -0.545 1 2
+HETATM C  C6  . MJK L 1 1 . 1 MJK L C6  ? 4.393   -1.339 -1.071 1 3
+HETATM C  C9  . MJK L 1 1 . 1 MJK L C9  ? -1.098  -3.17  0.402  1 4
+HETATM C  C13 . MJK L 1 1 . 1 MJK L C13 ? -6.37   0.897  0.599  1 5
+HETATM C  C8  . MJK L 1 1 . 1 MJK L C8  ? 5.739   0.206  -0.043 1 6
+HETATM C  C18 . MJK L 1 1 . 1 MJK L C18 ? -6.866  2.146  0.278  1 7
+HETATM C  C16 . MJK L 1 1 . 1 MJK L C16 ? -9.078  1.238  0.165  1 8
+HETATM C  C1  . MJK L 1 1 . 1 MJK L C1  ? -2.748  0.054  -0.213 1 9
+HETATM C  C2  . MJK L 1 1 . 1 MJK L C2  ? -1.005  -1.625 0.459  1 10
+HETATM C  C3  . MJK L 1 1 . 1 MJK L C3  ? -0.115  -1.112 -0.644 1 11
+HETATM C  C5  . MJK L 1 1 . 1 MJK L C5  ? 3.489   -0.362 -0.997 1 12
+HETATM C  C10 . MJK L 1 1 . 1 MJK L C10 ? -2.452  -3.427 1.115  1 13
+HETATM C  C11 . MJK L 1 1 . 1 MJK L C11 ? -3.312  -2.226 0.667  1 14
+HETATM C  C12 . MJK L 1 1 . 1 MJK L C12 ? -4.894  0.711  0.842  1 15
+HETATM C  C14 . MJK L 1 1 . 1 MJK L C14 ? -7.228  -0.182 0.703  1 16
+HETATM C  C15 . MJK L 1 1 . 1 MJK L C15 ? -8.582  -0.011 0.486  1 17
+HETATM C  C17 . MJK L 1 1 . 1 MJK L C17 ? -8.22   2.317  0.06   1 18
+HETATM N  N   . MJK L 1 1 . 1 MJK L N   ? -4.302  1.495  -1.401 1 19
+HETATM C  C   . MJK L 1 1 . 1 MJK L C   ? -4.2    0.359  -0.475 1 20
+HETATM O  O   . MJK L 1 1 . 1 MJK L O   ? -0.586  -0.845 -1.729 1 21
+HETATM N  N1  . MJK L 1 1 . 1 MJK L N1  ? -2.389  -1.156 0.261  1 22
+HETATM N  N2  . MJK L 1 1 . 1 MJK L N2  ? 1.205   -0.95  -0.424 1 23
+HETATM O  O1  . MJK L 1 1 . 1 MJK L O1  ? -1.903  0.897  -0.428 1 24
+HETATM S  S   . MJK L 1 1 . 1 MJK L S   ? 4.207   1.05   -0.232 1 25
+HETATM BR BR  . MJK L 1 1 . 1 MJK L BR  ? 7.293   0.932  0.751  1 26
+HETATM H  H1  . MJK L 1 1 . 1 MJK L H1  ? 1.731   0.537  -1.807 1 27
+HETATM H  H2  . MJK L 1 1 . 1 MJK L H2  ? 2.026   -1.133 -2.346 1 28
+HETATM H  H3  . MJK L 1 1 . 1 MJK L H3  ? 6.456   -1.728 -0.538 1 29
+HETATM H  H4  . MJK L 1 1 . 1 MJK L H4  ? 4.173   -2.302 -1.509 1 30
+HETATM H  H5  . MJK L 1 1 . 1 MJK L H5  ? -1.126  -3.522 -0.629 1 31
+HETATM H  H6  . MJK L 1 1 . 1 MJK L H6  ? -0.275  -3.631 0.948  1 32
+HETATM H  H7  . MJK L 1 1 . 1 MJK L H7  ? -6.195  2.989  0.197  1 33
+HETATM H  H8  . MJK L 1 1 . 1 MJK L H8  ? -10.137 1.372  -0.005 1 34
+HETATM H  H9  . MJK L 1 1 . 1 MJK L H9  ? -0.631  -1.303 1.43   1 35
+HETATM H  H10 . MJK L 1 1 . 1 MJK L H10 ? -2.894  -4.364 0.777  1 36
+HETATM H  H11 . MJK L 1 1 . 1 MJK L H11 ? -2.324  -3.427 2.197  1 37
+HETATM H  H12 . MJK L 1 1 . 1 MJK L H12 ? -3.94   -2.513 -0.176 1 38
+HETATM H  H13 . MJK L 1 1 . 1 MJK L H13 ? -3.932  -1.885 1.496  1 39
+HETATM H  H14 . MJK L 1 1 . 1 MJK L H14 ? -4.472  1.635  1.239  1 40
+HETATM H  H15 . MJK L 1 1 . 1 MJK L H15 ? -4.742  -0.095 1.56   1 41
+HETATM H  H16 . MJK L 1 1 . 1 MJK L H16 ? -6.84   -1.158 0.954  1 42
+HETATM H  H17 . MJK L 1 1 . 1 MJK L H17 ? -9.253  -0.854 0.567  1 43
+HETATM H  H18 . MJK L 1 1 . 1 MJK L H18 ? -8.608  3.293  -0.19  1 44
+HETATM H  H19 . MJK L 1 1 . 1 MJK L H19 ? -3.864  2.317  -1.015 1 45
+HETATM H  H20 . MJK L 1 1 . 1 MJK L H20 ? -3.908  1.264  -2.301 1 46
+HETATM H  H22 . MJK L 1 1 . 1 MJK L H22 ? -4.681  -0.514 -0.917 1 47
+HETATM H  H23 . MJK L 1 1 . 1 MJK L H23 ? 1.582   -1.163 0.443  1 48
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_264_ccd_a1axy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1AXY.cif",
+    "ligand": "A1AXY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1AXY": "ALL"
+    }
+  }
+}

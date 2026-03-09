@@ -1,0 +1,93 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O   . CGK L 1 1 . 1 CGK L O   ? 6.743   -2.581 -0.397 1 1
+HETATM C CX  . CGK L 1 1 . 1 CGK L CX  ? 7.528   -1.444 -0.033 1 2
+HETATM C CY  . CGK L 1 1 . 1 CGK L CY  ? 9.017   -1.745 -0.219 1 3
+HETATM C CT  . CGK L 1 1 . 1 CGK L CT  ? 9.291   -2.073 -1.688 1 4
+HETATM C CI  . CGK L 1 1 . 1 CGK L CI  ? 10.757  -2.37  -1.871 1 5
+HETATM O OI2 . CGK L 1 1 . 1 CGK L OI2 ? 11.232  -2.686 -3.086 1 6
+HETATM O OI1 . CGK L 1 1 . 1 CGK L OI1 ? 11.506  -2.323 -0.924 1 7
+HETATM O O1  . CGK L 1 1 . 1 CGK L O1  ? 7.26    -1.066 1.32   1 8
+HETATM C C2  . CGK L 1 1 . 1 CGK L C2  ? 6.75    0.238  1.552  1 9
+HETATM C C1  . CGK L 1 1 . 1 CGK L C1  ? 6.009   0.772  0.281  1 10
+HETATM S SX  . CGK L 1 1 . 1 CGK L SX  ? 7.042   0.014  -1.037 1 11
+HETATM C C3  . CGK L 1 1 . 1 CGK L C3  ? 5.588   0.144  2.571  1 12
+HETATM O O2  . CGK L 1 1 . 1 CGK L O2  ? 5.709   -1.043 3.359  1 13
+HETATM C C4  . CGK L 1 1 . 1 CGK L C4  ? 4.318   0.084  1.702  1 14
+HETATM O O3  . CGK L 1 1 . 1 CGK L O3  ? 4.739   0.099  0.328  1 15
+HETATM C C5  . CGK L 1 1 . 1 CGK L C5  ? 3.434   1.3    1.987  1 16
+HETATM O O4  . CGK L 1 1 . 1 CGK L O4  ? 2.208   1.178  1.264  1 17
+HETATM P P1  . CGK L 1 1 . 1 CGK L P1  ? 1.038   2.282  1.33   1 18
+HETATM O O5  . CGK L 1 1 . 1 CGK L O5  ? 0.438   2.341  2.823  1 19
+HETATM O O6  . CGK L 1 1 . 1 CGK L O6  ? 1.589   3.607  0.967  1 20
+HETATM O O7  . CGK L 1 1 . 1 CGK L O7  ? -0.132  1.886  0.297  1 21
+HETATM P P2  . CGK L 1 1 . 1 CGK L P2  ? -1.323  2.705  -0.411 1 22
+HETATM O O9  . CGK L 1 1 . 1 CGK L O9  ? -1.914  3.654  0.559  1 23
+HETATM O O8  . CGK L 1 1 . 1 CGK L O8  ? -0.739  3.521  -1.671 1 24
+HETATM O O10 . CGK L 1 1 . 1 CGK L O10 ? -2.456  1.678  -0.916 1 25
+HETATM C CA1 . CGK L 1 1 . 1 CGK L CA1 ? -3.692  2.104  -1.492 1 26
+HETATM C CA2 . CGK L 1 1 . 1 CGK L CA2 ? -4.532  0.879  -1.859 1 27
+HETATM O OA3 . CGK L 1 1 . 1 CGK L OA3 ? -4.998  0.213  -0.664 1 28
+HETATM C CA5 . CGK L 1 1 . 1 CGK L CA5 ? -6.134  -0.573 -1.086 1 29
+HETATM C CA4 . CGK L 1 1 . 1 CGK L CA4 ? -6.896  0.333  -2.077 1 30
+HETATM O OA2 . CGK L 1 1 . 1 CGK L OA2 ? -7.432  -0.44  -3.153 1 31
+HETATM C CA3 . CGK L 1 1 . 1 CGK L CA3 ? -5.819  1.311  -2.597 1 32
+HETATM O OA1 . CGK L 1 1 . 1 CGK L OA1 ? -5.655  1.171  -4.01  1 33
+HETATM N N9A . CGK L 1 1 . 1 CGK L N9A ? -6.982  -0.9   0.063  1 34
+HETATM C C4A . CGK L 1 1 . 1 CGK L C4A ? -7.853  -1.957 0.154  1 35
+HETATM C C5M . CGK L 1 1 . 1 CGK L C5M ? -8.44   -1.865 1.428  1 36
+HETATM N N7A . CGK L 1 1 . 1 CGK L N7A ? -7.908  -0.778 2.036  1 37
+HETATM C C8A . CGK L 1 1 . 1 CGK L C8A ? -7.048  -0.214 1.238  1 38
+HETATM N N3A . CGK L 1 1 . 1 CGK L N3A ? -8.21   -2.951 -0.652 1 39
+HETATM C C2A . CGK L 1 1 . 1 CGK L C2A ? -9.1    -3.841 -0.266 1 40
+HETATM N N1A . CGK L 1 1 . 1 CGK L N1A ? -9.68   -3.796 0.92   1 41
+HETATM C C6A . CGK L 1 1 . 1 CGK L C6A ? -9.39   -2.835 1.791  1 42
+HETATM N N6A . CGK L 1 1 . 1 CGK L N6A ? -10.002 -2.796 3.032  1 43
+HETATM H H1  . CGK L 1 1 . 1 CGK L H1  ? 5.792   -2.457 -0.278 1 44
+HETATM H H2  . CGK L 1 1 . 1 CGK L H2  ? 9.603   -0.873 0.074  1 45
+HETATM H H3  . CGK L 1 1 . 1 CGK L H3  ? 9.296   -2.596 0.402  1 46
+HETATM H H4  . CGK L 1 1 . 1 CGK L H4  ? 8.705   -2.945 -1.981 1 47
+HETATM H H5  . CGK L 1 1 . 1 CGK L H5  ? 9.012   -1.222 -2.309 1 48
+HETATM H H6  . CGK L 1 1 . 1 CGK L H6  ? 12.179  -2.868 -3.154 1 49
+HETATM H H7  . CGK L 1 1 . 1 CGK L H7  ? 7.534   0.922  1.879  1 50
+HETATM H H8  . CGK L 1 1 . 1 CGK L H8  ? 5.945   1.858  0.223  1 51
+HETATM H H9  . CGK L 1 1 . 1 CGK L H9  ? 5.57    1.026  3.211  1 52
+HETATM H H10 . CGK L 1 1 . 1 CGK L H10 ? 4.979   -1.181 3.977  1 53
+HETATM H H11 . CGK L 1 1 . 1 CGK L H11 ? 3.768   -0.833 1.911  1 54
+HETATM H H12 . CGK L 1 1 . 1 CGK L H12 ? 3.223   1.353  3.055  1 55
+HETATM H H13 . CGK L 1 1 . 1 CGK L H13 ? 3.952   2.207  1.674  1 56
+HETATM H H14 . CGK L 1 1 . 1 CGK L H14 ? 0.059   1.505  3.128  1 57
+HETATM H H15 . CGK L 1 1 . 1 CGK L H15 ? -0.335  2.961  -2.349 1 58
+HETATM H H16 . CGK L 1 1 . 1 CGK L H16 ? -4.236  2.716  -0.773 1 59
+HETATM H H17 . CGK L 1 1 . 1 CGK L H17 ? -3.492  2.689  -2.39  1 60
+HETATM H H18 . CGK L 1 1 . 1 CGK L H18 ? -3.953  0.193  -2.476 1 61
+HETATM H H19 . CGK L 1 1 . 1 CGK L H19 ? -5.8    -1.484 -1.584 1 62
+HETATM H H20 . CGK L 1 1 . 1 CGK L H20 ? -7.69   0.877  -1.565 1 63
+HETATM H H21 . CGK L 1 1 . 1 CGK L H21 ? -7.921  0.079  -3.806 1 64
+HETATM H H22 . CGK L 1 1 . 1 CGK L H22 ? -6.079  2.338  -2.342 1 65
+HETATM H H23 . CGK L 1 1 . 1 CGK L H23 ? -6.434  1.428  -4.523 1 66
+HETATM H H24 . CGK L 1 1 . 1 CGK L H24 ? -6.476  0.673  1.471  1 67
+HETATM H H25 . CGK L 1 1 . 1 CGK L H25 ? -9.368  -4.636 -0.946 1 68
+HETATM H H26 . CGK L 1 1 . 1 CGK L H26 ? -10.651 -3.476 3.274  1 69
+HETATM H H27 . CGK L 1 1 . 1 CGK L H27 ? -9.782  -2.09  3.659  1 70
+#

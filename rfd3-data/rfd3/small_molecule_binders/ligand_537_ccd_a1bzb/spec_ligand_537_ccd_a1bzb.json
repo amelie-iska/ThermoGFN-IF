@@ -1,0 +1,10 @@
+{
+  "ligand_537_ccd_a1bzb": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BZB.cif",
+    "ligand": "A1BZB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BZB": "ALL"
+    }
+  }
+}

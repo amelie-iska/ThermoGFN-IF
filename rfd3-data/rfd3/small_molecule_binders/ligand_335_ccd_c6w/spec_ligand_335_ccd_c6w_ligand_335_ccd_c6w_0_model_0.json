@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.03254127502441406,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.2975921630859375,
+        "non_loop_fraction": 0.82,
+        "loop_fraction": 0.18,
+        "helix_fraction": 0.82,
+        "sheet_fraction": 0.0,
+        "num_ss_elements": 3,
+        "radius_of_gyration": 10.38811922708877,
+        "alanine_content": 0.2,
+        "glycine_content": 0.04,
+        "num_residues": 50,
+        "diffused_com": [
+            -0.7702629566192627,
+            -2.161198854446411,
+            0.6497899293899536
+        ],
+        "fixed_com": [
+            0.0009765625,
+            -0.0002929687616415322,
+            -6.713867333019152e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/C6W.cif",
+        "length": "20-400",
+        "ligand": "C6W",
+        "extra": {
+            "example": "ligand_335_ccd_c6w",
+            "task_name": "spec_ligand_335_ccd_c6w_ligand_335_ccd_c6w",
+            "sampled_contig": "50",
+            "num_tokens_in": 51,
+            "num_residues_in": 51,
+            "num_chains": 2,
+            "num_atoms": 270,
+            "num_residues": 53,
+            "example_id": "spec_ligand_335_ccd_c6w_ligand_335_ccd_c6w_0"
+        },
+        "select_fixed_atoms": {
+            "C6W": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

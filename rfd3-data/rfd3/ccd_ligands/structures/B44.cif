@@ -1,0 +1,86 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O1   . B44 L 1 1 . 1 B44 L O1   ? 3.063   -1.41  -0.393 1 1
+HETATM C C7   . B44 L 1 1 . 1 B44 L C7   ? -3.382  -1.221 0.808  1 2
+HETATM O O2   . B44 L 1 1 . 1 B44 L O2   ? 0.206   -1.653 0.12   1 3
+HETATM C C6   . B44 L 1 1 . 1 B44 L C6   ? -5.149  -1.313 2.274  1 4
+HETATM C C1   . B44 L 1 1 . 1 B44 L C1   ? 2.309   -2.584 -0.702 1 5
+HETATM N N1   . B44 L 1 1 . 1 B44 L N1   ? -5.912  -0.566 1.496  1 6
+HETATM C C5   . B44 L 1 1 . 1 B44 L C5   ? -1.022  -2.131 0.712  1 7
+HETATM C C4   . B44 L 1 1 . 1 B44 L C4   ? -1.112  -3.614 0.289  1 8
+HETATM C C3   . B44 L 1 1 . 1 B44 L C3   ? 0.353   -4.015 0.008  1 9
+HETATM C C2   . B44 L 1 1 . 1 B44 L C2   ? 1.156   -2.726 0.294  1 10
+HETATM O O13  . B44 L 1 1 . 1 B44 L O13  ? 7.805   2.961  2.813  1 11
+HETATM P P3   . B44 L 1 1 . 1 B44 L P3   ? 8.04    2.665  1.248  1 12
+HETATM O O7   . B44 L 1 1 . 1 B44 L O7   ? 8.314   4.05   0.475  1 13
+HETATM O O10  . B44 L 1 1 . 1 B44 L O10  ? 9.206   1.769  1.085  1 14
+HETATM O O12  . B44 L 1 1 . 1 B44 L O12  ? 6.73    1.958  0.634  1 15
+HETATM P P2   . B44 L 1 1 . 1 B44 L P2   ? 6.451   1.068  -0.679 1 16
+HETATM O O6   . B44 L 1 1 . 1 B44 L O6   ? 6.437   2.018  -1.979 1 17
+HETATM O O9   . B44 L 1 1 . 1 B44 L O9   ? 7.517   0.052  -0.821 1 18
+HETATM O O11  . B44 L 1 1 . 1 B44 L O11  ? 5.025   0.333  -0.536 1 19
+HETATM P P1   . B44 L 1 1 . 1 B44 L P1   ? 4.353   -0.949 -1.239 1 20
+HETATM O O5   . B44 L 1 1 . 1 B44 L O5   ? 5.333   -2.057 -1.287 1 21
+HETATM O O8   . B44 L 1 1 . 1 B44 L O8   ? 3.903   -0.566 -2.737 1 22
+HETATM O O3   . B44 L 1 1 . 1 B44 L O3   ? 0.763   -5.065 0.886  1 23
+HETATM O O4   . B44 L 1 1 . 1 B44 L O4   ? -1.653  -4.405 1.349  1 24
+HETATM N N9   . B44 L 1 1 . 1 B44 L N9   ? -2.166  -1.38  0.191  1 25
+HETATM N N3   . B44 L 1 1 . 1 B44 L N3   ? -3.914  -1.636 1.952  1 26
+HETATM C C13  . B44 L 1 1 . 1 B44 L C13  ? -2.219  -0.709 -0.994 1 27
+HETATM N N7   . B44 L 1 1 . 1 B44 L N7   ? -3.387  -0.154 -1.14  1 28
+HETATM C C8   . B44 L 1 1 . 1 B44 L C8   ? -4.156  -0.431 -0.059 1 29
+HETATM C C9   . B44 L 1 1 . 1 B44 L C9   ? -5.467  -0.109 0.33   1 30
+HETATM N N6   . B44 L 1 1 . 1 B44 L N6   ? -6.273  0.672  -0.479 1 31
+HETATM C C10  . B44 L 1 1 . 1 B44 L C10  ? -7.635  1.005  -0.053 1 32
+HETATM C C11  . B44 L 1 1 . 1 B44 L C11  ? -8.306  1.873  -1.12  1 33
+HETATM C C12  . B44 L 1 1 . 1 B44 L C12  ? -9.706  2.216  -0.681 1 34
+HETATM C C18  . B44 L 1 1 . 1 B44 L C18  ? -10.759 1.385  -1.017 1 35
+HETATM C C17  . B44 L 1 1 . 1 B44 L C17  ? -12.043 1.699  -0.615 1 36
+HETATM C C16  . B44 L 1 1 . 1 B44 L C16  ? -12.275 2.844  0.124  1 37
+HETATM C C15  . B44 L 1 1 . 1 B44 L C15  ? -11.223 3.675  0.461  1 38
+HETATM C C14  . B44 L 1 1 . 1 B44 L C14  ? -9.938  3.358  0.062  1 39
+HETATM H H6   . B44 L 1 1 . 1 B44 L H6   ? -5.551  -1.662 3.213  1 40
+HETATM H H1   . B44 L 1 1 . 1 B44 L H1   ? 1.908   -2.503 -1.712 1 41
+HETATM H H1A  . B44 L 1 1 . 1 B44 L H1A  ? 2.955   -3.459 -0.636 1 42
+HETATM H H5   . B44 L 1 1 . 1 B44 L H5   ? -0.976  -2.049 1.798  1 43
+HETATM H H4   . B44 L 1 1 . 1 B44 L H4   ? -1.716  -3.718 -0.613 1 44
+HETATM H H3   . B44 L 1 1 . 1 B44 L H3   ? 0.474   -4.317 -1.033 1 45
+HETATM H H2   . B44 L 1 1 . 1 B44 L H2   ? 1.535   -2.735 1.316  1 46
+HETATM H HO13 . B44 L 1 1 . 1 B44 L HO13 ? 8.555   3.387  3.249  1 47
+HETATM H HO7  . B44 L 1 1 . 1 B44 L HO7  ? 7.59    4.687  0.539  1 48
+HETATM H HO6  . B44 L 1 1 . 1 B44 L HO6  ? 5.761   2.709  -1.954 1 49
+HETATM H HO8  . B44 L 1 1 . 1 B44 L HO8  ? 3.26    0.155  -2.782 1 50
+HETATM H HO3  . B44 L 1 1 . 1 B44 L HO3  ? 0.25    -5.88  0.79   1 51
+HETATM H HO4  . B44 L 1 1 . 1 B44 L HO4  ? -1.732  -5.346 1.137  1 52
+HETATM H H13  . B44 L 1 1 . 1 B44 L H13  ? -1.411  -0.648 -1.708 1 53
+HETATM H HN6  . B44 L 1 1 . 1 B44 L HN6  ? -5.937  1.0    -1.328 1 54
+HETATM H H10  . B44 L 1 1 . 1 B44 L H10  ? -8.208  0.088  0.083  1 55
+HETATM H H10A . B44 L 1 1 . 1 B44 L H10A ? -7.597  1.553  0.889  1 56
+HETATM H H11  . B44 L 1 1 . 1 B44 L H11  ? -7.733  2.79   -1.255 1 57
+HETATM H H11A . B44 L 1 1 . 1 B44 L H11A ? -8.344  1.326  -2.062 1 58
+HETATM H H18  . B44 L 1 1 . 1 B44 L H18  ? -10.577 0.49   -1.595 1 59
+HETATM H H17  . B44 L 1 1 . 1 B44 L H17  ? -12.865 1.051  -0.879 1 60
+HETATM H H16  . B44 L 1 1 . 1 B44 L H16  ? -13.279 3.09   0.438  1 61
+HETATM H H15  . B44 L 1 1 . 1 B44 L H15  ? -11.404 4.569  1.038  1 62
+HETATM H H14  . B44 L 1 1 . 1 B44 L H14  ? -9.115  4.004  0.329  1 63
+#

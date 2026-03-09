@@ -1,0 +1,71 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM F FAE  . ZVU L 1 1 . 1 ZVU L FAE  ? -7.541 -0.398 1.291  1 1
+HETATM C CBD  . ZVU L 1 1 . 1 ZVU L CBD  ? -6.227 -0.523 0.828  1 2
+HETATM F FAF  . ZVU L 1 1 . 1 ZVU L FAF  ? -5.399 -0.937 1.877  1 3
+HETATM F FAG  . ZVU L 1 1 . 1 ZVU L FAG  ? -6.184 -1.47  -0.201 1 4
+HETATM C CAY  . ZVU L 1 1 . 1 ZVU L CAY  ? -5.75  0.808  0.306  1 5
+HETATM C CAK  . ZVU L 1 1 . 1 ZVU L CAK  ? -6.587 1.905  0.341  1 6
+HETATM C CAI  . ZVU L 1 1 . 1 ZVU L CAI  ? -6.15  3.127  -0.138 1 7
+HETATM C CAH  . ZVU L 1 1 . 1 ZVU L CAH  ? -4.873 3.259  -0.654 1 8
+HETATM C CAJ  . ZVU L 1 1 . 1 ZVU L CAJ  ? -4.026 2.17   -0.694 1 9
+HETATM C CAX  . ZVU L 1 1 . 1 ZVU L CAX  ? -4.458 0.936  -0.207 1 10
+HETATM C CAU  . ZVU L 1 1 . 1 ZVU L CAU  ? -3.554 -0.234 -0.242 1 11
+HETATM O OAC  . ZVU L 1 1 . 1 ZVU L OAC  ? -3.935 -1.309 0.178  1 12
+HETATM N NAS  . ZVU L 1 1 . 1 ZVU L NAS  ? -2.308 -0.107 -0.739 1 13
+HETATM C CBB  . ZVU L 1 1 . 1 ZVU L CBB  ? -1.412 -1.266 -0.773 1 14
+HETATM C CAA  . ZVU L 1 1 . 1 ZVU L CAA  ? -1.677 -2.079 -2.042 1 15
+HETATM C CBA  . ZVU L 1 1 . 1 ZVU L CBA  ? 0.02   -0.795 -0.768 1 16
+HETATM N NBC  . ZVU L 1 1 . 1 ZVU L NBC  ? 1.037  -1.301 -0.007 1 17
+HETATM C CAB  . ZVU L 1 1 . 1 ZVU L CAB  ? 0.957  -2.399 0.959  1 18
+HETATM N NAR  . ZVU L 1 1 . 1 ZVU L NAR  ? 0.518  0.167  -1.493 1 19
+HETATM N NAQ  . ZVU L 1 1 . 1 ZVU L NAQ  ? 1.77   0.306  -1.24  1 20
+HETATM C CAZ  . ZVU L 1 1 . 1 ZVU L CAZ  ? 2.142  -0.569 -0.335 1 21
+HETATM S SAT  . ZVU L 1 1 . 1 ZVU L SAT  ? 3.763  -0.766 0.329  1 22
+HETATM C CAP  . ZVU L 1 1 . 1 ZVU L CAP  ? 4.635  0.534  -0.58  1 23
+HETATM C CAW  . ZVU L 1 1 . 1 ZVU L CAW  ? 6.083  0.553  -0.164 1 24
+HETATM C CAN  . ZVU L 1 1 . 1 ZVU L CAN  ? 7.007  -0.22  -0.841 1 25
+HETATM C CAO  . ZVU L 1 1 . 1 ZVU L CAO  ? 6.487  1.349  0.892  1 26
+HETATM C CAM  . ZVU L 1 1 . 1 ZVU L CAM  ? 7.815  1.369  1.274  1 27
+HETATM C CAV  . ZVU L 1 1 . 1 ZVU L CAV  ? 8.741  0.591  0.6    1 28
+HETATM F FAD  . ZVU L 1 1 . 1 ZVU L FAD  ? 10.039 0.609  0.973  1 29
+HETATM C CAL  . ZVU L 1 1 . 1 ZVU L CAL  ? 8.335  -0.202 -0.46  1 30
+HETATM H HAK  . ZVU L 1 1 . 1 ZVU L HAK  ? -7.585 1.808  0.742  1 31
+HETATM H HAI  . ZVU L 1 1 . 1 ZVU L HAI  ? -6.809 3.982  -0.109 1 32
+HETATM H HAH  . ZVU L 1 1 . 1 ZVU L HAH  ? -4.538 4.216  -1.025 1 33
+HETATM H HAJ  . ZVU L 1 1 . 1 ZVU L HAJ  ? -3.03  2.275  -1.097 1 34
+HETATM H HAS  . ZVU L 1 1 . 1 ZVU L HAS  ? -2.004 0.751  -1.074 1 35
+HETATM H HBB  . ZVU L 1 1 . 1 ZVU L HBB  ? -1.592 -1.89  0.102  1 36
+HETATM H HAA1 . ZVU L 1 1 . 1 ZVU L HAA1 ? -1.497 -1.454 -2.917 1 37
+HETATM H HAA2 . ZVU L 1 1 . 1 ZVU L HAA2 ? -1.01  -2.941 -2.067 1 38
+HETATM H HAA3 . ZVU L 1 1 . 1 ZVU L HAA3 ? -2.712 -2.42  -2.045 1 39
+HETATM H HAB1 . ZVU L 1 1 . 1 ZVU L HAB1 ? 1.161  -3.343 0.453  1 40
+HETATM H HAB2 . ZVU L 1 1 . 1 ZVU L HAB2 ? 1.693  -2.243 1.748  1 41
+HETATM H HAB3 . ZVU L 1 1 . 1 ZVU L HAB3 ? -0.042 -2.428 1.394  1 42
+HETATM H HAP1 . ZVU L 1 1 . 1 ZVU L HAP1 ? 4.567  0.336  -1.65  1 43
+HETATM H HAP2 . ZVU L 1 1 . 1 ZVU L HAP2 ? 4.18   1.499  -0.36  1 44
+HETATM H HAN  . ZVU L 1 1 . 1 ZVU L HAN  ? 6.691  -0.838 -1.668 1 45
+HETATM H HAO  . ZVU L 1 1 . 1 ZVU L HAO  ? 5.765  1.956  1.418  1 46
+HETATM H HAL  . ZVU L 1 1 . 1 ZVU L HAL  ? 9.057  -0.807 -0.989 1 47
+HETATM H HAM  . ZVU L 1 1 . 1 ZVU L HAM  ? 8.13   1.991  2.099  1 48
+#

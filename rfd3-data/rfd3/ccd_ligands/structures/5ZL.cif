@@ -1,0 +1,73 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C21 . 5ZL L 1 1 . 1 5ZL L C21 ?  -1.679 -3.406 -0.244 1 1
+HETATM C C22 . 5ZL L 1 1 . 1 5ZL L C22 ?  -2.988 -2.77  0.274  1 2
+HETATM C C24 . 5ZL L 1 1 . 1 5ZL L C24 ?  -2.52  -1.494 1.009  1 3
+HETATM C C26 . 5ZL L 1 1 . 1 5ZL L C26 ?  -4.537 -0.301 1.575  1 4
+HETATM C C28 . 5ZL L 1 1 . 1 5ZL L C28 ?  -4.162 1.497  -0.377 1 5
+HETATM C C23 . 5ZL L 1 1 . 1 5ZL L C23 ?  -0.575 -2.44  0.24   1 6
+HETATM C C25 . 5ZL L 1 1 . 1 5ZL L C25 ?  0.527  -2.32  -0.815 1 7
+HETATM C C27 . 5ZL L 1 1 . 1 5ZL L C27 ?  -3.259 0.47   -0.18  1 8
+HETATM C C29 . 5ZL L 1 1 . 1 5ZL L C29 ?  -5.272 1.576  0.462  1 9
+HETATM N N19 . 5ZL L 1 1 . 1 5ZL L N19 +1 -3.474 -0.403 0.794  1 10
+HETATM N N20 . 5ZL L 1 1 . 1 5ZL L N20 ?  -5.424 0.667  1.418  1 11
+HETATM O O04 . 5ZL L 1 1 . 1 5ZL L O04 ?  -1.245 -1.172 0.414  1 12
+HETATM O O05 . 5ZL L 1 1 . 1 5ZL L O05 ?  -1.494 -4.704 0.326  1 13
+HETATM O O06 . 5ZL L 1 1 . 1 5ZL L O06 ?  -3.651 -3.654 1.179  1 14
+HETATM O O07 . 5ZL L 1 1 . 1 5ZL L O07 ?  1.592  -1.516 -0.302 1 15
+HETATM O O08 . 5ZL L 1 1 . 1 5ZL L O08 ?  -4.725 -1.216 2.556  1 16
+HETATM O O09 . 5ZL L 1 1 . 1 5ZL L O09 ?  3.954  -0.367 -0.216 1 17
+HETATM O O10 . 5ZL L 1 1 . 1 5ZL L O10 ?  3.55   -2.44  -1.598 1 18
+HETATM O O11 . 5ZL L 1 1 . 1 5ZL L O11 ?  2.531  -0.284 -2.426 1 19
+HETATM O O12 . 5ZL L 1 1 . 1 5ZL L O12 ?  -6.183 2.567  0.305  1 20
+HETATM O O13 . 5ZL L 1 1 . 1 5ZL L O13 ?  5.885  1.155  0.717  1 21
+HETATM O O14 . 5ZL L 1 1 . 1 5ZL L O14 ?  5.823  0.447  -1.706 1 22
+HETATM O O15 . 5ZL L 1 1 . 1 5ZL L O15 ?  6.394  -1.323 0.001  1 23
+HETATM O O16 . 5ZL L 1 1 . 1 5ZL L O16 ?  7.352  2.817  -0.489 1 24
+HETATM O O17 . 5ZL L 1 1 . 1 5ZL L O17 ?  6.689  3.37   1.882  1 25
+HETATM O O18 . 5ZL L 1 1 . 1 5ZL L O18 ?  8.417  1.46   1.353  1 26
+HETATM O O31 . 5ZL L 1 1 . 1 5ZL L O31 ?  -8.327 3.487  -0.908 1 27
+HETATM O O32 . 5ZL L 1 1 . 1 5ZL L O32 ?  -6.828 1.778  -2.005 1 28
+HETATM O O33 . 5ZL L 1 1 . 1 5ZL L O33 ?  -8.255 0.994  -0.077 1 29
+HETATM P P01 . 5ZL L 1 1 . 1 5ZL L P01 ?  2.921  -1.179 -1.146 1 30
+HETATM P P02 . 5ZL L 1 1 . 1 5ZL L P02 ?  5.521  -0.012 -0.331 1 31
+HETATM P P03 . 5ZL L 1 1 . 1 5ZL L P03 ?  7.092  2.214  0.837  1 32
+HETATM P P30 . 5ZL L 1 1 . 1 5ZL L P30 ?  -7.386 2.197  -0.7   1 33
+HETATM H H1  . 5ZL L 1 1 . 1 5ZL L H1  ?  -1.687 -3.464 -1.332 1 34
+HETATM H H2  . 5ZL L 1 1 . 1 5ZL L H2  ?  -3.643 -2.512 -0.559 1 35
+HETATM H H3  . 5ZL L 1 1 . 1 5ZL L H3  ?  -2.403 -1.692 2.075  1 36
+HETATM H H4  . 5ZL L 1 1 . 1 5ZL L H4  ?  -4.011 2.222  -1.163 1 37
+HETATM H H5  . 5ZL L 1 1 . 1 5ZL L H5  ?  -0.159 -2.783 1.187  1 38
+HETATM H H6  . 5ZL L 1 1 . 1 5ZL L H6  ?  0.906  -3.313 -1.059 1 39
+HETATM H H7  . 5ZL L 1 1 . 1 5ZL L H7  ?  0.121  -1.855 -1.713 1 40
+HETATM H H8  . 5ZL L 1 1 . 1 5ZL L H8  ?  -2.388 0.379  -0.812 1 41
+HETATM H H9  . 5ZL L 1 1 . 1 5ZL L H9  ?  -2.192 -5.334 0.104  1 42
+HETATM H H10 . 5ZL L 1 1 . 1 5ZL L H10 ?  -3.914 -4.497 0.784  1 43
+HETATM H H11 . 5ZL L 1 1 . 1 5ZL L H11 ?  2.113  0.559  -2.203 1 44
+HETATM H H12 . 5ZL L 1 1 . 1 5ZL L H12 ?  6.246  -1.68  0.887  1 45
+HETATM H H13 . 5ZL L 1 1 . 1 5ZL L H13 ?  7.372  4.044  2.005  1 46
+HETATM H H14 . 5ZL L 1 1 . 1 5ZL L H14 ?  8.319  1.04   2.219  1 47
+HETATM H H15 . 5ZL L 1 1 . 1 5ZL L H15 ?  -9.074 3.337  -1.503 1 48
+HETATM H H16 . 5ZL L 1 1 . 1 5ZL L H16 ?  -8.653 1.199  0.78   1 49
+HETATM H H17 . 5ZL L 1 1 . 1 5ZL L H17 ?  -4.32  -0.975 3.401  1 50
+#

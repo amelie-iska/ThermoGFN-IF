@@ -1,0 +1,10 @@
+{
+  "ligand_326_ccd_6oz": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/6OZ.cif",
+    "ligand": "6OZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "6OZ": "ALL"
+    }
+  }
+}

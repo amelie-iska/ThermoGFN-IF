@@ -1,0 +1,10 @@
+{
+  "ligand_445_ccd_lzw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LZW.cif",
+    "ligand": "LZW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LZW": "ALL"
+    }
+  }
+}

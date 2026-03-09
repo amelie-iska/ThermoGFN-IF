@@ -1,0 +1,10 @@
+{
+  "ligand_299_ccd_8t5": {
+    "input": "./data/rfd3/ccd_ligands/structures/8T5.cif",
+    "ligand": "8T5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8T5": "ALL"
+    }
+  }
+}

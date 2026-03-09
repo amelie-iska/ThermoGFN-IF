@@ -1,0 +1,10 @@
+{
+  "ligand_233_ccd_a1h7c": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1H7C.cif",
+    "ligand": "A1H7C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1H7C": "ALL"
+    }
+  }
+}

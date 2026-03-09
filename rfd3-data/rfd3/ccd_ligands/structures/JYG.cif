@@ -1,0 +1,78 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . JYG L 1 1 . 1 JYG L C01 ? 6.288  1.278  -0.235 1 1
+HETATM C C02 . JYG L 1 1 . 1 JYG L C02 ? 5.294  0.245  -0.77  1 2
+HETATM N N03 . JYG L 1 1 . 1 JYG L N03 ? 5.501  -1.047 -0.105 1 3
+HETATM C C04 . JYG L 1 1 . 1 JYG L C04 ? 4.369  -1.375 0.544  1 4
+HETATM O O05 . JYG L 1 1 . 1 JYG L O05 ? 4.211  -2.388 1.197  1 5
+HETATM C C06 . JYG L 1 1 . 1 JYG L C06 ? 3.352  -0.332 0.352  1 6
+HETATM C C07 . JYG L 1 1 . 1 JYG L C07 ? 2.023  0.054  0.665  1 7
+HETATM C C08 . JYG L 1 1 . 1 JYG L C08 ? 1.803  1.251  0.06   1 8
+HETATM N N09 . JYG L 1 1 . 1 JYG L N09 ? 2.944  1.615  -0.612 1 9
+HETATM C C10 . JYG L 1 1 . 1 JYG L C10 ? 3.881  0.665  -0.442 1 10
+HETATM C C11 . JYG L 1 1 . 1 JYG L C11 ? 0.548  2.029  0.117  1 11
+HETATM C C12 . JYG L 1 1 . 1 JYG L C12 ? 0.586  3.414  0.238  1 12
+HETATM C C13 . JYG L 1 1 . 1 JYG L C13 ? -0.586 4.151  0.292  1 13
+HETATM C C14 . JYG L 1 1 . 1 JYG L C14 ? -1.814 3.528  0.226  1 14
+HETATM C C15 . JYG L 1 1 . 1 JYG L C15 ? -1.883 2.14   0.104  1 15
+HETATM C C16 . JYG L 1 1 . 1 JYG L C16 ? -3.169 1.433  0.031  1 16
+HETATM O O17 . JYG L 1 1 . 1 JYG L O17 ? -4.225 2.037  0.073  1 17
+HETATM N N18 . JYG L 1 1 . 1 JYG L N18 ? -3.135 0.086  -0.087 1 18
+HETATM C C19 . JYG L 1 1 . 1 JYG L C19 ? -1.942 -0.575 -0.134 1 19
+HETATM N N20 . JYG L 1 1 . 1 JYG L N20 ? -1.954 -1.941 -0.254 1 20
+HETATM C C21 . JYG L 1 1 . 1 JYG L C21 ? -0.693 -2.679 -0.362 1 21
+HETATM C C22 . JYG L 1 1 . 1 JYG L C22 ? 0.395  -2.006 -1.202 1 22
+HETATM C C23 . JYG L 1 1 . 1 JYG L C23 ? -0.245 -3.495 0.852  1 23
+HETATM C C24 . JYG L 1 1 . 1 JYG L C24 ? -0.769 -4.206 -0.397 1 24
+HETATM N N25 . JYG L 1 1 . 1 JYG L N25 ? -0.785 0.036  -0.07  1 25
+HETATM C C26 . JYG L 1 1 . 1 JYG L C26 ? -0.698 1.375  0.042  1 26
+HETATM C C27 . JYG L 1 1 . 1 JYG L C27 ? -4.388 -0.67  -0.164 1 27
+HETATM C C28 . JYG L 1 1 . 1 JYG L C28 ? -4.927 -0.912 -1.575 1 28
+HETATM C C29 . JYG L 1 1 . 1 JYG L C29 ? -5.409 -0.461 0.956  1 29
+HETATM C C30 . JYG L 1 1 . 1 JYG L C30 ? -4.616 -1.768 0.877  1 30
+HETATM H H1  . JYG L 1 1 . 1 JYG L H1  ? 7.304  0.956  -0.462 1 31
+HETATM H H2  . JYG L 1 1 . 1 JYG L H2  ? 6.098  2.243  -0.705 1 32
+HETATM H H3  . JYG L 1 1 . 1 JYG L H3  ? 6.169  1.371  0.845  1 33
+HETATM H H4  . JYG L 1 1 . 1 JYG L H4  ? 5.412  0.135  -1.848 1 34
+HETATM H H5  . JYG L 1 1 . 1 JYG L H5  ? 6.314  -1.574 -0.129 1 35
+HETATM H H6  . JYG L 1 1 . 1 JYG L H6  ? 1.32   -0.498 1.27   1 36
+HETATM H H7  . JYG L 1 1 . 1 JYG L H7  ? 3.056  2.428  -1.13  1 37
+HETATM H H8  . JYG L 1 1 . 1 JYG L H8  ? 1.539  3.92   0.29   1 38
+HETATM H H9  . JYG L 1 1 . 1 JYG L H9  ? -0.537 5.226  0.386  1 39
+HETATM H H10 . JYG L 1 1 . 1 JYG L H10 ? -2.721 4.113  0.269  1 40
+HETATM H H11 . JYG L 1 1 . 1 JYG L H11 ? -2.798 -2.419 -0.267 1 41
+HETATM H H12 . JYG L 1 1 . 1 JYG L H12 ? 0.715  -1.086 -0.712 1 42
+HETATM H H13 . JYG L 1 1 . 1 JYG L H13 ? 1.246  -2.68  -1.301 1 43
+HETATM H H14 . JYG L 1 1 . 1 JYG L H14 ? -0.001 -1.772 -2.19  1 44
+HETATM H H15 . JYG L 1 1 . 1 JYG L H15 ? 0.824  -3.553 1.053  1 45
+HETATM H H16 . JYG L 1 1 . 1 JYG L H16 ? -0.889 -3.483 1.731  1 46
+HETATM H H17 . JYG L 1 1 . 1 JYG L H17 ? -1.757 -4.663 -0.34  1 47
+HETATM H H18 . JYG L 1 1 . 1 JYG L H18 ? -0.043 -4.732 -1.018 1 48
+HETATM H H19 . JYG L 1 1 . 1 JYG L H19 ? -4.251 -1.576 -2.114 1 49
+HETATM H H20 . JYG L 1 1 . 1 JYG L H20 ? -5.914 -1.371 -1.514 1 50
+HETATM H H21 . JYG L 1 1 . 1 JYG L H21 ? -5.001 0.038  -2.104 1 51
+HETATM H H22 . JYG L 1 1 . 1 JYG L H22 ? -5.148 0.238  1.751  1 52
+HETATM H H23 . JYG L 1 1 . 1 JYG L H23 ? -6.465 -0.496 0.688  1 53
+HETATM H H24 . JYG L 1 1 . 1 JYG L H24 ? -5.151 -2.662 0.557  1 54
+HETATM H H25 . JYG L 1 1 . 1 JYG L H25 ? -3.834 -1.928 1.62   1 55
+#

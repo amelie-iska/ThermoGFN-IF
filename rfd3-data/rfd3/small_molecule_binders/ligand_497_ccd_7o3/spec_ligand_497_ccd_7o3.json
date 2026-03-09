@@ -1,0 +1,10 @@
+{
+  "ligand_497_ccd_7o3": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/7O3.cif",
+    "ligand": "7O3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7O3": "ALL"
+    }
+  }
+}

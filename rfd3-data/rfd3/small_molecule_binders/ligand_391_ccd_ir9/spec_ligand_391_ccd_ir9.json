@@ -1,0 +1,10 @@
+{
+  "ligand_391_ccd_ir9": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IR9.cif",
+    "ligand": "IR9",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IR9": "ALL"
+    }
+  }
+}

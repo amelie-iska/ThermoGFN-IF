@@ -1,0 +1,72 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . E78 L 1 1 . 1 E78 L C1  ? -0.141 -0.782 -0.135 1 1
+HETATM C C2  . E78 L 1 1 . 1 E78 L C2  ? 0.161  1.534  0.508  1 2
+HETATM C C3  . E78 L 1 1 . 1 E78 L C3  ? 0.705  0.298  0.143  1 3
+HETATM C C7  . E78 L 1 1 . 1 E78 L C7  ? 2.168  0.134  0.051  1 4
+HETATM C C8  . E78 L 1 1 . 1 E78 L C8  ? 2.889  -0.878 0.582  1 5
+HETATM C C9  . E78 L 1 1 . 1 E78 L C9  ? 4.6    0.224  -0.329 1 6
+HETATM C C10 . E78 L 1 1 . 1 E78 L C10 ? -3.507 0.48   0.314  1 7
+HETATM C C11 . E78 L 1 1 . 1 E78 L C11 ? 6.887  -0.385 -0.256 1 8
+HETATM C C12 . E78 L 1 1 . 1 E78 L C12 ? -2.654 -1.555 -0.287 1 9
+HETATM C C13 . E78 L 1 1 . 1 E78 L C13 ? -7.464 -0.808 -1.436 1 10
+HETATM C C14 . E78 L 1 1 . 1 E78 L C14 ? -7.116 0.477  -0.682 1 11
+HETATM C C15 . E78 L 1 1 . 1 E78 L C15 ? -6.0   -0.444 -1.18  1 12
+HETATM C C16 . E78 L 1 1 . 1 E78 L C16 ? -1.775 3.021  0.99   1 13
+HETATM C C19 . E78 L 1 1 . 1 E78 L C19 ? -5.935 -1.125 1.223  1 14
+HETATM C C20 . E78 L 1 1 . 1 E78 L C20 ? -5.241 -1.262 -0.133 1 15
+HETATM N N23 . E78 L 1 1 . 1 E78 L N23 ? 5.925  0.469  -0.657 1 16
+HETATM C C4  . E78 L 1 1 . 1 E78 L C4  ? -2.04  0.611  0.312  1 17
+HETATM C C5  . E78 L 1 1 . 1 E78 L C5  ? -1.49  -0.623 -0.054 1 18
+HETATM C C6  . E78 L 1 1 . 1 E78 L C6  ? -1.193 1.688  0.595  1 19
+HETATM C C17 . E78 L 1 1 . 1 E78 L C17 ? 2.265  -2.005 1.363  1 20
+HETATM C C18 . E78 L 1 1 . 1 E78 L C18 ? 8.327  -0.119 -0.612 1 21
+HETATM N N21 . E78 L 1 1 . 1 E78 L N21 ? 4.182  -0.796 0.358  1 22
+HETATM N N22 . E78 L 1 1 . 1 E78 L N22 ? -3.866 -0.768 -0.031 1 23
+HETATM O O24 . E78 L 1 1 . 1 E78 L O24 ? -4.283 1.375  0.589  1 24
+HETATM O O25 . E78 L 1 1 . 1 E78 L O25 ? 6.595  -1.368 0.392  1 25
+HETATM S S26 . E78 L 1 1 . 1 E78 L S26 ? 3.283  1.218  -0.777 1 26
+HETATM H H1  . E78 L 1 1 . 1 E78 L H1  ? 0.276  -1.737 -0.417 1 27
+HETATM H H2  . E78 L 1 1 . 1 E78 L H2  ? 0.813  2.368  0.723  1 28
+HETATM H H3  . E78 L 1 1 . 1 E78 L H3  ? -2.649 -1.911 -1.317 1 29
+HETATM H H4  . E78 L 1 1 . 1 E78 L H4  ? -2.602 -2.399 0.401  1 30
+HETATM H H5  . E78 L 1 1 . 1 E78 L H5  ? -7.886 -1.631 -0.859 1 31
+HETATM H H6  . E78 L 1 1 . 1 E78 L H6  ? -7.837 -0.709 -2.455 1 32
+HETATM H H7  . E78 L 1 1 . 1 E78 L H7  ? -7.26  1.422  -1.206 1 33
+HETATM H H8  . E78 L 1 1 . 1 E78 L H8  ? -7.309 0.5    0.39   1 34
+HETATM H H9  . E78 L 1 1 . 1 E78 L H9  ? -5.41  -0.105 -2.031 1 35
+HETATM H H10 . E78 L 1 1 . 1 E78 L H10 ? -1.947 3.622  0.096  1 36
+HETATM H H11 . E78 L 1 1 . 1 E78 L H11 ? -2.72  2.865  1.51   1 37
+HETATM H H12 . E78 L 1 1 . 1 E78 L H12 ? -1.079 3.541  1.648  1 38
+HETATM H H13 . E78 L 1 1 . 1 E78 L H13 ? -5.394 -1.708 1.969  1 39
+HETATM H H14 . E78 L 1 1 . 1 E78 L H14 ? -5.947 -0.077 1.521  1 40
+HETATM H H15 . E78 L 1 1 . 1 E78 L H15 ? -6.958 -1.493 1.147  1 41
+HETATM H H16 . E78 L 1 1 . 1 E78 L H16 ? -5.229 -2.311 -0.431 1 42
+HETATM H H17 . E78 L 1 1 . 1 E78 L H17 ? 6.159  1.255  -1.175 1 43
+HETATM H H18 . E78 L 1 1 . 1 E78 L H18 ? 1.914  -2.774 0.675  1 44
+HETATM H H19 . E78 L 1 1 . 1 E78 L H19 ? 3.006  -2.433 2.039  1 45
+HETATM H H20 . E78 L 1 1 . 1 E78 L H20 ? 1.423  -1.624 1.941  1 46
+HETATM H H21 . E78 L 1 1 . 1 E78 L H21 ? 8.79   0.482  0.17   1 47
+HETATM H H22 . E78 L 1 1 . 1 E78 L H22 ? 8.86   -1.066 -0.705 1 48
+HETATM H H23 . E78 L 1 1 . 1 E78 L H23 ? 8.374  0.418  -1.559 1 49
+#

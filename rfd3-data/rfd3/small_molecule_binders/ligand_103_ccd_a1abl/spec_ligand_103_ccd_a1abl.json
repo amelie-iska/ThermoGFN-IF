@@ -1,0 +1,10 @@
+{
+  "ligand_103_ccd_a1abl": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1ABL.cif",
+    "ligand": "A1ABL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1ABL": "ALL"
+    }
+  }
+}

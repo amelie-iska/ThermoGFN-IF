@@ -1,0 +1,93 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O5   . GNQ L 1 1 . 1 GNQ L O5   ? 4.076  -1.318 -0.359 1 1
+HETATM S S    . GNQ L 1 1 . 1 GNQ L S    ? 2.733  -1.706 -0.616 1 2
+HETATM O O4   . GNQ L 1 1 . 1 GNQ L O4   ? 2.364  -2.137 -1.919 1 3
+HETATM C C17  . GNQ L 1 1 . 1 GNQ L C17  ? 2.245  -2.975 0.586  1 4
+HETATM C C18  . GNQ L 1 1 . 1 GNQ L C18  ? 3.055  -4.224 0.353  1 5
+HETATM C C20  . GNQ L 1 1 . 1 GNQ L C20  ? 2.589  -5.199 -0.509 1 6
+HETATM C C21  . GNQ L 1 1 . 1 GNQ L C21  ? 3.334  -6.344 -0.725 1 7
+HETATM C C22  . GNQ L 1 1 . 1 GNQ L C22  ? 4.54   -6.517 -0.072 1 8
+HETATM C C23  . GNQ L 1 1 . 1 GNQ L C23  ? 5.003  -5.545 0.794  1 9
+HETATM C C19  . GNQ L 1 1 . 1 GNQ L C19  ? 4.26   -4.399 1.007  1 10
+HETATM C C16  . GNQ L 1 1 . 1 GNQ L C16  ? 1.623  -0.367 -0.1   1 11
+HETATM C CA   . GNQ L 1 1 . 1 GNQ L CA   ? 1.851  0.855  -0.992 1 12
+HETATM N N    . GNQ L 1 1 . 1 GNQ L N    ? 3.241  1.299  -0.867 1 13
+HETATM C C11  . GNQ L 1 1 . 1 GNQ L C11  ? 3.723  1.677  0.334  1 14
+HETATM O O3   . GNQ L 1 1 . 1 GNQ L O3   ? 3.034  1.561  1.329  1 15
+HETATM N N3   . GNQ L 1 1 . 1 GNQ L N3   ? 4.968  2.184  0.431  1 16
+HETATM C C15  . GNQ L 1 1 . 1 GNQ L C15  ? 5.777  2.461  -0.769 1 17
+HETATM C C14  . GNQ L 1 1 . 1 GNQ L C14  ? 6.38   3.862  -0.625 1 18
+HETATM O O2   . GNQ L 1 1 . 1 GNQ L O2   ? 7.123  3.941  0.592  1 19
+HETATM C C13  . GNQ L 1 1 . 1 GNQ L C13  ? 6.193  3.882  1.672  1 20
+HETATM C C12  . GNQ L 1 1 . 1 GNQ L C12  ? 5.569  2.489  1.74   1 21
+HETATM C C    . GNQ L 1 1 . 1 GNQ L C    ? 0.928  1.968  -0.564 1 22
+HETATM O O    . GNQ L 1 1 . 1 GNQ L O    ? 1.346  2.867  0.134  1 23
+HETATM N N2   . GNQ L 1 1 . 1 GNQ L N2   ? -0.361 1.963  -0.956 1 24
+HETATM C C9   . GNQ L 1 1 . 1 GNQ L C9   ? -1.257 3.044  -0.54  1 25
+HETATM C C10  . GNQ L 1 1 . 1 GNQ L C10  ? -1.119 4.222  -1.508 1 26
+HETATM C C8   . GNQ L 1 1 . 1 GNQ L C8   ? -2.702 2.542  -0.551 1 27
+HETATM N N1   . GNQ L 1 1 . 1 GNQ L N1   ? -2.808 1.342  0.282  1 28
+HETATM C C7   . GNQ L 1 1 . 1 GNQ L C7   ? -4.042 0.697  0.427  1 29
+HETATM C C6   . GNQ L 1 1 . 1 GNQ L C6   ? -4.143 -0.44  1.217  1 30
+HETATM C C5   . GNQ L 1 1 . 1 GNQ L C5   ? -5.361 -1.076 1.36   1 31
+HETATM C C4   . GNQ L 1 1 . 1 GNQ L C4   ? -5.167 1.198  -0.214 1 32
+HETATM C C3   . GNQ L 1 1 . 1 GNQ L C3   ? -6.383 0.558  -0.075 1 33
+HETATM C C2   . GNQ L 1 1 . 1 GNQ L C2   ? -6.483 -0.579 0.714  1 34
+HETATM O O1   . GNQ L 1 1 . 1 GNQ L O1   ? -7.681 -1.205 0.855  1 35
+HETATM C C1   . GNQ L 1 1 . 1 GNQ L C1   ? -8.628 -0.465 0.08   1 36
+HETATM F F1   . GNQ L 1 1 . 1 GNQ L F1   ? -8.227 -0.456 -1.26  1 37
+HETATM F F2   . GNQ L 1 1 . 1 GNQ L F2   ? -9.887 -1.065 0.186  1 38
+HETATM F F3   . GNQ L 1 1 . 1 GNQ L F3   ? -8.695 0.848  0.556  1 39
+HETATM H H171 . GNQ L 1 1 . 1 GNQ L H171 ? 2.426  -2.607 1.596  1 40
+HETATM H H172 . GNQ L 1 1 . 1 GNQ L H172 ? 1.186  -3.201 0.466  1 41
+HETATM H H20  . GNQ L 1 1 . 1 GNQ L H20  ? 1.647  -5.064 -1.019 1 42
+HETATM H H21  . GNQ L 1 1 . 1 GNQ L H21  ? 2.972  -7.103 -1.403 1 43
+HETATM H H22  . GNQ L 1 1 . 1 GNQ L H22  ? 5.12   -7.413 -0.239 1 44
+HETATM H H23  . GNQ L 1 1 . 1 GNQ L H23  ? 5.945  -5.681 1.304  1 45
+HETATM H H19  . GNQ L 1 1 . 1 GNQ L H19  ? 4.622  -3.639 1.684  1 46
+HETATM H H161 . GNQ L 1 1 . 1 GNQ L H161 ? 1.829  -0.104 0.937  1 47
+HETATM H H162 . GNQ L 1 1 . 1 GNQ L H162 ? 0.588  -0.697 -0.193 1 48
+HETATM H HA   . GNQ L 1 1 . 1 GNQ L HA   ? 1.645  0.592  -2.029 1 49
+HETATM H HN   . GNQ L 1 1 . 1 GNQ L HN   ? 3.816  1.32   -1.649 1 50
+HETATM H H151 . GNQ L 1 1 . 1 GNQ L H151 ? 6.575  1.723  -0.852 1 51
+HETATM H H152 . GNQ L 1 1 . 1 GNQ L H152 ? 5.145  2.422  -1.656 1 52
+HETATM H H141 . GNQ L 1 1 . 1 GNQ L H141 ? 7.043  4.061  -1.467 1 53
+HETATM H H142 . GNQ L 1 1 . 1 GNQ L H142 ? 5.58   4.602  -0.61  1 54
+HETATM H H131 . GNQ L 1 1 . 1 GNQ L H131 ? 6.71   4.096  2.608  1 55
+HETATM H H132 . GNQ L 1 1 . 1 GNQ L H132 ? 5.407  4.621  1.515  1 56
+HETATM H H121 . GNQ L 1 1 . 1 GNQ L H121 ? 4.802  2.466  2.514  1 57
+HETATM H H122 . GNQ L 1 1 . 1 GNQ L H122 ? 6.34   1.752  1.965  1 58
+HETATM H HN2  . GNQ L 1 1 . 1 GNQ L HN2  ? -0.695 1.244  -1.515 1 59
+HETATM H H9   . GNQ L 1 1 . 1 GNQ L H9   ? -0.993 3.368  0.466  1 60
+HETATM H H101 . GNQ L 1 1 . 1 GNQ L H101 ? -1.384 3.898  -2.514 1 61
+HETATM H H102 . GNQ L 1 1 . 1 GNQ L H102 ? -1.786 5.026  -1.198 1 62
+HETATM H H103 . GNQ L 1 1 . 1 GNQ L H103 ? -0.09  4.58   -1.5   1 63
+HETATM H H81  . GNQ L 1 1 . 1 GNQ L H81  ? -3.36  3.317  -0.158 1 64
+HETATM H H82  . GNQ L 1 1 . 1 GNQ L H82  ? -2.995 2.301  -1.573 1 65
+HETATM H HN1  . GNQ L 1 1 . 1 GNQ L HN1  ? -2.023 0.994  0.734  1 66
+HETATM H H6   . GNQ L 1 1 . 1 GNQ L H6   ? -3.269 -0.828 1.72   1 67
+HETATM H H5   . GNQ L 1 1 . 1 GNQ L H5   ? -5.439 -1.961 1.974  1 68
+HETATM H H4   . GNQ L 1 1 . 1 GNQ L H4   ? -5.089 2.083  -0.829 1 69
+HETATM H H3   . GNQ L 1 1 . 1 GNQ L H3   ? -7.257 0.944  -0.578 1 70
+#

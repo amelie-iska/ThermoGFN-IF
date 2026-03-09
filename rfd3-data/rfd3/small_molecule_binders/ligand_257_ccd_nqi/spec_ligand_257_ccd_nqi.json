@@ -1,0 +1,10 @@
+{
+  "ligand_257_ccd_nqi": {
+    "input": "./data/rfd3/ccd_ligands/structures/NQI.cif",
+    "ligand": "NQI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NQI": "ALL"
+    }
+  }
+}

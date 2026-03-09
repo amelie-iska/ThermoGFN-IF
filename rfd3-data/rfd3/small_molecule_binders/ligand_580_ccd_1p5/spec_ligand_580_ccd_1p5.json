@@ -1,0 +1,10 @@
+{
+  "ligand_580_ccd_1p5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1P5.cif",
+    "ligand": "1P5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1P5": "ALL"
+    }
+  }
+}

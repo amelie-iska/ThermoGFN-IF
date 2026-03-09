@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C19  . PU3 L 1 1 . 1 PU3 L C19  ? -3.194 1.351  -3.246 1 1
+HETATM O O3   . PU3 L 1 1 . 1 PU3 L O3   ? -2.34  0.436  -3.936 1 2
+HETATM C C5   . PU3 L 1 1 . 1 PU3 L C5   ? -1.201 0.331  -3.201 1 3
+HETATM C C6   . PU3 L 1 1 . 1 PU3 L C6   ? -1.064 1.052  -2.025 1 4
+HETATM C C4   . PU3 L 1 1 . 1 PU3 L C4   ? -0.171 -0.499 -3.628 1 5
+HETATM O O1   . PU3 L 1 1 . 1 PU3 L O1   ? -0.301 -1.208 -4.782 1 6
+HETATM C C7   . PU3 L 1 1 . 1 PU3 L C7   ? 0.206  -0.384 -5.833 1 7
+HETATM C C3   . PU3 L 1 1 . 1 PU3 L C3   ? 0.99   -0.603 -2.873 1 8
+HETATM O O2   . PU3 L 1 1 . 1 PU3 L O2   ? 2.0    -1.414 -3.287 1 9
+HETATM C C8   . PU3 L 1 1 . 1 PU3 L C8   ? 3.041  -1.306 -2.314 1 10
+HETATM C C2   . PU3 L 1 1 . 1 PU3 L C2   ? 1.121  0.125  -1.701 1 11
+HETATM C C1   . PU3 L 1 1 . 1 PU3 L C1   ? 0.092  0.946  -1.277 1 12
+HETATM C C9   . PU3 L 1 1 . 1 PU3 L C9   ? 0.236  1.731  0.0    1 13
+HETATM C C10  . PU3 L 1 1 . 1 PU3 L C10  ? -0.284 0.914  1.154  1 14
+HETATM N N1   . PU3 L 1 1 . 1 PU3 L N1   ? -1.514 0.923  1.58   1 15
+HETATM C C11  . PU3 L 1 1 . 1 PU3 L C11  ? -1.634 0.073  2.629  1 16
+HETATM C C13  . PU3 L 1 1 . 1 PU3 L C13  ? -2.691 -0.317 3.468  1 17
+HETATM N N5   . PU3 L 1 1 . 1 PU3 L N5   ? -3.961 0.206  3.298  1 18
+HETATM C C12  . PU3 L 1 1 . 1 PU3 L C12  ? -0.369 -0.497 2.846  1 19
+HETATM N N4   . PU3 L 1 1 . 1 PU3 L N4   ? -0.216 -1.371 3.836  1 20
+HETATM C C14  . PU3 L 1 1 . 1 PU3 L C14  ? -1.235 -1.708 4.597  1 21
+HETATM N N3   . PU3 L 1 1 . 1 PU3 L N3   ? -2.444 -1.202 4.428  1 22
+HETATM N N2   . PU3 L 1 1 . 1 PU3 L N2   ? 0.462  0.055  1.905  1 23
+HETATM C C15  . PU3 L 1 1 . 1 PU3 L C15  ? 1.889  -0.228 1.734  1 24
+HETATM C C16  . PU3 L 1 1 . 1 PU3 L C16  ? 2.708  0.746  2.581  1 25
+HETATM C C17  . PU3 L 1 1 . 1 PU3 L C17  ? 4.198  0.449  2.403  1 26
+HETATM C C18  . PU3 L 1 1 . 1 PU3 L C18  ? 5.018  1.424  3.25   1 27
+HETATM H H191 . PU3 L 1 1 . 1 PU3 L H191 ? -4.125 1.468  -3.801 1 28
+HETATM H H192 . PU3 L 1 1 . 1 PU3 L H192 ? -3.41  0.966  -2.25  1 29
+HETATM H H193 . PU3 L 1 1 . 1 PU3 L H193 ? -2.697 2.318  -3.162 1 30
+HETATM H H6   . PU3 L 1 1 . 1 PU3 L H6   ? -1.864 1.698  -1.692 1 31
+HETATM H H7C1 . PU3 L 1 1 . 1 PU3 L H7C1 ? 0.123  -0.913 -6.782 1 32
+HETATM H H7C2 . PU3 L 1 1 . 1 PU3 L H7C2 ? -0.368 0.54   -5.88  1 33
+HETATM H H7C3 . PU3 L 1 1 . 1 PU3 L H7C3 ? 1.253  -0.151 -5.637 1 34
+HETATM H H8C1 . PU3 L 1 1 . 1 PU3 L H8C1 ? 3.877  -1.943 -2.604 1 35
+HETATM H H8C2 . PU3 L 1 1 . 1 PU3 L H8C2 ? 3.376  -0.271 -2.253 1 36
+HETATM H H8C3 . PU3 L 1 1 . 1 PU3 L H8C3 ? 2.664  -1.623 -1.341 1 37
+HETATM H H2   . PU3 L 1 1 . 1 PU3 L H2   ? 2.024  0.045  -1.114 1 38
+HETATM H H9C1 . PU3 L 1 1 . 1 PU3 L H9C1 ? -0.334 2.657  -0.075 1 39
+HETATM H H9C2 . PU3 L 1 1 . 1 PU3 L H9C2 ? 1.288  1.965  0.167  1 40
+HETATM H H5N1 . PU3 L 1 1 . 1 PU3 L H5N1 ? -4.682 -0.071 3.883  1 41
+HETATM H H5N2 . PU3 L 1 1 . 1 PU3 L H5N2 ? -4.129 0.851  2.593  1 42
+HETATM H H14  . PU3 L 1 1 . 1 PU3 L H14  ? -1.078 -2.424 5.39   1 43
+HETATM H H151 . PU3 L 1 1 . 1 PU3 L H151 ? 2.159  -0.113 0.684  1 44
+HETATM H H152 . PU3 L 1 1 . 1 PU3 L H152 ? 2.096  -1.25  2.053  1 45
+HETATM H H161 . PU3 L 1 1 . 1 PU3 L H161 ? 2.438  0.631  3.631  1 46
+HETATM H H162 . PU3 L 1 1 . 1 PU3 L H162 ? 2.501  1.767  2.263  1 47
+HETATM H H171 . PU3 L 1 1 . 1 PU3 L H171 ? 4.469  0.564  1.353  1 48
+HETATM H H172 . PU3 L 1 1 . 1 PU3 L H172 ? 4.406  -0.572 2.722  1 49
+HETATM H H181 . PU3 L 1 1 . 1 PU3 L H181 ? 6.08   1.212  3.123  1 50
+HETATM H H182 . PU3 L 1 1 . 1 PU3 L H182 ? 4.81   2.446  2.932  1 51
+HETATM H H183 . PU3 L 1 1 . 1 PU3 L H183 ? 4.748  1.309  4.3    1 52
+#

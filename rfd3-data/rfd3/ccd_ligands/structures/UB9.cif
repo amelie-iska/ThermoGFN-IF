@@ -1,0 +1,47 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C12  . UB9 L 1 1 . 1 UB9 L C12  ? 3.579  0.229  0.007  1 1
+HETATM C C01  . UB9 L 1 1 . 1 UB9 L C01  ? 0.0    -3.25  -0.015 1 2
+HETATM C C02  . UB9 L 1 1 . 1 UB9 L C02  ? 0.0    -1.743 -0.005 1 3
+HETATM C C03  . UB9 L 1 1 . 1 UB9 L C03  ? 1.198  -1.054 -0.001 1 4
+HETATM C C04  . UB9 L 1 1 . 1 UB9 L C04  ? 1.202  0.333  0.007  1 5
+HETATM C C05  . UB9 L 1 1 . 1 UB9 L C05  ? 0.0    1.03   0.012  1 6
+HETATM C C06  . UB9 L 1 1 . 1 UB9 L C06  ? -1.202 0.333  0.008  1 7
+HETATM C C07  . UB9 L 1 1 . 1 UB9 L C07  ? -1.198 -1.054 -0.006 1 8
+HETATM C C09  . UB9 L 1 1 . 1 UB9 L C09  ? -3.579 0.229  0.008  1 9
+HETATM O O08  . UB9 L 1 1 . 1 UB9 L O08  ? -2.382 1.01   0.013  1 10
+HETATM O O10  . UB9 L 1 1 . 1 UB9 L O10  ? 0.0    2.391  0.021  1 11
+HETATM O O11  . UB9 L 1 1 . 1 UB9 L O11  ? 2.382  1.01   0.012  1 12
+HETATM H H123 . UB9 L 1 1 . 1 UB9 L H123 ? 4.444  0.891  0.011  1 13
+HETATM H H121 . UB9 L 1 1 . 1 UB9 L H121 ? 3.602  -0.405 0.893  1 14
+HETATM H H122 . UB9 L 1 1 . 1 UB9 L H122 ? 3.602  -0.394 -0.887 1 15
+HETATM H H013 . UB9 L 1 1 . 1 UB9 L H013 ? 0.005  -3.607 -1.044 1 16
+HETATM H H011 . UB9 L 1 1 . 1 UB9 L H011 ? 0.888  -3.617 0.501  1 17
+HETATM H H012 . UB9 L 1 1 . 1 UB9 L H012 ? -0.892 -3.616 0.493  1 18
+HETATM H H031 . UB9 L 1 1 . 1 UB9 L H031 ? 2.132  -1.596 -0.005 1 19
+HETATM H H071 . UB9 L 1 1 . 1 UB9 L H071 ? -2.132 -1.596 -0.014 1 20
+HETATM H H093 . UB9 L 1 1 . 1 UB9 L H093 ? -4.444 0.891  0.012  1 21
+HETATM H H092 . UB9 L 1 1 . 1 UB9 L H092 ? -3.602 -0.394 -0.886 1 22
+HETATM H H091 . UB9 L 1 1 . 1 UB9 L H091 ? -3.602 -0.405 0.894  1 23
+HETATM H H101 . UB9 L 1 1 . 1 UB9 L H101 ? 0.0    2.79   -0.86  1 24
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_227_ccd_hvt": {
+    "input": "./data/rfd3/ccd_ligands/structures/HVT.cif",
+    "ligand": "HVT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HVT": "ALL"
+    }
+  }
+}

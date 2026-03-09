@@ -1,0 +1,10 @@
+{
+  "ligand_500_ccd_qga": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/QGA.cif",
+    "ligand": "QGA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QGA": "ALL"
+    }
+  }
+}

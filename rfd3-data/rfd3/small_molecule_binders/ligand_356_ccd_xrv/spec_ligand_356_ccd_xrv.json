@@ -1,0 +1,10 @@
+{
+  "ligand_356_ccd_xrv": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XRV.cif",
+    "ligand": "XRV",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XRV": "ALL"
+    }
+  }
+}

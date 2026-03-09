@@ -1,0 +1,10 @@
+{
+  "ligand_267_ccd_yjy": {
+    "input": "./data/rfd3/ccd_ligands/structures/YJY.cif",
+    "ligand": "YJY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YJY": "ALL"
+    }
+  }
+}

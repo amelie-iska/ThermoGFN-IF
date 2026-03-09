@@ -1,0 +1,10 @@
+{
+  "ligand_032_ccd_dhc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DHC.cif",
+    "ligand": "DHC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DHC": "ALL"
+    }
+  }
+}

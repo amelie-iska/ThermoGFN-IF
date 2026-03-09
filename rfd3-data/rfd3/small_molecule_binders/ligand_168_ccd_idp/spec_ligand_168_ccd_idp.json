@@ -1,0 +1,10 @@
+{
+  "ligand_168_ccd_idp": {
+    "input": "./data/rfd3/ccd_ligands/structures/IDP.cif",
+    "ligand": "IDP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IDP": "ALL"
+    }
+  }
+}

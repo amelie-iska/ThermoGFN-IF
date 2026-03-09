@@ -1,0 +1,10 @@
+{
+  "ligand_292_ccd_ih7": {
+    "input": "./data/rfd3/ccd_ligands/structures/IH7.cif",
+    "ligand": "IH7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IH7": "ALL"
+    }
+  }
+}

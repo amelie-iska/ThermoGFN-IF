@@ -1,0 +1,10 @@
+{
+  "ligand_295_ccd_oe6": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OE6.cif",
+    "ligand": "OE6",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OE6": "ALL"
+    }
+  }
+}

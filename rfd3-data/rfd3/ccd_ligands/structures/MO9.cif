@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . MO9 L 1 1 . 1 MO9 L C1   ? 4.287  -0.269 -0.222 1 1
+HETATM C C2   . MO9 L 1 1 . 1 MO9 L C2   ? 3.302  -0.587 -1.146 1 2
+HETATM C C3   . MO9 L 1 1 . 1 MO9 L C3   ? 3.38   -1.769 -1.857 1 3
+HETATM C C4   . MO9 L 1 1 . 1 MO9 L C4   ? 4.43   -2.641 -1.638 1 4
+HETATM C C5   . MO9 L 1 1 . 1 MO9 L C5   ? 5.41   -2.329 -0.713 1 5
+HETATM C C6   . MO9 L 1 1 . 1 MO9 L C6   ? 5.34   -1.145 -0.005 1 6
+HETATM C C7   . MO9 L 1 1 . 1 MO9 L C7   ? 2.157  0.363  -1.385 1 7
+HETATM C C9   . MO9 L 1 1 . 1 MO9 L C9   ? -0.4   1.226  -0.774 1 8
+HETATM C C10  . MO9 L 1 1 . 1 MO9 L C10  ? -1.68  1.087  0.052  1 9
+HETATM C C12  . MO9 L 1 1 . 1 MO9 L C12  ? -2.668 2.144  -0.37  1 10
+HETATM S S8   . MO9 L 1 1 . 1 MO9 L S8   ? 0.789  -0.046 -0.266 1 11
+HETATM O O11  . MO9 L 1 1 . 1 MO9 L O11  ? -2.256 -0.228 -0.165 1 12
+HETATM O O13  . MO9 L 1 1 . 1 MO9 L O13  ? 0.275  -1.324 -0.612 1 13
+HETATM O O14  . MO9 L 1 1 . 1 MO9 L O14  ? 1.195  0.209  1.072  1 14
+HETATM N N15  . MO9 L 1 1 . 1 MO9 L N15  ? -2.39  3.446  -0.165 1 15
+HETATM O O16  . MO9 L 1 1 . 1 MO9 L O16  ? -3.713 1.822  -0.895 1 16
+HETATM C C17  . MO9 L 1 1 . 1 MO9 L C17  ? -3.351 4.474  -0.576 1 17
+HETATM C C18  . MO9 L 1 1 . 1 MO9 L C18  ? -2.817 5.805  -0.245 1 18
+HETATM C C19  . MO9 L 1 1 . 1 MO9 L C19  ? -2.966 -0.822 0.812  1 19
+HETATM N N20  . MO9 L 1 1 . 1 MO9 L N20  ? -3.501 -2.043 0.61   1 20
+HETATM O O21  . MO9 L 1 1 . 1 MO9 L O21  ? -3.126 -0.257 1.876  1 21
+HETATM C C22  . MO9 L 1 1 . 1 MO9 L C22  ? -4.283 -2.718 1.66   1 22
+HETATM C C23  . MO9 L 1 1 . 1 MO9 L C23  ? -5.568 -3.26  1.024  1 23
+HETATM O O24  . MO9 L 1 1 . 1 MO9 L O24  ? -5.237 -4.11  -0.074 1 24
+HETATM C C25  . MO9 L 1 1 . 1 MO9 L C25  ? -4.691 -3.292 -1.107 1 25
+HETATM C C26  . MO9 L 1 1 . 1 MO9 L C26  ? -3.33  -2.75  -0.671 1 26
+HETATM O O27  . MO9 L 1 1 . 1 MO9 L O27  ? 4.216  0.897  0.474  1 27
+HETATM C C28  . MO9 L 1 1 . 1 MO9 L C28  ? 5.354  0.932  1.338  1 28
+HETATM F F29  . MO9 L 1 1 . 1 MO9 L F29  ? 6.523  0.881  0.571  1 29
+HETATM F F30  . MO9 L 1 1 . 1 MO9 L F30  ? 5.315  -0.167 2.204  1 30
+HETATM N N31  . MO9 L 1 1 . 1 MO9 L N31  ? -2.405 6.832  0.011  1 31
+HETATM H H3   . MO9 L 1 1 . 1 MO9 L H3   ? 2.617  -2.015 -2.58  1 32
+HETATM H H4   . MO9 L 1 1 . 1 MO9 L H4   ? 4.487  -3.567 -2.191 1 33
+HETATM H H5   . MO9 L 1 1 . 1 MO9 L H5   ? 6.229  -3.011 -0.544 1 34
+HETATM H H6   . MO9 L 1 1 . 1 MO9 L H6   ? 6.106  -0.901 0.717  1 35
+HETATM H H71  . MO9 L 1 1 . 1 MO9 L H71  ? 2.487  1.385  -1.197 1 36
+HETATM H H72  . MO9 L 1 1 . 1 MO9 L H72  ? 1.82   0.274  -2.418 1 37
+HETATM H H91  . MO9 L 1 1 . 1 MO9 L H91  ? 0.032  2.214  -0.611 1 38
+HETATM H H92  . MO9 L 1 1 . 1 MO9 L H92  ? -0.635 1.103  -1.831 1 39
+HETATM H H10  . MO9 L 1 1 . 1 MO9 L H10  ? -1.446 1.211  1.109  1 40
+HETATM H HN15 . MO9 L 1 1 . 1 MO9 L HN15 ? -1.555 3.704  0.254  1 41
+HETATM H H171 . MO9 L 1 1 . 1 MO9 L H171 ? -3.518 4.406  -1.651 1 42
+HETATM H H172 . MO9 L 1 1 . 1 MO9 L H172 ? -4.294 4.32   -0.051 1 43
+HETATM H H221 . MO9 L 1 1 . 1 MO9 L H221 ? -3.704 -3.542 2.078  1 44
+HETATM H H222 . MO9 L 1 1 . 1 MO9 L H222 ? -4.534 -2.007 2.447  1 45
+HETATM H H231 . MO9 L 1 1 . 1 MO9 L H231 ? -6.129 -3.828 1.766  1 46
+HETATM H H232 . MO9 L 1 1 . 1 MO9 L H232 ? -6.176 -2.428 0.668  1 47
+HETATM H H251 . MO9 L 1 1 . 1 MO9 L H251 ? -4.573 -3.884 -2.015 1 48
+HETATM H H252 . MO9 L 1 1 . 1 MO9 L H252 ? -5.364 -2.457 -1.304 1 49
+HETATM H H261 . MO9 L 1 1 . 1 MO9 L H261 ? -2.948 -2.062 -1.425 1 50
+HETATM H H262 . MO9 L 1 1 . 1 MO9 L H262 ? -2.631 -3.576 -0.537 1 51
+HETATM H H28  . MO9 L 1 1 . 1 MO9 L H28  ? 5.34   1.853  1.919  1 52
+#

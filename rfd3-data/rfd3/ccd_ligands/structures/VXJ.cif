@@ -1,0 +1,65 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C10  . VXJ L 1 1 . 1 VXJ L C10  ? 3.754  -2.255 -0.923 1 1
+HETATM C  C11  . VXJ L 1 1 . 1 VXJ L C11  ? 2.488  -1.826 -0.576 1 2
+HETATM C  C17  . VXJ L 1 1 . 1 VXJ L C17  ? -1.594 0.605  0.834  1 3
+HETATM C  C16  . VXJ L 1 1 . 1 VXJ L C16  ? -2.7   1.109  -0.063 1 4
+HETATM C  C15  . VXJ L 1 1 . 1 VXJ L C15  ? -2.703 2.383  -0.646 1 5
+HETATM C  C14  . VXJ L 1 1 . 1 VXJ L C14  ? -1.604 3.399  -0.451 1 6
+HETATM C  C13  . VXJ L 1 1 . 1 VXJ L C13  ? -0.78  3.001  0.781  1 7
+HETATM C  C18  . VXJ L 1 1 . 1 VXJ L C18  ? -3.83  0.463  -0.451 1 8
+HETATM C  C19  . VXJ L 1 1 . 1 VXJ L C19  ? -4.234 -0.909 -0.07  1 9
+HETATM C  C20  . VXJ L 1 1 . 1 VXJ L C20  ? -3.302 -1.946 -0.101 1 10
+HETATM C  C21  . VXJ L 1 1 . 1 VXJ L C21  ? -3.683 -3.223 0.256  1 11
+HETATM C  C22  . VXJ L 1 1 . 1 VXJ L C22  ? -4.987 -3.476 0.643  1 12
+HETATM O  O01  . VXJ L 1 1 . 1 VXJ L O01  ? 1.705  1.93   0.566  1 13
+HETATM C  C02  . VXJ L 1 1 . 1 VXJ L C02  ? 0.788  1.132  0.579  1 14
+HETATM N  N03  . VXJ L 1 1 . 1 VXJ L N03  ? 1.04   -0.186 0.449  1 15
+HETATM C  C04  . VXJ L 1 1 . 1 VXJ L C04  ? 2.323  -0.622 0.095  1 16
+HETATM C  C05  . VXJ L 1 1 . 1 VXJ L C05  ? 3.432  0.15   0.416  1 17
+HETATM C  C06  . VXJ L 1 1 . 1 VXJ L C06  ? 4.698  -0.283 0.067  1 18
+HETATM CL CL07 . VXJ L 1 1 . 1 VXJ L CL07 ? 6.085  0.681  0.467  1 19
+HETATM C  C08  . VXJ L 1 1 . 1 VXJ L C08  ? 4.859  -1.485 -0.603 1 20
+HETATM F  F09  . VXJ L 1 1 . 1 VXJ L F09  ? 6.097  -1.909 -0.939 1 21
+HETATM N  N12  . VXJ L 1 1 . 1 VXJ L N12  ? -0.48  1.564  0.725  1 22
+HETATM C  C23  . VXJ L 1 1 . 1 VXJ L C23  ? -5.916 -2.451 0.675  1 23
+HETATM C  C24  . VXJ L 1 1 . 1 VXJ L C24  ? -5.545 -1.169 0.327  1 24
+HETATM N  N25  . VXJ L 1 1 . 1 VXJ L N25  ? -4.526 1.318  -1.257 1 25
+HETATM N  N26  . VXJ L 1 1 . 1 VXJ L N26  ? -3.79  2.509  -1.355 1 26
+HETATM H  H1   . VXJ L 1 1 . 1 VXJ L H1   ? 3.883  -3.194 -1.441 1 27
+HETATM H  H2   . VXJ L 1 1 . 1 VXJ L H2   ? 1.627  -2.427 -0.826 1 28
+HETATM H  H3   . VXJ L 1 1 . 1 VXJ L H3   ? -1.945 0.558  1.865  1 29
+HETATM H  H4   . VXJ L 1 1 . 1 VXJ L H4   ? -1.268 -0.382 0.506  1 30
+HETATM H  H5   . VXJ L 1 1 . 1 VXJ L H5   ? -0.961 3.415  -1.331 1 31
+HETATM H  H6   . VXJ L 1 1 . 1 VXJ L H6   ? -2.04  4.385  -0.296 1 32
+HETATM H  H7   . VXJ L 1 1 . 1 VXJ L H7   ? 0.151  3.568  0.794  1 33
+HETATM H  H8   . VXJ L 1 1 . 1 VXJ L H8   ? -1.35  3.219  1.684  1 34
+HETATM H  H9   . VXJ L 1 1 . 1 VXJ L H9   ? -2.283 -1.75  -0.404 1 35
+HETATM H  H10  . VXJ L 1 1 . 1 VXJ L H10  ? -2.963 -4.028 0.232  1 36
+HETATM H  H11  . VXJ L 1 1 . 1 VXJ L H11  ? -5.281 -4.477 0.921  1 37
+HETATM H  H12  . VXJ L 1 1 . 1 VXJ L H12  ? 0.333  -0.832 0.599  1 38
+HETATM H  H13  . VXJ L 1 1 . 1 VXJ L H13  ? 3.306  1.087  0.937  1 39
+HETATM H  H14  . VXJ L 1 1 . 1 VXJ L H14  ? -6.933 -2.655 0.978  1 40
+HETATM H  H15  . VXJ L 1 1 . 1 VXJ L H15  ? -6.27  -0.369 0.357  1 41
+HETATM H  H16  . VXJ L 1 1 . 1 VXJ L H16  ? -5.376 1.135  -1.686 1 42
+#

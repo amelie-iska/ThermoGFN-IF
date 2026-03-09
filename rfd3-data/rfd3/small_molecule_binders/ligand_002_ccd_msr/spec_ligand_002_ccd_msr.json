@@ -1,0 +1,10 @@
+{
+  "ligand_002_ccd_msr": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/MSR.cif",
+    "ligand": "MSR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MSR": "ALL"
+    }
+  }
+}

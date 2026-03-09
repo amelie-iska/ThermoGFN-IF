@@ -1,0 +1,10 @@
+{
+  "ligand_522_ccd_b4q": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/B4Q.cif",
+    "ligand": "B4Q",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B4Q": "ALL"
+    }
+  }
+}

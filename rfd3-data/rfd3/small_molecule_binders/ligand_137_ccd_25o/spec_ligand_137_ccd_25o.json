@@ -1,0 +1,10 @@
+{
+  "ligand_137_ccd_25o": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/25O.cif",
+    "ligand": "25O",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "25O": "ALL"
+    }
+  }
+}

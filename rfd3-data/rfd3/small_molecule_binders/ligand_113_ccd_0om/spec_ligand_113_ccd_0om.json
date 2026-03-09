@@ -1,0 +1,10 @@
+{
+  "ligand_113_ccd_0om": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/0OM.cif",
+    "ligand": "0OM",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0OM": "ALL"
+    }
+  }
+}

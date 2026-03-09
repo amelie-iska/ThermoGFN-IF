@@ -1,0 +1,61 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1  . 86D L 1 1 . 1 86D L N1  ? -5.737 -1.546 3.014  1 1
+HETATM C C17 . 86D L 1 1 . 1 86D L C17 ? -5.332 -1.039 2.082  1 2
+HETATM C C6  . 86D L 1 1 . 1 86D L C6  ? -4.822 -0.399 0.906  1 3
+HETATM C C7  . 86D L 1 1 . 1 86D L C7  ? -3.581 0.237  0.939  1 4
+HETATM C C8  . 86D L 1 1 . 1 86D L C8  ? -3.092 0.854  -0.201 1 5
+HETATM C C9  . 86D L 1 1 . 1 86D L C9  ? -3.837 0.839  -1.373 1 6
+HETATM C C10 . 86D L 1 1 . 1 86D L C10 ? -5.069 0.208  -1.408 1 7
+HETATM F F1  . 86D L 1 1 . 1 86D L F1  ? -5.789 0.198  -2.551 1 8
+HETATM C C5  . 86D L 1 1 . 1 86D L C5  ? -5.563 -0.415 -0.277 1 9
+HETATM O O1  . 86D L 1 1 . 1 86D L O1  ? -1.883 1.474  -0.173 1 10
+HETATM C C1  . 86D L 1 1 . 1 86D L C1  ? -0.774 0.703  -0.023 1 11
+HETATM C C14 . 86D L 1 1 . 1 86D L C14 ? 0.468  1.301  0.147  1 12
+HETATM C C15 . 86D L 1 1 . 1 86D L C15 ? 0.854  2.764  0.201  1 13
+HETATM C C11 . 86D L 1 1 . 1 86D L C11 ? 2.379  2.789  -0.035 1 14
+HETATM F F5  . 86D L 1 1 . 1 86D L F5  ? 2.983  3.8    0.719  1 15
+HETATM F F2  . 86D L 1 1 . 1 86D L F2  ? 2.669  2.944  -1.395 1 16
+HETATM C C13 . 86D L 1 1 . 1 86D L C13 ? 1.594  0.515  0.3    1 17
+HETATM C C12 . 86D L 1 1 . 1 86D L C12 ? 2.814  1.396  0.467  1 18
+HETATM O O4  . 86D L 1 1 . 1 86D L O4  ? 3.194  1.461  1.843  1 19
+HETATM C C4  . 86D L 1 1 . 1 86D L C4  ? 1.479  -0.865 0.284  1 20
+HETATM C C3  . 86D L 1 1 . 1 86D L C3  ? 0.244  -1.461 0.116  1 21
+HETATM C C2  . 86D L 1 1 . 1 86D L C2  ? -0.885 -0.679 -0.033 1 22
+HETATM S S1  . 86D L 1 1 . 1 86D L S1  ? 2.916  -1.866 0.479  1 23
+HETATM O O2  . 86D L 1 1 . 1 86D L O2  ? 3.925  -0.955 0.89   1 24
+HETATM O O3  . 86D L 1 1 . 1 86D L O3  ? 2.493  -2.924 1.329  1 25
+HETATM C C16 . 86D L 1 1 . 1 86D L C16 ? 3.263  -2.49  -1.189 1 26
+HETATM F F3  . 86D L 1 1 . 1 86D L F3  ? 2.218  -3.324 -1.602 1 27
+HETATM F F4  . 86D L 1 1 . 1 86D L F4  ? 3.377  -1.413 -2.075 1 28
+HETATM H H1  . 86D L 1 1 . 1 86D L H1  ? -3.002 0.249  1.851  1 29
+HETATM H H2  . 86D L 1 1 . 1 86D L H2  ? -3.453 1.321  -2.26  1 30
+HETATM H H3  . 86D L 1 1 . 1 86D L H3  ? -6.522 -0.909 -0.308 1 31
+HETATM H H4  . 86D L 1 1 . 1 86D L H4  ? 0.341  3.319  -0.584 1 32
+HETATM H H5  . 86D L 1 1 . 1 86D L H5  ? 0.616  3.182  1.179  1 33
+HETATM H H6  . 86D L 1 1 . 1 86D L H6  ? 3.639  1.017  -0.136 1 34
+HETATM H H7  . 86D L 1 1 . 1 86D L H7  ? 3.944  2.046  2.017  1 35
+HETATM H H8  . 86D L 1 1 . 1 86D L H8  ? 0.161  -2.537 0.104  1 36
+HETATM H H9  . 86D L 1 1 . 1 86D L H9  ? -1.852 -1.143 -0.161 1 37
+HETATM H H12 . 86D L 1 1 . 1 86D L H12 ? 4.195  -3.053 -1.18  1 38
+#

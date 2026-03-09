@@ -1,0 +1,10 @@
+{
+  "ligand_248_ccd_lbr": {
+    "input": "./data/rfd3/ccd_ligands/structures/LBR.cif",
+    "ligand": "LBR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LBR": "ALL"
+    }
+  }
+}

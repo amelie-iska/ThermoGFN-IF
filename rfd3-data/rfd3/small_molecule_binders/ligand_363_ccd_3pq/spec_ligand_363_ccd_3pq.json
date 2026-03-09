@@ -1,0 +1,10 @@
+{
+  "ligand_363_ccd_3pq": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/3PQ.cif",
+    "ligand": "3PQ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3PQ": "ALL"
+    }
+  }
+}

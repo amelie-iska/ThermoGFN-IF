@@ -1,0 +1,97 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O2A  . T6F L 1 1 . 1 T6F L O2A  ?  -5.027  -2.905 -1.453 1 1
+HETATM P PA   . T6F L 1 1 . 1 T6F L PA   ?  -5.661  -1.871 -0.394 1 2
+HETATM O O1A  . T6F L 1 1 . 1 T6F L O1A  ?  -6.059  -0.63  -1.095 1 3
+HETATM O O3A  . T6F L 1 1 . 1 T6F L O3A  ?  -6.954  -2.536 0.297  1 4
+HETATM P PB   . T6F L 1 1 . 1 T6F L PB   ?  -8.462  -2.82  -0.191 1 5
+HETATM O O3B  . T6F L 1 1 . 1 T6F L O3B  ?  -9.29   -1.439 -0.203 1 6
+HETATM O O2B  . T6F L 1 1 . 1 T6F L O2B  ?  -8.439  -3.394 -1.555 1 7
+HETATM O O1B  . T6F L 1 1 . 1 T6F L O1B  ?  -9.165  -3.859 0.817  1 8
+HETATM O O7   . T6F L 1 1 . 1 T6F L O7   ?  -4.568  -1.523 0.735  1 9
+HETATM C C7   . T6F L 1 1 . 1 T6F L C7   ?  -3.351  -0.828 0.453  1 10
+HETATM C C6   . T6F L 1 1 . 1 T6F L C6   ?  -2.547  -0.663 1.744  1 11
+HETATM C C5   . T6F L 1 1 . 1 T6F L C5   ?  -1.264  0.07   1.447  1 12
+HETATM S S1   . T6F L 1 1 . 1 T6F L S1   ?  0.268   -0.668 0.987  1 13
+HETATM C C2   . T6F L 1 1 . 1 T6F L C2   ?  0.994   0.877  0.892  1 14
+HETATM C CF2  . T6F L 1 1 . 1 T6F L CF2  ?  2.431   1.134  0.521  1 15
+HETATM O OF2  . T6F L 1 1 . 1 T6F L OF2  ?  3.049   1.931  1.533  1 16
+HETATM C CF1  . T6F L 1 1 . 1 T6F L CF1  ?  2.489   1.874  -0.817 1 17
+HETATM O OF1  . T6F L 1 1 . 1 T6F L OF1  ?  1.821   1.103  -1.817 1 18
+HETATM C CF3  . T6F L 1 1 . 1 T6F L CF3  ?  3.172   -0.199 0.398  1 19
+HETATM O OF3  . T6F L 1 1 . 1 T6F L OF3  ?  2.632   -0.946 -0.694 1 20
+HETATM C CF4  . T6F L 1 1 . 1 T6F L CF4  ?  4.659   0.064  0.15   1 21
+HETATM O OF4  . T6F L 1 1 . 1 T6F L OF4  ?  4.824   0.701  -1.119 1 22
+HETATM C CF5  . T6F L 1 1 . 1 T6F L CF5  ?  5.42    -1.262 0.158  1 23
+HETATM O OF5  . T6F L 1 1 . 1 T6F L OF5  ?  5.255   -1.899 1.427  1 24
+HETATM C CF6  . T6F L 1 1 . 1 T6F L CF6  ?  6.907   -0.999 -0.09  1 25
+HETATM O OF6  . T6F L 1 1 . 1 T6F L OF6  ?  7.6     -2.244 -0.198 1 26
+HETATM P PF   . T6F L 1 1 . 1 T6F L PF   ?  9.185   -2.345 -0.461 1 27
+HETATM O OF8  . T6F L 1 1 . 1 T6F L OF8  ?  9.533   -1.584 -1.682 1 28
+HETATM O OF7  . T6F L 1 1 . 1 T6F L OF7  ?  9.978   -1.731 0.798  1 29
+HETATM O OF9  . T6F L 1 1 . 1 T6F L OF9  ?  9.599   -3.889 -0.655 1 30
+HETATM N N3   . T6F L 1 1 . 1 T6F L N3   +1 0.131   1.792  1.183  1 31
+HETATM C C4   . T6F L 1 1 . 1 T6F L C4   ?  -1.09   1.394  1.479  1 32
+HETATM C CM4  . T6F L 1 1 . 1 T6F L CM4  ?  -2.197  2.354  1.83   1 33
+HETATM C C7,  . T6F L 1 1 . 1 T6F L C7,  ?  0.492   3.212  1.178  1 34
+HETATM C C5,  . T6F L 1 1 . 1 T6F L C5,  ?  -0.378  3.948  0.193  1 35
+HETATM C C4,  . T6F L 1 1 . 1 T6F L C4,  ?  -1.365  4.833  0.632  1 36
+HETATM N N4,  . T6F L 1 1 . 1 T6F L N4,  ?  -1.563  5.051  1.985  1 37
+HETATM N N3,  . T6F L 1 1 . 1 T6F L N3,  ?  -2.112  5.463  -0.271 1 38
+HETATM C C2,  . T6F L 1 1 . 1 T6F L C2,  ?  -1.926  5.258  -1.559 1 39
+HETATM C CM2  . T6F L 1 1 . 1 T6F L CM2  ?  -2.793  5.992  -2.549 1 40
+HETATM N N1,  . T6F L 1 1 . 1 T6F L N1,  ?  -1.003  4.43   -2.005 1 41
+HETATM C C6,  . T6F L 1 1 . 1 T6F L C6,  ?  -0.217  3.769  -1.167 1 42
+HETATM H HO2A . T6F L 1 1 . 1 T6F L HO2A ?  -4.743  -3.743 -1.063 1 43
+HETATM H HO3B . T6F L 1 1 . 1 T6F L HO3B ?  -9.346  -1.007 0.66   1 44
+HETATM H HO1B . T6F L 1 1 . 1 T6F L HO1B ?  -10.078 -4.077 0.584  1 45
+HETATM H H71  . T6F L 1 1 . 1 T6F L H71  ?  -2.767  -1.398 -0.269 1 46
+HETATM H H72  . T6F L 1 1 . 1 T6F L H72  ?  -3.581  0.154  0.04   1 47
+HETATM H H61  . T6F L 1 1 . 1 T6F L H61  ?  -3.132  -0.093 2.466  1 48
+HETATM H H62  . T6F L 1 1 . 1 T6F L H62  ?  -2.317  -1.645 2.157  1 49
+HETATM H HOF2 . T6F L 1 1 . 1 T6F L HOF2 ?  3.049   1.523  2.41   1 50
+HETATM H HF11 . T6F L 1 1 . 1 T6F L HF11 ?  1.999   2.843  -0.717 1 51
+HETATM H HF12 . T6F L 1 1 . 1 T6F L HF12 ?  3.529   2.022  -1.106 1 52
+HETATM H HOF1 . T6F L 1 1 . 1 T6F L HOF1 ?  1.818   1.512  -2.693 1 53
+HETATM H HF3  . T6F L 1 1 . 1 T6F L HF3  ?  3.053   -0.767 1.321  1 54
+HETATM H HOF3 . T6F L 1 1 . 1 T6F L HOF3 ?  2.823   -0.566 -1.562 1 55
+HETATM H HF4  . T6F L 1 1 . 1 T6F L HF4  ?  5.049   0.712  0.935  1 56
+HETATM H HOF4 . T6F L 1 1 . 1 T6F L HOF4 ?  4.498   0.18   -1.865 1 57
+HETATM H HF5  . T6F L 1 1 . 1 T6F L HF5  ?  5.03    -1.91  -0.627 1 58
+HETATM H HOF5 . T6F L 1 1 . 1 T6F L HOF5 ?  5.581   -1.378 2.174  1 59
+HETATM H HF61 . T6F L 1 1 . 1 T6F L HF61 ?  7.026   -0.435 -1.015 1 60
+HETATM H HF62 . T6F L 1 1 . 1 T6F L HF62 ?  7.318   -0.425 0.741  1 61
+HETATM H HOF7 . T6F L 1 1 . 1 T6F L HOF7 ?  9.798   -2.182 1.635  1 62
+HETATM H HOF9 . T6F L 1 1 . 1 T6F L HOF9 ?  10.543  -4.025 -0.818 1 63
+HETATM H HM41 . T6F L 1 1 . 1 T6F L HM41 ?  -2.111  2.64   2.879  1 64
+HETATM H HM42 . T6F L 1 1 . 1 T6F L HM42 ?  -2.12   3.243  1.204  1 65
+HETATM H HM43 . T6F L 1 1 . 1 T6F L HM43 ?  -3.161  1.874  1.663  1 66
+HETATM H H7,1 . T6F L 1 1 . 1 T6F L H7,1 ?  0.345   3.628  2.174  1 67
+HETATM H H7,2 . T6F L 1 1 . 1 T6F L H7,2 ?  1.538   3.32   0.89   1 68
+HETATM H H4,1 . T6F L 1 1 . 1 T6F L H4,1 ?  -0.929  4.701  2.631  1 69
+HETATM H H4,2 . T6F L 1 1 . 1 T6F L H4,2 ?  -2.335  5.555  2.288  1 70
+HETATM H HM21 . T6F L 1 1 . 1 T6F L HM21 ?  -2.322  6.939  -2.813 1 71
+HETATM H HM22 . T6F L 1 1 . 1 T6F L HM22 ?  -2.914  5.384  -3.446 1 72
+HETATM H HM23 . T6F L 1 1 . 1 T6F L HM23 ?  -3.77   6.183  -2.106 1 73
+HETATM H H6,  . T6F L 1 1 . 1 T6F L H6,  ?  0.537   3.093  -1.544 1 74
+#

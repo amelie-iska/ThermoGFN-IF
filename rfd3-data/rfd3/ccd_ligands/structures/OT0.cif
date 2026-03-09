@@ -1,0 +1,84 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C1  . OT0 L 1 1 . 1 OT0 L C1  ? 6.385  0.471  -0.272 1 1
+HETATM C  C2  . OT0 L 1 1 . 1 OT0 L C2  ? 5.128  -0.401 -0.229 1 2
+HETATM C  C3  . OT0 L 1 1 . 1 OT0 L C3  ? 4.022  0.335  0.531  1 3
+HETATM C  C4  . OT0 L 1 1 . 1 OT0 L C4  ? 2.788  -0.568 0.622  1 4
+HETATM C  C5  . OT0 L 1 1 . 1 OT0 L C5  ? 1.238  1.329  0.998  1 5
+HETATM C  C6  . OT0 L 1 1 . 1 OT0 L C6  ? 0.391  2.048  1.832  1 6
+HETATM C  C7  . OT0 L 1 1 . 1 OT0 L C7  ? -0.119 3.262  1.416  1 7
+HETATM C  C11 . OT0 L 1 1 . 1 OT0 L C11 ? 2.264  -0.847 -0.763 1 8
+HETATM C  C12 . OT0 L 1 1 . 1 OT0 L C12 ? 0.464  -1.546 -2.267 1 9
+HETATM N  N1  . OT0 L 1 1 . 1 OT0 L N1  ? 1.751  0.098  1.413  1 10
+HETATM C  C8  . OT0 L 1 1 . 1 OT0 L C8  ? 0.213  3.763  0.17   1 11
+HETATM CL CL1 . OT0 L 1 1 . 1 OT0 L CL1 ? -0.43  5.29   -0.35  1 12
+HETATM C  C9  . OT0 L 1 1 . 1 OT0 L C9  ? 1.057  3.05   -0.663 1 13
+HETATM C  C10 . OT0 L 1 1 . 1 OT0 L C10 ? 1.569  1.835  -0.253 1 14
+HETATM O  O1  . OT0 L 1 1 . 1 OT0 L O1  ? 2.946  -0.59  -1.732 1 15
+HETATM N  N2  . OT0 L 1 1 . 1 OT0 L N2  ? 1.038  -1.383 -0.925 1 16
+HETATM C  C13 . OT0 L 1 1 . 1 OT0 L C13 ? -0.914 -0.878 -2.298 1 17
+HETATM C  C14 . OT0 L 1 1 . 1 OT0 L C14 ? -1.779 -1.448 -1.171 1 18
+HETATM C  C15 . OT0 L 1 1 . 1 OT0 L C15 ? -3.168 -0.808 -1.22  1 19
+HETATM N  N3  . OT0 L 1 1 . 1 OT0 L N3  ? -4.031 -1.439 -0.219 1 20
+HETATM C  C16 . OT0 L 1 1 . 1 OT0 L C16 ? -5.309 -1.033 -0.08  1 21
+HETATM O  O2  . OT0 L 1 1 . 1 OT0 L O2  ? -5.744 -0.147 -0.784 1 22
+HETATM C  C17 . OT0 L 1 1 . 1 OT0 L C17 ? -6.198 -1.682 0.95   1 23
+HETATM C  C18 . OT0 L 1 1 . 1 OT0 L C18 ? -1.125 -1.144 0.179  1 24
+HETATM C  C19 . OT0 L 1 1 . 1 OT0 L C19 ? 0.251  -1.815 0.238  1 25
+HETATM C  C20 . OT0 L 1 1 . 1 OT0 L C20 ? 3.182  -1.885 1.298  1 26
+HETATM C  C21 . OT0 L 1 1 . 1 OT0 L C21 ? 4.32   -2.535 0.508  1 27
+HETATM C  C22 . OT0 L 1 1 . 1 OT0 L C22 ? 4.76   -3.822 1.21   1 28
+HETATM O  O3  . OT0 L 1 1 . 1 OT0 L O3  ? 5.424  -1.631 0.435  1 29
+HETATM H  H1  . OT0 L 1 1 . 1 OT0 L H1  ? 6.719  0.678  0.744  1 30
+HETATM H  H2  . OT0 L 1 1 . 1 OT0 L H2  ? 7.172  -0.053 -0.814 1 31
+HETATM H  H3  . OT0 L 1 1 . 1 OT0 L H3  ? 6.159  1.41   -0.778 1 32
+HETATM H  H4  . OT0 L 1 1 . 1 OT0 L H4  ? 4.794  -0.608 -1.246 1 33
+HETATM H  H5  . OT0 L 1 1 . 1 OT0 L H5  ? 4.37   0.578  1.535  1 34
+HETATM H  H6  . OT0 L 1 1 . 1 OT0 L H6  ? 3.764  1.252  0.002  1 35
+HETATM H  H7  . OT0 L 1 1 . 1 OT0 L H7  ? 0.131  1.657  2.804  1 36
+HETATM H  H8  . OT0 L 1 1 . 1 OT0 L H8  ? -0.779 3.821  2.064  1 37
+HETATM H  H9  . OT0 L 1 1 . 1 OT0 L H9  ? 1.115  -1.074 -3.003 1 38
+HETATM H  H10 . OT0 L 1 1 . 1 OT0 L H10 ? 0.361  -2.607 -2.494 1 39
+HETATM H  H11 . OT0 L 1 1 . 1 OT0 L H11 ? 1.42   -0.316 2.226  1 40
+HETATM H  H12 . OT0 L 1 1 . 1 OT0 L H12 ? 1.314  3.443  -1.636 1 41
+HETATM H  H13 . OT0 L 1 1 . 1 OT0 L H13 ? 2.228  1.279  -0.903 1 42
+HETATM H  H14 . OT0 L 1 1 . 1 OT0 L H14 ? -0.801 0.197  -2.161 1 43
+HETATM H  H15 . OT0 L 1 1 . 1 OT0 L H15 ? -1.392 -1.074 -3.258 1 44
+HETATM H  H16 . OT0 L 1 1 . 1 OT0 L H16 ? -1.871 -2.527 -1.295 1 45
+HETATM H  H17 . OT0 L 1 1 . 1 OT0 L H17 ? -3.084 0.258  -1.009 1 46
+HETATM H  H18 . OT0 L 1 1 . 1 OT0 L H18 ? -3.598 -0.95  -2.212 1 47
+HETATM H  H19 . OT0 L 1 1 . 1 OT0 L H19 ? -3.684 -2.148 0.344  1 48
+HETATM H  H20 . OT0 L 1 1 . 1 OT0 L H20 ? -6.281 -2.748 0.738  1 49
+HETATM H  H21 . OT0 L 1 1 . 1 OT0 L H21 ? -5.767 -1.541 1.941  1 50
+HETATM H  H23 . OT0 L 1 1 . 1 OT0 L H23 ? -1.009 -0.067 0.293  1 51
+HETATM H  H24 . OT0 L 1 1 . 1 OT0 L H24 ? -1.753 -1.53  0.982  1 52
+HETATM H  H25 . OT0 L 1 1 . 1 OT0 L H25 ? 0.131  -2.898 0.215  1 53
+HETATM H  H26 . OT0 L 1 1 . 1 OT0 L H26 ? 0.762  -1.521 1.155  1 54
+HETATM H  H27 . OT0 L 1 1 . 1 OT0 L H27 ? 3.513  -1.687 2.318  1 55
+HETATM H  H28 . OT0 L 1 1 . 1 OT0 L H28 ? 2.322  -2.555 1.318  1 56
+HETATM H  H29 . OT0 L 1 1 . 1 OT0 L H29 ? 3.976  -2.77  -0.499 1 57
+HETATM H  H30 . OT0 L 1 1 . 1 OT0 L H30 ? 3.917  -4.511 1.267  1 58
+HETATM H  H31 . OT0 L 1 1 . 1 OT0 L H31 ? 5.57   -4.284 0.647  1 59
+HETATM H  H32 . OT0 L 1 1 . 1 OT0 L H32 ? 5.104  -3.586 2.217  1 60
+HETATM CL CL2 . OT0 L 1 1 . 1 OT0 L CL2 ? -7.834 -0.928 0.892  1 61
+#

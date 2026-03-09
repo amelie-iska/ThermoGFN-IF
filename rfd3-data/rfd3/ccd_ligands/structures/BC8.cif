@@ -1,0 +1,60 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O OAA . BC8 L 1 1 . 1 BC8 L OAA ? -5.453 -0.456 0.262  1 1
+HETATM C CAB . BC8 L 1 1 . 1 BC8 L CAB ? -4.206 -0.182 0.678  1 2
+HETATM O OAH . BC8 L 1 1 . 1 BC8 L OAH ? -4.033 0.453  1.691  1 3
+HETATM C CAC . BC8 L 1 1 . 1 BC8 L CAC ? -3.023 -0.666 -0.12  1 4
+HETATM C CAD . BC8 L 1 1 . 1 BC8 L CAD ? -1.736 -0.092 0.477  1 5
+HETATM C CAE . BC8 L 1 1 . 1 BC8 L CAE ? -1.75  1.433  0.348  1 6
+HETATM C CAF . BC8 L 1 1 . 1 BC8 L CAF ? -1.775 1.813  -1.11  1 7
+HETATM O OAL . BC8 L 1 1 . 1 BC8 L OAL ? -1.754 3.107  -1.467 1 8
+HETATM O OAV . BC8 L 1 1 . 1 BC8 L OAV ? -1.813 0.953  -1.958 1 9
+HETATM O OAI . BC8 L 1 1 . 1 BC8 L OAI ? -1.649 -0.452 1.857  1 10
+HETATM C CAJ . BC8 L 1 1 . 1 BC8 L CAJ ? -0.547 -0.648 -0.264 1 11
+HETATM O OAK . BC8 L 1 1 . 1 BC8 L OAK ? -0.684 -1.095 -1.383 1 12
+HETATM N N   . BC8 L 1 1 . 1 BC8 L N   ? 0.669  -0.647 0.317  1 13
+HETATM C CA  . BC8 L 1 1 . 1 BC8 L CA  ? 1.843  -1.085 -0.441 1 14
+HETATM C C   . BC8 L 1 1 . 1 BC8 L C   ? 1.964  -2.585 -0.359 1 15
+HETATM O O   . BC8 L 1 1 . 1 BC8 L O   ? 1.152  -3.223 0.269  1 16
+HETATM O OXT . BC8 L 1 1 . 1 BC8 L OXT ? 2.973  -3.213 -0.983 1 17
+HETATM C CB  . BC8 L 1 1 . 1 BC8 L CB  ? 3.1    -0.439 0.146  1 18
+HETATM C CG  . BC8 L 1 1 . 1 BC8 L CG  ? 3.034  1.077  -0.051 1 19
+HETATM C CD  . BC8 L 1 1 . 1 BC8 L CD  ? 4.271  1.713  0.528  1 20
+HETATM O OE1 . BC8 L 1 1 . 1 BC8 L OE1 ? 5.119  1.024  1.044  1 21
+HETATM O OE2 . BC8 L 1 1 . 1 BC8 L OE2 ? 4.431  3.044  0.47   1 22
+HETATM H H1  . BC8 L 1 1 . 1 BC8 L H1  ? -6.18  -0.125 0.807  1 23
+HETATM H H2  . BC8 L 1 1 . 1 BC8 L H2  ? -2.984 -1.755 -0.087 1 24
+HETATM H H3  . BC8 L 1 1 . 1 BC8 L H3  ? -3.122 -0.337 -1.154 1 25
+HETATM H H4  . BC8 L 1 1 . 1 BC8 L H4  ? -2.636 1.831  0.842  1 26
+HETATM H H5  . BC8 L 1 1 . 1 BC8 L H5  ? -0.857 1.845  0.816  1 27
+HETATM H H6  . BC8 L 1 1 . 1 BC8 L H6  ? -1.771 3.302  -2.414 1 28
+HETATM H H7  . BC8 L 1 1 . 1 BC8 L H7  ? -1.635 -1.406 2.014  1 29
+HETATM H H8  . BC8 L 1 1 . 1 BC8 L H8  ? 0.767  -0.357 1.237  1 30
+HETATM H H9  . BC8 L 1 1 . 1 BC8 L H9  ? 1.735  -0.786 -1.484 1 31
+HETATM H H10 . BC8 L 1 1 . 1 BC8 L H10 ? 3.009  -4.176 -0.901 1 32
+HETATM H H11 . BC8 L 1 1 . 1 BC8 L H11 ? 3.161  -0.665 1.211  1 33
+HETATM H H12 . BC8 L 1 1 . 1 BC8 L H12 ? 3.981  -0.833 -0.36  1 34
+HETATM H H13 . BC8 L 1 1 . 1 BC8 L H13 ? 2.973  1.303  -1.115 1 35
+HETATM H H14 . BC8 L 1 1 . 1 BC8 L H14 ? 2.152  1.47   0.456  1 36
+HETATM H H15 . BC8 L 1 1 . 1 BC8 L H15 ? 5.242  3.406  0.854  1 37
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_144_ccd_wqp": {
+    "input": "./data/rfd3/ccd_ligands/structures/WQP.cif",
+    "ligand": "WQP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WQP": "ALL"
+    }
+  }
+}

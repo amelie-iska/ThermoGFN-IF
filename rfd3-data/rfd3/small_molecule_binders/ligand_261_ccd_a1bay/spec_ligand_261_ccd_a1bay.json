@@ -1,0 +1,10 @@
+{
+  "ligand_261_ccd_a1bay": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BAY.cif",
+    "ligand": "A1BAY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BAY": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_126_ccd_8jt": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8JT.cif",
+    "ligand": "8JT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8JT": "ALL"
+    }
+  }
+}

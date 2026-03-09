@@ -1,0 +1,10 @@
+{
+  "ligand_242_ccd_d30": {
+    "input": "./data/rfd3/ccd_ligands/structures/D30.cif",
+    "ligand": "D30",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "D30": "ALL"
+    }
+  }
+}

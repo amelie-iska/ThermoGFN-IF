@@ -1,0 +1,10 @@
+{
+  "ligand_124_ccd_g9l": {
+    "input": "./data/rfd3/ccd_ligands/structures/G9L.cif",
+    "ligand": "G9L",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G9L": "ALL"
+    }
+  }
+}

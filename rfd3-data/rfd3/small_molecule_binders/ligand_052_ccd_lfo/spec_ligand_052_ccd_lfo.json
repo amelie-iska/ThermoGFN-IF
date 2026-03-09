@@ -1,0 +1,10 @@
+{
+  "ligand_052_ccd_lfo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LFO.cif",
+    "ligand": "LFO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LFO": "ALL"
+    }
+  }
+}

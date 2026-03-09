@@ -1,0 +1,10 @@
+{
+  "ligand_026_ccd_v5l": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V5L.cif",
+    "ligand": "V5L",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V5L": "ALL"
+    }
+  }
+}

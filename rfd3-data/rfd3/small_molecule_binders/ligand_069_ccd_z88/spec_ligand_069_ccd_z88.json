@@ -1,0 +1,10 @@
+{
+  "ligand_069_ccd_z88": {
+    "input": "./data/rfd3/ccd_ligands/structures/Z88.cif",
+    "ligand": "Z88",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Z88": "ALL"
+    }
+  }
+}

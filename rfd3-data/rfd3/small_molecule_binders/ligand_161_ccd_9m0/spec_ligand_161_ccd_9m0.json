@@ -1,0 +1,10 @@
+{
+  "ligand_161_ccd_9m0": {
+    "input": "./data/rfd3/ccd_ligands/structures/9M0.cif",
+    "ligand": "9M0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9M0": "ALL"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.0887291431427002,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 1,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.90124773979187,
+        "non_loop_fraction": 0.6212534059945504,
+        "loop_fraction": 0.3787465940054496,
+        "helix_fraction": 0.45776566757493187,
+        "sheet_fraction": 0.16348773841961853,
+        "num_ss_elements": 20,
+        "radius_of_gyration": 18.463198159328073,
+        "alanine_content": 0.31607629427792916,
+        "glycine_content": 0.05449591280653951,
+        "num_residues": 367,
+        "diffused_com": [
+            1.7858573198318481,
+            -1.3791000843048096,
+            -0.0013235558290034533
+        ],
+        "fixed_com": [
+            -0.0010230655316263437,
+            4.650297705666162e-05,
+            -0.00037856330163776875
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XD4.cif",
+        "length": "20-400",
+        "ligand": "XD4",
+        "extra": {
+            "example": "ligand_300_ccd_xd4",
+            "task_name": "spec_ligand_300_ccd_xd4_ligand_300_ccd_xd4",
+            "sampled_contig": "367",
+            "num_tokens_in": 368,
+            "num_residues_in": 368,
+            "num_chains": 2,
+            "num_atoms": 1856,
+            "num_residues": 370,
+            "example_id": "spec_ligand_300_ccd_xd4_ligand_300_ccd_xd4_1"
+        },
+        "select_fixed_atoms": {
+            "XD4": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

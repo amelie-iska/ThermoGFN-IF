@@ -1,0 +1,10 @@
+{
+  "ligand_147_ccd_o9x": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/O9X.cif",
+    "ligand": "O9X",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "O9X": "ALL"
+    }
+  }
+}

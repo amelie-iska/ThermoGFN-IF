@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.059079885482788086,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.2784223556518555,
+        "non_loop_fraction": 0.5486725663716814,
+        "loop_fraction": 0.45132743362831856,
+        "helix_fraction": 0.5486725663716814,
+        "sheet_fraction": 0.0,
+        "num_ss_elements": 5,
+        "radius_of_gyration": 14.174835392173753,
+        "alanine_content": 0.05309734513274336,
+        "glycine_content": 0.008849557522123894,
+        "num_residues": 113,
+        "diffused_com": [
+            0.023014109581708908,
+            -7.290773391723633,
+            -7.535408020019531
+        ],
+        "fixed_com": [
+            0.0005063657299615443,
+            0.0005787037080153823,
+            5.8774596254806966e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RZE.cif",
+        "length": "20-400",
+        "ligand": "RZE",
+        "extra": {
+            "example": "ligand_574_ccd_rze",
+            "task_name": "spec_ligand_574_ccd_rze_ligand_574_ccd_rze",
+            "sampled_contig": "113",
+            "num_tokens_in": 114,
+            "num_residues_in": 114,
+            "num_chains": 2,
+            "num_atoms": 592,
+            "num_residues": 116,
+            "example_id": "spec_ligand_574_ccd_rze_ligand_574_ccd_rze_2"
+        },
+        "select_fixed_atoms": {
+            "RZE": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

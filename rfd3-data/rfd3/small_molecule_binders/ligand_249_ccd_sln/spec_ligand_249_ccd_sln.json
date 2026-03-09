@@ -1,0 +1,10 @@
+{
+  "ligand_249_ccd_sln": {
+    "input": "./data/rfd3/ccd_ligands/structures/SLN.cif",
+    "ligand": "SLN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SLN": "ALL"
+    }
+  }
+}

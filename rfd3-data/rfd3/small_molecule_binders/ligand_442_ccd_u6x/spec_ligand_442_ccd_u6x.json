@@ -1,0 +1,10 @@
+{
+  "ligand_442_ccd_u6x": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/U6X.cif",
+    "ligand": "U6X",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "U6X": "ALL"
+    }
+  }
+}

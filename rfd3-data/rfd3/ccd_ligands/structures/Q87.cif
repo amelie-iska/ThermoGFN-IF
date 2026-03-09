@@ -1,0 +1,64 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C4  . Q87 L 1 1 . 1 Q87 L C4  ? 1.246  0.919  0.083  1 1
+HETATM C C5  . Q87 L 1 1 . 1 Q87 L C5  ? -1.199 0.828  0.013  1 2
+HETATM C C6  . Q87 L 1 1 . 1 Q87 L C6  ? -2.307 -0.217 0.161  1 3
+HETATM C C8  . Q87 L 1 1 . 1 Q87 L C8  ? -4.778 -0.587 0.14   1 4
+HETATM N N1  . Q87 L 1 1 . 1 Q87 L N1  ? 0.105  0.182  0.175  1 5
+HETATM N N3  . Q87 L 1 1 . 1 Q87 L N3  ? 3.53   2.48   -0.116 1 6
+HETATM O O6  . Q87 L 1 1 . 1 Q87 L O6  ? 4.814  0.69   0.24   1 7
+HETATM C C2  . Q87 L 1 1 . 1 Q87 L C2  ? 3.455  -1.73  -0.237 1 8
+HETATM O O2  . Q87 L 1 1 . 1 Q87 L O2  ? -3.83  1.466  0.992  1 9
+HETATM N N   . Q87 L 1 1 . 1 Q87 L N   ? 2.616  -1.008 0.464  1 10
+HETATM C C   . Q87 L 1 1 . 1 Q87 L C   ? 4.618  -3.919 -0.725 1 11
+HETATM C C1  . Q87 L 1 1 . 1 Q87 L C1  ? 3.653  -3.089 0.081  1 12
+HETATM C C10 . Q87 L 1 1 . 1 Q87 L C10 ? 2.301  3.004  -0.253 1 13
+HETATM C C11 . Q87 L 1 1 . 1 Q87 L C11 ? 3.698  1.163  0.12   1 14
+HETATM C C3  . Q87 L 1 1 . 1 Q87 L C3  ? 2.506  0.309  0.231  1 15
+HETATM C C7  . Q87 L 1 1 . 1 Q87 L C7  ? -3.67  0.458  -0.008 1 16
+HETATM C C9  . Q87 L 1 1 . 1 Q87 L C9  ? -6.141 0.087  -0.029 1 17
+HETATM N N2  . Q87 L 1 1 . 1 Q87 L N2  ? 1.187  2.262  -0.159 1 18
+HETATM O O1  . Q87 L 1 1 . 1 Q87 L O1  ? -2.148 -1.225 -0.839 1 19
+HETATM O O3  . Q87 L 1 1 . 1 Q87 L O3  ? -4.619 -1.595 -0.86  1 20
+HETATM O O4  . Q87 L 1 1 . 1 Q87 L O4  ? -7.178 -0.863 0.224  1 21
+HETATM O O5  . Q87 L 1 1 . 1 Q87 L O5  ? 2.194  4.196  -0.465 1 22
+HETATM H H1  . Q87 L 1 1 . 1 Q87 L H1  ? -1.259 1.283  -0.975 1 23
+HETATM H H2  . Q87 L 1 1 . 1 Q87 L H2  ? -1.321 1.597  0.776  1 24
+HETATM H H3  . Q87 L 1 1 . 1 Q87 L H3  ? -2.248 -0.673 1.149  1 25
+HETATM H H4  . Q87 L 1 1 . 1 Q87 L H4  ? -4.719 -1.043 1.128  1 26
+HETATM H H5  . Q87 L 1 1 . 1 Q87 L H5  ? 0.157  -0.771 0.347  1 27
+HETATM H H6  . Q87 L 1 1 . 1 Q87 L H6  ? 4.307  3.056  -0.192 1 28
+HETATM H H7  . Q87 L 1 1 . 1 Q87 L H7  ? 3.995  -1.283 -1.059 1 29
+HETATM H H8  . Q87 L 1 1 . 1 Q87 L H8  ? -3.787 1.131  1.898  1 30
+HETATM H H9  . Q87 L 1 1 . 1 Q87 L H9  ? 5.615  -3.485 -0.657 1 31
+HETATM H H10 . Q87 L 1 1 . 1 Q87 L H10 ? 4.637  -4.936 -0.334 1 32
+HETATM H H11 . Q87 L 1 1 . 1 Q87 L H11 ? 4.299  -3.937 -1.767 1 33
+HETATM H H15 . Q87 L 1 1 . 1 Q87 L H15 ? -3.73  0.913  -0.997 1 34
+HETATM H H16 . Q87 L 1 1 . 1 Q87 L H16 ? -6.227 0.915  0.675  1 35
+HETATM H H17 . Q87 L 1 1 . 1 Q87 L H17 ? -6.236 0.466  -1.047 1 36
+HETATM H H18 . Q87 L 1 1 . 1 Q87 L H18 ? -2.19  -0.891 -1.745 1 37
+HETATM H H19 . Q87 L 1 1 . 1 Q87 L H19 ? -4.661 -1.261 -1.767 1 38
+HETATM H H20 . Q87 L 1 1 . 1 Q87 L H20 ? -8.071 -0.504 0.134  1 39
+HETATM O O7  . Q87 L 1 1 . 1 Q87 L O7  ? 3.045  -3.591 1.006  1 40
+HETATM H H12 . Q87 L 1 1 . 1 Q87 L H12 ? 0.322  2.688  -0.266 1 41
+#

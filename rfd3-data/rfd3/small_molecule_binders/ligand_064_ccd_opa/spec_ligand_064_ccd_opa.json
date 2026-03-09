@@ -1,0 +1,10 @@
+{
+  "ligand_064_ccd_opa": {
+    "input": "./data/rfd3/ccd_ligands/structures/OPA.cif",
+    "ligand": "OPA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OPA": "ALL"
+    }
+  }
+}

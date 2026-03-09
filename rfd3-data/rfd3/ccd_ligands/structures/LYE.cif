@@ -1,0 +1,62 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C02  . LYE L 1 1 . 1 LYE L C02  ? -0.919 -5.181 -0.435 1 1
+HETATM C  C04  . LYE L 1 1 . 1 LYE L C04  ? -0.928 -3.095 0.74   1 2
+HETATM C  C07  . LYE L 1 1 . 1 LYE L C07  ? -0.103 -1.019 -0.359 1 3
+HETATM C  C08  . LYE L 1 1 . 1 LYE L C08  ? -1.163 -0.09  -0.449 1 4
+HETATM C  C01  . LYE L 1 1 . 1 LYE L C01  ? -0.383 -4.565 -1.553 1 5
+HETATM C  C03  . LYE L 1 1 . 1 LYE L C03  ? -1.19  -4.447 0.707  1 6
+HETATM C  C05  . LYE L 1 1 . 1 LYE L C05  ? -0.386 -2.463 -0.386 1 7
+HETATM C  C06  . LYE L 1 1 . 1 LYE L C06  ? -0.115 -3.213 -1.536 1 8
+HETATM C  C09  . LYE L 1 1 . 1 LYE L C09  ? -0.891 1.294  -0.424 1 9
+HETATM C  C10  . LYE L 1 1 . 1 LYE L C10  ? -1.911 2.187  -0.511 1 10
+HETATM C  C11  . LYE L 1 1 . 1 LYE L C11  ? -3.239 1.731  -0.626 1 11
+HETATM C  C13  . LYE L 1 1 . 1 LYE L C13  ? -3.511 0.349  -0.651 1 12
+HETATM C  C14  . LYE L 1 1 . 1 LYE L C14  ? -2.492 -0.545 -0.57  1 13
+HETATM C  C17  . LYE L 1 1 . 1 LYE L C17  ? 1.281  -0.545 -0.24  1 14
+HETATM C  C18  . LYE L 1 1 . 1 LYE L C18  ? 1.685  0.166  0.9    1 15
+HETATM C  C19  . LYE L 1 1 . 1 LYE L C19  ? 2.979  0.607  1.007  1 16
+HETATM C  C20  . LYE L 1 1 . 1 LYE L C20  ? 3.891  0.35   -0.014 1 17
+HETATM C  C21  . LYE L 1 1 . 1 LYE L C21  ? 3.495  -0.356 -1.147 1 18
+HETATM C  C22  . LYE L 1 1 . 1 LYE L C22  ? 2.205  -0.807 -1.262 1 19
+HETATM O  O12  . LYE L 1 1 . 1 LYE L O12  ? -4.158 2.537  -0.704 1 20
+HETATM O  O24  . LYE L 1 1 . 1 LYE L O24  ? 5.169  0.789  0.096  1 21
+HETATM O  O27  . LYE L 1 1 . 1 LYE L O27  ? -0.156 -2.33  3.055  1 22
+HETATM O  O28  . LYE L 1 1 . 1 LYE L O28  ? -1.735 -0.892 1.757  1 23
+HETATM O  O29  . LYE L 1 1 . 1 LYE L O29  ? -2.454 -2.831 2.888  1 24
+HETATM S  S26  . LYE L 1 1 . 1 LYE L S26  ? -1.275 -2.163 2.195  1 25
+HETATM BR BR3  . LYE L 1 1 . 1 LYE L BR3  ? -5.294 -0.261 -0.804 1 26
+HETATM BR BR4  . LYE L 1 1 . 1 LYE L BR4  ? -1.548 4.042  -0.477 1 27
+HETATM BR BR2  . LYE L 1 1 . 1 LYE L BR2  ? 4.741  -0.7   -2.528 1 28
+HETATM BR BR1  . LYE L 1 1 . 1 LYE L BR1  ? 3.526  1.566  2.542  1 29
+HETATM H  H021 . LYE L 1 1 . 1 LYE L H021 ? -1.131 -6.24  -0.456 1 30
+HETATM H  H011 . LYE L 1 1 . 1 LYE L H011 ? -0.174 -5.144 -2.439 1 31
+HETATM H  H031 . LYE L 1 1 . 1 LYE L H031 ? -1.609 -4.936 1.575  1 32
+HETATM H  H061 . LYE L 1 1 . 1 LYE L H061 ? 0.303  -2.733 -2.409 1 33
+HETATM H  H091 . LYE L 1 1 . 1 LYE L H091 ? 0.127  1.643  -0.335 1 34
+HETATM H  H141 . LYE L 1 1 . 1 LYE L H141 ? -2.7   -1.605 -0.589 1 35
+HETATM H  H181 . LYE L 1 1 . 1 LYE L H181 ? 0.978  0.366  1.692  1 36
+HETATM H  H221 . LYE L 1 1 . 1 LYE L H221 ? 1.9    -1.357 -2.139 1 37
+HETATM H  H241 . LYE L 1 1 . 1 LYE L H241 ? 5.767  0.158  0.521  1 38
+HETATM H  H3   . LYE L 1 1 . 1 LYE L H3   ? -2.728 -2.395 3.706  1 39
+#

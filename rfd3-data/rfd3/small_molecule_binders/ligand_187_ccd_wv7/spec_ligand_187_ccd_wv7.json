@@ -1,0 +1,10 @@
+{
+  "ligand_187_ccd_wv7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WV7.cif",
+    "ligand": "WV7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WV7": "ALL"
+    }
+  }
+}

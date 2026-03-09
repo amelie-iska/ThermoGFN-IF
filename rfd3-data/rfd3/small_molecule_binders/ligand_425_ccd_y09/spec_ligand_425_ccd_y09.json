@@ -1,0 +1,10 @@
+{
+  "ligand_425_ccd_y09": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Y09.cif",
+    "ligand": "Y09",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Y09": "ALL"
+    }
+  }
+}

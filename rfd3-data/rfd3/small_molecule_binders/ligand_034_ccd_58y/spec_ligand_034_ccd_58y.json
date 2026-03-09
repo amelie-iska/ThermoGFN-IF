@@ -1,0 +1,10 @@
+{
+  "ligand_034_ccd_58y": {
+    "input": "./data/rfd3/ccd_ligands/structures/58Y.cif",
+    "ligand": "58Y",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "58Y": "ALL"
+    }
+  }
+}

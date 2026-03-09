@@ -1,0 +1,10 @@
+{
+  "ligand_045_ccd_wla": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WLA.cif",
+    "ligand": "WLA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WLA": "ALL"
+    }
+  }
+}

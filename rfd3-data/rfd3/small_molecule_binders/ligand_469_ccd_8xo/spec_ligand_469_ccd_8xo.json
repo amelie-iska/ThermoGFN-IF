@@ -1,0 +1,10 @@
+{
+  "ligand_469_ccd_8xo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8XO.cif",
+    "ligand": "8XO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8XO": "ALL"
+    }
+  }
+}

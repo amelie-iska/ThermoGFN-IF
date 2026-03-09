@@ -1,0 +1,10 @@
+{
+  "ligand_543_ccd_j86": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/J86.cif",
+    "ligand": "J86",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "J86": "ALL"
+    }
+  }
+}

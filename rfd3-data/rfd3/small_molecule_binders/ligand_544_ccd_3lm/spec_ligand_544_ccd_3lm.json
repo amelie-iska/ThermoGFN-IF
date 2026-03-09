@@ -1,0 +1,10 @@
+{
+  "ligand_544_ccd_3lm": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/3LM.cif",
+    "ligand": "3LM",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3LM": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_279_ccd_15c": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/15C.cif",
+    "ligand": "15C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "15C": "ALL"
+    }
+  }
+}

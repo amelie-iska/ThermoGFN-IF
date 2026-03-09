@@ -1,0 +1,10 @@
+{
+  "ligand_083_ccd_uup": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UUP.cif",
+    "ligand": "UUP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UUP": "ALL"
+    }
+  }
+}

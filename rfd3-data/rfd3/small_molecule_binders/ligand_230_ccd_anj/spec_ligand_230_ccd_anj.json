@@ -1,0 +1,10 @@
+{
+  "ligand_230_ccd_anj": {
+    "input": "./data/rfd3/ccd_ligands/structures/ANJ.cif",
+    "ligand": "ANJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ANJ": "ALL"
+    }
+  }
+}

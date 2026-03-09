@@ -1,0 +1,10 @@
+{
+  "ligand_518_ccd_a1ahj": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1AHJ.cif",
+    "ligand": "A1AHJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1AHJ": "ALL"
+    }
+  }
+}

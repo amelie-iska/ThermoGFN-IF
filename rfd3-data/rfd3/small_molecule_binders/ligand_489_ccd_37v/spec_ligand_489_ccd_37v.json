@@ -1,0 +1,10 @@
+{
+  "ligand_489_ccd_37v": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/37V.cif",
+    "ligand": "37V",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "37V": "ALL"
+    }
+  }
+}

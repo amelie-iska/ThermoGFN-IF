@@ -1,0 +1,10 @@
+{
+  "ligand_485_ccd_d2z": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/D2Z.cif",
+    "ligand": "D2Z",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "D2Z": "ALL"
+    }
+  }
+}

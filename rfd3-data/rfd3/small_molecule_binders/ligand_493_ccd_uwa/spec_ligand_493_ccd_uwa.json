@@ -1,0 +1,10 @@
+{
+  "ligand_493_ccd_uwa": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UWA.cif",
+    "ligand": "UWA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UWA": "ALL"
+    }
+  }
+}

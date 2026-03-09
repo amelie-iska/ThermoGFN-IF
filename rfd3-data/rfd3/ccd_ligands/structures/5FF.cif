@@ -1,0 +1,81 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . 5FF L 1 1 . 1 5FF L C1  ? -2.976 -0.102 0.732  1 1
+HETATM C C2  . 5FF L 1 1 . 1 5FF L C2  ? -3.397 -1.433 0.101  1 2
+HETATM C C3  . 5FF L 1 1 . 1 5FF L C3  ? -2.442 -2.534 0.585  1 3
+HETATM C C5  . 5FF L 1 1 . 1 5FF L C5  ? -0.759 -0.722 0.283  1 4
+HETATM F F58 . 5FF L 1 1 . 1 5FF L F58 ? -2.32  -3.471 -1.613 1 5
+HETATM C C13 . 5FF L 1 1 . 1 5FF L C13 ? -2.612 -3.784 -0.281 1 6
+HETATM F F56 . 5FF L 1 1 . 1 5FF L F56 ? -1.739 -4.783 0.165  1 7
+HETATM F F57 . 5FF L 1 1 . 1 5FF L F57 ? -3.931 -4.241 -0.188 1 8
+HETATM C C7  . 5FF L 1 1 . 1 5FF L C7  ? -4.005 0.952  0.413  1 9
+HETATM C C8  . 5FF L 1 1 . 1 5FF L C8  ? -4.957 1.296  1.354  1 10
+HETATM C C9  . 5FF L 1 1 . 1 5FF L C9  ? -5.901 2.263  1.061  1 11
+HETATM C C10 . 5FF L 1 1 . 1 5FF L C10 ? -5.892 2.886  -0.172 1 12
+HETATM C C32 . 5FF L 1 1 . 1 5FF L C32 ? -6.921 3.939  -0.492 1 13
+HETATM C C33 . 5FF L 1 1 . 1 5FF L C33 ? -6.389 5.313  -0.08  1 14
+HETATM C C11 . 5FF L 1 1 . 1 5FF L C11 ? -4.939 2.543  -1.113 1 15
+HETATM C C12 . 5FF L 1 1 . 1 5FF L C12 ? -3.993 1.579  -0.819 1 16
+HETATM N N6  . 5FF L 1 1 . 1 5FF L N6  ? -1.671 0.308  0.192  1 17
+HETATM N N4  . 5FF L 1 1 . 1 5FF L N4  ? -1.07  -2.025 0.461  1 18
+HETATM N N19 . 5FF L 1 1 . 1 5FF L N19 ? 0.113  -2.763 0.502  1 19
+HETATM C C18 . 5FF L 1 1 . 1 5FF L C18 ? 1.126  -1.954 0.357  1 20
+HETATM C C17 . 5FF L 1 1 . 1 5FF L C17 ? 0.625  -0.637 0.213  1 21
+HETATM C C20 . 5FF L 1 1 . 1 5FF L C20 ? 1.417  0.584  0.024  1 22
+HETATM O O22 . 5FF L 1 1 . 1 5FF L O22 ? 0.86   1.66   -0.088 1 23
+HETATM N N21 . 5FF L 1 1 . 1 5FF L N21 ? 2.763  0.514  -0.024 1 24
+HETATM C C23 . 5FF L 1 1 . 1 5FF L C23 ? 3.553  1.732  -0.212 1 25
+HETATM C C24 . 5FF L 1 1 . 1 5FF L C24 ? 5.019  1.382  -0.231 1 26
+HETATM C C25 . 5FF L 1 1 . 1 5FF L C25 ? 5.639  1.072  -1.427 1 27
+HETATM C C26 . 5FF L 1 1 . 1 5FF L C26 ? 6.983  0.75   -1.447 1 28
+HETATM C C27 . 5FF L 1 1 . 1 5FF L C27 ? 7.709  0.739  -0.265 1 29
+HETATM O O30 . 5FF L 1 1 . 1 5FF L O30 ? 9.031  0.424  -0.282 1 30
+HETATM C C31 . 5FF L 1 1 . 1 5FF L C31 ? 9.716  0.433  0.972  1 31
+HETATM C C28 . 5FF L 1 1 . 1 5FF L C28 ? 7.085  1.052  0.934  1 32
+HETATM C C29 . 5FF L 1 1 . 1 5FF L C29 ? 5.742  1.378  0.947  1 33
+HETATM H H1  . 5FF L 1 1 . 1 5FF L H1  ? -2.901 -0.22  1.813  1 34
+HETATM H H2  . 5FF L 1 1 . 1 5FF L H2  ? -4.416 -1.675 0.403  1 35
+HETATM H H3  . 5FF L 1 1 . 1 5FF L H3  ? -3.346 -1.355 -0.985 1 36
+HETATM H H4  . 5FF L 1 1 . 1 5FF L H4  ? -2.654 -2.775 1.627  1 37
+HETATM H H5  . 5FF L 1 1 . 1 5FF L H5  ? -4.964 0.809  2.318  1 38
+HETATM H H6  . 5FF L 1 1 . 1 5FF L H6  ? -6.645 2.531  1.796  1 39
+HETATM H H7  . 5FF L 1 1 . 1 5FF L H7  ? -7.126 3.935  -1.563 1 40
+HETATM H H8  . 5FF L 1 1 . 1 5FF L H8  ? -7.84  3.727  0.054  1 41
+HETATM H H9  . 5FF L 1 1 . 1 5FF L H9  ? -7.134 6.075  -0.311 1 42
+HETATM H H10 . 5FF L 1 1 . 1 5FF L H10 ? -6.185 5.318  0.991  1 43
+HETATM H H11 . 5FF L 1 1 . 1 5FF L H11 ? -5.47  5.526  -0.626 1 44
+HETATM H H12 . 5FF L 1 1 . 1 5FF L H12 ? -4.932 3.03   -2.077 1 45
+HETATM H H13 . 5FF L 1 1 . 1 5FF L H13 ? -3.248 1.311  -1.554 1 46
+HETATM H H14 . 5FF L 1 1 . 1 5FF L H14 ? -1.758 0.631  -0.76  1 47
+HETATM H H15 . 5FF L 1 1 . 1 5FF L H15 ? 2.168  -2.24  0.348  1 48
+HETATM H H16 . 5FF L 1 1 . 1 5FF L H16 ? 3.207  -0.344 0.065  1 49
+HETATM H H17 . 5FF L 1 1 . 1 5FF L H17 ? 3.28   2.201  -1.158 1 50
+HETATM H H18 . 5FF L 1 1 . 1 5FF L H18 ? 3.355  2.424  0.607  1 51
+HETATM H H19 . 5FF L 1 1 . 1 5FF L H19 ? 5.073  1.081  -2.347 1 52
+HETATM H H20 . 5FF L 1 1 . 1 5FF L H20 ? 7.466  0.507  -2.381 1 53
+HETATM H H21 . 5FF L 1 1 . 1 5FF L H21 ? 10.761 0.164  0.817  1 54
+HETATM H H22 . 5FF L 1 1 . 1 5FF L H22 ? 9.659  1.429  1.411  1 55
+HETATM H H23 . 5FF L 1 1 . 1 5FF L H23 ? 9.252  -0.288 1.645  1 56
+HETATM H H24 . 5FF L 1 1 . 1 5FF L H24 ? 7.648  1.043  1.855  1 57
+HETATM H H25 . 5FF L 1 1 . 1 5FF L H25 ? 5.257  1.625  1.88   1 58
+#

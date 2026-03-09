@@ -1,0 +1,10 @@
+{
+  "ligand_385_ccd_t6w": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/T6W.cif",
+    "ligand": "T6W",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "T6W": "ALL"
+    }
+  }
+}

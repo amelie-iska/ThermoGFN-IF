@@ -1,0 +1,10 @@
+{
+  "ligand_277_ccd_a1bs8": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BS8.cif",
+    "ligand": "A1BS8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BS8": "ALL"
+    }
+  }
+}

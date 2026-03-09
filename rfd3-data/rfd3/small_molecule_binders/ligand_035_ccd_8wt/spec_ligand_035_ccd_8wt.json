@@ -1,0 +1,10 @@
+{
+  "ligand_035_ccd_8wt": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8WT.cif",
+    "ligand": "8WT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8WT": "ALL"
+    }
+  }
+}

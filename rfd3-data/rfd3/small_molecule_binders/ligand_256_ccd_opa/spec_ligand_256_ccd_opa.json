@@ -1,0 +1,10 @@
+{
+  "ligand_256_ccd_opa": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OPA.cif",
+    "ligand": "OPA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OPA": "ALL"
+    }
+  }
+}

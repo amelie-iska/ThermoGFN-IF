@@ -1,0 +1,10 @@
+{
+  "ligand_245_ccd_kxg": {
+    "input": "./data/rfd3/ccd_ligands/structures/KXG.cif",
+    "ligand": "KXG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KXG": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_012_ccd_ui7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UI7.cif",
+    "ligand": "UI7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UI7": "ALL"
+    }
+  }
+}

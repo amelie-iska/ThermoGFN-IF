@@ -1,0 +1,10 @@
+{
+  "ligand_154_ccd_zve": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZVE.cif",
+    "ligand": "ZVE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZVE": "ALL"
+    }
+  }
+}

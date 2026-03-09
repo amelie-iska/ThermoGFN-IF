@@ -1,0 +1,10 @@
+{
+  "ligand_393_ccd_8xu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8XU.cif",
+    "ligand": "8XU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8XU": "ALL"
+    }
+  }
+}

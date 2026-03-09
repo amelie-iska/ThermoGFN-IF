@@ -1,0 +1,86 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C4  . 3IU L 1 1 . 1 3IU L C4  ? 3.309   1.107  0.849  1 1
+HETATM C C14 . 3IU L 1 1 . 1 3IU L C14 ? -6.428  -2.243 -1.196 1 2
+HETATM C C5  . 3IU L 1 1 . 1 3IU L C5  ? 2.268   1.998  0.664  1 3
+HETATM C C6  . 3IU L 1 1 . 1 3IU L C6  ? 2.282   2.877  -0.419 1 4
+HETATM C C11 . 3IU L 1 1 . 1 3IU L C11 ? -2.114  0.27   -0.599 1 5
+HETATM C C7  . 3IU L 1 1 . 1 3IU L C7  ? -0.072  2.02   1.081  1 6
+HETATM C C8  . 3IU L 1 1 . 1 3IU L C8  ? -0.306  1.891  -0.402 1 7
+HETATM C C9  . 3IU L 1 1 . 1 3IU L C9  ? 0.029   3.207  -1.101 1 8
+HETATM C C10 . 3IU L 1 1 . 1 3IU L C10 ? 1.434   2.077  3.006  1 9
+HETATM C C12 . 3IU L 1 1 . 1 3IU L C12 ? -3.528  -0.068 -0.844 1 10
+HETATM C C13 . 3IU L 1 1 . 1 3IU L C13 ? -5.391  -1.154 -1.102 1 11
+HETATM N N1  . 3IU L 1 1 . 1 3IU L N1  ? 1.192   2.031  1.562  1 12
+HETATM N N2  . 3IU L 1 1 . 1 3IU L N2  ? -1.711  1.555  -0.645 1 13
+HETATM C C3  . 3IU L 1 1 . 1 3IU L C3  ? 4.379   1.096  -0.048 1 14
+HETATM N N3  . 3IU L 1 1 . 1 3IU L N3  ? -4.498  0.776  -1.122 1 15
+HETATM C C1  . 3IU L 1 1 . 1 3IU L C1  ? 3.343   2.862  -1.311 1 16
+HETATM C C15 . 3IU L 1 1 . 1 3IU L C15 ? -7.568  -1.933 -0.261 1 17
+HETATM C C16 . 3IU L 1 1 . 1 3IU L C16 ? -7.535  -2.388 1.044  1 18
+HETATM C C17 . 3IU L 1 1 . 1 3IU L C17 ? -8.581  -2.104 1.902  1 19
+HETATM C C18 . 3IU L 1 1 . 1 3IU L C18 ? -9.66   -1.365 1.455  1 20
+HETATM C C19 . 3IU L 1 1 . 1 3IU L C19 ? -9.693  -0.909 0.15   1 21
+HETATM C C2  . 3IU L 1 1 . 1 3IU L C2  ? 4.391   1.984  -1.125 1 22
+HETATM C C20 . 3IU L 1 1 . 1 3IU L C20 ? -8.645  -1.189 -0.706 1 23
+HETATM C C21 . 3IU L 1 1 . 1 3IU L C21 ? 5.46    0.176  0.136  1 24
+HETATM C C22 . 3IU L 1 1 . 1 3IU L C22 ? 6.347   -0.578 0.287  1 25
+HETATM C C23 . 3IU L 1 1 . 1 3IU L C23 ? 7.459   -1.524 0.476  1 26
+HETATM C C24 . 3IU L 1 1 . 1 3IU L C24 ? 6.927   -2.959 0.419  1 27
+HETATM C C25 . 3IU L 1 1 . 1 3IU L C25 ? 8.1     -3.935 0.538  1 28
+HETATM C C26 . 3IU L 1 1 . 1 3IU L C26 ? 9.605   -2.369 -0.478 1 29
+HETATM C C27 . 3IU L 1 1 . 1 3IU L C27 ? 8.493   -1.329 -0.637 1 30
+HETATM N N4  . 3IU L 1 1 . 1 3IU L N4  ? -5.599  0.129  -1.274 1 31
+HETATM N N5  . 3IU L 1 1 . 1 3IU L N5  ? -4.082  -1.322 -0.831 1 32
+HETATM O O1  . 3IU L 1 1 . 1 3IU L O1  ? 1.249   3.743  -0.597 1 33
+HETATM O O2  . 3IU L 1 1 . 1 3IU L O2  ? -1.013  2.113  1.841  1 34
+HETATM O O3  . 3IU L 1 1 . 1 3IU L O3  ? -1.312  -0.611 -0.356 1 35
+HETATM O O4  . 3IU L 1 1 . 1 3IU L O4  ? 9.038   -3.68  -0.509 1 36
+HETATM H H1  . 3IU L 1 1 . 1 3IU L H1  ? 3.298   0.426  1.688  1 37
+HETATM H H2  . 3IU L 1 1 . 1 3IU L H2  ? -6.802  -2.302 -2.218 1 38
+HETATM H H3  . 3IU L 1 1 . 1 3IU L H3  ? -5.979  -3.197 -0.918 1 39
+HETATM H H4  . 3IU L 1 1 . 1 3IU L H4  ? 0.329   1.1    -0.8   1 40
+HETATM H H5  . 3IU L 1 1 . 1 3IU L H5  ? 0.129   3.03   -2.172 1 41
+HETATM H H6  . 3IU L 1 1 . 1 3IU L H6  ? -0.775  3.922  -0.927 1 42
+HETATM H H7  . 3IU L 1 1 . 1 3IU L H7  ? 1.497   3.116  3.33   1 43
+HETATM H H8  . 3IU L 1 1 . 1 3IU L H8  ? 0.614   1.583  3.528  1 44
+HETATM H H9  . 3IU L 1 1 . 1 3IU L H9  ? 2.369   1.567  3.234  1 45
+HETATM H H10 . 3IU L 1 1 . 1 3IU L H10 ? -2.351  2.258  -0.839 1 46
+HETATM H H12 . 3IU L 1 1 . 1 3IU L H12 ? 3.354   3.545  -2.147 1 47
+HETATM H H13 . 3IU L 1 1 . 1 3IU L H13 ? -6.692  -2.965 1.394  1 48
+HETATM H H14 . 3IU L 1 1 . 1 3IU L H14 ? -8.556  -2.46  2.922  1 49
+HETATM H H15 . 3IU L 1 1 . 1 3IU L H15 ? -10.478 -1.143 2.125  1 50
+HETATM H H16 . 3IU L 1 1 . 1 3IU L H16 ? -10.536 -0.332 -0.199 1 51
+HETATM H H17 . 3IU L 1 1 . 1 3IU L H17 ? 5.219   1.977  -1.819 1 52
+HETATM H H18 . 3IU L 1 1 . 1 3IU L H18 ? -8.669  -0.83  -1.724 1 53
+HETATM H H19 . 3IU L 1 1 . 1 3IU L H19 ? 7.928   -1.346 1.444  1 54
+HETATM H H20 . 3IU L 1 1 . 1 3IU L H20 ? 6.232   -3.123 1.243  1 55
+HETATM H H21 . 3IU L 1 1 . 1 3IU L H21 ? 6.413   -3.119 -0.529 1 56
+HETATM H H22 . 3IU L 1 1 . 1 3IU L H22 ? 8.587   -3.802 1.504  1 57
+HETATM H H23 . 3IU L 1 1 . 1 3IU L H23 ? 7.732   -4.958 0.455  1 58
+HETATM H H24 . 3IU L 1 1 . 1 3IU L H24 ? 10.321  -2.263 -1.293 1 59
+HETATM H H25 . 3IU L 1 1 . 1 3IU L H25 ? 10.113  -2.215 0.474  1 60
+HETATM H H26 . 3IU L 1 1 . 1 3IU L H26 ? 8.011   -1.457 -1.607 1 61
+HETATM H H27 . 3IU L 1 1 . 1 3IU L H27 ? 8.917   -0.328 -0.57  1 62
+HETATM H H28 . 3IU L 1 1 . 1 3IU L H28 ? -3.624  -2.16  -0.66  1 63
+#

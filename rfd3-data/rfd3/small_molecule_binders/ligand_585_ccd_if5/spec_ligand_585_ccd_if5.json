@@ -1,0 +1,10 @@
+{
+  "ligand_585_ccd_if5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IF5.cif",
+    "ligand": "IF5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IF5": "ALL"
+    }
+  }
+}

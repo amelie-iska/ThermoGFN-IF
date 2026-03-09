@@ -1,0 +1,63 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C2  . FKG L 1 1 . 1 FKG L C2  ? 2.228  1.62   -0.049 1 1
+HETATM C C3  . FKG L 1 1 . 1 FKG L C3  ? 0.114  -0.741 1.7    1 2
+HETATM C C5  . FKG L 1 1 . 1 FKG L C5  ? -1.967 -1.613 0.616  1 3
+HETATM C C7  . FKG L 1 1 . 1 FKG L C7  ? -3.708 -0.139 -0.109 1 4
+HETATM C C9  . FKG L 1 1 . 1 FKG L C9  ? -1.739 0.751  0.923  1 5
+HETATM C C10 . FKG L 1 1 . 1 FKG L C10 ? -5.057 0.074  -0.748 1 6
+HETATM C C11 . FKG L 1 1 . 1 FKG L C11 ? 0.094  -0.194 3.129  1 7
+HETATM C C12 . FKG L 1 1 . 1 FKG L C12 ? 2.63   2.993  -0.522 1 8
+HETATM C C13 . FKG L 1 1 . 1 FKG L C13 ? 4.137  0.078  -1.044 1 9
+HETATM C C15 . FKG L 1 1 . 1 FKG L C15 ? 4.195  -3.599 -0.498 1 10
+HETATM O O1  . FKG L 1 1 . 1 FKG L O1  ? 4.797  0.932  -1.609 1 11
+HETATM C C1  . FKG L 1 1 . 1 FKG L C1  ? 2.921  0.423  -0.308 1 12
+HETATM N N2  . FKG L 1 1 . 1 FKG L N2  ? 4.502  -1.225 -1.073 1 13
+HETATM C C14 . FKG L 1 1 . 1 FKG L C14 ? 3.752  -2.16  -0.438 1 14
+HETATM N N3  . FKG L 1 1 . 1 FKG L N3  ? 2.668  -1.872 0.221  1 15
+HETATM C C   . FKG L 1 1 . 1 FKG L C   ? 2.211  -0.614 0.318  1 16
+HETATM N N1  . FKG L 1 1 . 1 FKG L N1  ? 1.138  -0.04  0.923  1 17
+HETATM N N   . FKG L 1 1 . 1 FKG L N   ? 1.18   1.339  0.676  1 18
+HETATM O O   . FKG L 1 1 . 1 FKG L O   ? 3.486  3.599  0.449  1 19
+HETATM C C4  . FKG L 1 1 . 1 FKG L C4  ? -1.234 -0.529 1.062  1 20
+HETATM C C8  . FKG L 1 1 . 1 FKG L C8  ? -2.976 0.946  0.337  1 21
+HETATM F F2  . FKG L 1 1 . 1 FKG L F2  ? -5.653 1.218  -0.207 1 22
+HETATM F F1  . FKG L 1 1 . 1 FKG L F1  ? -4.899 0.238  -2.128 1 23
+HETATM F F   . FKG L 1 1 . 1 FKG L F   ? -5.87  -1.037 -0.5   1 24
+HETATM C C6  . FKG L 1 1 . 1 FKG L C6  ? -3.204 -1.418 0.031  1 25
+HETATM H H1  . FKG L 1 1 . 1 FKG L H1  ? 0.342  -1.807 1.723  1 26
+HETATM H H2  . FKG L 1 1 . 1 FKG L H2  ? -1.57  -2.612 0.721  1 27
+HETATM H H3  . FKG L 1 1 . 1 FKG L H3  ? -1.167 1.598  1.271  1 28
+HETATM H H4  . FKG L 1 1 . 1 FKG L H4  ? -0.668 -0.716 3.707  1 29
+HETATM H H5  . FKG L 1 1 . 1 FKG L H5  ? 1.069  -0.347 3.591  1 30
+HETATM H H6  . FKG L 1 1 . 1 FKG L H6  ? -0.133 0.872  3.106  1 31
+HETATM H H7  . FKG L 1 1 . 1 FKG L H7  ? 3.16   2.909  -1.471 1 32
+HETATM H H8  . FKG L 1 1 . 1 FKG L H8  ? 1.74   3.607  -0.656 1 33
+HETATM H H9  . FKG L 1 1 . 1 FKG L H9  ? 4.857  -3.811 0.342  1 34
+HETATM H H10 . FKG L 1 1 . 1 FKG L H10 ? 3.323  -4.251 -0.446 1 35
+HETATM H H11 . FKG L 1 1 . 1 FKG L H11 ? 4.727  -3.777 -1.433 1 36
+HETATM H H12 . FKG L 1 1 . 1 FKG L H12 ? 5.303  -1.492 -1.551 1 37
+HETATM H H13 . FKG L 1 1 . 1 FKG L H13 ? 3.785  4.487  0.209  1 38
+HETATM H H14 . FKG L 1 1 . 1 FKG L H14 ? -3.371 1.945  0.229  1 39
+HETATM H H15 . FKG L 1 1 . 1 FKG L H15 ? -3.776 -2.265 -0.318 1 40
+#

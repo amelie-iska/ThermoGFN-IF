@@ -1,0 +1,10 @@
+{
+  "ligand_158_ccd_1r9": {
+    "input": "./data/rfd3/ccd_ligands/structures/1R9.cif",
+    "ligand": "1R9",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1R9": "ALL"
+    }
+  }
+}

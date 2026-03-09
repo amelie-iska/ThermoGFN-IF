@@ -1,0 +1,10 @@
+{
+  "ligand_010_ccd_42c": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/42C.cif",
+    "ligand": "42C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "42C": "ALL"
+    }
+  }
+}

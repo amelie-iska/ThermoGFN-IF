@@ -1,0 +1,68 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C10 . RJJ L 1 1 . 1 RJJ L C10 ? 4.297  -0.874 0.197  1 1
+HETATM C C13 . RJJ L 1 1 . 1 RJJ L C13 ? 3.21   1.632  -0.231 1 2
+HETATM C C15 . RJJ L 1 1 . 1 RJJ L C15 ? -1.182 -1.748 -1.428 1 3
+HETATM C C17 . RJJ L 1 1 . 1 RJJ L C17 ? 0.454  -2.842 -0.057 1 4
+HETATM C C01 . RJJ L 1 1 . 1 RJJ L C01 ? -3.641 2.397  0.031  1 5
+HETATM C C02 . RJJ L 1 1 . 1 RJJ L C02 ? -2.996 1.648  -1.137 1 6
+HETATM C C03 . RJJ L 1 1 . 1 RJJ L C03 ? -2.246 0.425  -0.606 1 7
+HETATM C C04 . RJJ L 1 1 . 1 RJJ L C04 ? -1.181 0.887  0.355  1 8
+HETATM C C07 . RJJ L 1 1 . 1 RJJ L C07 ? 1.149  1.026  1.054  1 9
+HETATM C C08 . RJJ L 1 1 . 1 RJJ L C08 ? 2.509  0.689  0.498  1 10
+HETATM C C09 . RJJ L 1 1 . 1 RJJ L C09 ? 3.056  -0.561 0.717  1 11
+HETATM C C11 . RJJ L 1 1 . 1 RJJ L C11 ? 4.995  0.066  -0.538 1 12
+HETATM C C12 . RJJ L 1 1 . 1 RJJ L C12 ? 4.452  1.319  -0.752 1 13
+HETATM C C14 . RJJ L 1 1 . 1 RJJ L C14 ? -1.569 -0.298 -1.79  1 14
+HETATM C C18 . RJJ L 1 1 . 1 RJJ L C18 ? -1.708 -2.214 0.86   1 15
+HETATM C C19 . RJJ L 1 1 . 1 RJJ L C19 ? -2.501 -1.052 1.254  1 16
+HETATM N N06 . RJJ L 1 1 . 1 RJJ L N06 ? 0.12   0.674  0.073  1 17
+HETATM N N16 . RJJ L 1 1 . 1 RJJ L N16 ? -0.636 -1.858 -0.098 1 18
+HETATM N N20 . RJJ L 1 1 . 1 RJJ L N20 ? -3.174 -0.42  0.102  1 19
+HETATM O O05 . RJJ L 1 1 . 1 RJJ L O05 ? -1.494 1.451  1.382  1 20
+HETATM H H1  . RJJ L 1 1 . 1 RJJ L H1  ? 4.724  -1.851 0.368  1 21
+HETATM H H2  . RJJ L 1 1 . 1 RJJ L H2  ? 2.783  2.609  -0.403 1 22
+HETATM H H3  . RJJ L 1 1 . 1 RJJ L H3  ? -2.069 -2.377 -1.497 1 23
+HETATM H H4  . RJJ L 1 1 . 1 RJJ L H4  ? -0.442 -2.104 -2.144 1 24
+HETATM H H5  . RJJ L 1 1 . 1 RJJ L H5  ? 0.081  -3.812 -0.385 1 25
+HETATM H H6  . RJJ L 1 1 . 1 RJJ L H6  ? 1.259  -2.52  -0.718 1 26
+HETATM H H7  . RJJ L 1 1 . 1 RJJ L H7  ? 0.832  -2.924 0.962  1 27
+HETATM H H8  . RJJ L 1 1 . 1 RJJ L H8  ? -4.176 3.268  -0.348 1 28
+HETATM H H9  . RJJ L 1 1 . 1 RJJ L H9  ? -4.34  1.737  0.544  1 29
+HETATM H H10 . RJJ L 1 1 . 1 RJJ L H10 ? -2.868 2.72   0.727  1 30
+HETATM H H11 . RJJ L 1 1 . 1 RJJ L H11 ? -3.77  1.325  -1.834 1 31
+HETATM H H12 . RJJ L 1 1 . 1 RJJ L H12 ? -2.297 2.308  -1.65  1 32
+HETATM H H13 . RJJ L 1 1 . 1 RJJ L H13 ? 0.983  0.463  1.973  1 33
+HETATM H H14 . RJJ L 1 1 . 1 RJJ L H14 ? 1.098  2.093  1.267  1 34
+HETATM H H15 . RJJ L 1 1 . 1 RJJ L H15 ? 2.512  -1.294 1.295  1 35
+HETATM H H16 . RJJ L 1 1 . 1 RJJ L H16 ? 5.966  -0.178 -0.945 1 36
+HETATM H H17 . RJJ L 1 1 . 1 RJJ L H17 ? 4.999  2.055  -1.322 1 37
+HETATM H H18 . RJJ L 1 1 . 1 RJJ L H18 ? -0.671 0.249  -2.074 1 38
+HETATM H H19 . RJJ L 1 1 . 1 RJJ L H19 ? -2.257 -0.315 -2.636 1 39
+HETATM H H20 . RJJ L 1 1 . 1 RJJ L H20 ? -1.256 -2.653 1.749  1 40
+HETATM H H21 . RJJ L 1 1 . 1 RJJ L H21 ? -2.366 -2.95  0.397  1 41
+HETATM H H22 . RJJ L 1 1 . 1 RJJ L H22 ? -3.256 -1.367 1.975  1 42
+HETATM H H23 . RJJ L 1 1 . 1 RJJ L H23 ? -1.846 -0.32  1.725  1 43
+HETATM H H24 . RJJ L 1 1 . 1 RJJ L H24 ? 0.374  0.287  -0.779 1 44
+HETATM H H26 . RJJ L 1 1 . 1 RJJ L H26 ? -3.571 -1.116 -0.511 1 45
+#

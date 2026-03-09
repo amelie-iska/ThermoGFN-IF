@@ -1,0 +1,10 @@
+{
+  "ligand_578_ccd_1sl": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1SL.cif",
+    "ligand": "1SL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1SL": "ALL"
+    }
+  }
+}

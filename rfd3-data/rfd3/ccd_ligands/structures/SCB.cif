@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C1   . SCB L 1 1 . 1 SCB L C1   ? -6.293 -0.882 -2.649 1 1
+HETATM O  O1   . SCB L 1 1 . 1 SCB L O1   ? -5.623 -0.91  -1.387 1 2
+HETATM C  C2   . SCB L 1 1 . 1 SCB L C2   ? -6.179 0.145  -0.6   1 3
+HETATM C  C3   . SCB L 1 1 . 1 SCB L C3   ? -5.502 0.17   0.772  1 4
+HETATM N  N1   . SCB L 1 1 . 1 SCB L N1   ? -4.086 0.511  0.611  1 5
+HETATM C  C4   . SCB L 1 1 . 1 SCB L C4   ? -3.71  1.778  0.646  1 6
+HETATM O  O2   . SCB L 1 1 . 1 SCB L O2   ? -4.516 2.676  0.81   1 7
+HETATM C  C5   . SCB L 1 1 . 1 SCB L C5   ? -2.275 2.055  0.479  1 8
+HETATM C  C6   . SCB L 1 1 . 1 SCB L C6   ? -1.619 3.252  0.474  1 9
+HETATM C  C7   . SCB L 1 1 . 1 SCB L C7   ? -0.219 3.289  0.295  1 10
+HETATM C  C8   . SCB L 1 1 . 1 SCB L C8   ? 0.567  4.427  0.263  1 11
+HETATM C  C9   . SCB L 1 1 . 1 SCB L C9   ? 1.884  4.002  0.071  1 12
+HETATM C  C10  . SCB L 1 1 . 1 SCB L C10  ? 1.858  2.639  -0.017 1 13
+HETATM O  O3   . SCB L 1 1 . 1 SCB L O3   ? 0.587  2.22   0.12   1 14
+HETATM C  C11  . SCB L 1 1 . 1 SCB L C11  ? 3.032  1.768  -0.227 1 15
+HETATM C  C12  . SCB L 1 1 . 1 SCB L C12  ? 4.042  2.156  -1.113 1 16
+HETATM C  C13  . SCB L 1 1 . 1 SCB L C13  ? 5.14   1.344  -1.311 1 17
+HETATM C  C14  . SCB L 1 1 . 1 SCB L C14  ? 5.25   0.143  -0.635 1 18
+HETATM CL CL1  . SCB L 1 1 . 1 SCB L CL1  ? 6.636  -0.871 -0.89  1 19
+HETATM C  C15  . SCB L 1 1 . 1 SCB L C15  ? 4.248  -0.257 0.255  1 20
+HETATM C  C16  . SCB L 1 1 . 1 SCB L C16  ? 3.138  0.561  0.463  1 21
+HETATM C  C17  . SCB L 1 1 . 1 SCB L C17  ? 4.367  -1.54  0.976  1 22
+HETATM O  O4   . SCB L 1 1 . 1 SCB L O4   ? 5.336  -2.25  0.797  1 23
+HETATM O  O5   . SCB L 1 1 . 1 SCB L O5   ? 3.4    -1.923 1.833  1 24
+HETATM S  S1   . SCB L 1 1 . 1 SCB L S1   ? -1.621 0.403  0.285  1 25
+HETATM C  C18  . SCB L 1 1 . 1 SCB L C18  ? -3.159 -0.492 0.43   1 26
+HETATM N  N2   . SCB L 1 1 . 1 SCB L N2   ? -3.359 -1.79  0.373  1 27
+HETATM C  C19  . SCB L 1 1 . 1 SCB L C19  ? -2.302 -2.637 0.178  1 28
+HETATM C  C20  . SCB L 1 1 . 1 SCB L C20  ? -2.179 -3.795 0.951  1 29
+HETATM C  C21  . SCB L 1 1 . 1 SCB L C21  ? -1.111 -4.644 0.749  1 30
+HETATM C  C22  . SCB L 1 1 . 1 SCB L C22  ? -0.163 -4.352 -0.216 1 31
+HETATM C  C23  . SCB L 1 1 . 1 SCB L C23  ? -0.279 -3.207 -0.985 1 32
+HETATM C  C24  . SCB L 1 1 . 1 SCB L C24  ? -1.344 -2.351 -0.797 1 33
+HETATM H  H11  . SCB L 1 1 . 1 SCB L H11  ? -5.9   -1.673 -3.287 1 34
+HETATM H  H12A . SCB L 1 1 . 1 SCB L H12A ? -7.361 -1.034 -2.497 1 35
+HETATM H  H13A . SCB L 1 1 . 1 SCB L H13A ? -6.128 0.085  -3.126 1 36
+HETATM H  H21A . SCB L 1 1 . 1 SCB L H21A ? -6.016 1.098  -1.103 1 37
+HETATM H  H22A . SCB L 1 1 . 1 SCB L H22A ? -7.249 -0.021 -0.474 1 38
+HETATM H  H31  . SCB L 1 1 . 1 SCB L H31  ? -5.986 0.915  1.402  1 39
+HETATM H  H32  . SCB L 1 1 . 1 SCB L H32  ? -5.589 -0.812 1.237  1 40
+HETATM H  H6   . SCB L 1 1 . 1 SCB L H6   ? -2.171 4.17   0.606  1 41
+HETATM H  H8   . SCB L 1 1 . 1 SCB L H8   ? 0.228  5.447  0.373  1 42
+HETATM H  H9   . SCB L 1 1 . 1 SCB L H9   ? 2.758  4.633  0.0    1 43
+HETATM H  H12  . SCB L 1 1 . 1 SCB L H12  ? 3.962  3.093  -1.645 1 44
+HETATM H  H13  . SCB L 1 1 . 1 SCB L H13  ? 5.916  1.648  -1.997 1 45
+HETATM H  H16  . SCB L 1 1 . 1 SCB L H16  ? 2.361  0.258  1.149  1 46
+HETATM H  HO5  . SCB L 1 1 . 1 SCB L HO5  ? 3.478  -2.763 2.305  1 47
+HETATM H  H20  . SCB L 1 1 . 1 SCB L H20  ? -2.918 -4.024 1.704  1 48
+HETATM H  H21  . SCB L 1 1 . 1 SCB L H21  ? -1.014 -5.539 1.345  1 49
+HETATM H  H22  . SCB L 1 1 . 1 SCB L H22  ? 0.671  -5.02  -0.37  1 50
+HETATM H  H23  . SCB L 1 1 . 1 SCB L H23  ? 0.465  -2.985 -1.736 1 51
+HETATM H  H24  . SCB L 1 1 . 1 SCB L H24  ? -1.433 -1.458 -1.398 1 52
+#

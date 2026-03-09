@@ -1,0 +1,91 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N  N1  . GXF L 1 1 . 1 GXF L N1  ? -9.102 0.458  -2.361 1 1
+HETATM C  C7  . GXF L 1 1 . 1 GXF L C7  ? -1.893 -0.62  2.309  1 2
+HETATM C  C8  . GXF L 1 1 . 1 GXF L C8  ? 0.692  -1.679 1.804  1 3
+HETATM N  N2  . GXF L 1 1 . 1 GXF L N2  ? -7.672 1.207  -0.707 1 4
+HETATM C  C9  . GXF L 1 1 . 1 GXF L C9  ? 1.986  -1.61  0.991  1 5
+HETATM O  O1  . GXF L 1 1 . 1 GXF L O1  ? -4.329 1.531  3.644  1 6
+HETATM C  C1  . GXF L 1 1 . 1 GXF L C1  ? -8.788 1.305  -1.398 1 7
+HETATM C  C5  . GXF L 1 1 . 1 GXF L C5  ? -4.87  0.528  0.649  1 8
+HETATM C  C6  . GXF L 1 1 . 1 GXF L C6  ? -2.961 0.418  1.957  1 9
+HETATM N  N3  . GXF L 1 1 . 1 GXF L N3  ? -6.058 -1.569 -2.02  1 10
+HETATM C  C4  . GXF L 1 1 . 1 GXF L C4  ? -5.175 -1.245 -1.121 1 11
+HETATM C  C3  . GXF L 1 1 . 1 GXF L C3  ? -7.092 -0.695 -1.973 1 12
+HETATM C  C2  . GXF L 1 1 . 1 GXF L C2  ? -6.803 0.233  -0.957 1 13
+HETATM N  N4  . GXF L 1 1 . 1 GXF L N4  ? -5.589 -0.14  -0.439 1 14
+HETATM CL CL  . GXF L 1 1 . 1 GXF L CL  ? 4.801  5.497  0.161  1 15
+HETATM C  C18 . GXF L 1 1 . 1 GXF L C18 ? 5.265  3.876  -0.255 1 16
+HETATM C  C17 . GXF L 1 1 . 1 GXF L C17 ? 5.842  3.618  -1.486 1 17
+HETATM C  C16 . GXF L 1 1 . 1 GXF L C16 ? 6.212  2.332  -1.821 1 18
+HETATM C  C19 . GXF L 1 1 . 1 GXF L C19 ? 5.061  2.847  0.649  1 19
+HETATM C  C20 . GXF L 1 1 . 1 GXF L C20 ? 5.428  1.558  0.323  1 20
+HETATM C  C15 . GXF L 1 1 . 1 GXF L C15 ? 6.004  1.292  -0.917 1 21
+HETATM C  C14 . GXF L 1 1 . 1 GXF L C14 ? 6.4    -0.093 -1.273 1 22
+HETATM C  C13 . GXF L 1 1 . 1 GXF L C13 ? 6.192  -1.132 -0.369 1 23
+HETATM C  C21 . GXF L 1 1 . 1 GXF L C21 ? 6.976  -0.359 -2.514 1 24
+HETATM C  C22 . GXF L 1 1 . 1 GXF L C22 ? 7.344  -1.648 -2.843 1 25
+HETATM C  C23 . GXF L 1 1 . 1 GXF L C23 ? 7.143  -2.679 -1.945 1 26
+HETATM C  C12 . GXF L 1 1 . 1 GXF L C12 ? 6.565  -2.424 -0.708 1 27
+HETATM N  N6  . GXF L 1 1 . 1 GXF L N6  ? 6.363  -3.471 0.199  1 28
+HETATM C  C11 . GXF L 1 1 . 1 GXF L C11 ? 5.199  -3.533 0.931  1 29
+HETATM N  N7  . GXF L 1 1 . 1 GXF L N7  ? 5.06   -4.438 1.858  1 30
+HETATM N  N5  . GXF L 1 1 . 1 GXF L N5  ? 4.183  -2.64  0.683  1 31
+HETATM C  C10 . GXF L 1 1 . 1 GXF L C10 ? 2.944  -2.706 1.462  1 32
+HETATM S  S   . GXF L 1 1 . 1 GXF L S   ? -0.443 -0.379 1.245  1 33
+HETATM O  O   . GXF L 1 1 . 1 GXF L O   ? -3.472 0.164  0.637  1 34
+HETATM C  C24 . GXF L 1 1 . 1 GXF L C24 ? -4.146 0.304  2.936  1 35
+HETATM C  C25 . GXF L 1 1 . 1 GXF L C25 ? -5.365 0.016  2.026  1 36
+HETATM O  O2  . GXF L 1 1 . 1 GXF L O2  ? -6.51  0.751  2.461  1 37
+HETATM C  C   . GXF L 1 1 . 1 GXF L C   ? -8.295 -0.549 -2.683 1 38
+HETATM N  N   . GXF L 1 1 . 1 GXF L N   ? -8.633 -1.432 -3.693 1 39
+HETATM H  H1  . GXF L 1 1 . 1 GXF L H1  ? -1.602 -0.501 3.352  1 40
+HETATM H  H2  . GXF L 1 1 . 1 GXF L H2  ? -2.295 -1.621 2.155  1 41
+HETATM H  H3  . GXF L 1 1 . 1 GXF L H3  ? 0.226  -2.654 1.663  1 42
+HETATM H  H4  . GXF L 1 1 . 1 GXF L H4  ? 0.919  -1.534 2.861  1 43
+HETATM H  H5  . GXF L 1 1 . 1 GXF L H5  ? 1.76   -1.755 -0.065 1 44
+HETATM H  H6  . GXF L 1 1 . 1 GXF L H6  ? 2.452  -0.635 1.132  1 45
+HETATM H  H7  . GXF L 1 1 . 1 GXF L H7  ? -5.062 1.516  4.275  1 46
+HETATM H  H8  . GXF L 1 1 . 1 GXF L H8  ? -9.472 2.109  -1.17  1 47
+HETATM H  H9  . GXF L 1 1 . 1 GXF L H9  ? -4.985 1.61   0.577  1 48
+HETATM H  H10 . GXF L 1 1 . 1 GXF L H10 ? -2.535 1.42   2.005  1 49
+HETATM H  H11 . GXF L 1 1 . 1 GXF L H11 ? -4.25  -1.773 -0.941 1 50
+HETATM H  H12 . GXF L 1 1 . 1 GXF L H12 ? 6.002  4.425  -2.186 1 51
+HETATM H  H13 . GXF L 1 1 . 1 GXF L H13 ? 6.662  2.132  -2.782 1 52
+HETATM H  H14 . GXF L 1 1 . 1 GXF L H14 ? 4.615  3.055  1.61   1 53
+HETATM H  H15 . GXF L 1 1 . 1 GXF L H15 ? 5.269  0.756  1.029  1 54
+HETATM H  H16 . GXF L 1 1 . 1 GXF L H16 ? 5.743  -0.932 0.592  1 55
+HETATM H  H17 . GXF L 1 1 . 1 GXF L H17 ? 7.134  0.444  -3.218 1 56
+HETATM H  H18 . GXF L 1 1 . 1 GXF L H18 ? 7.79   -1.852 -3.806 1 57
+HETATM H  H19 . GXF L 1 1 . 1 GXF L H19 ? 7.432  -3.686 -2.208 1 58
+HETATM H  H20 . GXF L 1 1 . 1 GXF L H20 ? 7.044  -4.152 0.312  1 59
+HETATM H  H21 . GXF L 1 1 . 1 GXF L H21 ? 5.804  -5.017 2.086  1 60
+HETATM H  H22 . GXF L 1 1 . 1 GXF L H22 ? 4.287  -1.966 -0.007 1 61
+HETATM H  H23 . GXF L 1 1 . 1 GXF L H23 ? 3.17   -2.561 2.519  1 62
+HETATM H  H24 . GXF L 1 1 . 1 GXF L H24 ? 2.478  -3.681 1.321  1 63
+HETATM H  H25 . GXF L 1 1 . 1 GXF L H25 ? -3.986 -0.518 3.634  1 64
+HETATM H  H26 . GXF L 1 1 . 1 GXF L H26 ? -5.58  -1.052 1.989  1 65
+HETATM H  H27 . GXF L 1 1 . 1 GXF L H27 ? -6.857 0.467  3.318  1 66
+HETATM H  H28 . GXF L 1 1 . 1 GXF L H28 ? -8.036 -2.163 -3.918 1 67
+HETATM H  H29 . GXF L 1 1 . 1 GXF L H29 ? -9.467 -1.321 -4.176 1 68
+#

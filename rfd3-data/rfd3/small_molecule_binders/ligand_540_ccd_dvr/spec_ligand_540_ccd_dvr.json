@@ -1,0 +1,10 @@
+{
+  "ligand_540_ccd_dvr": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DVR.cif",
+    "ligand": "DVR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DVR": "ALL"
+    }
+  }
+}

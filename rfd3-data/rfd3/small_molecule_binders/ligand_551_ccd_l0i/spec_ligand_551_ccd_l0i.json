@@ -1,0 +1,10 @@
+{
+  "ligand_551_ccd_l0i": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/L0I.cif",
+    "ligand": "L0I",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "L0I": "ALL"
+    }
+  }
+}

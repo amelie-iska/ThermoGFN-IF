@@ -1,0 +1,70 @@
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=rfd3.configs is not available.
+  warnings.warn(
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+08:24:34 DEBUG transforms: Debug mode is on
+08:24:35 INFO rfd3.engine: [rank: 0] Low memory mode enabled.
+08:24:35 INFO rfd3.engine: [rank: 0] Outputs will be written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_066_ccd_asf.
+08:24:35 INFO rfd3.engine: [rank: 0] Prevalidating design specification for example: spec_ligand_066_ccd_asf_ligand_066_ccd_asf
+08:24:35 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+08:24:35 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+08:24:35 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+08:24:35 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+08:24:35 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+08:24:35 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+08:24:35 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+08:24:35 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory (0 total).
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_z.0.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_z.0.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_z.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_z.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_z.0.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_z.0.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_z.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_z.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:38 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+08:24:39 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+08:24:39 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+08:24:39 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+08:24:39 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+08:24:39 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+08:24:39 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+08:24:39 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+08:24:39 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+08:28:37 INFO rfd3.engine: [rank: 0] Finished inference batch in 237.78 seconds.
+08:28:37 INFO rfd3.engine: [rank: 0] Outputs for spec_ligand_066_ccd_asf_ligand_066_ccd_asf_2_model_0 written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_066_ccd_asf/spec_ligand_066_ccd_asf_ligand_066_ccd_asf_2_model_0.
+08:28:37 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+08:28:37 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+08:28:37 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+08:28:37 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+08:28:37 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+08:28:37 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+08:28:37 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+08:28:37 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+08:32:46 INFO rfd3.engine: [rank: 0] Finished inference batch in 248.86 seconds.
+08:32:46 INFO rfd3.engine: [rank: 0] Outputs for spec_ligand_066_ccd_asf_ligand_066_ccd_asf_0_model_0 written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_066_ccd_asf/spec_ligand_066_ccd_asf_ligand_066_ccd_asf_0_model_0.
+08:32:46 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+08:32:46 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+08:32:46 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+08:32:46 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+08:32:46 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+08:32:46 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+08:32:46 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+08:32:46 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+08:36:40 INFO rfd3.engine: [rank: 0] Finished inference batch in 233.03 seconds.
+08:36:40 INFO rfd3.engine: [rank: 0] Outputs for spec_ligand_066_ccd_asf_ligand_066_ccd_asf_1_model_0 written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_066_ccd_asf/spec_ligand_066_ccd_asf_ligand_066_ccd_asf_1_model_0.

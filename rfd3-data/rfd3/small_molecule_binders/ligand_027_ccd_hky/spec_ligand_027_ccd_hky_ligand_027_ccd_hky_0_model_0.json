@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.04742169380187988,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.305720090866089,
+        "non_loop_fraction": 0.620253164556962,
+        "loop_fraction": 0.379746835443038,
+        "helix_fraction": 0.33544303797468356,
+        "sheet_fraction": 0.2848101265822785,
+        "num_ss_elements": 11,
+        "radius_of_gyration": 14.311906999384851,
+        "alanine_content": 0.22151898734177214,
+        "glycine_content": 0.04430379746835443,
+        "num_residues": 158,
+        "diffused_com": [
+            3.4163053035736084,
+            -0.42327556014060974,
+            0.41794586181640625
+        ],
+        "fixed_com": [
+            -0.001953125,
+            0.0003004807804245502,
+            9.272648458136246e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/HKY.cif",
+        "length": "20-400",
+        "ligand": "HKY",
+        "extra": {
+            "example": "ligand_027_ccd_hky",
+            "task_name": "spec_ligand_027_ccd_hky_ligand_027_ccd_hky",
+            "sampled_contig": "158",
+            "num_tokens_in": 159,
+            "num_residues_in": 159,
+            "num_chains": 2,
+            "num_atoms": 803,
+            "num_residues": 161,
+            "example_id": "spec_ligand_027_ccd_hky_ligand_027_ccd_hky_0"
+        },
+        "select_fixed_atoms": {
+            "HKY": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

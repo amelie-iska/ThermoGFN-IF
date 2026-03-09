@@ -1,0 +1,64 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM F F26  . YQY L 1 1 . 1 YQY L F26  ? 0.206  -3.743 -0.741 1 1
+HETATM C C9   . YQY L 1 1 . 1 YQY L C9   ? 1.201  -3.0   -0.207 1 2
+HETATM C C10  . YQY L 1 1 . 1 YQY L C10  ? 2.1    -3.578 0.673  1 3
+HETATM F F22  . YQY L 1 1 . 1 YQY L F22  ? 1.98   -4.884 0.996  1 4
+HETATM C C11  . YQY L 1 1 . 1 YQY L C11  ? 3.125  -2.821 1.224  1 5
+HETATM C C12  . YQY L 1 1 . 1 YQY L C12  ? 3.258  -1.489 0.903  1 6
+HETATM C C13  . YQY L 1 1 . 1 YQY L C13  ? 2.358  -0.892 0.016  1 7
+HETATM C C16  . YQY L 1 1 . 1 YQY L C16  ? 2.496  0.533  -0.331 1 8
+HETATM O O18  . YQY L 1 1 . 1 YQY L O18  ? 1.644  1.08   -1.006 1 9
+HETATM N N17  . YQY L 1 1 . 1 YQY L N17  ? 3.566  1.231  0.098  1 10
+HETATM C C21  . YQY L 1 1 . 1 YQY L C21  ? 4.001  2.635  0.057  1 11
+HETATM C C20  . YQY L 1 1 . 1 YQY L C20  ? 5.45   2.132  0.116  1 12
+HETATM O O23  . YQY L 1 1 . 1 YQY L O23  ? 6.02   1.837  -1.161 1 13
+HETATM C C24  . YQY L 1 1 . 1 YQY L C24  ? 6.368  2.967  1.011  1 14
+HETATM N N25  . YQY L 1 1 . 1 YQY L N25  ? 7.721  2.397  0.991  1 15
+HETATM C C19  . YQY L 1 1 . 1 YQY L C19  ? 4.81   0.924  0.82   1 16
+HETATM C C8   . YQY L 1 1 . 1 YQY L C8   ? 1.324  -1.658 -0.546 1 17
+HETATM N N7   . YQY L 1 1 . 1 YQY L N7   ? 0.426  -1.076 -1.434 1 18
+HETATM C C5   . YQY L 1 1 . 1 YQY L C5   ? -0.813 -0.617 -0.975 1 19
+HETATM C C6   . YQY L 1 1 . 1 YQY L C6   ? -1.669 0.06   -1.837 1 20
+HETATM F F15  . YQY L 1 1 . 1 YQY L F15  ? -1.305 0.277  -3.12  1 21
+HETATM C C1   . YQY L 1 1 . 1 YQY L C1   ? -2.893 0.512  -1.38  1 22
+HETATM C C4   . YQY L 1 1 . 1 YQY L C4   ? -1.194 -0.842 0.341  1 23
+HETATM C C3   . YQY L 1 1 . 1 YQY L C3   ? -2.419 -0.388 0.792  1 24
+HETATM C C2   . YQY L 1 1 . 1 YQY L C2   ? -3.266 0.29   -0.065 1 25
+HETATM I I14  . YQY L 1 1 . 1 YQY L I14  ? -5.121 0.976  0.624  1 26
+HETATM H H11  . YQY L 1 1 . 1 YQY L H11  ? 3.822  -3.28  1.91   1 27
+HETATM H H12  . YQY L 1 1 . 1 YQY L H12  ? 4.057  -0.906 1.335  1 28
+HETATM H H211 . YQY L 1 1 . 1 YQY L H211 ? 3.754  3.139  -0.878 1 29
+HETATM H H212 . YQY L 1 1 . 1 YQY L H212 ? 3.704  3.207  0.936  1 30
+HETATM H H191 . YQY L 1 1 . 1 YQY L H191 ? 4.726  1.045  1.9    1 31
+HETATM H H192 . YQY L 1 1 . 1 YQY L H192 ? 5.253  -0.031 0.535  1 32
+HETATM H H23  . YQY L 1 1 . 1 YQY L H23  ? 6.933  1.521  -1.12  1 33
+HETATM H H241 . YQY L 1 1 . 1 YQY L H241 ? 6.4    3.993  0.641  1 34
+HETATM H H242 . YQY L 1 1 . 1 YQY L H242 ? 5.985  2.961  2.031  1 35
+HETATM H H251 . YQY L 1 1 . 1 YQY L H251 ? 8.073  2.333  0.048  1 36
+HETATM H H252 . YQY L 1 1 . 1 YQY L H252 ? 8.347  2.931  1.575  1 37
+HETATM H H7   . YQY L 1 1 . 1 YQY L H7   ? 0.658  -0.988 -2.372 1 38
+HETATM H H4   . YQY L 1 1 . 1 YQY L H4   ? -0.534 -1.372 1.012  1 39
+HETATM H H1   . YQY L 1 1 . 1 YQY L H1   ? -3.558 1.039  -2.048 1 40
+HETATM H H3   . YQY L 1 1 . 1 YQY L H3   ? -2.715 -0.563 1.816  1 41
+#

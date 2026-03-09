@@ -1,0 +1,10 @@
+{
+  "ligand_575_ccd_9zx": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/9ZX.cif",
+    "ligand": "9ZX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9ZX": "ALL"
+    }
+  }
+}

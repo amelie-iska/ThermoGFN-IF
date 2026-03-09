@@ -1,0 +1,10 @@
+{
+  "ligand_009_ccd_gt0": {
+    "input": "./data/rfd3/ccd_ligands/structures/GT0.cif",
+    "ligand": "GT0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GT0": "ALL"
+    }
+  }
+}

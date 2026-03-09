@@ -1,0 +1,10 @@
+{
+  "ligand_225_ccd_7a1": {
+    "input": "./data/rfd3/ccd_ligands/structures/7A1.cif",
+    "ligand": "7A1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7A1": "ALL"
+    }
+  }
+}

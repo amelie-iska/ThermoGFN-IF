@@ -1,0 +1,10 @@
+{
+  "ligand_428_ccd_att": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ATT.cif",
+    "ligand": "ATT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ATT": "ALL"
+    }
+  }
+}

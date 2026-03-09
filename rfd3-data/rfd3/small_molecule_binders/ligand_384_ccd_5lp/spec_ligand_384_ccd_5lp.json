@@ -1,0 +1,10 @@
+{
+  "ligand_384_ccd_5lp": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5LP.cif",
+    "ligand": "5LP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5LP": "ALL"
+    }
+  }
+}

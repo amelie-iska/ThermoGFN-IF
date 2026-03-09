@@ -1,0 +1,10 @@
+{
+  "ligand_242_ccd_mpe": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/MPE.cif",
+    "ligand": "MPE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MPE": "ALL"
+    }
+  }
+}

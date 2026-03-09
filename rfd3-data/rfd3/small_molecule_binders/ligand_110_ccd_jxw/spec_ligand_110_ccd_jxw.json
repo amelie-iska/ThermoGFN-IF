@@ -1,0 +1,10 @@
+{
+  "ligand_110_ccd_jxw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/JXW.cif",
+    "ligand": "JXW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "JXW": "ALL"
+    }
+  }
+}

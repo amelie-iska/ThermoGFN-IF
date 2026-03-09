@@ -1,0 +1,10 @@
+{
+  "ligand_036_ccd_a1io3": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1IO3.cif",
+    "ligand": "A1IO3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IO3": "ALL"
+    }
+  }
+}

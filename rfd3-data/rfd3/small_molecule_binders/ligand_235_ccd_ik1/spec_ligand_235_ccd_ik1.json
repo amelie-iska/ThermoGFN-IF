@@ -1,0 +1,10 @@
+{
+  "ligand_235_ccd_ik1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IK1.cif",
+    "ligand": "IK1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IK1": "ALL"
+    }
+  }
+}

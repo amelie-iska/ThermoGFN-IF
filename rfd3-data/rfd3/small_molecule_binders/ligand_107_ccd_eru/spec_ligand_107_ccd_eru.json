@@ -1,0 +1,10 @@
+{
+  "ligand_107_ccd_eru": {
+    "input": "./data/rfd3/ccd_ligands/structures/ERU.cif",
+    "ligand": "ERU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ERU": "ALL"
+    }
+  }
+}

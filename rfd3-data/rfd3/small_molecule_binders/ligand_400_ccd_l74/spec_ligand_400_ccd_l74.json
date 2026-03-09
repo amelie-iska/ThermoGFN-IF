@@ -1,0 +1,10 @@
+{
+  "ligand_400_ccd_l74": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/L74.cif",
+    "ligand": "L74",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "L74": "ALL"
+    }
+  }
+}

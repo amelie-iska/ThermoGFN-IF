@@ -1,0 +1,10 @@
+{
+  "ligand_275_ccd_n42": {
+    "input": "./data/rfd3/ccd_ligands/structures/N42.cif",
+    "ligand": "N42",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "N42": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_244_ccd_a1b19": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1B19.cif",
+    "ligand": "A1B19",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1B19": "ALL"
+    }
+  }
+}

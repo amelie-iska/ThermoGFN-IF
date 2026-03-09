@@ -1,0 +1,10 @@
+{
+  "ligand_507_ccd_u0n": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/U0N.cif",
+    "ligand": "U0N",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "U0N": "ALL"
+    }
+  }
+}

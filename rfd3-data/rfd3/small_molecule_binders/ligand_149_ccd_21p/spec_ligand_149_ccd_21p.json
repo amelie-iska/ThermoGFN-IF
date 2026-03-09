@@ -1,0 +1,10 @@
+{
+  "ligand_149_ccd_21p": {
+    "input": "./data/rfd3/ccd_ligands/structures/21P.cif",
+    "ligand": "21P",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "21P": "ALL"
+    }
+  }
+}

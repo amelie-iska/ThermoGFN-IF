@@ -1,0 +1,10 @@
+{
+  "ligand_289_ccd_uv3": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UV3.cif",
+    "ligand": "UV3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UV3": "ALL"
+    }
+  }
+}

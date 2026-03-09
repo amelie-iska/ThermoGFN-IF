@@ -1,0 +1,10 @@
+{
+  "ligand_424_ccd_5et": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5ET.cif",
+    "ligand": "5ET",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5ET": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_238_ccd_9ps": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/9PS.cif",
+    "ligand": "9PS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9PS": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_367_ccd_2yo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/2YO.cif",
+    "ligand": "2YO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2YO": "ALL"
+    }
+  }
+}

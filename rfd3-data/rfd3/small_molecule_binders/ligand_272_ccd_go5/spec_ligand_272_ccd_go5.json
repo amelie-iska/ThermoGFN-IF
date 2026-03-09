@@ -1,0 +1,10 @@
+{
+  "ligand_272_ccd_go5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/GO5.cif",
+    "ligand": "GO5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GO5": "ALL"
+    }
+  }
+}

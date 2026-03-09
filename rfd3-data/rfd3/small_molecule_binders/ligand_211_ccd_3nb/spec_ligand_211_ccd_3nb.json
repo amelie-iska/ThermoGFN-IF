@@ -1,0 +1,10 @@
+{
+  "ligand_211_ccd_3nb": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/3NB.cif",
+    "ligand": "3NB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3NB": "ALL"
+    }
+  }
+}

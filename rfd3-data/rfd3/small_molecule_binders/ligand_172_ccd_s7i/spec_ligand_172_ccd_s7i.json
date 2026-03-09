@@ -1,0 +1,10 @@
+{
+  "ligand_172_ccd_s7i": {
+    "input": "./data/rfd3/ccd_ligands/structures/S7I.cif",
+    "ligand": "S7I",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "S7I": "ALL"
+    }
+  }
+}

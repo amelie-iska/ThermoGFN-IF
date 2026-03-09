@@ -1,0 +1,10 @@
+{
+  "ligand_396_ccd_qgi": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/QGI.cif",
+    "ligand": "QGI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QGI": "ALL"
+    }
+  }
+}

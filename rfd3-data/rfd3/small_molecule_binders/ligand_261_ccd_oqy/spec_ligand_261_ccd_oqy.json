@@ -1,0 +1,10 @@
+{
+  "ligand_261_ccd_oqy": {
+    "input": "./data/rfd3/ccd_ligands/structures/OQY.cif",
+    "ligand": "OQY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OQY": "ALL"
+    }
+  }
+}

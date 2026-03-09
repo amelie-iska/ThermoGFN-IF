@@ -1,0 +1,10 @@
+{
+  "ligand_053_ccd_wor": {
+    "input": "./data/rfd3/ccd_ligands/structures/WOR.cif",
+    "ligand": "WOR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WOR": "ALL"
+    }
+  }
+}

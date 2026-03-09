@@ -1,0 +1,10 @@
+{
+  "ligand_438_ccd_4bp": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4BP.cif",
+    "ligand": "4BP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4BP": "ALL"
+    }
+  }
+}

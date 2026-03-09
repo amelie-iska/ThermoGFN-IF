@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . FPS L 1 1 . 1 FPS L C1   ? -1.729 -2.961 -0.594 1 1
+HETATM S S1   . FPS L 1 1 . 1 FPS L S1   ? -2.863 -2.104 0.533  1 2
+HETATM C C2   . FPS L 1 1 . 1 FPS L C2   ? -0.375 -2.301 -0.541 1 3
+HETATM C C3   . FPS L 1 1 . 1 FPS L C3   ? 0.663  -2.971 -0.105 1 4
+HETATM C C4   . FPS L 1 1 . 1 FPS L C4   ? 0.481  -4.353 0.469  1 5
+HETATM C C5   . FPS L 1 1 . 1 FPS L C5   ? 2.039  -2.36  -0.177 1 6
+HETATM C C6   . FPS L 1 1 . 1 FPS L C6   ? 2.37   -1.69  1.158  1 7
+HETATM C C7   . FPS L 1 1 . 1 FPS L C7   ? 3.745  -1.079 1.086  1 8
+HETATM C C8   . FPS L 1 1 . 1 FPS L C8   ? 3.901  0.209  1.273  1 9
+HETATM C C10  . FPS L 1 1 . 1 FPS L C10  ? 5.286  0.799  1.337  1 10
+HETATM C C9   . FPS L 1 1 . 1 FPS L C9   ? 2.694  1.099  1.425  1 11
+HETATM C C11  . FPS L 1 1 . 1 FPS L C11  ? 5.681  1.322  -0.045 1 12
+HETATM C C12  . FPS L 1 1 . 1 FPS L C12  ? 7.067  1.913  0.019  1 13
+HETATM C C13  . FPS L 1 1 . 1 FPS L C13  ? 7.999  1.486  -0.797 1 14
+HETATM C C14  . FPS L 1 1 . 1 FPS L C14  ? 7.686  0.405  -1.799 1 15
+HETATM C C15  . FPS L 1 1 . 1 FPS L C15  ? 9.384  2.076  -0.733 1 16
+HETATM P PA   . FPS L 1 1 . 1 FPS L PA   ? -3.31  -0.313 -0.511 1 17
+HETATM O O1A  . FPS L 1 1 . 1 FPS L O1A  ? -2.061 0.445  -0.746 1 18
+HETATM O O2A  . FPS L 1 1 . 1 FPS L O2A  ? -3.994 -0.672 -1.923 1 19
+HETATM O O3A  . FPS L 1 1 . 1 FPS L O3A  ? -4.324 0.58   0.365  1 20
+HETATM P PB   . FPS L 1 1 . 1 FPS L PB   ? -5.029 2.011  0.147  1 21
+HETATM O O1B  . FPS L 1 1 . 1 FPS L O1B  ? -3.947 3.182  0.37   1 22
+HETATM O O2B  . FPS L 1 1 . 1 FPS L O2B  ? -5.565 2.091  -1.23  1 23
+HETATM O O3B  . FPS L 1 1 . 1 FPS L O3B  ? -6.232 2.183  1.202  1 24
+HETATM H H11  . FPS L 1 1 . 1 FPS L H11  ? -1.637 -4.004 -0.293 1 25
+HETATM H H12A . FPS L 1 1 . 1 FPS L H12A ? -2.119 -2.909 -1.611 1 26
+HETATM H H2   . FPS L 1 1 . 1 FPS L H2   ? -0.26  -1.276 -0.862 1 27
+HETATM H H41  . FPS L 1 1 . 1 FPS L H41  ? 0.484  -5.085 -0.339 1 28
+HETATM H H42  . FPS L 1 1 . 1 FPS L H42  ? 1.297  -4.57  1.158  1 29
+HETATM H H43  . FPS L 1 1 . 1 FPS L H43  ? -0.468 -4.403 1.002  1 30
+HETATM H H51  . FPS L 1 1 . 1 FPS L H51  ? 2.772  -3.139 -0.384 1 31
+HETATM H H52  . FPS L 1 1 . 1 FPS L H52  ? 2.065  -1.616 -0.973 1 32
+HETATM H H61  . FPS L 1 1 . 1 FPS L H61  ? 1.636  -0.91  1.365  1 33
+HETATM H H62  . FPS L 1 1 . 1 FPS L H62  ? 2.344  -2.434 1.954  1 34
+HETATM H H7   . FPS L 1 1 . 1 FPS L H7   ? 4.603  -1.702 0.88   1 35
+HETATM H H101 . FPS L 1 1 . 1 FPS L H101 ? 5.298  1.62   2.054  1 36
+HETATM H H102 . FPS L 1 1 . 1 FPS L H102 ? 5.994  0.032  1.651  1 37
+HETATM H H91  . FPS L 1 1 . 1 FPS L H91  ? 2.372  1.1    2.466  1 38
+HETATM H H92  . FPS L 1 1 . 1 FPS L H92  ? 2.952  2.114  1.123  1 39
+HETATM H H93  . FPS L 1 1 . 1 FPS L H93  ? 1.887  0.727  0.795  1 40
+HETATM H H111 . FPS L 1 1 . 1 FPS L H111 ? 5.669  0.501  -0.762 1 41
+HETATM H H112 . FPS L 1 1 . 1 FPS L H112 ? 4.974  2.09   -0.359 1 42
+HETATM H H12  . FPS L 1 1 . 1 FPS L H12  ? 7.291  2.687  0.737  1 43
+HETATM H H141 . FPS L 1 1 . 1 FPS L H141 ? 6.89   0.744  -2.463 1 44
+HETATM H H142 . FPS L 1 1 . 1 FPS L H142 ? 8.578  0.184  -2.385 1 45
+HETATM H H143 . FPS L 1 1 . 1 FPS L H143 ? 7.363  -0.494 -1.275 1 46
+HETATM H H151 . FPS L 1 1 . 1 FPS L H151 ? 9.991  1.503  -0.032 1 47
+HETATM H H152 . FPS L 1 1 . 1 FPS L H152 ? 9.84   2.04   -1.722 1 48
+HETATM H H153 . FPS L 1 1 . 1 FPS L H153 ? 9.322  3.112  -0.399 1 49
+HETATM H H2A  . FPS L 1 1 . 1 FPS L H2A  ? -4.819 -1.17  -1.845 1 50
+HETATM H H1B  . FPS L 1 1 . 1 FPS L H1B  ? -3.553 3.19   1.253  1 51
+HETATM H H3B  . FPS L 1 1 . 1 FPS L H3B  ? -6.703 3.024  1.128  1 52
+#

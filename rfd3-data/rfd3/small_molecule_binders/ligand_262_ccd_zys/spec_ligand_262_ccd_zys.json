@@ -1,0 +1,10 @@
+{
+  "ligand_262_ccd_zys": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZYS.cif",
+    "ligand": "ZYS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZYS": "ALL"
+    }
+  }
+}

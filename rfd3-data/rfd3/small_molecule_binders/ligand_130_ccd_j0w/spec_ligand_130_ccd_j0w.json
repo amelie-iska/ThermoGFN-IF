@@ -1,0 +1,10 @@
+{
+  "ligand_130_ccd_j0w": {
+    "input": "./data/rfd3/ccd_ligands/structures/J0W.cif",
+    "ligand": "J0W",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "J0W": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_017_ccd_a1axn": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1AXN.cif",
+    "ligand": "A1AXN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1AXN": "ALL"
+    }
+  }
+}

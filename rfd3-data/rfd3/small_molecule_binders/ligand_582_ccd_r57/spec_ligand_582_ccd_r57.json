@@ -1,0 +1,10 @@
+{
+  "ligand_582_ccd_r57": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/R57.cif",
+    "ligand": "R57",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "R57": "ALL"
+    }
+  }
+}

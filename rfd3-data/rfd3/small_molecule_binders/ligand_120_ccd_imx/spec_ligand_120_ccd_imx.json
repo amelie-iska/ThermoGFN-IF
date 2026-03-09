@@ -1,0 +1,10 @@
+{
+  "ligand_120_ccd_imx": {
+    "input": "./data/rfd3/ccd_ligands/structures/IMX.cif",
+    "ligand": "IMX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IMX": "ALL"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# RFdiffusion3 ligand reference list built from local foundry example structures.
+# Format:
+#   name input_path ligand_code
+#
+# Note:
+# - This list excludes obvious ions/waters and uses ligands present in bundled
+#   example PDBs under models/foundry/models/rfd3/docs/input_pdbs.
+# - Paths are repo-root relative.
+
+iai ./models/foundry/models/rfd3/docs/input_pdbs/IAI.pdb IAI
+oqo ./models/foundry/models/rfd3/docs/input_pdbs/7v11.pdb OQO
+cit ./models/foundry/models/rfd3/docs/input_pdbs/7v11.pdb CIT
+nai ./models/foundry/models/rfd3/docs/input_pdbs/M0255_1mg5.pdb NAI
+hem ./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1bfr_C2.pdb HEM
+dxc ./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1e3v_C2.pdb DXC
+ncd ./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1j79_C2.pdb NCD
+oro ./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1j79_C2.pdb ORO
+kcx ./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1j79_C2.pdb KCX

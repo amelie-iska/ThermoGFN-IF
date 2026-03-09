@@ -1,0 +1,10 @@
+{
+  "ligand_152_ccd_uqa": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UQA.cif",
+    "ligand": "UQA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UQA": "ALL"
+    }
+  }
+}

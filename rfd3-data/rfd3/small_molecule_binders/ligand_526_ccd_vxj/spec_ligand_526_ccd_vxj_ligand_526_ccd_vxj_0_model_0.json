@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.09258699417114258,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.1978838443756104,
+        "non_loop_fraction": 0.5735849056603773,
+        "loop_fraction": 0.42641509433962266,
+        "helix_fraction": 0.33584905660377357,
+        "sheet_fraction": 0.23773584905660378,
+        "num_ss_elements": 18,
+        "radius_of_gyration": 16.81174491520843,
+        "alanine_content": 0.2528301886792453,
+        "glycine_content": 0.07169811320754717,
+        "num_residues": 265,
+        "diffused_com": [
+            -2.856311082839966,
+            1.3814138174057007,
+            -3.791290521621704
+        ],
+        "fixed_com": [
+            0.0005651620449498296,
+            -0.0009765625,
+            -0.000244140625
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/VXJ.cif",
+        "length": "20-400",
+        "ligand": "VXJ",
+        "extra": {
+            "example": "ligand_526_ccd_vxj",
+            "task_name": "spec_ligand_526_ccd_vxj_ligand_526_ccd_vxj",
+            "sampled_contig": "265",
+            "num_tokens_in": 266,
+            "num_residues_in": 266,
+            "num_chains": 2,
+            "num_atoms": 1351,
+            "num_residues": 268,
+            "example_id": "spec_ligand_526_ccd_vxj_ligand_526_ccd_vxj_0"
+        },
+        "select_fixed_atoms": {
+            "VXJ": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

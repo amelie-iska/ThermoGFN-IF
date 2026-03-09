@@ -1,0 +1,10 @@
+{
+  "ligand_245_ccd_1v6": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1V6.cif",
+    "ligand": "1V6",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1V6": "ALL"
+    }
+  }
+}

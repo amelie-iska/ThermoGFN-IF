@@ -1,0 +1,10 @@
+{
+  "ligand_027_ccd_hky": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/HKY.cif",
+    "ligand": "HKY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HKY": "ALL"
+    }
+  }
+}

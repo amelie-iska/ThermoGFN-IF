@@ -1,0 +1,10 @@
+{
+  "ligand_070_ccd_18n": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/18N.cif",
+    "ligand": "18N",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "18N": "ALL"
+    }
+  }
+}

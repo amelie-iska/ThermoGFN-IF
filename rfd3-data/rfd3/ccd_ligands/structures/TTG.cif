@@ -1,0 +1,80 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C25  . TTG L 1 1 . 1 TTG L C25  ? -2.333 0.621  -3.917 1 1
+HETATM C C31  . TTG L 1 1 . 1 TTG L C31  ? -3.223 0.716  -5.158 1 2
+HETATM C C21  . TTG L 1 1 . 1 TTG L C21  ? -1.003 -0.034 -4.291 1 3
+HETATM O O24  . TTG L 1 1 . 1 TTG L O24  ? -1.246 -1.345 -4.804 1 4
+HETATM C C16  . TTG L 1 1 . 1 TTG L C16  ? -0.127 -0.127 -3.069 1 5
+HETATM C C20  . TTG L 1 1 . 1 TTG L C20  ? -0.312 0.795  -5.342 1 6
+HETATM C C15  . TTG L 1 1 . 1 TTG L C15  ? 1.228  -0.212 -3.198 1 7
+HETATM C C17  . TTG L 1 1 . 1 TTG L C17  ? -0.695 -0.121 -1.792 1 8
+HETATM O O23  . TTG L 1 1 . 1 TTG L O23  ? -0.025 0.303  -6.408 1 9
+HETATM O O22  . TTG L 1 1 . 1 TTG L O22  ? -0.015 2.08   -5.095 1 10
+HETATM C C14  . TTG L 1 1 . 1 TTG L C14  ? 2.03   -0.297 -2.047 1 11
+HETATM C C19  . TTG L 1 1 . 1 TTG L C19  ? 1.861  -0.213 -4.565 1 12
+HETATM C C13  . TTG L 1 1 . 1 TTG L C13  ? 0.112  -0.212 -0.677 1 13
+HETATM O O18  . TTG L 1 1 . 1 TTG L O18  ? 3.243  -0.373 -2.158 1 14
+HETATM N N12  . TTG L 1 1 . 1 TTG L N12  ? 1.468  -0.296 -0.821 1 15
+HETATM C C9   . TTG L 1 1 . 1 TTG L C9   ? -0.241 -0.231 0.761  1 16
+HETATM C C11  . TTG L 1 1 . 1 TTG L C11  ? 2.079  -0.375 0.511  1 17
+HETATM C C8   . TTG L 1 1 . 1 TTG L C8   ? 0.947  -0.331 1.504  1 18
+HETATM N N10  . TTG L 1 1 . 1 TTG L N10  ? -1.417 -0.172 1.367  1 19
+HETATM C C7   . TTG L 1 1 . 1 TTG L C7   ? 0.909  -0.369 2.863  1 20
+HETATM C C5   . TTG L 1 1 . 1 TTG L C5   ? -1.517 -0.206 2.696  1 21
+HETATM C C6   . TTG L 1 1 . 1 TTG L C6   ? -0.348 -0.306 3.495  1 22
+HETATM C C4   . TTG L 1 1 . 1 TTG L C4   ? -2.774 -0.143 3.328  1 23
+HETATM C C1   . TTG L 1 1 . 1 TTG L C1   ? -0.463 -0.34  4.892  1 24
+HETATM C C3   . TTG L 1 1 . 1 TTG L C3   ? -2.852 -0.179 4.684  1 25
+HETATM C C2   . TTG L 1 1 . 1 TTG L C2   ? -1.699 -0.277 5.47   1 26
+HETATM C C27  . TTG L 1 1 . 1 TTG L C27  ? 0.77   -0.446 5.752  1 27
+HETATM N N28  . TTG L 1 1 . 1 TTG L N28  ? 1.26   0.9    6.072  1 28
+HETATM C C29  . TTG L 1 1 . 1 TTG L C29  ? 2.457  0.727  6.907  1 29
+HETATM C C30  . TTG L 1 1 . 1 TTG L C30  ? 1.71   1.498  4.808  1 30
+HETATM O O26  . TTG L 1 1 . 1 TTG L O26  ? -1.811 -0.31  6.824  1 31
+HETATM O O19  . TTG L 1 1 . 1 TTG L O19  ? 1.205  -1.175 -5.393 1 32
+HETATM H H251 . TTG L 1 1 . 1 TTG L H251 ? -2.148 1.622  -3.526 1 33
+HETATM H H252 . TTG L 1 1 . 1 TTG L H252 ? -2.833 0.021  -3.156 1 34
+HETATM H H311 . TTG L 1 1 . 1 TTG L H311 ? -4.17  1.183  -4.891 1 35
+HETATM H H312 . TTG L 1 1 . 1 TTG L H312 ? -2.723 1.316  -5.918 1 36
+HETATM H H313 . TTG L 1 1 . 1 TTG L H313 ? -3.408 -0.284 -5.549 1 37
+HETATM H H241 . TTG L 1 1 . 1 TTG L H241 ? -1.598 -1.871 -4.072 1 38
+HETATM H H171 . TTG L 1 1 . 1 TTG L H171 ? -1.767 -0.049 -1.678 1 39
+HETATM H H22O . TTG L 1 1 . 1 TTG L H22O ? 0.428  2.613  -5.769 1 40
+HETATM H H191 . TTG L 1 1 . 1 TTG L H191 ? 1.765  0.776  -5.012 1 41
+HETATM H H192 . TTG L 1 1 . 1 TTG L H192 ? 2.917  -0.47  -4.477 1 42
+HETATM H H111 . TTG L 1 1 . 1 TTG L H111 ? 2.63   -1.31  0.615  1 43
+HETATM H H112 . TTG L 1 1 . 1 TTG L H112 ? 2.747  0.471  0.667  1 44
+HETATM H H71  . TTG L 1 1 . 1 TTG L H71  ? 1.818  -0.446 3.441  1 45
+HETATM H H41  . TTG L 1 1 . 1 TTG L H41  ? -3.674 -0.066 2.735  1 46
+HETATM H H31  . TTG L 1 1 . 1 TTG L H31  ? -3.819 -0.131 5.162  1 47
+HETATM H H271 . TTG L 1 1 . 1 TTG L H271 ? 0.526  -0.973 6.674  1 48
+HETATM H H272 . TTG L 1 1 . 1 TTG L H272 ? 1.542  -0.995 5.213  1 49
+HETATM H H291 . TTG L 1 1 . 1 TTG L H291 ? 2.86   1.704  7.172  1 50
+HETATM H H292 . TTG L 1 1 . 1 TTG L H292 ? 2.191  0.184  7.814  1 51
+HETATM H H293 . TTG L 1 1 . 1 TTG L H293 ? 3.207  0.163  6.353  1 52
+HETATM H H301 . TTG L 1 1 . 1 TTG L H301 ? 2.085  2.504  4.995  1 53
+HETATM H H302 . TTG L 1 1 . 1 TTG L H302 ? 2.506  0.888  4.381  1 54
+HETATM H H303 . TTG L 1 1 . 1 TTG L H303 ? 0.874  1.545  4.111  1 55
+HETATM H H261 . TTG L 1 1 . 1 TTG L H261 ? -1.774 0.605  7.13   1 56
+HETATM H H19O . TTG L 1 1 . 1 TTG L H19O ? 1.65   -1.155 -6.252 1 57
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_488_ccd_5dr": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5DR.cif",
+    "ligand": "5DR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5DR": "ALL"
+    }
+  }
+}

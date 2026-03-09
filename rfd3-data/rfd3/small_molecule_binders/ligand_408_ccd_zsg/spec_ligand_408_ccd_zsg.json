@@ -1,0 +1,10 @@
+{
+  "ligand_408_ccd_zsg": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZSG.cif",
+    "ligand": "ZSG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZSG": "ALL"
+    }
+  }
+}

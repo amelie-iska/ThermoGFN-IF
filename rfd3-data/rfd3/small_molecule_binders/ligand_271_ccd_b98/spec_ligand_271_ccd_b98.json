@@ -1,0 +1,10 @@
+{
+  "ligand_271_ccd_b98": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/B98.cif",
+    "ligand": "B98",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B98": "ALL"
+    }
+  }
+}

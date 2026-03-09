@@ -1,0 +1,10 @@
+{
+  "ligand_368_ccd_7z5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/7Z5.cif",
+    "ligand": "7Z5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7Z5": "ALL"
+    }
+  }
+}

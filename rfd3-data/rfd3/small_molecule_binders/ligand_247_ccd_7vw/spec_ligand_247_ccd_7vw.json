@@ -1,0 +1,10 @@
+{
+  "ligand_247_ccd_7vw": {
+    "input": "./data/rfd3/ccd_ligands/structures/7VW.cif",
+    "ligand": "7VW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7VW": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_410_ccd_f21": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/F21.cif",
+    "ligand": "F21",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "F21": "ALL"
+    }
+  }
+}

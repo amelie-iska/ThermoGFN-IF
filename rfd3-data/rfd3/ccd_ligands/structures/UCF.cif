@@ -1,0 +1,105 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  CAJ  . UCF L 1 1 . 1 UCF L CAJ  ? -7.909 1.513  1.192  1 1
+HETATM O  OAI  . UCF L 1 1 . 1 UCF L OAI  ? -8.185 0.554  0.169  1 2
+HETATM C  CAB  . UCF L 1 1 . 1 UCF L CAB  ? -7.175 -0.291 -0.173 1 3
+HETATM C  CAC  . UCF L 1 1 . 1 UCF L CAC  ? -5.947 -0.198 0.461  1 4
+HETATM C  CAA  . UCF L 1 1 . 1 UCF L CAA  ? -7.375 -1.254 -1.158 1 5
+HETATM O  OAH  . UCF L 1 1 . 1 UCF L OAH  ? -8.581 -1.352 -1.78  1 6
+HETATM C  CAK  . UCF L 1 1 . 1 UCF L CAK  ? -8.714 -2.364 -2.78  1 7
+HETATM C  CAF  . UCF L 1 1 . 1 UCF L CAF  ? -6.344 -2.112 -1.503 1 8
+HETATM C  CAE  . UCF L 1 1 . 1 UCF L CAE  ? -5.119 -2.01  -0.87  1 9
+HETATM C  CAD  . UCF L 1 1 . 1 UCF L CAD  ? -4.922 -1.058 0.112  1 10
+HETATM C  CAG  . UCF L 1 1 . 1 UCF L CAG  ? -3.585 -0.951 0.799  1 11
+HETATM C  CAL  . UCF L 1 1 . 1 UCF L CAL  ? -2.693 0.026  0.03   1 12
+HETATM C  CAM  . UCF L 1 1 . 1 UCF L CAM  ? -1.335 0.134  0.728  1 13
+HETATM C  CAO  . UCF L 1 1 . 1 UCF L CAO  ? -0.501 1.186  0.043  1 14
+HETATM C  CAP  . UCF L 1 1 . 1 UCF L CAP  ? -0.402 2.451  0.589  1 15
+HETATM C  CAT  . UCF L 1 1 . 1 UCF L CAT  ? 0.169  0.882  -1.128 1 16
+HETATM C  CAS  . UCF L 1 1 . 1 UCF L CAS  ? 0.935  1.845  -1.758 1 17
+HETATM C  CAR  . UCF L 1 1 . 1 UCF L CAR  ? 1.032  3.114  -1.219 1 18
+HETATM C  CAQ  . UCF L 1 1 . 1 UCF L CAQ  ? 0.366  3.419  -0.041 1 19
+HETATM O  OAU  . UCF L 1 1 . 1 UCF L OAU  ? 0.46   4.666  0.491  1 20
+HETATM C  CAV  . UCF L 1 1 . 1 UCF L CAV  ? 1.263  5.614  -0.216 1 21
+HETATM C  CAW  . UCF L 1 1 . 1 UCF L CAW  ? 1.249  6.93   0.518  1 22
+HETATM O  OAY  . UCF L 1 1 . 1 UCF L OAY  ? 0.616  7.045  1.541  1 23
+HETATM O  OAX  . UCF L 1 1 . 1 UCF L OAX  ? 1.939  7.975  0.035  1 24
+HETATM O  OAN  . UCF L 1 1 . 1 UCF L OAN  ? -0.652 -1.146 0.659  1 25
+HETATM C  C    . UCF L 1 1 . 1 UCF L C    ? 0.184  -1.445 1.665  1 26
+HETATM O  O    . UCF L 1 1 . 1 UCF L O    ? 0.34   -0.664 2.573  1 27
+HETATM C  CA   . UCF L 1 1 . 1 UCF L CA   ? 0.928  -2.756 1.661  1 28
+HETATM C  CB   . UCF L 1 1 . 1 UCF L CB   ? 0.683  -3.489 2.984  1 29
+HETATM C  CBD  . UCF L 1 1 . 1 UCF L CBD  ? 1.55   -4.75  3.032  1 30
+HETATM C  CBE  . UCF L 1 1 . 1 UCF L CBE  ? 3.027  -4.358 2.962  1 31
+HETATM C  CBF  . UCF L 1 1 . 1 UCF L CBF  ? 3.299  -3.635 1.639  1 32
+HETATM N  N    . UCF L 1 1 . 1 UCF L N    ? 2.369  -2.504 1.519  1 33
+HETATM C  CBH  . UCF L 1 1 . 1 UCF L CBH  ? 2.828  -1.259 1.284  1 34
+HETATM O  OBI  . UCF L 1 1 . 1 UCF L OBI  ? 2.057  -0.323 1.257  1 35
+HETATM C  CBJ  . UCF L 1 1 . 1 UCF L CBJ  ? 4.3    -1.03  1.054  1 36
+HETATM C  CBL  . UCF L 1 1 . 1 UCF L CBL  ? 4.644  0.427  1.367  1 37
+HETATM C  CBR  . UCF L 1 1 . 1 UCF L CBR  ? 4.434  0.691  2.86   1 38
+HETATM C  CBK  . UCF L 1 1 . 1 UCF L CBK  ? 4.635  -1.327 -0.385 1 39
+HETATM S  SBM  . UCF L 1 1 . 1 UCF L SBM  ? 3.947  -0.501 -1.778 1 40
+HETATM C  CBN  . UCF L 1 1 . 1 UCF L CBN  ? 4.9    -1.493 -2.874 1 41
+HETATM CL CLBQ . UCF L 1 1 . 1 UCF L CLBQ ? 4.874  -1.377 -4.606 1 42
+HETATM C  CBO  . UCF L 1 1 . 1 UCF L CBO  ? 5.645  -2.348 -2.171 1 43
+HETATM C  CBP  . UCF L 1 1 . 1 UCF L CBP  ? 5.503  -2.252 -0.797 1 44
+HETATM H  HAK  . UCF L 1 1 . 1 UCF L HAK  ? -8.796 2.122  1.368  1 45
+HETATM H  HAL  . UCF L 1 1 . 1 UCF L HAL  ? -7.636 0.995  2.112  1 46
+HETATM H  HAJ  . UCF L 1 1 . 1 UCF L HAJ  ? -7.086 2.154  0.877  1 47
+HETATM H  HAC  . UCF L 1 1 . 1 UCF L HAC  ? -5.791 0.546  1.229  1 48
+HETATM H  HAO  . UCF L 1 1 . 1 UCF L HAO  ? -9.721 -2.334 -3.196 1 49
+HETATM H  HAM  . UCF L 1 1 . 1 UCF L HAM  ? -7.988 -2.188 -3.574 1 50
+HETATM H  HAN  . UCF L 1 1 . 1 UCF L HAN  ? -8.534 -3.342 -2.334 1 51
+HETATM H  HAF  . UCF L 1 1 . 1 UCF L HAF  ? -6.497 -2.86  -2.266 1 52
+HETATM H  HAE  . UCF L 1 1 . 1 UCF L HAE  ? -4.316 -2.68  -1.139 1 53
+HETATM H  HAG  . UCF L 1 1 . 1 UCF L HAG  ? -3.727 -0.589 1.817  1 54
+HETATM H  HAH  . UCF L 1 1 . 1 UCF L HAH  ? -3.111 -1.932 0.825  1 55
+HETATM H  HAP  . UCF L 1 1 . 1 UCF L HAP  ? -2.55  -0.336 -0.988 1 56
+HETATM H  HAQ  . UCF L 1 1 . 1 UCF L HAQ  ? -3.167 1.007  0.004  1 57
+HETATM H  HAR  . UCF L 1 1 . 1 UCF L HAR  ? -1.484 0.41   1.771  1 58
+HETATM H  HAS  . UCF L 1 1 . 1 UCF L HAS  ? -0.923 2.686  1.506  1 59
+HETATM H  HAV  . UCF L 1 1 . 1 UCF L HAV  ? 0.094  -0.108 -1.55  1 60
+HETATM H  HAU  . UCF L 1 1 . 1 UCF L HAU  ? 1.457  1.606  -2.672 1 61
+HETATM H  HAT  . UCF L 1 1 . 1 UCF L HAT  ? 1.631  3.866  -1.712 1 62
+HETATM H  HAX  . UCF L 1 1 . 1 UCF L HAX  ? 2.286  5.245  -0.282 1 63
+HETATM H  HAW  . UCF L 1 1 . 1 UCF L HAW  ? 0.862  5.753  -1.22  1 64
+HETATM H  H1   . UCF L 1 1 . 1 UCF L H1   ? 1.9    8.799  0.54   1 65
+HETATM H  HA   . UCF L 1 1 . 1 UCF L HA   ? 0.579  -3.372 0.832  1 66
+HETATM H  HB1  . UCF L 1 1 . 1 UCF L HB1  ? 0.946  -2.835 3.816  1 67
+HETATM H  HB2  . UCF L 1 1 . 1 UCF L HB2  ? -0.368 -3.766 3.057  1 68
+HETATM H  HB3  . UCF L 1 1 . 1 UCF L HB3  ? 1.359  -5.286 3.961  1 69
+HETATM H  HBD  . UCF L 1 1 . 1 UCF L HBD  ? 1.304  -5.391 2.185  1 70
+HETATM H  HB4  . UCF L 1 1 . 1 UCF L HB4  ? 3.268  -3.697 3.795  1 71
+HETATM H  HBE  . UCF L 1 1 . 1 UCF L HBE  ? 3.645  -5.255 3.021  1 72
+HETATM H  HBF  . UCF L 1 1 . 1 UCF L HBF  ? 4.325  -3.267 1.628  1 73
+HETATM H  HB5  . UCF L 1 1 . 1 UCF L HB5  ? 3.146  -4.324 0.808  1 74
+HETATM H  HBJ  . UCF L 1 1 . 1 UCF L HBJ  ? 4.876  -1.688 1.704  1 75
+HETATM H  HB6  . UCF L 1 1 . 1 UCF L HB6  ? 5.686  0.618  1.108  1 76
+HETATM H  HBL  . UCF L 1 1 . 1 UCF L HBL  ? 3.999  1.086  0.787  1 77
+HETATM H  HB7  . UCF L 1 1 . 1 UCF L HB7  ? 3.412  0.429  3.134  1 78
+HETATM H  HB8  . UCF L 1 1 . 1 UCF L HB8  ? 5.132  0.086  3.438  1 79
+HETATM H  HBR  . UCF L 1 1 . 1 UCF L HBR  ? 4.607  1.746  3.07   1 80
+HETATM H  HBO  . UCF L 1 1 . 1 UCF L HBO  ? 6.312  -3.058 -2.638 1 81
+HETATM H  HBP  . UCF L 1 1 . 1 UCF L HBP  ? 6.051  -2.88  -0.111 1 82
+#

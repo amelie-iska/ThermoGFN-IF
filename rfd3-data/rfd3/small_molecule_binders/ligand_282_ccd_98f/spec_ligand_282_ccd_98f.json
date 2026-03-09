@@ -1,0 +1,10 @@
+{
+  "ligand_282_ccd_98f": {
+    "input": "./data/rfd3/ccd_ligands/structures/98F.cif",
+    "ligand": "98F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "98F": "ALL"
+    }
+  }
+}

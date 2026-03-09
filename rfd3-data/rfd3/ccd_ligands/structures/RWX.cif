@@ -1,0 +1,77 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C28  . RWX L 1 1 . 1 RWX L C28  ? -8.331 2.23   1.062  1 1
+HETATM C  C3   . RWX L 1 1 . 1 RWX L C3   ? 6.715  -0.161 0.576  1 2
+HETATM C  C4   . RWX L 1 1 . 1 RWX L C4   ? 5.628  0.388  -0.115 1 3
+HETATM C  C20  . RWX L 1 1 . 1 RWX L C20  ? -5.451 0.293  0.121  1 4
+HETATM C  C5   . RWX L 1 1 . 1 RWX L C5   ? 4.512  -0.344 0.237  1 5
+HETATM C  C21  . RWX L 1 1 . 1 RWX L C21  ? -5.731 -0.6   -0.895 1 6
+HETATM C  C2   . RWX L 1 1 . 1 RWX L C2   ? 6.254  -1.194 1.322  1 7
+HETATM C  C26  . RWX L 1 1 . 1 RWX L C26  ? -6.464 1.189  0.714  1 8
+HETATM C  C18  . RWX L 1 1 . 1 RWX L C18  ? -3.402 -0.575 -0.083 1 9
+HETATM C  C7   . RWX L 1 1 . 1 RWX L C7   ? 3.146  -0.127 -0.245 1 10
+HETATM C  C23  . RWX L 1 1 . 1 RWX L C23  ? -6.99  -0.793 -1.514 1 11
+HETATM C  C11  . RWX L 1 1 . 1 RWX L C11  ? 0.098  0.366  0.559  1 12
+HETATM C  C12  . RWX L 1 1 . 1 RWX L C12  ? -1.347 0.546  0.089  1 13
+HETATM C  C14  . RWX L 1 1 . 1 RWX L C14  ? -1.456 -1.762 -0.643 1 14
+HETATM C  C10  . RWX L 1 1 . 1 RWX L C10  ? 0.779  -0.704 -0.299 1 15
+HETATM C  C15  . RWX L 1 1 . 1 RWX L C15  ? -0.014 -2.01  -0.195 1 16
+HETATM C  C1   . RWX L 1 1 . 1 RWX L C1   ? 7.091  -2.066 2.223  1 17
+HETATM C  C31  . RWX L 1 1 . 1 RWX L C31  ? -5.063 2.151  2.576  1 18
+HETATM C  C17  . RWX L 1 1 . 1 RWX L C17  ? -0.086 -3.887 1.293  1 19
+HETATM N  N27  . RWX L 1 1 . 1 RWX L N27  ? -7.704 1.346  0.294  1 20
+HETATM N  N29  . RWX L 1 1 . 1 RWX L N29  ? -7.509 2.657  1.987  1 21
+HETATM N  N19  . RWX L 1 1 . 1 RWX L N19  ? -4.193 0.263  0.516  1 22
+HETATM N  N6   . RWX L 1 1 . 1 RWX L N6   ? 4.918  -1.317 1.125  1 23
+HETATM N  N30  . RWX L 1 1 . 1 RWX L N30  ? -6.286 1.997  1.786  1 24
+HETATM N  N13  . RWX L 1 1 . 1 RWX L N13  ? -2.064 -0.731 0.208  1 25
+HETATM N  N9   . RWX L 1 1 . 1 RWX L N9   ? 2.145  -0.922 0.184  1 26
+HETATM O  O8   . RWX L 1 1 . 1 RWX L O8   ? 2.914  0.772  -1.033 1 27
+HETATM O  O24  . RWX L 1 1 . 1 RWX L O24  ? -7.923 -0.063 -1.235 1 28
+HETATM O  O25  . RWX L 1 1 . 1 RWX L O25  ? -7.155 -1.786 -2.413 1 29
+HETATM O  O16  . RWX L 1 1 . 1 RWX L O16  ? -0.006 -2.467 1.159  1 30
+HETATM S  S22  . RWX L 1 1 . 1 RWX L S22  ? -4.24  -1.454 -1.284 1 31
+HETATM CL CL3  . RWX L 1 1 . 1 RWX L CL3  ? 8.361  0.382  0.489  1 32
+HETATM BR BR3  . RWX L 1 1 . 1 RWX L BR3  ? 5.68   1.855  -1.307 1 33
+HETATM H  H28  . RWX L 1 1 . 1 RWX L H28  ? -9.355 2.55   0.94   1 34
+HETATM H  H6   . RWX L 1 1 . 1 RWX L H6   ? 4.343  -1.978 1.54   1 35
+HETATM H  H11C . RWX L 1 1 . 1 RWX L H11C ? 7.118  -1.633 3.223  1 36
+HETATM H  H12C . RWX L 1 1 . 1 RWX L H12C ? 6.655  -3.063 2.271  1 37
+HETATM H  H13C . RWX L 1 1 . 1 RWX L H13C ? 8.104  -2.131 1.827  1 38
+HETATM H  H9   . RWX L 1 1 . 1 RWX L H9   ? 2.33   -1.638 0.812  1 39
+HETATM H  H25  . RWX L 1 1 . 1 RWX L H25  ? -8.048 -1.839 -2.781 1 40
+HETATM H  H111 . RWX L 1 1 . 1 RWX L H111 ? 0.634  1.31   0.456  1 41
+HETATM H  H112 . RWX L 1 1 . 1 RWX L H112 ? 0.106  0.055  1.603  1 42
+HETATM H  H121 . RWX L 1 1 . 1 RWX L H121 ? -1.839 1.297  0.707  1 43
+HETATM H  H122 . RWX L 1 1 . 1 RWX L H122 ? -1.354 0.87   -0.951 1 44
+HETATM H  H10  . RWX L 1 1 . 1 RWX L H10  ? 0.807  -0.376 -1.337 1 45
+HETATM H  H141 . RWX L 1 1 . 1 RWX L H141 ? -1.462 -1.426 -1.68  1 46
+HETATM H  H142 . RWX L 1 1 . 1 RWX L H142 ? -2.027 -2.686 -0.557 1 47
+HETATM H  H15  . RWX L 1 1 . 1 RWX L H15  ? 0.442  -2.764 -0.837 1 48
+HETATM H  H311 . RWX L 1 1 . 1 RWX L H311 ? -4.453 2.948  2.151  1 49
+HETATM H  H312 . RWX L 1 1 . 1 RWX L H312 ? -5.324 2.404  3.604  1 50
+HETATM H  H313 . RWX L 1 1 . 1 RWX L H313 ? -4.501 1.217  2.563  1 51
+HETATM H  H171 . RWX L 1 1 . 1 RWX L H171 ? -1.011 -4.244 0.839  1 52
+HETATM H  H172 . RWX L 1 1 . 1 RWX L H172 ? 0.766  -4.348 0.793  1 53
+HETATM H  H173 . RWX L 1 1 . 1 RWX L H173 ? -0.075 -4.153 2.35   1 54
+#

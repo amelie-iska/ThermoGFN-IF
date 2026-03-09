@@ -1,0 +1,10 @@
+{
+  "ligand_143_ccd_7wt": {
+    "input": "./data/rfd3/ccd_ligands/structures/7WT.cif",
+    "ligand": "7WT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7WT": "ALL"
+    }
+  }
+}

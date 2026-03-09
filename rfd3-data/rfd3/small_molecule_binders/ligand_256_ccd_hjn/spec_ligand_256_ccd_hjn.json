@@ -1,0 +1,10 @@
+{
+  "ligand_256_ccd_hjn": {
+    "input": "./data/rfd3/ccd_ligands/structures/HJN.cif",
+    "ligand": "HJN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HJN": "ALL"
+    }
+  }
+}

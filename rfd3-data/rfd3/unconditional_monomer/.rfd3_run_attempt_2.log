@@ -1,0 +1,8 @@
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=rfd3.configs is not available.
+  warnings.warn(
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+05:34:41 DEBUG transforms: Debug mode is on
+05:34:41 INFO rfd3.engine: [rank: 0] Outputs will be written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/unconditional_monomer.
+05:34:41 INFO rfd3.engine: [rank: 0] Prevalidating design specification for example: spec_unconditional_monomer_unconditional_monomer
+05:34:41 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory (0 total).

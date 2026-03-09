@@ -1,0 +1,10 @@
+{
+  "ligand_215_ccd_6ss": {
+    "input": "./data/rfd3/ccd_ligands/structures/6SS.cif",
+    "ligand": "6SS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "6SS": "ALL"
+    }
+  }
+}

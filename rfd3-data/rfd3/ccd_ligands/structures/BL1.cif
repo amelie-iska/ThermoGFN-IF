@@ -1,0 +1,63 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O  OAW  . BL1 L 1 1 . 1 BL1 L OAW  ? 4.897  1.572  -0.424 1 1
+HETATM S  SAX  . BL1 L 1 1 . 1 BL1 L SAX  ? 4.099  1.162  0.678  1 2
+HETATM N  NAS  . BL1 L 1 1 . 1 BL1 L NAS  ? 5.07   0.22   1.633  1 3
+HETATM O  OAV  . BL1 L 1 1 . 1 BL1 L OAV  ? 3.446  2.077  1.548  1 4
+HETATM C  CAO  . BL1 L 1 1 . 1 BL1 L CAO  ? 2.842  0.117  0.021  1 5
+HETATM C  CAM  . BL1 L 1 1 . 1 BL1 L CAM  ? 1.524  0.324  0.368  1 6
+HETATM C  CAJ  . BL1 L 1 1 . 1 BL1 L CAJ  ? 3.179  -0.909 -0.847 1 7
+HETATM CL CLAQ . BL1 L 1 1 . 1 BL1 L CLAQ ? 4.84   -1.16  -1.284 1 8
+HETATM C  CAC  . BL1 L 1 1 . 1 BL1 L CAC  ? 2.197  -1.734 -1.367 1 9
+HETATM C  CAN  . BL1 L 1 1 . 1 BL1 L CAN  ? 0.875  -1.54  -1.024 1 10
+HETATM C  CAL  . BL1 L 1 1 . 1 BL1 L CAL  ? 0.528  -0.501 -0.158 1 11
+HETATM C  CAK  . BL1 L 1 1 . 1 BL1 L CAK  ? -0.886 -0.288 0.215  1 12
+HETATM O  OAU  . BL1 L 1 1 . 1 BL1 L OAU  ? -1.186 0.617  0.969  1 13
+HETATM N  NAR  . BL1 L 1 1 . 1 BL1 L NAR  ? -1.843 -1.096 -0.281 1 14
+HETATM N  NAT  . BL1 L 1 1 . 1 BL1 L NAT  ? -3.184 -0.894 0.072  1 15
+HETATM C  CAI  . BL1 L 1 1 . 1 BL1 L CAI  ? -3.937 -1.722 1.017  1 16
+HETATM C  CAP  . BL1 L 1 1 . 1 BL1 L CAP  ? -3.283 -1.68  2.399  1 17
+HETATM C  CAA  . BL1 L 1 1 . 1 BL1 L CAA  ? -3.995 0.13   -0.42  1 18
+HETATM C  CAB  . BL1 L 1 1 . 1 BL1 L CAB  ? -5.273 0.072  0.113  1 19
+HETATM C  CAF  . BL1 L 1 1 . 1 BL1 L CAF  ? -5.341 -1.098 1.069  1 20
+HETATM C  CAD  . BL1 L 1 1 . 1 BL1 L CAD  ? -3.686 1.143  -1.331 1 21
+HETATM C  CAH  . BL1 L 1 1 . 1 BL1 L CAH  ? -4.642 2.069  -1.691 1 22
+HETATM C  CAG  . BL1 L 1 1 . 1 BL1 L CAG  ? -5.914 2.002  -1.152 1 23
+HETATM C  CAE  . BL1 L 1 1 . 1 BL1 L CAE  ? -6.227 1.001  -0.251 1 24
+HETATM H  H1AS . BL1 L 1 1 . 1 BL1 L H1AS ? 5.829  0.614  2.091  1 25
+HETATM H  H2AS . BL1 L 1 1 . 1 BL1 L H2AS ? 4.88   -0.725 1.735  1 26
+HETATM H  HAM  . BL1 L 1 1 . 1 BL1 L HAM  ? 1.262  1.124  1.046  1 27
+HETATM H  HAC  . BL1 L 1 1 . 1 BL1 L HAC  ? 2.466  -2.532 -2.044 1 28
+HETATM H  HAN  . BL1 L 1 1 . 1 BL1 L HAN  ? 0.11   -2.184 -1.43  1 29
+HETATM H  HNAR . BL1 L 1 1 . 1 BL1 L HNAR ? -1.604 -1.818 -0.883 1 30
+HETATM H  HAI  . BL1 L 1 1 . 1 BL1 L HAI  ? -3.993 -2.75  0.657  1 31
+HETATM H  H1AP . BL1 L 1 1 . 1 BL1 L H1AP ? -3.243 -0.649 2.75   1 32
+HETATM H  H2AP . BL1 L 1 1 . 1 BL1 L H2AP ? -3.868 -2.279 3.097  1 33
+HETATM H  H3AP . BL1 L 1 1 . 1 BL1 L H3AP ? -2.272 -2.081 2.335  1 34
+HETATM H  H1AF . BL1 L 1 1 . 1 BL1 L H1AF ? -6.09  -1.816 0.734  1 35
+HETATM H  H2AF . BL1 L 1 1 . 1 BL1 L H2AF ? -5.568 -0.756 2.079  1 36
+HETATM H  HAD  . BL1 L 1 1 . 1 BL1 L HAD  ? -2.695 1.201  -1.755 1 37
+HETATM H  HAH  . BL1 L 1 1 . 1 BL1 L HAH  ? -4.397 2.85   -2.395 1 38
+HETATM H  HAG  . BL1 L 1 1 . 1 BL1 L HAG  ? -6.661 2.728  -1.436 1 39
+HETATM H  HAE  . BL1 L 1 1 . 1 BL1 L HAE  ? -7.22  0.947  0.17   1 40
+#

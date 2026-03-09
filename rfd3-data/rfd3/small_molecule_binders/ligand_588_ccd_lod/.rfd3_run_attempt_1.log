@@ -1,0 +1,255 @@
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=rfd3.configs is not available.
+  warnings.warn(
+/home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+12:54:55 DEBUG transforms: Debug mode is on
+12:54:56 INFO rfd3.engine: [rank: 0] Low memory mode enabled.
+12:54:56 INFO rfd3.engine: [rank: 0] Outputs will be written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_588_ccd_lod.
+12:54:56 INFO rfd3.engine: [rank: 0] Prevalidating design specification for example: spec_ligand_588_ccd_lod_ligand_588_ccd_lod
+12:54:56 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+12:54:56 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+12:54:56 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+12:54:56 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+12:54:56 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+12:54:56 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+12:54:56 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+12:54:56 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory (0 total).
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_z.0.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_z.0.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.process_z.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.process_z.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight': Parameter 'model.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.output_proj.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.motif_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_inverse_dist.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.ref_pos_embedder.process_valid_mask.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_single_l.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_single_m.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_z.0.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_z.0.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.process_z.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.process_z.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.1.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.3.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING foundry.utils.weights: [rank: 0] Failed to apply policy: 'copy' to 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight': Parameter 'shadow.token_initializer.chunked_pairwise_embedder.pair_mlp.5.weight' not found in checkpoint. Falling back to policy: 'reinit'.
+12:54:59 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+12:54:59 WARNING atomworks.io: Field b_factor not found in file, ignoring.
+12:54:59 WARNING atomworks.io: Field occupancy not found in file, ignoring.
+12:54:59 WARNING atomworks.io: Field is_motif_atom_unindexed_motif_breakpoint not found in file, ignoring.
+12:54:59 WARNING atomworks.io: Field is_motif_atom_with_fixed_coord not found in file, ignoring.
+12:54:59 WARNING atomworks.io: Field is_motif_atom_unindexed not found in file, ignoring.
+12:54:59 WARNING atomworks.io: Field is_motif_atom_with_fixed_seq not found in file, ignoring.
+12:54:59 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+12:55:25 INFO rfd3.engine: [rank: 0] Finished inference batch in 25.60 seconds.
+12:55:25 INFO rfd3.engine: [rank: 0] Outputs for spec_ligand_588_ccd_lod_ligand_588_ccd_lod_2_model_0 written to /home/iska/amelie-ai/ThermoGFN/data/rfd3/small_molecule_binders/ligand_588_ccd_lod/spec_ligand_588_ccd_lod_ligand_588_ccd_lod_2_model_0.
+12:55:25 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+12:55:25 ERROR rfd3.inference.input_parsing: [rank: 0] ✗ Failed in validator: load_input
+  Error: [Errno 2] No such file or directory: '/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LOD.cif'
+  Error type: FileNotFoundError
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/cli.p │
+│ y:43 in design                                                               │
+│                                                                              │
+│   40 │   │   from rfd3.run_inference import run_inference                    │
+│   41 │   │                                                                   │
+│   42 │   │   with suppress_warnings(is_inference=True):                      │
+│ ❱ 43 │   │   │   run_inference(cfg)                                          │
+│   44                                                                         │
+│   45                                                                         │
+│   46 if __name__ == "__main__":                                              │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/hydra/main.py:8 │
+│ 3 in decorated_main                                                          │
+│                                                                              │
+│    80 │   │   @functools.wraps(task_function)                                │
+│    81 │   │   def decorated_main(cfg_passthrough: Optional[DictConfig] = Non │
+│    82 │   │   │   if cfg_passthrough is not None:                            │
+│ ❱  83 │   │   │   │   return task_function(cfg_passthrough)                  │
+│    84 │   │   │   else:                                                      │
+│    85 │   │   │   │   args_parser = get_args_parser()                        │
+│    86 │   │   │   │   args = args_parser.parse_args()                        │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/run_i │
+│ nference.py:39 in run_inference                                              │
+│                                                                              │
+│   36 │                                                                       │
+│   37 │   # Run                                                               │
+│   38 │   engine = RFD3InferenceEngine(**RFD3InferenceConfig(**init_cfg_dict) │
+│ ❱ 39 │   engine.run(**run_params)                                            │
+│   40                                                                         │
+│   41                                                                         │
+│   42 if __name__ == "__main__":                                              │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/engin │
+│ e.py:245 in run                                                              │
+│                                                                              │
+│   242 │   │   )                                                              │
+│   243 │   │   # init before                                                  │
+│   244 │   │   self.initialize()                                              │
+│ ❱ 245 │   │   outputs = self._run_multi(design_specifications)               │
+│   246 │   │   return outputs                                                 │
+│   247 │                                                                      │
+│   248 │   def _set_out_dir(self, out_dir: str | PathLike | None):            │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/engin │
+│ e.py:280 in _run_multi                                                       │
+│                                                                              │
+│   277 │   │   # Evaluate, using `validation_step`                            │
+│   278 │   │   # ============================================================ │
+│   279 │   │   outputs = {}                                                   │
+│ ❱ 280 │   │   for batch_idx, batch in enumerate(loader):                     │
+│   281 │   │   │   pipeline_output = batch[0]                                 │
+│   282 │   │   │   example_id = pipeline_output["example_id"]                 │
+│   283                                                                        │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/lightning/fabri │
+│ c/wrappers.py:326 in __iter__                                                │
+│                                                                              │
+│   323 │   │   if self._device is None:                                       │
+│   324 │   │   │   yield from iter(self._dataloader)                          │
+│   325 │   │   else:                                                          │
+│ ❱ 326 │   │   │   for item in self._dataloader:                              │
+│   327 │   │   │   │   yield move_data_to_device(item, self._device)          │
+│   328                                                                        │
+│   329                                                                        │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/torch/utils/dat │
+│ a/dataloader.py:733 in __next__                                              │
+│                                                                              │
+│    730 │   │   │   if self._sampler_iter is None:                            │
+│    731 │   │   │   │   # TODO(https://github.com/pytorch/pytorch/issues/7675 │
+│    732 │   │   │   │   self._reset()  # type: ignore[call-arg]               │
+│ ❱  733 │   │   │   data = self._next_data()                                  │
+│    734 │   │   │   self._num_yielded += 1                                    │
+│    735 │   │   │   if (                                                      │
+│    736 │   │   │   │   self._dataset_kind == _DatasetKind.Iterable           │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/torch/utils/dat │
+│ a/dataloader.py:789 in _next_data                                            │
+│                                                                              │
+│    786 │                                                                     │
+│    787 │   def _next_data(self):                                             │
+│    788 │   │   index = self._next_index()  # may raise StopIteration         │
+│ ❱  789 │   │   data = self._dataset_fetcher.fetch(index)  # may raise StopIt │
+│    790 │   │   if self._pin_memory:                                          │
+│    791 │   │   │   data = _utils.pin_memory.pin_memory(data, self._pin_memor │
+│    792 │   │   return data                                                   │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/torch/utils/dat │
+│ a/_utils/fetch.py:52 in fetch                                                │
+│                                                                              │
+│   49 │   │   │   if hasattr(self.dataset, "__getitems__") and self.dataset._ │
+│   50 │   │   │   │   data = self.dataset.__getitems__(possibly_batched_index │
+│   51 │   │   │   else:                                                       │
+│ ❱ 52 │   │   │   │   data = [self.dataset[idx] for idx in possibly_batched_i │
+│   53 │   │   else:                                                           │
+│   54 │   │   │   data = self.dataset[possibly_batched_index]                 │
+│   55 │   │   return self.collate_fn(data)                                    │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/infer │
+│ ence/datasets.py:165 in __getitem__                                          │
+│                                                                              │
+│   162 │   │   if not isinstance(spec, DesignInputSpecification):             │
+│   163 │   │   │   spec = ensure_input_is_abspath(spec, self.json_path)       │
+│   164 │   │   │   spec["cif_parser_args"] = self.cif_parser_args             │
+│ ❱ 165 │   │   │   spec = DesignInputSpecification.safe_init(**spec)          │
+│   166 │   │                                                                  │
+│   167 │   │   # Create pipeline input                                        │
+│   168 │   │   data = spec.to_pipeline_input(example_id=example_id)           │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/infer │
+│ ence/input_parsing.py:782 in safe_init                                       │
+│                                                                              │
+│    779 │   │   │   logger.warning(warn)                                      │
+│    780 │   │   │   return LegacySpecification(**spec_kwargs)                 │
+│    781 │   │   else:                                                         │
+│ ❱  782 │   │   │   return cls(**spec_kwargs)                                 │
+│    783 │                                                                     │
+│    784 │   def to_pipeline_input(self, example_id):                          │
+│    785 │   │   atom_array, spec_dict = self.build(return_metadata=True)      │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/pydantic/main.p │
+│ y:250 in __init__                                                            │
+│                                                                              │
+│    247 │   │   """                                                           │
+│    248 │   │   # `__tracebackhide__` tells pytest and some other tools to om │
+│    249 │   │   __tracebackhide__ = True                                      │
+│ ❱  250 │   │   validated_self = self.__pydantic_validator__.validate_python( │
+│    251 │   │   if self is not validated_self:                                │
+│    252 │   │   │   warnings.warn(                                            │
+│    253 │   │   │   │   'A custom validator is returning a value other than ` │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/infer │
+│ ence/input_parsing.py:327 in load_input                                      │
+│                                                                              │
+│    324 │   │   │   │   │   raise ValueError(                                 │
+│    325 │   │   │   │   │   │   "Both 'input' and 'atom_array_input' provided │
+│    326 │   │   │   │   │   )                                                 │
+│ ❱  327 │   │   │   │   atom_array = inference_load_(                         │
+│    328 │   │   │   │   │   data["input"], cif_parser_args=data.get("cif_pars │
+│    329 │   │   │   │   )["atom_array"]                                       │
+│    330                                                                       │
+│                                                                              │
+│ /home/iska/amelie-ai/enzyme-quiver/models/foundry/models/rfd3/src/rfd3/utils │
+│ /inference.py:348 in inference_load_                                         │
+│                                                                              │
+│   345 │   )                                                                  │
+│   346 │                                                                      │
+│   347 │   # Use the parse function with the merged CIF parser arguments      │
+│ ❱ 348 │   result_dict = parse(                                               │
+│   349 │   │   filename=file,                                                 │
+│   350 │   │   build_assembly=(assembly_id,),  # Convert list to tuple (make  │
+│   351 │   │   **merged_cif_parser_args,                                      │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/atomworks/io/pa │
+│ rser.py:333 in parse                                                         │
+│                                                                              │
+│   330 │   │   │   extra_fields=extra_fields,                                 │
+│   331 │   │   )                                                              │
+│   332 │   elif file_type in ("cif", "bcif", "mmjson"):                       │
+│ ❱ 333 │   │   result = _parse_from_cif(                                      │
+│   334 │   │   │   filename=filename,                                         │
+│   335 │   │   │   file_type=file_type,                                       │
+│   336 │   │   │   ccd_mirror_path=ccd_mirror_path,                           │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/atomworks/io/pa │
+│ rser.py:702 in _parse_from_cif                                               │
+│                                                                              │
+│   699 │   data_dict = {"extra_info": {}}                                     │
+│   700 │                                                                      │
+│   701 │   # ... read the CIF file into the dictionary (we will clean up the  │
+│ ❱ 702 │   cif_file = read_any(filename, file_type=file_type)                 │
+│   703 │   data_dict["cif_block"] = cif_file.block                            │
+│   704 │                                                                      │
+│   705 │   # ... load metadata into "metadata" key (either from RCSB standard │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/atomworks/io/ut │
+│ ils/io_utils.py:458 in read_any                                              │
+│                                                                              │
+│    455 │   │   raise ValueError(f"Unsupported file type: {file_type}")       │
+│    456 │                                                                     │
+│    457 │   # Load the file content                                           │
+│ ❱  458 │   file_obj = file_cls.read(path_or_buffer)                          │
+│    459 │                                                                     │
+│    460 │   return file_obj                                                   │
+│    461                                                                       │
+│                                                                              │
+│ /home/iska/miniconda3/envs/rfd3/lib/python3.12/site-packages/biotite/structu │
+│ re/io/pdbx/cif.py:866 in read                                                │
+│                                                                              │
+│    863 │   │   """                                                           │
+│    864 │   │   # File name                                                   │
+│    865 │   │   if is_open_compatible(file):                                  │
+│ ❱  866 │   │   │   with open(file, "r") as f:                                │
+│    867 │   │   │   │   text = f.read()                                       │
+│    868 │   │   # File object                                                 │
+│    869 │   │   else:                                                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+FileNotFoundError: [Errno 2] No such file or directory: 
+'/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LOD.cif'

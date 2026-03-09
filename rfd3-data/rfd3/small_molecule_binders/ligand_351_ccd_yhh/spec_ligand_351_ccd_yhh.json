@@ -1,0 +1,10 @@
+{
+  "ligand_351_ccd_yhh": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/YHH.cif",
+    "ligand": "YHH",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YHH": "ALL"
+    }
+  }
+}

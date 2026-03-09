@@ -1,0 +1,98 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C    . LQY L 1 1 . 1 LQY L C    ? 2.042  5.287  -0.264 1 1
+HETATM N N    . LQY L 1 1 . 1 LQY L N    ? 6.85   -0.845 0.004  1 2
+HETATM O O    . LQY L 1 1 . 1 LQY L O    ? 2.105  3.877  -0.04  1 3
+HETATM C C1   . LQY L 1 1 . 1 LQY L C1   ? 0.925  3.207  0.006  1 4
+HETATM N N1   . LQY L 1 1 . 1 LQY L N1   ? 10.287 -1.753 -0.986 1 5
+HETATM O O1   . LQY L 1 1 . 1 LQY L O1   ? 5.989  -1.776 1.828  1 6
+HETATM C C2   . LQY L 1 1 . 1 LQY L C2   ? -0.269 3.894  -0.162 1 7
+HETATM N N2   . LQY L 1 1 . 1 LQY L N2   ? -2.807 -0.162 0.349  1 8
+HETATM O O2   . LQY L 1 1 . 1 LQY L O2   ? 8.713  -0.413 -1.791 1 9
+HETATM C C3   . LQY L 1 1 . 1 LQY L C3   ? -1.47  3.219  -0.117 1 10
+HETATM N N3   . LQY L 1 1 . 1 LQY L N3   ? -4.018 -0.866 0.388  1 11
+HETATM O O3   . LQY L 1 1 . 1 LQY L O3   ? -6.209 -0.82  0.831  1 12
+HETATM C C4   . LQY L 1 1 . 1 LQY L C4   ? -1.492 1.837  0.1    1 13
+HETATM C C5   . LQY L 1 1 . 1 LQY L C5   ? -0.296 1.14   0.269  1 14
+HETATM C C6   . LQY L 1 1 . 1 LQY L C6   ? 0.915  1.823  0.217  1 15
+HETATM C C7   . LQY L 1 1 . 1 LQY L C7   ? 2.19   1.088  0.39   1 16
+HETATM C C8   . LQY L 1 1 . 1 LQY L C8   ? 2.352  0.218  1.469  1 17
+HETATM C C9   . LQY L 1 1 . 1 LQY L C9   ? 3.536  -0.465 1.631  1 18
+HETATM C C10  . LQY L 1 1 . 1 LQY L C10  ? 4.576  -0.286 0.715  1 19
+HETATM C C11  . LQY L 1 1 . 1 LQY L C11  ? 4.412  0.585  -0.366 1 20
+HETATM C C12  . LQY L 1 1 . 1 LQY L C12  ? 3.226  1.263  -0.529 1 21
+HETATM C C13  . LQY L 1 1 . 1 LQY L C13  ? 5.847  -1.018 0.888  1 22
+HETATM C C14  . LQY L 1 1 . 1 LQY L C14  ? 8.111  -1.571 0.175  1 23
+HETATM C C15  . LQY L 1 1 . 1 LQY L C15  ? 9.058  -1.203 -0.938 1 24
+HETATM C C16  . LQY L 1 1 . 1 LQY L C16  ? -2.778 1.119  0.149  1 25
+HETATM C C17  . LQY L 1 1 . 1 LQY L C17  ? -4.049 -2.295 0.069  1 26
+HETATM C C18  . LQY L 1 1 . 1 LQY L C18  ? -3.144 -3.065 1.053  1 27
+HETATM C C19  . LQY L 1 1 . 1 LQY L C19  ? -3.464 -4.484 1.107  1 28
+HETATM C C20  . LQY L 1 1 . 1 LQY L C20  ? -3.258 -5.185 -0.252 1 29
+HETATM C C21  . LQY L 1 1 . 1 LQY L C21  ? -4.452 -4.9   -1.122 1 30
+HETATM C C22  . LQY L 1 1 . 1 LQY L C22  ? -4.235 -3.682 -2.041 1 31
+HETATM C C23  . LQY L 1 1 . 1 LQY L C23  ? -3.531 -2.513 -1.327 1 32
+HETATM C C24  . LQY L 1 1 . 1 LQY L C24  ? -5.16  -0.22  0.722  1 33
+HETATM C C25  . LQY L 1 1 . 1 LQY L C25  ? -5.09  1.265  0.955  1 34
+HETATM C C26  . LQY L 1 1 . 1 LQY L C26  ? -6.448 1.929  0.815  1 35
+HETATM C C27  . LQY L 1 1 . 1 LQY L C27  ? -6.847 2.058  -0.624 1 36
+HETATM C C28  . LQY L 1 1 . 1 LQY L C28  ? -6.024 1.918  -1.612 1 37
+HETATM C C29  . LQY L 1 1 . 1 LQY L C29  ? -4.572 1.59   -1.461 1 38
+HETATM C C30  . LQY L 1 1 . 1 LQY L C30  ? -4.085 1.869  -0.034 1 39
+HETATM H H    . LQY L 1 1 . 1 LQY L H    ? 3.052  5.698  -0.278 1 40
+HETATM H HA   . LQY L 1 1 . 1 LQY L HA   ? 1.558  5.481  -1.221 1 41
+HETATM H HB   . LQY L 1 1 . 1 LQY L HB   ? 1.469  5.757  0.535  1 42
+HETATM H HN   . LQY L 1 1 . 1 LQY L HN   ? 6.736  -0.241 -0.746 1 43
+HETATM H HN1  . LQY L 1 1 . 1 LQY L HN1  ? 10.897 -1.516 -1.703 1 44
+HETATM H HN1A . LQY L 1 1 . 1 LQY L HN1A ? 10.563 -2.385 -0.304 1 45
+HETATM H H2   . LQY L 1 1 . 1 LQY L H2   ? -0.257 4.96   -0.329 1 46
+HETATM H H3   . LQY L 1 1 . 1 LQY L H3   ? -2.396 3.758  -0.248 1 47
+HETATM H H5   . LQY L 1 1 . 1 LQY L H5   ? -0.309 0.073  0.437  1 48
+HETATM H H8   . LQY L 1 1 . 1 LQY L H8   ? 1.548  0.08   2.177  1 49
+HETATM H H9   . LQY L 1 1 . 1 LQY L H9   ? 3.662  -1.138 2.466  1 50
+HETATM H H11  . LQY L 1 1 . 1 LQY L H11  ? 5.216  0.724  -1.074 1 51
+HETATM H H12  . LQY L 1 1 . 1 LQY L H12  ? 3.098  1.933  -1.365 1 52
+HETATM H H14  . LQY L 1 1 . 1 LQY L H14  ? 8.556  -1.304 1.134  1 53
+HETATM H H14A . LQY L 1 1 . 1 LQY L H14A ? 7.919  -2.644 0.15   1 54
+HETATM H H17  . LQY L 1 1 . 1 LQY L H17  ? -5.071 -2.666 0.146  1 55
+HETATM H H18  . LQY L 1 1 . 1 LQY L H18  ? -2.106 -2.948 0.743  1 56
+HETATM H H18A . LQY L 1 1 . 1 LQY L H18A ? -3.263 -2.639 2.049  1 57
+HETATM H H19  . LQY L 1 1 . 1 LQY L H19  ? -2.826 -4.962 1.85   1 58
+HETATM H H19A . LQY L 1 1 . 1 LQY L H19A ? -4.504 -4.6   1.41   1 59
+HETATM H H20  . LQY L 1 1 . 1 LQY L H20  ? -2.357 -4.8   -0.729 1 60
+HETATM H H20A . LQY L 1 1 . 1 LQY L H20A ? -3.164 -6.26  -0.099 1 61
+HETATM H H21  . LQY L 1 1 . 1 LQY L H21  ? -4.655 -5.775 -1.739 1 62
+HETATM H H21A . LQY L 1 1 . 1 LQY L H21A ? -5.316 -4.712 -0.485 1 63
+HETATM H H22  . LQY L 1 1 . 1 LQY L H22  ? -3.629 -3.989 -2.894 1 64
+HETATM H H22A . LQY L 1 1 . 1 LQY L H22A ? -5.203 -3.34  -2.405 1 65
+HETATM H H23  . LQY L 1 1 . 1 LQY L H23  ? -3.684 -1.602 -1.906 1 66
+HETATM H H23A . LQY L 1 1 . 1 LQY L H23A ? -2.462 -2.721 -1.278 1 67
+HETATM H H25  . LQY L 1 1 . 1 LQY L H25  ? -4.716 1.443  1.964  1 68
+HETATM H H26  . LQY L 1 1 . 1 LQY L H26  ? -7.193 1.332  1.34   1 69
+HETATM H H26A . LQY L 1 1 . 1 LQY L H26A ? -6.407 2.922  1.264  1 70
+HETATM H H27  . LQY L 1 1 . 1 LQY L H27  ? -7.88  2.28   -0.849 1 71
+HETATM H H28  . LQY L 1 1 . 1 LQY L H28  ? -6.41  2.046  -2.612 1 72
+HETATM H H29  . LQY L 1 1 . 1 LQY L H29  ? -4.418 0.535  -1.69  1 73
+HETATM H H29A . LQY L 1 1 . 1 LQY L H29A ? -3.994 2.194  -2.161 1 74
+HETATM H H30  . LQY L 1 1 . 1 LQY L H30  ? -3.952 2.936  0.145  1 75
+#

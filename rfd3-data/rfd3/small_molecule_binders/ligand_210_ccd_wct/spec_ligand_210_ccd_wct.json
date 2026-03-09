@@ -1,0 +1,10 @@
+{
+  "ligand_210_ccd_wct": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WCT.cif",
+    "ligand": "WCT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WCT": "ALL"
+    }
+  }
+}

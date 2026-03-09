@@ -1,0 +1,10 @@
+{
+  "ligand_474_ccd_fkg": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/FKG.cif",
+    "ligand": "FKG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "FKG": "ALL"
+    }
+  }
+}

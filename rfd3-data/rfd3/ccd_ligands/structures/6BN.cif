@@ -1,0 +1,90 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C4  . 6BN L 1 1 . 1 6BN L C4  ? 0.779  -2.118 0.352  1 1
+HETATM C  C5  . 6BN L 1 1 . 1 6BN L C5  ? 1.089  -0.835 0.809  1 2
+HETATM C  C6  . 6BN L 1 1 . 1 6BN L C6  ? 0.067  0.065  1.107  1 3
+HETATM C  C8  . 6BN L 1 1 . 1 6BN L C8  ? 2.507  -0.446 0.949  1 4
+HETATM C  C10 . 6BN L 1 1 . 1 6BN L C10 ? 3.118  -2.354 -0.455 1 5
+HETATM C  C13 . 6BN L 1 1 . 1 6BN L C13 ? 5.37   0.115  -0.263 1 6
+HETATM C  C15 . 6BN L 1 1 . 1 6BN L C15 ? 6.094  2.342  -0.725 1 7
+HETATM C  C20 . 6BN L 1 1 . 1 6BN L C20 ? 6.777  3.054  -2.994 1 8
+HETATM C  C21 . 6BN L 1 1 . 1 6BN L C21 ? 5.421  1.734  1.631  1 9
+HETATM C  C22 . 6BN L 1 1 . 1 6BN L C22 ? 6.735  1.557  2.394  1 10
+HETATM C  C26 . 6BN L 1 1 . 1 6BN L C26 ? -3.593 0.116  0.953  1 11
+HETATM C  C28 . 6BN L 1 1 . 1 6BN L C28 ? -5.335 -0.158 -0.816 1 12
+HETATM C  C1  . 6BN L 1 1 . 1 6BN L C1  ? -1.255 -0.319 0.933  1 13
+HETATM C  C2  . 6BN L 1 1 . 1 6BN L C2  ? -1.554 -1.59  0.465  1 14
+HETATM C  C3  . 6BN L 1 1 . 1 6BN L C3  ? -0.538 -2.487 0.176  1 15
+HETATM CL CL7 . 6BN L 1 1 . 1 6BN L CL7 ? 0.446  1.654  1.693  1 16
+HETATM N  N9  . 6BN L 1 1 . 1 6BN L N9  ? 3.462  -1.226 0.409  1 17
+HETATM C  C11 . 6BN L 1 1 . 1 6BN L C11 ? 1.893  -3.094 0.076  1 18
+HETATM C  C12 . 6BN L 1 1 . 1 6BN L C12 ? 4.871  -0.94  0.691  1 19
+HETATM C  C14 . 6BN L 1 1 . 1 6BN L C14 ? 5.63   1.378  0.181  1 20
+HETATM C  C16 . 6BN L 1 1 . 1 6BN L C16 ? 6.278  2.013  -2.025 1 21
+HETATM N  N17 . 6BN L 1 1 . 1 6BN L N17 ? 6.028  0.752  -2.464 1 22
+HETATM C  C18 . 6BN L 1 1 . 1 6BN L C18 ? 5.577  -0.194 -1.618 1 23
+HETATM O  O19 . 6BN L 1 1 . 1 6BN L O19 ? 5.349  -1.32  -2.029 1 24
+HETATM O  O23 . 6BN L 1 1 . 1 6BN L O23 ? 2.809  0.569  1.546  1 25
+HETATM CL CL  . 6BN L 1 1 . 1 6BN L CL  ? -0.924 -4.075 -0.408 1 26
+HETATM O  O25 . 6BN L 1 1 . 1 6BN L O25 ? -2.258 0.552  1.22   1 27
+HETATM C  C27 . 6BN L 1 1 . 1 6BN L C27 ? -3.917 0.343  -0.525 1 28
+HETATM N  N29 . 6BN L 1 1 . 1 6BN L N29 ? -6.267 0.497  0.113  1 29
+HETATM C  C30 . 6BN L 1 1 . 1 6BN L C30 ? -5.998 0.417  1.556  1 30
+HETATM C  C31 . 6BN L 1 1 . 1 6BN L C31 ? -4.572 0.911  1.819  1 31
+HETATM C  C32 . 6BN L 1 1 . 1 6BN L C32 ? -7.347 1.157  -0.349 1 32
+HETATM C  C33 . 6BN L 1 1 . 1 6BN L C33 ? -7.674 1.131  -1.82  1 33
+HETATM C  C34 . 6BN L 1 1 . 1 6BN L C34 ? -8.112 -0.279 -2.22  1 34
+HETATM O  O35 . 6BN L 1 1 . 1 6BN L O35 ? -8.731 2.053  -2.089 1 35
+HETATM O  O36 . 6BN L 1 1 . 1 6BN L O36 ? -8.056 1.772  0.419  1 36
+HETATM H  H1  . 6BN L 1 1 . 1 6BN L H1  ? 2.907  -1.985 -1.458 1 37
+HETATM H  H2  . 6BN L 1 1 . 1 6BN L H2  ? 3.961  -3.043 -0.497 1 38
+HETATM H  H3  . 6BN L 1 1 . 1 6BN L H3  ? 6.303  3.346  -0.387 1 39
+HETATM H  H4  . 6BN L 1 1 . 1 6BN L H4  ? 7.866  3.032  -3.021 1 40
+HETATM H  H5  . 6BN L 1 1 . 1 6BN L H5  ? 6.384  2.842  -3.989 1 41
+HETATM H  H6  . 6BN L 1 1 . 1 6BN L H6  ? 6.441  4.04   -2.673 1 42
+HETATM H  H7  . 6BN L 1 1 . 1 6BN L H7  ? 4.661  1.081  2.059  1 43
+HETATM H  H8  . 6BN L 1 1 . 1 6BN L H8  ? 5.094  2.771  1.707  1 44
+HETATM H  H9  . 6BN L 1 1 . 1 6BN L H9  ? 7.063  0.521  2.318  1 45
+HETATM H  H10 . 6BN L 1 1 . 1 6BN L H10 ? 7.495  2.211  1.965  1 46
+HETATM H  H11 . 6BN L 1 1 . 1 6BN L H11 ? 6.584  1.815  3.442  1 47
+HETATM H  H12 . 6BN L 1 1 . 1 6BN L H12 ? -3.681 -0.945 1.186  1 48
+HETATM H  H13 . 6BN L 1 1 . 1 6BN L H13 ? -5.607 0.091  -1.842 1 49
+HETATM H  H14 . 6BN L 1 1 . 1 6BN L H14 ? -5.379 -1.238 -0.677 1 50
+HETATM H  H15 . 6BN L 1 1 . 1 6BN L H15 ? -2.584 -1.883 0.326  1 51
+HETATM H  H16 . 6BN L 1 1 . 1 6BN L H16 ? 2.155  -3.614 0.997  1 52
+HETATM H  H17 . 6BN L 1 1 . 1 6BN L H17 ? 1.561  -3.821 -0.666 1 53
+HETATM H  H18 . 6BN L 1 1 . 1 6BN L H18 ? 5.459  -1.849 0.566  1 54
+HETATM H  H19 . 6BN L 1 1 . 1 6BN L H19 ? 4.971  -0.58  1.715  1 55
+HETATM H  H20 . 6BN L 1 1 . 1 6BN L H20 ? 6.173  0.532  -3.397 1 56
+HETATM H  H21 . 6BN L 1 1 . 1 6BN L H21 ? -3.852 1.407  -0.753 1 57
+HETATM H  H22 . 6BN L 1 1 . 1 6BN L H22 ? -3.204 -0.206 -1.142 1 58
+HETATM H  H23 . 6BN L 1 1 . 1 6BN L H23 ? -6.708 1.045  2.094  1 59
+HETATM H  H24 . 6BN L 1 1 . 1 6BN L H24 ? -6.097 -0.615 1.89   1 60
+HETATM H  H25 . 6BN L 1 1 . 1 6BN L H25 ? -4.326 0.768  2.872  1 61
+HETATM H  H26 . 6BN L 1 1 . 1 6BN L H26 ? -4.502 1.97   1.57   1 62
+HETATM H  H27 . 6BN L 1 1 . 1 6BN L H27 ? -6.791 1.413  -2.393 1 63
+HETATM H  H28 . 6BN L 1 1 . 1 6BN L H28 ? -8.263 -0.32  -3.299 1 64
+HETATM H  H29 . 6BN L 1 1 . 1 6BN L H29 ? -7.341 -0.994 -1.933 1 65
+HETATM H  H30 . 6BN L 1 1 . 1 6BN L H30 ? -9.045 -0.527 -1.713 1 66
+HETATM H  H31 . 6BN L 1 1 . 1 6BN L H31 ? -9.55  1.863  -1.612 1 67
+#

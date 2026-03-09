@@ -1,0 +1,61 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . A1IUZ L 1 1 . 1 A1IUZ L C01 ? -1.749 -1.009 1.967  1 1
+HETATM C C02 . A1IUZ L 1 1 . 1 A1IUZ L C02 ? -2.572 -0.491 0.816  1 2
+HETATM C C03 . A1IUZ L 1 1 . 1 A1IUZ L C03 ? -3.91  -0.817 0.721  1 3
+HETATM C C04 . A1IUZ L 1 1 . 1 A1IUZ L C04 ? -4.667 -0.342 -0.335 1 4
+HETATM C C05 . A1IUZ L 1 1 . 1 A1IUZ L C05 ? -4.09  0.461  -1.302 1 5
+HETATM C C06 . A1IUZ L 1 1 . 1 A1IUZ L C06 ? -2.753 0.794  -1.218 1 6
+HETATM C C07 . A1IUZ L 1 1 . 1 A1IUZ L C07 ? -1.985 0.323  -0.153 1 7
+HETATM C C08 . A1IUZ L 1 1 . 1 A1IUZ L C08 ? -0.553 0.681  -0.054 1 8
+HETATM C C10 . A1IUZ L 1 1 . 1 A1IUZ L C10 ? 1.293  1.926  0.177  1 9
+HETATM C C11 . A1IUZ L 1 1 . 1 A1IUZ L C11 ? 2.193  3.117  0.383  1 10
+HETATM C C12 . A1IUZ L 1 1 . 1 A1IUZ L C12 ? 0.48   -0.182 -0.143 1 11
+HETATM C C13 . A1IUZ L 1 1 . 1 A1IUZ L C13 ? 1.701  0.634  -0.008 1 12
+HETATM C C14 . A1IUZ L 1 1 . 1 A1IUZ L C14 ? 0.458  -1.678 -0.318 1 13
+HETATM C C15 . A1IUZ L 1 1 . 1 A1IUZ L C15 ? 1.713  -2.268 0.331  1 14
+HETATM C C16 . A1IUZ L 1 1 . 1 A1IUZ L C16 ? 2.87   -2.376 -0.674 1 15
+HETATM C C17 . A1IUZ L 1 1 . 1 A1IUZ L C17 ? 3.244  -0.992 -1.184 1 16
+HETATM C C18 . A1IUZ L 1 1 . 1 A1IUZ L C18 ? 3.03   0.036  -0.102 1 17
+HETATM N N09 . A1IUZ L 1 1 . 1 A1IUZ L N09 ? -0.056 1.95   0.139  1 18
+HETATM O O19 . A1IUZ L 1 1 . 1 A1IUZ L O19 ? 3.922  0.353  0.657  1 19
+HETATM H H1  . A1IUZ L 1 1 . 1 A1IUZ L H1  ? -1.797 -0.302 2.795  1 20
+HETATM H H2  . A1IUZ L 1 1 . 1 A1IUZ L H2  ? -2.142 -1.973 2.29   1 21
+HETATM H H3  . A1IUZ L 1 1 . 1 A1IUZ L H3  ? -0.713 -1.127 1.649  1 22
+HETATM H H4  . A1IUZ L 1 1 . 1 A1IUZ L H4  ? -4.366 -1.444 1.473  1 23
+HETATM H H5  . A1IUZ L 1 1 . 1 A1IUZ L H5  ? -5.714 -0.6   -0.405 1 24
+HETATM H H6  . A1IUZ L 1 1 . 1 A1IUZ L H6  ? -4.686 0.828  -2.124 1 25
+HETATM H H7  . A1IUZ L 1 1 . 1 A1IUZ L H7  ? -2.303 1.421  -1.974 1 26
+HETATM H H8  . A1IUZ L 1 1 . 1 A1IUZ L H8  ? 2.438  3.558  -0.583 1 27
+HETATM H H9  . A1IUZ L 1 1 . 1 A1IUZ L H9  ? 1.683  3.855  1.001  1 28
+HETATM H H10 . A1IUZ L 1 1 . 1 A1IUZ L H10 ? 3.109  2.798  0.88   1 29
+HETATM H H11 . A1IUZ L 1 1 . 1 A1IUZ L H11 ? -0.43  -2.089 0.163  1 30
+HETATM H H12 . A1IUZ L 1 1 . 1 A1IUZ L H12 ? 0.444  -1.921 -1.38  1 31
+HETATM H H13 . A1IUZ L 1 1 . 1 A1IUZ L H13 ? 2.02   -1.63  1.16   1 32
+HETATM H H14 . A1IUZ L 1 1 . 1 A1IUZ L H14 ? 1.482  -3.262 0.715  1 33
+HETATM H H15 . A1IUZ L 1 1 . 1 A1IUZ L H15 ? 3.734  -2.827 -0.185 1 34
+HETATM H H16 . A1IUZ L 1 1 . 1 A1IUZ L H16 ? 2.564  -3.0   -1.513 1 35
+HETATM H H17 . A1IUZ L 1 1 . 1 A1IUZ L H17 ? 4.293  -0.989 -1.483 1 36
+HETATM H H18 . A1IUZ L 1 1 . 1 A1IUZ L H18 ? 2.622  -0.744 -2.044 1 37
+HETATM H H19 . A1IUZ L 1 1 . 1 A1IUZ L H19 ? -0.598 2.748  0.236  1 38
+#

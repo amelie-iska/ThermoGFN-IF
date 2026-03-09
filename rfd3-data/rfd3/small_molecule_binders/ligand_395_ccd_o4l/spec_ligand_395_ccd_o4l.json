@@ -1,0 +1,10 @@
+{
+  "ligand_395_ccd_o4l": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/O4L.cif",
+    "ligand": "O4L",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "O4L": "ALL"
+    }
+  }
+}

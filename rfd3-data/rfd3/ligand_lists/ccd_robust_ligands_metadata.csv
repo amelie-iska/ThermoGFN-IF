@@ -1,0 +1,301 @@
+name,input_path,ligand_code,formula_weight,heavy_atoms,hetero_atoms,elements,formula,ccd_name,weight_bin
+ccd_12q,./data/rfd3/ccd_ligands/structures/12Q.cif,12Q,159.185,12,2,"C,H,N,O",C10 H9 N O,1-METHYLQUINOLIN-2(1H)-ONE,0
+ccd_1f1,./data/rfd3/ccd_ligands/structures/1F1.cif,1F1,161.157,12,3,"C,H,N,O",C9 H7 N O2,1H-indole-6-carboxylic acid,0
+ccd_a1d6h,./data/rfd3/ccd_ligands/structures/A1D6H.cif,A1D6H,162.185,12,2,"C,H,O",C10 H10 O2,(~{E})-3-(2-methoxyphenyl)prop-2-enal,0
+ccd_dhy,./data/rfd3/ccd_ligands/structures/DHY.cif,DHY,168.147,12,4,"C,H,O",C8 H8 O4,"2-(3,4-DIHYDROXYPHENYL)ACETIC ACID",0
+ccd_fxq,./data/rfd3/ccd_ligands/structures/FXQ.cif,FXQ,172.231,12,6,"C,H,N",C6 H16 N6,1-(4-carbamimidamidobutyl)guanidine,0
+ccd_ssc,./data/rfd3/ccd_ligands/structures/SSC.cif,SSC,173.167,12,5,"C,H,N,O",C7 H11 N O4,"(2S,5S)-5-CARBOXYMETHYLPROLINE",0
+ccd_lhr,./data/rfd3/ccd_ligands/structures/LHR.cif,LHR,175.187,13,4,"C,H,N,O",C9 H9 N3 O,N-(1H-indazol-6-yl)acetamide,0
+ccd_3z8,./data/rfd3/ccd_ligands/structures/3Z8.cif,3Z8,181.619,12,3,"C,CL,H,N,O",C9 H8 Cl N O,"7-chloro-3,4-dihydroisoquinolin-1(2H)-one",0
+ccd_gt0,./data/rfd3/ccd_ligands/structures/GT0.cif,GT0,183.204,13,4,"C,H,N,O",C9 H13 N O3,5-(hydroxymethyl)-4-(methoxymethyl)-2-methylpyridin-3-ol,0
+ccd_k8j,./data/rfd3/ccd_ligands/structures/K8J.cif,K8J,184.121,13,5,"C,F,H,O",C8 H5 F O4,"4-fluorobenzene-1,2-dicarboxylic acid",0
+ccd_z0b,./data/rfd3/ccd_ligands/structures/Z0B.cif,Z0B,186.233,13,3,"C,H,N,S",C10 H6 N2 S,"thieno[2,3-c][2,6]naphthyridine",0
+ccd_okp,./data/rfd3/ccd_ligands/structures/OKP.cif,OKP,188.076,13,5,"B,C,H,N,O",C8 H21 B N2 O2,{5-[(3-aminopropyl)amino]pentyl}boronic acid,0
+ccd_jh7,./data/rfd3/ccd_ligands/structures/JH7.cif,JH7,189.214,14,4,"C,H,N,O",C10 H11 N3 O,"1-methyl-5-(phenylamino)-1,2-dihydro-3H-pyrazol-3-one",0
+ccd_2qc,./data/rfd3/ccd_ligands/structures/2QC.cif,2QC,191.253,13,4,"C,H,N,S",C9 H9 N3 S,"1-[4-(1,2,3-thiadiazol-4-yl)phenyl]methanamine",0
+ccd_m56,./data/rfd3/ccd_ligands/structures/M56.cif,M56,192.238,13,4,"C,H,N,O,S",C9 H8 N2 O S,"~{N}-methyl-1,3-benzothiazole-6-carboxamide",0
+ccd_a1d6y,./data/rfd3/ccd_ligands/structures/A1D6Y.cif,A1D6Y,194.184,14,4,"C,H,O",C10 H10 O4,2-ethoxycarbonylbenzoic acid,0
+ccd_zpi,./data/rfd3/ccd_ligands/structures/ZPI.cif,ZPI,196.248,15,2,"C,H,N",C13 H12 N2,"6,7,8,9-tetrahydro-5~{H}-carbazole-1-carbonitrile",0
+ccd_0on,./data/rfd3/ccd_ligands/structures/0ON.cif,0ON,198.221,15,3,"C,H,N,O",C12 H10 N2 O,N-phenylpyridine-3-carboxamide,0
+ccd_3vr,./data/rfd3/ccd_ligands/structures/3VR.cif,3VR,201.268,15,3,"C,H,N",C12 H15 N3,N-methyl-1-[4-(1H-pyrazol-1-ylmethyl)phenyl]methanamine,0
+ccd_96k,./data/rfd3/ccd_ligands/structures/96K.cif,96K,201.349,14,2,"C,H,N,O",C12 H27 N O,6-dipropylamino-1-hexanol,0
+ccd_tqc,./data/rfd3/ccd_ligands/structures/TQC.cif,TQC,204.228,15,5,"C,H,N,O",C10 H12 N4 O,"(3M)-5-cyclobutyl-3-(1-methyl-1H-imidazol-2-yl)-1,2,4-oxadiazole",0
+ccd_nwy,./data/rfd3/ccd_ligands/structures/NWY.cif,NWY,204.268,15,3,"C,H,N,O",C12 H16 N2 O,N-[(6-methylpyridin-3-yl)methyl]cyclobutanecarboxamide,0
+ccd_iaj,./data/rfd3/ccd_ligands/structures/IAJ.cif,IAJ,205.236,14,5,"C,H,N,O,S",C9 H7 N3 O S,"8-methoxy-[1,2,4]triazolo[3,4-b][1,3]benzothiazole",0
+ccd_4go,./data/rfd3/ccd_ligands/structures/4GO.cif,4GO,205.256,15,4,"C,H,N,O",C11 H15 N3 O,6-(cyclopentylamino)pyridine-3-carboxamide,0
+ccd_48y,./data/rfd3/ccd_ligands/structures/48Y.cif,48Y,206.150,14,7,"C,H,O",C7 H10 O7,"(1R,2S)-1-hydroxybutane-1,2,4-tricarboxylic acid",0
+ccd_1eb,./data/rfd3/ccd_ligands/structures/1EB.cif,1EB,206.198,15,5,"C,H,N,O",C10 H10 N2 O3,N-(4-nitrophenyl)cyclopropanecarboxamide,0
+ccd_j1k,./data/rfd3/ccd_ligands/structures/J1K.cif,J1K,209.199,15,5,"C,H,N,O",C10 H11 N O4,4-(2-hydroxyethylcarbamoyl)benzoic acid,0
+ccd_9nb,./data/rfd3/ccd_ligands/structures/9NB.cif,9NB,209.265,14,4,"C,H,N,O,S",C10 H11 N O2 S,~{N}-(4-ethanoylphenyl)-2-sulfanyl-ethanamide,0
+ccd_kdx,./data/rfd3/ccd_ligands/structures/KDX.cif,KDX,215.208,16,5,"C,H,N,O",C11 H9 N3 O2,"9-methoxy-3,5-dihydro-4H-pyrimido[5,4-b]indol-4-one",0
+ccd_ase,./data/rfd3/ccd_ligands/structures/ASE.cif,ASE,218.252,16,4,"C,H,N,O",C12 H14 N2 O2,N-ACETYL SEROTONIN,0
+ccd_a98,./data/rfd3/ccd_ligands/structures/A98.cif,A98,219.285,13,7,"C,H,N,O,S",C6 H9 N3 O2 S2,"methyl ~{N}-(5-ethylsulfanyl-1,3,4-thiadiazol-2-yl)carbamate",0
+ccd_2j4,./data/rfd3/ccd_ligands/structures/2J4.cif,2J4,220.246,14,7,"C,H,N,O,S",C7 H12 N2 O4 S,"(3aR,5R,6S,7R,7aR)-2-amino-5-(hydroxymethyl)-5,6,7,7a-tetrahydro-3aH-pyrano[3,2-d][1,3]thiazole-6,7-diol",1
+ccd_mn9,./data/rfd3/ccd_ligands/structures/MN9.cif,MN9,221.208,15,7,"C,H,N,O",C8 H15 N O6,2-(ACETYLAMINO)-2-DEOXY-D-MANNOSE,1
+ccd_58y,./data/rfd3/ccd_ligands/structures/58Y.cif,58Y,221.274,14,6,"C,H,N,O,S",C8 H15 N O4 S,"(2R,3aR,5R,6R,7R,7aR)-5-(hydroxymethyl)-2-methylhexahydro-3aH-pyrano[3,2-d][1,3]thiazole-6,7-diol",1
+ccd_tr4,./data/rfd3/ccd_ligands/structures/TR4.cif,TR4,230.289,16,5,"C,H,N,S",C11 H10 N4 S,5-amino-3-(methylsulfanyl)-1-phenyl-1H-pyrazole-4-carbonitrile,1
+ccd_a1io3,./data/rfd3/ccd_ligands/structures/A1IO3.cif,A1IO3,231.254,17,6,"C,H,N,O",C11 H13 N5 O,N-phenethyl-2-(1H-tetrazol-5-yl)acetamide,1
+ccd_zve,./data/rfd3/ccd_ligands/structures/ZVE.cif,ZVE,233.233,16,6,"C,F,H,N",C10 H14 F3 N3,(3R)-3-[1-methyl-4-(trifluoromethyl)-1H-imidazol-2-yl]piperidine,1
+ccd_w5c,./data/rfd3/ccd_ligands/structures/W5C.cif,W5C,233.290,16,5,"C,H,N,O,S",C11 H11 N3 O S,"2-[(4-methyl-4H-1,2,4-triazol-3-yl)sulfanyl]-1-phenylethan-1-one",1
+ccd_ofz,./data/rfd3/ccd_ligands/structures/OFZ.cif,OFZ,235.368,17,3,"C,H,N",C14 H25 N3,1-(2-adamantylmethyl)-3-ethyl-guanidine,1
+ccd_4zl,./data/rfd3/ccd_ligands/structures/4ZL.cif,4ZL,236.267,17,5,"C,H,N,O",C12 H16 N2 O3,ethyl N-(benzylcarbamoyl)glycinate,1
+ccd_vao,./data/rfd3/ccd_ligands/structures/VAO.cif,VAO,240.214,18,5,"C,H,N,O",C13 H8 N2 O3,2-(5-cyano-2-oxidanyl-phenyl)pyridine-4-carboxylic acid,1
+ccd_wh1,./data/rfd3/ccd_ligands/structures/WH1.cif,WH1,240.300,18,3,"C,H,N,O",C15 H16 N2 O,N-methyl-N-[2-(pyridin-2-yl)ethyl]benzamide,1
+ccd_jmj,./data/rfd3/ccd_ligands/structures/JMJ.cif,JMJ,241.290,15,7,"C,H,N,O,S",C8 H7 N3 O2 S2,"N-[5-(methylsulfanyl)-1,3,4-thiadiazol-2-yl]furan-2-carboxamide",1
+ccd_s6v,./data/rfd3/ccd_ligands/structures/S6V.cif,S6V,247.293,18,5,"C,H,N,O",C13 H17 N3 O2,1-[2-(2-oxidanylidenepyrrolidin-1-yl)ethyl]-3-phenyl-urea,1
+ccd_dp3,./data/rfd3/ccd_ligands/structures/DP3.cif,DP3,247.298,17,9,"C,H,N,O",C8 H21 N7 O2,N-{(4S)-4-AMINO-5-[(2-AMINOETHYL)AMINO]PENTYL}-N'-NITROGUANIDINE,1
+ccd_a1bem,./data/rfd3/ccd_ligands/structures/A1BEM.cif,A1BEM,248.324,18,5,"C,H,N,O",C13 H20 N4 O,N-ethyl-2-(4-methylpiperazin-1-yl)pyridine-3-carboxamide,1
+ccd_gus,./data/rfd3/ccd_ligands/structures/GUS.cif,GUS,250.254,18,7,"C,H,N,O",C11 H14 N4 O3,(E)-N-[(5-carbamimidamido-2-hydroxyphenyl)methylidene]-L-alanine,1
+ccd_dsy,./data/rfd3/ccd_ligands/structures/DSY.cif,DSY,251.302,17,5,"C,H,N,O,S",C12 H13 N O3 S,5-(DIMETHYLAMINO)-2-NAPHTHALENESULFONIC ACID,1
+ccd_iwi,./data/rfd3/ccd_ligands/structures/IWI.cif,IWI,253.705,16,5,"C,CL,H,N,O,S",C11 H8 Cl N O2 S,"2-[(3-chlorophenyl)methyl]-1,3-thiazole-4-carboxylic acid",1
+ccd_a1bxl,./data/rfd3/ccd_ligands/structures/A1BXL.cif,A1BXL,255.315,19,4,"C,H,N,O",C15 H17 N3 O,N-(quinolin-8-yl)piperidine-4-carboxamide,1
+ccd_5sk,./data/rfd3/ccd_ligands/structures/5SK.cif,5SK,255.318,19,5,"C,H,N",C14 H17 N5,"~{N}-[(2~{R})-butan-2-yl]-1-methyl-[1,2,4]triazolo[4,3-a]quinoxalin-4-amine",1
+ccd_umj,./data/rfd3/ccd_ligands/structures/UMJ.cif,UMJ,258.316,19,4,"C,H,N,O",C15 H18 N2 O2,1-benzyl-3-tert-butyl-1H-pyrazole-5-carboxylic acid,1
+ccd_wor,./data/rfd3/ccd_ligands/structures/WOR.cif,WOR,258.337,17,6,"C,H,N,O,S",C11 H18 N2 O3 S,N'-(2-hydroxy-5-methylphenyl)-N-methyl-N-(propan-2-yl)sulfuric diamide,1
+ccd_apf,./data/rfd3/ccd_ligands/structures/APF.cif,APF,259.224,18,6,"C,F,H,N,O",C12 H12 F3 N O2,"1,1,1-TRIFLUORO-3-ACETAMIDO-4-PHENYL BUTAN-2-ONE(N-ACETYL-L-PHENYLALANYL TRIFLUOROMETHYL KETONE)",1
+ccd_n7m,./data/rfd3/ccd_ligands/structures/N7M.cif,N7M,259.282,17,8,"C,H,N,O,S",C9 H13 N3 O4 S,4-{[(2-hydroxyethyl)carbamoyl]amino}benzene-1-sulfonamide,1
+ccd_m6r,./data/rfd3/ccd_ligands/structures/M6R.cif,M6R,261.167,16,10,"C,H,N,O,P",C6 H16 N O8 P,5-AMINO-5-DEOXY-1-O-PHOSPHONO-D-MANNITOL,1
+ccd_ik1,./data/rfd3/ccd_ligands/structures/IK1.cif,IK1,261.300,18,6,"C,H,N,O,S",C12 H11 N3 O2 S,5-PHENYL-2-UREIDOTHIOPHENE-3-CARBOXAMIDE,1
+ccd_9ps,./data/rfd3/ccd_ligands/structures/9PS.cif,9PS,262.303,20,2,"C,H,O",C18 H14 O2,"4-[(~{E})-2-naphthalen-2-ylethenyl]benzene-1,2-diol",1
+ccd_a3v,./data/rfd3/ccd_ligands/structures/A3V.cif,A3V,263.375,19,3,"C,H,N,O",C16 H25 N O2,(1R)-3-amino-1-[3-(cyclohexylmethoxy)phenyl]propan-1-ol,1
+ccd_k0o,./data/rfd3/ccd_ligands/structures/K0O.cif,K0O,266.333,19,4,"C,H,O",C15 H22 O4,Aspterric Acid,1
+ccd_1v6,./data/rfd3/ccd_ligands/structures/1V6.cif,1V6,266.361,19,3,"C,H,N,S",C16 H14 N2 S,"4-(4-benzylphenyl)-1,3-thiazol-2-amine",1
+ccd_m84,./data/rfd3/ccd_ligands/structures/M84.cif,M84,269.295,20,4,"C,H,N,O",C16 H15 N O3,3-{4-[(PHENYLCARBONYL)AMINO]PHENYL}PROPANOIC ACID,1
+ccd_v7r,./data/rfd3/ccd_ligands/structures/V7R.cif,V7R,270.348,18,6,"C,H,N,O,S",C12 H18 N2 O3 S,4-azanyl-~{N}-(4-oxidanylcyclohexyl)benzenesulfonamide,1
+ccd_opa,./data/rfd3/ccd_ligands/structures/OPA.cif,OPA,271.247,18,8,"C,H,N,O,S",C10 H9 N O6 S,"2-(OXALYL-AMINO)-4,7-DIHYDRO-5H-THIENO[2,3-C]PYRAN-3-CARBOXYLIC ACID",1
+ccd_geh,./data/rfd3/ccd_ligands/structures/GEH.cif,GEH,273.779,17,5,"C,CL,H,N,O,S",C12 H16 Cl N O2 S,2-(4-chloranylphenoxy)-2-methyl-~{N}-(2-sulfanylethyl)propanamide,1
+ccd_rjj,./data/rfd3/ccd_ligands/structures/RJJ.cif,RJJ,275.389,20,4,"C,H,N,O",C16 H25 N3 O,"(5R)-N-benzyl-5-ethyl-1-methyl-1,4-diazepane-5-carboxamide",1
+ccd_407,./data/rfd3/ccd_ligands/structures/407.cif,407,276.285,18,8,"C,F,H,N,O,S",C10 H13 F N2 O4 S,N~2~-[(4-fluoro-3-methylphenyl)sulfonyl]-N-hydroxy-D-alaninamide,1
+ccd_oy2,./data/rfd3/ccd_ligands/structures/OY2.cif,OY2,276.331,20,5,"C,H,N,O",C15 H20 N2 O3,"methyl 4-ethyl-1-propanoyl-2,3-dihydroquinoxaline-6-carboxylate",1
+ccd_z88,./data/rfd3/ccd_ligands/structures/Z88.cif,Z88,278.123,14,6,"BR,C,H,N,O,S",C8 H8 Br N O3 S,N-[(4-bromophenyl)sulfonyl]acetamide,1
+ccd_sil,./data/rfd3/ccd_ligands/structures/SIL.cif,SIL,278.282,18,6,"C,H,O,P",C12 H23 O5 P,"[(4S)-2,2-DIMETHYL-1,3-DIOXOLAN-4-YL]METHYL HYDROGEN HEX-5-ENYLPHOSPHONATE",1
+ccd_h5v,./data/rfd3/ccd_ligands/structures/H5V.cif,H5V,280.280,20,8,"C,H,N,O",C12 H16 N4 O4,"7-(2-C-methyl-beta-D-ribofuranosyl)-7H-pyrrolo[2,3-d]pyrimidin-4-amine",2
+ccd_2qo,./data/rfd3/ccd_ligands/structures/2QO.cif,2QO,280.318,21,3,"C,H,O",C18 H16 O3,(2E)-3-[6-hydroxy-3'-(prop-2-en-1-yl)biphenyl-3-yl]prop-2-enoic acid,2
+ccd_4bt,./data/rfd3/ccd_ligands/structures/4BT.cif,4BT,282.428,18,6,"C,H,N,S",C12 H18 N4 S2,2-{2-[4-(2-CARBAMIMIDOYLSULFANYL-ETHYL)-PHENYL]-ETHYL}-ISOTHIOUREA,2
+ccd_0n4,./data/rfd3/ccd_ligands/structures/0N4.cif,0N4,283.072,19,11,"B,C,H,N,O,S",C8 H10 B N5 O4 S,[({[4-(1H-tetrazol-5-yl)phenyl]sulfonyl}amino)methyl]boronic acid,2
+ccd_ky0,./data/rfd3/ccd_ligands/structures/KY0.cif,KY0,286.756,20,4,"C,CL,H,N,O",C16 H15 Cl N2 O,1-(3-chlorophenyl)-N-(4-methylpyridin-3-yl)cyclopropane-1-carboxamide,2
+ccd_32v,./data/rfd3/ccd_ligands/structures/32V.cif,32V,287.380,20,5,"C,H,N,O,S",C15 H17 N3 O S,"2-(cyclopentylamino)-3-ethyl-7-ethynylthieno[3,2-d]pyrimidin-4(3H)-one",2
+ccd_3tx,./data/rfd3/ccd_ligands/structures/3TX.cif,3TX,288.303,22,5,"C,H,N,O",C17 H12 N4 O,"4-[4-(quinolin-2-yl)-1H-1,2,3-triazol-1-yl]phenol",2
+ccd_5dj,./data/rfd3/ccd_ligands/structures/5DJ.cif,5DJ,288.340,22,2,"C,H,O",C20 H16 O2,"4,4'-(2-phenylethene-1,1-diyl)diphenol",2
+ccd_as1,./data/rfd3/ccd_ligands/structures/AS1.cif,AS1,290.273,20,10,"C,H,N,O",C10 H18 N4 O6,ARGININOSUCCINATE,2
+ccd_9cf,./data/rfd3/ccd_ligands/structures/9CF.cif,9CF,292.327,21,5,"C,H,O",C16 H20 O5,"(3S)-6,8-dihydroxy-3-{[(2R,6R)-6-methyloxan-2-yl]methyl}-3,4-dihydro-1H-2-benzopyran-1-one",2
+ccd_07u,./data/rfd3/ccd_ligands/structures/07U.cif,07U,293.366,22,5,"C,H,N",C17 H19 N5,"2-methyl-N~1~-[3-(pyridin-4-yl)-2,6-naphthyridin-1-yl]propane-1,2-diamine",2
+ccd_a1igd,./data/rfd3/ccd_ligands/structures/A1IGD.cif,A1IGD,294.003,13,7,"C,H,I,N,O",C6 H3 I N2 O4,"2,4-dinitroiodobenzene",2
+ccd_36i,./data/rfd3/ccd_ligands/structures/36I.cif,36I,297.375,21,5,"C,H,N,O,S",C16 H15 N3 O S,"4-(2-phenylthieno[3,2-d]pyrimidin-4-yl)morpholine",2
+ccd_gr2,./data/rfd3/ccd_ligands/structures/GR2.cif,GR2,298.290,22,5,"C,H,O",C17 H14 O5,"(3E,3aR,8bS)-3-({[(2R)-4-methyl-5-oxo-2,5-dihydrofuran-2-yl]oxy}methylidene)-3,3a,4,8b-tetrahydro-2H-indeno[1,2-b]furan-2-one",2
+ccd_4zn,./data/rfd3/ccd_ligands/structures/4ZN.cif,4ZN,299.303,20,6,"C,H,N,O,P",C14 H22 N O4 P,(2S)-2-{[(R)-[(R)-amino(phenyl)methyl](hydroxy)phosphoryl]methyl}-4-methylpentanoic acid,2
+ccd_abw,./data/rfd3/ccd_ligands/structures/ABW.cif,ABW,301.336,21,7,"C,H,N,O",C14 H23 N O6,"5-[1-(ACETYLAMINO)-3-METHYLBUTYL]-2,5-ANHYDRO-3,4-DIDEOXY-4-(METHOXYCARBONYL)PENTONIC ACID",2
+ccd_h6k,./data/rfd3/ccd_ligands/structures/H6K.cif,H6K,305.294,23,8,"C,H,N,O",C15 H11 N7 O,1-(5-cyanopyrazin-2-yl)-3-(5-phenyl-1H-pyrazol-3-yl)urea,2
+ccd_a1b1b,./data/rfd3/ccd_ligands/structures/A1B1B.cif,A1B1B,310.776,21,6,"C,CL,H,N,O",C15 H19 Cl N2 O3,(3S)-1-[(2-chloro-6-methoxyphenyl)acetyl]piperidine-3-carboxamide,2
+ccd_xzv,./data/rfd3/ccd_ligands/structures/XZV.cif,XZV,311.764,21,7,"C,CL,H,N,O",C14 H18 Cl N3 O3,4-(5-chlorofuran-2-carbonyl)-N-(cyclopropylmethyl)piperazine-1-carboxamide,2
+ccd_tg4,./data/rfd3/ccd_ligands/structures/TG4.cif,TG4,313.416,21,7,"C,H,N,O,S",C14 H23 N3 O3 S,2-(butylamino)-~{N}-[2-(4-sulfamoylphenyl)ethyl]ethanamide,2
+ccd_u8r,./data/rfd3/ccd_ligands/structures/U8R.cif,U8R,317.290,23,7,"C,F,H,N,O",C16 H13 F2 N3 O2,"4-[4-[bis(fluoranyl)methoxy]phenyl]-3-cyclopropyl-2~{H}-pyrazolo[4,3-b]pyridin-5-one",2
+ccd_0lr,./data/rfd3/ccd_ligands/structures/0LR.cif,0LR,317.424,24,2,"C,H,N,O",C22 H23 N O,"(3R,4R)-3-(naphthalen-2-ylmethoxy)-4-phenylpiperidine",2
+ccd_fdn,./data/rfd3/ccd_ligands/structures/FDN.cif,FDN,318.275,23,7,"C,F,H,N,O",C16 H12 F2 N2 O3,"(5S)-3-ANILINO-5-(2,4-DIFLUOROPHENYL)-5-METHYL-1,3-OXAZOLIDINE-2,4-DIONE",2
+ccd_5g4,./data/rfd3/ccd_ligands/structures/5G4.cif,5G4,319.354,24,4,"C,H,N,O",C20 H17 N O3,"4-{(E)-(4-hydroxyphenyl)[(2-methylphenyl)imino]methyl}benzene-1,3-diol",2
+ccd_qzr,./data/rfd3/ccd_ligands/structures/QZR.cif,QZR,319.402,21,7,"C,H,N,O,S",C14 H13 N3 O2 S2,"6-methyl-~{N}-(4-methylsulfonylphenyl)thieno[2,3-d]pyrimidin-4-amine",2
+ccd_s5f,./data/rfd3/ccd_ligands/structures/S5F.cif,S5F,320.777,22,8,"C,CL,H,N,O",C14 H17 Cl N6 O,"6-chloro-4-{(8S)-8-[(4H-1,2,4-triazol-4-yl)methyl]-6-azaspiro[3.4]octan-6-yl}pyrimidin-2(1H)-one",2
+ccd_8xu,./data/rfd3/ccd_ligands/structures/8XU.cif,8XU,324.181,21,12,"C,H,N,O,P",C9 H13 N2 O9 P,"1-(5-O-phosphono-beta-D-xylofuranosyl)pyrimidine-2,4(1H,3H)-dione",2
+ccd_97m,./data/rfd3/ccd_ligands/structures/97M.cif,97M,328.487,23,4,"C,H,O",C19 H36 O4,"(2R)-2,3-dihydroxypropyl (9Z)-hexadec-9-enoate",2
+ccd_zsg,./data/rfd3/ccd_ligands/structures/ZSG.cif,ZSG,330.388,24,9,"C,H,N,O",C15 H22 N8 O,"(8S)-5-(2-aminopyrimidin-4-yl)-N-[2-(dimethylamino)ethyl]-4,5,6,7-tetrahydropyrazolo[1,5-a]pyrazine-2-carboxamide",2
+ccd_bvd,./data/rfd3/ccd_ligands/structures/BVD.cif,BVD,333.135,19,8,"BR,C,H,N,O",C11 H13 Br N2 O5,5-BROMOVINYLDEOXYURIDINE,2
+ccd_pv1,./data/rfd3/ccd_ligands/structures/PV1.cif,PV1,334.165,20,5,"BR,C,H,N,O",C15 H12 Br N O3,"(5-bromo-2,4-dihydroxyphenyl)(1,3-dihydro-2H-isoindol-2-yl)methanone",2
+ccd_zsy,./data/rfd3/ccd_ligands/structures/ZSY.cif,ZSY,335.357,25,6,"C,H,N,O",C19 H17 N3 O3,N-cyclopropyl-6-(furan-2-yl)-2-hydroxy-N-[(pyridin-2-yl)methyl]pyridine-3-carboxamide,2
+ccd_b0o,./data/rfd3/ccd_ligands/structures/B0O.cif,B0O,335.439,25,3,"C,H,N,O",C22 H25 N O2,"(6R,6aS,10S,10aR)-10-methyl-4-phenyl-6-[(1E)-prop-1-en-1-yl]-2,6,6a,7,8,9,10,10a-octahydro-1H-[2]benzopyrano[4,3-c]pyridin-1-one",2
+ccd_fpg,./data/rfd3/ccd_ligands/structures/FPG.cif,FPG,336.231,20,10,"C,F,H,O,P",C10 H23 F O7 P2,"(1S)-1-[(1R)-1-FLUOROETHYL]-1,5-DIMETHYLHEXYL TRIHYDROGEN DIPHOSPHATE",2
+ccd_wk5,./data/rfd3/ccd_ligands/structures/WK5.cif,WK5,336.361,25,5,"C,H,N,O",C20 H18 N O4,"8-methoxy-1-(4-methoxyphenyl)-3-methyl-2-oxidanyl-[1]benzofuro[3,2-c]pyridine",2
+ccd_y09,./data/rfd3/ccd_ligands/structures/Y09.cif,Y09,337.264,23,8,"C,H,N,O,P",C15 H16 N O6 P,(2-{2-[(3-methoxyphenyl)amino]-2-oxoethoxy}phenyl)phosphonic acid,2
+ccd_eru,./data/rfd3/ccd_ligands/structures/ERU.cif,ERU,337.583,24,2,"C,H,N,O",C22 H43 N O,(13Z)-docos-13-enamide,2
+ccd_jxi,./data/rfd3/ccd_ligands/structures/JXI.cif,JXI,338.407,25,7,"C,H,N,O",C18 H22 N6 O,"1-methyl-6-{2-[(4R)-1-methyl-4-phenyl-4,5-dihydro-1H-imidazol-2-yl]ethyl}-1,2,3,5-tetrahydro-4H-pyrazolo[3,4-d]pyrimidin-4-one",2
+ccd_tvt,./data/rfd3/ccd_ligands/structures/TVT.cif,TVT,339.319,24,10,"C,F,H,N",C14 H16 F3 N7,2-methyl-2-(3-methyl-4-{[4-(methylamino)-5-(trifluoromethyl)pyrimidin-2-yl]amino}-1H-pyrazol-1-yl)propanenitrile,2
+ccd_k9q,./data/rfd3/ccd_ligands/structures/K9Q.cif,K9Q,339.431,25,5,"C,H,N,O",C20 H25 N3 O2,"(2~{S},4~{R})-~{N}-[(2~{S})-1-azanyl-3-(4-phenylphenyl)propan-2-yl]-4-oxidanyl-pyrrolidine-2-carboxamide",2
+ccd_kky,./data/rfd3/ccd_ligands/structures/KKY.cif,KKY,341.466,25,4,"C,F,H,N",C21 H28 F N3,6-[2-(3-fluoro-5-{2-[(2S)-1-methylpyrrolidin-2-yl]ethyl}phenyl)ethyl]-4-methylpyridin-2-amine,3
+ccd_arz,./data/rfd3/ccd_ligands/structures/ARZ.cif,ARZ,342.437,22,9,"C,H,N,O,S",C13 H18 N4 O3 S2,"(3S,5S,7S)-N-(5-sulfamoyl-1,3,4-thiadiazol-2-yl)tricyclo[3.3.1.1~3,7~]decane-1-carboxamide",3
+ccd_8r7,./data/rfd3/ccd_ligands/structures/8R7.cif,8R7,347.407,26,4,"C,H,N,O",C22 H21 N O3,2-cyclopentyl-4-(7-methoxyquinolin-4-yl)benzoic acid,3
+ccd_1tz,./data/rfd3/ccd_ligands/structures/1TZ.cif,1TZ,348.441,26,5,"C,H,N,O",C21 H24 N4 O,"(2S)-2-azanyl-3-(3H-indol-3-yl)-N-[(E)-(2,4,6-trimethylphenyl)methylideneamino]propanamide",3
+ccd_nlm,./data/rfd3/ccd_ligands/structures/NLM.cif,NLM,348.783,21,10,"C,CL,H,N,O,S",C11 H9 Cl N2 O5 S2,4-[(3-chloropyridin-2-yl)sulfamoyl]benzene-1-sulfonic acid,3
+ccd_1gb,./data/rfd3/ccd_ligands/structures/1GB.cif,1GB,349.383,26,6,"C,H,N,O",C20 H19 N3 O3,"(3S,6S)-3-(4-hydroxybenzyl)-6-(1H-indol-3-ylmethyl)piperazine-2,5-dione",3
+ccd_t23,./data/rfd3/ccd_ligands/structures/T23.cif,T23,350.262,23,11,"C,H,N,O,P",C12 H19 N2 O8 P,2'-O-METHYL-3'-METHYL-3'-DEOXY-ARABINOFURANOSYL-THYMINE-5'-PHOSPHATE,3
+ccd_qup,./data/rfd3/ccd_ligands/structures/QUP.cif,QUP,351.790,25,7,"C,CL,H,N,O",C18 H14 Cl N5 O,"1-(5-chloro-2-methylphenyl)-4-(pyrrolo[2,1-f][1,2,4]triazin-4-yl)-1H-pyrrole-2-carboxamide",3
+ccd_qt3,./data/rfd3/ccd_ligands/structures/QT3.cif,QT3,351.829,25,5,"C,CL,H,N,O",C20 H18 Cl N3 O,"(1R)-7-chloro-N-(isoquinolin-4-yl)-2-methyl-1,2,3,4-tetrahydroisoquinoline-1-carboxamide",3
+ccd_imx,./data/rfd3/ccd_ligands/structures/IMX.cif,IMX,352.359,26,6,"C,F,H,N,O",C20 H17 F N2 O3,"[(1R,2R)-2-{[(5-fluoro-1H-indol-2-yl)carbonyl]amino}-2,3-dihydro-1H-inden-1-yl]acetic acid",3
+ccd_9en,./data/rfd3/ccd_ligands/structures/9EN.cif,9EN,353.412,24,8,"C,F,H,N,O,S",C16 H20 F N3 O3 S,"~{N}-[[(5~{S})-3-(3-fluoranyl-4-thiomorpholin-4-yl-phenyl)-2-oxidanylidene-1,3-oxazolidin-5-yl]methyl]ethanamide",3
+ccd_h8j,./data/rfd3/ccd_ligands/structures/H8J.cif,H8J,353.458,26,5,"C,H,N,O",C21 H27 N3 O2,"(8alpha)-N-[(2S)-1-hydroxybutan-2-yl]-1,6-dimethyl-9,10-didehydroergoline-8-carboxamide",3
+ccd_n87,./data/rfd3/ccd_ligands/structures/N87.cif,N87,354.353,26,6,"C,H,O",C20 H18 O6,"(1R,4R,5R)-1,4,5-trihydroxy-3-[3-(phenylcarbonyl)phenyl]cyclohex-2-ene-1-carboxylic acid",3
+ccd_g9l,./data/rfd3/ccd_ligands/structures/G9L.cif,G9L,357.422,26,6,"C,F,H,N,O",C20 H24 F N3 O2,"8-fluoro-2-(3-piperidin-1-ylpropanoyl)-1,3,4,5-tetrahydrobenzo[c][1,6]naphthyridin-6(2H)-one",3
+ccd_d2z,./data/rfd3/ccd_ligands/structures/D2Z.cif,D2Z,357.424,26,6,"C,H,N,O",C20 H25 N2 O4,"2-[4-[[(3~{R})-2,3-dihydro-1,4-benzodioxin-3-yl]methylcarbamoyl]phenoxy]ethyl-dimethyl-azanium",3
+ccd_f3f,./data/rfd3/ccd_ligands/structures/F3F.cif,F3F,363.314,25,9,"C,F,H,N,O,S",C16 H8 F3 N3 O2 S,"S-[5-(TRIFLUOROMETHYL)-4H-1,2,4-TRIAZOL-3-YL] 5-(PHENYLETHYNYL)FURAN-2-CARBOTHIOATE",3
+ccd_1a1,./data/rfd3/ccd_ligands/structures/1A1.cif,1A1,363.396,26,9,"C,H,N,O,S",C17 H13 N7 O S,"N-[7-(1H-imidazol-1-yl)-2-(pyridin-3-yl)[1,3]thiazolo[5,4-d]pyrimidin-5-yl]cyclopropanecarboxamide",3
+ccd_0c7,./data/rfd3/ccd_ligands/structures/0C7.cif,0C7,364.792,26,9,"C,CL,H,N",C17 H13 Cl N8,"N~4~-(2-chlorophenyl)-N~2~-[4-(1H-tetrazol-5-yl)phenyl]pyrimidine-2,4-diamine",3
+ccd_u0n,./data/rfd3/ccd_ligands/structures/U0N.cif,U0N,365.436,27,9,"C,H,N",C18 H23 N9,"4-amino-2-[(1,3-dimethyl-1H-pyrazol-4-yl)amino]-7-methyl-6-[(2R)-2-methylpyrrolidin-1-yl]-7H-pyrrolo[2,3-d]pyrimidine-5-carbonitrile",3
+ccd_j0w,./data/rfd3/ccd_ligands/structures/J0W.cif,J0W,365.465,27,4,"C,H,N,O",C23 H27 N O3,"(E)-3-[4-(6-HYDROXY-2-ISOBUTYL-1-METHYL-3,4-DIHYDROISOQUINOLIN-1-YL)PHENYL]PROP-2-ENOIC ACID",3
+ccd_mxk,./data/rfd3/ccd_ligands/structures/MXK.cif,MXK,367.405,27,9,"C,H,N,O",C18 H21 N7 O2,"(2~{E})-2-hydroxyimino-~{N}-[(1~{S})-3-[4-[(2-methylimidazol-1-yl)methyl]-1,2,3-triazol-1-yl]-1-phenyl-propyl]ethanamid e",3
+ccd_4td,./data/rfd3/ccd_ligands/structures/4TD.cif,4TD,368.463,25,8,"C,H,O",C17 H36 O8,(2S)-1-[3-[(2S)-2-oxidanylpropoxy]-2-[[(2S)-2-oxidanylpropoxy]methyl]-2-[[(2R)-2-oxidanylpropoxy]methyl]propoxy]propan-2-ol,3
+ccd_kfy,./data/rfd3/ccd_ligands/structures/KFY.cif,KFY,369.418,27,8,"C,H,N,O",C19 H23 N5 O3,"9-[(2E)-but-2-en-1-yl]-8-[(3,4,5-trimethoxyphenyl)methyl]-9H-purin-6-amine",3
+ccd_x4w,./data/rfd3/ccd_ligands/structures/X4W.cif,X4W,370.404,28,6,"C,H,N,O",C22 H18 N4 O2,"(6P)-6-[(4S)-imidazo[1,2-a]pyridin-3-yl]-4-[(1R)-1-phenylethyl]-2H-pyrido[3,2-b][1,4]oxazin-3(4H)-one",3
+ccd_60r,./data/rfd3/ccd_ligands/structures/60R.cif,60R,373.376,28,5,"C,F,H,N,O",C23 H16 F N O3,"6-[(~{E})-(3-fluoranyl-6~{H}-benzo[c][1]benzoxepin-11-ylidene)methyl]-4~{H}-1,4-benzoxazin-3-one",3
+ccd_qce,./data/rfd3/ccd_ligands/structures/QCE.cif,QCE,377.287,25,12,"C,H,N,O,P",C13 H20 N3 O8 P,N3-(N-(1-amino-4-methyl-1-oxopentan-2-yl)-2-amino-2-oxo-ethyl)-2'-deoxythymidine,3
+ccd_qlp,./data/rfd3/ccd_ligands/structures/QLP.cif,QLP,377.287,25,12,"C,H,N,O,P",C13 H20 N3 O8 P,N~2~-({3-HYDROXY-2-METHYL-5-[(PHOSPHONOOXY)METHYL]PYRIDIN-4-YL}METHYL)-L-GLUTAMINE,3
+ccd_zp0,./data/rfd3/ccd_ligands/structures/ZP0.cif,ZP0,377.435,27,8,"C,H,N,O",C19 H27 N3 O5,"N-{[(2S)-5,5-dimethyl-1,4-dioxan-2-yl]methyl}-4-(3-hydroxybenzoyl)piperazine-1-carboxamide",3
+ccd_0we,./data/rfd3/ccd_ligands/structures/0WE.cif,0WE,377.436,28,6,"C,H,N,O",C22 H23 N3 O3,"N-methyl-N-[(3-methyl-1-benzofuran-2-yl)methyl]-3-(7-oxo-5,6,7,8-tetrahydro-1,8-naphthyridin-3-yl)propanamide",3
+ccd_2nk,./data/rfd3/ccd_ligands/structures/2NK.cif,2NK,381.418,28,6,"C,F,H,N,O",C22 H21 F2 N3 O,"2,6-difluoro-4-{4-[4-(4-methylpiperazin-1-yl)phenyl]pyridin-3-yl}phenol",3
+ccd_gh2,./data/rfd3/ccd_ligands/structures/GH2.cif,GH2,386.389,26,9,"C,F,H,N,O,S",C17 H17 F3 N2 O3 S,"ethyl 2-[4-[4-[3,3,3-tris(fluoranyl)propylcarbamoyl]phenyl]-1,3-thiazol-2-yl]ethanoate",3
+ccd_a1f,./data/rfd3/ccd_ligands/structures/A1F.cif,A1F,390.472,27,7,"C,F,H,N,O,S",C20 H23 F N2 O3 S,"1-(2-fluoro-4-methylphenyl)-N-(2-oxo-1-propyl-1,2,3,4-tetrahydroquinolin-6-yl)methanesulfonamide",3
+ccd_7wt,./data/rfd3/ccd_ligands/structures/7WT.cif,7WT,390.513,28,5,"C,H,O",C23 H34 O5,"Z-7-[(1R,2R,3R,5S)-3,5-bis(oxidanyl)-2-[(3R)-3-oxidanyl-5-phenyl-pentyl]cyclopentyl]hept-5-enoic acid",3
+ccd_wqp,./data/rfd3/ccd_ligands/structures/WQP.cif,WQP,391.266,25,14,"C,H,N,O,P",C11 H22 N O12 P,"5-(ACETYLAMINO)-3,5-DIDEOXY-2-O-PHOSPHONO-D-ERYTHRO-L-MANNO-NONONIC ACID",3
+ccd_9zx,./data/rfd3/ccd_ligands/structures/9ZX.cif,9ZX,393.475,29,5,"C,H,N,O",C24 H27 N O4,4-methyl-3-(morpholin-4-ylmethyl)-7-[(2~{S})-2-phenylpropoxy]chromen-2-one,3
+ccd_1p5,./data/rfd3/ccd_ligands/structures/1P5.cif,1P5,394.473,29,9,"C,H,N,O",C20 H26 N8 O,"(3S)-1-[6-(2-aminopyrazolo[1,5-a]pyrimidin-3-yl)pyrimidin-4-yl]-N,N-diethylpiperidine-3-carboxamide",3
+ccd_r57,./data/rfd3/ccd_ligands/structures/R57.cif,R57,395.308,28,10,"C,F,H,N,O",C18 H13 F4 N3 O3,3-[(3-fluoro-4-methoxybenzyl)amino]-6-(trifluoromethyl)quinoxaline-2-carboxylic acid,3
+ccd_a1d6o,./data/rfd3/ccd_ligands/structures/A1D6O.cif,A1D6O,397.517,27,8,"C,H,N,O,S",C19 H19 N5 O S2,"1-[2-[(4,6-dimethyl-1,3-benzothiazol-2-yl)sulfanylmethyl]-3-methyl-phenyl]-4-methyl-1,2,3,4-tetrazol-5-one",3
+ccd_21p,./data/rfd3/ccd_ligands/structures/21P.cif,21P,398.600,27,6,"C,H,O,SI",C21 H26 O4 Si2,"4-[2-(1,1,3,3-tetramethyl-2,3-dihydro-1H-1,3-benzodisilol-5-yl)-1,3-dioxolan-2-yl]benzoic acid",3
+ccd_kzl,./data/rfd3/ccd_ligands/structures/KZL.cif,KZL,400.435,29,11,"C,H,N,O",C18 H24 N8 O3,"5-[(2-amino-1,1-dimethylethyl)amino]-7-[(3,5-dimethoxyphenyl)amino][1,2,4]triazolo[4,3-c]pyrimidine-8-carboxamide",4
+ccd_ayt,./data/rfd3/ccd_ligands/structures/AYT.cif,AYT,400.637,29,2,"C,H,O",C27 H44 O2,"(1~{S},3~{Z})-3-[(2~{E})-2-[(1~{S},3~{a}~{S},7~{a}~{S})-7~{a}-methyl-1-[(2~{S})-6-methyl-2-oxidanyl-heptan-2-yl]-2,3,3~{a},5,6,7-hexahydro-1~{H}-inden-4-ylidene]ethylidene]-4-methylidene-cyclohexan-1-ol",4
+ccd_ro4,./data/rfd3/ccd_ligands/structures/RO4.cif,RO4,401.498,28,9,"C,H,N,O",C19 H35 N3 O6,[[1-[N-HYDROXY-ACETAMIDYL]-3-METHYL-BUTYL]-CARBONYL-LEUCINYL]-ALANINE ETHYL ESTER,4
+ccd_wxh,./data/rfd3/ccd_ligands/structures/WXH.cif,WXH,406.425,28,9,"C,F,H,N,O,S",C19 H17 F3 N4 O S,"(4P)-4-[(2P)-2-(1,2,5,6-tetrahydropyridin-3-yl)-1H-pyrrolo[2,3-b]pyridin-5-yl]-N-(2,2,2-trifluoroethyl)thiophene-2-carboxamide",4
+ccd_er4,./data/rfd3/ccd_ligands/structures/ER4.cif,ER4,406.517,30,5,"C,H,N,O",C25 H30 N2 O3,(3R)-3-{[2-benzyl-6-(3-methoxypropoxy)pyridin-3-yl]ethynyl}-1-azabicyclo[2.2.2]octan-3-ol,4
+ccd_le6,./data/rfd3/ccd_ligands/structures/LE6.cif,LE6,408.873,28,7,"C,CL,H,O",C21 H25 Cl O6,"(2S,3R,4R,5S,6R)-2-[4-chloranyl-3-[(4-ethoxyphenyl)methyl]phenyl]-6-(hydroxymethyl)oxane-3,4,5-triol",4
+ccd_7i4,./data/rfd3/ccd_ligands/structures/7I4.cif,7I4,409.453,30,7,"C,F,H,N,O",C23 H24 F N3 O3,"1-[[2-fluoranyl-4-[5-[4-(2-methylpropyl)phenyl]-1,2,4-oxadiazol-3-yl]phenyl]methyl]azetidine-3-carboxylic acid",4
+ccd_5dq,./data/rfd3/ccd_ligands/structures/5DQ.cif,5DQ,410.413,28,10,"C,F,H,N,O,S",C18 H17 F3 N4 O2 S,"N-CYCLOPENTYL-2-[4-(TRIFLUOROMETHYL)PHENYL]-3H-IMIDAZO[4,5-B]PYRIDINE-7-SULFONAMIDE",4
+ccd_1r9,./data/rfd3/ccd_ligands/structures/1R9.cif,1R9,411.905,28,7,"C,CL,H,N,O,S",C21 H18 Cl N3 O2 S,"2-(2-chlorophenyl)-N-[5-(cyclopropylcarbamoyl)-2-methylphenyl]-1,3-thiazole-5-carboxamide",4
+ccd_9fr,./data/rfd3/ccd_ligands/structures/9FR.cif,9FR,412.519,30,5,"C,H,O",C25 H32 O5,"(6aS,8aR,12aS,12bR,13aR)-5,6a,9,9,12a,13a-hexamethyl-7,8,8a,9,11,12,12a,12b,13,13a-decahydro-3H-benzo[a]furo[3,4-j]xanthene-3,4,10(1H,6aH)-trione",4
+ccd_86d,./data/rfd3/ccd_ligands/structures/86D.cif,86D,419.323,28,11,"C,F,H,N,O,S",C17 H10 F5 N O4 S,"3-({(1S)-7-[(difluoromethyl)sulfonyl]-2,2-difluoro-1-hydroxy-2,3-dihydro-1H-inden-4-yl}oxy)-5-fluorobenzonitrile",4
+ccd_9m0,./data/rfd3/ccd_ligands/structures/9M0.cif,9M0,420.413,30,8,"C,F,H,N,O,S",C22 H13 F N2 O4 S,"3-[(2H-1,3-benzodioxol-5-yl)methyl]-8-fluoro-1-(1,3-thiazol-2-yl)[1]benzopyrano[2,3-c]pyrrol-9(2H)-one",4
+ccd_yzv,./data/rfd3/ccd_ligands/structures/YZV.cif,YZV,421.484,30,9,"C,F,H,N,O",C21 H29 F2 N5 O2,"(2S,5R)-5-[(1E,3S)-4,4-difluoro-3-hydroxy-4-phenylbut-1-en-1-yl]-1-[6-(1H-tetrazol-5-yl)hexyl]pyrrolidin-2-ol",4
+ccd_24r,./data/rfd3/ccd_ligands/structures/24R.cif,24R,421.519,30,9,"C,H,N,O,S",C21 H23 N7 O S,"N-[(1S,2R)-2-aminocyclohexyl]-4-[6-(1-methyl-1H-pyrazol-4-yl)pyrazolo[1,5-a]pyrimidin-3-yl]thiophene-2-carboxamide",4
+ccd_xwy,./data/rfd3/ccd_ligands/structures/XWY.cif,XWY,422.543,30,7,"C,H,N,O,S",C23 H26 N4 O2 S,(3R)-3-methyl-4-{6-[1-(S-methylsulfonimidoyl)cyclopropyl]-2-(naphthalen-1-yl)pyrimidin-4-yl}morpholine,4
+ccd_ebx,./data/rfd3/ccd_ligands/structures/EBX.cif,EBX,426.466,31,9,"C,H,N,O",C22 H26 N4 O5,"4-[[3,4-bis(oxidanylidene)-2-[[(1~{R})-1-(4-propan-2-ylfuran-2-yl)propyl]amino]cyclobuten-1-yl]amino]-~{N},~{N}-dimethyl-3-oxidanyl-pyridine-2-carboxamide",4
+ccd_u30,./data/rfd3/ccd_ligands/structures/U30.cif,U30,426.474,32,9,"C,H,N,O",C23 H22 N8 O,"3-[2-azanyl-6-[1-[[6-(2-oxidanylpropan-2-yl)pyridin-2-yl]methyl]-1,2,3-triazol-4-yl]pyrimidin-4-yl]-2-methyl-benzenecarbonitrile",4
+ccd_uii,./data/rfd3/ccd_ligands/structures/UII.cif,UII,427.495,28,11,"C,H,N,O,S",C17 H21 N3 O6 S2,2-[[3-[[methylsulfonyl-[(4-sulfamoylphenyl)methyl]amino]methyl]phenyl]amino]ethanoic acid,4
+ccd_idp,./data/rfd3/ccd_ligands/structures/IDP.cif,IDP,428.186,27,17,"C,H,N,O,P",C10 H14 N4 O11 P2,INOSINE-5'-DIPHOSPHATE,4
+ccd_4c4,./data/rfd3/ccd_ligands/structures/4C4.cif,4C4,431.522,31,7,"C,H,N,O",C24 H33 N O6,Myxopyronin B,4
+ccd_nei,./data/rfd3/ccd_ligands/structures/NEI.cif,NEI,434.190,23,11,"C,H,I,N,O",C12 H15 I N6 O4,"(2S,3S,4R,5R)-5-(6-AMINO-2-IODO-9H-PURIN-9-YL)-N-ETHYL-3,4-DIHYDROXYTETRAHYDROFURAN-2-CARBOXAMIDE",4
+ccd_dz2,./data/rfd3/ccd_ligands/structures/DZ2.cif,DZ2,439.914,20,7,"BR,C,CL,H,N,O",C13 H7 Br2 Cl2 N O2,"2,5-dichloro-N-(3,5-dibromo-4-hydroxyphenyl)benzamide",4
+ccd_s7i,./data/rfd3/ccd_ligands/structures/S7I.cif,S7I,439.958,30,7,"C,CL,H,N,O,S",C23 H22 Cl N3 O2 S,~{N}-[3-(5-carbamimidoylthiophen-3-yl)phenyl]-1-(4-chloranylphenoxy)cyclopentane-1-carboxamide,4
+ccd_htb,./data/rfd3/ccd_ligands/structures/HTB.cif,HTB,441.608,33,4,"C,H,N,O",C29 H35 N3 O,"N-(1-benzofuran-2-ylmethyl)-N'-(1,2,3,4-tetrahydroacridin-9-yl)heptane-1,7-diamine",4
+ccd_b36,./data/rfd3/ccd_ligands/structures/B36.cif,B36,444.567,34,3,"C,H,N,O",C31 H28 N2 O,6-{[1-(anthracen-9-ylcarbonyl)piperidin-4-yl]methyl}-2-methylquinoline,4
+ccd_b8z,./data/rfd3/ccd_ligands/structures/B8Z.cif,B8Z,445.487,30,10,"C,F,H,N,O,S",C20 H16 F N3 O4 S2,"~{N}-(5,6-dimethoxy-1,3-benzothiazol-2-yl)-2-[(4-fluoranylphenoxy)methyl]-1,3-thiazole-4-carboxamide",4
+ccd_bv0,./data/rfd3/ccd_ligands/structures/BV0.cif,BV0,445.494,33,9,"C,H,N,O",C24 H25 N6 O3,"6-azanyl-11-methyl-2-oxidanylidene-7-[[(2R)-oxolan-2-yl]methyl]-N-(pyridin-3-ylmethyl)-1,9-diaza-7-azoniatricyclo[8.4.0.0^{3,8}]tetradeca-3(8),4,6,9,11,13-hexaene-5-carboxamide",4
+ccd_5pb,./data/rfd3/ccd_ligands/structures/5PB.cif,5PB,451.925,31,8,"C,CL,H,N,O,S",C23 H18 Cl N3 O3 S,"4-[4-(benzyloxy)phenyl]-5-{[2-(4-chlorophenyl)-2-oxoethyl]sulfanyl}-2,4-dihydro-3H-1,2,4-triazol-3-one",4
+ccd_cfg,./data/rfd3/ccd_ligands/structures/CFG.cif,CFG,453.563,32,9,"C,H,N,O,SI",C23 H27 N3 O5 Si,"N-[(1R)-1-(4-methoxyphenyl)-2-oxo-2-{[4-(trimethylsilyl)phenyl]amino}ethyl]-N-methyl-3-oxo-2,3-dihydro-1,2-oxazole-5-carboxamide",4
+ccd_a1av7,./data/rfd3/ccd_ligands/structures/A1AV7.cif,A1AV7,454.519,33,9,"C,H,N,O",C24 H30 N4 O5,"N-[(2S)-1-{[(2S)-1-hydroxy-3-(2-oxo-1,2-dihydropyridin-3-yl)propan-2-yl]amino}-4-methyl-1-oxopentan-2-yl]-4-methoxy-1H-indole-2-carboxamide",4
+ccd_ot0,./data/rfd3/ccd_ligands/structures/OT0.cif,OT0,456.406,30,8,"C,CL,H,N,O",C22 H31 Cl2 N3 O3,"2-chloranyl-~{N}-[[1-[(2~{S},6~{R})-4-[(4-chlorophenyl)amino]-2,6-dimethyl-oxan-4-yl]carbonylpiperidin-4-yl]methyl]ethanamide",4
+ccd_5ec,./data/rfd3/ccd_ligands/structures/5EC.cif,5EC,457.563,33,8,"C,H,N,O",C25 H35 N3 O5,"ethyl (2Z,4S)-4-{[N-(3-methylbutanoyl)-L-phenylalanyl]amino}-5-[(3S)-2-oxopyrrolidin-3-yl]pent-2-enoate",4
+ccd_jgc,./data/rfd3/ccd_ligands/structures/JGC.cif,JGC,458.360,31,14,"C,H,N,O,P",C17 H23 N4 O9 P,Flavin mononucleotide (semi-quinone intermediate),4
+ccd_rjh,./data/rfd3/ccd_ligands/structures/RJH.cif,RJH,460.914,32,11,"C,CL,H,N,O",C21 H25 Cl N6 O4,"1-(3-chloranyl-4-methoxy-phenyl)-3-[7-[(3~{S})-3-(methoxymethyl)morpholin-4-yl]-2-methyl-pyrazolo[1,5-a]pyrimidin-6-yl]urea",4
+ccd_rl1,./data/rfd3/ccd_ligands/structures/RL1.cif,RL1,465.299,30,8,"BR,C,H,N,O",C22 H17 Br N4 O3,"[5-(6-bromo[1,2,4]triazolo[4,3-a]pyridin-3-yl)-2,4-dihydroxyphenyl](3,4-dihydroisoquinolin-2(1H)-yl)methanone",4
+ccd_ijg,./data/rfd3/ccd_ligands/structures/IJG.cif,IJG,465.492,32,11,"C,F,H,N,O,S",C21 H22 F3 N5 O2 S,"(3~{R},5~{R})-3-[2-[[methyl(prop-2-enyl)amino]methyl]-1,3-thiazol-4-yl]-5-[3-[4-(trifluoromethyl)phenyl]-1,2,4-oxadiazol-5-yl]pyrrolidin-3-ol",4
+ccd_epv,./data/rfd3/ccd_ligands/structures/EPV.cif,EPV,465.975,33,8,"C,CL,H,N,O",C25 H28 Cl N5 O2,"1-(5-tert-butoxy-2-chlorophenyl)-4-methyl-N-(2-methylpropyl)[1,2,4]triazolo[4,3-a]quinoxaline-8-carboxamide",4
+ccd_hr6,./data/rfd3/ccd_ligands/structures/HR6.cif,HR6,467.459,30,13,"C,H,N,O,P,S",C17 H18 N5 O5 P S2,"(2S,4aR,6R,7R,7aS)-6-[6-amino-8-(benzylsulfanyl)-9H-purin-9-yl]-2-sulfanyltetrahydro-4H-furo[3,2-d][1,3,2]dioxaphosphinin-7-ol 2-oxide",4
+ccd_cdd,./data/rfd3/ccd_ligands/structures/CDD.cif,CDD,467.829,32,12,"C,CL,F,H,N,O",C20 H17 Cl F3 N5 O3,"2-(6-CHLORO-3-{[2,2-DIFLUORO-2-(1-OXIDO-2-PYRIDINYL)ETHYL]AMINO}-2-OXO-1(2H)-PYRAZINYL)-N-[(2-FLUOROPHENYL)METHYL]ACETAMIDE",4
+ccd_i5g,./data/rfd3/ccd_ligands/structures/I5G.cif,I5G,471.336,32,9,"C,CL,H,N,O",C23 H20 Cl2 N4 O3,"1-chloranyl-~{N}-[(~{S})-(3-chloranyl-4-cyano-phenyl)-[(2~{R},4~{S})-4-oxidanylpyrrolidin-2-yl]methyl]-7-methoxy-isoquinoline-6-carboxamide",5
+ccd_xg5,./data/rfd3/ccd_ligands/structures/XG5.cif,XG5,474.470,34,14,"C,H,N,O",C20 H26 N8 O6,"(2R,3R,4R,5S)-1-(2-{6-[2-(4-azido-2-nitroanilino)ethyl]pyrazin-2-yl}ethyl)-2-(hydroxymethyl)piperidine-3,4,5-triol",5
+ccd_g81,./data/rfd3/ccd_ligands/structures/G81.cif,G81,475.578,34,9,"C,H,N,O",C25 H37 N3 O6,ETHYL (4R)-4-{[N-(TERT-BUTOXYCARBONYL)-L-PHENYLALANYL]AMINO}-5-[(3S)-2-OXOPYRROLIDIN-3-YL]PENTANOATE,5
+ccd_m3k,./data/rfd3/ccd_ligands/structures/M3K.cif,M3K,478.229,26,9,"C,F,H,I,N,O",C17 H17 F2 I N2 O4,"2-([3R-3,4-dihydroxybutyl]oxy)-4-fluoro-6-[(2-fluoro-4-iodophenyl)amino]benzamide",5
+ccd_1uf,./data/rfd3/ccd_ligands/structures/1UF.cif,1UF,479.894,32,13,"C,CL,H,N,O,S",C19 H18 Cl N5 O6 S,"N-{4-[(2-amino-6-methyl-4-oxo-4,7-dihydro-3H-pyrrolo[2,3-d]pyrimidin-5-yl)sulfanyl]-2-chlorobenzoyl}-L-glutamic acid",5
+ccd_a1eec,./data/rfd3/ccd_ligands/structures/A1EEC.cif,A1EEC,480.386,33,7,"C,CL,H,N,O",C26 H23 Cl2 N3 O2,"(2~{R})-2-[2-[1-[(1~{R})-1-[2,6-bis(chloranyl)-3-cyclopropyl-phenyl]ethyl]imidazo[4,5-c]pyridin-6-yl]phenyl]propanoic acid",5
+ccd_kvk,./data/rfd3/ccd_ligands/structures/KVK.cif,KVK,480.601,32,11,"C,H,N,O,S",C21 H28 N4 O5 S2,"6-[4-[[3-oxidanyl-1,1-bis(oxidanylidene)-5-phenyl-2-propan-2-yl-3~{H}-1,2-thiazol-4-yl]amino]butyl]pyridine-2-sulfonamide",5
+ccd_51w,./data/rfd3/ccd_ligands/structures/51W.cif,51W,481.334,27,9,"C,H,I,N,O",C18 H24 I N7 O,N-[3-({4-[(3-aminopropyl)amino]-5-iodopyrimidin-2-yl}amino)phenyl]pyrrolidine-1-carboxamide,5
+ccd_ojr,./data/rfd3/ccd_ligands/structures/OJR.cif,OJR,481.614,34,10,"C,H,N,O,S",C24 H31 N7 O2 S,"(2P)-4'-(piperidin-4-yl)-4-[(piperidin-4-yl)methyl]-2-(1H-tetrazol-5-yl)[1,1'-biphenyl]-3-sulfonamide",5
+ccd_csg,./data/rfd3/ccd_ligands/structures/CSG.cif,CSG,482.172,29,20,"C,H,N,O,P",C9 H17 N4 O13 P3,2'-amino-2'-deoxycytidine 5'-(tetrahydrogen triphosphate),5
+ccd_scb,./data/rfd3/ccd_ligands/structures/SCB.cif,SCB,482.936,33,9,"C,CL,H,N,O,S",C24 H19 Cl N2 O5 S,"2-CHLORO-5-(5-{(E)-[(2Z)-3-(2-METHOXYETHYL)-4-OXO-2-(PHENYLIMINO)-1,3-THIAZOLIDIN-5-YLIDENE]METHYL}-2-FURYL)BENZOIC ACID",5
+ccd_9cs,./data/rfd3/ccd_ligands/structures/9CS.cif,9CS,483.514,33,15,"C,H,N,O",C18 H37 N5 O10,"(1R,2S,3S,4R,6S)-4,6-DIAMINO-3-[(3-AMINO-3-DEOXY-ALPHA-D-GLUCOPYRANOSYL)OXY]-2-HYDROXYCYCLOHEXYL 2,6-DIAMINO-2,6-DIDEOXY-ALPHA-D-GLUCOPYRANOSIDE",5
+ccd_c0z,./data/rfd3/ccd_ligands/structures/C0Z.cif,C0Z,484.010,33,8,"C,CL,H,N,O,S",C25 H26 Cl N3 O3 S,"6-CHLORO-N-[(3S)-1-[(1S)-1-DIMETHYLAMINO-2,3-DIHYDRO-1H-INDEN-5-YL]-2-OXO-PYRROLIDIN-3-YL]NAPHTHALENE-2-SULFONAMIDE",5
+ccd_ham,./data/rfd3/ccd_ligands/structures/HAM.cif,HAM,484.361,33,17,"C,H,N,O,P",C16 H21 N8 O8 P,HISTIDYL-ADENOSINE MONOPHOSPHATE,5
+ccd_8vm,./data/rfd3/ccd_ligands/structures/8VM.cif,8VM,485.642,34,9,"C,H,N,O,S",C25 H35 N5 O3 S,"5-(3-{4-[(2S)-2-hydroxy-3,3-dimethylbutoxy]-3-methylphenyl}pentan-3-yl)-3-methyl-N-(1H-tetrazol-5-yl)thiophene-2-carboxamide",5
+ccd_3v0,./data/rfd3/ccd_ligands/structures/3V0.cif,3V0,487.221,27,10,"C,F,H,I,N,O",C17 H15 F I N3 O5,"N-{[(2R)-2,3-dihydroxypropyl]oxy}-3-[(2-fluoro-4-iodophenyl)amino]furo[3,2-c]pyridine-2-carboxamide",5
+ccd_waa,./data/rfd3/ccd_ligands/structures/WAA.cif,WAA,488.661,36,5,"C,H,N,O",C31 H40 N2 O3,"(2S)-2-[[(1R,4aR,4bR,10aR)-1,4a-dimethyl-7-propan-2-yl-2,3,4,4b,5,6,10,10a-octahydrophenanthren-1-yl]carbonylamino]-3-( 1H-indol-3-yl)propanoic acid",5
+ccd_033,./data/rfd3/ccd_ligands/structures/033.cif,033,492.544,35,9,"C,H,N,O,S",C26 H24 N2 O6 S,"N-({4'-[(1-BENZOFURAN-2-YLCARBONYL)AMINO]-1,1'-BIPHENYL-4-YL}SULFONYL)-L-VALINE",5
+ccd_dj8,./data/rfd3/ccd_ligands/structures/DJ8.cif,DJ8,492.957,35,10,"C,CL,H,N,O",C25 H25 Cl N6 O3,"1-[(4-chloranyl-2-methyl-phenyl)methyl]-3-(7,10-dioxa-13,17,18,21-tetrazatetracyclo[12.5.2.1^{2,6}.0^{17,20}]docosa-1(20),2(22),3,5,14(21),15,18-heptaen-5-yl)urea",5
+ccd_3qf,./data/rfd3/ccd_ligands/structures/3QF.cif,3QF,495.365,32,17,"C,H,N,O,P",C15 H27 N7 O8 P2,"[2-([2-(2-amino-6-oxo-1,6-dihydro-9H-purin-9-yl)ethyl]{2-[(2-oxoethyl)(2-phosphonoethyl)amino]ethyl}amino)ethyl]phosphonic acid",5
+ccd_a1irs,./data/rfd3/ccd_ligands/structures/A1IRS.cif,A1IRS,496.622,35,9,"C,H,N,O,S",C26 H32 N4 O4 S,(2~{S})-2-[[(2~{S})-6-azanyl-2-[[(2~{S})-3-phenyl-2-sulfanyl-propanoyl]amino]hexanoyl]amino]-3-(1~{H}-indol-3-yl)propanoic acid,5
+ccd_qh8,./data/rfd3/ccd_ligands/structures/QH8.cif,QH8,497.563,35,10,"C,H,N,O,S",C25 H27 N3 O6 S,1-[3-[(4-butylphenyl)sulfonyl-(2-hydroxy-2-oxoethyl)amino]phenyl]-5-cyclopropyl-pyrazole-4-carboxylic acid,5
+ccd_rt9,./data/rfd3/ccd_ligands/structures/RT9.cif,RT9,499.967,34,10,"C,CL,H,N,O,S",C24 H22 Cl N3 O5 S,"(4S)-6-chloro-N-(isoquinolin-4-yl)-2-[(1-methoxycyclopropyl)methanesulfonyl]-1-oxo-1,2,3,4-tetrahydroisoquinoline-4-carboxamide",5
+ccd_g0d,./data/rfd3/ccd_ligands/structures/G0D.cif,G0D,505.672,36,7,"C,H,N,O,S",C29 H35 N3 O3 S,tert-butyl [(2R)-1-{[(2R)-1-oxo-3-phenyl-1-{[(pyridin-3-yl)methyl]amino}propan-2-yl]sulfanyl}-3-phenylpropan-2-yl]carbamate,5
+ccd_a1id9,./data/rfd3/ccd_ligands/structures/A1ID9.cif,A1ID9,506.383,32,8,"BR,C,F,H,N,O",C24 H26 Br F2 N3 O2,"(1~{R})-2-[4-[[4-bromanyl-3,5-bis(fluoranyl)phenyl]methylamino]cyclohexyl]-1-(6-methoxy-1,5-naphthyridin-4-yl)ethanol",5
+ccd_szp,./data/rfd3/ccd_ligands/structures/SZP.cif,SZP,506.830,33,13,"C,CL,F,H,N,O,S",C20 H12 Cl F5 N2 O4 S,"N-(2-chloro-5-{[4-(trifluoromethoxy)phenyl]sulfamoyl}phenyl)-3,5-difluorobenzamide",5
+ccd_6ss,./data/rfd3/ccd_ligands/structures/6SS.cif,6SS,514.419,35,8,"C,CL,F,H,N,O",C27 H26 Cl2 F N3 O2,"(3~{S},3'~{S},4'~{S},5'~{S})-4'-azanyl-6-chloranyl-3'-(3-chloranyl-2-fluoranyl-phenyl)-1'-[(3-ethoxyphenyl)methyl]-5'-methyl-spiro[1~{H}-indole-3,2'-pyrrolidine]-2-one",5
+ccd_fdj,./data/rfd3/ccd_ligands/structures/FDJ.cif,FDJ,514.641,30,19,"C,CL,H,N,O,P",C11 H18 Cl N2 O13 P3,5'-O-[(R)-{[(R)-[(R)-chloro(phosphono)methyl](hydroxy)phosphoryl]oxy}(hydroxy)phosphoryl]thymidine,5
+ccd_a1ivd,./data/rfd3/ccd_ligands/structures/A1IVD.cif,A1IVD,517.585,34,12,"C,F,H,N,O,S",C22 H26 F3 N3 O4 S2,"N,N-dimethyl-4-[1'-[2,2,2-tris(fluoranyl)ethyl]spiro[2H-indole-3,4'-piperidine]-1-yl]sulfonyl-benzenesulfonamide",5
+ccd_7t5,./data/rfd3/ccd_ligands/structures/7T5.cif,7T5,518.622,38,8,"C,F,H,N,O",C30 H35 F N4 O3,"(2S,4S)-4-fluoranyl-N-[(3R,5R)-5-[[[4-[2-(4-methylphenyl)ethynyl]phenyl]carbonylamino]methyl]-1-(2-methylpropanoyl)pyrrolidin-3-yl]pyrrolidine-2-carboxamide",5
+ccd_dry,./data/rfd3/ccd_ligands/structures/DRY.cif,DRY,521.603,39,6,"C,H,N,O",C33 H31 N O5,[(1-{3-[(6-BENZOYL-1-PROPYL-2-NAPHTHYL)OXY]PROPYL}-1H-INDOL-5-YL)OXY]ACETIC ACID,5
+ccd_wiq,./data/rfd3/ccd_ligands/structures/WIQ.cif,WIQ,524.014,37,11,"C,CL,H,N,O",C26 H30 Cl N7 O3,"3-[(6-chloro-1-cyclopropyl-1H-benzimidazol-5-yl)ethynyl]-1-[(3S,5S)-5-(methoxymethyl)-1-(prop-2-enoyl)pyrrolidin-3-yl]-5-(methylamino)-1H-pyrazole-4-carboxamide",5
+ccd_v7y,./data/rfd3/ccd_ligands/structures/V7Y.cif,V7Y,528.564,40,10,"C,H,N,O",C30 H24 N8 O2,"2-amino-N-[(1S)-1-{8-[(1-methyl-1H-pyrazol-4-yl)ethynyl]-1-oxo-2-phenyl-1,2-dihydroisoquinolin-3-yl}ethyl]pyrazolo[1,5-a]pyrimidine-3-carboxamide",5
+ccd_a1add,./data/rfd3/ccd_ligands/structures/A1ADD.cif,A1ADD,529.455,34,11,"C,CL,F,H,N,O,S",C23 H27 Cl2 F N4 O3 S,"(S~1~S,3S)-N-{3,5-dichloro-4-[(2S)-2-phenylmorpholine-4-carbonyl]phenyl}-3-(dimethylamino)pyrrolidine-1-sulfonimidoyl fluoride",5
+ccd_ddi,./data/rfd3/ccd_ligands/structures/DDI.cif,DDI,529.580,39,8,"C,H,N,O",C31 H31 N O7,"SPIRO[NAPHTHALENE-2(3H),3'(10'H)-PENTALENO[1,2-B]NAPHTHALENE]-3,10'-DIONE, 2'-[(2-AMINO-2-DEOXY-B-D-GULOPYRANOSYL)OXY]-1,1',2',3'A,4,10'A-HEXAHYDRO-,(2'R,3'AS,10'AR)-(9CI)",5
+ccd_unw,./data/rfd3/ccd_ligands/structures/UNW.cif,UNW,532.033,38,9,"C,CL,H,N,O",C29 H30 Cl N5 O3,"6-[5-chloranyl-2-(oxan-4-ylamino)pyrimidin-4-yl]-2-[2-oxidanylidene-2-(1,3,4,5-tetrahydro-2-benzazepin-2-yl)ethyl]-3~{H}-isoindol-1-one",5
+ccd_7a1,./data/rfd3/ccd_ligands/structures/7A1.cif,7A1,534.628,39,11,"C,F,H,N,O",C28 H35 F N8 O2,6-[4-[(6-azanylpyridin-3-yl)methylcarbamoylamino]-3-fluoranyl-phenyl]-2-(ethylamino)-~{N}-(2-piperidin-1-ylethyl)pyridine-3-carboxamide,5
+ccd_1i9,./data/rfd3/ccd_ligands/structures/1I9.cif,1I9,537.053,38,10,"C,CL,H,N,O",C28 H33 Cl N6 O3,"3-[4-(5-chloropyridin-3-yl)-2-[(R)-cyclopropyl(ethoxy)methyl]-3-{(1R)-1-[(1r,4R)-4-methylcyclohexyl]ethyl}-3H-imidazo[4,5-c]pyridin-6-yl]-1,2,4-oxadiazol-5(4H)-one",5
+ccd_hvt,./data/rfd3/ccd_ligands/structures/HVT.cif,HVT,537.733,39,7,"C,H,N,O",C32 H47 N3 O4,"(3~{S},7~{S},8~{S})-8-(naphthalen-2-ylmethyl)-7-oxidanyl-3-propan-2-yl-1,4,9-triazacyclohenicosane-2,5,10-trione",5
+ccd_2sz,./data/rfd3/ccd_ligands/structures/2SZ.cif,2SZ,543.618,41,9,"C,H,N,O",C32 H29 N7 O2,6-(1H-benzimidazol-1-yl)-N-hydroxy-5-[4-({6-[(4-methylpiperazin-1-yl)methyl]pyridin-3-yl}ethynyl)phenyl]pyridine-3-carboxamide,6
+ccd_a1ako,./data/rfd3/ccd_ligands/structures/A1AKO.cif,A1AKO,547.980,37,12,"C,CL,F,H,N,O,S",C25 H21 Cl F3 N5 O2 S,"(4S)-3-(4-chlorophenyl)-N'-[(1E)-ethanimidoyl]-4-phenyl-N-[4-(trifluoromethyl)benzene-1-sulfonyl]-4,5-dihydro-1H-pyrazole-1-carboximidamide",6
+ccd_anj,./data/rfd3/ccd_ligands/structures/ANJ.cif,ANJ,548.625,39,11,"C,H,N,O",C28 H40 N2 O9,"(2R,3S,6S,7R,8R)-3-{[3-(FORMYLAMINO)-2-HYDROXYBENZOYL]AMINO}-8-HEXYL-2,6-DIMETHYL-4,9-DIOXO-1,5-DIOXONAN-7-YL (2S)-2-METHYLBUTANOATE",6
+ccd_vt8,./data/rfd3/ccd_ligands/structures/VT8.cif,VT8,549.086,31,20,"C,CL,H,N,O,P",C11 H17 Cl2 N2 O13 P3,5'-O-[(R)-{[(R)-[dichloro(phosphono)methyl](hydroxy)phosphoryl]oxy}(hydroxy)phosphoryl]thymidine,6
+ccd_4yb,./data/rfd3/ccd_ligands/structures/4YB.cif,4YB,550.499,38,17,"C,H,N,O,S",C21 H22 N6 O10 S,5'-O-{[4-(2-carboxyphenyl)-4-oxobutanoyl]sulfamoyl}adenosine,6
+ccd_a1h7c,./data/rfd3/ccd_ligands/structures/A1H7C.cif,A1H7C,551.095,37,10,"C,CL,H,N,O,S",C27 H35 Cl N2 O6 S,"(4-chloranyl-1,3-thiazol-5-yl)methyl (2S)-1-[(2S)-2-cyclohexyl-2-(3,4,5-trimethoxyphenyl)ethanoyl]piperidine-2-carboxylate",6
+ccd_q70,./data/rfd3/ccd_ligands/structures/Q70.cif,Q70,556.500,39,13,"C,F,H,N,O",C26 H26 F6 N4 O3,Osugacestat,6
+ccd_90h,./data/rfd3/ccd_ligands/structures/90H.cif,90H,561.594,39,14,"C,F,H,N,O",C25 H38 F3 N5 O6,"(1R,2S,5S)-N-{(2S,3R)-3-hydroxy-4-(methylamino)-4-oxo-1-[(3S)-2-oxopyrrolidin-3-yl]butan-2-yl}-6,6-dimethyl-3-[3-methyl-N-(trifluoroacetyl)-L-valyl]-3-azabicyclo[3.1.0]hexane-2-carboxamide",6
+ccd_wgo,./data/rfd3/ccd_ligands/structures/WGO.cif,WGO,561.621,38,14,"C,F,H,N,O,S",C24 H36 F N3 O9 S,"N~2~-{[2-(4-fluorophenoxy)-2-methylpropoxy]carbonyl}-N-{(1R,2S)-1-hydroxy-3-[(3S)-2-oxopyrrolidin-3-yl]-1-sulfanylpropan-2-yl}-L-leucinamide",6
+ccd_660,./data/rfd3/ccd_ligands/structures/660.cif,660,564.329,36,20,"C,H,N,O,P",C16 H26 N2 O16 P2,"[[(2~{R},3~{S},4~{R},5~{R})-5-[2,4-bis(oxidanylidene)pyrimidin-1-yl]-3,4-bis(oxidanyl)oxolan-2-yl]methoxy-oxidanyl-phosphoryl]oxy-[[(2~{S},3~{R},4~{S},5~{S},6~{R})-6-(hydroxymethyl)-3,4,5-tris(oxidanyl)oxan-2-yl]methyl]phosphinic acid",6
+ccd_5zl,./data/rfd3/ccd_ligands/structures/5ZL.cif,5ZL,565.129,33,24,"C,H,N,O,P",C9 H17 N2 O18 P4,"[[(2~{R},3~{S},4~{R},5~{R})-3,4-bis(oxidanyl)-5-(2-oxidanyl-4-phosphonooxy-pyrimidin-1-yl)oxolan-2-yl]methoxy-oxidanyl-phosphoryl] phosphono hydrogen phosphate",6
+ccd_274,./data/rfd3/ccd_ligands/structures/274.cif,274,568.087,39,11,"C,CL,H,N,O,S",C28 H30 Cl N5 O4 S,"(3Z)-N-(3-CHLOROPHENYL)-3-({3,5-DIMETHYL-4-[(4-METHYLPIPERAZIN-1-YL)CARBONYL]-1H-PYRROL-2-YL}METHYLENE)-N-METHYL-2-OXOINDOLINE-5-SULFONAMIDE",6
+ccd_uew,./data/rfd3/ccd_ligands/structures/UEW.cif,UEW,568.752,42,8,"C,H,N,O",C34 H44 N6 O2,N-(((R)-1-(6-(benzylamino)pyrimidin-4-yl)-3-hydroxypiperidin-3-yl)methyl)-4-(((S)-1-isopropyl-2-azaspiro[3.3]heptan-2-yl)methyl)benzamide,6
+ccd_7q6,./data/rfd3/ccd_ligands/structures/7Q6.cif,7Q6,570.142,31,21,"C,H,N,O,P,SE",C10 H16 N5 O12 P3 Se,"[[(2R,3S,5R)-5-(2-azanyl-6-oxidanylidene-1H-purin-9-yl)-3-oxidanyl-oxolan-2-yl]methoxy-selanyl-phosphoryl] phosphono hydrogen phosphate",6
+ccd_d30,./data/rfd3/ccd_ligands/structures/D30.cif,D30,570.619,40,9,"C,F,H,O,S",C31 H29 F3 O5 S,"[(4-{[2-(pent-2-yn-1-yloxy)-4-{[4-(trifluoromethyl)phenoxy]methyl}phenyl]sulfanyl}-5,6,7,8-tetrahydronaphthalen-1-yl)oxy]acetic acid",6
+ccd_vra,./data/rfd3/ccd_ligands/structures/VRA.cif,VRA,572.337,31,12,"C,F,H,I,N,O,S",C19 H20 F3 I N2 O5 S,"N-{3,4-difluoro-2-[(2-fluoro-4-iodophenyl)amino]-6-methoxyphenyl}-1-[(2S)-2,3-dihydroxypropyl]cyclopropanesulfonamide",6
+ccd_gnq,./data/rfd3/ccd_ligands/structures/GNQ.cif,GNQ,572.597,39,14,"C,F,H,N,O,S",C25 H31 F3 N4 O6 S,N-[(1R)-1-[(BENZYLSULFONYL)METHYL]-2-{[(1S)-1-METHYL-2-{[4-(TRIFLUOROMETHOXY)PHENYL]AMINO}ETHYL]AMINO}-2-OXOETHYL]MORPHOLINE-4-CARBOXAMIDE,6
+ccd_kxg,./data/rfd3/ccd_ligands/structures/KXG.cif,KXG,575.381,36,21,"C,H,N,O,P,S",C15 H23 N5 O13 P2 S,"[[(2~{R},3~{S},4~{R},5~{R})-5-(6-aminopurin-9-yl)-3,4-bis(oxidanyl)oxolan-2-yl]methoxy-oxidanyl-phosphoryl] [(3~{S},4~{R},5~{R})-3,4-bis(oxidanyl)-5-sulfanyl-oxolan-2-yl]methyl hydrogen phosphate",6
+ccd_urr,./data/rfd3/ccd_ligands/structures/URR.cif,URR,575.695,38,14,"C,H,N,O,S",C24 H37 N3 O9 S2,"N~2~-(ethoxycarbonyl)-N-{(1S,2S)-1-hydroxy-3-[(3S)-2-oxopyrrolidin-3-yl]-1-sulfanylpropan-2-yl}-L-leucinamide",6
+ccd_7vw,./data/rfd3/ccd_ligands/structures/7VW.cif,7VW,576.725,41,11,"C,H,N,O",C30 H48 N4 O7,N-[(benzyloxy)carbonyl]-O-tert-butyl-L-threonyl-N-{(2S)-1-hydroxy-3-[(3S)-2-oxopyrrolidin-3-yl]propan-2-yl}-4-methyl-L-leucinamide,6
+ccd_lbr,./data/rfd3/ccd_ligands/structures/LBR.cif,LBR,577.675,36,6,"BR,C,H,O",C30 H57 Br O5,(2S)-1-[(13-bromotridecanoyl)oxy]-3-hydroxypropan-2-yl tetradecanoate,6
+ccd_sln,./data/rfd3/ccd_ligands/structures/SLN.cif,SLN,581.411,38,20,"C,H,N,O,P",C18 H29 N7 O11 P2,"1-(4-AZIDO-2-NITROPHENYL)AMINO-3-(1-OXYL-2,2,5,5-TETRAMETHYLPYRROLIDINYL-3-CARBAMIDO)-2-PROPYLDISPHOSPHATE",6
+ccd_gbr,./data/rfd3/ccd_ligands/structures/GBR.cif,GBR,584.104,32,21,"BR,C,H,N,O,P",C11 H17 Br N5 O12 P3,5'-O-[(R)-{[(S)-[(R)-bromo(phosphono)methyl](hydroxy)phosphoryl]oxy}(hydroxy)phosphoryl]-2'-deoxyguanosine,6
+ccd_2iu,./data/rfd3/ccd_ligands/structures/2IU.cif,2IU,584.258,37,20,"C,H,N,O,P",C17 H19 N2 O15 P3,"[[(2R,3S,5R)-5-[5-(1-benzofuran-2-yl)-2,4-bis(oxidanylidene)pyrimidin-1-yl]-3-oxidanyl-oxolan-2-yl]methoxy-oxidanyl-phosphoryl] phosphono hydrogen phosphate",6
+ccd_8b8,./data/rfd3/ccd_ligands/structures/8B8.cif,8B8,584.665,43,11,"C,H,N,O",C32 H36 N6 O5,(2S)-3-(1H-indol-3-yl)-N-[[1-(5-methoxypyridin-2-yl)cyclohexyl]methyl]-2-methyl-2-[(4-nitrophenyl)carbamoylamino]propanamide,6
+ccd_a1iv1,./data/rfd3/ccd_ligands/structures/A1IV1.cif,A1IV1,592.145,39,11,"C,CL,F,H,N,O,S",C28 H31 Cl F N3 O4 S2,"4-[[(3R)-3-[1-(4-chloranyl-2-fluoranyl-phenyl)piperidin-4-yl]-3-methyl-2H-indol-1-yl]sulfonyl]-N,N-dimethyl-benzenesulfonamide",6
+ccd_l5f,./data/rfd3/ccd_ligands/structures/L5F.cif,L5F,592.663,42,12,"C,H,N,O,S",C30 H32 N4 O7 S,"2-[(1S,2R,8S)-2,4,32-trimethyl-28,28-bis(oxidanylidene)-19,22,27-trioxa-28$l^{6}-thia-1,14,15,16-tetrazahexacyclo[21.5.3.1^{3,7}.1^{9,13}.0^{12,16}.0^{26,30}]tritriaconta-3(33),4,6,9(32),10,12,14,23,25,30-decaen-8-yl]ethanoic acid",6
+ccd_3bp,./data/rfd3/ccd_ligands/structures/3BP.cif,3BP,592.709,42,12,"C,H,N,O,S",C30 H36 N6 O5 S,2-(3-BIPHENYL-4-YL-2-ETHANESULFONYLAMINO-PROPIONYLAMINO)-PENTANEDIOIC ACID 5-AMIDE 1-(4-CARBAMIMIDOYL-BENZYLAMIDE),6
+ccd_hjn,./data/rfd3/ccd_ligands/structures/HJN.cif,HJN,594.594,41,14,"C,H,N,O,P",C27 H39 N4 O9 P,"[(2~{R},3~{S},4~{S})-5-[5-[(2~{Z})-3,7-dimethylocta-2,6-dienyl]-7,8-dimethyl-2,4-bis(oxidanylidene)-1~{H}-benzo[g]pteridin-10-yl]-2,3,4-tris(oxidanyl)pentyl] dihydrogen phosphate",6
+ccd_nqi,./data/rfd3/ccd_ligands/structures/NQI.cif,NQI,600.667,43,15,"C,H,N,O",C28 H40 N8 O7,N~2~-[(2S)-2-{[(2R)-4-ETHOXY-2-HYDROXY-4-OXOBUTANOYL]AMINO}PENT-4-ENOYL]-L-ARGINYL-L-TRYPTOPHANAMIDE,6
+ccd_45b,./data/rfd3/ccd_ligands/structures/45B.cif,45B,602.058,43,12,"C,CL,F,H,N,O",C31 H29 Cl F N7 O3,4-{[2-({4-[2-(4-acetylpiperazin-1-yl)-2-oxoethyl]phenyl}amino)-5-fluoropyrimidin-4-yl]amino}-N-(2-chlorophenyl)benzamide,6
+ccd_ofh,./data/rfd3/ccd_ligands/structures/OFH.cif,OFH,603.962,39,16,"C,CL,F,H,N,O,S",C23 H24 Cl F6 N3 O5 S,"(4R)-4-[(2-chloro-4-{[(2S)-1,1,1-trifluoropropan-2-yl]oxy}phenyl)sulfonyl]-N-{1-[(E)-iminomethyl]cyclopropyl}-1-{[1-(trifluoromethyl)cyclopropyl]carbonyl}-L-prolinamide",6
+ccd_318,./data/rfd3/ccd_ligands/structures/318.cif,318,606.703,44,10,"C,F,H,N,O",C34 H40 F2 N4 O4,"N'-[(1S,2S)-2-[(4S)-1-benzyl-5-oxoimidazolidin-4-yl]-1-(3,5-difluorobenzyl)-2-hydroxyethyl]-5-methyl-N,N-dipropylbenzene-1,3-dicarboxamide",6
+ccd_oqy,./data/rfd3/ccd_ligands/structures/OQY.cif,OQY,611.726,44,11,"C,H,N,O",C33 H45 N3 O8,"(3R,3aS,6aR)-hexahydrofuro[2,3-b]furan-3-yl [(2S,4S,5S)-4-hydroxy-5-{[N-(methoxycarbonyl)-3-methyl-L-valyl]amino}-1,6-diphenylhexan-2-yl]carbamate",6
+ccd_fw8,./data/rfd3/ccd_ligands/structures/FW8.cif,FW8,613.711,46,11,"C,H,N,O",C35 H35 N9 O2,"1-[(10~{b}~{S})-6-oxidanylidene-2,3,4,10~{b}-tetrahydro-1~{H}-pyrido[2,1-a]isoindol-10-yl]-3-[4-[1-[2-(1,2,3,4-tetrahydroacridin-9-ylamino)ethyl]-1,2,3-triazol-4-yl]pyridin-2-yl]urea",6
+ccd_ueh,./data/rfd3/ccd_ligands/structures/UEH.cif,UEH,615.766,45,11,"C,H,N,O",C34 H45 N7 O4,"(R)-4-((4,4-dimethylpiperidin-1-yl)methyl)-2-hydroxy-N-((3-hydroxy-1-(6-((3-(methylcarbamoyl)benzyl)amino)pyrimidin-4-yl)piperidin-3-yl)methyl)benzamide",6
+ccd_j12,./data/rfd3/ccd_ligands/structures/J12.cif,J12,621.745,43,14,"C,H,N,O,S",C29 H43 N5 O8 S,"N-{3-[4-(3-AMINO-PROPYL)-PIPERAZIN-1-YL]-PROPYL}-3-(2-THIOPHEN-2-YL-ACETYLAMINO)-5-(3,4,5-TRIHYDROXY-6-HYDROXYMETHYL-TETRAHYDRO-PYRAN-2-YLOXY)-BENZAMIDE",7
+ccd_52z,./data/rfd3/ccd_ligands/structures/52Z.cif,52Z,622.727,43,13,"C,H,N,O,S",C30 H42 N2 O10 S,"(3R,3aS,4S,7aS)-3-hydroxyhexahydro-4H-furo[2,3-b]pyran-4-yl [(2S,3R)-3-hydroxy-1-(4-methoxyphenyl)-4-{[(4-methoxyphenyl)sulfonyl](2-methylpropyl)amino}butan-2-yl]carbamate",7
+ccd_g6h,./data/rfd3/ccd_ligands/structures/G6H.cif,G6H,631.604,46,14,"C,F,H,N,O",C32 H28 F3 N7 O4,"N-{4-methyl-3-[(3-{4-[(3,4,5-trimethoxyphenyl)amino]-1,3,5-triazin-2-yl}pyridin-2-yl)amino]phenyl}-3-(trifluoromethyl)benzamide",7
+ccd_yjy,./data/rfd3/ccd_ligands/structures/YJY.cif,YJY,634.612,45,13,"C,F,H,N,O",C32 H32 F6 N4 O3,"(6S)-1-[3,5-bis(trifluoromethyl)phenyl]-6-{(5M)-5-(3,5-dimethyl-1,2-oxazol-4-yl)-1-[(1s,4R)-4-methoxycyclohexyl]-1H-benzimidazol-2-yl}piperidin-2-one",7
+ccd_98o,./data/rfd3/ccd_ligands/structures/98O.cif,98O,636.156,45,11,"C,CL,F,H,N,O",C34 H39 Cl F N5 O4,"(2S,4S)-N-((3R,5R)-5-((2-chloro-4-((4-(morpholinomethyl)phenyl)ethynyl)benzamido)methyl)-1-(cyclopropanecarbonyl)pyrrolidin-3-yl)-4-fluoropyrrolidine-2-carboxamide",7
+ccd_ph1,./data/rfd3/ccd_ligands/structures/PH1.cif,PH1,637.158,45,2,"C,H,O",C43 H88 O2,"1,2-[DI-2,6,10,14-TETRAMETHYL-HEXADECAN-16-OXY]-PROPANE",7
+ccd_17x,./data/rfd3/ccd_ligands/structures/17X.cif,17X,638.800,48,8,"C,H,N,O",C40 H42 N6 O2,(2S)-2-(2-phenyl-1H-benzimidazol-1-yl)-2-(piperidin-4-yl)ethyl 1-(1-benzyl-1H-benzimidazol-2-yl)piperidine-4-carboxylate,7
+ccd_mi3,./data/rfd3/ccd_ligands/structures/MI3.cif,MI3,641.313,41,23,"C,H,N,O,P",C18 H22 N5 O15 P3,3'-O-{[2-(methylamino)phenyl]carbonyl}inosine 5'-(tetrahydrogen triphosphate),7
+ccd_a1ic4,./data/rfd3/ccd_ligands/structures/A1IC4.cif,A1IC4,644.034,44,20,"C,CL,H,N,O",C24 H34 Cl N9 O10,"(2S,3S)-2-[[(2S)-2-[[(2S,4S)-5-aminocarbonyloxy-4-oxidanyl-2-[[(2S,3R)-3-oxidanylpiperidin-2-yl]carbonylamino]pentanoyl]amino]-3-(1H-imidazol-4-yl)propanoyl]amino]-3-(2-chloranyl-1H-imidazol-4-yl)-3-oxidanyl-propanoic acid",7
+ccd_ucf,./data/rfd3/ccd_ligands/structures/UCF.cif,UCF,644.175,44,11,"C,CL,H,N,O,S",C33 H38 Cl N O8 S,"2-[3-[(1~{R})-1-[(2~{S})-1-[(2~{S})-2-(5-chloranylthiophen-2-yl)butanoyl]piperidin-2-yl]carbonyloxy-3-(3,4-dimethoxyphenyl)propyl]phenoxy]ethanoic acid",7
+ccd_f4i,./data/rfd3/ccd_ligands/structures/F4I.cif,F4I,644.479,44,20,"C,H,N,O,P",C24 H29 N4 O15 P,"(2~{S})-2-[[(2~{S})-2-[oxidanyl-[(2~{R},3~{S},4~{S})-2,3,4-tris(oxidanyl)-5-[2,4,8-tris(oxidanylidene)-1,9-dihydropyrimido[4,5-b]quinolin-10-yl]pentoxy]phosphoryl]oxypropanoyl]amino]pentanedioic acid",7
+ccd_n42,./data/rfd3/ccd_ligands/structures/N42.cif,N42,647.763,48,10,"C,H,N,O",C38 H41 N5 O5,"N-[3-(5-{[3-(acryloylamino)-4-(morpholine-4-carbonyl)phenyl]amino}-1-methyl-6-oxo-1,6-dihydropyridin-3-yl)-2-methylphenyl]-4-tert-butylbenzamide",7
+ccd_cll,./data/rfd3/ccd_ligands/structures/CLL.cif,CLL,649.084,47,2,"C,H,O",C45 H76 O2,CHOLESTERYL LINOLEATE,7
+ccd_t3,./data/rfd3/ccd_ligands/structures/T3.cif,T3,650.973,23,8,"C,H,I,N,O",C15 H12 I3 N O4,"3,5,3'TRIIODOTHYRONINE",7
+ccd_beb,./data/rfd3/ccd_ligands/structures/BEB.cif,BEB,652.733,48,10,"C,H,N,O",C38 H40 N2 O8,"N,N-[2,5-O-DIBENZYL-GLUCARYL]-DI-[1-AMINO-INDAN-2-OL]",7
+ccd_cu9,./data/rfd3/ccd_ligands/structures/CU9.cif,CU9,652.819,48,8,"C,H,N,O",C40 H48 N2 O6,"6,6',7',12'-tetramethoxy-2,2,2',2'-tetramethyltubocuraran-2,2'-diium",7
+ccd_apu,./data/rfd3/ccd_ligands/structures/APU.cif,APU,653.387,43,24,"C,H,N,O,P",C19 H25 N7 O15 P2,ADENYLYL-3'-5'-PHOSPHO-URIDINE-3'-MONOPHOSPHATE,7
+ccd_881,./data/rfd3/ccd_ligands/structures/881.cif,881,656.776,49,11,"C,H,N,O",C38 H40 N8 O3,"N',N''-{furan-2,5-diylbis[3-(piperidin-4-yloxy)benzene-4,1-diyl]}dipyridine-2-carboximidamide",7
+ccd_98f,./data/rfd3/ccd_ligands/structures/98F.cif,98F,658.405,44,23,"C,F,H,N,O,P",C21 H22 F2 N10 O9 P2,"9-[(1R,6R,8R,13E,15R,17R,18R)-17-(6-aminopurin-9-yl)-9,18-bis(fluoranyl)-3,12-bis(oxidanyl)-3,12-bis(oxidanylidene)-2,4,7,11,16-pentaoxa-3$l^{5},12$l^{5}-diphosphatricyclo[13.3.0.0^{6,10}]octadec-13-en-8-yl]purin-6-amine",7
+ccd_biq,./data/rfd3/ccd_ligands/structures/BIQ.cif,BIQ,660.674,48,15,"C,H,N,O",C33 H36 N6 O9,"BENZYL [12-(2-AMINO-2-OXOETHYL)-4-NITRO-10,13-DIOXO-15-[(PROPYLAMINO)CARBONYL]-2-OXA-11,14-DIAZATRICYCLO[15 .2.2.1~3,7~]DOCOSA-1(19),3(22),4,6,17,20-HEXAEN-9-YL]CARBAMATE",7
+ccd_cna,./data/rfd3/ccd_ligands/structures/CNA.cif,CNA,662.460,44,22,"C,H,N,O,P",C22 H30 N7 O13 P2,CARBA-NICOTINAMIDE-ADENINE-DINUCLEOTIDE,7
+ccd_8hd,./data/rfd3/ccd_ligands/structures/8HD.cif,8HD,662.796,47,12,"C,H,N,O,S",C35 H42 N4 O7 S,"N~3~-{(2S,3R)-3-hydroxy-4-[{[4-(hydroxymethyl)phenyl]sulfonyl}(2-methylpropyl)amino]-1-phenylbutan-2-yl}-N~1~-methyl-N~1~-[(4-methyl-1,3-oxazol-2-yl)methyl]benzene-1,3-dicarboxamide",7
+ccd_ba7,./data/rfd3/ccd_ligands/structures/BA7.cif,BA7,663.422,44,22,"C,H,N,O,P",C22 H27 N5 O15 P2,"[(2R,3R,4R,5R)-5-[[[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-3,4-bis(oxidanyl)oxolan-2-yl]methoxy-oxidanyl-phosphoryl]oxy-oxidanyl-phosphoryl]oxymethyl]-2,4-bis(oxidanyl)oxolan-3-yl] benzoate",7
+ccd_dnd,./data/rfd3/ccd_ligands/structures/DND.cif,DND,665.418,44,23,"C,H,N,O,P",C21 H27 N6 O15 P2,NICOTINIC ACID ADENINE DINUCLEOTIDE,7
+ccd_nai,./data/rfd3/ccd_ligands/structures/NAI.cif,NAI,665.441,44,23,"C,H,N,O,P",C21 H29 N7 O14 P2,"1,4-DIHYDRONICOTINAMIDE ADENINE DINUCLEOTIDE",7
+ccd_a1icx,./data/rfd3/ccd_ligands/structures/A1ICX.cif,A1ICX,666.789,48,12,"C,H,N,O,S",C36 H38 N6 O5 S,"3-[[1-[(3~{R},4~{R})-1-[5-(3-methoxypyridin-4-yl)thiophen-2-yl]carbonyl-3-phenyl-piperidin-4-yl]carbonyl-4-oxidanyl-piperidin-4-yl]methyl]-7-methyl-pyrrolo[2,3-d]pyrimidin-4-one",7
+ccd_hue,./data/rfd3/ccd_ligands/structures/HUE.cif,HUE,669.686,47,9,"C,CL,H,N,O",C38 H42 Cl2 N6 O,6-chloranyl-3-[3-[(1~{S})-1-(4-chlorophenyl)ethyl]-5-phenyl-imidazol-4-yl]-~{N}-[2-(4-cyclohexylpiperazin-1-yl)ethyl]-1~{H}-indole-2-carboxamide,7
+ccd_xn2,./data/rfd3/ccd_ligands/structures/XN2.cif,XN2,670.837,49,10,"C,H,N,O",C39 H50 N4 O6,"N-[2-HYDROXY-1-INDANYL]-5-[(2-TERTIARYBUTYLAMINOCARBONYL)-4(BENZO[1,3]DIOXOL-5-YLMETHYL)-PIPERAZINO]-4-HYDROXY-2-(1-PHE NYLETHYL)-PENTANAMIDE",7
+ccd_ih7,./data/rfd3/ccd_ligands/structures/IH7.cif,IH7,673.345,42,14,"BR,C,CL,H,N,O",C28 H24 Br Cl2 N7 O4,"~{N}-[4-[(1~{R})-1-[3,5-bis(chloranyl)pyridin-4-yl]ethoxy]-5-cyano-pyridin-2-yl]-6-bromanyl-5-(hydroxymethyl)-1-(2-morpholin-4-ylethyl)pyrrolo[3,2-b]pyridine-3-carboxamide",7
+ccd_7tq,./data/rfd3/ccd_ligands/structures/7TQ.cif,7TQ,676.784,49,12,"C,H,N,O,S",C37 H36 N6 O5 S,"4-({(3R)-7-cyano-4-[(4-methoxyphenyl)sulfonyl]-1-[(1-methyl-1H-imidazol-5-yl)methyl]-2,3,4,5-tetrahydro-1H-1,4-benzodiazepin-3-yl}methyl)phenyl benzylcarbamate",7
+ccd_epz,./data/rfd3/ccd_ligands/structures/EPZ.cif,EPZ,679.416,44,24,"C,H,N,O,P",C20 H31 N3 O19 P2,"(2R)-2-{[(2R,3R,4R,5S,6R)-3-(acetylamino)-2-{[(S)-{[(R)-{[(2R,3S,4R,5R)-5-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-3,4-dihydroxytetrahydrofuran-2-yl]methoxy}(hydroxy)phosphoryl]oxy}(hydroxy)phosphoryl]oxy}-5-hydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-4-yl]oxy}propanoic acid",7
+ccd_2ah,./data/rfd3/ccd_ligands/structures/2AH.cif,2AH,679.804,50,11,"C,H,N,O",C39 H45 N5 O6,"{(1S)-1-[N'-[(2S)-2-HYDROXY-2-((1S,2R)-2-HYDROXY-INDAN-1-YLCARBAMOYL)-3-PHENYL-PROPYL]-N'-[4-(PYRIDINE-2-YL)-BENZYL]-HYDRAZINOCARBONYL]-2,2-DIMETHYL-PROPYL}-CARBAMIC ACID METHYL ESTER",7
+ccd_63p,./data/rfd3/ccd_ligands/structures/63P.cif,63P,683.196,49,12,"C,CL,H,N,O",C37 H39 Cl N6 O5,"(9'S,17'R)-6'-chloro-N-methyl-9'-{[(1-methyl-1H-pyrazol-5-yl)carbonyl]amino}-10',19'-dioxo-2'-oxa-11',18'-diazaspiro[cyclopentane-1,21'-tetracyclo[20.2.2.2~12,15~.1~3,7~]nonacosane]-1'(24'),3'(29'),4',6',12',14',22',25',27'-nonaene-17'-carboxamide",7
+ccd_mcj,./data/rfd3/ccd_ligands/structures/MCJ.cif,MCJ,687.562,49,19,"C,H,N,O",C30 H29 N3 O16,"N-[(2,3-dihydroxyphenyl)carbonyl]-O-[(2S)-2-{[(2,3-dihydroxyphenyl)carbonyl]amino}-3-({N-[(2,3-dihydroxyphenyl)carbonyl]-L-seryl}oxy)propanoyl]-D-serine",7
+ccd_mou,./data/rfd3/ccd_ligands/structures/MOU.cif,MOU,690.817,49,12,"C,H,O",C37 H54 O12,"(1S,4R,5R,9S,11S)-2-({[(2S,5R,6R,7R,9S,10R)-2-(7-CARBOXYHEPTYL)-6-HYDROXY-10-METHOXY-9-METHYL-3-OXO-1,4,8-TRIOXASPIRO[4 .5]DEC-7-YL]OXY}METHYL)-9-FORMYL-13-ISOPROPYL-5-METHYLTETRACYCLO[7.4.0.02,11.04.8]TRIDEC-12-ENE-1-CARBOXYLIC ACID",7
+ccd_8t5,./data/rfd3/ccd_ligands/structures/8T5.cif,8T5,692.201,49,13,"C,CL,H,N,O",C36 H42 Cl N5 O7,"(1~{S},4~{S},7~{R},10~{R})-14-[(3~{S},6~{R},8~{a}~{S})-1'-[(2~{S})-2-acetamido-3-(2-chlorophenyl)propanoyl]-5-oxidanylidene-spiro[1,2,3,8~{a}-tetrahydroindolizine-6,2'-pyrrolidine]-3-yl]carbonyl-2-oxidanylidene-3,14-diazatricyclo[8.4.0.0^{3,7}]tetradec-8-ene-4-carboxylic acid",7
+ccd_mcn,./data/rfd3/ccd_ligands/structures/MCN.cif,MCN,696.501,44,25,"C,H,N,O,P,S",C19 H22 N8 O13 P2 S2,PTERIN CYTOSINE DINUCLEOTIDE,7

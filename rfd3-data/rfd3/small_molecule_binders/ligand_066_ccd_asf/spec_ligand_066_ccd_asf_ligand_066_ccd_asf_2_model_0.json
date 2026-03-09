@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.8958837985992432,
+        "n_chainbreaks": 1,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.170464515686035,
+        "non_loop_fraction": 0.745398773006135,
+        "loop_fraction": 0.254601226993865,
+        "helix_fraction": 0.5736196319018405,
+        "sheet_fraction": 0.17177914110429449,
+        "num_ss_elements": 20,
+        "radius_of_gyration": 17.584269899035977,
+        "alanine_content": 0.44785276073619634,
+        "glycine_content": 0.0705521472392638,
+        "num_residues": 326,
+        "diffused_com": [
+            2.8374319076538086,
+            0.5936951637268066,
+            3.7306225299835205
+        ],
+        "fixed_com": [
+            -0.00146484375,
+            -0.00032552084303461015,
+            0.0
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ASF.cif",
+        "length": "20-400",
+        "ligand": "ASF",
+        "extra": {
+            "example": "ligand_066_ccd_asf",
+            "task_name": "spec_ligand_066_ccd_asf_ligand_066_ccd_asf",
+            "sampled_contig": "326",
+            "num_tokens_in": 327,
+            "num_residues_in": 327,
+            "num_chains": 2,
+            "num_atoms": 1642,
+            "num_residues": 329,
+            "example_id": "spec_ligand_066_ccd_asf_ligand_066_ccd_asf_2"
+        },
+        "select_fixed_atoms": {
+            "ASF": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

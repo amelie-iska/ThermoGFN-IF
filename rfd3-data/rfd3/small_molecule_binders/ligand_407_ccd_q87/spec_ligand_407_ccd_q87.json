@@ -1,0 +1,10 @@
+{
+  "ligand_407_ccd_q87": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Q87.cif",
+    "ligand": "Q87",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Q87": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_065_ccd_geh": {
+    "input": "./data/rfd3/ccd_ligands/structures/GEH.cif",
+    "ligand": "GEH",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GEH": "ALL"
+    }
+  }
+}

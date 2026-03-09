@@ -1,0 +1,10 @@
+{
+  "ligand_184_ccd_rl1": {
+    "input": "./data/rfd3/ccd_ligands/structures/RL1.cif",
+    "ligand": "RL1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RL1": "ALL"
+    }
+  }
+}

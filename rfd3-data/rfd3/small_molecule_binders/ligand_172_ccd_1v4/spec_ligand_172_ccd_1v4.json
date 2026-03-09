@@ -1,0 +1,10 @@
+{
+  "ligand_172_ccd_1v4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1V4.cif",
+    "ligand": "1V4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1V4": "ALL"
+    }
+  }
+}

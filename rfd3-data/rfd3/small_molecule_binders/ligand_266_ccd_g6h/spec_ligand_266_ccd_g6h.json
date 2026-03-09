@@ -1,0 +1,10 @@
+{
+  "ligand_266_ccd_g6h": {
+    "input": "./data/rfd3/ccd_ligands/structures/G6H.cif",
+    "ligand": "G6H",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G6H": "ALL"
+    }
+  }
+}

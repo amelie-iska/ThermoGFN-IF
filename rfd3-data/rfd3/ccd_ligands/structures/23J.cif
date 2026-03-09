@@ -1,0 +1,41 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . 23J L 1 1 . 1 23J L C01 ? -1.372 2.407  0.019  1 1
+HETATM C C02 . 23J L 1 1 . 1 23J L C02 ? -2.583 1.73   -0.021 1 2
+HETATM C C03 . 23J L 1 1 . 1 23J L C03 ? -2.615 0.351  -0.031 1 3
+HETATM C C04 . 23J L 1 1 . 1 23J L C04 ? -1.429 -0.374 -0.001 1 4
+HETATM C C05 . 23J L 1 1 . 1 23J L C05 ? -0.197 0.31   0.04   1 5
+HETATM C C06 . 23J L 1 1 . 1 23J L C06 ? -0.185 1.711  0.044  1 6
+HETATM C C07 . 23J L 1 1 . 1 23J L C07 ? 1.065  -0.44  0.073  1 7
+HETATM O O08 . 23J L 1 1 . 1 23J L O08 ? 1.049  -1.65  0.18   1 8
+HETATM C C09 . 23J L 1 1 . 1 23J L C09 ? 2.366  0.284  -0.023 1 9
+HETATM O O10 . 23J L 1 1 . 1 23J L O10 ? 3.517  -0.408 -0.097 1 10
+HETATM O O11 . 23J L 1 1 . 1 23J L O11 ? 2.386  1.497  -0.035 1 11
+HETATM S S12 . 23J L 1 1 . 1 23J L S12 ? -1.465 -2.135 -0.013 1 12
+HETATM H H1  . 23J L 1 1 . 1 23J L H1  ? -1.361 3.487  0.027  1 13
+HETATM H H2  . 23J L 1 1 . 1 23J L H2  ? -3.508 2.287  -0.045 1 14
+HETATM H H3  . 23J L 1 1 . 1 23J L H3  ? -3.562 -0.166 -0.063 1 15
+HETATM H H4  . 23J L 1 1 . 1 23J L H4  ? 0.753  2.244  0.075  1 16
+HETATM H H5  . 23J L 1 1 . 1 23J L H5  ? 4.335  0.104  -0.158 1 17
+HETATM H H6  . 23J L 1 1 . 1 23J L H6  ? -1.429 -2.372 -1.402 1 18
+#

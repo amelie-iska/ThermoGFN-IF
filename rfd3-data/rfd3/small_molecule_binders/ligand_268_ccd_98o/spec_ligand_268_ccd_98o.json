@@ -1,0 +1,10 @@
+{
+  "ligand_268_ccd_98o": {
+    "input": "./data/rfd3/ccd_ligands/structures/98O.cif",
+    "ligand": "98O",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "98O": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_482_ccd_t86": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/T86.cif",
+    "ligand": "T86",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "T86": "ALL"
+    }
+  }
+}

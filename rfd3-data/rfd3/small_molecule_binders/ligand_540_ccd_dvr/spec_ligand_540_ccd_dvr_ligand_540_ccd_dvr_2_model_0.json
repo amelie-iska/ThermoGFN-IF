@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.841055154800415,
+        "n_chainbreaks": 1,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 2.700273275375366,
+        "non_loop_fraction": 0.6257861635220126,
+        "loop_fraction": 0.3742138364779874,
+        "helix_fraction": 0.42138364779874216,
+        "sheet_fraction": 0.20440251572327045,
+        "num_ss_elements": 22,
+        "radius_of_gyration": 17.241873474020068,
+        "alanine_content": 0.3836477987421384,
+        "glycine_content": 0.07547169811320754,
+        "num_residues": 318,
+        "diffused_com": [
+            3.5522098541259766,
+            1.8803759813308716,
+            3.4248242378234863
+        ],
+        "fixed_com": [
+            -0.0013474684674292803,
+            -0.0018028846243396401,
+            -0.0006760817486792803
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DVR.cif",
+        "length": "20-400",
+        "ligand": "DVR",
+        "extra": {
+            "example": "ligand_540_ccd_dvr",
+            "task_name": "spec_ligand_540_ccd_dvr_ligand_540_ccd_dvr",
+            "sampled_contig": "318",
+            "num_tokens_in": 319,
+            "num_residues_in": 319,
+            "num_chains": 2,
+            "num_atoms": 1616,
+            "num_residues": 321,
+            "example_id": "spec_ligand_540_ccd_dvr_ligand_540_ccd_dvr_2"
+        },
+        "select_fixed_atoms": {
+            "DVR": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

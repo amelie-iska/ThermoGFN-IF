@@ -1,0 +1,10 @@
+{
+  "ligand_026_ccd_1eb": {
+    "input": "./data/rfd3/ccd_ligands/structures/1EB.cif",
+    "ligand": "1EB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1EB": "ALL"
+    }
+  }
+}

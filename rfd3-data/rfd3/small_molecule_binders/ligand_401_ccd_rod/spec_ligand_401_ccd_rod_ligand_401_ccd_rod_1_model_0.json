@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.0865328311920166,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.064328193664551,
+        "non_loop_fraction": 0.6170798898071626,
+        "loop_fraction": 0.38292011019283745,
+        "helix_fraction": 0.41046831955922863,
+        "sheet_fraction": 0.2066115702479339,
+        "num_ss_elements": 23,
+        "radius_of_gyration": 19.4349753619815,
+        "alanine_content": 0.2644628099173554,
+        "glycine_content": 0.08264462809917356,
+        "num_residues": 363,
+        "diffused_com": [
+            0.4524836540222168,
+            -0.900286853313446,
+            -1.826007604598999
+        ],
+        "fixed_com": [
+            -0.0006368886097334325,
+            0.00010614809434628114,
+            -6.368885806296021e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ROD.cif",
+        "length": "20-400",
+        "ligand": "ROD",
+        "extra": {
+            "example": "ligand_401_ccd_rod",
+            "task_name": "spec_ligand_401_ccd_rod_ligand_401_ccd_rod",
+            "sampled_contig": "363",
+            "num_tokens_in": 364,
+            "num_residues_in": 364,
+            "num_chains": 2,
+            "num_atoms": 1838,
+            "num_residues": 366,
+            "example_id": "spec_ligand_401_ccd_rod_ligand_401_ccd_rod_1"
+        },
+        "select_fixed_atoms": {
+            "ROD": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

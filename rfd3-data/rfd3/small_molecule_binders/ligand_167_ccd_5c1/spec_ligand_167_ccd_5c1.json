@@ -1,0 +1,10 @@
+{
+  "ligand_167_ccd_5c1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5C1.cif",
+    "ligand": "5C1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5C1": "ALL"
+    }
+  }
+}

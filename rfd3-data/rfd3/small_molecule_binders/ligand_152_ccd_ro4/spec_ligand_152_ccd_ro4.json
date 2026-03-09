@@ -1,0 +1,10 @@
+{
+  "ligand_152_ccd_ro4": {
+    "input": "./data/rfd3/ccd_ligands/structures/RO4.cif",
+    "ligand": "RO4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RO4": "ALL"
+    }
+  }
+}

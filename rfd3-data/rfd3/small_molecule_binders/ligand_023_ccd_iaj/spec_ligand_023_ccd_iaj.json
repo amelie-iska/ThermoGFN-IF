@@ -1,0 +1,10 @@
+{
+  "ligand_023_ccd_iaj": {
+    "input": "./data/rfd3/ccd_ligands/structures/IAJ.cif",
+    "ligand": "IAJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IAJ": "ALL"
+    }
+  }
+}

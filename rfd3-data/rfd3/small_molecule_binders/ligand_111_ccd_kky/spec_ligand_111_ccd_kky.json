@@ -1,0 +1,10 @@
+{
+  "ligand_111_ccd_kky": {
+    "input": "./data/rfd3/ccd_ligands/structures/KKY.cif",
+    "ligand": "KKY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KKY": "ALL"
+    }
+  }
+}

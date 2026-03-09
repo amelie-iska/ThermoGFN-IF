@@ -1,0 +1,10 @@
+{
+  "ligand_118_ccd_qup": {
+    "input": "./data/rfd3/ccd_ligands/structures/QUP.cif",
+    "ligand": "QUP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QUP": "ALL"
+    }
+  }
+}

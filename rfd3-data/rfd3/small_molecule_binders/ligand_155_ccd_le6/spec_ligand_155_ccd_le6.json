@@ -1,0 +1,10 @@
+{
+  "ligand_155_ccd_le6": {
+    "input": "./data/rfd3/ccd_ligands/structures/LE6.cif",
+    "ligand": "LE6",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LE6": "ALL"
+    }
+  }
+}

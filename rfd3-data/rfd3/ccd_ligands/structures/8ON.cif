@@ -1,0 +1,88 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C4  . 8ON L 1 1 . 1 8ON L C4  ? 2.443   -3.275 0.048  1 1
+HETATM C C5  . 8ON L 1 1 . 1 8ON L C5  ? 3.513   -2.348 0.117  1 2
+HETATM C C6  . 8ON L 1 1 . 1 8ON L C6  ? 3.21    -0.966 0.052  1 3
+HETATM N N1  . 8ON L 1 1 . 1 8ON L N1  ? 1.941   -0.605 -0.07  1 4
+HETATM N N3  . 8ON L 1 1 . 1 8ON L N3  ? 1.192   -2.81  -0.076 1 5
+HETATM C CAM . 8ON L 1 1 . 1 8ON L CAM ? -4.714  1.215  0.431  1 6
+HETATM C CAN . 8ON L 1 1 . 1 8ON L CAN ? -6.096  1.817  0.155  1 7
+HETATM N NAE . 8ON L 1 1 . 1 8ON L NAE ? -7.05   0.719  -0.059 1 8
+HETATM C CAY . 8ON L 1 1 . 1 8ON L CAY ? -8.213  0.671  0.62   1 9
+HETATM O OBI . 8ON L 1 1 . 1 8ON L OBI ? -8.484  1.541  1.421  1 10
+HETATM C CAL . 8ON L 1 1 . 1 8ON L CAL ? -9.177  -0.464 0.386  1 11
+HETATM C CAZ . 8ON L 1 1 . 1 8ON L CAZ ? -6.702  -0.326 -1.034 1 12
+HETATM C CBD . 8ON L 1 1 . 1 8ON L CBD ? -5.296  -0.844 -0.711 1 13
+HETATM N NAD . 8ON L 1 1 . 1 8ON L NAD ? -4.362  0.288  -0.653 1 14
+HETATM C CAJ . 8ON L 1 1 . 1 8ON L CAJ ? -3.047  -0.156 -0.524 1 15
+HETATM C CBE . 8ON L 1 1 . 1 8ON L CBE ? -2.007  0.765  -0.451 1 16
+HETATM C CBA . 8ON L 1 1 . 1 8ON L CBA ? -0.707  0.329  -0.324 1 17
+HETATM C CBB . 8ON L 1 1 . 1 8ON L CBB ? -2.777  -1.519 -0.461 1 18
+HETATM C CBC . 8ON L 1 1 . 1 8ON L CBC ? -1.478  -1.96  -0.334 1 19
+HETATM C CAO . 8ON L 1 1 . 1 8ON L CAO ? -0.433  -1.038 -0.268 1 20
+HETATM C C2  . 8ON L 1 1 . 1 8ON L C2  ? 0.964   -1.51  -0.132 1 21
+HETATM C CAX . 8ON L 1 1 . 1 8ON L CAX ? 2.717   -4.646 0.116  1 22
+HETATM C CBG . 8ON L 1 1 . 1 8ON L CBG ? 4.024   -5.071 0.243  1 23
+HETATM N NAC . 8ON L 1 1 . 1 8ON L NAC ? 4.301   -6.435 0.311  1 24
+HETATM C CBH . 8ON L 1 1 . 1 8ON L CBH ? 5.073   -4.148 0.305  1 25
+HETATM C CAK . 8ON L 1 1 . 1 8ON L CAK ? 4.829   -2.809 0.247  1 26
+HETATM N NAF . 8ON L 1 1 . 1 8ON L NAF ? 4.21    -0.019 0.115  1 27
+HETATM C CAR . 8ON L 1 1 . 1 8ON L CAR ? 3.876   1.406  0.046  1 28
+HETATM C CAG . 8ON L 1 1 . 1 8ON L CAG ? 5.158   2.235  0.138  1 29
+HETATM C CAW . 8ON L 1 1 . 1 8ON L CAW ? 4.814   3.701  0.067  1 30
+HETATM C CAV . 8ON L 1 1 . 1 8ON L CAV ? 4.757   4.339  -1.158 1 31
+HETATM C CAU . 8ON L 1 1 . 1 8ON L CAU ? 4.441   5.683  -1.223 1 32
+HETATM C CAQ . 8ON L 1 1 . 1 8ON L CAQ ? 4.182   6.389  -0.063 1 33
+HETATM C CAT . 8ON L 1 1 . 1 8ON L CAT ? 4.239   5.751  1.162  1 34
+HETATM C CBF . 8ON L 1 1 . 1 8ON L CBF ? 4.55    4.406  1.226  1 35
+HETATM H H1  . 8ON L 1 1 . 1 8ON L H1  ? -3.973  2.012  0.483  1 36
+HETATM H H2  . 8ON L 1 1 . 1 8ON L H2  ? -4.735  0.676  1.378  1 37
+HETATM H H3  . 8ON L 1 1 . 1 8ON L H3  ? -6.411  2.415  1.01   1 38
+HETATM H H4  . 8ON L 1 1 . 1 8ON L H4  ? -6.05   2.445  -0.735 1 39
+HETATM H H5  . 8ON L 1 1 . 1 8ON L H5  ? -8.952  -1.279 1.073  1 40
+HETATM H H6  . 8ON L 1 1 . 1 8ON L H6  ? -10.196 -0.116 0.555  1 41
+HETATM H H7  . 8ON L 1 1 . 1 8ON L H7  ? -9.079  -0.817 -0.641 1 42
+HETATM H H8  . 8ON L 1 1 . 1 8ON L H8  ? -7.418  -1.144 -0.965 1 43
+HETATM H H9  . 8ON L 1 1 . 1 8ON L H9  ? -6.719  0.092  -2.04  1 44
+HETATM H H10 . 8ON L 1 1 . 1 8ON L H10 ? -5.309  -1.355 0.252  1 45
+HETATM H H11 . 8ON L 1 1 . 1 8ON L H11 ? -4.977  -1.539 -1.488 1 46
+HETATM H H12 . 8ON L 1 1 . 1 8ON L H12 ? -2.22   1.823  -0.495 1 47
+HETATM H H13 . 8ON L 1 1 . 1 8ON L H13 ? 0.1     1.045  -0.269 1 48
+HETATM H H14 . 8ON L 1 1 . 1 8ON L H14 ? -3.587  -2.232 -0.513 1 49
+HETATM H H15 . 8ON L 1 1 . 1 8ON L H15 ? -1.269  -3.018 -0.286 1 50
+HETATM H H16 . 8ON L 1 1 . 1 8ON L H16 ? 1.912   -5.365 0.069  1 51
+HETATM H H17 . 8ON L 1 1 . 1 8ON L H17 ? 3.578   -7.08  0.268  1 52
+HETATM H H18 . 8ON L 1 1 . 1 8ON L H18 ? 5.218   -6.74  0.4    1 53
+HETATM H H19 . 8ON L 1 1 . 1 8ON L H19 ? 6.089   -4.5   0.405  1 54
+HETATM H H20 . 8ON L 1 1 . 1 8ON L H20 ? 5.647   -2.106 0.296  1 55
+HETATM H H21 . 8ON L 1 1 . 1 8ON L H21 ? 5.135   -0.296 0.205  1 56
+HETATM H H22 . 8ON L 1 1 . 1 8ON L H22 ? 3.373   1.616  -0.898 1 57
+HETATM H H23 . 8ON L 1 1 . 1 8ON L H23 ? 3.216   1.664  0.874  1 58
+HETATM H H24 . 8ON L 1 1 . 1 8ON L H24 ? 5.66    2.025  1.082  1 59
+HETATM H H25 . 8ON L 1 1 . 1 8ON L H25 ? 5.818   1.977  -0.691 1 60
+HETATM H H26 . 8ON L 1 1 . 1 8ON L H26 ? 4.959   3.787  -2.064 1 61
+HETATM H H27 . 8ON L 1 1 . 1 8ON L H27 ? 4.397   6.182  -2.18  1 62
+HETATM H H28 . 8ON L 1 1 . 1 8ON L H28 ? 3.936   7.44   -0.114 1 63
+HETATM H H29 . 8ON L 1 1 . 1 8ON L H29 ? 4.038   6.303  2.068  1 64
+HETATM H H30 . 8ON L 1 1 . 1 8ON L H30 ? 4.591   3.906  2.183  1 65
+#

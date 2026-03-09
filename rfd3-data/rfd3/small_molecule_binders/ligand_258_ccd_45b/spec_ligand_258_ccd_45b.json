@@ -1,0 +1,10 @@
+{
+  "ligand_258_ccd_45b": {
+    "input": "./data/rfd3/ccd_ligands/structures/45B.cif",
+    "ligand": "45B",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "45B": "ALL"
+    }
+  }
+}

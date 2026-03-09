@@ -1,0 +1,10 @@
+{
+  "ligand_153_ccd_a1bbx": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BBX.cif",
+    "ligand": "A1BBX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BBX": "ALL"
+    }
+  }
+}

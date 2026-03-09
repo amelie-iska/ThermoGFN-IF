@@ -1,0 +1,10 @@
+{
+  "ligand_340_ccd_zvj": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZVJ.cif",
+    "ligand": "ZVJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZVJ": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_250_ccd_v8i": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V8I.cif",
+    "ligand": "V8I",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V8I": "ALL"
+    }
+  }
+}

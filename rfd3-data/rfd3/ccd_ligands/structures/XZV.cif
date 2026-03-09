@@ -1,0 +1,62 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N  N1  . XZV L 1 1 . 1 XZV L N1  ? -1.576 1.333  0.428  1 1
+HETATM C  C4  . XZV L 1 1 . 1 XZV L C4  ? -6.589 -2.287 0.225  1 2
+HETATM C  C5  . XZV L 1 1 . 1 XZV L C5  ? -0.68  0.213  0.749  1 3
+HETATM C  C6  . XZV L 1 1 . 1 XZV L C6  ? 0.449  0.176  -0.288 1 4
+HETATM C  C7  . XZV L 1 1 . 1 XZV L C7  ? 2.339  1.731  -0.233 1 5
+HETATM C  C8  . XZV L 1 1 . 1 XZV L C8  ? 3.241  0.591  -0.057 1 6
+HETATM C  C10 . XZV L 1 1 . 1 XZV L C10 ? 5.035  -0.662 0.333  1 7
+HETATM C  C13 . XZV L 1 1 . 1 XZV L C13 ? -1.006 2.683  0.305  1 8
+HETATM N  N   . XZV L 1 1 . 1 XZV L N   ? -3.387 -0.128 0.249  1 9
+HETATM C  C   . XZV L 1 1 . 1 XZV L C   ? -2.895 1.126  0.243  1 10
+HETATM O  O   . XZV L 1 1 . 1 XZV L O   ? -3.64  2.071  0.072  1 11
+HETATM C  C1  . XZV L 1 1 . 1 XZV L C1  ? -4.833 -0.348 0.162  1 12
+HETATM C  C11 . XZV L 1 1 . 1 XZV L C11 ? 3.987  -1.471 0.045  1 13
+HETATM C  C12 . XZV L 1 1 . 1 XZV L C12 ? 0.123  2.645  -0.732 1 14
+HETATM C  C2  . XZV L 1 1 . 1 XZV L C2  ? -5.122 -1.85  0.188  1 15
+HETATM C  C3  . XZV L 1 1 . 1 XZV L C3  ? -5.768 -2.467 -1.054 1 16
+HETATM C  C9  . XZV L 1 1 . 1 XZV L C9  ? 4.566  0.658  0.271  1 17
+HETATM N  N2  . XZV L 1 1 . 1 XZV L N2  ? 1.019  1.525  -0.411 1 18
+HETATM O  O1  . XZV L 1 1 . 1 XZV L O1  ? 2.781  2.865  -0.217 1 19
+HETATM O  O2  . XZV L 1 1 . 1 XZV L O2  ? 2.909  -0.711 -0.187 1 20
+HETATM CL CL  . XZV L 1 1 . 1 XZV L CL  ? 4.035  -3.205 -0.013 1 21
+HETATM H  H7  . XZV L 1 1 . 1 XZV L H7  ? -6.833 -3.182 0.796  1 22
+HETATM H  H6  . XZV L 1 1 . 1 XZV L H6  ? -7.346 -1.503 0.23   1 23
+HETATM H  H8  . XZV L 1 1 . 1 XZV L H8  ? -0.259 0.356  1.744  1 24
+HETATM H  H9  . XZV L 1 1 . 1 XZV L H9  ? -1.238 -0.722 0.716  1 25
+HETATM H  H11 . XZV L 1 1 . 1 XZV L H11 ? 1.223  -0.519 0.038  1 26
+HETATM H  H10 . XZV L 1 1 . 1 XZV L H10 ? 0.051  -0.142 -1.252 1 27
+HETATM H  H13 . XZV L 1 1 . 1 XZV L H13 ? 6.042  -0.975 0.566  1 28
+HETATM H  H17 . XZV L 1 1 . 1 XZV L H17 ? -1.78  3.378  -0.022 1 29
+HETATM H  H16 . XZV L 1 1 . 1 XZV L H16 ? -0.608 3.001  1.268  1 30
+HETATM H  H   . XZV L 1 1 . 1 XZV L H   ? -2.784 -0.886 0.311  1 31
+HETATM H  H1  . XZV L 1 1 . 1 XZV L H1  ? -5.325 0.131  1.008  1 32
+HETATM H  H2  . XZV L 1 1 . 1 XZV L H2  ? -5.21  0.078  -0.768 1 33
+HETATM H  H14 . XZV L 1 1 . 1 XZV L H14 ? -0.298 2.503  -1.727 1 34
+HETATM H  H15 . XZV L 1 1 . 1 XZV L H15 ? 0.682  3.581  -0.699 1 35
+HETATM H  H3  . XZV L 1 1 . 1 XZV L H3  ? -4.403 -2.459 0.736  1 36
+HETATM H  H5  . XZV L 1 1 . 1 XZV L H5  ? -5.473 -3.481 -1.324 1 37
+HETATM H  H4  . XZV L 1 1 . 1 XZV L H4  ? -5.987 -1.803 -1.89  1 38
+HETATM H  H12 . XZV L 1 1 . 1 XZV L H12 ? 5.14   1.555  0.45   1 39
+#

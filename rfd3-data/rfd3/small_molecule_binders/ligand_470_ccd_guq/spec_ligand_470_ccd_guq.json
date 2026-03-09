@@ -1,0 +1,10 @@
+{
+  "ligand_470_ccd_guq": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/GUQ.cif",
+    "ligand": "GUQ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GUQ": "ALL"
+    }
+  }
+}

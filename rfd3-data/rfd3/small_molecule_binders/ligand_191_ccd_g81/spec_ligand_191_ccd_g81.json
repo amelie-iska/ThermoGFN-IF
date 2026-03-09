@@ -1,0 +1,10 @@
+{
+  "ligand_191_ccd_g81": {
+    "input": "./data/rfd3/ccd_ligands/structures/G81.cif",
+    "ligand": "G81",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G81": "ALL"
+    }
+  }
+}

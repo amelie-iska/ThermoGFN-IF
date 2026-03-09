@@ -1,0 +1,79 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C2   . MYE L 1 1 . 1 MYE L C2   ? -1.091 -6.401 6.286  1 1
+HETATM C  C3   . MYE L 1 1 . 1 MYE L C3   ? -1.556 -5.016 5.837  1 2
+HETATM C  C4   . MYE L 1 1 . 1 MYE L C4   ? -1.889 -4.126 7.039  1 3
+HETATM C  C5   . MYE L 1 1 . 1 MYE L C5   ? -2.384 -2.74  6.626  1 4
+HETATM N  N6   . MYE L 1 1 . 1 MYE L N6   ? -1.362 -2.02  5.9    1 5
+HETATM C  C7   . MYE L 1 1 . 1 MYE L C7   ? -1.543 -1.531 4.614  1 6
+HETATM O  O8   . MYE L 1 1 . 1 MYE L O8   ? -2.573 -1.649 3.954  1 7
+HETATM C  C9   . MYE L 1 1 . 1 MYE L C9   ? -0.282 -0.864 4.072  1 8
+HETATM C  C10  . MYE L 1 1 . 1 MYE L C10  ? -0.331 0.648  4.324  1 9
+HETATM C  C11  . MYE L 1 1 . 1 MYE L C11  ? 0.875  1.435  3.774  1 10
+HETATM C  C12  . MYE L 1 1 . 1 MYE L C12  ? 0.997  1.205  2.265  1 11
+HETATM C  C13  . MYE L 1 1 . 1 MYE L C13  ? 2.186  1.049  4.461  1 12
+HETATM N  N14  . MYE L 1 1 . 1 MYE L N14  ? -0.204 -1.181 2.67   1 13
+HETATM C  C15  . MYE L 1 1 . 1 MYE L C15  ? 0.381  -2.329 2.171  1 14
+HETATM O  O16  . MYE L 1 1 . 1 MYE L O16  ? 0.901  -3.214 2.841  1 15
+HETATM O  O17  . MYE L 1 1 . 1 MYE L O17  ? 0.295  -2.338 0.807  1 16
+HETATM C  C18  . MYE L 1 1 . 1 MYE L C18  ? 0.865  -3.477 0.153  1 17
+HETATM C  C19  . MYE L 1 1 . 1 MYE L C19  ? 0.688  -3.33  -1.33  1 18
+HETATM C  C20  . MYE L 1 1 . 1 MYE L C20  ? -0.455 -3.833 -1.94  1 19
+HETATM C  C21  . MYE L 1 1 . 1 MYE L C21  ? -0.62  -3.696 -3.318 1 20
+HETATM C  C22  . MYE L 1 1 . 1 MYE L C22  ? 0.359  -3.056 -4.077 1 21
+HETATM BR BR2  . MYE L 1 1 . 1 MYE L BR2  ? 0.136  -2.87  -5.945 1 22
+HETATM C  C24  . MYE L 1 1 . 1 MYE L C24  ? 1.504  -2.554 -3.459 1 23
+HETATM C  C25  . MYE L 1 1 . 1 MYE L C25  ? 1.669  -2.692 -2.08  1 24
+HETATM C  C26  . MYE L 1 1 . 1 MYE L C26  ? -2.728 -1.852 7.804  1 25
+HETATM O  O27  . MYE L 1 1 . 1 MYE L O27  ? -3.227 -2.265 8.847  1 26
+HETATM C  C1   . MYE L 1 1 . 1 MYE L C1   ? -0.784 -7.299 5.097  1 27
+HETATM H  H21A . MYE L 1 1 . 1 MYE L H21A ? -0.192 -6.31  6.908  1 28
+HETATM H  H22  . MYE L 1 1 . 1 MYE L H22  ? -1.865 -6.873 6.902  1 29
+HETATM H  H31  . MYE L 1 1 . 1 MYE L H31  ? -0.769 -4.542 5.238  1 30
+HETATM H  H32  . MYE L 1 1 . 1 MYE L H32  ? -2.433 -5.123 5.189  1 31
+HETATM H  H41  . MYE L 1 1 . 1 MYE L H41  ? -0.984 -4.021 7.652  1 32
+HETATM H  H42  . MYE L 1 1 . 1 MYE L H42  ? -2.638 -4.622 7.669  1 33
+HETATM H  H5   . MYE L 1 1 . 1 MYE L H5   ? -3.251 -2.792 5.961  1 34
+HETATM H  HN6  . MYE L 1 1 . 1 MYE L HN6  ? -0.468 -1.882 6.363  1 35
+HETATM H  H9   . MYE L 1 1 . 1 MYE L H9   ? 0.59   -1.32  4.552  1 36
+HETATM H  H101 . MYE L 1 1 . 1 MYE L H101 ? -0.402 0.825  5.407  1 37
+HETATM H  H102 . MYE L 1 1 . 1 MYE L H102 ? -1.254 1.059  3.894  1 38
+HETATM H  H11  . MYE L 1 1 . 1 MYE L H11  ? 0.708  2.508  3.932  1 39
+HETATM H  H121 . MYE L 1 1 . 1 MYE L H121 ? 1.825  1.788  1.848  1 40
+HETATM H  H122 . MYE L 1 1 . 1 MYE L H122 ? 0.081  1.514  1.749  1 41
+HETATM H  H123 . MYE L 1 1 . 1 MYE L H123 ? 1.176  0.149  2.036  1 42
+HETATM H  H131 . MYE L 1 1 . 1 MYE L H131 ? 2.369  -0.029 4.389  1 43
+HETATM H  H132 . MYE L 1 1 . 1 MYE L H132 ? 3.033  1.566  3.999  1 44
+HETATM H  H133 . MYE L 1 1 . 1 MYE L H133 ? 2.178  1.324  5.519  1 45
+HETATM H  H14  . MYE L 1 1 . 1 MYE L H14  ? -0.603 -0.52  2.007  1 46
+HETATM H  H181 . MYE L 1 1 . 1 MYE L H181 ? 0.37   -4.384 0.519  1 47
+HETATM H  H182 . MYE L 1 1 . 1 MYE L H182 ? 1.927  -3.546 0.412  1 48
+HETATM H  H20  . MYE L 1 1 . 1 MYE L H20  ? -1.224 -4.333 -1.356 1 49
+HETATM H  H21  . MYE L 1 1 . 1 MYE L H21  ? -1.518 -4.093 -3.784 1 50
+HETATM H  H24  . MYE L 1 1 . 1 MYE L H24  ? 2.277  -2.053 -4.036 1 51
+HETATM H  H25  . MYE L 1 1 . 1 MYE L H25  ? 2.564  -2.298 -1.607 1 52
+HETATM H  H26  . MYE L 1 1 . 1 MYE L H26  ? -2.595 -0.765 7.659  1 53
+HETATM H  H11A . MYE L 1 1 . 1 MYE L H11A ? -1.672 -7.439 4.472  1 54
+HETATM H  H12  . MYE L 1 1 . 1 MYE L H12  ? 0.009  -6.87  4.476  1 55
+HETATM H  H13  . MYE L 1 1 . 1 MYE L H13  ? -0.451 -8.283 5.441  1 56
+#

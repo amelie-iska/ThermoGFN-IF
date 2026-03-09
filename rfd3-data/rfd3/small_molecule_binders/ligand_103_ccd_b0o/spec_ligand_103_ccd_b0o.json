@@ -1,0 +1,10 @@
+{
+  "ligand_103_ccd_b0o": {
+    "input": "./data/rfd3/ccd_ligands/structures/B0O.cif",
+    "ligand": "B0O",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B0O": "ALL"
+    }
+  }
+}

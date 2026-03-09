@@ -1,0 +1,10 @@
+{
+  "ligand_253_ccd_a1iv1": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1IV1.cif",
+    "ligand": "A1IV1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IV1": "ALL"
+    }
+  }
+}

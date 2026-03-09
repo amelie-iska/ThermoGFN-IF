@@ -1,0 +1,10 @@
+{
+  "ligand_490_ccd_99l": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/99L.cif",
+    "ligand": "99L",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "99L": "ALL"
+    }
+  }
+}

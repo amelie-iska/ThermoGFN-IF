@@ -1,0 +1,10 @@
+{
+  "ligand_266_ccd_bs4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BS4.cif",
+    "ligand": "BS4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BS4": "ALL"
+    }
+  }
+}

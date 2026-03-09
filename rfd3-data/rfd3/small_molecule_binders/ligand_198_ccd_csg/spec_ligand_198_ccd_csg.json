@@ -1,0 +1,10 @@
+{
+  "ligand_198_ccd_csg": {
+    "input": "./data/rfd3/ccd_ligands/structures/CSG.cif",
+    "ligand": "CSG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "CSG": "ALL"
+    }
+  }
+}

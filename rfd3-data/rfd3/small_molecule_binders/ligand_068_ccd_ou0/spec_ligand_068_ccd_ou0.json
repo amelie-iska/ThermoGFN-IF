@@ -1,0 +1,10 @@
+{
+  "ligand_068_ccd_ou0": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OU0.cif",
+    "ligand": "OU0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OU0": "ALL"
+    }
+  }
+}

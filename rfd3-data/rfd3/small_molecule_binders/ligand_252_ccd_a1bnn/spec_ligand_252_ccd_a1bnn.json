@@ -1,0 +1,10 @@
+{
+  "ligand_252_ccd_a1bnn": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BNN.cif",
+    "ligand": "A1BNN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BNN": "ALL"
+    }
+  }
+}

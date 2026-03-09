@@ -1,0 +1,10 @@
+{
+  "ligand_512_ccd_iqe": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IQE.cif",
+    "ligand": "IQE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IQE": "ALL"
+    }
+  }
+}

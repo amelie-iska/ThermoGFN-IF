@@ -1,0 +1,10 @@
+{
+  "ligand_139_ccd_0we": {
+    "input": "./data/rfd3/ccd_ligands/structures/0WE.cif",
+    "ligand": "0WE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0WE": "ALL"
+    }
+  }
+}

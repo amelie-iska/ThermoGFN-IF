@@ -1,0 +1,10 @@
+{
+  "ligand_205_ccd_waa": {
+    "input": "./data/rfd3/ccd_ligands/structures/WAA.cif",
+    "ligand": "WAA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WAA": "ALL"
+    }
+  }
+}

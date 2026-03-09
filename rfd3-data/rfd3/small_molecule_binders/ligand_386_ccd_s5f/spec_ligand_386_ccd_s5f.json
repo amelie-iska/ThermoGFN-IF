@@ -1,0 +1,10 @@
+{
+  "ligand_386_ccd_s5f": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/S5F.cif",
+    "ligand": "S5F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "S5F": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_389_ccd_n84": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/N84.cif",
+    "ligand": "N84",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "N84": "ALL"
+    }
+  }
+}

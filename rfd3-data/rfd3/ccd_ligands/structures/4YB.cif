@@ -1,0 +1,83 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . 4YB L 1 1 . 1 4YB L C1  ? -3.922 2.638  0.235  1 1
+HETATM C C2  . 4YB L 1 1 . 1 4YB L C2  ? -3.021 3.659  -0.112 1 2
+HETATM C C3  . 4YB L 1 1 . 1 4YB L C3  ? -3.429 4.992  0.063  1 3
+HETATM C C4  . 4YB L 1 1 . 1 4YB L C4  ? -2.04  1.767  -0.516 1 4
+HETATM N N1  . 4YB L 1 1 . 1 4YB L N1  ? -4.645 5.223  0.547  1 5
+HETATM N N2  . 4YB L 1 1 . 1 4YB L N2  ? -5.118 2.967  0.712  1 6
+HETATM O O1  . 4YB L 1 1 . 1 4YB L O1  ? 6.832  -0.031 -1.687 1 7
+HETATM C C5  . 4YB L 1 1 . 1 4YB L C5  ? 6.578  1.142  -1.498 1 8
+HETATM O O2  . 4YB L 1 1 . 1 4YB L O2  ? 6.695  2.027  -2.507 1 9
+HETATM C C6  . 4YB L 1 1 . 1 4YB L C6  ? 6.14   1.597  -0.162 1 10
+HETATM C C7  . 4YB L 1 1 . 1 4YB L C7  ? 6.814  2.63   0.482  1 11
+HETATM C C8  . 4YB L 1 1 . 1 4YB L C8  ? 6.401  3.053  1.732  1 12
+HETATM C C9  . 4YB L 1 1 . 1 4YB L C9  ? 5.318  2.456  2.352  1 13
+HETATM C C10 . 4YB L 1 1 . 1 4YB L C10 ? 4.633  1.429  1.729  1 14
+HETATM C C11 . 4YB L 1 1 . 1 4YB L C11 ? 5.031  0.993  0.466  1 15
+HETATM C C12 . 4YB L 1 1 . 1 4YB L C12 ? 4.302  -0.097 -0.206 1 16
+HETATM O O3  . 4YB L 1 1 . 1 4YB L O3  ? 4.582  -0.401 -1.346 1 17
+HETATM C C13 . 4YB L 1 1 . 1 4YB L C13 ? 3.21   -0.835 0.525  1 18
+HETATM C C14 . 4YB L 1 1 . 1 4YB L C14 ? 2.62   -1.909 -0.391 1 19
+HETATM C C15 . 4YB L 1 1 . 1 4YB L C15 ? 1.527  -2.646 0.339  1 20
+HETATM O O4  . 4YB L 1 1 . 1 4YB L O4  ? 1.247  -2.342 1.479  1 21
+HETATM N N3  . 4YB L 1 1 . 1 4YB L N3  ? 0.86   -3.644 -0.275 1 22
+HETATM S S1  . 4YB L 1 1 . 1 4YB L S1  ? -0.341 -4.454 0.527  1 23
+HETATM O O5  . 4YB L 1 1 . 1 4YB L O5  ? -0.863 -5.406 -0.389 1 24
+HETATM O O6  . 4YB L 1 1 . 1 4YB L O6  ? 0.192  -4.807 1.796  1 25
+HETATM O O7  . 4YB L 1 1 . 1 4YB L O7  ? -1.459 -3.455 0.792  1 26
+HETATM C C16 . 4YB L 1 1 . 1 4YB L C16 ? -2.238 -3.135 -0.362 1 27
+HETATM C C17 . 4YB L 1 1 . 1 4YB L C17 ? -3.325 -2.128 0.021  1 28
+HETATM O O8  . 4YB L 1 1 . 1 4YB L O8  ? -2.738 -0.844 0.323  1 29
+HETATM C C18 . 4YB L 1 1 . 1 4YB L C18 ? -4.258 -1.862 -1.181 1 30
+HETATM O O9  . 4YB L 1 1 . 1 4YB L O9  ? -5.45  -2.643 -1.073 1 31
+HETATM C C19 . 4YB L 1 1 . 1 4YB L C19 ? -4.586 -0.356 -1.076 1 32
+HETATM O O10 . 4YB L 1 1 . 1 4YB L O10 ? -5.99  -0.161 -0.899 1 33
+HETATM C C20 . 4YB L 1 1 . 1 4YB L C20 ? -3.812 0.109  0.178  1 34
+HETATM N N4  . 4YB L 1 1 . 1 4YB L N4  ? -3.274 1.457  -0.026 1 35
+HETATM N N5  . 4YB L 1 1 . 1 4YB L N5  ? -1.893 3.059  -0.564 1 36
+HETATM C C21 . 4YB L 1 1 . 1 4YB L C21 ? -5.458 4.23   0.859  1 37
+HETATM N N6  . 4YB L 1 1 . 1 4YB L N6  ? -2.585 6.039  -0.261 1 38
+HETATM H H1  . 4YB L 1 1 . 1 4YB L H1  ? -1.294 1.046  -0.815 1 39
+HETATM H H2  . 4YB L 1 1 . 1 4YB L H2  ? 6.985  1.681  -3.363 1 40
+HETATM H H3  . 4YB L 1 1 . 1 4YB L H3  ? 7.661  3.101  0.005  1 41
+HETATM H H4  . 4YB L 1 1 . 1 4YB L H4  ? 6.928  3.855  2.228  1 42
+HETATM H H5  . 4YB L 1 1 . 1 4YB L H5  ? 5.004  2.795  3.328  1 43
+HETATM H H6  . 4YB L 1 1 . 1 4YB L H6  ? 3.789  0.968  2.218  1 44
+HETATM H H7  . 4YB L 1 1 . 1 4YB L H7  ? 3.622  -1.304 1.417  1 45
+HETATM H H8  . 4YB L 1 1 . 1 4YB L H8  ? 2.427  -0.132 0.812  1 46
+HETATM H H9  . 4YB L 1 1 . 1 4YB L H9  ? 2.207  -1.439 -1.284 1 47
+HETATM H H10 . 4YB L 1 1 . 1 4YB L H10 ? 3.402  -2.611 -0.679 1 48
+HETATM H H11 . 4YB L 1 1 . 1 4YB L H11 ? 1.083  -3.887 -1.187 1 49
+HETATM H H12 . 4YB L 1 1 . 1 4YB L H12 ? -1.594 -2.701 -1.126 1 50
+HETATM H H13 . 4YB L 1 1 . 1 4YB L H13 ? -2.702 -4.041 -0.75  1 51
+HETATM H H14 . 4YB L 1 1 . 1 4YB L H14 ? -3.899 -2.496 0.872  1 52
+HETATM H H15 . 4YB L 1 1 . 1 4YB L H15 ? -3.745 -2.079 -2.118 1 53
+HETATM H H16 . 4YB L 1 1 . 1 4YB L H16 ? -6.072 -2.515 -1.802 1 54
+HETATM H H17 . 4YB L 1 1 . 1 4YB L H17 ? -4.236 0.174  -1.962 1 55
+HETATM H H18 . 4YB L 1 1 . 1 4YB L H18 ? -6.529 -0.491 -1.631 1 56
+HETATM H H19 . 4YB L 1 1 . 1 4YB L H19 ? -4.461 0.087  1.054  1 57
+HETATM H H20 . 4YB L 1 1 . 1 4YB L H20 ? -6.437 4.463  1.249  1 58
+HETATM H H21 . 4YB L 1 1 . 1 4YB L H21 ? -1.699 5.857  -0.613 1 59
+HETATM H H22 . 4YB L 1 1 . 1 4YB L H22 ? -2.878 6.955  -0.136 1 60
+#

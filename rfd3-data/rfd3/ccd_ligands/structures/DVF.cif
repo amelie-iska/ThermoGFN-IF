@@ -1,0 +1,73 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . DVF L 1 1 . 1 DVF L C1  ? -3.903 -0.148 1.232  1 1
+HETATM C C2  . DVF L 1 1 . 1 DVF L C2  ? -5.125 -0.954 0.787  1 2
+HETATM C C3  . DVF L 1 1 . 1 DVF L C3  ? -3.701 1.015  0.295  1 3
+HETATM C C7  . DVF L 1 1 . 1 DVF L C7  ? -4.452 3.095  -0.623 1 4
+HETATM C C8  . DVF L 1 1 . 1 DVF L C8  ? -4.637 2.028  0.237  1 5
+HETATM C C9  . DVF L 1 1 . 1 DVF L C9  ? -1.552 -0.009 -0.448 1 6
+HETATM C C10 . DVF L 1 1 . 1 DVF L C10 ? 0.674  -0.614 -0.251 1 7
+HETATM C C11 . DVF L 1 1 . 1 DVF L C11 ? 2.373  1.143  0.094  1 8
+HETATM C C12 . DVF L 1 1 . 1 DVF L C12 ? 3.871  1.258  0.218  1 9
+HETATM C C13 . DVF L 1 1 . 1 DVF L C13 ? 4.627  1.568  -0.897 1 10
+HETATM C C14 . DVF L 1 1 . 1 DVF L C14 ? 6.004  1.672  -0.772 1 11
+HETATM C C15 . DVF L 1 1 . 1 DVF L C15 ? 6.571  1.458  0.475  1 12
+HETATM C C16 . DVF L 1 1 . 1 DVF L C16 ? 5.751  1.152  1.544  1 13
+HETATM C C19 . DVF L 1 1 . 1 DVF L C19 ? 0.102  -4.192 -0.425 1 14
+HETATM C C20 . DVF L 1 1 . 1 DVF L C20 ? -1.152 -3.719 -0.544 1 15
+HETATM C C21 . DVF L 1 1 . 1 DVF L C21 ? -1.067 -2.263 -0.489 1 16
+HETATM C C   . DVF L 1 1 . 1 DVF L C   ? -4.127 0.375  2.652  1 17
+HETATM C C6  . DVF L 1 1 . 1 DVF L C6  ? -3.33  3.155  -1.429 1 18
+HETATM C C5  . DVF L 1 1 . 1 DVF L C5  ? -2.384 2.152  -1.375 1 19
+HETATM C C4  . DVF L 1 1 . 1 DVF L C4  ? -2.565 1.073  -0.51  1 20
+HETATM N N4  . DVF L 1 1 . 1 DVF L N4  ? -1.954 -1.266 -0.536 1 21
+HETATM N N   . DVF L 1 1 . 1 DVF L N   ? -0.271 0.317  -0.312 1 22
+HETATM C C17 . DVF L 1 1 . 1 DVF L C17 ? 0.298  -1.961 -0.334 1 23
+HETATM N N3  . DVF L 1 1 . 1 DVF L N3  ? 0.98   -3.155 -0.299 1 24
+HETATM C C18 . DVF L 1 1 . 1 DVF L C18 ? 2.43   -3.293 -0.148 1 25
+HETATM N N1  . DVF L 1 1 . 1 DVF L N1  ? 2.006  -0.26  -0.109 1 26
+HETATM N N2  . DVF L 1 1 . 1 DVF L N2  ? 4.444  1.066  1.39   1 27
+HETATM H H1  . DVF L 1 1 . 1 DVF L H1  ? -3.02  -0.786 1.214  1 28
+HETATM H H2  . DVF L 1 1 . 1 DVF L H2  ? -6.008 -0.315 0.804  1 29
+HETATM H H3  . DVF L 1 1 . 1 DVF L H3  ? -4.966 -1.326 -0.225 1 30
+HETATM H H4  . DVF L 1 1 . 1 DVF L H4  ? -5.272 -1.795 1.464  1 31
+HETATM H H5  . DVF L 1 1 . 1 DVF L H5  ? -5.188 3.885  -0.665 1 32
+HETATM H H6  . DVF L 1 1 . 1 DVF L H6  ? -5.516 1.986  0.863  1 33
+HETATM H H7  . DVF L 1 1 . 1 DVF L H7  ? 1.904  1.513  1.005  1 34
+HETATM H H8  . DVF L 1 1 . 1 DVF L H8  ? 2.033  1.735  -0.756 1 35
+HETATM H H9  . DVF L 1 1 . 1 DVF L H9  ? 4.151  1.727  -1.853 1 36
+HETATM H H10 . DVF L 1 1 . 1 DVF L H10 ? 6.62   1.912  -1.626 1 37
+HETATM H H11 . DVF L 1 1 . 1 DVF L H11 ? 7.641  1.531  0.608  1 38
+HETATM H H12 . DVF L 1 1 . 1 DVF L H12 ? 6.186  0.984  2.519  1 39
+HETATM H H13 . DVF L 1 1 . 1 DVF L H13 ? 0.374  -5.237 -0.429 1 40
+HETATM H H14 . DVF L 1 1 . 1 DVF L H14 ? -2.052 -4.305 -0.659 1 41
+HETATM H H15 . DVF L 1 1 . 1 DVF L H15 ? -3.256 0.949  2.969  1 42
+HETATM H H16 . DVF L 1 1 . 1 DVF L H16 ? -5.01  1.014  2.67   1 43
+HETATM H H17 . DVF L 1 1 . 1 DVF L H17 ? -4.273 -0.466 3.33   1 44
+HETATM H H18 . DVF L 1 1 . 1 DVF L H18 ? -3.191 3.991  -2.099 1 45
+HETATM H H19 . DVF L 1 1 . 1 DVF L H19 ? -1.508 2.199  -2.005 1 46
+HETATM H H20 . DVF L 1 1 . 1 DVF L H20 ? 2.909  -3.183 -1.121 1 47
+HETATM H H21 . DVF L 1 1 . 1 DVF L H21 ? 2.8    -2.521 0.527  1 48
+HETATM H H22 . DVF L 1 1 . 1 DVF L H22 ? 2.661  -4.276 0.262  1 49
+HETATM H H23 . DVF L 1 1 . 1 DVF L H23 ? 2.696  -0.942 -0.145 1 50
+#

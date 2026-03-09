@@ -1,0 +1,10 @@
+{
+  "ligand_318_ccd_a1b3d": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1B3D.cif",
+    "ligand": "A1B3D",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1B3D": "ALL"
+    }
+  }
+}

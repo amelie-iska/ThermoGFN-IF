@@ -1,0 +1,10 @@
+{
+  "ligand_361_ccd_y0b": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Y0B.cif",
+    "ligand": "Y0B",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Y0B": "ALL"
+    }
+  }
+}

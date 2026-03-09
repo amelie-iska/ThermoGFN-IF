@@ -1,0 +1,66 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C10 . ZVJ L 1 1 . 1 ZVJ L C10 ? 4.795  -1.208 0.553  1 1
+HETATM C C13 . ZVJ L 1 1 . 1 ZVJ L C13 ? 2.558  -1.429 -0.293 1 2
+HETATM C C15 . ZVJ L 1 1 . 1 ZVJ L C15 ? -3.174 2.15   0.267  1 3
+HETATM C C17 . ZVJ L 1 1 . 1 ZVJ L C17 ? -4.111 0.053  1.26   1 4
+HETATM C C20 . ZVJ L 1 1 . 1 ZVJ L C20 ? -3.861 -1.279 -1.154 1 5
+HETATM C C21 . ZVJ L 1 1 . 1 ZVJ L C21 ? -3.481 0.046  -1.052 1 6
+HETATM C C01 . ZVJ L 1 1 . 1 ZVJ L C01 ? -1.298 3.673  0.904  1 7
+HETATM C C02 . ZVJ L 1 1 . 1 ZVJ L C02 ? -1.699 2.215  0.669  1 8
+HETATM C C04 . ZVJ L 1 1 . 1 ZVJ L C04 ? 0.404  1.146  0.121  1 9
+HETATM C C05 . ZVJ L 1 1 . 1 ZVJ L C05 ? 1.234  0.564  -1.025 1 10
+HETATM C C06 . ZVJ L 1 1 . 1 ZVJ L C06 ? 2.488  -0.06  -0.47  1 11
+HETATM C C07 . ZVJ L 1 1 . 1 ZVJ L C07 ? 3.567  0.738  -0.138 1 12
+HETATM C C08 . ZVJ L 1 1 . 1 ZVJ L C08 ? 4.723  0.165  0.374  1 13
+HETATM C C11 . ZVJ L 1 1 . 1 ZVJ L C11 ? 3.711  -2.006 0.219  1 14
+HETATM C C16 . ZVJ L 1 1 . 1 ZVJ L C16 ? -3.6   0.709  0.155  1 15
+HETATM C C18 . ZVJ L 1 1 . 1 ZVJ L C18 ? -4.497 -1.27  1.162  1 16
+HETATM C C19 . ZVJ L 1 1 . 1 ZVJ L C19 ? -4.373 -1.939 -0.047 1 17
+HETATM N N03 . ZVJ L 1 1 . 1 ZVJ L N03 ? -0.873 1.648  -0.405 1 18
+HETATM O O09 . ZVJ L 1 1 . 1 ZVJ L O09 ? 5.783  0.95   0.701  1 19
+HETATM O O12 . ZVJ L 1 1 . 1 ZVJ L O12 ? 3.779  -3.352 0.392  1 20
+HETATM O O14 . ZVJ L 1 1 . 1 ZVJ L O14 ? 1.584  1.607  -1.937 1 21
+HETATM O O22 . ZVJ L 1 1 . 1 ZVJ L O22 ? -4.753 -3.24  -0.147 1 22
+HETATM H H1  . ZVJ L 1 1 . 1 ZVJ L H1  ? 5.695  -1.656 0.947  1 23
+HETATM H H2  . ZVJ L 1 1 . 1 ZVJ L H2  ? 1.713  -2.05  -0.553 1 24
+HETATM H H3  . ZVJ L 1 1 . 1 ZVJ L H3  ? -3.779 2.65   1.023  1 25
+HETATM H H4  . ZVJ L 1 1 . 1 ZVJ L H4  ? -3.311 2.645  -0.694 1 26
+HETATM H H5  . ZVJ L 1 1 . 1 ZVJ L H5  ? -4.203 0.573  2.202  1 27
+HETATM H H6  . ZVJ L 1 1 . 1 ZVJ L H6  ? -3.768 -1.796 -2.097 1 28
+HETATM H H7  . ZVJ L 1 1 . 1 ZVJ L H7  ? -3.091 0.563  -1.916 1 29
+HETATM H H8  . ZVJ L 1 1 . 1 ZVJ L H8  ? -1.451 4.244  -0.012 1 30
+HETATM H H9  . ZVJ L 1 1 . 1 ZVJ L H9  ? -1.911 4.094  1.701  1 31
+HETATM H H10 . ZVJ L 1 1 . 1 ZVJ L H10 ? -0.247 3.72   1.19   1 32
+HETATM H H11 . ZVJ L 1 1 . 1 ZVJ L H11 ? -1.546 1.644  1.585  1 33
+HETATM H H12 . ZVJ L 1 1 . 1 ZVJ L H12 ? 0.212  0.37   0.861  1 34
+HETATM H H13 . ZVJ L 1 1 . 1 ZVJ L H13 ? 0.951  1.965  0.587  1 35
+HETATM H H14 . ZVJ L 1 1 . 1 ZVJ L H14 ? 0.651  -0.194 -1.547 1 36
+HETATM H H15 . ZVJ L 1 1 . 1 ZVJ L H15 ? 3.51   1.807  -0.277 1 37
+HETATM H H16 . ZVJ L 1 1 . 1 ZVJ L H16 ? -4.896 -1.782 2.025  1 38
+HETATM H H17 . ZVJ L 1 1 . 1 ZVJ L H17 ? -1.371 0.922  -0.899 1 39
+HETATM H H19 . ZVJ L 1 1 . 1 ZVJ L H19 ? 6.409  1.087  -0.023 1 40
+HETATM H H20 . ZVJ L 1 1 . 1 ZVJ L H20 ? 3.48   -3.652 1.261  1 41
+HETATM H H21 . ZVJ L 1 1 . 1 ZVJ L H21 ? 2.105  2.319  -1.54  1 42
+HETATM H H22 . ZVJ L 1 1 . 1 ZVJ L H22 ? -5.679 -3.362 -0.401 1 43
+#

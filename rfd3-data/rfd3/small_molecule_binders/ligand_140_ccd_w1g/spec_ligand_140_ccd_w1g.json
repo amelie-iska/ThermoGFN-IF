@@ -1,0 +1,10 @@
+{
+  "ligand_140_ccd_w1g": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/W1G.cif",
+    "ligand": "W1G",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "W1G": "ALL"
+    }
+  }
+}

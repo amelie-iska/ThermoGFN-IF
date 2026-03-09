@@ -1,0 +1,10 @@
+{
+  "ligand_373_ccd_zkq": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZKQ.cif",
+    "ligand": "ZKQ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZKQ": "ALL"
+    }
+  }
+}

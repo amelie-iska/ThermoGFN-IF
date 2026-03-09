@@ -1,0 +1,58 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . V3W L 1 1 . 1 V3W L C01 ? 5.101  -0.984 0.402  1 1
+HETATM C C02 . V3W L 1 1 . 1 V3W L C02 ? 3.783  -0.343 0.249  1 2
+HETATM C C03 . V3W L 1 1 . 1 V3W L C03 ? 3.387  0.663  1.135  1 3
+HETATM C C04 . V3W L 1 1 . 1 V3W L C04 ? 2.154  1.261  0.991  1 4
+HETATM C C05 . V3W L 1 1 . 1 V3W L C05 ? 1.301  0.864  -0.04  1 5
+HETATM C C06 . V3W L 1 1 . 1 V3W L C06 ? -0.023 1.509  -0.194 1 6
+HETATM C C08 . V3W L 1 1 . 1 V3W L C08 ? -1.013 -0.703 -0.543 1 7
+HETATM C C09 . V3W L 1 1 . 1 V3W L C09 ? -2.091 -1.296 0.37   1 8
+HETATM C C10 . V3W L 1 1 . 1 V3W L C10 ? -3.458 -0.738 -0.033 1 9
+HETATM C C12 . V3W L 1 1 . 1 V3W L C12 ? -5.743 -1.437 0.158  1 10
+HETATM C C13 . V3W L 1 1 . 1 V3W L C13 ? -3.461 0.783  0.141  1 11
+HETATM C C14 . V3W L 1 1 . 1 V3W L C14 ? -2.398 1.4    -0.774 1 12
+HETATM C C16 . V3W L 1 1 . 1 V3W L C16 ? 1.696  -0.139 -0.926 1 13
+HETATM C C17 . V3W L 1 1 . 1 V3W L C17 ? 2.93   -0.736 -0.787 1 14
+HETATM N N07 . V3W L 1 1 . 1 V3W L N07 ? -1.105 0.763  -0.493 1 15
+HETATM O O11 . V3W L 1 1 . 1 V3W L O11 ? -4.47  -1.313 0.796  1 16
+HETATM O O15 . V3W L 1 1 . 1 V3W L O15 ? -0.134 2.711  -0.051 1 17
+HETATM H H1  . V3W L 1 1 . 1 V3W L H1  ? 5.76   -0.68  1.202  1 18
+HETATM H H4  . V3W L 1 1 . 1 V3W L H4  ? 4.046  0.969  1.934  1 19
+HETATM H H5  . V3W L 1 1 . 1 V3W L H5  ? 1.848  2.038  1.676  1 20
+HETATM H H6  . V3W L 1 1 . 1 V3W L H6  ? -0.028 -1.019 -0.198 1 21
+HETATM H H7  . V3W L 1 1 . 1 V3W L H7  ? -1.17  -1.046 -1.565 1 22
+HETATM H H8  . V3W L 1 1 . 1 V3W L H8  ? -2.097 -2.381 0.269  1 23
+HETATM H H9  . V3W L 1 1 . 1 V3W L H9  ? -1.879 -1.028 1.405  1 24
+HETATM H H10 . V3W L 1 1 . 1 V3W L H10 ? -3.658 -0.984 -1.075 1 25
+HETATM H H11 . V3W L 1 1 . 1 V3W L H11 ? -5.648 -2.072 -0.723 1 26
+HETATM H H12 . V3W L 1 1 . 1 V3W L H12 ? -6.456 -1.882 0.852  1 27
+HETATM H H13 . V3W L 1 1 . 1 V3W L H13 ? -6.096 -0.45  -0.143 1 28
+HETATM H H14 . V3W L 1 1 . 1 V3W L H14 ? -4.442 1.177  -0.124 1 29
+HETATM H H15 . V3W L 1 1 . 1 V3W L H15 ? -3.237 1.031  1.178  1 30
+HETATM H H16 . V3W L 1 1 . 1 V3W L H16 ? -2.67  1.23   -1.816 1 31
+HETATM H H17 . V3W L 1 1 . 1 V3W L H17 ? -2.33  2.471  -0.585 1 32
+HETATM H H18 . V3W L 1 1 . 1 V3W L H18 ? 1.035  -0.445 -1.723 1 33
+HETATM H H19 . V3W L 1 1 . 1 V3W L H19 ? 3.236  -1.51  -1.475 1 34
+HETATM O O1  . V3W L 1 1 . 1 V3W L O1  ? 5.444  -1.856 -0.368 1 35
+#

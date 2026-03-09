@@ -1,0 +1,10 @@
+{
+  "ligand_508_ccd_j0w": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/J0W.cif",
+    "ligand": "J0W",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "J0W": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_201_ccd_a1bem": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1BEM.cif",
+    "ligand": "A1BEM",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1BEM": "ALL"
+    }
+  }
+}

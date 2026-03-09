@@ -1,0 +1,10 @@
+{
+  "ligand_166_ccd_u30": {
+    "input": "./data/rfd3/ccd_ligands/structures/U30.cif",
+    "ligand": "U30",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "U30": "ALL"
+    }
+  }
+}

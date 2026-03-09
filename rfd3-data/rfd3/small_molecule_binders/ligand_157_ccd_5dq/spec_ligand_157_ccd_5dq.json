@@ -1,0 +1,10 @@
+{
+  "ligand_157_ccd_5dq": {
+    "input": "./data/rfd3/ccd_ligands/structures/5DQ.cif",
+    "ligand": "5DQ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5DQ": "ALL"
+    }
+  }
+}

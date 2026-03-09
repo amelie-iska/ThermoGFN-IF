@@ -1,0 +1,10 @@
+{
+  "ligand_427_ccd_a1h60": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1H60.cif",
+    "ligand": "A1H60",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1H60": "ALL"
+    }
+  }
+}

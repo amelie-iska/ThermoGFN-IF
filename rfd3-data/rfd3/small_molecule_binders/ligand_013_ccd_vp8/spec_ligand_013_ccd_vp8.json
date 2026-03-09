@@ -1,0 +1,10 @@
+{
+  "ligand_013_ccd_vp8": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/VP8.cif",
+    "ligand": "VP8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "VP8": "ALL"
+    }
+  }
+}

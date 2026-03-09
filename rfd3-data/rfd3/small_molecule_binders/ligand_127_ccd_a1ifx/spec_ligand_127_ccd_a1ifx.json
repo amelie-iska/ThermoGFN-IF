@@ -1,0 +1,10 @@
+{
+  "ligand_127_ccd_a1ifx": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1IFX.cif",
+    "ligand": "A1IFX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IFX": "ALL"
+    }
+  }
+}

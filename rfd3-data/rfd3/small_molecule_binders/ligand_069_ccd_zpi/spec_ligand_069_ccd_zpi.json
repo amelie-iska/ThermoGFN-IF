@@ -1,0 +1,10 @@
+{
+  "ligand_069_ccd_zpi": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZPI.cif",
+    "ligand": "ZPI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZPI": "ALL"
+    }
+  }
+}

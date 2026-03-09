@@ -1,0 +1,10 @@
+{
+  "ligand_180_ccd_ot0": {
+    "input": "./data/rfd3/ccd_ligands/structures/OT0.cif",
+    "ligand": "OT0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OT0": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_146_ccd_rdj": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RDJ.cif",
+    "ligand": "RDJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RDJ": "ALL"
+    }
+  }
+}

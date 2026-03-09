@@ -1,0 +1,79 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N  N1  . RT9 L 1 1 . 1 RT9 L N1  ? 1.737  -0.551 0.998  1 1
+HETATM C  C4  . RT9 L 1 1 . 1 RT9 L C4  ? 0.219  1.285  1.664  1 2
+HETATM C  C5  . RT9 L 1 1 . 1 RT9 L C5  ? 0.475  -0.131 1.215  1 3
+HETATM C  C6  . RT9 L 1 1 . 1 RT9 L C6  ? 1.984  -1.891 0.694  1 4
+HETATM C  C7  . RT9 L 1 1 . 1 RT9 L C7  ? 1.042  -2.862 0.963  1 5
+HETATM C  C8  . RT9 L 1 1 . 1 RT9 L C8  ? 2.372  -4.566 0.132  1 6
+HETATM C  C10 . RT9 L 1 1 . 1 RT9 L C10 ? 4.601  -4.077 -0.777 1 7
+HETATM C  C13 . RT9 L 1 1 . 1 RT9 L C13 ? 4.211  -1.364 -0.215 1 8
+HETATM C  C15 . RT9 L 1 1 . 1 RT9 L C15 ? 0.764  2.241  0.637  1 9
+HETATM C  C17 . RT9 L 1 1 . 1 RT9 L C17 ? 2.536  3.608  -0.211 1 10
+HETATM C  C20 . RT9 L 1 1 . 1 RT9 L C20 ? -0.038 2.624  -0.44  1 11
+HETATM C  C21 . RT9 L 1 1 . 1 RT9 L C21 ? -1.417 2.101  -0.53  1 12
+HETATM C  C22 . RT9 L 1 1 . 1 RT9 L C22 ? -5.41  -1.77  0.558  1 13
+HETATM O  O4  . RT9 L 1 1 . 1 RT9 L O4  ? -2.052 2.217  -1.56  1 14
+HETATM N  N   . RT9 L 1 1 . 1 RT9 L N   ? -1.962 1.493  0.541  1 15
+HETATM S  S   . RT9 L 1 1 . 1 RT9 L S   ? -3.425 0.731  0.39   1 16
+HETATM O  O1  . RT9 L 1 1 . 1 RT9 L O1  ? -3.975 0.765  1.699  1 17
+HETATM O  O2  . RT9 L 1 1 . 1 RT9 L O2  ? -4.06  1.402  -0.69  1 18
+HETATM C  C2  . RT9 L 1 1 . 1 RT9 L C2  ? -3.001 -0.97  -0.079 1 19
+HETATM C  C1  . RT9 L 1 1 . 1 RT9 L C1  ? -4.275 -1.724 -0.467 1 20
+HETATM C  C23 . RT9 L 1 1 . 1 RT9 L C23 ? -4.581 -3.025 0.278  1 21
+HETATM O  O   . RT9 L 1 1 . 1 RT9 L O   ? -4.636 -1.653 -1.848 1 22
+HETATM C  C   . RT9 L 1 1 . 1 RT9 L C   ? -3.526 -1.733 -2.744 1 23
+HETATM C  C19 . RT9 L 1 1 . 1 RT9 L C19 ? 0.462  3.494  -1.407 1 24
+HETATM C  C18 . RT9 L 1 1 . 1 RT9 L C18 ? 1.747  3.982  -1.286 1 25
+HETATM CL CL  . RT9 L 1 1 . 1 RT9 L CL  ? 4.148  4.233  -0.064 1 26
+HETATM C  C16 . RT9 L 1 1 . 1 RT9 L C16 ? 2.044  2.737  0.749  1 27
+HETATM C  C3  . RT9 L 1 1 . 1 RT9 L C3  ? -1.283 1.497  1.835  1 28
+HETATM O  O3  . RT9 L 1 1 . 1 RT9 L O3  ? -0.455 -0.892 1.049  1 29
+HETATM C  C14 . RT9 L 1 1 . 1 RT9 L C14 ? 3.203  -2.284 0.097  1 30
+HETATM C  C12 . RT9 L 1 1 . 1 RT9 L C12 ? 5.366  -1.804 -0.791 1 31
+HETATM C  C11 . RT9 L 1 1 . 1 RT9 L C11 ? 5.56   -3.155 -1.068 1 32
+HETATM C  C9  . RT9 L 1 1 . 1 RT9 L C9  ? 3.396  -3.66  -0.189 1 33
+HETATM N  N2  . RT9 L 1 1 . 1 RT9 L N2  ? 1.26   -4.138 0.681  1 34
+HETATM H  H1  . RT9 L 1 1 . 1 RT9 L H1  ? 2.473  0.078  1.05   1 35
+HETATM H  H2  . RT9 L 1 1 . 1 RT9 L H2  ? 0.718  1.455  2.618  1 36
+HETATM H  H3  . RT9 L 1 1 . 1 RT9 L H3  ? 0.104  -2.575 1.416  1 37
+HETATM H  H4  . RT9 L 1 1 . 1 RT9 L H4  ? 2.5    -5.619 -0.075 1 38
+HETATM H  H5  . RT9 L 1 1 . 1 RT9 L H5  ? 4.765  -5.122 -0.998 1 39
+HETATM H  H6  . RT9 L 1 1 . 1 RT9 L H6  ? 4.075  -0.314 -0.002 1 40
+HETATM H  H7  . RT9 L 1 1 . 1 RT9 L H7  ? -5.249 -1.263 1.51   1 41
+HETATM H  H8  . RT9 L 1 1 . 1 RT9 L H8  ? -6.431 -1.746 0.179  1 42
+HETATM H  H9  . RT9 L 1 1 . 1 RT9 L H9  ? -2.316 -0.954 -0.926 1 43
+HETATM H  H10 . RT9 L 1 1 . 1 RT9 L H10 ? -2.525 -1.471 0.764  1 44
+HETATM H  H11 . RT9 L 1 1 . 1 RT9 L H11 ? -3.875 -3.344 1.044  1 45
+HETATM H  H12 . RT9 L 1 1 . 1 RT9 L H12 ? -5.057 -3.827 -0.286 1 46
+HETATM H  H13 . RT9 L 1 1 . 1 RT9 L H13 ? -3.89  -1.803 -3.769 1 47
+HETATM H  H14 . RT9 L 1 1 . 1 RT9 L H14 ? -2.909 -0.84  -2.638 1 48
+HETATM H  H15 . RT9 L 1 1 . 1 RT9 L H15 ? -2.931 -2.615 -2.508 1 49
+HETATM H  H16 . RT9 L 1 1 . 1 RT9 L H16 ? -0.153 3.785  -2.246 1 50
+HETATM H  H17 . RT9 L 1 1 . 1 RT9 L H17 ? 2.139  4.657  -2.033 1 51
+HETATM H  H18 . RT9 L 1 1 . 1 RT9 L H18 ? 2.664  2.449  1.585  1 52
+HETATM H  H19 . RT9 L 1 1 . 1 RT9 L H19 ? -1.69  0.698  2.455  1 53
+HETATM H  H20 . RT9 L 1 1 . 1 RT9 L H20 ? -1.456 2.454  2.327  1 54
+HETATM H  H21 . RT9 L 1 1 . 1 RT9 L H21 ? 6.143  -1.094 -1.032 1 55
+HETATM H  H22 . RT9 L 1 1 . 1 RT9 L H22 ? 6.486  -3.477 -1.52  1 56
+#

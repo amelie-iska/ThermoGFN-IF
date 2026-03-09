@@ -1,0 +1,10 @@
+{
+  "ligand_364_ccd_xzv": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XZV.cif",
+    "ligand": "XZV",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XZV": "ALL"
+    }
+  }
+}

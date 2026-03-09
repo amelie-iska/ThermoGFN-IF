@@ -1,0 +1,10 @@
+{
+  "ligand_379_ccd_a1a73": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1A73.cif",
+    "ligand": "A1A73",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1A73": "ALL"
+    }
+  }
+}

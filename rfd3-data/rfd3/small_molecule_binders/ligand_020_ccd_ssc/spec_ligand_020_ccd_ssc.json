@@ -1,0 +1,10 @@
+{
+  "ligand_020_ccd_ssc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/SSC.cif",
+    "ligand": "SSC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SSC": "ALL"
+    }
+  }
+}

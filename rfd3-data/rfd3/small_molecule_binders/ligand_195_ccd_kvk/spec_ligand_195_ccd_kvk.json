@@ -1,0 +1,10 @@
+{
+  "ligand_195_ccd_kvk": {
+    "input": "./data/rfd3/ccd_ligands/structures/KVK.cif",
+    "ligand": "KVK",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KVK": "ALL"
+    }
+  }
+}

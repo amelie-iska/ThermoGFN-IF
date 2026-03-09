@@ -1,0 +1,10 @@
+{
+  "ligand_524_ccd_x4w": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/X4W.cif",
+    "ligand": "X4W",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "X4W": "ALL"
+    }
+  }
+}

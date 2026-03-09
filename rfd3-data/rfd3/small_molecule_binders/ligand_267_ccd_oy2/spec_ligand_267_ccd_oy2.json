@@ -1,0 +1,10 @@
+{
+  "ligand_267_ccd_oy2": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OY2.cif",
+    "ligand": "OY2",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OY2": "ALL"
+    }
+  }
+}

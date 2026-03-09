@@ -1,0 +1,10 @@
+{
+  "ligand_015_ccd_m56": {
+    "input": "./data/rfd3/ccd_ligands/structures/M56.cif",
+    "ligand": "M56",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "M56": "ALL"
+    }
+  }
+}

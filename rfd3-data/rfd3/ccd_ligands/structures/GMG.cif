@@ -1,0 +1,70 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C4   . GMG L 1 1 . 1 GMG L C4   ? 6.668  0.323  0.136  1 1
+HETATM C C5   . GMG L 1 1 . 1 GMG L C5   ? -4.595 0.086  -1.279 1 2
+HETATM C C6   . GMG L 1 1 . 1 GMG L C6   ? -3.503 1.231  0.524  1 3
+HETATM C C7   . GMG L 1 1 . 1 GMG L C7   ? 3.489  2.235  -0.163 1 4
+HETATM C C8   . GMG L 1 1 . 1 GMG L C8   ? -3.708 -0.964 -1.158 1 5
+HETATM C C10  . GMG L 1 1 . 1 GMG L C10  ? 2.581  1.225  -0.122 1 6
+HETATM C C13  . GMG L 1 1 . 1 GMG L C13  ? -2.057 -3.361 0.039  1 7
+HETATM C C15  . GMG L 1 1 . 1 GMG L C15  ? -5.465 2.325  -0.577 1 8
+HETATM C C17  . GMG L 1 1 . 1 GMG L C17  ? 4.863  1.949  -0.077 1 9
+HETATM C C20  . GMG L 1 1 . 1 GMG L C20  ? 2.995  -0.11  0.005  1 10
+HETATM C C21  . GMG L 1 1 . 1 GMG L C21  ? 1.982  -1.193 0.047  1 11
+HETATM C C22  . GMG L 1 1 . 1 GMG L C22  ? -0.284 -1.949 0.006  1 12
+HETATM C C24  . GMG L 1 1 . 1 GMG L C24  ? 0.19   -3.269 0.128  1 13
+HETATM C C1   . GMG L 1 1 . 1 GMG L C1   ? 7.145  2.665  -0.039 1 14
+HETATM C C2   . GMG L 1 1 . 1 GMG L C2   ? 7.567  1.343  0.088  1 15
+HETATM C C3   . GMG L 1 1 . 1 GMG L C3   ? 5.822  2.975  -0.118 1 16
+HETATM C C9   . GMG L 1 1 . 1 GMG L C9   ? -2.609 0.187  0.654  1 17
+HETATM C C11  . GMG L 1 1 . 1 GMG L C11  ? 4.338  -0.425 0.092  1 18
+HETATM C C12  . GMG L 1 1 . 1 GMG L C12  ? 0.623  -0.893 -0.038 1 19
+HETATM C C14  . GMG L 1 1 . 1 GMG L C14  ? 2.376  -2.527 0.171  1 20
+HETATM C C16  . GMG L 1 1 . 1 GMG L C16  ? -4.493 1.181  -0.44  1 21
+HETATM C C18  . GMG L 1 1 . 1 GMG L C18  ? -2.707 -0.919 -0.188 1 22
+HETATM C C19  . GMG L 1 1 . 1 GMG L C19  ? 5.292  0.603  0.051  1 23
+HETATM C C23  . GMG L 1 1 . 1 GMG L C23  ? -1.751 -2.044 -0.054 1 24
+HETATM C C25  . GMG L 1 1 . 1 GMG L C25  ? -6.661 2.076  0.306  1 25
+HETATM N N26  . GMG L 1 1 . 1 GMG L N26  ? -0.91  -4.095 0.15   1 26
+HETATM N N27  . GMG L 1 1 . 1 GMG L N27  ? 1.494  -3.502 0.205  1 27
+HETATM O O28  . GMG L 1 1 . 1 GMG L O28  ? -7.663 2.968  0.346  1 28
+HETATM O O29  . GMG L 1 1 . 1 GMG L O29  ? -6.719 1.073  0.977  1 29
+HETATM H H4   . GMG L 1 1 . 1 GMG L H4   ? 7.009  -0.697 0.234  1 30
+HETATM H H5   . GMG L 1 1 . 1 GMG L H5   ? -5.368 0.055  -2.033 1 31
+HETATM H H6   . GMG L 1 1 . 1 GMG L H6   ? -3.428 2.089  1.177  1 32
+HETATM H H7   . GMG L 1 1 . 1 GMG L H7   ? 3.156  3.257  -0.261 1 33
+HETATM H H8   . GMG L 1 1 . 1 GMG L H8   ? -3.788 -1.818 -1.814 1 34
+HETATM H H10  . GMG L 1 1 . 1 GMG L H10  ? 1.528  1.453  -0.188 1 35
+HETATM H H13  . GMG L 1 1 . 1 GMG L H13  ? -3.057 -3.768 0.03   1 36
+HETATM H H15  . GMG L 1 1 . 1 GMG L H15  ? -4.979 3.253  -0.276 1 37
+HETATM H H15A . GMG L 1 1 . 1 GMG L H15A ? -5.79  2.404  -1.615 1 38
+HETATM H H1   . GMG L 1 1 . 1 GMG L H1   ? 7.879  3.457  -0.074 1 39
+HETATM H H2   . GMG L 1 1 . 1 GMG L H2   ? 8.623  1.125  0.149  1 40
+HETATM H H3   . GMG L 1 1 . 1 GMG L H3   ? 5.511  4.004  -0.216 1 41
+HETATM H H9   . GMG L 1 1 . 1 GMG L H9   ? -1.836 0.227  1.407  1 42
+HETATM H H11  . GMG L 1 1 . 1 GMG L H11  ? 4.651  -1.454 0.19   1 43
+HETATM H H12  . GMG L 1 1 . 1 GMG L H12  ? 0.283  0.128  -0.136 1 44
+HETATM H H14  . GMG L 1 1 . 1 GMG L H14  ? 3.428  -2.764 0.235  1 45
+HETATM H HO28 . GMG L 1 1 . 1 GMG L HO28 ? -8.409 2.765  0.926  1 46
+HETATM H HN26 . GMG L 1 1 . 1 GMG L HN26 ? -0.876 -5.06  0.234  1 47
+#

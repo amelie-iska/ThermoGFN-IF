@@ -1,0 +1,10 @@
+{
+  "ligand_302_ccd_21d": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/21D.cif",
+    "ligand": "21D",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "21D": "ALL"
+    }
+  }
+}

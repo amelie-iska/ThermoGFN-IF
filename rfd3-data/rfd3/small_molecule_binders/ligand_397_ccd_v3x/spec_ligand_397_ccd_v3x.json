@@ -1,0 +1,10 @@
+{
+  "ligand_397_ccd_v3x": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V3X.cif",
+    "ligand": "V3X",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V3X": "ALL"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C31 . F1S L 1 1 . 1 F1S L C31 ? 4.638  -0.507 2.624  1 1
+HETATM S  S30 . F1S L 1 1 . 1 F1S L S30 ? 5.26   0.278  1.112  1 2
+HETATM O  O32 . F1S L 1 1 . 1 F1S L O32 ? 4.473  1.413  0.78   1 3
+HETATM O  O33 . F1S L 1 1 . 1 F1S L O33 ? 6.679  0.351  1.135  1 4
+HETATM N  N27 . F1S L 1 1 . 1 F1S L N27 ? 4.927  -0.815 -0.087 1 5
+HETATM C  C26 . F1S L 1 1 . 1 F1S L C26 ? 3.601  -1.12  -0.406 1 6
+HETATM C  C25 . F1S L 1 1 . 1 F1S L C25 ? 2.616  -0.141 -0.337 1 7
+HETATM C  C21 . F1S L 1 1 . 1 F1S L C21 ? 3.25   -2.407 -0.803 1 8
+HETATM CL CL2 . F1S L 1 1 . 1 F1S L CL2 ? 4.47   -3.638 -0.9   1 9
+HETATM N  N22 . F1S L 1 1 . 1 F1S L N22 ? 2.001  -2.702 -1.105 1 10
+HETATM C  C23 . F1S L 1 1 . 1 F1S L C23 ? 1.039  -1.802 -1.046 1 11
+HETATM C  C24 . F1S L 1 1 . 1 F1S L C24 ? 1.31   -0.494 -0.664 1 12
+HETATM N  N28 . F1S L 1 1 . 1 F1S L N28 ? 0.284  0.455  -0.609 1 13
+HETATM C  C2  . F1S L 1 1 . 1 F1S L C2  ? -1.023 0.051  -0.387 1 14
+HETATM N  N1  . F1S L 1 1 . 1 F1S L N1  ? -1.312 -1.24  -0.331 1 15
+HETATM C  C6  . F1S L 1 1 . 1 F1S L C6  ? -2.541 -1.667 -0.116 1 16
+HETATM C  C5  . F1S L 1 1 . 1 F1S L C5  ? -3.586 -0.78  0.061  1 17
+HETATM C  C15 . F1S L 1 1 . 1 F1S L C15 ? -4.983 -1.29  0.306  1 18
+HETATM C  C16 . F1S L 1 1 . 1 F1S L C16 ? -5.426 -2.157 -0.876 1 19
+HETATM C  C17 . F1S L 1 1 . 1 F1S L C17 ? -6.813 -2.735 -0.584 1 20
+HETATM O  O18 . F1S L 1 1 . 1 F1S L O18 ? -6.769 -3.486 0.632  1 21
+HETATM C  C19 . F1S L 1 1 . 1 F1S L C19 ? -6.406 -2.716 1.78   1 22
+HETATM C  C20 . F1S L 1 1 . 1 F1S L C20 ? -5.003 -2.138 1.582  1 23
+HETATM C  C4  . F1S L 1 1 . 1 F1S L C4  ? -3.34  0.582  0.013  1 24
+HETATM C  C3  . F1S L 1 1 . 1 F1S L C3  ? -2.031 1.012  -0.216 1 25
+HETATM C  C7  . F1S L 1 1 . 1 F1S L C7  ? -1.711 2.456  -0.271 1 26
+HETATM N  N12 . F1S L 1 1 . 1 F1S L N12 ? -2.138 3.27   0.69   1 27
+HETATM N  N8  . F1S L 1 1 . 1 F1S L N8  ? -0.99  2.943  -1.28  1 28
+HETATM C  C9  . F1S L 1 1 . 1 F1S L C9  ? -0.704 4.232  -1.329 1 29
+HETATM C  C13 . F1S L 1 1 . 1 F1S L C13 ? 0.112  4.778  -2.473 1 30
+HETATM N  N10 . F1S L 1 1 . 1 F1S L N10 ? -1.132 5.044  -0.378 1 31
+HETATM C  C11 . F1S L 1 1 . 1 F1S L C11 ? -1.848 4.565  0.636  1 32
+HETATM N  N14 . F1S L 1 1 . 1 F1S L N14 ? -2.289 5.414  1.631  1 33
+HETATM H  H1  . F1S L 1 1 . 1 F1S L H1  ? 5.155  -1.454 2.781  1 34
+HETATM H  H2  . F1S L 1 1 . 1 F1S L H2  ? 4.818  0.15   3.475  1 35
+HETATM H  H3  . F1S L 1 1 . 1 F1S L H3  ? 3.568  -0.69  2.526  1 36
+HETATM H  H4  . F1S L 1 1 . 1 F1S L H4  ? 5.653  -1.242 -0.569 1 37
+HETATM H  H5  . F1S L 1 1 . 1 F1S L H5  ? 2.858  0.868  -0.037 1 38
+HETATM H  H6  . F1S L 1 1 . 1 F1S L H6  ? 0.028  -2.084 -1.302 1 39
+HETATM H  H7  . F1S L 1 1 . 1 F1S L H7  ? 0.488  1.396  -0.727 1 40
+HETATM H  H8  . F1S L 1 1 . 1 F1S L H8  ? -2.735 -2.729 -0.079 1 41
+HETATM H  H9  . F1S L 1 1 . 1 F1S L H9  ? -5.665 -0.447 0.417  1 42
+HETATM H  H10 . F1S L 1 1 . 1 F1S L H10 ? -5.468 -1.548 -1.779 1 43
+HETATM H  H11 . F1S L 1 1 . 1 F1S L H11 ? -4.714 -2.971 -1.019 1 44
+HETATM H  H12 . F1S L 1 1 . 1 F1S L H12 ? -7.532 -1.922 -0.482 1 45
+HETATM H  H13 . F1S L 1 1 . 1 F1S L H13 ? -7.116 -3.388 -1.403 1 46
+HETATM H  H14 . F1S L 1 1 . 1 F1S L H14 ? -7.119 -1.902 1.912  1 47
+HETATM H  H15 . F1S L 1 1 . 1 F1S L H15 ? -6.415 -3.355 2.663  1 48
+HETATM H  H16 . F1S L 1 1 . 1 F1S L H16 ? -4.283 -2.951 1.49   1 49
+HETATM H  H17 . F1S L 1 1 . 1 F1S L H17 ? -4.742 -1.514 2.437  1 50
+HETATM H  H18 . F1S L 1 1 . 1 F1S L H18 ? -4.14  1.295  0.148  1 51
+HETATM H  H19 . F1S L 1 1 . 1 F1S L H19 ? -0.554 5.08   -3.281 1 52
+HETATM H  H20 . F1S L 1 1 . 1 F1S L H20 ? 0.684  5.64   -2.131 1 53
+HETATM H  H21 . F1S L 1 1 . 1 F1S L H21 ? 0.794  4.007  -2.832 1 54
+HETATM H  H22 . F1S L 1 1 . 1 F1S L H22 ? -2.811 5.065  2.371  1 55
+HETATM H  H23 . F1S L 1 1 . 1 F1S L H23 ? -2.077 6.36   1.591  1 56
+#

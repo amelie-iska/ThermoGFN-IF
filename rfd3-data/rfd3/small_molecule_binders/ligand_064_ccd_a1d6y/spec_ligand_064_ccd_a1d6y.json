@@ -1,0 +1,10 @@
+{
+  "ligand_064_ccd_a1d6y": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1D6Y.cif",
+    "ligand": "A1D6Y",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1D6Y": "ALL"
+    }
+  }
+}

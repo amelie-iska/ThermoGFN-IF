@@ -1,0 +1,10 @@
+{
+  "ligand_241_ccd_7n4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/7N4.cif",
+    "ligand": "7N4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7N4": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_498_ccd_f3f": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/F3F.cif",
+    "ligand": "F3F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "F3F": "ALL"
+    }
+  }
+}

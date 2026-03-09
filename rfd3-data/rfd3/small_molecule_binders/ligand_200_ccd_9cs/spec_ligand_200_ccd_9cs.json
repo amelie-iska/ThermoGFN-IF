@@ -1,0 +1,10 @@
+{
+  "ligand_200_ccd_9cs": {
+    "input": "./data/rfd3/ccd_ligands/structures/9CS.cif",
+    "ligand": "9CS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9CS": "ALL"
+    }
+  }
+}

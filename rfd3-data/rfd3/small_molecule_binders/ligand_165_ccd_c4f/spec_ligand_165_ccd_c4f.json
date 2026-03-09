@@ -1,0 +1,10 @@
+{
+  "ligand_165_ccd_c4f": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/C4F.cif",
+    "ligand": "C4F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "C4F": "ALL"
+    }
+  }
+}

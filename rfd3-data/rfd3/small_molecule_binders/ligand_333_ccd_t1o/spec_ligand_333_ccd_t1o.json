@@ -1,0 +1,10 @@
+{
+  "ligand_333_ccd_t1o": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/T1O.cif",
+    "ligand": "T1O",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "T1O": "ALL"
+    }
+  }
+}

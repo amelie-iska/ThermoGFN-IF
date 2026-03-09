@@ -1,0 +1,10 @@
+{
+  "ligand_484_ccd_g9l": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/G9L.cif",
+    "ligand": "G9L",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G9L": "ALL"
+    }
+  }
+}

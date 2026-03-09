@@ -1,0 +1,89 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N3     . UD4 L 1 1 . 1 UD4 L N3     ? -6.747 -2.999 -0.873 1 1
+HETATM C C2     . UD4 L 1 1 . 1 UD4 L C2     ? -6.271 -1.808 -1.279 1 2
+HETATM N N1     . UD4 L 1 1 . 1 UD4 L N1     ? -5.643 -0.985 -0.42  1 3
+HETATM C C4     . UD4 L 1 1 . 1 UD4 L C4     ? -6.606 -3.385 0.412  1 4
+HETATM C C5     . UD4 L 1 1 . 1 UD4 L C5     ? -5.946 -2.529 1.326  1 5
+HETATM C C6     . UD4 L 1 1 . 1 UD4 L C6     ? -5.473 -1.342 0.89   1 6
+HETATM O "O7'"  . UD4 L 1 1 . 1 UD4 L "O7'"  ? 7.161  1.208  -1.675 1 7
+HETATM C "C7'"  . UD4 L 1 1 . 1 UD4 L "C7'"  ? 6.166  1.044  -2.35  1 8
+HETATM C "C8'"  . UD4 L 1 1 . 1 UD4 L "C8'"  ? 5.894  1.95   -3.524 1 9
+HETATM N "N2'"  . UD4 L 1 1 . 1 UD4 L "N2'"  ? 5.305  0.052  -2.051 1 10
+HETATM C "C2'"  . UD4 L 1 1 . 1 UD4 L "C2'"  ? 5.569  -0.828 -0.91  1 11
+HETATM C "C3'"  . UD4 L 1 1 . 1 UD4 L "C3'"  ? 4.869  -2.173 -1.128 1 12
+HETATM O "O3'"  . UD4 L 1 1 . 1 UD4 L "O3'"  ? 5.417  -2.816 -2.28  1 13
+HETATM C "C4'"  . UD4 L 1 1 . 1 UD4 L "C4'"  ? 5.087  -3.056 0.105  1 14
+HETATM N N4A    . UD4 L 1 1 . 1 UD4 L N4A    ? 4.358  -4.32  -0.062 1 15
+HETATM C "C5'"  . UD4 L 1 1 . 1 UD4 L "C5'"  ? 4.568  -2.325 1.345  1 16
+HETATM C "C6'"  . UD4 L 1 1 . 1 UD4 L "C6'"  ? 4.837  -3.174 2.589  1 17
+HETATM O "O5'"  . UD4 L 1 1 . 1 UD4 L "O5'"  ? 5.238  -1.069 1.472  1 18
+HETATM C "C1'"  . UD4 L 1 1 . 1 UD4 L "C1'"  ? 5.031  -0.183 0.37   1 19
+HETATM O "O1'"  . UD4 L 1 1 . 1 UD4 L "O1'"  ? 3.633  0.075  0.222  1 20
+HETATM P PB     . UD4 L 1 1 . 1 UD4 L PB     ? 2.883  1.293  0.961  1 21
+HETATM O O2B    . UD4 L 1 1 . 1 UD4 L O2B    ? 3.125  1.209  2.419  1 22
+HETATM O O1B    . UD4 L 1 1 . 1 UD4 L O1B    ? 3.451  2.692  0.402  1 23
+HETATM O O3A    . UD4 L 1 1 . 1 UD4 L O3A    ? 1.301  1.203  0.674  1 24
+HETATM P PA     . UD4 L 1 1 . 1 UD4 L PA     ? 0.004  1.89   1.334  1 25
+HETATM O O2A    . UD4 L 1 1 . 1 UD4 L O2A    ? -0.307 1.198  2.753  1 26
+HETATM O O1A    . UD4 L 1 1 . 1 UD4 L O1A    ? 0.259  3.334  1.535  1 27
+HETATM O O5B    . UD4 L 1 1 . 1 UD4 L O5B    ? -1.261 1.7    0.356  1 28
+HETATM C C5B    . UD4 L 1 1 . 1 UD4 L C5B    ? -2.538 2.288  0.611  1 29
+HETATM C C4B    . UD4 L 1 1 . 1 UD4 L C4B    ? -3.507 1.909  -0.511 1 30
+HETATM O O4B    . UD4 L 1 1 . 1 UD4 L O4B    ? -3.764 0.495  -0.477 1 31
+HETATM C C2B    . UD4 L 1 1 . 1 UD4 L C2B    ? -4.856 2.625  -0.302 1 32
+HETATM O O3B    . UD4 L 1 1 . 1 UD4 L O3B    ? -5.153 3.467  -1.418 1 33
+HETATM C C3B    . UD4 L 1 1 . 1 UD4 L C3B    ? -5.885 1.473  -0.203 1 34
+HETATM O "O2'"  . UD4 L 1 1 . 1 UD4 L "O2'"  ? -7.083 1.798  -0.911 1 35
+HETATM C C1B    . UD4 L 1 1 . 1 UD4 L C1B    ? -5.134 0.306  -0.892 1 36
+HETATM O O2     . UD4 L 1 1 . 1 UD4 L O2     ? -6.411 -1.47  -2.439 1 37
+HETATM O O4     . UD4 L 1 1 . 1 UD4 L O4     ? -7.041 -4.461 0.781  1 38
+HETATM H H5     . UD4 L 1 1 . 1 UD4 L H5     ? -5.824 -2.821 2.358  1 39
+HETATM H H6     . UD4 L 1 1 . 1 UD4 L H6     ? -4.968 -0.676 1.573  1 40
+HETATM H "H8'"  . UD4 L 1 1 . 1 UD4 L "H8'"  ? 6.695  2.685  -3.608 1 41
+HETATM H "H8'A" . UD4 L 1 1 . 1 UD4 L "H8'A" ? 5.848  1.357  -4.437 1 42
+HETATM H "H8'B" . UD4 L 1 1 . 1 UD4 L "H8'B" ? 4.944  2.463  -3.374 1 43
+HETATM H "HN2'" . UD4 L 1 1 . 1 UD4 L "HN2'" ? 4.509  -0.079 -2.59  1 44
+HETATM H "H2'"  . UD4 L 1 1 . 1 UD4 L "H2'"  ? 6.643  -0.988 -0.814 1 45
+HETATM H "H3'"  . UD4 L 1 1 . 1 UD4 L "H3'"  ? 3.801  -2.009 -1.274 1 46
+HETATM H "HO3'" . UD4 L 1 1 . 1 UD4 L "HO3'" ? 5.019  -3.675 -2.478 1 47
+HETATM H "H4'"  . UD4 L 1 1 . 1 UD4 L "H4'"  ? 6.151  -3.262 0.221  1 48
+HETATM H HN4A   . UD4 L 1 1 . 1 UD4 L HN4A   ? 4.487  -4.92  0.74   1 49
+HETATM H HN4B   . UD4 L 1 1 . 1 UD4 L HN4B   ? 3.378  -4.152 -0.234 1 50
+HETATM H "H5'"  . UD4 L 1 1 . 1 UD4 L "H5'"  ? 3.496  -2.156 1.245  1 51
+HETATM H "H6'"  . UD4 L 1 1 . 1 UD4 L "H6'"  ? 5.909  -3.342 2.689  1 52
+HETATM H "H6'A" . UD4 L 1 1 . 1 UD4 L "H6'A" ? 4.467  -2.654 3.472  1 53
+HETATM H "H6'B" . UD4 L 1 1 . 1 UD4 L "H6'B" ? 4.326  -4.133 2.491  1 54
+HETATM H "H1'"  . UD4 L 1 1 . 1 UD4 L "H1'"  ? 5.556  0.754  0.553  1 55
+HETATM H HO1B   . UD4 L 1 1 . 1 UD4 L HO1B   ? 3.327  2.815  -0.549 1 56
+HETATM H HO2A   . UD4 L 1 1 . 1 UD4 L HO2A   ? -0.484 0.249  2.698  1 57
+HETATM H H5B    . UD4 L 1 1 . 1 UD4 L H5B    ? -2.922 1.923  1.563  1 58
+HETATM H H5BA   . UD4 L 1 1 . 1 UD4 L H5BA   ? -2.436 3.373  0.652  1 59
+HETATM H H4B    . UD4 L 1 1 . 1 UD4 L H4B    ? -3.083 2.185  -1.476 1 60
+HETATM H H2B    . UD4 L 1 1 . 1 UD4 L H2B    ? -4.84  3.206  0.62   1 61
+HETATM H HO3B   . UD4 L 1 1 . 1 UD4 L HO3B   ? -5.991 3.943  -1.339 1 62
+HETATM H H3B    . UD4 L 1 1 . 1 UD4 L H3B    ? -6.103 1.235  0.838  1 63
+HETATM H "HO2'" . UD4 L 1 1 . 1 UD4 L "HO2'" ? -7.542 2.579  -0.572 1 64
+HETATM H H1B    . UD4 L 1 1 . 1 UD4 L H1B    ? -5.223 0.379  -1.976 1 65
+HETATM H HN3    . UD4 L 1 1 . 1 UD4 L HN3    ? -7.198 -3.58  -1.505 1 66
+#

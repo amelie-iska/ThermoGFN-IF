@@ -1,0 +1,10 @@
+{
+  "ligand_547_ccd_4wm": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4WM.cif",
+    "ligand": "4WM",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4WM": "ALL"
+    }
+  }
+}

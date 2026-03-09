@@ -1,0 +1,10 @@
+{
+  "ligand_095_ccd_qzr": {
+    "input": "./data/rfd3/ccd_ligands/structures/QZR.cif",
+    "ligand": "QZR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QZR": "ALL"
+    }
+  }
+}

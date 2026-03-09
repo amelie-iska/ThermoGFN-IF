@@ -1,0 +1,10 @@
+{
+  "ligand_269_ccd_a1a0k": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1A0K.cif",
+    "ligand": "A1A0K",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1A0K": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_077_ccd_3tx": {
+    "input": "./data/rfd3/ccd_ligands/structures/3TX.cif",
+    "ligand": "3TX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3TX": "ALL"
+    }
+  }
+}

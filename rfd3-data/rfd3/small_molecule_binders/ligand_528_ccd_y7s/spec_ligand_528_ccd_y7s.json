@@ -1,0 +1,10 @@
+{
+  "ligand_528_ccd_y7s": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Y7S.cif",
+    "ligand": "Y7S",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Y7S": "ALL"
+    }
+  }
+}

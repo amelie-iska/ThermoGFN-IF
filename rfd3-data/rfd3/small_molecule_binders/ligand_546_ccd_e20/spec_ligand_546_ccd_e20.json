@@ -1,0 +1,10 @@
+{
+  "ligand_546_ccd_e20": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/E20.cif",
+    "ligand": "E20",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "E20": "ALL"
+    }
+  }
+}

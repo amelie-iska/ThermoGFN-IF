@@ -1,0 +1,10 @@
+{
+  "ligand_040_ccd_4zl": {
+    "input": "./data/rfd3/ccd_ligands/structures/4ZL.cif",
+    "ligand": "4ZL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4ZL": "ALL"
+    }
+  }
+}

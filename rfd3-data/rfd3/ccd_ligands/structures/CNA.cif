@@ -1,0 +1,97 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM P PA    . CNA L 1 1 . 1 CNA L PA    ?  1.531   2.978  -0.521 1 1
+HETATM O O1A   . CNA L 1 1 . 1 CNA L O1A   ?  1.343   4.482  0.022  1 2
+HETATM O O2A   . CNA L 1 1 . 1 CNA L O2A   ?  1.886   3.013  -1.958 1 3
+HETATM O O5B   . CNA L 1 1 . 1 CNA L O5B   ?  2.708   2.252  0.304  1 4
+HETATM C C5B   . CNA L 1 1 . 1 CNA L C5B   ?  4.071   2.676  0.251  1 5
+HETATM C C4B   . CNA L 1 1 . 1 CNA L C4B   ?  4.921   1.775  1.149  1 6
+HETATM O O4B   . CNA L 1 1 . 1 CNA L O4B   ?  4.952   0.441  0.613  1 7
+HETATM C C3B   . CNA L 1 1 . 1 CNA L C3B   ?  6.374   2.288  1.183  1 8
+HETATM O O3B   . CNA L 1 1 . 1 CNA L O3B   ?  6.754   2.624  2.519  1 9
+HETATM C C2B   . CNA L 1 1 . 1 CNA L C2B   ?  7.211   1.093  0.665  1 10
+HETATM O O2B   . CNA L 1 1 . 1 CNA L O2B   ?  8.415   0.948  1.422  1 11
+HETATM C C1B   . CNA L 1 1 . 1 CNA L C1B   ?  6.256   -0.103 0.911  1 12
+HETATM N N9A   . CNA L 1 1 . 1 CNA L N9A   ?  6.572   -1.21  0.005  1 13
+HETATM C C8A   . CNA L 1 1 . 1 CNA L C8A   ?  5.978   -1.465 -1.195 1 14
+HETATM N N7A   . CNA L 1 1 . 1 CNA L N7A   ?  6.503   -2.527 -1.734 1 15
+HETATM C C5A   . CNA L 1 1 . 1 CNA L C5A   ?  7.465   -3.019 -0.917 1 16
+HETATM C C6A   . CNA L 1 1 . 1 CNA L C6A   ?  8.344   -4.114 -0.973 1 17
+HETATM N N6A   . CNA L 1 1 . 1 CNA L N6A   ?  8.335   -4.975 -2.056 1 18
+HETATM N N1A   . CNA L 1 1 . 1 CNA L N1A   ?  9.184   -4.303 0.039  1 19
+HETATM C C2A   . CNA L 1 1 . 1 CNA L C2A   ?  9.2     -3.487 1.077  1 20
+HETATM N N3A   . CNA L 1 1 . 1 CNA L N3A   ?  8.395   -2.45  1.172  1 21
+HETATM C C4A   . CNA L 1 1 . 1 CNA L C4A   ?  7.525   -2.177 0.206  1 22
+HETATM O O3    . CNA L 1 1 . 1 CNA L O3    ?  0.157   2.161  -0.328 1 23
+HETATM P PN    . CNA L 1 1 . 1 CNA L PN    ?  -1.225  2.088  -1.149 1 24
+HETATM O O1N   . CNA L 1 1 . 1 CNA L O1N   ?  -1.597  3.444  -1.61  1 25
+HETATM O O2N   . CNA L 1 1 . 1 CNA L O2N   ?  -1.043  1.12   -2.422 1 26
+HETATM O O5D   . CNA L 1 1 . 1 CNA L O5D   ?  -2.386  1.509  -0.195 1 27
+HETATM C C5D   . CNA L 1 1 . 1 CNA L C5D   ?  -3.754  1.421  -0.6   1 28
+HETATM C C4D   . CNA L 1 1 . 1 CNA L C4D   ?  -4.585  0.828  0.54   1 29
+HETATM C "C4'" . CNA L 1 1 . 1 CNA L "C4'" ?  -6.082  0.842  0.166  1 30
+HETATM C C3D   . CNA L 1 1 . 1 CNA L C3D   ?  -4.201  -0.646 0.761  1 31
+HETATM O O3D   . CNA L 1 1 . 1 CNA L O3D   ?  -3.746  -0.837 2.102  1 32
+HETATM C C2D   . CNA L 1 1 . 1 CNA L C2D   ?  -5.478  -1.475 0.513  1 33
+HETATM O O2D   . CNA L 1 1 . 1 CNA L O2D   ?  -5.553  -2.566 1.434  1 34
+HETATM C C1D   . CNA L 1 1 . 1 CNA L C1D   ?  -6.635  -0.476 0.762  1 35
+HETATM N N1N   . CNA L 1 1 . 1 CNA L N1N   +1 -7.846  -0.897 0.054  1 36
+HETATM C C2N   . CNA L 1 1 . 1 CNA L C2N   ?  -8.972  -1.014 0.726  1 37
+HETATM C C3N   . CNA L 1 1 . 1 CNA L C3N   ?  -10.145 -1.413 0.084  1 38
+HETATM C C7N   . CNA L 1 1 . 1 CNA L C7N   ?  -11.409 -1.544 0.839  1 39
+HETATM O O7N   . CNA L 1 1 . 1 CNA L O7N   ?  -11.433 -1.303 2.03   1 40
+HETATM N N7N   . CNA L 1 1 . 1 CNA L N7N   ?  -12.535 -1.93  0.207  1 41
+HETATM C C4N   . CNA L 1 1 . 1 CNA L C4N   ?  -10.104 -1.687 -1.289 1 42
+HETATM C C5N   . CNA L 1 1 . 1 CNA L C5N   ?  -8.896  -1.549 -1.949 1 43
+HETATM C C6N   . CNA L 1 1 . 1 CNA L C6N   ?  -7.779  -1.144 -1.241 1 44
+HETATM H H1    . CNA L 1 1 . 1 CNA L H1    ?  1.109   4.535  0.959  1 45
+HETATM H H2    . CNA L 1 1 . 1 CNA L H2    ?  4.432   2.611  -0.776 1 46
+HETATM H H3    . CNA L 1 1 . 1 CNA L H3    ?  4.145   3.707  0.597  1 47
+HETATM H H4    . CNA L 1 1 . 1 CNA L H4    ?  4.507   1.76   2.157  1 48
+HETATM H H5    . CNA L 1 1 . 1 CNA L H5    ?  6.49    3.149  0.524  1 49
+HETATM H H6    . CNA L 1 1 . 1 CNA L H6    ?  7.677   2.898  2.607  1 50
+HETATM H H7    . CNA L 1 1 . 1 CNA L H7    ?  7.431   1.203  -0.396 1 51
+HETATM H H8    . CNA L 1 1 . 1 CNA L H8    ?  9.005   1.712  1.372  1 52
+HETATM H H9    . CNA L 1 1 . 1 CNA L H9    ?  6.31    -0.431 1.949  1 53
+HETATM H H10   . CNA L 1 1 . 1 CNA L H10   ?  5.188   -0.874 -1.633 1 54
+HETATM H H11   . CNA L 1 1 . 1 CNA L H11   ?  7.717   -4.826 -2.789 1 55
+HETATM H H12   . CNA L 1 1 . 1 CNA L H12   ?  8.947   -5.727 -2.083 1 56
+HETATM H H13   . CNA L 1 1 . 1 CNA L H13   ?  9.899   -3.677 1.878  1 57
+HETATM H H14   . CNA L 1 1 . 1 CNA L H14   ?  -0.799  0.212  -2.194 1 58
+HETATM H H15   . CNA L 1 1 . 1 CNA L H15   ?  -4.126  2.416  -0.841 1 59
+HETATM H H16   . CNA L 1 1 . 1 CNA L H16   ?  -3.832  0.78   -1.478 1 60
+HETATM H H17   . CNA L 1 1 . 1 CNA L H17   ?  -4.424  1.398  1.455  1 61
+HETATM H H18   . CNA L 1 1 . 1 CNA L H18   ?  -6.579  1.702  0.614  1 62
+HETATM H H19   . CNA L 1 1 . 1 CNA L H19   ?  -6.204  0.852  -0.918 1 63
+HETATM H H20   . CNA L 1 1 . 1 CNA L H20   ?  -3.423  -0.939 0.057  1 64
+HETATM H H21   . CNA L 1 1 . 1 CNA L H21   ?  -3.489  -1.747 2.304  1 65
+HETATM H H22   . CNA L 1 1 . 1 CNA L H22   ?  -5.503  -1.84  -0.514 1 66
+HETATM H H23   . CNA L 1 1 . 1 CNA L H23   ?  -4.82   -3.192 1.362  1 67
+HETATM H H24   . CNA L 1 1 . 1 CNA L H24   ?  -6.828  -0.366 1.829  1 68
+HETATM H H25   . CNA L 1 1 . 1 CNA L H25   ?  -8.989  -0.799 1.785  1 69
+HETATM H H26   . CNA L 1 1 . 1 CNA L H26   ?  -12.516 -2.122 -0.744 1 70
+HETATM H H27   . CNA L 1 1 . 1 CNA L H27   ?  -13.364 -2.016 0.702  1 71
+HETATM H H28   . CNA L 1 1 . 1 CNA L H28   ?  -10.992 -1.998 -1.818 1 72
+HETATM H H29   . CNA L 1 1 . 1 CNA L H29   ?  -8.827  -1.752 -3.008 1 73
+HETATM H H30   . CNA L 1 1 . 1 CNA L H30   ?  -6.836  -1.032 -1.755 1 74
+#

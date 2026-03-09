@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.07828688621520996,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.850170135498047,
+        "non_loop_fraction": 0.49707602339181284,
+        "loop_fraction": 0.5029239766081871,
+        "helix_fraction": 0.0,
+        "sheet_fraction": 0.49707602339181284,
+        "num_ss_elements": 11,
+        "radius_of_gyration": 15.80627100396394,
+        "alanine_content": 0.2222222222222222,
+        "glycine_content": 0.08771929824561403,
+        "num_residues": 171,
+        "diffused_com": [
+            2.576141595840454,
+            0.7060936093330383,
+            2.1040048599243164
+        ],
+        "fixed_com": [
+            0.0008491847547702491,
+            -0.0003954016719944775,
+            -2.122961996064987e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/U6X.cif",
+        "length": "20-400",
+        "ligand": "U6X",
+        "extra": {
+            "example": "ligand_442_ccd_u6x",
+            "task_name": "spec_ligand_442_ccd_u6x_ligand_442_ccd_u6x",
+            "sampled_contig": "171",
+            "num_tokens_in": 172,
+            "num_residues_in": 172,
+            "num_chains": 2,
+            "num_atoms": 878,
+            "num_residues": 174,
+            "example_id": "spec_ligand_442_ccd_u6x_ligand_442_ccd_u6x_2"
+        },
+        "select_fixed_atoms": {
+            "U6X": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

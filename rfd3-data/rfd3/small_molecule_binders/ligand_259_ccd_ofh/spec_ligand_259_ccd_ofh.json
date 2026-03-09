@@ -1,0 +1,10 @@
+{
+  "ligand_259_ccd_ofh": {
+    "input": "./data/rfd3/ccd_ligands/structures/OFH.cif",
+    "ligand": "OFH",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OFH": "ALL"
+    }
+  }
+}

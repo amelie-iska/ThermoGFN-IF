@@ -1,0 +1,10 @@
+{
+  "ligand_188_ccd_svo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/SVO.cif",
+    "ligand": "SVO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SVO": "ALL"
+    }
+  }
+}

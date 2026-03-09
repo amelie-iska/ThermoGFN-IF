@@ -1,0 +1,10 @@
+{
+  "ligand_320_ccd_xlw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XLW.cif",
+    "ligand": "XLW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XLW": "ALL"
+    }
+  }
+}

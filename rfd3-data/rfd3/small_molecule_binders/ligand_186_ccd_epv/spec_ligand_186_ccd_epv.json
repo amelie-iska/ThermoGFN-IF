@@ -1,0 +1,10 @@
+{
+  "ligand_186_ccd_epv": {
+    "input": "./data/rfd3/ccd_ligands/structures/EPV.cif",
+    "ligand": "EPV",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "EPV": "ALL"
+    }
+  }
+}

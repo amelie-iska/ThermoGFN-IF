@@ -1,0 +1,10 @@
+{
+  "ligand_457_ccd_69b": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/69B.cif",
+    "ligand": "69B",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "69B": "ALL"
+    }
+  }
+}

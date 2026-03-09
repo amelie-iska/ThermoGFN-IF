@@ -1,0 +1,10 @@
+{
+  "ligand_215_ccd_iwi": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IWI.cif",
+    "ligand": "IWI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IWI": "ALL"
+    }
+  }
+}

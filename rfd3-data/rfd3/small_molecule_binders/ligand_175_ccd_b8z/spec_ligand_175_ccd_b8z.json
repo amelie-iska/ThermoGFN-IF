@@ -1,0 +1,10 @@
+{
+  "ligand_175_ccd_b8z": {
+    "input": "./data/rfd3/ccd_ligands/structures/B8Z.cif",
+    "ligand": "B8Z",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B8Z": "ALL"
+    }
+  }
+}

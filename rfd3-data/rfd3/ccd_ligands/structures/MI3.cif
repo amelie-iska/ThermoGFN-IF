@@ -1,0 +1,86 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C CA7    . MI3 L 1 1 . 1 MI3 L CA7    ? 6.358  5.345  -2.117 1 1
+HETATM N NA1    . MI3 L 1 1 . 1 MI3 L NA1    ? 5.564  4.332  -1.417 1 2
+HETATM C CA6    . MI3 L 1 1 . 1 MI3 L CA6    ? 5.236  4.51   -0.08  1 3
+HETATM C CA5    . MI3 L 1 1 . 1 MI3 L CA5    ? 5.757  5.584  0.631  1 4
+HETATM C CA4    . MI3 L 1 1 . 1 MI3 L CA4    ? 5.429  5.758  1.96   1 5
+HETATM C CA3    . MI3 L 1 1 . 1 MI3 L CA3    ? 4.582  4.865  2.597  1 6
+HETATM C CA2    . MI3 L 1 1 . 1 MI3 L CA2    ? 4.056  3.793  1.91   1 7
+HETATM C CA1    . MI3 L 1 1 . 1 MI3 L CA1    ? 4.372  3.607  0.561  1 8
+HETATM C CA     . MI3 L 1 1 . 1 MI3 L CA     ? 3.808  2.467  -0.181 1 9
+HETATM O OA     . MI3 L 1 1 . 1 MI3 L OA     ? 4.167  2.247  -1.321 1 10
+HETATM O "O3'"  . MI3 L 1 1 . 1 MI3 L "O3'"  ? 2.894  1.667  0.403  1 11
+HETATM C "C3'"  . MI3 L 1 1 . 1 MI3 L "C3'"  ? 2.382  0.563  -0.388 1 12
+HETATM C "C2'"  . MI3 L 1 1 . 1 MI3 L "C2'"  ? 3.23   -0.708 -0.157 1 13
+HETATM O "O2'"  . MI3 L 1 1 . 1 MI3 L "O2'"  ? 4.284  -0.444 0.771  1 14
+HETATM C "C4'"  . MI3 L 1 1 . 1 MI3 L "C4'"  ? 0.969  0.163  0.092  1 15
+HETATM C "C5'"  . MI3 L 1 1 . 1 MI3 L "C5'"  ? -0.097 0.794  -0.806 1 16
+HETATM O "O5'"  . MI3 L 1 1 . 1 MI3 L "O5'"  ? -1.394 0.508  -0.279 1 17
+HETATM P PA     . MI3 L 1 1 . 1 MI3 L PA     ? -2.755 1.019  -0.972 1 18
+HETATM O O3A    . MI3 L 1 1 . 1 MI3 L O3A    ? -2.815 2.627  -0.917 1 19
+HETATM O O2A    . MI3 L 1 1 . 1 MI3 L O2A    ? -2.787 0.572  -2.383 1 20
+HETATM O O1A    . MI3 L 1 1 . 1 MI3 L O1A    ? -4.02  0.407  -0.187 1 21
+HETATM P PB     . MI3 L 1 1 . 1 MI3 L PB     ? -5.568 0.179  -0.566 1 22
+HETATM O O3B    . MI3 L 1 1 . 1 MI3 L O3B    ? -5.711 -1.153 -1.459 1 23
+HETATM O O2B    . MI3 L 1 1 . 1 MI3 L O2B    ? -6.065 1.343  -1.333 1 24
+HETATM O O1B    . MI3 L 1 1 . 1 MI3 L O1B    ? -6.432 0.016  0.783  1 25
+HETATM P PG     . MI3 L 1 1 . 1 MI3 L PG     ? -8.007 0.071  1.116  1 26
+HETATM O O3G    . MI3 L 1 1 . 1 MI3 L O3G    ? -8.686 -1.336 0.729  1 27
+HETATM O O1G    . MI3 L 1 1 . 1 MI3 L O1G    ? -8.213 0.354  2.687  1 28
+HETATM O O2G    . MI3 L 1 1 . 1 MI3 L O2G    ? -8.639 1.156  0.332  1 29
+HETATM O "O4'"  . MI3 L 1 1 . 1 MI3 L "O4'"  ? 0.934  -1.276 -0.021 1 30
+HETATM C "C1'"  . MI3 L 1 1 . 1 MI3 L "C1'"  ? 2.229  -1.725 0.435  1 31
+HETATM N N9     . MI3 L 1 1 . 1 MI3 L N9     ? 2.51   -3.071 -0.072 1 32
+HETATM C C8     . MI3 L 1 1 . 1 MI3 L C8     ? 1.915  -3.67  -1.142 1 33
+HETATM N N7     . MI3 L 1 1 . 1 MI3 L N7     ? 2.406  -4.864 -1.308 1 34
+HETATM C C5     . MI3 L 1 1 . 1 MI3 L C5     ? 3.341  -5.099 -0.358 1 35
+HETATM C C4     . MI3 L 1 1 . 1 MI3 L C4     ? 3.421  -3.953 0.439  1 36
+HETATM N N3     . MI3 L 1 1 . 1 MI3 L N3     ? 4.286  -3.919 1.463  1 37
+HETATM C C2     . MI3 L 1 1 . 1 MI3 L C2     ? 5.059  -4.934 1.729  1 38
+HETATM N N1     . MI3 L 1 1 . 1 MI3 L N1     ? 5.034  -6.074 0.994  1 39
+HETATM C C6     . MI3 L 1 1 . 1 MI3 L C6     ? 4.185  -6.195 -0.051 1 40
+HETATM O O6     . MI3 L 1 1 . 1 MI3 L O6     ? 4.156  -7.215 -0.719 1 41
+HETATM H HA7    . MI3 L 1 1 . 1 MI3 L HA7    ? 6.513  5.035  -3.15  1 42
+HETATM H HA7A   . MI3 L 1 1 . 1 MI3 L HA7A   ? 5.828  6.298  -2.1   1 43
+HETATM H HA7B   . MI3 L 1 1 . 1 MI3 L HA7B   ? 7.323  5.457  -1.622 1 44
+HETATM H HNA1   . MI3 L 1 1 . 1 MI3 L HNA1   ? 5.267  3.538  -1.888 1 45
+HETATM H HA5    . MI3 L 1 1 . 1 MI3 L HA5    ? 6.418  6.284  0.142  1 46
+HETATM H HA4    . MI3 L 1 1 . 1 MI3 L HA4    ? 5.837  6.595  2.507  1 47
+HETATM H HA3    . MI3 L 1 1 . 1 MI3 L HA3    ? 4.333  5.011  3.637  1 48
+HETATM H HA2    . MI3 L 1 1 . 1 MI3 L HA2    ? 3.396  3.101  2.411  1 49
+HETATM H "H3'"  . MI3 L 1 1 . 1 MI3 L "H3'"  ? 2.368  0.826  -1.445 1 50
+HETATM H "H2'"  . MI3 L 1 1 . 1 MI3 L "H2'"  ? 3.635  -1.073 -1.101 1 51
+HETATM H "HO2'" . MI3 L 1 1 . 1 MI3 L "HO2'" ? 4.848  -1.209 0.953  1 52
+HETATM H "H4'"  . MI3 L 1 1 . 1 MI3 L "H4'"  ? 0.819  0.468  1.128  1 53
+HETATM H "H5'"  . MI3 L 1 1 . 1 MI3 L "H5'"  ? 0.051  1.873  -0.843 1 54
+HETATM H "H5'A" . MI3 L 1 1 . 1 MI3 L "H5'A" ? -0.015 0.381  -1.812 1 55
+HETATM H "H1'"  . MI3 L 1 1 . 1 MI3 L "H1'"  ? 2.274  -1.712 1.524  1 56
+HETATM H H8     . MI3 L 1 1 . 1 MI3 L H8     ? 1.15   -3.221 -1.758 1 57
+HETATM H H2     . MI3 L 1 1 . 1 MI3 L H2     ? 5.742  -4.865 2.563  1 58
+HETATM H HN1    . MI3 L 1 1 . 1 MI3 L HN1    ? 5.625  -6.808 1.223  1 59
+HETATM H HO3A   . MI3 L 1 1 . 1 MI3 L HO3A   ? -2.798 2.99   -0.021 1 60
+HETATM H HO3B   . MI3 L 1 1 . 1 MI3 L HO3B   ? -5.404 -1.957 -1.018 1 61
+HETATM H HO3G   . MI3 L 1 1 . 1 MI3 L HO3G   ? -8.32  -2.094 1.206  1 62
+HETATM H HO1G   . MI3 L 1 1 . 1 MI3 L HO1G   ? -9.14  0.4    2.96   1 63
+#

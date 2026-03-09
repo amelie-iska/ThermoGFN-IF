@@ -1,0 +1,82 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C4  . CFG L 1 1 . 1 CFG L C4  ? -2.729 2.832  1.55   1 1
+HETATM C  C5  . CFG L 1 1 . 1 CFG L C5  ? -2.369 1.529  1.265  1 2
+HETATM C  C6  . CFG L 1 1 . 1 CFG L C6  ? -1.958 1.188  -0.011 1 3
+HETATM C  C7  . CFG L 1 1 . 1 CFG L C7  ? -1.906 2.149  -1.003 1 4
+HETATM C  C8  . CFG L 1 1 . 1 CFG L C8  ? -2.265 3.454  -0.723 1 5
+HETATM C  C15 . CFG L 1 1 . 1 CFG L C15 ? -4.526 -3.165 -0.094 1 6
+HETATM C  C20 . CFG L 1 1 . 1 CFG L C20 ? -0.068 -0.322 -0.461 1 7
+HETATM C  C24 . CFG L 1 1 . 1 CFG L C24 ? 2.712  -1.015 -0.556 1 8
+HETATM C  C26 . CFG L 1 1 . 1 CFG L C26 ? 4.859  -0.345 0.264  1 9
+HETATM C  C28 . CFG L 1 1 . 1 CFG L C28 ? 2.881  0.298  1.451  1 10
+HETATM C  C1  . CFG L 1 1 . 1 CFG L C1  ? -2.956 6.022  -0.237 1 11
+HETATM O  O2  . CFG L 1 1 . 1 CFG L O2  ? -3.033 5.08   0.835  1 12
+HETATM C  C3  . CFG L 1 1 . 1 CFG L C3  ? -2.679 3.798  0.556  1 13
+HETATM C  C9  . CFG L 1 1 . 1 CFG L C9  ? -1.566 -0.234 -0.32  1 14
+HETATM N  N10 . CFG L 1 1 . 1 CFG L N10 ? -2.2   -0.654 -1.572 1 15
+HETATM C  C11 . CFG L 1 1 . 1 CFG L C11 ? -1.792 -0.045 -2.84  1 16
+HETATM C  C12 . CFG L 1 1 . 1 CFG L C12 ? -3.158 -1.602 -1.557 1 17
+HETATM O  O13 . CFG L 1 1 . 1 CFG L O13 ? -3.602 -2.034 -2.602 1 18
+HETATM C  C14 . CFG L 1 1 . 1 CFG L C14 ? -3.672 -2.116 -0.265 1 19
+HETATM C  C16 . CFG L 1 1 . 1 CFG L C16 ? -4.699 -3.242 1.317  1 20
+HETATM O  O17 . CFG L 1 1 . 1 CFG L O17 ? -5.386 -4.04  1.932  1 21
+HETATM N  N18 . CFG L 1 1 . 1 CFG L N18 ? -3.944 -2.25  1.832  1 22
+HETATM O  O19 . CFG L 1 1 . 1 CFG L O19 ? -3.383 -1.636 0.954  1 23
+HETATM O  O21 . CFG L 1 1 . 1 CFG L O21 ? 0.437  -0.34  -1.563 1 24
+HETATM N  N22 . CFG L 1 1 . 1 CFG L N22 ? 0.71   -0.382 0.638  1 25
+HETATM C  C23 . CFG L 1 1 . 1 CFG L C23 ? 2.103  -0.366 0.511  1 26
+HETATM C  C25 . CFG L 1 1 . 1 CFG L C25 ? 4.088  -1.002 -0.676 1 27
+HETATM C  C27 . CFG L 1 1 . 1 CFG L C27 ? 4.256  0.302  1.328  1 28
+HETATM SI SI  . CFG L 1 1 . 1 CFG L SI  ? 6.72   -0.337 0.103  1 29
+HETATM C  C30 . CFG L 1 1 . 1 CFG L C30 ? 7.427  -1.811 0.997  1 30
+HETATM C  C31 . CFG L 1 1 . 1 CFG L C31 ? 7.187  -0.421 -1.699 1 31
+HETATM C  C32 . CFG L 1 1 . 1 CFG L C32 ? 7.402  1.227  0.849  1 32
+HETATM H  H1  . CFG L 1 1 . 1 CFG L H1  ? -3.054 3.097  2.546  1 33
+HETATM H  H2  . CFG L 1 1 . 1 CFG L H2  ? -2.408 0.776  2.038  1 34
+HETATM H  H3  . CFG L 1 1 . 1 CFG L H3  ? -1.585 1.88   -1.999 1 35
+HETATM H  H4  . CFG L 1 1 . 1 CFG L H4  ? -2.224 4.204  -1.498 1 36
+HETATM H  H5  . CFG L 1 1 . 1 CFG L H5  ? -4.972 -3.789 -0.854 1 37
+HETATM H  H6  . CFG L 1 1 . 1 CFG L H6  ? 2.11   -1.532 -1.288 1 38
+HETATM H  H7  . CFG L 1 1 . 1 CFG L H7  ? 2.411  0.803  2.281  1 39
+HETATM H  H8  . CFG L 1 1 . 1 CFG L H8  ? -1.93  6.074  -0.603 1 40
+HETATM H  H9  . CFG L 1 1 . 1 CFG L H9  ? -3.614 5.706  -1.046 1 41
+HETATM H  H10 . CFG L 1 1 . 1 CFG L H10 ? -3.265 7.004  0.119  1 42
+HETATM H  H11 . CFG L 1 1 . 1 CFG L H11 ? -1.894 -0.885 0.49   1 43
+HETATM H  H12 . CFG L 1 1 . 1 CFG L H12 ? -0.946 0.62   -2.668 1 44
+HETATM H  H13 . CFG L 1 1 . 1 CFG L H13 ? -1.502 -0.827 -3.542 1 45
+HETATM H  H14 . CFG L 1 1 . 1 CFG L H14 ? -2.624 0.524  -3.254 1 46
+HETATM H  H15 . CFG L 1 1 . 1 CFG L H15 ? -3.862 -2.056 2.778  1 47
+HETATM H  H16 . CFG L 1 1 . 1 CFG L H16 ? 0.304  -0.435 1.518  1 48
+HETATM H  H17 . CFG L 1 1 . 1 CFG L H17 ? 4.561  -1.507 -1.505 1 49
+HETATM H  H18 . CFG L 1 1 . 1 CFG L H18 ? 4.862  0.814  2.061  1 50
+HETATM H  H19 . CFG L 1 1 . 1 CFG L H19 ? 7.028  -2.727 0.56   1 51
+HETATM H  H20 . CFG L 1 1 . 1 CFG L H20 ? 8.513  -1.807 0.902  1 52
+HETATM H  H21 . CFG L 1 1 . 1 CFG L H21 ? 7.154  -1.762 2.051  1 53
+HETATM H  H22 . CFG L 1 1 . 1 CFG L H22 ? 6.774  0.441  -2.222 1 54
+HETATM H  H23 . CFG L 1 1 . 1 CFG L H23 ? 8.273  -0.417 -1.793 1 55
+HETATM H  H24 . CFG L 1 1 . 1 CFG L H24 ? 6.788  -1.336 -2.135 1 56
+HETATM H  H25 . CFG L 1 1 . 1 CFG L H25 ? 7.129  1.276  1.903  1 57
+HETATM H  H26 . CFG L 1 1 . 1 CFG L H26 ? 8.488  1.232  0.755  1 58
+HETATM H  H27 . CFG L 1 1 . 1 CFG L H27 ? 6.988  2.09   0.326  1 59
+#

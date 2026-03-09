@@ -1,0 +1,10 @@
+{
+  "ligand_227_ccd_8cb": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8CB.cif",
+    "ligand": "8CB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8CB": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_569_ccd_3pu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/3PU.cif",
+    "ligand": "3PU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3PU": "ALL"
+    }
+  }
+}

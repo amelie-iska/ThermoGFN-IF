@@ -1,0 +1,81 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C CAB . 3JK L 1 1 . 1 3JK L CAB ? -5.669 -2.671 0.378  1 1
+HETATM C CBC . 3JK L 1 1 . 1 3JK L CBC ? -6.397 -1.526 -0.33  1 2
+HETATM C CAC . 3JK L 1 1 . 1 3JK L CAC ? -6.235 -1.677 -1.844 1 3
+HETATM C CAD . 3JK L 1 1 . 1 3JK L CAD ? -7.883 -1.567 0.031  1 4
+HETATM C CAN . 3JK L 1 1 . 1 3JK L CAN ? -5.8   -0.19  0.116  1 5
+HETATM C CAT . 3JK L 1 1 . 1 3JK L CAT ? -4.336 -0.149 -0.239 1 6
+HETATM O OAE . 3JK L 1 1 . 1 3JK L OAE ? -3.821 -1.097 -0.794 1 7
+HETATM N N   . 3JK L 1 1 . 1 3JK L N   ? -3.6   0.939  0.06   1 8
+HETATM C CD2 . 3JK L 1 1 . 1 3JK L CD2 ? -4.096 2.154  0.731  1 9
+HETATM C CG  . 3JK L 1 1 . 1 3JK L CG  ? -3.119 3.275  0.295  1 10
+HETATM O OD1 . 3JK L 1 1 . 1 3JK L OD1 ? -3.454 3.77   -1.002 1 11
+HETATM C CB  . 3JK L 1 1 . 1 3JK L CB  ? -1.766 2.515  0.269  1 12
+HETATM C CA  . 3JK L 1 1 . 1 3JK L CA  ? -2.167 1.108  -0.223 1 13
+HETATM C C   . 3JK L 1 1 . 1 3JK L C   ? -1.366 0.062  0.509  1 14
+HETATM O O   . 3JK L 1 1 . 1 3JK L O   ? -1.93  -0.761 1.198  1 15
+HETATM N NAR . 3JK L 1 1 . 1 3JK L NAR ? -0.023 0.043  0.398  1 16
+HETATM C CAM . 3JK L 1 1 . 1 3JK L CAM ? 0.756  -0.974 1.109  1 17
+HETATM C CAV . 3JK L 1 1 . 1 3JK L CAV ? 2.222  -0.778 0.82   1 18
+HETATM C CAI . 3JK L 1 1 . 1 3JK L CAI ? 2.981  0.043  1.635  1 19
+HETATM C CAK . 3JK L 1 1 . 1 3JK L CAK ? 4.323  0.228  1.376  1 20
+HETATM C CAH . 3JK L 1 1 . 1 3JK L CAH ? 2.804  -1.423 -0.256 1 21
+HETATM C CAJ . 3JK L 1 1 . 1 3JK L CAJ ? 4.145  -1.248 -0.526 1 22
+HETATM C CAX . 3JK L 1 1 . 1 3JK L CAX ? 4.915  -0.417 0.288  1 23
+HETATM C CAY . 3JK L 1 1 . 1 3JK L CAY ? 6.353  -0.224 0.004  1 24
+HETATM O OAS . 3JK L 1 1 . 1 3JK L OAS ? 7.366  -0.294 0.896  1 25
+HETATM C CAL . 3JK L 1 1 . 1 3JK L CAL ? 8.508  -0.059 0.234  1 26
+HETATM N NAQ . 3JK L 1 1 . 1 3JK L NAQ ? 8.235  0.152  -1.023 1 27
+HETATM C CAW . 3JK L 1 1 . 1 3JK L CAW ? 6.91   0.051  -1.203 1 28
+HETATM C CAA . 3JK L 1 1 . 1 3JK L CAA ? 6.172  0.223  -2.506 1 29
+HETATM H H1  . 3JK L 1 1 . 1 3JK L H1  ? -6.094 -3.623 0.06   1 30
+HETATM H H2  . 3JK L 1 1 . 1 3JK L H2  ? -4.61  -2.642 0.121  1 31
+HETATM H H3  . 3JK L 1 1 . 1 3JK L H3  ? -5.784 -2.563 1.456  1 32
+HETATM H H4  . 3JK L 1 1 . 1 3JK L H4  ? -6.66  -2.629 -2.161 1 33
+HETATM H H5  . 3JK L 1 1 . 1 3JK L H5  ? -6.754 -0.862 -2.347 1 34
+HETATM H H6  . 3JK L 1 1 . 1 3JK L H6  ? -5.176 -1.648 -2.101 1 35
+HETATM H H7  . 3JK L 1 1 . 1 3JK L H7  ? -7.998 -1.459 1.11   1 36
+HETATM H H8  . 3JK L 1 1 . 1 3JK L H8  ? -8.402 -0.751 -0.473 1 37
+HETATM H H9  . 3JK L 1 1 . 1 3JK L H9  ? -8.308 -2.519 -0.287 1 38
+HETATM H H10 . 3JK L 1 1 . 1 3JK L H10 ? -6.319 0.626  -0.388 1 39
+HETATM H H11 . 3JK L 1 1 . 1 3JK L H11 ? -5.916 -0.082 1.195  1 40
+HETATM H H12 . 3JK L 1 1 . 1 3JK L H12 ? -5.109 2.384  0.4    1 41
+HETATM H H13 . 3JK L 1 1 . 1 3JK L H13 ? -4.072 2.027  1.813  1 42
+HETATM H H14 . 3JK L 1 1 . 1 3JK L H14 ? -3.1   4.083  1.027  1 43
+HETATM H H15 . 3JK L 1 1 . 1 3JK L H15 ? -4.334 4.167  -1.057 1 44
+HETATM H H16 . 3JK L 1 1 . 1 3JK L H16 ? -1.07  2.983  -0.428 1 45
+HETATM H H17 . 3JK L 1 1 . 1 3JK L H17 ? -1.338 2.467  1.27   1 46
+HETATM H H18 . 3JK L 1 1 . 1 3JK L H18 ? -1.994 1.027  -1.296 1 47
+HETATM H H19 . 3JK L 1 1 . 1 3JK L H19 ? 0.428  0.701  -0.153 1 48
+HETATM H H20 . 3JK L 1 1 . 1 3JK L H20 ? 0.581  -0.881 2.181  1 49
+HETATM H H21 . 3JK L 1 1 . 1 3JK L H21 ? 0.449  -1.966 0.776  1 50
+HETATM H H22 . 3JK L 1 1 . 1 3JK L H22 ? 2.521  0.541  2.476  1 51
+HETATM H H23 . 3JK L 1 1 . 1 3JK L H23 ? 4.914  0.869  2.012  1 52
+HETATM H H24 . 3JK L 1 1 . 1 3JK L H24 ? 2.207  -2.066 -0.886 1 53
+HETATM H H25 . 3JK L 1 1 . 1 3JK L H25 ? 4.599  -1.753 -1.367 1 54
+HETATM H H26 . 3JK L 1 1 . 1 3JK L H26 ? 9.495  -0.045 0.673  1 55
+HETATM H H27 . 3JK L 1 1 . 1 3JK L H27 ? 6.015  -0.753 -2.966 1 56
+HETATM H H28 . 3JK L 1 1 . 1 3JK L H28 ? 5.208  0.695  -2.318 1 57
+HETATM H H29 . 3JK L 1 1 . 1 3JK L H29 ? 6.76   0.851  -3.176 1 58
+#

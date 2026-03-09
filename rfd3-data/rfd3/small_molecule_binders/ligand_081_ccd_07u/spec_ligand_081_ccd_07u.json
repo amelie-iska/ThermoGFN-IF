@@ -1,0 +1,10 @@
+{
+  "ligand_081_ccd_07u": {
+    "input": "./data/rfd3/ccd_ligands/structures/07U.cif",
+    "ligand": "07U",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "07U": "ALL"
+    }
+  }
+}

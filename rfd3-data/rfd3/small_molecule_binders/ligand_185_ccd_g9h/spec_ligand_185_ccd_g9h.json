@@ -1,0 +1,10 @@
+{
+  "ligand_185_ccd_g9h": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/G9H.cif",
+    "ligand": "G9H",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G9H": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_009_ccd_29h": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/29H.cif",
+    "ligand": "29H",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "29H": "ALL"
+    }
+  }
+}

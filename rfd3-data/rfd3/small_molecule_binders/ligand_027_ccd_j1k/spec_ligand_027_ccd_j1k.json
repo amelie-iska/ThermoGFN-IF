@@ -1,0 +1,10 @@
+{
+  "ligand_027_ccd_j1k": {
+    "input": "./data/rfd3/ccd_ligands/structures/J1K.cif",
+    "ligand": "J1K",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "J1K": "ALL"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C9   . FPG L 1 1 . 1 FPG L C9   ? 3.594  1.73   -5.463 1 1
+HETATM C C7   . FPG L 1 1 . 1 FPG L C7   ? 3.064  2.756  -4.461 1 2
+HETATM C C6   . FPG L 1 1 . 1 FPG L C6   ? 1.702  2.351  -3.868 1 3
+HETATM C C8   . FPG L 1 1 . 1 FPG L C8   ? 4.083  2.95   -3.334 1 4
+HETATM C C2   . FPG L 1 1 . 1 FPG L C2   ? -3.185 1.095  -4.52  1 5
+HETATM C C1   . FPG L 1 1 . 1 FPG L C1   ? -3.144 -0.212 -3.742 1 6
+HETATM C C10  . FPG L 1 1 . 1 FPG L C10  ? -1.493 0.385  -6.278 1 7
+HETATM C C5   . FPG L 1 1 . 1 FPG L C5   ? 0.606  2.167  -4.924 1 8
+HETATM C C4   . FPG L 1 1 . 1 FPG L C4   ? -0.715 1.74   -4.275 1 9
+HETATM F F    . FPG L 1 1 . 1 FPG L F    ? -4.178 0.972  -5.451 1 10
+HETATM C C3   . FPG L 1 1 . 1 FPG L C3   ? -1.878 1.458  -5.255 1 11
+HETATM O O1   . FPG L 1 1 . 1 FPG L O1   ? -2.092 2.666  -6.0   1 12
+HETATM P PA   . FPG L 1 1 . 1 FPG L PA   ? -2.516 4.01   -5.223 1 13
+HETATM O O1A  . FPG L 1 1 . 1 FPG L O1A  ? -1.519 4.47   -4.199 1 14
+HETATM O O2A  . FPG L 1 1 . 1 FPG L O2A  ? -2.814 5.086  -6.394 1 15
+HETATM O O3A  . FPG L 1 1 . 1 FPG L O3A  ? -3.985 3.698  -4.624 1 16
+HETATM P PB   . FPG L 1 1 . 1 FPG L PB   ? -5.037 4.647  -3.848 1 17
+HETATM O O2B  . FPG L 1 1 . 1 FPG L O2B  ? -4.277 4.979  -2.461 1 18
+HETATM O O3B  . FPG L 1 1 . 1 FPG L O3B  ? -5.496 5.843  -4.628 1 19
+HETATM O O1B  . FPG L 1 1 . 1 FPG L O1B  ? -6.205 3.623  -3.403 1 20
+HETATM H H91  . FPG L 1 1 . 1 FPG L H91  ? 2.951  1.665  -6.346 1 21
+HETATM H H92  . FPG L 1 1 . 1 FPG L H92  ? 3.661  0.733  -5.014 1 22
+HETATM H H93  . FPG L 1 1 . 1 FPG L H93  ? 4.594  2.009  -5.813 1 23
+HETATM H H7   . FPG L 1 1 . 1 FPG L H7   ? 2.951  3.716  -4.979 1 24
+HETATM H H61  . FPG L 1 1 . 1 FPG L H61  ? 1.381  3.126  -3.16  1 25
+HETATM H H62  . FPG L 1 1 . 1 FPG L H62  ? 1.809  1.424  -3.29  1 26
+HETATM H H81  . FPG L 1 1 . 1 FPG L H81  ? 3.741  3.714  -2.628 1 27
+HETATM H H82  . FPG L 1 1 . 1 FPG L H82  ? 4.243  2.02   -2.778 1 28
+HETATM H H83  . FPG L 1 1 . 1 FPG L H83  ? 5.049  3.276  -3.735 1 29
+HETATM H H2   . FPG L 1 1 . 1 FPG L H2   ? -3.483 1.9    -3.841 1 30
+HETATM H H11  . FPG L 1 1 . 1 FPG L H11  ? -2.91  -1.058 -4.396 1 31
+HETATM H H12  . FPG L 1 1 . 1 FPG L H12  ? -2.414 -0.18  -2.928 1 32
+HETATM H H13  . FPG L 1 1 . 1 FPG L H13  ? -4.129 -0.415 -3.309 1 33
+HETATM H H101 . FPG L 1 1 . 1 FPG L H101 ? -2.213 0.345  -7.103 1 34
+HETATM H H102 . FPG L 1 1 . 1 FPG L H102 ? -1.432 -0.609 -5.827 1 35
+HETATM H H103 . FPG L 1 1 . 1 FPG L H103 ? -0.525 0.617  -6.738 1 36
+HETATM H H51  . FPG L 1 1 . 1 FPG L H51  ? 0.919  1.408  -5.647 1 37
+HETATM H H52  . FPG L 1 1 . 1 FPG L H52  ? 0.471  3.109  -5.468 1 38
+HETATM H H41  . FPG L 1 1 . 1 FPG L H41  ? -1.035 2.513  -3.562 1 39
+HETATM H H42  . FPG L 1 1 . 1 FPG L H42  ? -0.542 0.848  -3.659 1 40
+HETATM H HO2A . FPG L 1 1 . 1 FPG L HO2A ? -2.059 5.542  -6.823 1 41
+HETATM H HO2B . FPG L 1 1 . 1 FPG L HO2B ? -4.681 5.622  -1.84  1 42
+HETATM H HO1B . FPG L 1 1 . 1 FPG L HO1B ? -7.011 3.98   -2.972 1 43
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_079_ccd_yxn": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/YXN.cif",
+    "ligand": "YXN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YXN": "ALL"
+    }
+  }
+}

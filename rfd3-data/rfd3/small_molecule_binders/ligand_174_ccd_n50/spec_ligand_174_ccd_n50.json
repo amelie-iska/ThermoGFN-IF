@@ -1,0 +1,10 @@
+{
+  "ligand_174_ccd_n50": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/N50.cif",
+    "ligand": "N50",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "N50": "ALL"
+    }
+  }
+}

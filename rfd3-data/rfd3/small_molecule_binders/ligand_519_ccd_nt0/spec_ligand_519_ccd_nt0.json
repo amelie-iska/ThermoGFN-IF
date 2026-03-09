@@ -1,0 +1,10 @@
+{
+  "ligand_519_ccd_nt0": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/NT0.cif",
+    "ligand": "NT0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NT0": "ALL"
+    }
+  }
+}

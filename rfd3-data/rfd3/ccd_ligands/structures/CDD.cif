@@ -1,0 +1,72 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C1   . CDD L 1 1 . 1 CDD L C1   ?  7.726  -0.091 -1.523 1 1
+HETATM N  N2   . CDD L 1 1 . 1 CDD L N2   +1 6.491  -0.449 -1.222 1 2
+HETATM C  C3   . CDD L 1 1 . 1 CDD L C3   ?  6.145  -0.777 0.008  1 3
+HETATM C  C4   . CDD L 1 1 . 1 CDD L C4   ?  7.075  -0.766 1.031  1 4
+HETATM C  C5   . CDD L 1 1 . 1 CDD L C5   ?  8.381  -0.396 0.752  1 5
+HETATM C  C6   . CDD L 1 1 . 1 CDD L C6   ?  8.707  -0.053 -0.551 1 6
+HETATM C  C11  . CDD L 1 1 . 1 CDD L C11  ?  4.722  -1.177 0.3    1 7
+HETATM C  C12  . CDD L 1 1 . 1 CDD L C12  ?  3.805  0.037  0.128  1 8
+HETATM F  F13  . CDD L 1 1 . 1 CDD L F13  ?  4.33   -2.186 -0.586 1 9
+HETATM F  F14  . CDD L 1 1 . 1 CDD L F14  ?  4.629  -1.648 1.614  1 10
+HETATM N  N15  . CDD L 1 1 . 1 CDD L N15  ?  2.442  -0.321 0.527  1 11
+HETATM C  C18  . CDD L 1 1 . 1 CDD L C18  ?  1.426  0.626  0.457  1 12
+HETATM C  C19  . CDD L 1 1 . 1 CDD L C19  ?  0.057  0.277  0.848  1 13
+HETATM N  N20  . CDD L 1 1 . 1 CDD L N20  ?  -0.898 1.23   0.769  1 14
+HETATM C  C21  . CDD L 1 1 . 1 CDD L C21  ?  -0.56  2.473  0.322  1 15
+HETATM C  C22  . CDD L 1 1 . 1 CDD L C22  ?  0.713  2.758  -0.036 1 16
+HETATM N  N23  . CDD L 1 1 . 1 CDD L N23  ?  1.68   1.846  0.033  1 17
+HETATM C  C24  . CDD L 1 1 . 1 CDD L C24  ?  -2.279 0.93   1.155  1 18
+HETATM C  C25  . CDD L 1 1 . 1 CDD L C25  ?  -3.037 0.424  -0.046 1 19
+HETATM N  N28  . CDD L 1 1 . 1 CDD L N28  ?  -4.335 0.083  0.071  1 20
+HETATM C  C29  . CDD L 1 1 . 1 CDD L C29  ?  -5.072 -0.408 -1.096 1 21
+HETATM C  C30  . CDD L 1 1 . 1 CDD L C30  ?  -6.493 -0.717 -0.699 1 22
+HETATM C  C33  . CDD L 1 1 . 1 CDD L C33  ?  -7.515 0.137  -1.07  1 23
+HETATM C  C34  . CDD L 1 1 . 1 CDD L C34  ?  -8.818 -0.146 -0.707 1 24
+HETATM C  C35  . CDD L 1 1 . 1 CDD L C35  ?  -9.101 -1.283 0.027  1 25
+HETATM C  C2   . CDD L 1 1 . 1 CDD L C2   ?  -8.081 -2.138 0.399  1 26
+HETATM C  C37  . CDD L 1 1 . 1 CDD L C37  ?  -6.776 -1.858 0.031  1 27
+HETATM O  O42  . CDD L 1 1 . 1 CDD L O42  ?  -0.212 -0.845 1.244  1 28
+HETATM CL CL43 . CDD L 1 1 . 1 CDD L CL43 ?  -1.779 3.704  0.209  1 29
+HETATM O  O44  . CDD L 1 1 . 1 CDD L O44  ?  -2.478 0.324  -1.118 1 30
+HETATM F  F1   . CDD L 1 1 . 1 CDD L F1   ?  -5.778 -2.694 0.394  1 31
+HETATM O  O1   . CDD L 1 1 . 1 CDD L O1   -1 5.512  -0.476 -2.245 1 32
+HETATM H  H1   . CDD L 1 1 . 1 CDD L H1   ?  7.972  0.175  -2.541 1 33
+HETATM H  H4   . CDD L 1 1 . 1 CDD L H4   ?  6.786  -1.039 2.035  1 34
+HETATM H  H5   . CDD L 1 1 . 1 CDD L H5   ?  9.128  -0.376 1.532  1 35
+HETATM H  H6   . CDD L 1 1 . 1 CDD L H6   ?  9.716  0.24   -0.804 1 36
+HETATM H  H121 . CDD L 1 1 . 1 CDD L H121 ?  4.164  0.854  0.753  1 37
+HETATM H  H122 . CDD L 1 1 . 1 CDD L H122 ?  3.808  0.349  -0.916 1 38
+HETATM H  H15  . CDD L 1 1 . 1 CDD L H15  ?  2.247  -1.218 0.84   1 39
+HETATM H  H22  . CDD L 1 1 . 1 CDD L H22  ?  0.95   3.751  -0.388 1 40
+HETATM H  H241 . CDD L 1 1 . 1 CDD L H241 ?  -2.282 0.167  1.933  1 41
+HETATM H  H242 . CDD L 1 1 . 1 CDD L H242 ?  -2.756 1.835  1.531  1 42
+HETATM H  H28  . CDD L 1 1 . 1 CDD L H28  ?  -4.782 0.163  0.929  1 43
+HETATM H  H291 . CDD L 1 1 . 1 CDD L H291 ?  -5.07  0.354  -1.874 1 44
+HETATM H  H292 . CDD L 1 1 . 1 CDD L H292 ?  -4.595 -1.313 -1.472 1 45
+HETATM H  H33  . CDD L 1 1 . 1 CDD L H33  ?  -7.295 1.026  -1.643 1 46
+HETATM H  H34  . CDD L 1 1 . 1 CDD L H34  ?  -9.616 0.522  -0.997 1 47
+HETATM H  H35  . CDD L 1 1 . 1 CDD L H35  ?  -10.12 -1.503 0.311  1 48
+HETATM H  H2   . CDD L 1 1 . 1 CDD L H2   ?  -8.303 -3.025 0.973  1 49
+#

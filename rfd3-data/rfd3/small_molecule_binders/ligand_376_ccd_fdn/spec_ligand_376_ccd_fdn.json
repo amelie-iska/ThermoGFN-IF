@@ -1,0 +1,10 @@
+{
+  "ligand_376_ccd_fdn": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/FDN.cif",
+    "ligand": "FDN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "FDN": "ALL"
+    }
+  }
+}

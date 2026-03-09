@@ -1,0 +1,10 @@
+{
+  "ligand_440_ccd_a1imc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1IMC.cif",
+    "ligand": "A1IMC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IMC": "ALL"
+    }
+  }
+}

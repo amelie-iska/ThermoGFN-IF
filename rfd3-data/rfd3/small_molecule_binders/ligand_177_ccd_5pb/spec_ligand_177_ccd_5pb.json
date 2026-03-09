@@ -1,0 +1,10 @@
+{
+  "ligand_177_ccd_5pb": {
+    "input": "./data/rfd3/ccd_ligands/structures/5PB.cif",
+    "ligand": "5PB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5PB": "ALL"
+    }
+  }
+}

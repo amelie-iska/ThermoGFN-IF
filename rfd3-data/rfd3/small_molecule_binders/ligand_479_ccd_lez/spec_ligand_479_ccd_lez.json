@@ -1,0 +1,10 @@
+{
+  "ligand_479_ccd_lez": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LEZ.cif",
+    "ligand": "LEZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LEZ": "ALL"
+    }
+  }
+}

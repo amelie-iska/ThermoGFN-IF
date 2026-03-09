@@ -1,0 +1,10 @@
+{
+  "ligand_374_ccd_bk1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BK1.cif",
+    "ligand": "BK1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BK1": "ALL"
+    }
+  }
+}

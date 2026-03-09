@@ -1,0 +1,10 @@
+{
+  "ligand_289_ccd_a1icx": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1ICX.cif",
+    "ligand": "A1ICX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1ICX": "ALL"
+    }
+  }
+}

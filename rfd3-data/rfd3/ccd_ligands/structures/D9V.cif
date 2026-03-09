@@ -1,0 +1,69 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O O3  . D9V L 1 1 . 1 D9V L O3  ? -3.042 -1.013 1.677  1 1
+HETATM C C4  . D9V L 1 1 . 1 D9V L C4  ? 1.397  -2.06  0.295  1 2
+HETATM C C5  . D9V L 1 1 . 1 D9V L C5  ? -0.939 -1.49  0.58   1 3
+HETATM C C6  . D9V L 1 1 . 1 D9V L C6  ? -1.597 -1.791 -0.776 1 4
+HETATM N N1  . D9V L 1 1 . 1 D9V L N1  ? -0.746 1.45   0.137  1 5
+HETATM C C7  . D9V L 1 1 . 1 D9V L C7  ? -3.113 -1.979 -0.532 1 6
+HETATM C C8  . D9V L 1 1 . 1 D9V L C8  ? -2.586 0.235  -0.944 1 7
+HETATM C C9  . D9V L 1 1 . 1 D9V L C9  ? -2.017 0.756  0.385  1 8
+HETATM C C10 . D9V L 1 1 . 1 D9V L C10 ? -1.785 -0.442 1.311  1 9
+HETATM C C11 . D9V L 1 1 . 1 D9V L C11 ? -0.221 2.042  1.374  1 10
+HETATM C C12 . D9V L 1 1 . 1 D9V L C12 ? 1.169  2.628  1.11   1 11
+HETATM C C13 . D9V L 1 1 . 1 D9V L C13 ? 1.069  3.693  0.014  1 12
+HETATM C C14 . D9V L 1 1 . 1 D9V L C14 ? 0.474  3.061  -1.247 1 13
+HETATM C C15 . D9V L 1 1 . 1 D9V L C15 ? -0.895 2.463  -0.915 1 14
+HETATM O O1  . D9V L 1 1 . 1 D9V L O1  ? -3.678 -0.664 -0.678 1 15
+HETATM O O2  . D9V L 1 1 . 1 D9V L O2  ? -1.535 -0.574 -1.561 1 16
+HETATM N N   . D9V L 1 1 . 1 D9V L N   ? 0.417  -0.968 0.365  1 17
+HETATM C C2  . D9V L 1 1 . 1 D9V L C2  ? 2.773  -1.487 0.074  1 18
+HETATM C C1  . D9V L 1 1 . 1 D9V L C1  ? 3.641  -1.131 1.039  1 19
+HETATM O O   . D9V L 1 1 . 1 D9V L O   ? 3.344  -1.251 -1.118 1 20
+HETATM C C3  . D9V L 1 1 . 1 D9V L C3  ? 4.572  -0.739 -0.934 1 21
+HETATM C C   . D9V L 1 1 . 1 D9V L C   ? 4.799  -0.646 0.389  1 22
+HETATM H H1  . D9V L 1 1 . 1 D9V L H1  ? -2.97  -1.78  2.262  1 23
+HETATM H H2  . D9V L 1 1 . 1 D9V L H2  ? 1.383  -2.622 1.229  1 24
+HETATM H H3  . D9V L 1 1 . 1 D9V L H3  ? 1.143  -2.724 -0.532 1 25
+HETATM H H4  . D9V L 1 1 . 1 D9V L H4  ? -0.89  -2.402 1.176  1 26
+HETATM H H5  . D9V L 1 1 . 1 D9V L H5  ? -1.143 -2.642 -1.282 1 27
+HETATM H H7  . D9V L 1 1 . 1 D9V L H7  ? -3.535 -2.658 -1.273 1 28
+HETATM H H8  . D9V L 1 1 . 1 D9V L H8  ? -3.29  -2.358 0.474  1 29
+HETATM H H9  . D9V L 1 1 . 1 D9V L H9  ? -2.874 1.055  -1.602 1 30
+HETATM H H10 . D9V L 1 1 . 1 D9V L H10 ? -2.727 1.447  0.84   1 31
+HETATM H H11 . D9V L 1 1 . 1 D9V L H11 ? -1.26  -0.112 2.208  1 32
+HETATM H H12 . D9V L 1 1 . 1 D9V L H12 ? -0.89  2.834  1.711  1 33
+HETATM H H13 . D9V L 1 1 . 1 D9V L H13 ? -0.151 1.274  2.144  1 34
+HETATM H H14 . D9V L 1 1 . 1 D9V L H14 ? 1.552  3.082  2.024  1 35
+HETATM H H15 . D9V L 1 1 . 1 D9V L H15 ? 1.843  1.835  0.787  1 36
+HETATM H H16 . D9V L 1 1 . 1 D9V L H16 ? 0.426  4.505  0.353  1 37
+HETATM H H17 . D9V L 1 1 . 1 D9V L H17 ? 2.063  4.082  -0.207 1 38
+HETATM H H18 . D9V L 1 1 . 1 D9V L H18 ? 0.361  3.824  -2.017 1 39
+HETATM H H19 . D9V L 1 1 . 1 D9V L H19 ? 1.137  2.275  -1.608 1 40
+HETATM H H20 . D9V L 1 1 . 1 D9V L H20 ? -1.315 2.0    -1.808 1 41
+HETATM H H21 . D9V L 1 1 . 1 D9V L H21 ? -1.562 3.252  -0.568 1 42
+HETATM H H22 . D9V L 1 1 . 1 D9V L H22 ? 0.456  -0.394 -0.463 1 43
+HETATM H H24 . D9V L 1 1 . 1 D9V L H24 ? 3.483  -1.201 2.105  1 44
+HETATM H H25 . D9V L 1 1 . 1 D9V L H25 ? 5.261  -0.454 -1.715 1 45
+HETATM H H26 . D9V L 1 1 . 1 D9V L H26 ? 5.696  -0.276 0.863  1 46
+#

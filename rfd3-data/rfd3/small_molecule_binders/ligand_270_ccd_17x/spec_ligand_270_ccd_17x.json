@@ -1,0 +1,10 @@
+{
+  "ligand_270_ccd_17x": {
+    "input": "./data/rfd3/ccd_ligands/structures/17X.cif",
+    "ligand": "17X",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "17X": "ALL"
+    }
+  }
+}

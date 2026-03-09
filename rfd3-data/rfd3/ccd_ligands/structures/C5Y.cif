@@ -1,0 +1,83 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C15  . C5Y L 1 1 . 1 C5Y L C15  ? -5.09   0.25   -0.67  1 1
+HETATM C C17  . C5Y L 1 1 . 1 C5Y L C17  ? -7.427  1.134  -0.666 1 2
+HETATM C C20  . C5Y L 1 1 . 1 C5Y L C20  ? -11.094 2.027  0.094  1 3
+HETATM C C21  . C5Y L 1 1 . 1 C5Y L C21  ? -12.101 2.9    -0.658 1 4
+HETATM C C24  . C5Y L 1 1 . 1 C5Y L C24  ? 3.177   -2.854 0.025  1 5
+HETATM C C26  . C5Y L 1 1 . 1 C5Y L C26  ? 4.248   -1.772 0.306  1 6
+HETATM C C28  . C5Y L 1 1 . 1 C5Y L C28  ? 3.588   1.529  0.743  1 7
+HETATM C C02  . C5Y L 1 1 . 1 C5Y L C02  ? 6.667   3.252  0.277  1 8
+HETATM C C03  . C5Y L 1 1 . 1 C5Y L C03  ? 5.511   2.457  0.365  1 9
+HETATM C C04  . C5Y L 1 1 . 1 C5Y L C04  ? 5.49    1.239  -0.335 1 10
+HETATM C C06  . C5Y L 1 1 . 1 C5Y L C06  ? 3.773   -0.603 -0.594 1 11
+HETATM C C08  . C5Y L 1 1 . 1 C5Y L C08  ? 1.975   -2.062 -0.525 1 12
+HETATM C C09  . C5Y L 1 1 . 1 C5Y L C09  ? 0.748   -2.299 0.356  1 13
+HETATM C C14  . C5Y L 1 1 . 1 C5Y L C14  ? -4.098  -0.609 0.071  1 14
+HETATM C C16  . C5Y L 1 1 . 1 C5Y L C16  ? -6.42   0.261  0.086  1 15
+HETATM C C18  . C5Y L 1 1 . 1 C5Y L C18  ? -8.757  1.144  0.09   1 16
+HETATM C C19  . C5Y L 1 1 . 1 C5Y L C19  ? -9.764  2.017  -0.662 1 17
+HETATM C C31  . C5Y L 1 1 . 1 C5Y L C31  ? 7.615   1.662  -1.101 1 18
+HETATM N N01  . C5Y L 1 1 . 1 C5Y L N01  ? 6.746   4.462  0.945  1 19
+HETATM N N05  . C5Y L 1 1 . 1 C5Y L N05  ? 4.264   0.678  -0.079 1 20
+HETATM N N29  . C5Y L 1 1 . 1 C5Y L N29  ? 4.32    2.574  1.0    1 21
+HETATM N N30  . C5Y L 1 1 . 1 C5Y L N30  ? 6.554   0.885  -1.048 1 22
+HETATM N N32  . C5Y L 1 1 . 1 C5Y L N32  ? 7.682   2.815  -0.461 1 23
+HETATM O O07  . C5Y L 1 1 . 1 C5Y L O07  ? 2.333   -0.67  -0.5   1 24
+HETATM O O10  . C5Y L 1 1 . 1 C5Y L O10  ? -0.388  -1.656 -0.225 1 25
+HETATM O O12  . C5Y L 1 1 . 1 C5Y L O12  ? -1.781  -1.204 1.831  1 26
+HETATM O O13  . C5Y L 1 1 . 1 C5Y L O13  ? -2.855  -0.766 -0.411 1 27
+HETATM O O22  . C5Y L 1 1 . 1 C5Y L O22  ? -4.422  -1.157 1.098  1 28
+HETATM O O23  . C5Y L 1 1 . 1 C5Y L O23  ? -2.401  -3.214 0.435  1 29
+HETATM O O25  . C5Y L 1 1 . 1 C5Y L O25  ? 3.649   -3.787 -0.949 1 30
+HETATM O O27  . C5Y L 1 1 . 1 C5Y L O27  ? 5.545   -2.224 -0.089 1 31
+HETATM P P11  . C5Y L 1 1 . 1 C5Y L P11  ? -1.855  -1.699 0.438  1 32
+HETATM H H151 . C5Y L 1 1 . 1 C5Y L H151 ? -4.705  1.268  -0.743 1 33
+HETATM H H152 . C5Y L 1 1 . 1 C5Y L H152 ? -5.244  -0.153 -1.671 1 34
+HETATM H H172 . C5Y L 1 1 . 1 C5Y L H172 ? -7.043  2.151  -0.739 1 35
+HETATM H H171 . C5Y L 1 1 . 1 C5Y L H171 ? -7.581  0.73   -1.667 1 36
+HETATM H H201 . C5Y L 1 1 . 1 C5Y L H201 ? -10.94  2.431  1.095  1 37
+HETATM H H202 . C5Y L 1 1 . 1 C5Y L H202 ? -11.479 1.01   0.168  1 38
+HETATM H H212 . C5Y L 1 1 . 1 C5Y L H212 ? -11.717 3.917  -0.731 1 39
+HETATM H H213 . C5Y L 1 1 . 1 C5Y L H213 ? -12.255 2.497  -1.658 1 40
+HETATM H H211 . C5Y L 1 1 . 1 C5Y L H211 ? -13.049 2.908  -0.119 1 41
+HETATM H H241 . C5Y L 1 1 . 1 C5Y L H241 ? 2.905   -3.369 0.946  1 42
+HETATM H H261 . C5Y L 1 1 . 1 C5Y L H261 ? 4.242   -1.482 1.356  1 43
+HETATM H H281 . C5Y L 1 1 . 1 C5Y L H281 ? 2.59    1.364  1.122  1 44
+HETATM H H061 . C5Y L 1 1 . 1 C5Y L H061 ? 4.097   -0.754 -1.623 1 45
+HETATM H H081 . C5Y L 1 1 . 1 C5Y L H081 ? 1.765   -2.372 -1.549 1 46
+HETATM H H091 . C5Y L 1 1 . 1 C5Y L H091 ? 0.559   -3.37  0.435  1 47
+HETATM H H092 . C5Y L 1 1 . 1 C5Y L H092 ? 0.929   -1.889 1.35   1 48
+HETATM H H162 . C5Y L 1 1 . 1 C5Y L H162 ? -6.804  -0.756 0.159  1 49
+HETATM H H161 . C5Y L 1 1 . 1 C5Y L H161 ? -6.266  0.664  1.087  1 50
+HETATM H H182 . C5Y L 1 1 . 1 C5Y L H182 ? -9.141  0.127  0.164  1 51
+HETATM H H181 . C5Y L 1 1 . 1 C5Y L H181 ? -8.603  1.548  1.091  1 52
+HETATM H H192 . C5Y L 1 1 . 1 C5Y L H192 ? -9.918  1.614  -1.663 1 53
+HETATM H H191 . C5Y L 1 1 . 1 C5Y L H191 ? -9.38   3.034  -0.735 1 54
+HETATM H H311 . C5Y L 1 1 . 1 C5Y L H311 ? 8.463   1.344  -1.689 1 55
+HETATM H H012 . C5Y L 1 1 . 1 C5Y L H012 ? 5.999   4.77   1.481  1 56
+HETATM H H011 . C5Y L 1 1 . 1 C5Y L H011 ? 7.549   5.002  0.877  1 57
+HETATM H H1   . C5Y L 1 1 . 1 C5Y L H1   ? -2.475  -3.603 -0.447 1 58
+HETATM H H251 . C5Y L 1 1 . 1 C5Y L H251 ? 4.405   -4.314 -0.655 1 59
+HETATM H H271 . C5Y L 1 1 . 1 C5Y L H271 ? 5.849   -3.01  0.384  1 60
+#

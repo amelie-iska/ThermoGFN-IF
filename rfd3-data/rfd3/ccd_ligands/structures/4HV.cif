@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . 4HV L 1 1 . 1 4HV L C1   ? 7.849  -0.695 -1.965 1 1
+HETATM O O2   . 4HV L 1 1 . 1 4HV L O2   ? 7.339  0.041  -0.852 1 2
+HETATM C C3   . 4HV L 1 1 . 1 4HV L C3   ? 6.009  -0.071 -0.595 1 3
+HETATM C C4   . 4HV L 1 1 . 1 4HV L C4   ? 5.215  -0.879 -1.396 1 4
+HETATM C C5   . 4HV L 1 1 . 1 4HV L C5   ? 3.865  -0.996 -1.139 1 5
+HETATM C C6   . 4HV L 1 1 . 1 4HV L C6   ? 3.294  -0.301 -0.072 1 6
+HETATM C C7   . 4HV L 1 1 . 1 4HV L C7   ? 4.093  0.512  0.735  1 7
+HETATM C C8   . 4HV L 1 1 . 1 4HV L C8   ? 5.447  0.621  0.475  1 8
+HETATM O O9   . 4HV L 1 1 . 1 4HV L O9   ? 6.229  1.407  1.263  1 9
+HETATM C C10  . 4HV L 1 1 . 1 4HV L C10  ? 5.586  2.087  2.342  1 10
+HETATM C C11  . 4HV L 1 1 . 1 4HV L C11  ? 1.847  -0.426 0.205  1 11
+HETATM C C12  . 4HV L 1 1 . 1 4HV L C12  ? 0.971  -1.184 -0.5   1 12
+HETATM C C13  . 4HV L 1 1 . 1 4HV L C13  ? -0.334 -0.99  0.141  1 13
+HETATM C C14  . 4HV L 1 1 . 1 4HV L C14  ? -0.114 -0.127 1.176  1 14
+HETATM O O15  . 4HV L 1 1 . 1 4HV L O15  ? 1.184  0.191  1.2    1 15
+HETATM C C16  . 4HV L 1 1 . 1 4HV L C16  ? -1.617 -1.6   -0.251 1 16
+HETATM O O17  . 4HV L 1 1 . 1 4HV L O17  ? -1.666 -2.356 -1.202 1 17
+HETATM N N18  . 4HV L 1 1 . 1 4HV L N18  ? -2.737 -1.319 0.444  1 18
+HETATM C C19  . 4HV L 1 1 . 1 4HV L C19  ? -4.013 -1.925 0.054  1 19
+HETATM C C21  . 4HV L 1 1 . 1 4HV L C21  ? -5.165 -1.038 0.528  1 20
+HETATM C C22  . 4HV L 1 1 . 1 4HV L C22  ? -5.113 0.283  -0.196 1 21
+HETATM C C23  . 4HV L 1 1 . 1 4HV L C23  ? -5.79  0.441  -1.393 1 22
+HETATM C C24  . 4HV L 1 1 . 1 4HV L C24  ? -5.748 1.65   -2.064 1 23
+HETATM C C25  . 4HV L 1 1 . 1 4HV L C25  ? -5.03  2.707  -1.543 1 24
+HETATM C C26  . 4HV L 1 1 . 1 4HV L C26  ? -4.345 2.555  -0.336 1 25
+HETATM C C27  . 4HV L 1 1 . 1 4HV L C27  ? -4.396 1.333  0.339  1 26
+HETATM C C28  . 4HV L 1 1 . 1 4HV L C28  ? -3.599 3.648  0.21   1 27
+HETATM N N29  . 4HV L 1 1 . 1 4HV L N29  ? -3.006 4.515  0.643  1 28
+HETATM C C30  . 4HV L 1 1 . 1 4HV L C30  ? -4.137 -3.309 0.695  1 29
+HETATM O O31  . 4HV L 1 1 . 1 4HV L O31  ? -4.203 -3.171 2.116  1 30
+HETATM H H19  . 4HV L 1 1 . 1 4HV L H19  ? -4.052 -2.023 -1.031 1 31
+HETATM H H1   . 4HV L 1 1 . 1 4HV L H1   ? 8.921  -0.517 -2.059 1 32
+HETATM H H1A  . 4HV L 1 1 . 1 4HV L H1A  ? 7.67   -1.759 -1.81  1 33
+HETATM H H1B  . 4HV L 1 1 . 1 4HV L H1B  ? 7.347  -0.371 -2.877 1 34
+HETATM H H4   . 4HV L 1 1 . 1 4HV L H4   ? 5.655  -1.417 -2.222 1 35
+HETATM H H5   . 4HV L 1 1 . 1 4HV L H5   ? 3.249  -1.625 -1.764 1 36
+HETATM H H7   . 4HV L 1 1 . 1 4HV L H7   ? 3.655  1.051  1.562  1 37
+HETATM H H10  . 4HV L 1 1 . 1 4HV L H10  ? 6.321  2.678  2.889  1 38
+HETATM H H10A . 4HV L 1 1 . 1 4HV L H10A ? 4.812  2.746  1.948  1 39
+HETATM H H10B . 4HV L 1 1 . 1 4HV L H10B ? 5.134  1.357  3.014  1 40
+HETATM H H12  . 4HV L 1 1 . 1 4HV L H12  ? 1.19   -1.804 -1.357 1 41
+HETATM H H14  . 4HV L 1 1 . 1 4HV L H14  ? -0.864 0.235  1.864  1 42
+HETATM H HN18 . 4HV L 1 1 . 1 4HV L HN18 ? -2.699 -0.716 1.203  1 43
+HETATM H H21  . 4HV L 1 1 . 1 4HV L H21  ? -6.114 -1.531 0.317  1 44
+HETATM H H21A . 4HV L 1 1 . 1 4HV L H21A ? -5.075 -0.868 1.601  1 45
+HETATM H H23  . 4HV L 1 1 . 1 4HV L H23  ? -6.353 -0.383 -1.805 1 46
+HETATM H H24  . 4HV L 1 1 . 1 4HV L H24  ? -6.278 1.766  -2.998 1 47
+HETATM H H25  . 4HV L 1 1 . 1 4HV L H25  ? -4.998 3.65   -2.068 1 48
+HETATM H H27  . 4HV L 1 1 . 1 4HV L H27  ? -3.869 1.208  1.273  1 49
+HETATM H H30  . 4HV L 1 1 . 1 4HV L H30  ? -5.043 -3.796 0.335  1 50
+HETATM H H30A . 4HV L 1 1 . 1 4HV L H30A ? -3.27  -3.912 0.428  1 51
+HETATM H HO31 . 4HV L 1 1 . 1 4HV L HO31 ? -4.283 -4.011 2.589  1 52
+#

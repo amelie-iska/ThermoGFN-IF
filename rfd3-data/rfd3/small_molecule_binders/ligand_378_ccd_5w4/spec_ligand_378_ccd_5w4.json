@@ -1,0 +1,10 @@
+{
+  "ligand_378_ccd_5w4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5W4.cif",
+    "ligand": "5W4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5W4": "ALL"
+    }
+  }
+}

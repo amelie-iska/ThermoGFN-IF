@@ -1,0 +1,10 @@
+{
+  "ligand_520_ccd_kfy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/KFY.cif",
+    "ligand": "KFY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KFY": "ALL"
+    }
+  }
+}

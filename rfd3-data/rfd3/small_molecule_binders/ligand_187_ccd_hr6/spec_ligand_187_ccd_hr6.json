@@ -1,0 +1,10 @@
+{
+  "ligand_187_ccd_hr6": {
+    "input": "./data/rfd3/ccd_ligands/structures/HR6.cif",
+    "ligand": "HR6",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HR6": "ALL"
+    }
+  }
+}

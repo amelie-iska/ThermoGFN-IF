@@ -1,0 +1,10 @@
+{
+  "ligand_056_ccd_m6r": {
+    "input": "./data/rfd3/ccd_ligands/structures/M6R.cif",
+    "ligand": "M6R",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "M6R": "ALL"
+    }
+  }
+}

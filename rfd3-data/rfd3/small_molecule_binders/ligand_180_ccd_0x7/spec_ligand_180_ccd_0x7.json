@@ -1,0 +1,10 @@
+{
+  "ligand_180_ccd_0x7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/0X7.cif",
+    "ligand": "0X7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0X7": "ALL"
+    }
+  }
+}

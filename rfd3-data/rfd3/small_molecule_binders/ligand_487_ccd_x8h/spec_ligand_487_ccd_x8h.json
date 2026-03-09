@@ -1,0 +1,10 @@
+{
+  "ligand_487_ccd_x8h": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/X8H.cif",
+    "ligand": "X8H",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "X8H": "ALL"
+    }
+  }
+}

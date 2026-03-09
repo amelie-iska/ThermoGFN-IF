@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.04803633689880371,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 2.458578586578369,
+        "non_loop_fraction": 0.38596491228070173,
+        "loop_fraction": 0.6140350877192983,
+        "helix_fraction": 0.0,
+        "sheet_fraction": 0.38596491228070173,
+        "num_ss_elements": 7,
+        "radius_of_gyration": 13.360427777414394,
+        "alanine_content": 0.30701754385964913,
+        "glycine_content": 0.09649122807017543,
+        "num_residues": 114,
+        "diffused_com": [
+            2.136629343032837,
+            -1.533719539642334,
+            3.5413150787353516
+        ],
+        "fixed_com": [
+            0.000247955322265625,
+            0.00042724609375,
+            7.62939453125e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/HPZ.cif",
+        "length": "20-400",
+        "ligand": "HPZ",
+        "extra": {
+            "example": "ligand_121_ccd_hpz",
+            "task_name": "spec_ligand_121_ccd_hpz_ligand_121_ccd_hpz",
+            "sampled_contig": "114",
+            "num_tokens_in": 115,
+            "num_residues_in": 115,
+            "num_chains": 2,
+            "num_atoms": 586,
+            "num_residues": 117,
+            "example_id": "spec_ligand_121_ccd_hpz_ligand_121_ccd_hpz_0"
+        },
+        "select_fixed_atoms": {
+            "HPZ": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

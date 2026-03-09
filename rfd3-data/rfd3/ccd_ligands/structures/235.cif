@@ -1,0 +1,80 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C35  . 235 L 1 1 . 1 235 L C35  ? 3.469  2.358  1.321  1 1
+HETATM C C36  . 235 L 1 1 . 1 235 L C36  ? 2.836  3.565  1.55   1 2
+HETATM C C37  . 235 L 1 1 . 1 235 L C37  ? 2.082  4.151  0.551  1 3
+HETATM C C38  . 235 L 1 1 . 1 235 L C38  ? 1.962  3.53   -0.679 1 4
+HETATM C C39  . 235 L 1 1 . 1 235 L C39  ? 2.596  2.324  -0.909 1 5
+HETATM C C34  . 235 L 1 1 . 1 235 L C34  ? 3.349  1.737  0.091  1 6
+HETATM S S32  . 235 L 1 1 . 1 235 L S32  ? 4.156  0.198  -0.201 1 7
+HETATM O O33  . 235 L 1 1 . 1 235 L O33  ? 4.324  0.095  -1.609 1 8
+HETATM O O32  . 235 L 1 1 . 1 235 L O32  ? 5.238  0.131  0.718  1 9
+HETATM N N31  . 235 L 1 1 . 1 235 L N31  ? 3.099  -1.001 0.232  1 10
+HETATM C C27  . 235 L 1 1 . 1 235 L C27  ? 1.85   -1.181 -0.512 1 11
+HETATM C C28  . 235 L 1 1 . 1 235 L C28  ? 1.9    -2.503 -1.281 1 12
+HETATM C C30  . 235 L 1 1 . 1 235 L C30  ? 0.658  -2.626 -2.165 1 13
+HETATM C C29  . 235 L 1 1 . 1 235 L C29  ? 3.155  -2.537 -2.155 1 14
+HETATM P P24  . 235 L 1 1 . 1 235 L P24  ? 0.447  -1.207 0.652  1 15
+HETATM O O25  . 235 L 1 1 . 1 235 L O25  ? 0.595  -0.105 1.628  1 16
+HETATM O O26  . 235 L 1 1 . 1 235 L O26  ? 0.423  -2.615 1.432  1 17
+HETATM C C15  . 235 L 1 1 . 1 235 L C15  ? -1.111 -0.997 -0.27  1 18
+HETATM C C1   . 235 L 1 1 . 1 235 L C1   ? -2.26  -0.769 0.715  1 19
+HETATM C C2   . 235 L 1 1 . 1 235 L C2   ? -2.619 -2.074 1.378  1 20
+HETATM O O14  . 235 L 1 1 . 1 235 L O14  ? -2.017 -3.082 1.092  1 21
+HETATM O O13  . 235 L 1 1 . 1 235 L O13  ? -3.606 -2.116 2.286  1 22
+HETATM C C3   . 235 L 1 1 . 1 235 L C3   ? -3.459 -0.236 -0.026 1 23
+HETATM C C8   . 235 L 1 1 . 1 235 L C8   ? -3.986 0.997  0.309  1 24
+HETATM C C4   . 235 L 1 1 . 1 235 L C4   ? -4.028 -0.978 -1.045 1 25
+HETATM C C5   . 235 L 1 1 . 1 235 L C5   ? -5.128 -0.488 -1.725 1 26
+HETATM C C6   . 235 L 1 1 . 1 235 L C6   ? -5.659 0.742  -1.385 1 27
+HETATM C C7   . 235 L 1 1 . 1 235 L C7   ? -5.086 1.486  -0.371 1 28
+HETATM C C9   . 235 L 1 1 . 1 235 L C9   ? -5.661 2.83   -0.005 1 29
+HETATM N N10  . 235 L 1 1 . 1 235 L N10  ? -5.01  3.876  -0.805 1 30
+HETATM H H35  . 235 L 1 1 . 1 235 L H35  ? 4.062  1.902  2.1    1 31
+HETATM H H36  . 235 L 1 1 . 1 235 L H36  ? 2.93   4.05   2.511  1 32
+HETATM H H37  . 235 L 1 1 . 1 235 L H37  ? 1.587  5.094  0.73   1 33
+HETATM H H38  . 235 L 1 1 . 1 235 L H38  ? 1.373  3.988  -1.459 1 34
+HETATM H H39  . 235 L 1 1 . 1 235 L H39  ? 2.502  1.839  -1.869 1 35
+HETATM H HN31 . 235 L 1 1 . 1 235 L HN31 ? 3.306  -1.584 0.979  1 36
+HETATM H H27  . 235 L 1 1 . 1 235 L H27  ? 1.724  -0.357 -1.215 1 37
+HETATM H H28  . 235 L 1 1 . 1 235 L H28  ? 1.927  -3.332 -0.574 1 38
+HETATM H H301 . 235 L 1 1 . 1 235 L H301 ? 0.544  -1.719 -2.76  1 39
+HETATM H H302 . 235 L 1 1 . 1 235 L H302 ? 0.768  -3.484 -2.829 1 40
+HETATM H H303 . 235 L 1 1 . 1 235 L H303 ? -0.223 -2.762 -1.538 1 41
+HETATM H H291 . 235 L 1 1 . 1 235 L H291 ? 4.041  -2.477 -1.523 1 42
+HETATM H H292 . 235 L 1 1 . 1 235 L H292 ? 3.177  -3.467 -2.723 1 43
+HETATM H H293 . 235 L 1 1 . 1 235 L H293 ? 3.141  -1.691 -2.843 1 44
+HETATM H HO26 . 235 L 1 1 . 1 235 L HO26 ? 0.418  -3.387 0.849  1 45
+HETATM H H151 . 235 L 1 1 . 1 235 L H151 ? -1.027 -0.137 -0.935 1 46
+HETATM H H152 . 235 L 1 1 . 1 235 L H152 ? -1.309 -1.893 -0.859 1 47
+HETATM H H1   . 235 L 1 1 . 1 235 L H1   ? -1.951 -0.049 1.473  1 48
+HETATM H HO13 . 235 L 1 1 . 1 235 L HO13 ? -3.8   -2.976 2.684  1 49
+HETATM H H8   . 235 L 1 1 . 1 235 L H8   ? -3.539 1.578  1.102  1 50
+HETATM H H4   . 235 L 1 1 . 1 235 L H4   ? -3.613 -1.939 -1.31  1 51
+HETATM H H5   . 235 L 1 1 . 1 235 L H5   ? -5.572 -1.067 -2.521 1 52
+HETATM H H6   . 235 L 1 1 . 1 235 L H6   ? -6.518 1.124  -1.917 1 53
+HETATM H H91  . 235 L 1 1 . 1 235 L H91  ? -6.733 2.834  -0.206 1 54
+HETATM H H92  . 235 L 1 1 . 1 235 L H92  ? -5.49  3.023  1.054  1 55
+HETATM H H101 . 235 L 1 1 . 1 235 L H101 ? -5.379 4.787  -0.579 1 56
+HETATM H H102 . 235 L 1 1 . 1 235 L H102 ? -4.008 3.851  -0.686 1 57
+#

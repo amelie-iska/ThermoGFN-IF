@@ -1,0 +1,10 @@
+{
+  "ligand_452_ccd_wvw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WVW.cif",
+    "ligand": "WVW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WVW": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_159_ccd_xxl": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XXL.cif",
+    "ligand": "XXL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XXL": "ALL"
+    }
+  }
+}

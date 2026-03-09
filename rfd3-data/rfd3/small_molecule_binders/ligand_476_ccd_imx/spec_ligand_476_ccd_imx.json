@@ -1,0 +1,10 @@
+{
+  "ligand_476_ccd_imx": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IMX.cif",
+    "ligand": "IMX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IMX": "ALL"
+    }
+  }
+}

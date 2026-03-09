@@ -1,0 +1,10 @@
+{
+  "ligand_419_ccd_gzs": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/GZS.cif",
+    "ligand": "GZS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GZS": "ALL"
+    }
+  }
+}

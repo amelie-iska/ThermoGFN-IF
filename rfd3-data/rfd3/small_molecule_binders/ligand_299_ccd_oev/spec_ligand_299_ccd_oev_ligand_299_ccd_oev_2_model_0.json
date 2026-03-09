@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.08441781997680664,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 2.286677837371826,
+        "non_loop_fraction": 0.6758620689655173,
+        "loop_fraction": 0.32413793103448274,
+        "helix_fraction": 0.5275862068965518,
+        "sheet_fraction": 0.1482758620689655,
+        "num_ss_elements": 18,
+        "radius_of_gyration": 17.361995403100316,
+        "alanine_content": 0.2206896551724138,
+        "glycine_content": 0.06206896551724138,
+        "num_residues": 290,
+        "diffused_com": [
+            -2.245025157928467,
+            -2.7373812198638916,
+            -2.146780252456665
+        ],
+        "fixed_com": [
+            -0.0023437500931322575,
+            0.0003662109375,
+            -2.441406286379788e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OEV.cif",
+        "length": "20-400",
+        "ligand": "OEV",
+        "extra": {
+            "example": "ligand_299_ccd_oev",
+            "task_name": "spec_ligand_299_ccd_oev_ligand_299_ccd_oev",
+            "sampled_contig": "290",
+            "num_tokens_in": 291,
+            "num_residues_in": 291,
+            "num_chains": 2,
+            "num_atoms": 1470,
+            "num_residues": 293,
+            "example_id": "spec_ligand_299_ccd_oev_ligand_299_ccd_oev_2"
+        },
+        "select_fixed_atoms": {
+            "OEV": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

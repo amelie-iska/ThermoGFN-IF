@@ -1,0 +1,10 @@
+{
+  "ligand_583_ccd_s51": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/S51.cif",
+    "ligand": "S51",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "S51": "ALL"
+    }
+  }
+}

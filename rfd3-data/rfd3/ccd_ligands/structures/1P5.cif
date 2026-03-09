@@ -1,0 +1,78 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N3   . 1P5 L 1 1 . 1 1P5 L N3   ? -5.013 -0.844 -0.539 1 1
+HETATM C C4   . 1P5 L 1 1 . 1 1P5 L C4   ? -6.139 -0.565 0.356  1 2
+HETATM C C5   . 1P5 L 1 1 . 1 1P5 L C5   ? -6.864 0.697  -0.114 1 3
+HETATM C C6   . 1P5 L 1 1 . 1 1P5 L C6   ? -3.821 -0.251 -0.327 1 4
+HETATM C C8   . 1P5 L 1 1 . 1 1P5 L C8   ? -3.621 0.628  0.881  1 5
+HETATM C C10  . 1P5 L 1 1 . 1 1P5 L C10  ? -3.531 -0.241 2.138  1 6
+HETATM C C15  . 1P5 L 1 1 . 1 1P5 L C15  ? -0.013 1.18   0.345  1 7
+HETATM C C17  . 1P5 L 1 1 . 1 1P5 L C17  ? 2.342  1.225  -0.076 1 8
+HETATM C C21  . 1P5 L 1 1 . 1 1P5 L C21  ? 3.641  0.545  -0.239 1 9
+HETATM C C22  . 1P5 L 1 1 . 1 1P5 L C22  ? 3.899  -0.819 -0.039 1 10
+HETATM C C24  . 1P5 L 1 1 . 1 1P5 L C24  ? 3.609  -3.053 0.451  1 11
+HETATM C C26  . 1P5 L 1 1 . 1 1P5 L C26  ? 5.764  -2.263 -0.185 1 12
+HETATM C C1   . 1P5 L 1 1 . 1 1P5 L C1   ? -5.641 -0.996 -2.897 1 13
+HETATM C C2   . 1P5 L 1 1 . 1 1P5 L C2   ? -5.181 -1.77  -1.66  1 14
+HETATM O O7   . 1P5 L 1 1 . 1 1P5 L O7   ? -2.909 -0.426 -1.107 1 15
+HETATM C C11  . 1P5 L 1 1 . 1 1P5 L C11  ? -2.313 -1.163 2.025  1 16
+HETATM C C12  . 1P5 L 1 1 . 1 1P5 L C12  ? -1.054 -0.315 1.835  1 17
+HETATM N N13  . 1P5 L 1 1 . 1 1P5 L N13  ? -1.189 0.498  0.619  1 18
+HETATM C C14  . 1P5 L 1 1 . 1 1P5 L C14  ? -2.323 1.424  0.723  1 19
+HETATM C C16  . 1P5 L 1 1 . 1 1P5 L C16  ? 1.186  0.49   0.2    1 20
+HETATM N N18  . 1P5 L 1 1 . 1 1P5 L N18  ? 2.251  2.553  -0.19  1 21
+HETATM C C19  . 1P5 L 1 1 . 1 1P5 L C19  ? 1.094  3.165  -0.051 1 22
+HETATM N N20  . 1P5 L 1 1 . 1 1P5 L N20  ? -0.017 2.506  0.211  1 23
+HETATM N N23  . 1P5 L 1 1 . 1 1P5 L N23  ? 3.119  -1.839 0.33   1 24
+HETATM C C25  . 1P5 L 1 1 . 1 1P5 L C25  ? 4.964  -3.293 0.191  1 25
+HETATM N N27  . 1P5 L 1 1 . 1 1P5 L N27  ? 5.229  -1.015 -0.301 1 26
+HETATM N N28  . 1P5 L 1 1 . 1 1P5 L N28  ? 5.787  0.217  -0.66  1 27
+HETATM C C29  . 1P5 L 1 1 . 1 1P5 L C29  ? 4.854  1.142  -0.631 1 28
+HETATM N N30  . 1P5 L 1 1 . 1 1P5 L N30  ? 5.036  2.491  -0.934 1 29
+HETATM H H4   . 1P5 L 1 1 . 1 1P5 L H4   ? -6.83  -1.407 0.344  1 30
+HETATM H H4A  . 1P5 L 1 1 . 1 1P5 L H4A  ? -5.768 -0.414 1.37   1 31
+HETATM H H5   . 1P5 L 1 1 . 1 1P5 L H5   ? -6.173 1.54   -0.101 1 32
+HETATM H H5A  . 1P5 L 1 1 . 1 1P5 L H5A  ? -7.235 0.547  -1.128 1 33
+HETATM H H5B  . 1P5 L 1 1 . 1 1P5 L H5B  ? -7.702 0.905  0.552  1 34
+HETATM H H8   . 1P5 L 1 1 . 1 1P5 L H8   ? -4.461 1.316  0.973  1 35
+HETATM H H10  . 1P5 L 1 1 . 1 1P5 L H10  ? -3.425 0.397  3.015  1 36
+HETATM H H10A . 1P5 L 1 1 . 1 1P5 L H10A ? -4.436 -0.842 2.23   1 37
+HETATM H H24  . 1P5 L 1 1 . 1 1P5 L H24  ? 2.965  -3.866 0.75   1 38
+HETATM H H26  . 1P5 L 1 1 . 1 1P5 L H26  ? 6.811  -2.431 -0.389 1 39
+HETATM H H1   . 1P5 L 1 1 . 1 1P5 L H1   ? -5.766 -1.686 -3.732 1 40
+HETATM H H1A  . 1P5 L 1 1 . 1 1P5 L H1A  ? -6.591 -0.505 -2.686 1 41
+HETATM H H1B  . 1P5 L 1 1 . 1 1P5 L H1B  ? -4.893 -0.246 -3.155 1 42
+HETATM H H2   . 1P5 L 1 1 . 1 1P5 L H2   ? -4.231 -2.262 -1.872 1 43
+HETATM H H2A  . 1P5 L 1 1 . 1 1P5 L H2A  ? -5.928 -2.521 -1.403 1 44
+HETATM H H11  . 1P5 L 1 1 . 1 1P5 L H11  ? -2.22  -1.754 2.936  1 45
+HETATM H H11A . 1P5 L 1 1 . 1 1P5 L H11A ? -2.438 -1.827 1.17   1 46
+HETATM H H12  . 1P5 L 1 1 . 1 1P5 L H12  ? -0.923 0.34   2.696  1 47
+HETATM H H12A . 1P5 L 1 1 . 1 1P5 L H12A ? -0.187 -0.969 1.74   1 48
+HETATM H H14  . 1P5 L 1 1 . 1 1P5 L H14  ? -2.378 2.034  -0.179 1 49
+HETATM H H14A . 1P5 L 1 1 . 1 1P5 L H14A ? -2.186 2.071  1.59   1 50
+HETATM H H16  . 1P5 L 1 1 . 1 1P5 L H16  ? 1.222  -0.585 0.299  1 51
+HETATM H H19  . 1P5 L 1 1 . 1 1P5 L H19  ? 1.054  4.24   -0.149 1 52
+HETATM H H25  . 1P5 L 1 1 . 1 1P5 L H25  ? 5.369  -4.29  0.289  1 53
+HETATM H HN30 . 1P5 L 1 1 . 1 1P5 L HN30 ? 4.307  3.118  -0.812 1 54
+HETATM H HN3A . 1P5 L 1 1 . 1 1P5 L HN3A ? 5.893  2.802  -1.268 1 55
+#

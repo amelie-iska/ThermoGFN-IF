@@ -1,0 +1,10 @@
+{
+  "ligand_194_ccd_a1eec": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1EEC.cif",
+    "ligand": "A1EEC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1EEC": "ALL"
+    }
+  }
+}

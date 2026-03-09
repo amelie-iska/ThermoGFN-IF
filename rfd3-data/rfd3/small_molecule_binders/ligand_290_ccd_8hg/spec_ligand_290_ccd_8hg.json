@@ -1,0 +1,10 @@
+{
+  "ligand_290_ccd_8hg": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8HG.cif",
+    "ligand": "8HG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8HG": "ALL"
+    }
+  }
+}

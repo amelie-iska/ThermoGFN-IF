@@ -1,0 +1,10 @@
+{
+  "ligand_214_ccd_a1iuz": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1IUZ.cif",
+    "ligand": "A1IUZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1IUZ": "ALL"
+    }
+  }
+}

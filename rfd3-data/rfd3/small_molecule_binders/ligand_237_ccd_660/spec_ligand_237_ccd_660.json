@@ -1,0 +1,10 @@
+{
+  "ligand_237_ccd_660": {
+    "input": "./data/rfd3/ccd_ligands/structures/660.cif",
+    "ligand": "660",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "660": "ALL"
+    }
+  }
+}

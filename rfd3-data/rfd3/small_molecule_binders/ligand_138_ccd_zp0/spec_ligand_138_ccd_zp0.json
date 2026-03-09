@@ -1,0 +1,10 @@
+{
+  "ligand_138_ccd_zp0": {
+    "input": "./data/rfd3/ccd_ligands/structures/ZP0.cif",
+    "ligand": "ZP0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZP0": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_566_ccd_32q": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/32Q.cif",
+    "ligand": "32Q",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "32Q": "ALL"
+    }
+  }
+}

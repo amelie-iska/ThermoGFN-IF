@@ -1,0 +1,10 @@
+{
+  "ligand_279_ccd_cu9": {
+    "input": "./data/rfd3/ccd_ligands/structures/CU9.cif",
+    "ligand": "CU9",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "CU9": "ALL"
+    }
+  }
+}

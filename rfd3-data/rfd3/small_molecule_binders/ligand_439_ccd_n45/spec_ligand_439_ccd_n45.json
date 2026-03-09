@@ -1,0 +1,10 @@
+{
+  "ligand_439_ccd_n45": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/N45.cif",
+    "ligand": "N45",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "N45": "ALL"
+    }
+  }
+}

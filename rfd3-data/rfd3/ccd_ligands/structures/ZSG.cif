@@ -1,0 +1,69 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1  . ZSG L 1 1 . 1 ZSG L N1  ? 3.868  -0.017 0.14   1 1
+HETATM C C7  . ZSG L 1 1 . 1 ZSG L C7  ? -0.718 -0.594 0.169  1 2
+HETATM C C8  . ZSG L 1 1 . 1 ZSG L C8  ? -2.178 -0.965 0.23   1 3
+HETATM N N2  . ZSG L 1 1 . 1 ZSG L N2  ? -2.943 0.068  -0.491 1 4
+HETATM C C9  . ZSG L 1 1 . 1 ZSG L C9  ? -2.563 1.414  -0.04  1 5
+HETATM C C1  . ZSG L 1 1 . 1 ZSG L C1  ? 8.453  1.593  0.045  1 6
+HETATM C C5  . ZSG L 1 1 . 1 ZSG L C5  ? 1.477  -0.535 0.22   1 7
+HETATM C C6  . ZSG L 1 1 . 1 ZSG L C6  ? 0.35   -1.368 0.43   1 8
+HETATM N N3  . ZSG L 1 1 . 1 ZSG L N3  ? -0.26  0.635  -0.182 1 9
+HETATM C C4  . ZSG L 1 1 . 1 ZSG L C4  ? 2.895  -0.92  0.376  1 10
+HETATM C C3  . ZSG L 1 1 . 1 ZSG L C3  ? 5.274  -0.4   0.289  1 11
+HETATM C C2  . ZSG L 1 1 . 1 ZSG L C2  ? 6.166  0.8    -0.034 1 12
+HETATM N N4  . ZSG L 1 1 . 1 ZSG L N4  ? 1.021  0.647  -0.146 1 13
+HETATM N N   . ZSG L 1 1 . 1 ZSG L N   ? 7.576  0.416  0.115  1 14
+HETATM C C   . ZSG L 1 1 . 1 ZSG L C   ? 7.959  -0.586 -0.89  1 15
+HETATM O O   . ZSG L 1 1 . 1 ZSG L O   ? 3.184  -2.05  0.717  1 16
+HETATM C C10 . ZSG L 1 1 . 1 ZSG L C10 ? -1.152 1.749  -0.537 1 17
+HETATM C C11 . ZSG L 1 1 . 1 ZSG L C11 ? -4.306 -0.136 -0.351 1 18
+HETATM C C12 . ZSG L 1 1 . 1 ZSG L C12 ? -4.882 -1.354 -0.721 1 19
+HETATM C C13 . ZSG L 1 1 . 1 ZSG L C13 ? -6.245 -1.513 -0.564 1 20
+HETATM C C14 . ZSG L 1 1 . 1 ZSG L C14 ? -6.389 0.632  0.271  1 21
+HETATM N N5  . ZSG L 1 1 . 1 ZSG L N5  ? -6.962 -0.513 -0.072 1 22
+HETATM N N6  . ZSG L 1 1 . 1 ZSG L N6  ? -7.171 1.65   0.788  1 23
+HETATM N N7  . ZSG L 1 1 . 1 ZSG L N7  ? -5.084 0.822  0.141  1 24
+HETATM H H10 . ZSG L 1 1 . 1 ZSG L H10 ? 3.637  0.885  -0.132 1 25
+HETATM H H12 . ZSG L 1 1 . 1 ZSG L H12 ? -2.331 -1.935 -0.244 1 26
+HETATM H H13 . ZSG L 1 1 . 1 ZSG L H13 ? -2.504 -1.007 1.269  1 27
+HETATM H H14 . ZSG L 1 1 . 1 ZSG L H14 ? -3.27  2.142  -0.438 1 28
+HETATM H H15 . ZSG L 1 1 . 1 ZSG L H15 ? -2.582 1.451  1.049  1 29
+HETATM H H5  . ZSG L 1 1 . 1 ZSG L H5  ? 8.193  2.287  0.844  1 30
+HETATM H H3  . ZSG L 1 1 . 1 ZSG L H3  ? 9.491  1.28   0.159  1 31
+HETATM H H4  . ZSG L 1 1 . 1 ZSG L H4  ? 8.325  2.084  -0.919 1 32
+HETATM H H11 . ZSG L 1 1 . 1 ZSG L H11 ? 0.349  -2.404 0.735  1 33
+HETATM H H8  . ZSG L 1 1 . 1 ZSG L H8  ? 5.456  -0.722 1.315  1 34
+HETATM H H9  . ZSG L 1 1 . 1 ZSG L H9  ? 5.502  -1.218 -0.394 1 35
+HETATM H H6  . ZSG L 1 1 . 1 ZSG L H6  ? 5.984  1.122  -1.06  1 36
+HETATM H H7  . ZSG L 1 1 . 1 ZSG L H7  ? 5.938  1.617  0.649  1 37
+HETATM H H1  . ZSG L 1 1 . 1 ZSG L H1  ? 8.986  -0.904 -0.712 1 38
+HETATM H H   . ZSG L 1 1 . 1 ZSG L H   ? 7.294  -1.446 -0.816 1 39
+HETATM H H2  . ZSG L 1 1 . 1 ZSG L H2  ? 7.88   -0.15  -1.885 1 40
+HETATM H H16 . ZSG L 1 1 . 1 ZSG L H16 ? -1.165 1.877  -1.62  1 41
+HETATM H H17 . ZSG L 1 1 . 1 ZSG L H17 ? -0.803 2.665  -0.062 1 42
+HETATM H H18 . ZSG L 1 1 . 1 ZSG L H18 ? -4.275 -2.153 -1.12  1 43
+HETATM H H19 . ZSG L 1 1 . 1 ZSG L H19 ? -6.721 -2.441 -0.84  1 44
+HETATM H H20 . ZSG L 1 1 . 1 ZSG L H20 ? -6.763 2.489  1.05   1 45
+HETATM H H21 . ZSG L 1 1 . 1 ZSG L H21 ? -8.128 1.523  0.888  1 46
+#

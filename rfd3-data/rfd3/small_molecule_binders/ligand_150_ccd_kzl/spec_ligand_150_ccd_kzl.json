@@ -1,0 +1,10 @@
+{
+  "ligand_150_ccd_kzl": {
+    "input": "./data/rfd3/ccd_ligands/structures/KZL.cif",
+    "ligand": "KZL",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KZL": "ALL"
+    }
+  }
+}

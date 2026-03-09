@@ -1,0 +1,10 @@
+{
+  "ligand_036_ccd_bfe": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BFE.cif",
+    "ligand": "BFE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BFE": "ALL"
+    }
+  }
+}

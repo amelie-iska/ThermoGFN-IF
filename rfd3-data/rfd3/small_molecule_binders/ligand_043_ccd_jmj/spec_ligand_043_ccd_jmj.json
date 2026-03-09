@@ -1,0 +1,10 @@
+{
+  "ligand_043_ccd_jmj": {
+    "input": "./data/rfd3/ccd_ligands/structures/JMJ.cif",
+    "ligand": "JMJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "JMJ": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_387_ccd_bc8": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BC8.cif",
+    "ligand": "BC8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BC8": "ALL"
+    }
+  }
+}

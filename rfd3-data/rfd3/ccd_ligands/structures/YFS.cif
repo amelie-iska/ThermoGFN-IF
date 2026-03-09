@@ -1,0 +1,66 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C13 . YFS L 1 1 . 1 YFS L C13 ? 2.616  -0.278 -0.151 1 1
+HETATM C C18 . YFS L 1 1 . 1 YFS L C18 ? 6.181  -0.383 -0.71  1 2
+HETATM C C16 . YFS L 1 1 . 1 YFS L C16 ? 4.07   -0.534 -0.217 1 3
+HETATM C C15 . YFS L 1 1 . 1 YFS L C15 ? 0.356  -1.077 -0.312 1 4
+HETATM C C20 . YFS L 1 1 . 1 YFS L C20 ? 4.746  -1.532 0.408  1 5
+HETATM C C22 . YFS L 1 1 . 1 YFS L C22 ? 2.46   3.311  0.632  1 6
+HETATM C C11 . YFS L 1 1 . 1 YFS L C11 ? 0.779  1.243  0.186  1 7
+HETATM C C12 . YFS L 1 1 . 1 YFS L C12 ? 2.141  1.009  0.131  1 8
+HETATM N N1  . YFS L 1 1 . 1 YFS L N1  ? -4.357 -1.172 1.675  1 9
+HETATM C C2  . YFS L 1 1 . 1 YFS L C2  ? -3.78  -0.221 0.716  1 10
+HETATM C C3  . YFS L 1 1 . 1 YFS L C3  ? -4.492 -0.36  -0.631 1 11
+HETATM C C4  . YFS L 1 1 . 1 YFS L C4  ? -5.957 0.056  -0.479 1 12
+HETATM C C5  . YFS L 1 1 . 1 YFS L C5  ? -6.031 1.545  -0.134 1 13
+HETATM C C6  . YFS L 1 1 . 1 YFS L C6  ? -6.698 -0.2   -1.793 1 14
+HETATM C C7  . YFS L 1 1 . 1 YFS L C7  ? -2.312 -0.512 0.54   1 15
+HETATM O O8  . YFS L 1 1 . 1 YFS L O8  ? -1.869 -1.599 0.844  1 16
+HETATM N N9  . YFS L 1 1 . 1 YFS L N9  ? -1.491 0.436  0.047  1 17
+HETATM C C10 . YFS L 1 1 . 1 YFS L C10 ? -0.114 0.201  -0.026 1 18
+HETATM C C14 . YFS L 1 1 . 1 YFS L C14 ? 1.712  -1.318 -0.374 1 19
+HETATM O O17 . YFS L 1 1 . 1 YFS L O17 ? 4.981  0.176  -0.918 1 20
+HETATM N N19 . YFS L 1 1 . 1 YFS L N19 ? 6.042  -1.406 0.084  1 21
+HETATM O O21 . YFS L 1 1 . 1 YFS L O21 ? 3.016  2.025  0.35   1 22
+HETATM H H39 . YFS L 1 1 . 1 YFS L H39 ? 7.114  -0.042 -1.135 1 23
+HETATM H H38 . YFS L 1 1 . 1 YFS L H38 ? -0.343 -1.882 -0.485 1 24
+HETATM H H40 . YFS L 1 1 . 1 YFS L H40 ? 4.319  -2.286 1.053  1 25
+HETATM H H41 . YFS L 1 1 . 1 YFS L H41 ? 1.847  3.253  1.531  1 26
+HETATM H H42 . YFS L 1 1 . 1 YFS L H42 ? 3.265  4.029  0.786  1 27
+HETATM H H43 . YFS L 1 1 . 1 YFS L H43 ? 1.842  3.631  -0.208 1 28
+HETATM H H36 . YFS L 1 1 . 1 YFS L H36 ? 0.409  2.233  0.408  1 29
+HETATM H H25 . YFS L 1 1 . 1 YFS L H25 ? -5.325 -0.957 1.859  1 30
+HETATM H H24 . YFS L 1 1 . 1 YFS L H24 ? -4.252 -2.121 1.35   1 31
+HETATM H H23 . YFS L 1 1 . 1 YFS L H23 ? -3.907 0.795  1.09   1 32
+HETATM H H26 . YFS L 1 1 . 1 YFS L H26 ? -4.006 0.282  -1.367 1 33
+HETATM H H27 . YFS L 1 1 . 1 YFS L H27 ? -4.441 -1.397 -0.964 1 34
+HETATM H H28 . YFS L 1 1 . 1 YFS L H28 ? -6.418 -0.525 0.318  1 35
+HETATM H H31 . YFS L 1 1 . 1 YFS L H31 ? -5.569 2.126  -0.932 1 36
+HETATM H H30 . YFS L 1 1 . 1 YFS L H30 ? -7.074 1.841  -0.026 1 37
+HETATM H H29 . YFS L 1 1 . 1 YFS L H29 ? -5.502 1.728  0.801  1 38
+HETATM H H33 . YFS L 1 1 . 1 YFS L H33 ? -6.646 -1.261 -2.039 1 39
+HETATM H H34 . YFS L 1 1 . 1 YFS L H34 ? -7.742 0.096  -1.685 1 40
+HETATM H H32 . YFS L 1 1 . 1 YFS L H32 ? -6.236 0.381  -2.591 1 41
+HETATM H H35 . YFS L 1 1 . 1 YFS L H35 ? -1.855 1.282  -0.258 1 42
+HETATM H H37 . YFS L 1 1 . 1 YFS L H37 ? 2.074  -2.311 -0.596 1 43
+#

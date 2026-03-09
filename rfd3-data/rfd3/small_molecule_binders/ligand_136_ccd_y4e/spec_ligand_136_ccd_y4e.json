@@ -1,0 +1,10 @@
+{
+  "ligand_136_ccd_y4e": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/Y4E.cif",
+    "ligand": "Y4E",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Y4E": "ALL"
+    }
+  }
+}

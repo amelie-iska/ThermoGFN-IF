@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.7766048908233643,
+        "n_chainbreaks": 1,
+        "n_clashing.interresidue_clashes_w_sidechain": 1,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.2162227630615234,
+        "non_loop_fraction": 0.6,
+        "loop_fraction": 0.4,
+        "helix_fraction": 0.4523076923076923,
+        "sheet_fraction": 0.1476923076923077,
+        "num_ss_elements": 18,
+        "radius_of_gyration": 17.858240803491842,
+        "alanine_content": 0.3169230769230769,
+        "glycine_content": 0.09538461538461539,
+        "num_residues": 325,
+        "diffused_com": [
+            3.4543867111206055,
+            -0.7277336120605469,
+            -0.7335875034332275
+        ],
+        "fixed_com": [
+            -0.000244140625,
+            -0.00054931640625,
+            3.0517578125e-05
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RZK.cif",
+        "length": "20-400",
+        "ligand": "RZK",
+        "extra": {
+            "example": "ligand_123_ccd_rzk",
+            "task_name": "spec_ligand_123_ccd_rzk_ligand_123_ccd_rzk",
+            "sampled_contig": "325",
+            "num_tokens_in": 326,
+            "num_residues_in": 326,
+            "num_chains": 2,
+            "num_atoms": 1641,
+            "num_residues": 328,
+            "example_id": "spec_ligand_123_ccd_rzk_ligand_123_ccd_rzk_1"
+        },
+        "select_fixed_atoms": {
+            "RZK": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

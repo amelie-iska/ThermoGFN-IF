@@ -1,0 +1,10 @@
+{
+  "ligand_158_ccd_nqs": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/NQS.cif",
+    "ligand": "NQS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NQS": "ALL"
+    }
+  }
+}

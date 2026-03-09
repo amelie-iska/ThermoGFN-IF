@@ -1,0 +1,10 @@
+{
+  "ligand_084_ccd_tek": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/TEK.cif",
+    "ligand": "TEK",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "TEK": "ALL"
+    }
+  }
+}

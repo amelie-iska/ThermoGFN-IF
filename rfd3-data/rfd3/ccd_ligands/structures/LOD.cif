@@ -1,0 +1,75 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C1  . LOD L 1 1 . 1 LOD L C1  ? 3.516  -1.182 0.713  1 1
+HETATM C  C2  . LOD L 1 1 . 1 LOD L C2  ? 4.726  -0.573 0.444  1 2
+HETATM C  C3  . LOD L 1 1 . 1 LOD L C3  ? 4.788  0.65   -0.212 1 3
+HETATM C  C7  . LOD L 1 1 . 1 LOD L C7  ? -2.887 0.126  -0.341 1 4
+HETATM C  C8  . LOD L 1 1 . 1 LOD L C8  ? -3.924 0.767  0.352  1 5
+HETATM C  C9  . LOD L 1 1 . 1 LOD L C9  ? -3.631 1.671  1.374  1 6
+HETATM C  C10 . LOD L 1 1 . 1 LOD L C10 ? -2.317 1.941  1.693  1 7
+HETATM C  C11 . LOD L 1 1 . 1 LOD L C11 ? 0.691  2.368  0.306  1 8
+HETATM C  C12 . LOD L 1 1 . 1 LOD L C12 ? 0.2    0.658  -1.552 1 9
+HETATM C  C13 . LOD L 1 1 . 1 LOD L C13 ? -1.572 0.386  -0.003 1 10
+HETATM C  C14 . LOD L 1 1 . 1 LOD L C14 ? -1.296 1.306  1.002  1 11
+HETATM C  C15 . LOD L 1 1 . 1 LOD L C15 ? 1.253  1.492  -0.805 1 12
+HETATM C  C16 . LOD L 1 1 . 1 LOD L C16 ? -5.327 0.484  -0.005 1 13
+HETATM C  C19 . LOD L 1 1 . 1 LOD L C19 ? -1.196 -2.552 -0.216 1 14
+HETATM C  C20 . LOD L 1 1 . 1 LOD L C20 ? -2.682 -2.561 0.181  1 15
+HETATM C  C21 . LOD L 1 1 . 1 LOD L C21 ? -2.58  -4.095 0.225  1 16
+HETATM C  C22 . LOD L 1 1 . 1 LOD L C22 ? 3.343  2.531  -1.283 1 17
+HETATM N  N1  . LOD L 1 1 . 1 LOD L N1  ? -0.506 -0.252 -0.65  1 18
+HETATM O  O1  . LOD L 1 1 . 1 LOD L O1  ? 0.003  1.592  1.295  1 19
+HETATM O  O2  . LOD L 1 1 . 1 LOD L O2  ? -6.327 1.098  0.657  1 20
+HETATM O  O3  . LOD L 1 1 . 1 LOD L O3  ? -5.581 -0.302 -0.896 1 21
+HETATM C  C17 . LOD L 1 1 . 1 LOD L C17 ? -0.853 -1.517 -1.288 1 22
+HETATM C  C18 . LOD L 1 1 . 1 LOD L C18 ? -1.418 -3.968 -0.774 1 23
+HETATM C  C4  . LOD L 1 1 . 1 LOD L C4  ? 3.586  1.234  -0.578 1 24
+HETATM C  C5  . LOD L 1 1 . 1 LOD L C5  ? 2.365  0.625  -0.302 1 25
+HETATM C  C6  . LOD L 1 1 . 1 LOD L C6  ? 2.31   -0.597 0.353  1 26
+HETATM CL CL1 . LOD L 1 1 . 1 LOD L CL1 ? 6.197  -1.35  0.936  1 27
+HETATM C  C23 . LOD L 1 1 . 1 LOD L C23 ? 1.924  2.404  -1.85  1 28
+HETATM H  H1  . LOD L 1 1 . 1 LOD L H1  ? 3.508  -2.135 1.221  1 29
+HETATM H  H2  . LOD L 1 1 . 1 LOD L H2  ? 5.734  1.127  -0.426 1 30
+HETATM H  H3  . LOD L 1 1 . 1 LOD L H3  ? -3.153 -0.544 -1.144 1 31
+HETATM H  H4  . LOD L 1 1 . 1 LOD L H4  ? -4.429 2.156  1.916  1 32
+HETATM H  H5  . LOD L 1 1 . 1 LOD L H5  ? -2.086 2.642  2.481  1 33
+HETATM H  H6  . LOD L 1 1 . 1 LOD L H6  ? 1.51   2.906  0.787  1 34
+HETATM H  H7  . LOD L 1 1 . 1 LOD L H7  ? -0.002 3.092  -0.124 1 35
+HETATM H  H8  . LOD L 1 1 . 1 LOD L H8  ? -0.517 1.333  -2.017 1 36
+HETATM H  H9  . LOD L 1 1 . 1 LOD L H9  ? 0.7    0.079  -2.329 1 37
+HETATM H  H10 . LOD L 1 1 . 1 LOD L H10 ? -0.518 -2.52  0.637  1 38
+HETATM H  H11 . LOD L 1 1 . 1 LOD L H11 ? -2.878 -2.108 1.153  1 39
+HETATM H  H12 . LOD L 1 1 . 1 LOD L H12 ? -3.345 -2.19  -0.601 1 40
+HETATM H  H13 . LOD L 1 1 . 1 LOD L H13 ? -2.28  -4.484 1.197  1 41
+HETATM H  H14 . LOD L 1 1 . 1 LOD L H14 ? -3.454 -4.602 -0.184 1 42
+HETATM H  H15 . LOD L 1 1 . 1 LOD L H15 ? 3.403  3.363  -0.582 1 43
+HETATM H  H16 . LOD L 1 1 . 1 LOD L H16 ? 4.064  2.664  -2.09  1 44
+HETATM H  H17 . LOD L 1 1 . 1 LOD L H17 ? -7.23  0.88   0.388  1 45
+HETATM H  H18 . LOD L 1 1 . 1 LOD L H18 ? -0.007 -1.871 -1.877 1 46
+HETATM H  H19 . LOD L 1 1 . 1 LOD L H19 ? -1.713 -1.37  -1.941 1 47
+HETATM H  H20 . LOD L 1 1 . 1 LOD L H20 ? -1.735 -3.981 -1.817 1 48
+HETATM H  H21 . LOD L 1 1 . 1 LOD L H21 ? -0.592 -4.65  -0.572 1 49
+HETATM H  H22 . LOD L 1 1 . 1 LOD L H22 ? 1.37   -1.076 0.58   1 50
+HETATM H  H23 . LOD L 1 1 . 1 LOD L H23 ? 1.934  1.927  -2.83  1 51
+HETATM H  H24 . LOD L 1 1 . 1 LOD L H24 ? 1.428  3.374  -1.893 1 52
+#

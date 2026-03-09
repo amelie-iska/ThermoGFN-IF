@@ -1,0 +1,10 @@
+{
+  "ligand_394_ccd_kk2": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/KK2.cif",
+    "ligand": "KK2",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KK2": "ALL"
+    }
+  }
+}

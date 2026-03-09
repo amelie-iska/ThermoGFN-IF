@@ -1,0 +1,10 @@
+{
+  "ligand_495_ccd_rna": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RNA.cif",
+    "ligand": "RNA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RNA": "ALL"
+    }
+  }
+}

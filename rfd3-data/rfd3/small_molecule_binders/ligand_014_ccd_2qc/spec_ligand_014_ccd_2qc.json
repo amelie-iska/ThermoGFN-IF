@@ -1,0 +1,10 @@
+{
+  "ligand_014_ccd_2qc": {
+    "input": "./data/rfd3/ccd_ligands/structures/2QC.cif",
+    "ligand": "2QC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2QC": "ALL"
+    }
+  }
+}

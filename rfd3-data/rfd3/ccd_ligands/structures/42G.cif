@@ -1,0 +1,82 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C01 . 42G L 1 1 . 1 42G L C01 ? -7.59   -0.022 0.04   1 1
+HETATM C C02 . 42G L 1 1 . 1 42G L C02 ? -6.913  -0.315 1.209  1 2
+HETATM C C03 . 42G L 1 1 . 1 42G L C03 ? -5.586  0.049  1.349  1 3
+HETATM C C04 . 42G L 1 1 . 1 42G L C04 ? -4.937  0.706  0.32   1 4
+HETATM C C05 . 42G L 1 1 . 1 42G L C05 ? -5.614  0.998  -0.849 1 5
+HETATM C C06 . 42G L 1 1 . 1 42G L C06 ? -6.938  0.629  -0.992 1 6
+HETATM S S07 . 42G L 1 1 . 1 42G L S07 ? -9.28   -0.484 -0.139 1 7
+HETATM O O08 . 42G L 1 1 . 1 42G L O08 ? -9.527  -0.573 -1.536 1 8
+HETATM O O09 . 42G L 1 1 . 1 42G L O09 ? -9.498  -1.564 0.759  1 9
+HETATM N N10 . 42G L 1 1 . 1 42G L N10 ? -10.196 0.778  0.418  1 10
+HETATM C C11 . 42G L 1 1 . 1 42G L C11 ? -3.491  1.103  0.474  1 11
+HETATM C C12 . 42G L 1 1 . 1 42G L C12 ? -2.595  -0.032 -0.027 1 12
+HETATM N N13 . 42G L 1 1 . 1 42G L N13 ? -1.19   0.354  0.122  1 13
+HETATM C C14 . 42G L 1 1 . 1 42G L C14 ? -0.214  -0.495 -0.257 1 14
+HETATM O O15 . 42G L 1 1 . 1 42G L O15 ? -0.5    -1.581 -0.722 1 15
+HETATM C C16 . 42G L 1 1 . 1 42G L C16 ? 1.202   -0.105 -0.106 1 16
+HETATM C C17 . 42G L 1 1 . 1 42G L C17 ? 1.533   1.14   0.433  1 17
+HETATM C C18 . 42G L 1 1 . 1 42G L C18 ? 2.855   1.497  0.577  1 18
+HETATM C C19 . 42G L 1 1 . 1 42G L C19 ? 3.86    0.62   0.186  1 19
+HETATM C C20 . 42G L 1 1 . 1 42G L C20 ? 3.535   -0.62  -0.351 1 20
+HETATM C C21 . 42G L 1 1 . 1 42G L C21 ? 2.215   -0.984 -0.498 1 21
+HETATM O O22 . 42G L 1 1 . 1 42G L O22 ? 5.162   0.976  0.329  1 22
+HETATM C C23 . 42G L 1 1 . 1 42G L C23 ? 6.144   0.027  -0.093 1 23
+HETATM C C24 . 42G L 1 1 . 1 42G L C24 ? 7.542   0.601  0.144  1 24
+HETATM O O25 . 42G L 1 1 . 1 42G L O25 ? 7.736   1.743  -0.692 1 25
+HETATM C C26 . 42G L 1 1 . 1 42G L C26 ? 8.592   -0.461 -0.191 1 26
+HETATM N N27 . 42G L 1 1 . 1 42G L N27 ? 9.928   0.047  0.15   1 27
+HETATM C C28 . 42G L 1 1 . 1 42G L C28 ? 10.964  -0.947 -0.159 1 28
+HETATM C C29 . 42G L 1 1 . 1 42G L C29 ? 12.298  -0.237 -0.397 1 29
+HETATM C C30 . 42G L 1 1 . 1 42G L C30 ? 11.105  -1.917 1.016  1 30
+HETATM H H1  . 42G L 1 1 . 1 42G L H1  ? -7.42   -0.827 2.013  1 31
+HETATM H H2  . 42G L 1 1 . 1 42G L H2  ? -5.057  -0.179 2.263  1 32
+HETATM H H3  . 42G L 1 1 . 1 42G L H3  ? -5.107  1.511  -1.653 1 33
+HETATM H H4  . 42G L 1 1 . 1 42G L H4  ? -7.467  0.858  -1.905 1 34
+HETATM H H5  . 42G L 1 1 . 1 42G L H5  ? -9.764  1.578  0.757  1 35
+HETATM H H6  . 42G L 1 1 . 1 42G L H6  ? -11.164 0.719  0.404  1 36
+HETATM H H7  . 42G L 1 1 . 1 42G L H7  ? -3.298  2.003  -0.11  1 37
+HETATM H H8  . 42G L 1 1 . 1 42G L H8  ? -3.278  1.298  1.525  1 38
+HETATM H H9  . 42G L 1 1 . 1 42G L H9  ? -2.788  -0.932 0.556  1 39
+HETATM H H10 . 42G L 1 1 . 1 42G L H10 ? -2.809  -0.227 -1.078 1 40
+HETATM H H11 . 42G L 1 1 . 1 42G L H11 ? -0.962  1.221  0.493  1 41
+HETATM H H12 . 42G L 1 1 . 1 42G L H12 ? 0.753   1.822  0.737  1 42
+HETATM H H13 . 42G L 1 1 . 1 42G L H13 ? 3.112   2.46   0.994  1 43
+HETATM H H14 . 42G L 1 1 . 1 42G L H14 ? 4.319   -1.298 -0.654 1 44
+HETATM H H15 . 42G L 1 1 . 1 42G L H15 ? 1.964   -1.95  -0.912 1 45
+HETATM H H16 . 42G L 1 1 . 1 42G L H16 ? 6.027   -0.894 0.478  1 46
+HETATM H H17 . 42G L 1 1 . 1 42G L H17 ? 6.012   -0.184 -1.154 1 47
+HETATM H H18 . 42G L 1 1 . 1 42G L H18 ? 7.642   0.894  1.189  1 48
+HETATM H H19 . 42G L 1 1 . 1 42G L H19 ? 7.661   1.556  -1.638 1 49
+HETATM H H20 . 42G L 1 1 . 1 42G L H20 ? 8.39    -1.365 0.384  1 50
+HETATM H H21 . 42G L 1 1 . 1 42G L H21 ? 8.551   -0.69  -1.255 1 51
+HETATM H H22 . 42G L 1 1 . 1 42G L H22 ? 10.113  0.92   -0.321 1 52
+HETATM H H24 . 42G L 1 1 . 1 42G L H24 ? 10.681  -1.5   -1.054 1 53
+HETATM H H25 . 42G L 1 1 . 1 42G L H25 ? 12.58   0.316  0.498  1 54
+HETATM H H26 . 42G L 1 1 . 1 42G L H26 ? 13.066  -0.975 -0.626 1 55
+HETATM H H27 . 42G L 1 1 . 1 42G L H27 ? 12.197  0.454  -1.234 1 56
+HETATM H H28 . 42G L 1 1 . 1 42G L H28 ? 10.155  -2.423 1.186  1 57
+HETATM H H29 . 42G L 1 1 . 1 42G L H29 ? 11.874  -2.655 0.787  1 58
+HETATM H H30 . 42G L 1 1 . 1 42G L H30 ? 11.388  -1.364 1.912  1 59
+#

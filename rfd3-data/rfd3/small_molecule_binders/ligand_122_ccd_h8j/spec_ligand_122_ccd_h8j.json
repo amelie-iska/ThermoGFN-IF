@@ -1,0 +1,10 @@
+{
+  "ligand_122_ccd_h8j": {
+    "input": "./data/rfd3/ccd_ligands/structures/H8J.cif",
+    "ligand": "H8J",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "H8J": "ALL"
+    }
+  }
+}

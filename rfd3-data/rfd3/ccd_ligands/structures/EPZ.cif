@@ -1,0 +1,98 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . EPZ L 1 1 . 1 EPZ L C1   ? -4.31  1.284  -0.457 1 1
+HETATM O O1   . EPZ L 1 1 . 1 EPZ L O1   ? -2.891 1.167  -0.344 1 2
+HETATM C C2   . EPZ L 1 1 . 1 EPZ L C2   ? -4.97  -0.003 0.045  1 3
+HETATM N N2   . EPZ L 1 1 . 1 EPZ L N2   ? -4.562 -0.256 1.429  1 4
+HETATM C C3   . EPZ L 1 1 . 1 EPZ L C3   ? -4.529 -1.173 -0.84  1 5
+HETATM O O3   . EPZ L 1 1 . 1 EPZ L O3   ? -5.197 -2.366 -0.425 1 6
+HETATM C C4   . EPZ L 1 1 . 1 EPZ L C4   ? -4.892 -0.862 -2.296 1 7
+HETATM O O4   . EPZ L 1 1 . 1 EPZ L O4   ? -4.42  -1.914 -3.141 1 8
+HETATM C C5   . EPZ L 1 1 . 1 EPZ L C5   ? -4.235 0.458  -2.707 1 9
+HETATM O O5   . EPZ L 1 1 . 1 EPZ L O5   ? -4.664 1.497  -1.825 1 10
+HETATM C C6   . EPZ L 1 1 . 1 EPZ L C6   ? -4.641 0.805  -4.141 1 11
+HETATM O O6   . EPZ L 1 1 . 1 EPZ L O6   ? -3.938 1.975  -4.565 1 12
+HETATM C C7   . EPZ L 1 1 . 1 EPZ L C7   ? -5.249 0.3    2.446  1 13
+HETATM O O7   . EPZ L 1 1 . 1 EPZ L O7   ? -6.205 1.01   2.216  1 14
+HETATM C C8   . EPZ L 1 1 . 1 EPZ L C8   ? -4.829 0.041  3.87   1 15
+HETATM P PA   . EPZ L 1 1 . 1 EPZ L PA   ? 0.908  2.556  0.775  1 16
+HETATM P PB   . EPZ L 1 1 . 1 EPZ L PB   ? -1.924 2.429  -0.091 1 17
+HETATM O O1A  . EPZ L 1 1 . 1 EPZ L O1A  ? 0.556  3.181  2.07   1 18
+HETATM O O1B  . EPZ L 1 1 . 1 EPZ L O1B  ? -1.989 3.417  -1.361 1 19
+HETATM C C1D  . EPZ L 1 1 . 1 EPZ L C1D  ? 5.609  -0.94  0.647  1 20
+HETATM C C1E  . EPZ L 1 1 . 1 EPZ L C1E  ? -5.297 -4.009 1.317  1 21
+HETATM O O1E  . EPZ L 1 1 . 1 EPZ L O1E  ? -4.761 -4.809 2.253  1 22
+HETATM N N1U  . EPZ L 1 1 . 1 EPZ L N1U  ? 6.462  -1.004 -0.543 1 23
+HETATM O O2A  . EPZ L 1 1 . 1 EPZ L O2A  ? 1.516  3.673  -0.212 1 24
+HETATM O O2B  . EPZ L 1 1 . 1 EPZ L O2B  ? -2.365 3.154  1.121  1 25
+HETATM C C2D  . EPZ L 1 1 . 1 EPZ L C2D  ? 6.385  -0.33  1.836  1 26
+HETATM O O2D  . EPZ L 1 1 . 1 EPZ L O2D  ? 6.883  -1.361 2.691  1 27
+HETATM C C2E  . EPZ L 1 1 . 1 EPZ L C2E  ? -4.401 -3.222 0.397  1 28
+HETATM O O2E  . EPZ L 1 1 . 1 EPZ L O2E  ? -6.498 -3.921 1.213  1 29
+HETATM C C2U  . EPZ L 1 1 . 1 EPZ L C2U  ? 6.751  -2.197 -1.092 1 30
+HETATM O O2U  . EPZ L 1 1 . 1 EPZ L O2U  ? 6.301  -3.211 -0.595 1 31
+HETATM O O3A  . EPZ L 1 1 . 1 EPZ L O3A  ? -0.412 1.915  0.112  1 32
+HETATM C C3D  . EPZ L 1 1 . 1 EPZ L C3D  ? 5.33   0.523  2.575  1 33
+HETATM O O3D  . EPZ L 1 1 . 1 EPZ L O3D  ? 5.145  0.045  3.908  1 34
+HETATM C C3E  . EPZ L 1 1 . 1 EPZ L C3E  ? -3.607 -4.184 -0.488 1 35
+HETATM N N3U  . EPZ L 1 1 . 1 EPZ L N3U  ? 7.531  -2.284 -2.186 1 36
+HETATM C C4D  . EPZ L 1 1 . 1 EPZ L C4D  ? 4.042  0.328  1.745  1 37
+HETATM O O4D  . EPZ L 1 1 . 1 EPZ L O4D  ? 4.504  -0.038 0.427  1 38
+HETATM C C4U  . EPZ L 1 1 . 1 EPZ L C4U  ? 8.038  -1.169 -2.75  1 39
+HETATM O O4U  . EPZ L 1 1 . 1 EPZ L O4U  ? 8.744  -1.247 -3.739 1 40
+HETATM C C5D  . EPZ L 1 1 . 1 EPZ L C5D  ? 3.243  1.631  1.687  1 41
+HETATM O O5D  . EPZ L 1 1 . 1 EPZ L O5D  ? 2.002  1.4    1.017  1 42
+HETATM C C5U  . EPZ L 1 1 . 1 EPZ L C5U  ? 7.741  0.093  -2.181 1 43
+HETATM C C6U  . EPZ L 1 1 . 1 EPZ L C6U  ? 6.951  0.152  -1.087 1 44
+HETATM H H1   . EPZ L 1 1 . 1 EPZ L H1   ? -4.654 2.126  0.143  1 45
+HETATM H H2   . EPZ L 1 1 . 1 EPZ L H2   ? -6.054 0.101  -0.003 1 46
+HETATM H HN2  . EPZ L 1 1 . 1 EPZ L HN2  ? -3.797 -0.823 1.613  1 47
+HETATM H H3   . EPZ L 1 1 . 1 EPZ L H3   ? -3.451 -1.309 -0.754 1 48
+HETATM H H4   . EPZ L 1 1 . 1 EPZ L H4   ? -5.974 -0.777 -2.391 1 49
+HETATM H HO4  . EPZ L 1 1 . 1 EPZ L HO4  ? -4.615 -1.783 -4.078 1 50
+HETATM H H5   . EPZ L 1 1 . 1 EPZ L H5   ? -3.151 0.358  -2.651 1 51
+HETATM H H6   . EPZ L 1 1 . 1 EPZ L H6   ? -4.394 -0.026 -4.8   1 52
+HETATM H H6A  . EPZ L 1 1 . 1 EPZ L H6A  ? -5.714 0.993  -4.178 1 53
+HETATM H HO6  . EPZ L 1 1 . 1 EPZ L HO6  ? -4.147 2.254  -5.467 1 54
+HETATM H H8   . EPZ L 1 1 . 1 EPZ L H8   ? -4.111 0.799  4.181  1 55
+HETATM H H8A  . EPZ L 1 1 . 1 EPZ L H8A  ? -5.703 0.08   4.52   1 56
+HETATM H H8B  . EPZ L 1 1 . 1 EPZ L H8B  ? -4.369 -0.945 3.939  1 57
+HETATM H HO1B . EPZ L 1 1 . 1 EPZ L HO1B ? -1.713 3.008  -2.193 1 58
+HETATM H H1D  . EPZ L 1 1 . 1 EPZ L H1D  ? 5.243  -1.934 0.904  1 59
+HETATM H HO1E . EPZ L 1 1 . 1 EPZ L HO1E ? -5.376 -5.294 2.821  1 60
+HETATM H HO2A . EPZ L 1 1 . 1 EPZ L HO2A ? 1.77   3.334  -1.081 1 61
+HETATM H H2D  . EPZ L 1 1 . 1 EPZ L H2D  ? 7.201  0.297  1.477  1 62
+HETATM H HO2D . EPZ L 1 1 . 1 EPZ L HO2D ? 7.379  -1.034 3.454  1 63
+HETATM H H2E  . EPZ L 1 1 . 1 EPZ L H2E  ? -3.712 -2.619 0.988  1 64
+HETATM H H3D  . EPZ L 1 1 . 1 EPZ L H3D  ? 5.626  1.572  2.583  1 65
+HETATM H HO3D . EPZ L 1 1 . 1 EPZ L HO3D ? 5.94   0.089  4.456  1 66
+HETATM H H3E  . EPZ L 1 1 . 1 EPZ L H3E  ? -4.295 -4.843 -1.018 1 67
+HETATM H H3EA . EPZ L 1 1 . 1 EPZ L H3EA ? -3.021 -3.615 -1.21  1 68
+HETATM H H3EB . EPZ L 1 1 . 1 EPZ L H3EB ? -2.939 -4.781 0.132  1 69
+HETATM H H4D  . EPZ L 1 1 . 1 EPZ L H4D  ? 3.435  -0.472 2.17   1 70
+HETATM H H5D  . EPZ L 1 1 . 1 EPZ L H5D  ? 3.049  1.984  2.7    1 71
+HETATM H H5DA . EPZ L 1 1 . 1 EPZ L H5DA ? 3.815  2.384  1.144  1 72
+HETATM H H5U  . EPZ L 1 1 . 1 EPZ L H5U  ? 8.138  0.997  -2.619 1 73
+HETATM H H6U  . EPZ L 1 1 . 1 EPZ L H6U  ? 6.714  1.106  -0.64  1 74
+HETATM H HN3U . EPZ L 1 1 . 1 EPZ L HN3U ? 7.73   -3.152 -2.569 1 75
+#

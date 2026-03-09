@@ -1,0 +1,10 @@
+{
+  "ligand_402_ccd_w40": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/W40.cif",
+    "ligand": "W40",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "W40": "ALL"
+    }
+  }
+}

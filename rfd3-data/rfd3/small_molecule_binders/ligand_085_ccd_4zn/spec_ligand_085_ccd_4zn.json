@@ -1,0 +1,10 @@
+{
+  "ligand_085_ccd_4zn": {
+    "input": "./data/rfd3/ccd_ligands/structures/4ZN.cif",
+    "ligand": "4ZN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4ZN": "ALL"
+    }
+  }
+}

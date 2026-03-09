@@ -1,0 +1,10 @@
+{
+  "ligand_190_ccd_xg5": {
+    "input": "./data/rfd3/ccd_ligands/structures/XG5.cif",
+    "ligand": "XG5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XG5": "ALL"
+    }
+  }
+}

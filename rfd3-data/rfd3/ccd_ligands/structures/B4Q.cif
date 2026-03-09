@@ -1,0 +1,78 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . B4Q L 1 1 . 1 B4Q L C1  ? -4.924 1.763  1.172  1 1
+HETATM N N1  . B4Q L 1 1 . 1 B4Q L N1  ? 5.548  1.304  -0.64  1 2
+HETATM C C2  . B4Q L 1 1 . 1 B4Q L C2  ? -5.896 0.872  0.441  1 3
+HETATM N N2  . B4Q L 1 1 . 1 B4Q L N2  ? 5.265  -0.323 0.786  1 4
+HETATM C C3  . B4Q L 1 1 . 1 B4Q L C3  ? -7.248 1.147  0.479  1 5
+HETATM C C4  . B4Q L 1 1 . 1 B4Q L C4  ? -8.141 0.33   -0.191 1 6
+HETATM C C5  . B4Q L 1 1 . 1 B4Q L C5  ? -7.685 -0.765 -0.902 1 7
+HETATM C C6  . B4Q L 1 1 . 1 B4Q L C6  ? -6.335 -1.049 -0.946 1 8
+HETATM C C7  . B4Q L 1 1 . 1 B4Q L C7  ? -5.431 -0.227 -0.278 1 9
+HETATM C C8  . B4Q L 1 1 . 1 B4Q L C8  ? -3.977 -0.523 -0.328 1 10
+HETATM C C9  . B4Q L 1 1 . 1 B4Q L C9  ? -3.272 -0.366 -1.52  1 11
+HETATM C C10 . B4Q L 1 1 . 1 B4Q L C10 ? -1.921 -0.643 -1.561 1 12
+HETATM C C11 . B4Q L 1 1 . 1 B4Q L C11 ? -1.266 -1.076 -0.421 1 13
+HETATM C C12 . B4Q L 1 1 . 1 B4Q L C12 ? 0.209  -1.377 -0.472 1 14
+HETATM C C13 . B4Q L 1 1 . 1 B4Q L C13 ? 2.414  -0.418 -0.19  1 15
+HETATM C C14 . B4Q L 1 1 . 1 B4Q L C14 ? 3.17   0.868  0.15   1 16
+HETATM C C15 . B4Q L 1 1 . 1 B4Q L C15 ? 4.653  0.605  0.11   1 17
+HETATM C C16 . B4Q L 1 1 . 1 B4Q L C16 ? 6.794  0.758  -0.406 1 18
+HETATM C C17 . B4Q L 1 1 . 1 B4Q L C17 ? 8.073  1.032  -0.872 1 19
+HETATM C C18 . B4Q L 1 1 . 1 B4Q L C18 ? 9.138  0.278  -0.428 1 20
+HETATM C C19 . B4Q L 1 1 . 1 B4Q L C19 ? 8.94   -0.752 0.481  1 21
+HETATM C C20 . B4Q L 1 1 . 1 B4Q L C20 ? 7.689  -1.036 0.95   1 22
+HETATM C C21 . B4Q L 1 1 . 1 B4Q L C21 ? 6.595  -0.285 0.515  1 23
+HETATM C C22 . B4Q L 1 1 . 1 B4Q L C22 ? -1.961 -1.233 0.764  1 24
+HETATM C C23 . B4Q L 1 1 . 1 B4Q L C23 ? -3.312 -0.954 0.817  1 25
+HETATM C C24 . B4Q L 1 1 . 1 B4Q L C24 ? -4.068 -1.125 2.11   1 26
+HETATM C C   . B4Q L 1 1 . 1 B4Q L C   ? -4.386 2.826  0.212  1 27
+HETATM N N   . B4Q L 1 1 . 1 B4Q L N   ? 0.969  -0.162 -0.15  1 28
+HETATM H H1  . B4Q L 1 1 . 1 B4Q L H1  ? -5.432 2.248  2.005  1 29
+HETATM H H2  . B4Q L 1 1 . 1 B4Q L H2  ? -4.096 1.163  1.55   1 30
+HETATM H H3  . B4Q L 1 1 . 1 B4Q L H3  ? 5.347  2.046  -1.232 1 31
+HETATM H H5  . B4Q L 1 1 . 1 B4Q L H5  ? -7.609 2.001  1.033  1 32
+HETATM H H6  . B4Q L 1 1 . 1 B4Q L H6  ? -9.198 0.548  -0.158 1 33
+HETATM H H7  . B4Q L 1 1 . 1 B4Q L H7  ? -8.387 -1.399 -1.423 1 34
+HETATM H H8  . B4Q L 1 1 . 1 B4Q L H8  ? -5.981 -1.905 -1.502 1 35
+HETATM H H9  . B4Q L 1 1 . 1 B4Q L H9  ? -3.782 -0.028 -2.41  1 36
+HETATM H H10 . B4Q L 1 1 . 1 B4Q L H10 ? -1.373 -0.522 -2.484 1 37
+HETATM H H11 . B4Q L 1 1 . 1 B4Q L H11 ? 0.446  -2.157 0.252  1 38
+HETATM H H12 . B4Q L 1 1 . 1 B4Q L H12 ? 0.477  -1.718 -1.472 1 39
+HETATM H H13 . B4Q L 1 1 . 1 B4Q L H13 ? 2.697  -0.752 -1.188 1 40
+HETATM H H14 . B4Q L 1 1 . 1 B4Q L H14 ? 2.667  -1.19  0.537  1 41
+HETATM H H15 . B4Q L 1 1 . 1 B4Q L H15 ? 2.918  1.641  -0.576 1 42
+HETATM H H16 . B4Q L 1 1 . 1 B4Q L H16 ? 2.888  1.202  1.149  1 43
+HETATM H H17 . B4Q L 1 1 . 1 B4Q L H17 ? 8.233  1.832  -1.58  1 44
+HETATM H H18 . B4Q L 1 1 . 1 B4Q L H18 ? 10.133 0.489  -0.79  1 45
+HETATM H H19 . B4Q L 1 1 . 1 B4Q L H19 ? 9.783  -1.335 0.821  1 46
+HETATM H H20 . B4Q L 1 1 . 1 B4Q L H20 ? 7.546  -1.84  1.658  1 47
+HETATM H H21 . B4Q L 1 1 . 1 B4Q L H21 ? -1.446 -1.572 1.65   1 48
+HETATM H H22 . B4Q L 1 1 . 1 B4Q L H22 ? -3.957 -0.227 2.717  1 49
+HETATM H H23 . B4Q L 1 1 . 1 B4Q L H23 ? -5.124 -1.29  1.894  1 50
+HETATM H H24 . B4Q L 1 1 . 1 B4Q L H24 ? -3.67  -1.982 2.653  1 51
+HETATM H H25 . B4Q L 1 1 . 1 B4Q L H25 ? -5.214 3.426  -0.166 1 52
+HETATM H H26 . B4Q L 1 1 . 1 B4Q L H26 ? -3.684 3.47   0.741  1 53
+HETATM H H27 . B4Q L 1 1 . 1 B4Q L H27 ? -3.879 2.341  -0.621 1 54
+HETATM H H28 . B4Q L 1 1 . 1 B4Q L H28 ? 0.692  0.211  0.746  1 55
+#

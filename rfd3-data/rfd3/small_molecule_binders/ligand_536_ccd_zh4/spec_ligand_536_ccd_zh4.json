@@ -1,0 +1,10 @@
+{
+  "ligand_536_ccd_zh4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZH4.cif",
+    "ligand": "ZH4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZH4": "ALL"
+    }
+  }
+}

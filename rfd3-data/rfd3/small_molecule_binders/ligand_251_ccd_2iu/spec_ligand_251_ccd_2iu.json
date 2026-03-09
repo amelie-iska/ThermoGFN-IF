@@ -1,0 +1,10 @@
+{
+  "ligand_251_ccd_2iu": {
+    "input": "./data/rfd3/ccd_ligands/structures/2IU.cif",
+    "ligand": "2IU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2IU": "ALL"
+    }
+  }
+}

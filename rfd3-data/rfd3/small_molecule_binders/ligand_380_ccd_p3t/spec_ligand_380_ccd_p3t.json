@@ -1,0 +1,10 @@
+{
+  "ligand_380_ccd_p3t": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/P3T.cif",
+    "ligand": "P3T",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "P3T": "ALL"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N  N    . 44Z L 1 1 . 1 44Z L N    ? 0.716  -1.786 -1.655 1 1
+HETATM C  C1   . 44Z L 1 1 . 1 44Z L C1   ? -1.176 3.966  -1.569 1 2
+HETATM O  O1   . 44Z L 1 1 . 1 44Z L O1   ? -2.165 4.102  -2.257 1 3
+HETATM N  N1   . 44Z L 1 1 . 1 44Z L N1   ? -0.375 5.017  -1.39  1 4
+HETATM C  C2   . 44Z L 1 1 . 1 44Z L C2   ? 0.886  4.982  -0.663 1 5
+HETATM C  C3   . 44Z L 1 1 . 1 44Z L C3   ? 0.922  3.796  0.303  1 6
+HETATM N  N2   . 44Z L 1 1 . 1 44Z L N2   ? 0.46   2.6    -0.422 1 7
+HETATM C  C4   . 44Z L 1 1 . 1 44Z L C4   ? -0.912 2.62   -0.95  1 8
+HETATM C  C5   . 44Z L 1 1 . 1 44Z L C5   ? 1.262  1.53   -0.593 1 9
+HETATM O  O5   . 44Z L 1 1 . 1 44Z L O5   ? 2.444  1.607  -0.323 1 10
+HETATM N  N3   . 44Z L 1 1 . 1 44Z L N3   ? 0.752  0.375  -1.065 1 11
+HETATM C  C6   . 44Z L 1 1 . 1 44Z L C6   ? 1.427  -0.821 -1.171 1 12
+HETATM C  C7   . 44Z L 1 1 . 1 44Z L C7   ? -0.641 -1.314 -1.958 1 13
+HETATM C  C8   . 44Z L 1 1 . 1 44Z L C8   ? -0.622 0.174  -1.554 1 14
+HETATM C  CG1  . 44Z L 1 1 . 1 44Z L CG1  ? -1.621 0.439  -0.457 1 15
+HETATM C  CD1  . 44Z L 1 1 . 1 44Z L CD1  ? -1.343 0.047  0.84   1 16
+HETATM C  CE1  . 44Z L 1 1 . 1 44Z L CE1  ? -2.259 0.29   1.846  1 17
+HETATM C  CZ1  . 44Z L 1 1 . 1 44Z L CZ1  ? -3.453 0.925  1.556  1 18
+HETATM CL CL   . 44Z L 1 1 . 1 44Z L CL   ? -4.603 1.231  2.82   1 19
+HETATM C  CE2  . 44Z L 1 1 . 1 44Z L CE2  ? -3.73  1.318  0.259  1 20
+HETATM C  CD2  . 44Z L 1 1 . 1 44Z L CD2  ? -2.811 1.079  -0.746 1 21
+HETATM C  CG2  . 44Z L 1 1 . 1 44Z L CG2  ? -1.658 -2.069 -1.142 1 22
+HETATM C  CD3  . 44Z L 1 1 . 1 44Z L CD3  ? -1.382 -2.398 0.173  1 23
+HETATM C  CE3  . 44Z L 1 1 . 1 44Z L CE3  ? -2.312 -3.091 0.925  1 24
+HETATM C  CZ2  . 44Z L 1 1 . 1 44Z L CZ2  ? -3.521 -3.456 0.364  1 25
+HETATM C  CE4  . 44Z L 1 1 . 1 44Z L CE4  ? -3.801 -3.127 -0.954 1 26
+HETATM O  O4   . 44Z L 1 1 . 1 44Z L O4   ? -4.989 -3.486 -1.508 1 27
+HETATM C  CD4  . 44Z L 1 1 . 1 44Z L CD4  ? -2.867 -2.428 -1.705 1 28
+HETATM C  CG3  . 44Z L 1 1 . 1 44Z L CG3  ? 2.838  -0.986 -0.768 1 29
+HETATM C  CD5  . 44Z L 1 1 . 1 44Z L CD5  ? 3.784  -1.431 -1.694 1 30
+HETATM C  CE5  . 44Z L 1 1 . 1 44Z L CE5  ? 5.099  -1.584 -1.315 1 31
+HETATM C  CZ3  . 44Z L 1 1 . 1 44Z L CZ3  ? 5.489  -1.297 -0.012 1 32
+HETATM C  CE6  . 44Z L 1 1 . 1 44Z L CE6  ? 4.557  -0.854 0.915  1 33
+HETATM C  CD6  . 44Z L 1 1 . 1 44Z L CD6  ? 3.234  -0.692 0.543  1 34
+HETATM O  O6   . 44Z L 1 1 . 1 44Z L O6   ? 2.321  -0.259 1.449  1 35
+HETATM C  C9   . 44Z L 1 1 . 1 44Z L C9   ? 2.773  -0.083 2.793  1 36
+HETATM C  CM2  . 44Z L 1 1 . 1 44Z L CM2  ? 1.872  0.927  3.507  1 37
+HETATM C  CM3  . 44Z L 1 1 . 1 44Z L CM3  ? 2.719  -1.424 3.529  1 38
+HETATM O  O3   . 44Z L 1 1 . 1 44Z L O3   ? 6.788  -1.451 0.354  1 39
+HETATM C  CM1  . 44Z L 1 1 . 1 44Z L CM1  ? 7.695  -1.911 -0.65  1 40
+HETATM C  CM4  . 44Z L 1 1 . 1 44Z L CM4  ? -5.904 -4.2   -0.674 1 41
+HETATM H  H1   . 44Z L 1 1 . 1 44Z L H1   ? -0.652 5.865  -1.772 1 42
+HETATM H  H21  . 44Z L 1 1 . 1 44Z L H21  ? 1.707  4.893  -1.373 1 43
+HETATM H  H22  . 44Z L 1 1 . 1 44Z L H22  ? 1.0    5.907  -0.098 1 44
+HETATM H  H32  . 44Z L 1 1 . 1 44Z L H32  ? 1.942  3.641  0.656  1 45
+HETATM H  H31  . 44Z L 1 1 . 1 44Z L H31  ? 0.264  3.99   1.15   1 46
+HETATM H  H42  . 44Z L 1 1 . 1 44Z L H42  ? -1.619 2.447  -0.138 1 47
+HETATM H  H41  . 44Z L 1 1 . 1 44Z L H41  ? -1.024 1.843  -1.706 1 48
+HETATM H  H7   . 44Z L 1 1 . 1 44Z L H7   ? -0.854 -1.419 -3.022 1 49
+HETATM H  H8   . 44Z L 1 1 . 1 44Z L H8   ? -0.82  0.809  -2.417 1 50
+HETATM H  HD1  . 44Z L 1 1 . 1 44Z L HD1  ? -0.411 -0.449 1.066  1 51
+HETATM H  HE1  . 44Z L 1 1 . 1 44Z L HE1  ? -2.042 -0.017 2.859  1 52
+HETATM H  HE2  . 44Z L 1 1 . 1 44Z L HE2  ? -4.662 1.813  0.032  1 53
+HETATM H  HD2  . 44Z L 1 1 . 1 44Z L HD2  ? -3.026 1.389  -1.758 1 54
+HETATM H  HD3  . 44Z L 1 1 . 1 44Z L HD3  ? -0.437 -2.114 0.613  1 55
+HETATM H  HE3  . 44Z L 1 1 . 1 44Z L HE3  ? -2.094 -3.347 1.951  1 56
+HETATM H  HZ2  . 44Z L 1 1 . 1 44Z L HZ2  ? -4.247 -3.998 0.952  1 57
+HETATM H  HD4  . 44Z L 1 1 . 1 44Z L HD4  ? -3.084 -2.166 -2.73  1 58
+HETATM H  HD5  . 44Z L 1 1 . 1 44Z L HD5  ? 3.484  -1.656 -2.707 1 59
+HETATM H  HE5  . 44Z L 1 1 . 1 44Z L HE5  ? 5.829  -1.929 -2.033 1 60
+HETATM H  HE6  . 44Z L 1 1 . 1 44Z L HE6  ? 4.865  -0.633 1.926  1 61
+HETATM H  H9   . 44Z L 1 1 . 1 44Z L H9   ? 3.798  0.286  2.786  1 62
+HETATM H  HM23 . 44Z L 1 1 . 1 44Z L HM23 ? 2.217  1.06   4.532  1 63
+HETATM H  HM21 . 44Z L 1 1 . 1 44Z L HM21 ? 1.91   1.882  2.983  1 64
+HETATM H  HM22 . 44Z L 1 1 . 1 44Z L HM22 ? 0.846  0.557  3.514  1 65
+HETATM H  HM33 . 44Z L 1 1 . 1 44Z L HM33 ? 1.694  -1.793 3.535  1 66
+HETATM H  HM32 . 44Z L 1 1 . 1 44Z L HM32 ? 3.361  -2.143 3.02   1 67
+HETATM H  HM31 . 44Z L 1 1 . 1 44Z L HM31 ? 3.064  -1.29  4.554  1 68
+HETATM H  HM12 . 44Z L 1 1 . 1 44Z L HM12 ? 7.374  -2.888 -1.009 1 69
+HETATM H  HM13 . 44Z L 1 1 . 1 44Z L HM13 ? 7.707  -1.204 -1.48  1 70
+HETATM H  HM11 . 44Z L 1 1 . 1 44Z L HM11 ? 8.696  -1.99  -0.226 1 71
+HETATM H  HM43 . 44Z L 1 1 . 1 44Z L HM43 ? -6.81  -4.424 -1.237 1 72
+HETATM H  HM42 . 44Z L 1 1 . 1 44Z L HM42 ? -5.443 -5.13  -0.342 1 73
+HETATM H  HM41 . 44Z L 1 1 . 1 44Z L HM41 ? -6.157 -3.59  0.193  1 74
+#

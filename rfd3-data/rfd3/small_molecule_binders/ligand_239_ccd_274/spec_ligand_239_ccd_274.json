@@ -1,0 +1,10 @@
+{
+  "ligand_239_ccd_274": {
+    "input": "./data/rfd3/ccd_ligands/structures/274.cif",
+    "ligand": "274",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "274": "ALL"
+    }
+  }
+}

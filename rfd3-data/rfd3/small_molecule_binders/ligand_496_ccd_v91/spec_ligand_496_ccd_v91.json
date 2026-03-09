@@ -1,0 +1,10 @@
+{
+  "ligand_496_ccd_v91": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V91.cif",
+    "ligand": "V91",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V91": "ALL"
+    }
+  }
+}

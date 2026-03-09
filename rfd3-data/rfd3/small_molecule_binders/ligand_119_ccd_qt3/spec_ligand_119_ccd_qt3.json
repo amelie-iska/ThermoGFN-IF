@@ -1,0 +1,10 @@
+{
+  "ligand_119_ccd_qt3": {
+    "input": "./data/rfd3/ccd_ligands/structures/QT3.cif",
+    "ligand": "QT3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QT3": "ALL"
+    }
+  }
+}

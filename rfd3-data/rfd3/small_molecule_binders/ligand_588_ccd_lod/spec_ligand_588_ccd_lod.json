@@ -1,0 +1,10 @@
+{
+  "ligand_588_ccd_lod": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/LOD.cif",
+    "ligand": "LOD",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "LOD": "ALL"
+    }
+  }
+}

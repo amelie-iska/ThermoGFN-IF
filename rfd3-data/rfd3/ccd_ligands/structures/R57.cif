@@ -1,0 +1,64 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM F FAU . R57 L 1 1 . 1 R57 L FAU ? -5.932 0.772  2.226  1 1
+HETATM C CAU . R57 L 1 1 . 1 R57 L CAU ? -5.216 0.86   1.083  1 2
+HETATM C CAV . R57 L 1 1 . 1 R57 L CAV ? -5.868 0.99   -0.137 1 3
+HETATM O OAW . R57 L 1 1 . 1 R57 L OAW ? -7.226 1.028  -0.184 1 4
+HETATM C CAX . R57 L 1 1 . 1 R57 L CAX ? -7.827 1.163  -1.473 1 5
+HETATM C CAY . R57 L 1 1 . 1 R57 L CAY ? -5.13  1.08   -1.308 1 6
+HETATM C CAZ . R57 L 1 1 . 1 R57 L CAZ ? -3.749 1.041  -1.258 1 7
+HETATM C CAT . R57 L 1 1 . 1 R57 L CAT ? -3.835 0.827  1.127  1 8
+HETATM C CAS . R57 L 1 1 . 1 R57 L CAS ? -3.102 0.912  -0.043 1 9
+HETATM C CAR . R57 L 1 1 . 1 R57 L CAR ? -1.597 0.876  0.007  1 10
+HETATM N NAQ . R57 L 1 1 . 1 R57 L NAQ ? -1.138 -0.512 -0.094 1 11
+HETATM C CAP . R57 L 1 1 . 1 R57 L CAP ? 0.214  -0.796 -0.07  1 12
+HETATM C CAC . R57 L 1 1 . 1 R57 L CAC ? 0.642  -2.144 -0.059 1 13
+HETATM C CAB . R57 L 1 1 . 1 R57 L CAB ? -0.365 -3.227 -0.072 1 14
+HETATM O OAA . R57 L 1 1 . 1 R57 L OAA ? 0.025  -4.51  0.055  1 15
+HETATM O OBA . R57 L 1 1 . 1 R57 L OBA ? -1.543 -2.959 -0.196 1 16
+HETATM N NAD . R57 L 1 1 . 1 R57 L NAD ? 1.926  -2.451 -0.037 1 17
+HETATM C CAE . R57 L 1 1 . 1 R57 L CAE ? 2.836  -1.477 -0.025 1 18
+HETATM C CAF . R57 L 1 1 . 1 R57 L CAF ? 4.216  -1.753 -0.002 1 19
+HETATM C CAG . R57 L 1 1 . 1 R57 L CAG ? 5.104  -0.722 0.009  1 20
+HETATM N NAO . R57 L 1 1 . 1 R57 L NAO ? 1.087  0.194  -0.064 1 21
+HETATM C CAN . R57 L 1 1 . 1 R57 L CAN ? 2.395  -0.08  -0.037 1 22
+HETATM C CAM . R57 L 1 1 . 1 R57 L CAM ? 3.364  0.936  -0.025 1 23
+HETATM C CAH . R57 L 1 1 . 1 R57 L CAH ? 4.684  0.605  -0.003 1 24
+HETATM C CAI . R57 L 1 1 . 1 R57 L CAI ? 5.716  1.703  0.01   1 25
+HETATM F FAJ . R57 L 1 1 . 1 R57 L FAJ ? 5.537  2.498  1.147  1 26
+HETATM F FAK . R57 L 1 1 . 1 R57 L FAK ? 6.996  1.138  0.032  1 27
+HETATM F FAL . R57 L 1 1 . 1 R57 L FAL ? 5.574  2.49   -1.137 1 28
+HETATM H H1  . R57 L 1 1 . 1 R57 L H1  ? -8.912 1.181  -1.368 1 29
+HETATM H H2  . R57 L 1 1 . 1 R57 L H2  ? -7.492 2.091  -1.935 1 30
+HETATM H H3  . R57 L 1 1 . 1 R57 L H3  ? -7.537 0.319  -2.099 1 31
+HETATM H H4  . R57 L 1 1 . 1 R57 L H4  ? -5.634 1.18   -2.257 1 32
+HETATM H H5  . R57 L 1 1 . 1 R57 L H5  ? -3.175 1.111  -2.17  1 33
+HETATM H H6  . R57 L 1 1 . 1 R57 L H6  ? -3.327 0.731  2.076  1 34
+HETATM H H7  . R57 L 1 1 . 1 R57 L H7  ? -1.191 1.454  -0.823 1 35
+HETATM H H8  . R57 L 1 1 . 1 R57 L H8  ? -1.254 1.304  0.949  1 36
+HETATM H H9  . R57 L 1 1 . 1 R57 L H9  ? -1.784 -1.231 -0.178 1 37
+HETATM H H10 . R57 L 1 1 . 1 R57 L H10 ? -0.67  -5.183 0.041  1 38
+HETATM H H11 . R57 L 1 1 . 1 R57 L H11 ? 4.567  -2.774 0.007  1 39
+HETATM H H12 . R57 L 1 1 . 1 R57 L H12 ? 6.162  -0.94  0.026  1 40
+HETATM H H13 . R57 L 1 1 . 1 R57 L H13 ? 3.063  1.974  -0.033 1 41
+#

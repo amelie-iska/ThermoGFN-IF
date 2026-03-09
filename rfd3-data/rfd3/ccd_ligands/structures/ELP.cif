@@ -1,0 +1,71 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C3   . ELP L 1 1 . 1 ELP L C3   ? 2.737  -0.065 0.235  1 1
+HETATM C C2   . ELP L 1 1 . 1 ELP L C2   ? 3.811  -0.248 1.094  1 2
+HETATM N N1   . ELP L 1 1 . 1 ELP L N1   ? 3.631  -0.292 2.398  1 3
+HETATM C C6   . ELP L 1 1 . 1 ELP L C6   ? 2.438  -0.172 2.947  1 4
+HETATM C C4   . ELP L 1 1 . 1 ELP L C4   ? 1.448  0.06   0.778  1 5
+HETATM C C4A  . ELP L 1 1 . 1 ELP L C4A  ? 0.272  0.249  -0.092 1 6
+HETATM N N2   . ELP L 1 1 . 1 ELP L N2   ? 0.419  0.296  -1.376 1 7
+HETATM C C    . ELP L 1 1 . 1 ELP L C    ? -0.748 0.484  -2.241 1 8
+HETATM C CA1  . ELP L 1 1 . 1 ELP L CA1  ? -1.428 1.811  -1.898 1 9
+HETATM C CA2  . ELP L 1 1 . 1 ELP L CA2  ? -0.308 0.503  -3.682 1 10
+HETATM P P2   . ELP L 1 1 . 1 ELP L P2   ? -1.922 -0.885 -1.982 1 11
+HETATM O O6   . ELP L 1 1 . 1 ELP L O6   ? -2.295 -0.952 -0.551 1 12
+HETATM O O7   . ELP L 1 1 . 1 ELP L O7   ? -3.243 -0.634 -2.869 1 13
+HETATM O O8   . ELP L 1 1 . 1 ELP L O8   ? -1.235 -2.272 -2.423 1 14
+HETATM O O1   . ELP L 1 1 . 1 ELP L O1   ? 2.928  -0.02  -1.108 1 15
+HETATM C C2A  . ELP L 1 1 . 1 ELP L C2A  ? 5.201  -0.391 0.529  1 16
+HETATM C C5   . ELP L 1 1 . 1 ELP L C5   ? 1.312  0.006  2.17   1 17
+HETATM C C5A  . ELP L 1 1 . 1 ELP L C5A  ? -0.044 0.141  2.811  1 18
+HETATM O O2   . ELP L 1 1 . 1 ELP L O2   ? 0.088  0.053  4.231  1 19
+HETATM P P1   . ELP L 1 1 . 1 ELP L P1   ? -1.391 0.205  4.847  1 20
+HETATM O O3   . ELP L 1 1 . 1 ELP L O3   ? -2.254 -0.88  4.332  1 21
+HETATM O O4   . ELP L 1 1 . 1 ELP L O4   ? -1.315 0.115  6.453  1 22
+HETATM O O5   . ELP L 1 1 . 1 ELP L O5   ? -2.007 1.629  4.419  1 23
+HETATM C CB2  . ELP L 1 1 . 1 ELP L CB2  ? -1.091 1.126  -4.636 1 24
+HETATM C CG2  . ELP L 1 1 . 1 ELP L CG2  ? -0.687 1.143  -5.958 1 25
+HETATM C CD   . ELP L 1 1 . 1 ELP L CD   ? 0.499  0.538  -6.326 1 26
+HETATM C CG1  . ELP L 1 1 . 1 ELP L CG1  ? 1.283  -0.083 -5.372 1 27
+HETATM C CB1  . ELP L 1 1 . 1 ELP L CB1  ? 0.881  -0.097 -4.049 1 28
+HETATM H HC6  . ELP L 1 1 . 1 ELP L HC6  ? 2.341  -0.214 4.022  1 29
+HETATM H H4A  . ELP L 1 1 . 1 ELP L H4A  ? -0.711 0.348  0.342  1 30
+HETATM H HA11 . ELP L 1 1 . 1 ELP L HA11 ? -0.725 2.63   -2.053 1 31
+HETATM H HA12 . ELP L 1 1 . 1 ELP L HA12 ? -2.297 1.951  -2.541 1 32
+HETATM H HA13 . ELP L 1 1 . 1 ELP L HA13 ? -1.746 1.797  -0.856 1 33
+HETATM H HO7  . ELP L 1 1 . 1 ELP L HO7  ? -3.836 -1.379 -2.703 1 34
+HETATM H HO8  . ELP L 1 1 . 1 ELP L HO8  ? -1.008 -2.186 -3.36  1 35
+HETATM H HO1  . ELP L 1 1 . 1 ELP L HO1  ? 3.076  0.907  -1.338 1 36
+HETATM H H2A1 . ELP L 1 1 . 1 ELP L H2A1 ? 5.409  -1.444 0.341  1 37
+HETATM H H2A2 . ELP L 1 1 . 1 ELP L H2A2 ? 5.272  0.165  -0.405 1 38
+HETATM H H2A3 . ELP L 1 1 . 1 ELP L H2A3 ? 5.925  0.0    1.242  1 39
+HETATM H H5A1 . ELP L 1 1 . 1 ELP L H5A1 ? -0.477 1.106  2.546  1 40
+HETATM H H5A2 . ELP L 1 1 . 1 ELP L H5A2 ? -0.695 -0.657 2.457  1 41
+HETATM H HO4  . ELP L 1 1 . 1 ELP L HO4  ? -2.22  0.21   6.781  1 42
+HETATM H HO5  . ELP L 1 1 . 1 ELP L HO5  ? -1.416 2.308  4.773  1 43
+HETATM H HB2  . ELP L 1 1 . 1 ELP L HB2  ? -2.018 1.599  -4.348 1 44
+HETATM H HG2  . ELP L 1 1 . 1 ELP L HG2  ? -1.299 1.629  -6.703 1 45
+HETATM H HCD  . ELP L 1 1 . 1 ELP L HCD  ? 0.814  0.551  -7.359 1 46
+HETATM H HG1  . ELP L 1 1 . 1 ELP L HG1  ? 2.21   -0.557 -5.66  1 47
+HETATM H HB1  . ELP L 1 1 . 1 ELP L HB1  ? 1.493  -0.583 -3.304 1 48
+#

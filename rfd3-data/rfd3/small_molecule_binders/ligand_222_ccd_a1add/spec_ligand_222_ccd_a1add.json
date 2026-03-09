@@ -1,0 +1,10 @@
+{
+  "ligand_222_ccd_a1add": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1ADD.cif",
+    "ligand": "A1ADD",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1ADD": "ALL"
+    }
+  }
+}

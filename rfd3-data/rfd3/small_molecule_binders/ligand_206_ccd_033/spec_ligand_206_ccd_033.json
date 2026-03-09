@@ -1,0 +1,10 @@
+{
+  "ligand_206_ccd_033": {
+    "input": "./data/rfd3/ccd_ligands/structures/033.cif",
+    "ligand": "033",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "033": "ALL"
+    }
+  }
+}

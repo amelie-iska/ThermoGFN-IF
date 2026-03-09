@@ -1,0 +1,10 @@
+{
+  "ligand_268_ccd_a1d48": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1D48.cif",
+    "ligand": "A1D48",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1D48": "ALL"
+    }
+  }
+}

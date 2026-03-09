@@ -1,0 +1,10 @@
+{
+  "ligand_001_ccd_12q": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/12Q.cif",
+    "ligand": "12Q",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "12Q": "ALL"
+    }
+  }
+}

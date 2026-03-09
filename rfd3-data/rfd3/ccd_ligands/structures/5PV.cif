@@ -1,0 +1,50 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . 5PV L 1 1 . 1 5PV L C1   ? 0.003  0.442  -2.111 1 1
+HETATM C C2   . 5PV L 1 1 . 1 5PV L C2   ? -1.195 0.193  -2.752 1 2
+HETATM C C3   . 5PV L 1 1 . 1 5PV L C3   ? -1.199 -0.322 -4.034 1 3
+HETATM C C4   . 5PV L 1 1 . 1 5PV L C4   ? -0.004 -0.589 -4.676 1 4
+HETATM C C5   . 5PV L 1 1 . 1 5PV L C5   ? 1.194  -0.339 -4.035 1 5
+HETATM C C6   . 5PV L 1 1 . 1 5PV L C6   ? 1.198  0.181  -2.754 1 6
+HETATM C C7   . 5PV L 1 1 . 1 5PV L C7   ? 0.007  1.005  -0.713 1 7
+HETATM C C8   . 5PV L 1 1 . 1 5PV L C8   ? -0.001 -0.141 0.298  1 8
+HETATM C C9   . 5PV L 1 1 . 1 5PV L C9   ? 0.003  0.429  1.717  1 9
+HETATM C C10  . 5PV L 1 1 . 1 5PV L C10  ? -0.005 -0.718 2.729  1 10
+HETATM C C11  . 5PV L 1 1 . 1 5PV L C11  ? -0.001 -0.155 4.127  1 11
+HETATM O O1   . 5PV L 1 1 . 1 5PV L O1   ? -0.007 -0.982 5.184  1 12
+HETATM O O2   . 5PV L 1 1 . 1 5PV L O2   ? 0.007  1.041  4.297  1 13
+HETATM H H2   . 5PV L 1 1 . 1 5PV L H2   ? -2.129 0.401  -2.251 1 14
+HETATM H H3   . 5PV L 1 1 . 1 5PV L H3   ? -2.136 -0.518 -4.535 1 15
+HETATM H H4   . 5PV L 1 1 . 1 5PV L H4   ? -0.007 -0.993 -5.677 1 16
+HETATM H H5   . 5PV L 1 1 . 1 5PV L H5   ? 2.128  -0.547 -4.536 1 17
+HETATM H H6   . 5PV L 1 1 . 1 5PV L H6   ? 2.135  0.376  -2.253 1 18
+HETATM H H71  . 5PV L 1 1 . 1 5PV L H71  ? -0.878 1.624  -0.568 1 19
+HETATM H H72  . 5PV L 1 1 . 1 5PV L H72  ? 0.901  1.611  -0.568 1 20
+HETATM H H81  . 5PV L 1 1 . 1 5PV L H81  ? 0.884  -0.76  0.153  1 21
+HETATM H H82  . 5PV L 1 1 . 1 5PV L H82  ? -0.895 -0.747 0.153  1 22
+HETATM H H91  . 5PV L 1 1 . 1 5PV L H91  ? -0.882 1.048  1.863  1 23
+HETATM H H92  . 5PV L 1 1 . 1 5PV L H92  ? 0.897  1.035  1.863  1 24
+HETATM H H101 . 5PV L 1 1 . 1 5PV L H101 ? 0.88   -1.337 2.584  1 25
+HETATM H H102 . 5PV L 1 1 . 1 5PV L H102 ? -0.899 -1.323 2.584  1 26
+HETATM H HO1  . 5PV L 1 1 . 1 5PV L HO1  ? -0.004 -0.621 6.081  1 27
+#

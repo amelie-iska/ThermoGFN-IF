@@ -1,0 +1,10 @@
+{
+  "ligand_210_ccd_qh8": {
+    "input": "./data/rfd3/ccd_ligands/structures/QH8.cif",
+    "ligand": "QH8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "QH8": "ALL"
+    }
+  }
+}

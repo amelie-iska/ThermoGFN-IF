@@ -1,0 +1,10 @@
+{
+  "ligand_269_ccd_ph1": {
+    "input": "./data/rfd3/ccd_ligands/structures/PH1.cif",
+    "ligand": "PH1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "PH1": "ALL"
+    }
+  }
+}

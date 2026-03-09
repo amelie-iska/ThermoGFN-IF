@@ -1,0 +1,10 @@
+{
+  "ligand_291_ccd_v0z": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V0Z.cif",
+    "ligand": "V0Z",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V0Z": "ALL"
+    }
+  }
+}

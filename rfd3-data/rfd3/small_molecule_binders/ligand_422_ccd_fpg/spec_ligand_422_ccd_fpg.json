@@ -1,0 +1,10 @@
+{
+  "ligand_422_ccd_fpg": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/FPG.cif",
+    "ligand": "FPG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "FPG": "ALL"
+    }
+  }
+}

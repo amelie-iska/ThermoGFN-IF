@@ -1,0 +1,10 @@
+{
+  "ligand_051_ccd_6ei": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/6EI.cif",
+    "ligand": "6EI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "6EI": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_353_ccd_ump": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UMP.cif",
+    "ligand": "UMP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UMP": "ALL"
+    }
+  }
+}

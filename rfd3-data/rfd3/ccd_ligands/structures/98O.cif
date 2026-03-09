@@ -1,0 +1,107 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C4   . 98O L 1 1 . 1 98O L C4   ? -4.451  -1.423 1.019  1 1
+HETATM C  C6   . 98O L 1 1 . 1 98O L C6   ? -6.746  -0.947 0.537  1 2
+HETATM N  N1   . 98O L 1 1 . 1 98O L N1   ? -6.5    1.443  -0.11  1 3
+HETATM C  C2   . 98O L 1 1 . 1 98O L C2   ? -6.027  0.403  0.807  1 4
+HETATM C  C3   . 98O L 1 1 . 1 98O L C3   ? -4.549  0.032  0.515  1 5
+HETATM N  N5   . 98O L 1 1 . 1 98O L N5   ? -5.814  -1.976 1.032  1 6
+HETATM C  C7   . 98O L 1 1 . 1 98O L C7   ? -3.567  -2.242 0.076  1 7
+HETATM N  N8   . 98O L 1 1 . 1 98O L N8   ? -2.197  -1.724 0.119  1 8
+HETATM C  C9   . 98O L 1 1 . 1 98O L C9   ? -1.261  -2.227 -0.71  1 9
+HETATM O  O10  . 98O L 1 1 . 1 98O L O10  ? -1.553  -3.11  -1.493 1 10
+HETATM C  C11  . 98O L 1 1 . 1 98O L C11  ? 0.119   -1.705 -0.667 1 11
+HETATM C  C12  . 98O L 1 1 . 1 98O L C12  ? 0.456   -0.693 0.237  1 12
+HETATM C  C13  . 98O L 1 1 . 1 98O L C13  ? 1.731   -0.208 0.28   1 13
+HETATM C  C14  . 98O L 1 1 . 1 98O L C14  ? 2.707   -0.721 -0.581 1 14
+HETATM C  C15  . 98O L 1 1 . 1 98O L C15  ? 2.377   -1.734 -1.488 1 15
+HETATM C  C16  . 98O L 1 1 . 1 98O L C16  ? 1.092   -2.227 -1.528 1 16
+HETATM C  C17  . 98O L 1 1 . 1 98O L C17  ? -6.154  -3.217 1.431  1 17
+HETATM O  O18  . 98O L 1 1 . 1 98O L O18  ? -5.315  -3.953 1.907  1 18
+HETATM C  C19  . 98O L 1 1 . 1 98O L C19  ? -7.577  -3.692 1.286  1 19
+HETATM C  C20  . 98O L 1 1 . 1 98O L C20  ? -7.899  -5.112 1.757  1 20
+HETATM C  C21  . 98O L 1 1 . 1 98O L C21  ? -7.852  -4.795 0.261  1 21
+HETATM CL CL25 . 98O L 1 1 . 1 98O L CL25 ? 0.677   -3.488 -2.646 1 22
+HETATM C  C26  . 98O L 1 1 . 1 98O L C26  ? -7.596  2.165  0.199  1 23
+HETATM O  O27  . 98O L 1 1 . 1 98O L O27  ? -8.189  1.954  1.235  1 24
+HETATM C  C28  . 98O L 1 1 . 1 98O L C28  ? -8.083  3.235  -0.744 1 25
+HETATM N  N29  . 98O L 1 1 . 1 98O L N29  ? -9.47   3.639  -0.398 1 26
+HETATM C  C30  . 98O L 1 1 . 1 98O L C30  ? -9.616  4.992  -0.995 1 27
+HETATM C  C31  . 98O L 1 1 . 1 98O L C31  ? -8.257  5.679  -0.739 1 28
+HETATM C  C32  . 98O L 1 1 . 1 98O L C32  ? -7.249  4.523  -0.574 1 29
+HETATM F  F33  . 98O L 1 1 . 1 98O L F33  ? -8.313  6.445  0.43   1 30
+HETATM C  C34  . 98O L 1 1 . 1 98O L C34  ? 4.044   -0.21  -0.535 1 31
+HETATM C  C35  . 98O L 1 1 . 1 98O L C35  ? 5.14    0.21   -0.496 1 32
+HETATM C  C36  . 98O L 1 1 . 1 98O L C36  ? 6.476   0.721  -0.45  1 33
+HETATM C  C37  . 98O L 1 1 . 1 98O L C37  ? 6.811   1.729  0.459  1 34
+HETATM C  C38  . 98O L 1 1 . 1 98O L C38  ? 8.101   2.217  0.498  1 35
+HETATM C  C39  . 98O L 1 1 . 1 98O L C39  ? 9.062   1.711  -0.36  1 36
+HETATM C  C40  . 98O L 1 1 . 1 98O L C40  ? 8.738   0.713  -1.262 1 37
+HETATM C  C41  . 98O L 1 1 . 1 98O L C41  ? 7.454   0.211  -1.309 1 38
+HETATM C  C42  . 98O L 1 1 . 1 98O L C42  ? 10.468  2.25   -0.311 1 39
+HETATM N  N43  . 98O L 1 1 . 1 98O L N43  ? 11.26   1.466  0.646  1 40
+HETATM C  C44  . 98O L 1 1 . 1 98O L C44  ? 12.561  2.102  0.899  1 41
+HETATM C  C45  . 98O L 1 1 . 1 98O L C45  ? 13.327  1.286  1.944  1 42
+HETATM O  O46  . 98O L 1 1 . 1 98O L O46  ? 13.463  -0.061 1.484  1 43
+HETATM C  C47  . 98O L 1 1 . 1 98O L C47  ? 12.215  -0.711 1.228  1 44
+HETATM C  C48  . 98O L 1 1 . 1 98O L C48  ? 11.438  0.084  0.176  1 45
+HETATM H  H1   . 98O L 1 1 . 1 98O L H1   ? -4.035  -1.44  2.026  1 46
+HETATM H  H2   . 98O L 1 1 . 1 98O L H2   ? -7.688  -0.993 1.084  1 47
+HETATM H  H3   . 98O L 1 1 . 1 98O L H3   ? -6.923  -1.077 -0.531 1 48
+HETATM H  H4   . 98O L 1 1 . 1 98O L H4   ? -6.025  1.612  -0.938 1 49
+HETATM H  H5   . 98O L 1 1 . 1 98O L H5   ? -6.154  0.712  1.844  1 50
+HETATM H  H6   . 98O L 1 1 . 1 98O L H6   ? -3.872  0.679  1.072  1 51
+HETATM H  H7   . 98O L 1 1 . 1 98O L H7   ? -4.342  0.085  -0.554 1 52
+HETATM H  H8   . 98O L 1 1 . 1 98O L H8   ? -3.571  -3.286 0.39   1 53
+HETATM H  H9   . 98O L 1 1 . 1 98O L H9   ? -3.952  -2.167 -0.941 1 54
+HETATM H  H10  . 98O L 1 1 . 1 98O L H10  ? -1.964  -1.019 0.744  1 55
+HETATM H  H11  . 98O L 1 1 . 1 98O L H11  ? -0.295  -0.295 0.904  1 56
+HETATM H  H12  . 98O L 1 1 . 1 98O L H12  ? 1.987   0.573  0.98   1 57
+HETATM H  H13  . 98O L 1 1 . 1 98O L H13  ? 3.129   -2.131 -2.154 1 58
+HETATM H  H14  . 98O L 1 1 . 1 98O L H14  ? -8.343  -2.93  1.423  1 59
+HETATM H  H15  . 98O L 1 1 . 1 98O L H15  ? -7.082  -5.702 2.172  1 60
+HETATM H  H16  . 98O L 1 1 . 1 98O L H16  ? -8.878  -5.283 2.204  1 61
+HETATM H  H17  . 98O L 1 1 . 1 98O L H17  ? -8.8    -4.757 -0.276 1 62
+HETATM H  H18  . 98O L 1 1 . 1 98O L H18  ? -7.004  -5.176 -0.308 1 63
+HETATM H  H19  . 98O L 1 1 . 1 98O L H19  ? -8.033  2.884  -1.775 1 64
+HETATM H  H20  . 98O L 1 1 . 1 98O L H20  ? -10.142 2.996  -0.79  1 65
+HETATM H  H22  . 98O L 1 1 . 1 98O L H22  ? -9.808  4.916  -2.065 1 66
+HETATM H  H23  . 98O L 1 1 . 1 98O L H23  ? -10.418 5.54   -0.502 1 67
+HETATM H  H24  . 98O L 1 1 . 1 98O L H24  ? -7.984  6.304  -1.589 1 68
+HETATM H  H25  . 98O L 1 1 . 1 98O L H25  ? -6.797  4.554  0.417  1 69
+HETATM H  H26  . 98O L 1 1 . 1 98O L H26  ? -6.479  4.581  -1.344 1 70
+HETATM H  H27  . 98O L 1 1 . 1 98O L H27  ? 6.062   2.125  1.128  1 71
+HETATM H  H28  . 98O L 1 1 . 1 98O L H28  ? 8.361   2.996  1.199  1 72
+HETATM H  H29  . 98O L 1 1 . 1 98O L H29  ? 9.493   0.323  -1.928 1 73
+HETATM H  H30  . 98O L 1 1 . 1 98O L H30  ? 7.204   -0.571 -2.01  1 74
+HETATM H  H31  . 98O L 1 1 . 1 98O L H31  ? 10.919  2.178  -1.301 1 75
+HETATM H  H32  . 98O L 1 1 . 1 98O L H32  ? 10.447  3.293  0.004  1 76
+HETATM H  H34  . 98O L 1 1 . 1 98O L H34  ? 13.135  2.137  -0.027 1 77
+HETATM H  H35  . 98O L 1 1 . 1 98O L H35  ? 12.406  3.114  1.271  1 78
+HETATM H  H36  . 98O L 1 1 . 1 98O L H36  ? 14.316  1.721  2.093  1 79
+HETATM H  H37  . 98O L 1 1 . 1 98O L H37  ? 12.78   1.296  2.886  1 80
+HETATM H  H38  . 98O L 1 1 . 1 98O L H38  ? 12.399  -1.72  0.859  1 81
+HETATM H  H39  . 98O L 1 1 . 1 98O L H39  ? 11.635  -0.761 2.15   1 82
+HETATM H  H40  . 98O L 1 1 . 1 98O L H40  ? 10.462  -0.375 0.02   1 83
+HETATM H  H41  . 98O L 1 1 . 1 98O L H41  ? 11.994  0.088  -0.762 1 84
+#

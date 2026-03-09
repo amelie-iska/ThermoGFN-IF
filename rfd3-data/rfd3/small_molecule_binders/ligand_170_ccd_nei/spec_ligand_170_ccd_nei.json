@@ -1,0 +1,10 @@
+{
+  "ligand_170_ccd_nei": {
+    "input": "./data/rfd3/ccd_ligands/structures/NEI.cif",
+    "ligand": "NEI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NEI": "ALL"
+    }
+  }
+}

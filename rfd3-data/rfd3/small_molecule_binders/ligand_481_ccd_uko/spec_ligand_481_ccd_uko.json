@@ -1,0 +1,10 @@
+{
+  "ligand_481_ccd_uko": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UKO.cif",
+    "ligand": "UKO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UKO": "ALL"
+    }
+  }
+}

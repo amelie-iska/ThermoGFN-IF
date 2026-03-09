@@ -1,0 +1,10 @@
+{
+  "ligand_129_ccd_o09": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/O09.cif",
+    "ligand": "O09",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "O09": "ALL"
+    }
+  }
+}

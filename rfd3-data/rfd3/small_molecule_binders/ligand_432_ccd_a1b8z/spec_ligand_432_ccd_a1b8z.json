@@ -1,0 +1,10 @@
+{
+  "ligand_432_ccd_a1b8z": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1B8Z.cif",
+    "ligand": "A1B8Z",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1B8Z": "ALL"
+    }
+  }
+}

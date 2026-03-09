@@ -1,0 +1,10 @@
+{
+  "ligand_116_ccd_1gb": {
+    "input": "./data/rfd3/ccd_ligands/structures/1GB.cif",
+    "ligand": "1GB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1GB": "ALL"
+    }
+  }
+}

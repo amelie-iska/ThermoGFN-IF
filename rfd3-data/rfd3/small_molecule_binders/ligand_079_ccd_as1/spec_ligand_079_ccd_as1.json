@@ -1,0 +1,10 @@
+{
+  "ligand_079_ccd_as1": {
+    "input": "./data/rfd3/ccd_ligands/structures/AS1.cif",
+    "ligand": "AS1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "AS1": "ALL"
+    }
+  }
+}

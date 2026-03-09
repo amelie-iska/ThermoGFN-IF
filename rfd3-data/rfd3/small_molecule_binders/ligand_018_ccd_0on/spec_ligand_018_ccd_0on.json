@@ -1,0 +1,10 @@
+{
+  "ligand_018_ccd_0on": {
+    "input": "./data/rfd3/ccd_ligands/structures/0ON.cif",
+    "ligand": "0ON",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0ON": "ALL"
+    }
+  }
+}

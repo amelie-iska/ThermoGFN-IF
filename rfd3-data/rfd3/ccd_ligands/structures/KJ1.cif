@@ -1,0 +1,78 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C13 . KJ1 L 1 1 . 1 KJ1 L C13 ? 2.022   -0.312 0.0   1 1
+HETATM C C15 . KJ1 L 1 1 . 1 KJ1 L C15 ? 4.521   -0.296 0.0   1 2
+HETATM C C17 . KJ1 L 1 1 . 1 KJ1 L C17 ? 7.019   -0.281 0.0   1 3
+HETATM C C01 . KJ1 L 1 1 . 1 KJ1 L C01 ? -11.626 0.219  0.0   1 4
+HETATM C C02 . KJ1 L 1 1 . 1 KJ1 L C02 ? -10.371 -0.656 0.0   1 5
+HETATM C C03 . KJ1 L 1 1 . 1 KJ1 L C03 ? -9.127  0.235  0.0   1 6
+HETATM C C04 . KJ1 L 1 1 . 1 KJ1 L C04 ? -7.873  -0.641 0.0   1 7
+HETATM C C05 . KJ1 L 1 1 . 1 KJ1 L C05 ? -6.629  0.25   0.0   1 8
+HETATM C C06 . KJ1 L 1 1 . 1 KJ1 L C06 ? -5.374  -0.626 0.0   1 9
+HETATM C C07 . KJ1 L 1 1 . 1 KJ1 L C07 ? -4.13   0.265  0.0   1 10
+HETATM C C08 . KJ1 L 1 1 . 1 KJ1 L C08 ? -2.876  -0.61  0.0   1 11
+HETATM C C09 . KJ1 L 1 1 . 1 KJ1 L C09 ? -1.651  0.267  0.0   1 12
+HETATM O O10 . KJ1 L 1 1 . 1 KJ1 L O10 ? -1.77   1.474  0.0   1 13
+HETATM N N11 . KJ1 L 1 1 . 1 KJ1 L N11 ? -0.423  -0.289 0.0   1 14
+HETATM C C12 . KJ1 L 1 1 . 1 KJ1 L C12 ? 0.768   0.564  0.0   1 15
+HETATM C C14 . KJ1 L 1 1 . 1 KJ1 L C14 ? 3.266   0.579  0.0   1 16
+HETATM C C16 . KJ1 L 1 1 . 1 KJ1 L C16 ? 5.765   0.595  0.0   1 17
+HETATM C C18 . KJ1 L 1 1 . 1 KJ1 L C18 ? 8.263   0.61   0.0   1 18
+HETATM C C19 . KJ1 L 1 1 . 1 KJ1 L C19 ? 9.499   -0.252 0.0   1 19
+HETATM N N20 . KJ1 L 1 1 . 1 KJ1 L N20 ? 10.719  0.319  0.0   1 20
+HETATM O O21 . KJ1 L 1 1 . 1 KJ1 L O21 ? 9.395   -1.461 0.0   1 21
+HETATM H H1  . KJ1 L 1 1 . 1 KJ1 L H1  ? 2.026   -0.941 0.89  1 22
+HETATM H H2  . KJ1 L 1 1 . 1 KJ1 L H2  ? 2.026   -0.941 -0.89 1 23
+HETATM H H3  . KJ1 L 1 1 . 1 KJ1 L H3  ? 4.525   -0.926 0.89  1 24
+HETATM H H4  . KJ1 L 1 1 . 1 KJ1 L H4  ? 4.525   -0.926 -0.89 1 25
+HETATM H H5  . KJ1 L 1 1 . 1 KJ1 L H5  ? 7.023   -0.91  0.89  1 26
+HETATM H H6  . KJ1 L 1 1 . 1 KJ1 L H6  ? -11.63  0.849  -0.89 1 27
+HETATM H H7  . KJ1 L 1 1 . 1 KJ1 L H7  ? -12.512 -0.415 0.0   1 28
+HETATM H H8  . KJ1 L 1 1 . 1 KJ1 L H8  ? -11.63  0.849  0.89  1 29
+HETATM H H9  . KJ1 L 1 1 . 1 KJ1 L H9  ? -10.367 -1.286 0.89  1 30
+HETATM H H10 . KJ1 L 1 1 . 1 KJ1 L H10 ? -10.367 -1.286 -0.89 1 31
+HETATM H H11 . KJ1 L 1 1 . 1 KJ1 L H11 ? -9.131  0.864  -0.89 1 32
+HETATM H H12 . KJ1 L 1 1 . 1 KJ1 L H12 ? -9.131  0.864  0.89  1 33
+HETATM H H13 . KJ1 L 1 1 . 1 KJ1 L H13 ? -7.869  -1.27  0.89  1 34
+HETATM H H14 . KJ1 L 1 1 . 1 KJ1 L H14 ? -7.869  -1.27  -0.89 1 35
+HETATM H H15 . KJ1 L 1 1 . 1 KJ1 L H15 ? -6.633  0.879  -0.89 1 36
+HETATM H H16 . KJ1 L 1 1 . 1 KJ1 L H16 ? -6.633  0.879  0.89  1 37
+HETATM H H17 . KJ1 L 1 1 . 1 KJ1 L H17 ? -5.371  -1.255 0.89  1 38
+HETATM H H18 . KJ1 L 1 1 . 1 KJ1 L H18 ? -5.371  -1.255 -0.89 1 39
+HETATM H H19 . KJ1 L 1 1 . 1 KJ1 L H19 ? -4.134  0.895  -0.89 1 40
+HETATM H H20 . KJ1 L 1 1 . 1 KJ1 L H20 ? -4.134  0.895  0.89  1 41
+HETATM H H21 . KJ1 L 1 1 . 1 KJ1 L H21 ? -2.872  -1.24  0.89  1 42
+HETATM H H22 . KJ1 L 1 1 . 1 KJ1 L H22 ? -2.872  -1.24  -0.89 1 43
+HETATM H H23 . KJ1 L 1 1 . 1 KJ1 L H23 ? -0.328  -1.254 0.0   1 44
+HETATM H H24 . KJ1 L 1 1 . 1 KJ1 L H24 ? 0.764   1.193  0.89  1 45
+HETATM H H25 . KJ1 L 1 1 . 1 KJ1 L H25 ? 0.764   1.193  -0.89 1 46
+HETATM H H26 . KJ1 L 1 1 . 1 KJ1 L H26 ? 3.262   1.209  -0.89 1 47
+HETATM H H27 . KJ1 L 1 1 . 1 KJ1 L H27 ? 3.262   1.209  0.89  1 48
+HETATM H H28 . KJ1 L 1 1 . 1 KJ1 L H28 ? 5.761   1.224  -0.89 1 49
+HETATM H H29 . KJ1 L 1 1 . 1 KJ1 L H29 ? 8.259   1.239  -0.89 1 50
+HETATM H H30 . KJ1 L 1 1 . 1 KJ1 L H30 ? 8.259   1.239  0.89  1 51
+HETATM H H31 . KJ1 L 1 1 . 1 KJ1 L H31 ? 11.515  -0.236 0.0   1 52
+HETATM H H32 . KJ1 L 1 1 . 1 KJ1 L H32 ? 10.802  1.285  0.0   1 53
+HETATM H H33 . KJ1 L 1 1 . 1 KJ1 L H33 ? 7.023   -0.91  -0.89 1 54
+HETATM H H34 . KJ1 L 1 1 . 1 KJ1 L H34 ? 5.761   1.224  0.89  1 55
+#

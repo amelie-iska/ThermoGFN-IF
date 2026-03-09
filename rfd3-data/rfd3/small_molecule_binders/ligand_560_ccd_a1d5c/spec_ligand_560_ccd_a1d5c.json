@@ -1,0 +1,10 @@
+{
+  "ligand_560_ccd_a1d5c": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1D5C.cif",
+    "ligand": "A1D5C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1D5C": "ALL"
+    }
+  }
+}

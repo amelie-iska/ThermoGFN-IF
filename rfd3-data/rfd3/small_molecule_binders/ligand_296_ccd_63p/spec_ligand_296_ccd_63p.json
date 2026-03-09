@@ -1,0 +1,10 @@
+{
+  "ligand_296_ccd_63p": {
+    "input": "./data/rfd3/ccd_ligands/structures/63P.cif",
+    "ligand": "63P",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "63P": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_199_ccd_0qx": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/0QX.cif",
+    "ligand": "0QX",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0QX": "ALL"
+    }
+  }
+}

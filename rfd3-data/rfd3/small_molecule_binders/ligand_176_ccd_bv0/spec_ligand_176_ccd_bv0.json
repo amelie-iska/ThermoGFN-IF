@@ -1,0 +1,10 @@
+{
+  "ligand_176_ccd_bv0": {
+    "input": "./data/rfd3/ccd_ligands/structures/BV0.cif",
+    "ligand": "BV0",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BV0": "ALL"
+    }
+  }
+}

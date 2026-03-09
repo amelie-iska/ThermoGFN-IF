@@ -1,0 +1,10 @@
+{
+  "ligand_032_ccd_2j4": {
+    "input": "./data/rfd3/ccd_ligands/structures/2J4.cif",
+    "ligand": "2J4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2J4": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_177_ccd_wh1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WH1.cif",
+    "ligand": "WH1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WH1": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_390_ccd_if2": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IF2.cif",
+    "ligand": "IF2",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IF2": "ALL"
+    }
+  }
+}

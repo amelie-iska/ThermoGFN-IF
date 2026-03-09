@@ -1,0 +1,10 @@
+{
+  "ligand_255_ccd_ubp": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UBP.cif",
+    "ligand": "UBP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UBP": "ALL"
+    }
+  }
+}

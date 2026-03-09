@@ -1,0 +1,10 @@
+{
+  "ligand_214_ccd_szp": {
+    "input": "./data/rfd3/ccd_ligands/structures/SZP.cif",
+    "ligand": "SZP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SZP": "ALL"
+    }
+  }
+}

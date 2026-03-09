@@ -1,0 +1,10 @@
+{
+  "ligand_317_ccd_cq9": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/CQ9.cif",
+    "ligand": "CQ9",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "CQ9": "ALL"
+    }
+  }
+}

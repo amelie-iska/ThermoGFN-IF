@@ -1,0 +1,84 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C4  . EPV L 1 1 . 1 EPV L C4  ? 0.093  1.198  -0.05  1 1
+HETATM C  C5  . EPV L 1 1 . 1 EPV L C5  ? -1.068 1.969  -0.071 1 2
+HETATM C  C6  . EPV L 1 1 . 1 EPV L C6  ? -0.996 3.34   -0.349 1 3
+HETATM C  C8  . EPV L 1 1 . 1 EPV L C8  ? 3.687  3.072  -0.823 1 4
+HETATM C  C17 . EPV L 1 1 . 1 EPV L C17 ? 2.79   -0.252 -0.067 1 5
+HETATM C  C20 . EPV L 1 1 . 1 EPV L C20 ? 0.437  -3.157 -0.456 1 6
+HETATM C  C21 . EPV L 1 1 . 1 EPV L C21 ? 0.043  -3.36  0.86   1 7
+HETATM C  C22 . EPV L 1 1 . 1 EPV L C22 ? 0.541  -2.557 1.869  1 8
+HETATM C  C26 . EPV L 1 1 . 1 EPV L C26 ? -5.899 2.518  0.367  1 9
+HETATM C  C28 . EPV L 1 1 . 1 EPV L C28 ? -5.993 3.044  -1.067 1 10
+HETATM C  C1  . EPV L 1 1 . 1 EPV L C1  ? 0.205  3.932  -0.601 1 11
+HETATM C  C19 . EPV L 1 1 . 1 EPV L C19 ? 1.331  -2.146 -0.763 1 12
+HETATM C  C18 . EPV L 1 1 . 1 EPV L C18 ? 1.835  -1.333 0.253  1 13
+HETATM C  C2  . EPV L 1 1 . 1 EPV L C2  ? 1.383  3.173  -0.584 1 14
+HETATM C  C3  . EPV L 1 1 . 1 EPV L C3  ? 1.318  1.793  -0.305 1 15
+HETATM C  C23 . EPV L 1 1 . 1 EPV L C23 ? 1.433  -1.545 1.574  1 16
+HETATM C  C9  . EPV L 1 1 . 1 EPV L C9  ? 3.681  1.686  -0.55  1 17
+HETATM C  C11 . EPV L 1 1 . 1 EPV L C11 ? -2.376 1.34   0.201  1 18
+HETATM C  C12 . EPV L 1 1 . 1 EPV L C12 ? 4.992  3.769  -1.107 1 19
+HETATM C  C27 . EPV L 1 1 . 1 EPV L C27 ? -7.236 1.894  0.769  1 20
+HETATM C  C31 . EPV L 1 1 . 1 EPV L C31 ? -0.478 -5.903 -0.078 1 21
+HETATM C  C32 . EPV L 1 1 . 1 EPV L C32 ? -1.545 -5.638 -2.322 1 22
+HETATM C  C33 . EPV L 1 1 . 1 EPV L C33 ? -2.235 -4.162 -0.428 1 23
+HETATM C  C25 . EPV L 1 1 . 1 EPV L C25 ? -4.797 1.46   0.451  1 24
+HETATM C  C30 . EPV L 1 1 . 1 EPV L C30 ? -1.06  -4.898 -1.074 1 25
+HETATM N  N16 . EPV L 1 1 . 1 EPV L N16 ? 4.101  -0.374 -0.19  1 26
+HETATM N  N15 . EPV L 1 1 . 1 EPV L N15 ? 4.625  0.766  -0.475 1 27
+HETATM N  N7  . EPV L 1 1 . 1 EPV L N7  ? 2.574  3.757  -0.833 1 28
+HETATM N  N10 . EPV L 1 1 . 1 EPV L N10 ? 2.486  1.054  -0.291 1 29
+HETATM N  N13 . EPV L 1 1 . 1 EPV L N13 ? -3.499 2.085  0.181  1 30
+HETATM O  O14 . EPV L 1 1 . 1 EPV L O14 ? -2.439 0.15   0.443  1 31
+HETATM O  O29 . EPV L 1 1 . 1 EPV L O29 ? -0.052 -3.954 -1.442 1 32
+HETATM CL CL4 . EPV L 1 1 . 1 EPV L CL4 ? 2.055  -0.538 2.844  1 33
+HETATM H  H1  . EPV L 1 1 . 1 EPV L H1  ? 0.039  0.142  0.169  1 34
+HETATM H  H2  . EPV L 1 1 . 1 EPV L H2  ? -1.899 3.932  -0.365 1 35
+HETATM H  H3  . EPV L 1 1 . 1 EPV L H3  ? -0.656 -4.149 1.097  1 36
+HETATM H  H4  . EPV L 1 1 . 1 EPV L H4  ? 0.23   -2.72  2.89   1 37
+HETATM H  H5  . EPV L 1 1 . 1 EPV L H5  ? -5.664 3.342  1.041  1 38
+HETATM H  H6  . EPV L 1 1 . 1 EPV L H6  ? -5.04  3.489  -1.354 1 39
+HETATM H  H7  . EPV L 1 1 . 1 EPV L H7  ? -6.227 2.221  -1.742 1 40
+HETATM H  H8  . EPV L 1 1 . 1 EPV L H8  ? -6.778 3.798  -1.127 1 41
+HETATM H  H9  . EPV L 1 1 . 1 EPV L H9  ? 0.249  4.99   -0.816 1 42
+HETATM H  H10 . EPV L 1 1 . 1 EPV L H10 ? 1.638  -1.987 -1.786 1 43
+HETATM H  H11 . EPV L 1 1 . 1 EPV L H11 ? 4.806  4.827  -1.295 1 44
+HETATM H  H12 . EPV L 1 1 . 1 EPV L H12 ? 5.655  3.664  -0.248 1 45
+HETATM H  H13 . EPV L 1 1 . 1 EPV L H13 ? 5.46   3.321  -1.984 1 46
+HETATM H  H14 . EPV L 1 1 . 1 EPV L H14 ? -7.169 1.519  1.791  1 47
+HETATM H  H15 . EPV L 1 1 . 1 EPV L H15 ? -8.022 2.648  0.71   1 48
+HETATM H  H16 . EPV L 1 1 . 1 EPV L H16 ? -7.471 1.071  0.095  1 49
+HETATM H  H17 . EPV L 1 1 . 1 EPV L H17 ? -1.288 -6.379 0.474  1 50
+HETATM H  H18 . EPV L 1 1 . 1 EPV L H18 ? 0.089  -6.662 -0.617 1 51
+HETATM H  H19 . EPV L 1 1 . 1 EPV L H19 ? 0.181  -5.385 0.619  1 52
+HETATM H  H20 . EPV L 1 1 . 1 EPV L H20 ? -1.96  -4.922 -3.031 1 53
+HETATM H  H21 . EPV L 1 1 . 1 EPV L H21 ? -0.708 -6.162 -2.782 1 54
+HETATM H  H22 . EPV L 1 1 . 1 EPV L H22 ? -2.314 -6.358 -2.041 1 55
+HETATM H  H23 . EPV L 1 1 . 1 EPV L H23 ? -1.861 -3.475 0.332  1 56
+HETATM H  H24 . EPV L 1 1 . 1 EPV L H24 ? -2.776 -3.601 -1.19  1 57
+HETATM H  H25 . EPV L 1 1 . 1 EPV L H25 ? -2.906 -4.885 0.036  1 58
+HETATM H  H26 . EPV L 1 1 . 1 EPV L H26 ? -4.789 1.022  1.449  1 59
+HETATM H  H27 . EPV L 1 1 . 1 EPV L H27 ? -4.985 0.68   -0.287 1 60
+HETATM H  H28 . EPV L 1 1 . 1 EPV L H28 ? -3.448 3.034  -0.012 1 61
+#

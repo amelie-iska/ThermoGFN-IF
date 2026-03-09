@@ -1,0 +1,10 @@
+{
+  "ligand_048_ccd_dsy": {
+    "input": "./data/rfd3/ccd_ligands/structures/DSY.cif",
+    "ligand": "DSY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DSY": "ALL"
+    }
+  }
+}

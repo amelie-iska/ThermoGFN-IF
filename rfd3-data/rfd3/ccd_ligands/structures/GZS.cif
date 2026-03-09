@@ -1,0 +1,63 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C43 . GZS L 1 1 . 1 GZS L C43 ? -6.04  2.035  0.078  1 1
+HETATM O O64 . GZS L 1 1 . 1 GZS L O64 ? -6.393 1.724  1.191  1 2
+HETATM C C44 . GZS L 1 1 . 1 GZS L C44 ? -4.813 1.404  -0.527 1 3
+HETATM C C45 . GZS L 1 1 . 1 GZS L C45 ? -4.201 0.418  0.471  1 4
+HETATM C C46 . GZS L 1 1 . 1 GZS L C46 ? -2.955 -0.222 -0.144 1 5
+HETATM N N47 . GZS L 1 1 . 1 GZS L N47 ? -2.37  -1.166 0.812  1 6
+HETATM S S48 . GZS L 1 1 . 1 GZS L S48 ? -1.247 -2.271 0.301  1 7
+HETATM O O62 . GZS L 1 1 . 1 GZS L O62 ? -0.854 -3.005 1.453  1 8
+HETATM O O63 . GZS L 1 1 . 1 GZS L O63 ? -1.786 -2.882 -0.863 1 9
+HETATM C C49 . GZS L 1 1 . 1 GZS L C49 ? 0.173  -1.369 -0.222 1 10
+HETATM C C54 . GZS L 1 1 . 1 GZS L C54 ? 1.176  -1.074 0.683  1 11
+HETATM C C53 . GZS L 1 1 . 1 GZS L C53 ? 2.29   -0.367 0.275  1 12
+HETATM C C52 . GZS L 1 1 . 1 GZS L C52 ? 2.402  0.047  -1.044 1 13
+HETATM O O55 . GZS L 1 1 . 1 GZS L O55 ? 3.498  0.743  -1.448 1 14
+HETATM C C56 . GZS L 1 1 . 1 GZS L C56 ? 4.464  1.001  -0.528 1 15
+HETATM C C61 . GZS L 1 1 . 1 GZS L C61 ? 5.507  0.103  -0.345 1 16
+HETATM C C60 . GZS L 1 1 . 1 GZS L C60 ? 6.488  0.368  0.59   1 17
+HETATM C C59 . GZS L 1 1 . 1 GZS L C59 ? 6.432  1.526  1.344  1 18
+HETATM C C58 . GZS L 1 1 . 1 GZS L C58 ? 5.395  2.422  1.164  1 19
+HETATM C C57 . GZS L 1 1 . 1 GZS L C57 ? 4.414  2.165  0.225  1 20
+HETATM C C51 . GZS L 1 1 . 1 GZS L C51 ? 1.395  -0.25  -1.951 1 21
+HETATM C C50 . GZS L 1 1 . 1 GZS L C50 ? 0.285  -0.961 -1.539 1 22
+HETATM O OXT . GZS L 1 1 . 1 GZS L OXT ? -6.745 2.938  -0.621 1 23
+HETATM H H1  . GZS L 1 1 . 1 GZS L H1  ? -5.089 0.874  -1.439 1 24
+HETATM H H2  . GZS L 1 1 . 1 GZS L H2  ? -4.085 2.18   -0.764 1 25
+HETATM H H3  . GZS L 1 1 . 1 GZS L H3  ? -3.926 0.948  1.383  1 26
+HETATM H H4  . GZS L 1 1 . 1 GZS L H4  ? -4.93  -0.357 0.708  1 27
+HETATM H H5  . GZS L 1 1 . 1 GZS L H5  ? -3.231 -0.752 -1.055 1 28
+HETATM H H6  . GZS L 1 1 . 1 GZS L H6  ? -2.227 0.554  -0.38  1 29
+HETATM H H7  . GZS L 1 1 . 1 GZS L H7  ? -2.64  -1.143 1.743  1 30
+HETATM H H8  . GZS L 1 1 . 1 GZS L H8  ? 1.088  -1.397 1.71   1 31
+HETATM H H9  . GZS L 1 1 . 1 GZS L H9  ? 3.073  -0.137 0.983  1 32
+HETATM H H10 . GZS L 1 1 . 1 GZS L H10 ? 5.55   -0.802 -0.933 1 33
+HETATM H H11 . GZS L 1 1 . 1 GZS L H11 ? 7.299  -0.331 0.734  1 34
+HETATM H H12 . GZS L 1 1 . 1 GZS L H12 ? 7.201  1.731  2.075  1 35
+HETATM H H13 . GZS L 1 1 . 1 GZS L H13 ? 5.353  3.325  1.754  1 36
+HETATM H H14 . GZS L 1 1 . 1 GZS L H14 ? 3.604  2.865  0.084  1 37
+HETATM H H15 . GZS L 1 1 . 1 GZS L H15 ? 1.48   0.072  -2.978 1 38
+HETATM H H16 . GZS L 1 1 . 1 GZS L H16 ? -0.499 -1.194 -2.244 1 39
+HETATM H HXT . GZS L 1 1 . 1 GZS L HXT ? -7.527 3.312  -0.193 1 40
+#

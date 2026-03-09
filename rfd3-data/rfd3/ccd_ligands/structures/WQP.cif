@@ -1,0 +1,70 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O OAE  . WQP L 1 1 . 1 WQP L OAE  ? -2.203 -2.601 -0.235 1 1
+HETATM P PAD  . WQP L 1 1 . 1 WQP L PAD  ? -3.515 -1.814 0.265  1 2
+HETATM O OAA  . WQP L 1 1 . 1 WQP L OAA  ? -4.587 -1.949 -0.747 1 3
+HETATM O OAC  . WQP L 1 1 . 1 WQP L OAC  ? -4.015 -2.439 1.663  1 4
+HETATM O OAH  . WQP L 1 1 . 1 WQP L OAH  ? -3.162 -0.257 0.47   1 5
+HETATM C CAN  . WQP L 1 1 . 1 WQP L CAN  ? -2.789 0.604  -0.608 1 6
+HETATM C CAM  . WQP L 1 1 . 1 WQP L CAM  ? -3.775 1.74   -0.707 1 7
+HETATM O OAV  . WQP L 1 1 . 1 WQP L OAV  ? -4.649 1.855  0.119  1 8
+HETATM O OAL  . WQP L 1 1 . 1 WQP L OAL  ? -3.683 2.622  -1.714 1 9
+HETATM C CAO  . WQP L 1 1 . 1 WQP L CAO  ? -1.39  1.166  -0.351 1 10
+HETATM C CAP  . WQP L 1 1 . 1 WQP L CAP  ? -0.37  0.025  -0.374 1 11
+HETATM O OAW  . WQP L 1 1 . 1 WQP L OAW  ? -0.627 -0.865 0.715  1 12
+HETATM C CAQ  . WQP L 1 1 . 1 WQP L CAQ  ? 1.041  0.599  -0.242 1 13
+HETATM N NAI  . WQP L 1 1 . 1 WQP L NAI  ? 1.147  1.353  1.01   1 14
+HETATM C CAF  . WQP L 1 1 . 1 WQP L CAF  ? 1.353  2.685  0.979  1 15
+HETATM C CAG  . WQP L 1 1 . 1 WQP L CAG  ? 1.349  3.477  2.261  1 16
+HETATM O OAB  . WQP L 1 1 . 1 WQP L OAB  ? 1.541  3.245  -0.079 1 17
+HETATM C CAR  . WQP L 1 1 . 1 WQP L CAR  ? 2.059  -0.544 -0.236 1 18
+HETATM O OAX  . WQP L 1 1 . 1 WQP L OAX  ? 1.956  -1.279 -1.457 1 19
+HETATM C CAS  . WQP L 1 1 . 1 WQP L CAS  ? 3.47   0.031  -0.104 1 20
+HETATM O OAJ  . WQP L 1 1 . 1 WQP L OAJ  ? 3.694  0.988  -1.141 1 21
+HETATM C CAT  . WQP L 1 1 . 1 WQP L CAT  ? 4.494  -1.1   -0.223 1 22
+HETATM O OAY  . WQP L 1 1 . 1 WQP L OAY  ? 4.27   -2.057 0.814  1 23
+HETATM C CAU  . WQP L 1 1 . 1 WQP L CAU  ? 5.906  -0.525 -0.091 1 24
+HETATM O OAK  . WQP L 1 1 . 1 WQP L OAK  ? 6.865  -1.561 -0.318 1 25
+HETATM H HAE  . WQP L 1 1 . 1 WQP L HAE  ? -1.458 -2.556 0.38   1 26
+HETATM H HAC  . WQP L 1 1 . 1 WQP L HAC  ? -4.246 -3.377 1.614  1 27
+HETATM H HAN  . WQP L 1 1 . 1 WQP L HAN  ? -2.789 0.04   -1.541 1 28
+HETATM H HAO1 . WQP L 1 1 . 1 WQP L HAO1 ? -1.141 1.89   -1.126 1 29
+HETATM H HAO2 . WQP L 1 1 . 1 WQP L HAO2 ? -1.367 1.654  0.623  1 30
+HETATM H HAL  . WQP L 1 1 . 1 WQP L HAL  ? -4.338 3.334  -1.737 1 31
+HETATM H HAP  . WQP L 1 1 . 1 WQP L HAP  ? -0.455 -0.519 -1.315 1 32
+HETATM H HAW  . WQP L 1 1 . 1 WQP L HAW  ? -0.496 -0.467 1.587  1 33
+HETATM H HAQ  . WQP L 1 1 . 1 WQP L HAQ  ? 1.244  1.262  -1.083 1 34
+HETATM H HAI  . WQP L 1 1 . 1 WQP L HAI  ? 1.068  0.894  1.861  1 35
+HETATM H HAR  . WQP L 1 1 . 1 WQP L HAR  ? 1.856  -1.206 0.605  1 36
+HETATM H HAG1 . WQP L 1 1 . 1 WQP L HAG1 ? 2.359  3.514  2.669  1 37
+HETATM H HAG2 . WQP L 1 1 . 1 WQP L HAG2 ? 1.001  4.49   2.061  1 38
+HETATM H HAG3 . WQP L 1 1 . 1 WQP L HAG3 ? 0.684  3.0    2.981  1 39
+HETATM H HAX  . WQP L 1 1 . 1 WQP L HAX  ? 2.124  -0.751 -2.249 1 40
+HETATM H HAS  . WQP L 1 1 . 1 WQP L HAS  ? 3.576  0.516  0.867  1 41
+HETATM H HAJ  . WQP L 1 1 . 1 WQP L HAJ  ? 3.616  0.625  -2.034 1 42
+HETATM H HAT  . WQP L 1 1 . 1 WQP L HAT  ? 4.389  -1.585 -1.194 1 43
+HETATM H HAY  . WQP L 1 1 . 1 WQP L HAY  ? 4.348  -1.694 1.707  1 44
+HETATM H HAU1 . WQP L 1 1 . 1 WQP L HAU1 ? 6.046  0.267  -0.826 1 45
+HETATM H HAU2 . WQP L 1 1 . 1 WQP L HAU2 ? 6.041  -0.119 0.911  1 46
+HETATM H HAK  . WQP L 1 1 . 1 WQP L HAK  ? 7.784  -1.268 -0.25  1 47
+#

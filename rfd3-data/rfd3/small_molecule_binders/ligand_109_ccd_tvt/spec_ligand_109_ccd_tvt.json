@@ -1,0 +1,10 @@
+{
+  "ligand_109_ccd_tvt": {
+    "input": "./data/rfd3/ccd_ligands/structures/TVT.cif",
+    "ligand": "TVT",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "TVT": "ALL"
+    }
+  }
+}

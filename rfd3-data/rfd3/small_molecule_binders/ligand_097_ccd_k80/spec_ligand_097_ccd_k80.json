@@ -1,0 +1,10 @@
+{
+  "ligand_097_ccd_k80": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/K80.cif",
+    "ligand": "K80",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "K80": "ALL"
+    }
+  }
+}

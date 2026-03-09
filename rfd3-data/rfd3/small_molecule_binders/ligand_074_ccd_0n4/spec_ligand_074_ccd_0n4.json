@@ -1,0 +1,10 @@
+{
+  "ligand_074_ccd_0n4": {
+    "input": "./data/rfd3/ccd_ligands/structures/0N4.cif",
+    "ligand": "0N4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0N4": "ALL"
+    }
+  }
+}

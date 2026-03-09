@@ -1,0 +1,10 @@
+{
+  "ligand_250_ccd_gbr": {
+    "input": "./data/rfd3/ccd_ligands/structures/GBR.cif",
+    "ligand": "GBR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GBR": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_209_ccd_uq4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/UQ4.cif",
+    "ligand": "UQ4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UQ4": "ALL"
+    }
+  }
+}

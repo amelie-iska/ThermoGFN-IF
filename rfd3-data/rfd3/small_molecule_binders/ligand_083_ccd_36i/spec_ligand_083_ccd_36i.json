@@ -1,0 +1,10 @@
+{
+  "ligand_083_ccd_36i": {
+    "input": "./data/rfd3/ccd_ligands/structures/36I.cif",
+    "ligand": "36I",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "36I": "ALL"
+    }
+  }
+}

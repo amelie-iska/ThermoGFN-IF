@@ -1,0 +1,10 @@
+{
+  "ligand_240_ccd_uew": {
+    "input": "./data/rfd3/ccd_ligands/structures/UEW.cif",
+    "ligand": "UEW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UEW": "ALL"
+    }
+  }
+}

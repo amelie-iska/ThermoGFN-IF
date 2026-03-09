@@ -1,0 +1,10 @@
+{
+  "ligand_141_ccd_gh2": {
+    "input": "./data/rfd3/ccd_ligands/structures/GH2.cif",
+    "ligand": "GH2",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GH2": "ALL"
+    }
+  }
+}

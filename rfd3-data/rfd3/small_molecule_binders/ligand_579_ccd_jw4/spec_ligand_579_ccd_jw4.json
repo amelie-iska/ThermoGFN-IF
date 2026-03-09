@@ -1,0 +1,10 @@
+{
+  "ligand_579_ccd_jw4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/JW4.cif",
+    "ligand": "JW4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "JW4": "ALL"
+    }
+  }
+}

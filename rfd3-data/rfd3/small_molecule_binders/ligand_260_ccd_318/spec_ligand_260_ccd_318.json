@@ -1,0 +1,10 @@
+{
+  "ligand_260_ccd_318": {
+    "input": "./data/rfd3/ccd_ligands/structures/318.cif",
+    "ligand": "318",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "318": "ALL"
+    }
+  }
+}

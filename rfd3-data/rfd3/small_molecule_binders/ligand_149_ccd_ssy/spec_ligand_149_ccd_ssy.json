@@ -1,0 +1,10 @@
+{
+  "ligand_149_ccd_ssy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/SSY.cif",
+    "ligand": "SSY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SSY": "ALL"
+    }
+  }
+}

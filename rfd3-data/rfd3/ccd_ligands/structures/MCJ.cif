@@ -1,0 +1,101 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . MCJ L 1 1 . 1 MCJ L C1   ? 1.539   5.567  0.434  1 1
+HETATM N N1   . MCJ L 1 1 . 1 MCJ L N1   ? -0.109  2.493  -0.838 1 2
+HETATM O O1   . MCJ L 1 1 . 1 MCJ L O1   ? 1.567   5.291  1.763  1 3
+HETATM C C3   . MCJ L 1 1 . 1 MCJ L C3   ? -8.494  -2.12  -0.545 1 4
+HETATM N N3   . MCJ L 1 1 . 1 MCJ L N3   ? -5.376  -0.559 0.731  1 5
+HETATM O O3   . MCJ L 1 1 . 1 MCJ L O3   ? -9.071  -2.495 0.625  1 6
+HETATM C C4   . MCJ L 1 1 . 1 MCJ L C4   ? 2.066   6.764  -0.043 1 7
+HETATM O O4   . MCJ L 1 1 . 1 MCJ L O4   ? 2.606   7.662  0.824  1 8
+HETATM C C6   . MCJ L 1 1 . 1 MCJ L C6   ? -9.134  -2.379 -1.754 1 9
+HETATM O O6   . MCJ L 1 1 . 1 MCJ L O6   ? -10.34  -3.007 -1.764 1 10
+HETATM C C7   . MCJ L 1 1 . 1 MCJ L C7   ? 2.041   7.039  -1.399 1 11
+HETATM O O7   . MCJ L 1 1 . 1 MCJ L O7   ? 0.441   3.124  1.219  1 12
+HETATM C C9   . MCJ L 1 1 . 1 MCJ L C9   ? -8.543  -1.995 -2.945 1 13
+HETATM O O9   . MCJ L 1 1 . 1 MCJ L O9   ? -7.077  -1.524 1.784  1 14
+HETATM C C10  . MCJ L 1 1 . 1 MCJ L C10  ? 1.493   6.129  -2.288 1 15
+HETATM O O10  . MCJ L 1 1 . 1 MCJ L O10  ? -1.869  2.599  1.145  1 16
+HETATM C C12  . MCJ L 1 1 . 1 MCJ L C12  ? -7.315  -1.354 -2.943 1 17
+HETATM O O12  . MCJ L 1 1 . 1 MCJ L O12  ? -3.893  -2.48  1.721  1 18
+HETATM C C13  . MCJ L 1 1 . 1 MCJ L C13  ? 0.967   4.94   -1.831 1 19
+HETATM O O14  . MCJ L 1 1 . 1 MCJ L O14  ? -3.18   -1.464 3.549  1 20
+HETATM C C15  . MCJ L 1 1 . 1 MCJ L C15  ? -6.67   -1.091 -1.754 1 21
+HETATM O O15  . MCJ L 1 1 . 1 MCJ L O15  ? -2.702  0.569  0.882  1 22
+HETATM C C16  . MCJ L 1 1 . 1 MCJ L C16  ? 0.985   4.648  -0.464 1 23
+HETATM C C18  . MCJ L 1 1 . 1 MCJ L C18  ? -7.256  -1.468 -0.542 1 24
+HETATM C C19  . MCJ L 1 1 . 1 MCJ L C19  ? 0.424   3.376  0.029  1 25
+HETATM C C21  . MCJ L 1 1 . 1 MCJ L C21  ? -6.568  -1.188 0.733  1 26
+HETATM C C22  . MCJ L 1 1 . 1 MCJ L C22  ? -0.666  1.229  -0.349 1 27
+HETATM C C24  . MCJ L 1 1 . 1 MCJ L C24  ? -4.693  -0.281 1.997  1 28
+HETATM C C25  . MCJ L 1 1 . 1 MCJ L C25  ? -1.79   1.516  0.614  1 29
+HETATM C C27  . MCJ L 1 1 . 1 MCJ L C27  ? -3.893  -1.489 2.412  1 30
+HETATM C C30  . MCJ L 1 1 . 1 MCJ L C30  ? -3.756  0.915  1.819  1 31
+HETATM C C32  . MCJ L 1 1 . 1 MCJ L C32  ? 0.427   0.432  0.366  1 32
+HETATM O O33  . MCJ L 1 1 . 1 MCJ L O33  ? 1.453   0.054  -0.59  1 33
+HETATM C C34  . MCJ L 1 1 . 1 MCJ L C34  ? 2.491   -0.655 -0.12  1 34
+HETATM O O35  . MCJ L 1 1 . 1 MCJ L O35  ? 2.541   -0.951 1.051  1 35
+HETATM C C36  . MCJ L 1 1 . 1 MCJ L C36  ? 3.595   -1.083 -1.053 1 36
+HETATM N N37  . MCJ L 1 1 . 1 MCJ L N37  ? 4.602   -1.838 -0.303 1 37
+HETATM C C38  . MCJ L 1 1 . 1 MCJ L C38  ? 3.014   -1.966 -2.159 1 38
+HETATM O O39  . MCJ L 1 1 . 1 MCJ L O39  ? 2.307   -3.061 -1.572 1 39
+HETATM C C40  . MCJ L 1 1 . 1 MCJ L C40  ? 5.873   -1.893 -0.749 1 40
+HETATM O O41  . MCJ L 1 1 . 1 MCJ L O41  ? 6.183   -1.316 -1.773 1 41
+HETATM C C42  . MCJ L 1 1 . 1 MCJ L C42  ? 6.887   -2.653 0.005  1 42
+HETATM C C43  . MCJ L 1 1 . 1 MCJ L C43  ? 8.208   -2.713 -0.454 1 43
+HETATM C C44  . MCJ L 1 1 . 1 MCJ L C44  ? 9.156   -3.432 0.266  1 44
+HETATM C C45  . MCJ L 1 1 . 1 MCJ L C45  ? 8.791   -4.086 1.431  1 45
+HETATM C C46  . MCJ L 1 1 . 1 MCJ L C46  ? 7.484   -4.027 1.885  1 46
+HETATM C C47  . MCJ L 1 1 . 1 MCJ L C47  ? 6.535   -3.314 1.186  1 47
+HETATM O O48  . MCJ L 1 1 . 1 MCJ L O48  ? 8.562   -2.071 -1.597 1 48
+HETATM O O49  . MCJ L 1 1 . 1 MCJ L O49  ? 10.442  -3.495 -0.175 1 49
+HETATM H HN1  . MCJ L 1 1 . 1 MCJ L HN1  ? -0.123  2.693  -1.787 1 50
+HETATM H HN3  . MCJ L 1 1 . 1 MCJ L HN3  ? -4.97   -0.291 -0.108 1 51
+HETATM H HO3  . MCJ L 1 1 . 1 MCJ L HO3  ? -8.83   -3.385 0.916  1 52
+HETATM H HO6  . MCJ L 1 1 . 1 MCJ L HO6  ? -11.097 -2.408 -1.719 1 53
+HETATM H H7   . MCJ L 1 1 . 1 MCJ L H7   ? 2.451   7.969  -1.766 1 54
+HETATM H H9   . MCJ L 1 1 . 1 MCJ L H9   ? -9.042  -2.197 -3.882 1 55
+HETATM H H10  . MCJ L 1 1 . 1 MCJ L H10  ? 1.477   6.352  -3.344 1 56
+HETATM H H12  . MCJ L 1 1 . 1 MCJ L H12  ? -6.861  -1.059 -3.877 1 57
+HETATM H H13  . MCJ L 1 1 . 1 MCJ L H13  ? 0.54    4.235  -2.529 1 58
+HETATM H HO14 . MCJ L 1 1 . 1 MCJ L HO14 ? -2.683  -2.262 3.773  1 59
+HETATM H H15  . MCJ L 1 1 . 1 MCJ L H15  ? -5.712  -0.592 -1.759 1 60
+HETATM H H22  . MCJ L 1 1 . 1 MCJ L H22  ? -1.048  0.65   -1.189 1 61
+HETATM H H24  . MCJ L 1 1 . 1 MCJ L H24  ? -5.432  -0.053 2.766  1 62
+HETATM H H30  . MCJ L 1 1 . 1 MCJ L H30  ? -3.315  1.177  2.781  1 63
+HETATM H H30A . MCJ L 1 1 . 1 MCJ L H30A ? -4.32   1.764  1.434  1 64
+HETATM H H32  . MCJ L 1 1 . 1 MCJ L H32  ? 0.869   1.046  1.151  1 65
+HETATM H H32A . MCJ L 1 1 . 1 MCJ L H32A ? -0.007  -0.465 0.807  1 66
+HETATM H H36  . MCJ L 1 1 . 1 MCJ L H36  ? 4.057   -0.202 -1.497 1 67
+HETATM H HN37 . MCJ L 1 1 . 1 MCJ L HN37 ? 4.354   -2.299 0.514  1 68
+HETATM H H38  . MCJ L 1 1 . 1 MCJ L H38  ? 2.33    -1.378 -2.771 1 69
+HETATM H H38A . MCJ L 1 1 . 1 MCJ L H38A ? 3.823   -2.348 -2.781 1 70
+HETATM H HO39 . MCJ L 1 1 . 1 MCJ L HO39 ? 1.911   -3.664 -2.217 1 71
+HETATM H H45  . MCJ L 1 1 . 1 MCJ L H45  ? 9.529   -4.644 1.988  1 72
+HETATM H H46  . MCJ L 1 1 . 1 MCJ L H46  ? 7.208   -4.54  2.795  1 73
+HETATM H H47  . MCJ L 1 1 . 1 MCJ L H47  ? 5.519   -3.268 1.548  1 74
+HETATM H HO48 . MCJ L 1 1 . 1 MCJ L HO48 ? 8.859   -1.161 -1.462 1 75
+HETATM H HO49 . MCJ L 1 1 . 1 MCJ L HO49 ? 11.009  -2.789 0.164  1 76
+HETATM H H28  . MCJ L 1 1 . 1 MCJ L H28  ? 2.366   4.829  2.052  1 77
+HETATM H H29  . MCJ L 1 1 . 1 MCJ L H29  ? 3.552   7.537  0.981  1 78
+#

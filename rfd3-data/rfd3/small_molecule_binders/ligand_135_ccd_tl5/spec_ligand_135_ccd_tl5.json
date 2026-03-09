@@ -1,0 +1,10 @@
+{
+  "ligand_135_ccd_tl5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/TL5.cif",
+    "ligand": "TL5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "TL5": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_552_ccd_v10": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/V10.cif",
+    "ligand": "V10",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "V10": "ALL"
+    }
+  }
+}

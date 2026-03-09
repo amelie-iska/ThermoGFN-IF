@@ -1,0 +1,10 @@
+{
+  "ligand_216_ccd_fdj": {
+    "input": "./data/rfd3/ccd_ligands/structures/FDJ.cif",
+    "ligand": "FDJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "FDJ": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_092_ccd_0lr": {
+    "input": "./data/rfd3/ccd_ligands/structures/0LR.cif",
+    "ligand": "0LR",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0LR": "ALL"
+    }
+  }
+}

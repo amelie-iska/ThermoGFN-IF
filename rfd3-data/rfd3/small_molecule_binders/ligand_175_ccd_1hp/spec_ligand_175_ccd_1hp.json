@@ -1,0 +1,10 @@
+{
+  "ligand_175_ccd_1hp": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1HP.cif",
+    "ligand": "1HP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1HP": "ALL"
+    }
+  }
+}

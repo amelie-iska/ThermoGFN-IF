@@ -1,0 +1,10 @@
+{
+  "ligand_232_ccd_wws": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WWS.cif",
+    "ligand": "WWS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WWS": "ALL"
+    }
+  }
+}

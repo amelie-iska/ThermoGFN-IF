@@ -1,0 +1,10 @@
+{
+  "ligand_273_ccd_ucf": {
+    "input": "./data/rfd3/ccd_ligands/structures/UCF.cif",
+    "ligand": "UCF",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "UCF": "ALL"
+    }
+  }
+}

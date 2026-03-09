@@ -1,0 +1,10 @@
+{
+  "ligand_073_ccd_jcz": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/JCZ.cif",
+    "ligand": "JCZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "JCZ": "ALL"
+    }
+  }
+}

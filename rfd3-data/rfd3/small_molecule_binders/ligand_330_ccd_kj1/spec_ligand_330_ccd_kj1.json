@@ -1,0 +1,10 @@
+{
+  "ligand_330_ccd_kj1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/KJ1.cif",
+    "ligand": "KJ1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "KJ1": "ALL"
+    }
+  }
+}

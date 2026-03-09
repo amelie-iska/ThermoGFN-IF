@@ -1,0 +1,10 @@
+{
+  "ligand_047_ccd_yez": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/YEZ.cif",
+    "ligand": "YEZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YEZ": "ALL"
+    }
+  }
+}

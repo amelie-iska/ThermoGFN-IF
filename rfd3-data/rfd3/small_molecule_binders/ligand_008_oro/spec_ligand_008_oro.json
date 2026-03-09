@@ -1,0 +1,10 @@
+{
+  "ligand_008_oro": {
+    "input": "./models/foundry/models/rfd3/docs/input_pdbs/symmetry_examples/1j79_C2.pdb",
+    "ligand": "ORO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ORO": "ALL"
+    }
+  }
+}

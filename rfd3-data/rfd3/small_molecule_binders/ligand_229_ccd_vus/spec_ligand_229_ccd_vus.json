@@ -1,0 +1,10 @@
+{
+  "ligand_229_ccd_vus": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/VUS.cif",
+    "ligand": "VUS",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "VUS": "ALL"
+    }
+  }
+}

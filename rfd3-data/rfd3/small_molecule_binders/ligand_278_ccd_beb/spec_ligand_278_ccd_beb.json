@@ -1,0 +1,10 @@
+{
+  "ligand_278_ccd_beb": {
+    "input": "./data/rfd3/ccd_ligands/structures/BEB.cif",
+    "ligand": "BEB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BEB": "ALL"
+    }
+  }
+}

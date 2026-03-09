@@ -1,0 +1,10 @@
+{
+  "ligand_145_ccd_b77": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/B77.cif",
+    "ligand": "B77",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B77": "ALL"
+    }
+  }
+}

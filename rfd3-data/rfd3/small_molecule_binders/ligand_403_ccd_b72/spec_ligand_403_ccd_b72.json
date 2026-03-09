@@ -1,0 +1,10 @@
+{
+  "ligand_403_ccd_b72": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/B72.cif",
+    "ligand": "B72",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "B72": "ALL"
+    }
+  }
+}

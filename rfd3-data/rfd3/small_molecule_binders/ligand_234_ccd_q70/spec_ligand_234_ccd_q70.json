@@ -1,0 +1,10 @@
+{
+  "ligand_234_ccd_q70": {
+    "input": "./data/rfd3/ccd_ligands/structures/Q70.cif",
+    "ligand": "Q70",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "Q70": "ALL"
+    }
+  }
+}

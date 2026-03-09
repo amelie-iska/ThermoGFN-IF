@@ -1,0 +1,10 @@
+{
+  "ligand_287_ccd_dnd": {
+    "input": "./data/rfd3/ccd_ligands/structures/DND.cif",
+    "ligand": "DND",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DND": "ALL"
+    }
+  }
+}

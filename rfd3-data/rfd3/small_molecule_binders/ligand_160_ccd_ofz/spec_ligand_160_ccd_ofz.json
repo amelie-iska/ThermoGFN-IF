@@ -1,0 +1,10 @@
+{
+  "ligand_160_ccd_ofz": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/OFZ.cif",
+    "ligand": "OFZ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "OFZ": "ALL"
+    }
+  }
+}

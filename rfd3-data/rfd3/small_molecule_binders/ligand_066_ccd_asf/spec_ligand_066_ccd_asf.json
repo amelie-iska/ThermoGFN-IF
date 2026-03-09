@@ -1,0 +1,10 @@
+{
+  "ligand_066_ccd_asf": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ASF.cif",
+    "ligand": "ASF",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ASF": "ALL"
+    }
+  }
+}

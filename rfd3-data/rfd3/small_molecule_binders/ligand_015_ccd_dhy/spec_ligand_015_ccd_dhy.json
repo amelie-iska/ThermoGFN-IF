@@ -1,0 +1,10 @@
+{
+  "ligand_015_ccd_dhy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DHY.cif",
+    "ligand": "DHY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DHY": "ALL"
+    }
+  }
+}

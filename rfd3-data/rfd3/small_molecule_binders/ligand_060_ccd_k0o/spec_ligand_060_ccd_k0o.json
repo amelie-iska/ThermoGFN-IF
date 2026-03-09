@@ -1,0 +1,10 @@
+{
+  "ligand_060_ccd_k0o": {
+    "input": "./data/rfd3/ccd_ligands/structures/K0O.cif",
+    "ligand": "K0O",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "K0O": "ALL"
+    }
+  }
+}

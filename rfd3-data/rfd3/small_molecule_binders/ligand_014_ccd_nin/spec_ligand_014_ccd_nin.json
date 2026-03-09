@@ -1,0 +1,10 @@
+{
+  "ligand_014_ccd_nin": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/NIN.cif",
+    "ligand": "NIN",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NIN": "ALL"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1  . VUS L 1 1 . 1 VUS L N1  ?  1.011  2.732  0.06   1 1
+HETATM C C4  . VUS L 1 1 . 1 VUS L C4  ?  1.594  2.403  1.385  1 2
+HETATM C C5  . VUS L 1 1 . 1 VUS L C5  ?  1.105  0.955  1.637  1 3
+HETATM C C6  . VUS L 1 1 . 1 VUS L C6  ?  1.179  0.312  0.233  1 4
+HETATM C C7  . VUS L 1 1 . 1 VUS L C7  ?  0.056  -0.695 -0.019 1 5
+HETATM C C8  . VUS L 1 1 . 1 VUS L C8  ?  -1.294 0.022  0.036  1 6
+HETATM O O   . VUS L 1 1 . 1 VUS L O   ?  2.437  -2.482 -0.854 1 7
+HETATM C C   . VUS L 1 1 . 1 VUS L C   ?  2.504  -1.812 0.15   1 8
+HETATM O O1  . VUS L 1 1 . 1 VUS L O1  ?  2.511  -2.405 1.354  1 9
+HETATM C C1  . VUS L 1 1 . 1 VUS L C1  ?  2.58   -0.31  0.049  1 10
+HETATM C C3  . VUS L 1 1 . 1 VUS L C3  ?  1.14   1.506  -0.755 1 11
+HETATM C C2  . VUS L 1 1 . 1 VUS L C2  ?  2.523  1.499  -1.44  1 12
+HETATM N N   . VUS L 1 1 . 1 VUS L N   ?  2.997  0.097  -1.317 1 13
+HETATM C C9  . VUS L 1 1 . 1 VUS L C9  ?  -2.42  -0.992 -0.179 1 14
+HETATM B B   . VUS L 1 1 . 1 VUS L B   -1 -3.829 -0.243 -0.121 1 15
+HETATM O O4  . VUS L 1 1 . 1 VUS L O4  ?  -4.835 -1.149 -0.313 1 16
+HETATM O O3  . VUS L 1 1 . 1 VUS L O3  ?  -3.979 0.352  1.101  1 17
+HETATM O O2  . VUS L 1 1 . 1 VUS L O2  ?  -3.88  0.709  -1.1   1 18
+HETATM H H1  . VUS L 1 1 . 1 VUS L H1  ?  1.501  3.504  -0.368 1 19
+HETATM H H3  . VUS L 1 1 . 1 VUS L H3  ?  2.682  2.441  1.348  1 20
+HETATM H H4  . VUS L 1 1 . 1 VUS L H4  ?  1.213  3.079  2.151  1 21
+HETATM H H5  . VUS L 1 1 . 1 VUS L H5  ?  1.769  0.44   2.332  1 22
+HETATM H H6  . VUS L 1 1 . 1 VUS L H6  ?  0.082  0.953  2.011  1 23
+HETATM H H7  . VUS L 1 1 . 1 VUS L H7  ?  0.187  -1.147 -1.003 1 24
+HETATM H H8  . VUS L 1 1 . 1 VUS L H8  ?  0.086  -1.472 0.744  1 25
+HETATM H H9  . VUS L 1 1 . 1 VUS L H9  ?  -1.414 0.496  1.01   1 26
+HETATM H H10 . VUS L 1 1 . 1 VUS L H10 ?  -1.335 0.781  -0.745 1 27
+HETATM H H11 . VUS L 1 1 . 1 VUS L H11 ?  2.461  -3.371 1.368  1 28
+HETATM H H12 . VUS L 1 1 . 1 VUS L H12 ?  3.272  0.086  0.793  1 29
+HETATM H H13 . VUS L 1 1 . 1 VUS L H13 ?  0.323  1.411  -1.47  1 30
+HETATM H H14 . VUS L 1 1 . 1 VUS L H14 ?  2.428  1.777  -2.49  1 31
+HETATM H H15 . VUS L 1 1 . 1 VUS L H15 ?  3.204  2.179  -0.928 1 32
+HETATM H H16 . VUS L 1 1 . 1 VUS L H16 ?  2.569  -0.492 -2.016 1 33
+HETATM H H18 . VUS L 1 1 . 1 VUS L H18 ?  -2.3   -1.466 -1.153 1 34
+HETATM H H19 . VUS L 1 1 . 1 VUS L H19 ?  -2.379 -1.751 0.602  1 35
+HETATM H H21 . VUS L 1 1 . 1 VUS L H21 ?  -4.815 0.826  1.207  1 36
+HETATM H H22 . VUS L 1 1 . 1 VUS L H22 ?  -3.194 1.387  -1.026 1 37
+HETATM H H2  . VUS L 1 1 . 1 VUS L H2  ?  -4.859 -1.855 0.347  1 38
+#

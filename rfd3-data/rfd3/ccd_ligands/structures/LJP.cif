@@ -1,0 +1,67 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . LJP L 1 1 . 1 LJP L C1  ? 5.447  -1.219 0.139  1 1
+HETATM O O1  . LJP L 1 1 . 1 LJP L O1  ? 4.156  0.783  -0.165 1 2
+HETATM C C2  . LJP L 1 1 . 1 LJP L C2  ? 4.092  -0.523 0.368  1 3
+HETATM N N2  . LJP L 1 1 . 1 LJP L N2  ? -1.943 -0.368 -0.042 1 4
+HETATM C C3  . LJP L 1 1 . 1 LJP L C3  ? 3.822  -0.497 1.875  1 5
+HETATM O O3  . LJP L 1 1 . 1 LJP L O3  ? -2.406 1.803  0.049  1 6
+HETATM C C4  . LJP L 1 1 . 1 LJP L C4  ? 3.008  -1.357 -0.327 1 7
+HETATM C C5  . LJP L 1 1 . 1 LJP L C5  ? 1.725  -0.548 -0.24  1 8
+HETATM C C6  . LJP L 1 1 . 1 LJP L C6  ? 1.748  0.791  -0.206 1 9
+HETATM C C7  . LJP L 1 1 . 1 LJP L C7  ? 3.017  1.614  -0.26  1 10
+HETATM C C8  . LJP L 1 1 . 1 LJP L C8  ? 3.005  2.649  0.873  1 11
+HETATM C C16 . LJP L 1 1 . 1 LJP L C16 ? -5.296 1.356  0.189  1 12
+HETATM C C15 . LJP L 1 1 . 1 LJP L C15 ? -6.45  0.65   0.229  1 13
+HETATM N N4  . LJP L 1 1 . 1 LJP L N4  ? -6.121 -0.658 0.172  1 14
+HETATM N N3  . LJP L 1 1 . 1 LJP L N3  ? -4.846 -0.793 0.1    1 15
+HETATM C C14 . LJP L 1 1 . 1 LJP L C14 ? -4.265 0.391  0.105  1 16
+HETATM C C13 . LJP L 1 1 . 1 LJP L C13 ? -2.814 0.658  0.036  1 17
+HETATM C C10 . LJP L 1 1 . 1 LJP L C10 ? -0.582 -0.117 -0.106 1 18
+HETATM S S1  . LJP L 1 1 . 1 LJP L S1  ? 0.119  1.435  -0.096 1 19
+HETATM C C9  . LJP L 1 1 . 1 LJP L C9  ? 3.053  2.372  -1.601 1 20
+HETATM C C11 . LJP L 1 1 . 1 LJP L C11 ? 0.383  -1.085 -0.189 1 21
+HETATM C C12 . LJP L 1 1 . 1 LJP L C12 ? 0.075  -2.518 -0.223 1 22
+HETATM O O2  . LJP L 1 1 . 1 LJP L O2  ? 0.002  -3.15  0.814  1 23
+HETATM N N1  . LJP L 1 1 . 1 LJP L N1  ? -0.127 -3.135 -1.404 1 24
+HETATM H H1  . LJP L 1 1 . 1 LJP L H1  ? 6.234  -0.655 0.639  1 25
+HETATM H H2  . LJP L 1 1 . 1 LJP L H2  ? 5.409  -2.23  0.546  1 26
+HETATM H H3  . LJP L 1 1 . 1 LJP L H3  ? 5.655  -1.265 -0.93  1 27
+HETATM H H4  . LJP L 1 1 . 1 LJP L H4  ? 4.617  0.054  2.377  1 28
+HETATM H H5  . LJP L 1 1 . 1 LJP L H5  ? 2.866  -0.008 2.064  1 29
+HETATM H H6  . LJP L 1 1 . 1 LJP L H6  ? 3.789  -1.518 2.256  1 30
+HETATM H H7  . LJP L 1 1 . 1 LJP L H7  ? 3.278  -1.524 -1.369 1 31
+HETATM H H8  . LJP L 1 1 . 1 LJP L H8  ? 2.893  -2.309 0.189  1 32
+HETATM H H10 . LJP L 1 1 . 1 LJP L H10 ? 3.9    3.268  0.81   1 33
+HETATM H H11 . LJP L 1 1 . 1 LJP L H11 ? 2.12   3.279  0.781  1 34
+HETATM H H12 . LJP L 1 1 . 1 LJP L H12 ? 2.987  2.135  1.834  1 35
+HETATM H H13 . LJP L 1 1 . 1 LJP L H13 ? -5.186 2.43   0.211  1 36
+HETATM H H14 . LJP L 1 1 . 1 LJP L H14 ? -7.448 1.058  0.295  1 37
+HETATM H H15 . LJP L 1 1 . 1 LJP L H15 ? -6.757 -1.391 0.184  1 38
+HETATM H H16 . LJP L 1 1 . 1 LJP L H16 ? 3.054  1.657  -2.423 1 39
+HETATM H H17 . LJP L 1 1 . 1 LJP L H17 ? 2.176  3.015  -1.679 1 40
+HETATM H H18 . LJP L 1 1 . 1 LJP L H18 ? 3.956  2.982  -1.649 1 41
+HETATM H H19 . LJP L 1 1 . 1 LJP L H19 ? -0.069 -2.632 -2.231 1 42
+HETATM H H20 . LJP L 1 1 . 1 LJP L H20 ? -0.331 -4.083 -1.427 1 43
+HETATM H H21 . LJP L 1 1 . 1 LJP L H21 ? -2.269 -1.281 -0.052 1 44
+#

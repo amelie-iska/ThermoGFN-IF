@@ -1,0 +1,10 @@
+{
+  "ligand_254_ccd_l5f": {
+    "input": "./data/rfd3/ccd_ligands/structures/L5F.cif",
+    "ligand": "L5F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "L5F": "ALL"
+    }
+  }
+}

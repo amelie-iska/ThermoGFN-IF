@@ -1,0 +1,10 @@
+{
+  "ligand_195_ccd_a1a77": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1A77.cif",
+    "ligand": "A1A77",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1A77": "ALL"
+    }
+  }
+}

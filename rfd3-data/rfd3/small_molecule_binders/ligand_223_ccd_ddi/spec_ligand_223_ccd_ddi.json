@@ -1,0 +1,10 @@
+{
+  "ligand_223_ccd_ddi": {
+    "input": "./data/rfd3/ccd_ligands/structures/DDI.cif",
+    "ligand": "DDI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DDI": "ALL"
+    }
+  }
+}

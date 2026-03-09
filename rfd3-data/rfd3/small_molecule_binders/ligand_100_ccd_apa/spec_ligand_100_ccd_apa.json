@@ -1,0 +1,10 @@
+{
+  "ligand_100_ccd_apa": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/APA.cif",
+    "ligand": "APA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "APA": "ALL"
+    }
+  }
+}

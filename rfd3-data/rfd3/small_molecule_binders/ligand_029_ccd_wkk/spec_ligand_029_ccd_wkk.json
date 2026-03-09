@@ -1,0 +1,10 @@
+{
+  "ligand_029_ccd_wkk": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/WKK.cif",
+    "ligand": "WKK",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WKK": "ALL"
+    }
+  }
+}

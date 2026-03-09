@@ -1,0 +1,10 @@
+{
+  "ligand_255_ccd_3bp": {
+    "input": "./data/rfd3/ccd_ligands/structures/3BP.cif",
+    "ligand": "3BP",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3BP": "ALL"
+    }
+  }
+}

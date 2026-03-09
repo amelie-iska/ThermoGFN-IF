@@ -1,0 +1,10 @@
+{
+  "ligand_038_ccd_mua": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/MUA.cif",
+    "ligand": "MUA",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MUA": "ALL"
+    }
+  }
+}

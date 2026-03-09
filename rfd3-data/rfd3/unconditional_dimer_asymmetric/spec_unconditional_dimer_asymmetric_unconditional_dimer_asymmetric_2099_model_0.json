@@ -1,0 +1,36 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.14959383010864258,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 1,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "non_loop_fraction": 0.6709677419354838,
+        "loop_fraction": 0.32903225806451614,
+        "helix_fraction": 0.4967741935483871,
+        "sheet_fraction": 0.17419354838709677,
+        "num_ss_elements": 32,
+        "radius_of_gyration": 21.255449891276005,
+        "alanine_content": 0.27741935483870966,
+        "glycine_content": 0.07741935483870968,
+        "num_residues": 465,
+        "diffused_com": [
+            -0.8409348130226135,
+            2.2741169929504395,
+            -1.9471176862716675
+        ]
+    },
+    "specification": {
+        "dialect": 1,
+        "contig": "20-400,/0,20-400",
+        "length": null,
+        "extra": {
+            "example": "unconditional_dimer_asymmetric",
+            "task_name": "spec_unconditional_dimer_asymmetric_unconditional_dimer_asymmetric",
+            "example_id": "spec_unconditional_dimer_asymmetric_unconditional_dimer_asymmetric_2099"
+        },
+        "cif_parser_args": null
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

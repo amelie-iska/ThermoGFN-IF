@@ -1,0 +1,10 @@
+{
+  "ligand_207_ccd_dsy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DSY.cif",
+    "ligand": "DSY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DSY": "ALL"
+    }
+  }
+}

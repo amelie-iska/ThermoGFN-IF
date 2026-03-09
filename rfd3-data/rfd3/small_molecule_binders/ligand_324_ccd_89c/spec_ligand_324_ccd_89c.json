@@ -1,0 +1,10 @@
+{
+  "ligand_324_ccd_89c": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/89C.cif",
+    "ligand": "89C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "89C": "ALL"
+    }
+  }
+}

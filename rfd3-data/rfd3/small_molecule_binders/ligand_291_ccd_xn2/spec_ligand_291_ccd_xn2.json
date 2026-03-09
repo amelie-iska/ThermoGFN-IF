@@ -1,0 +1,10 @@
+{
+  "ligand_291_ccd_xn2": {
+    "input": "./data/rfd3/ccd_ligands/structures/XN2.cif",
+    "ligand": "XN2",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XN2": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_558_ccd_2eo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/2EO.cif",
+    "ligand": "2EO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "2EO": "ALL"
+    }
+  }
+}

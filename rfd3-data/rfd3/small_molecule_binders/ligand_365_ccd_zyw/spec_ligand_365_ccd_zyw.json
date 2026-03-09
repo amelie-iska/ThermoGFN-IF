@@ -1,0 +1,10 @@
+{
+  "ligand_365_ccd_zyw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZYW.cif",
+    "ligand": "ZYW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZYW": "ALL"
+    }
+  }
+}

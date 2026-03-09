@@ -1,0 +1,10 @@
+{
+  "ligand_369_ccd_tg4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/TG4.cif",
+    "ligand": "TG4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "TG4": "ALL"
+    }
+  }
+}

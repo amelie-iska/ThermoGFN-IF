@@ -1,0 +1,10 @@
+{
+  "ligand_142_ccd_a1f": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1F.cif",
+    "ligand": "A1F",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1F": "ALL"
+    }
+  }
+}

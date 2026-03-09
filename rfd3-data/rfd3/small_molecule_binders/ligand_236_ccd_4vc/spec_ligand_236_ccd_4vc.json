@@ -1,0 +1,10 @@
+{
+  "ligand_236_ccd_4vc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4VC.cif",
+    "ligand": "4VC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4VC": "ALL"
+    }
+  }
+}

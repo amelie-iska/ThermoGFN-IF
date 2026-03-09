@@ -1,0 +1,10 @@
+{
+  "ligand_142_ccd_a1aj3": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1AJ3.cif",
+    "ligand": "A1AJ3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1AJ3": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_357_ccd_6ob": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/6OB.cif",
+    "ligand": "6OB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "6OB": "ALL"
+    }
+  }
+}

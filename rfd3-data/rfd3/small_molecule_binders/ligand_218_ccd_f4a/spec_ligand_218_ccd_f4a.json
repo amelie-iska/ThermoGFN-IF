@@ -1,0 +1,10 @@
+{
+  "ligand_218_ccd_f4a": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/F4A.cif",
+    "ligand": "F4A",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "F4A": "ALL"
+    }
+  }
+}

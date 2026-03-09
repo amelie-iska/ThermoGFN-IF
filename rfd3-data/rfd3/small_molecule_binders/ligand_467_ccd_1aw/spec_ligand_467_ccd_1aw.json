@@ -1,0 +1,10 @@
+{
+  "ligand_467_ccd_1aw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1AW.cif",
+    "ligand": "1AW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1AW": "ALL"
+    }
+  }
+}

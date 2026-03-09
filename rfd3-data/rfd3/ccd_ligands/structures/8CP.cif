@@ -1,0 +1,68 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1    . 8CP L 1 1 . 1 8CP L N1    ? 5.069  -0.636 0.674  1 1
+HETATM C C2    . 8CP L 1 1 . 1 8CP L C2    ? 5.251  -0.771 -0.653 1 2
+HETATM N N3    . 8CP L 1 1 . 1 8CP L N3    ? 6.022  -1.738 -1.146 1 3
+HETATM C C4    . 8CP L 1 1 . 1 8CP L C4    ? 6.633  -2.595 -0.339 1 4
+HETATM C C5    . 8CP L 1 1 . 1 8CP L C5    ? 6.464  -2.481 1.056  1 5
+HETATM C C6    . 8CP L 1 1 . 1 8CP L C6    ? 5.676  -1.493 1.542  1 6
+HETATM O O2    . 8CP L 1 1 . 1 8CP L O2    ? 4.7    0.005  -1.416 1 7
+HETATM N N4    . 8CP L 1 1 . 1 8CP L N4    ? 7.428  -3.59  -0.86  1 8
+HETATM C "C1'" . 8CP L 1 1 . 1 8CP L "C1'" ? 4.219  0.441  1.187  1 9
+HETATM C "C2'" . 8CP L 1 1 . 1 8CP L "C2'" ? 4.797  1.818  0.79   1 10
+HETATM C "C3'" . 8CP L 1 1 . 1 8CP L "C3'" ? 3.548  2.676  0.488  1 11
+HETATM C "C4'" . 8CP L 1 1 . 1 8CP L "C4'" ? 2.364  1.717  0.738  1 12
+HETATM O "O4'" . 8CP L 1 1 . 1 8CP L "O4'" ? 2.917  0.394  0.563  1 13
+HETATM O "O3'" . 8CP L 1 1 . 1 8CP L "O3'" ? 3.483  3.794  1.376  1 14
+HETATM C "C5'" . 8CP L 1 1 . 1 8CP L "C5'" ? 1.251  1.968  -0.282 1 15
+HETATM O "O5'" . 8CP L 1 1 . 1 8CP L "O5'" ? 0.121  1.154  0.036  1 16
+HETATM P PA    . 8CP L 1 1 . 1 8CP L PA    ? -1.237 1.161  -0.83  1 17
+HETATM O O1A   . 8CP L 1 1 . 1 8CP L O1A   ? -1.752 2.545  -0.928 1 18
+HETATM O O2A   . 8CP L 1 1 . 1 8CP L O2A   ? -0.934 0.595  -2.306 1 19
+HETATM O O3A   . 8CP L 1 1 . 1 8CP L O3A   ? -2.336 0.229  -0.112 1 20
+HETATM P PB    . 8CP L 1 1 . 1 8CP L PB    ? -3.928 0.052  -0.272 1 21
+HETATM O O1B   . 8CP L 1 1 . 1 8CP L O1B   ? -4.658 1.452  0.041  1 22
+HETATM O O2B   . 8CP L 1 1 . 1 8CP L O2B   ? -4.241 -0.369 -1.656 1 23
+HETATM P PG    . 8CP L 1 1 . 1 8CP L PG    ? -6.137 -1.336 0.672  1 24
+HETATM O O1G   . 8CP L 1 1 . 1 8CP L O1G   ? -6.826 -0.06  0.968  1 25
+HETATM O O2G   . 8CP L 1 1 . 1 8CP L O2G   ? -6.618 -2.461 1.719  1 26
+HETATM O O3G   . 8CP L 1 1 . 1 8CP L O3G   ? -6.497 -1.806 -0.825 1 27
+HETATM N N3B   . 8CP L 1 1 . 1 8CP L N3B   ? -4.473 -1.119 0.807  1 28
+HETATM H H1    . 8CP L 1 1 . 1 8CP L H1    ? 6.955  -3.171 1.726  1 29
+HETATM H H2    . 8CP L 1 1 . 1 8CP L H2    ? 5.53   -1.385 2.607  1 30
+HETATM H H3    . 8CP L 1 1 . 1 8CP L H3    ? 7.542  -3.667 -1.821 1 31
+HETATM H H4    . 8CP L 1 1 . 1 8CP L H4    ? 7.873  -4.215 -0.268 1 32
+HETATM H H5    . 8CP L 1 1 . 1 8CP L H5    ? 4.124  0.365  2.27   1 33
+HETATM H H6    . 8CP L 1 1 . 1 8CP L H6    ? 5.364  2.246  1.617  1 34
+HETATM H H7    . 8CP L 1 1 . 1 8CP L H7    ? 5.423  1.728  -0.098 1 35
+HETATM H H8    . 8CP L 1 1 . 1 8CP L H8    ? 3.557  3.011  -0.549 1 36
+HETATM H H9    . 8CP L 1 1 . 1 8CP L H9    ? 1.983  1.84   1.752  1 37
+HETATM H H10   . 8CP L 1 1 . 1 8CP L H10   ? 4.234  4.398  1.304  1 38
+HETATM H H11   . 8CP L 1 1 . 1 8CP L H11   ? 0.962  3.018  -0.253 1 39
+HETATM H H12   . 8CP L 1 1 . 1 8CP L H12   ? 1.61   1.717  -1.28  1 40
+HETATM H H13   . 8CP L 1 1 . 1 8CP L H13   ? -0.593 -0.309 -2.319 1 41
+HETATM H H14   . 8CP L 1 1 . 1 8CP L H14   ? -4.496 1.789  0.933  1 42
+HETATM H H15   . 8CP L 1 1 . 1 8CP L H15   ? -7.569 -2.638 1.696  1 43
+HETATM H H16   . 8CP L 1 1 . 1 8CP L H16   ? -6.079 -2.637 -1.087 1 44
+HETATM H H17   . 8CP L 1 1 . 1 8CP L H17   ? -3.983 -1.991 0.673  1 45
+#

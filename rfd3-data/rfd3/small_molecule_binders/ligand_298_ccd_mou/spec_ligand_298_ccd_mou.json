@@ -1,0 +1,10 @@
+{
+  "ligand_298_ccd_mou": {
+    "input": "./data/rfd3/ccd_ligands/structures/MOU.cif",
+    "ligand": "MOU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MOU": "ALL"
+    }
+  }
+}

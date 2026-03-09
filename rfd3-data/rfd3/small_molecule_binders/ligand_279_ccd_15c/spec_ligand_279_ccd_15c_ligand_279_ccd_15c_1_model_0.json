@@ -1,0 +1,52 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.07670354843139648,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.0482726097106934,
+        "non_loop_fraction": 0.6818181818181819,
+        "loop_fraction": 0.3181818181818182,
+        "helix_fraction": 0.4772727272727273,
+        "sheet_fraction": 0.20454545454545456,
+        "num_ss_elements": 12,
+        "radius_of_gyration": 15.19376457096298,
+        "alanine_content": 0.26136363636363635,
+        "glycine_content": 0.05113636363636364,
+        "num_residues": 176,
+        "diffused_com": [
+            -1.0677746534347534,
+            -0.5092859268188477,
+            3.414120674133301
+        ],
+        "fixed_com": [
+            0.0009300595265813172,
+            -0.00016276042151730508,
+            5.449567652249243e-06
+        ]
+    },
+    "specification": {
+        "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/15C.cif",
+        "length": "20-400",
+        "ligand": "15C",
+        "extra": {
+            "example": "ligand_279_ccd_15c",
+            "task_name": "spec_ligand_279_ccd_15c_ligand_279_ccd_15c",
+            "sampled_contig": "176",
+            "num_tokens_in": 177,
+            "num_residues_in": 177,
+            "num_chains": 2,
+            "num_atoms": 901,
+            "num_residues": 179,
+            "example_id": "spec_ligand_279_ccd_15c_ligand_279_ccd_15c_1"
+        },
+        "select_fixed_atoms": {
+            "15C": "ALL"
+        },
+        "select_unfixed_sequence": false
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}

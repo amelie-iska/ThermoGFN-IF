@@ -1,0 +1,10 @@
+{
+  "ligand_548_ccd_gg3": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/GG3.cif",
+    "ligand": "GG3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "GG3": "ALL"
+    }
+  }
+}

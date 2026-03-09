@@ -1,0 +1,59 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . U8R L 1 1 . 1 U8R L C1  ? 1.764  0.144  -1.765 1 1
+HETATM C C2  . U8R L 1 1 . 1 U8R L C2  ? 2.645  0.143  -0.694 1 2
+HETATM C C3  . U8R L 1 1 . 1 U8R L C3  ? 2.185  0.428  0.584  1 3
+HETATM C C7  . U8R L 1 1 . 1 U8R L C7  ? -3.153 2.632  0.116  1 4
+HETATM C C8  . U8R L 1 1 . 1 U8R L C8  ? -4.086 1.674  0.333  1 5
+HETATM C C9  . U8R L 1 1 . 1 U8R L C9  ? -3.662 0.272  0.352  1 6
+HETATM C C10 . U8R L 1 1 . 1 U8R L C10 ? -2.287 -0.026 0.142  1 7
+HETATM C C11 . U8R L 1 1 . 1 U8R L C11 ? -2.195 -1.378 0.214  1 8
+HETATM C C12 . U8R L 1 1 . 1 U8R L C12 ? -0.942 -2.2   0.058  1 9
+HETATM C C13 . U8R L 1 1 . 1 U8R L C13 ? -0.856 -3.136 -1.149 1 10
+HETATM C C14 . U8R L 1 1 . 1 U8R L C14 ? -1.061 -3.713 0.253  1 11
+HETATM C C15 . U8R L 1 1 . 1 U8R L C15 ? 4.811  -0.121 0.252  1 12
+HETATM F F1  . U8R L 1 1 . 1 U8R L F1  ? 4.783  1.151  0.835  1 13
+HETATM F F   . U8R L 1 1 . 1 U8R L F   ? 4.363  -1.069 1.178  1 14
+HETATM O O1  . U8R L 1 1 . 1 U8R L O1  ? 3.96   -0.137 -0.896 1 15
+HETATM C C4  . U8R L 1 1 . 1 U8R L C4  ? 0.85   0.712  0.79   1 16
+HETATM C C5  . U8R L 1 1 . 1 U8R L C5  ? -0.033 0.713  -0.282 1 17
+HETATM C C   . U8R L 1 1 . 1 U8R L C   ? 0.429  0.434  -1.562 1 18
+HETATM N N   . U8R L 1 1 . 1 U8R L N   ? -1.386 1.007  -0.075 1 19
+HETATM N N1  . U8R L 1 1 . 1 U8R L N1  ? -3.439 -1.848 0.452  1 20
+HETATM N N2  . U8R L 1 1 . 1 U8R L N2  ? -4.28  -0.877 0.53   1 21
+HETATM C C6  . U8R L 1 1 . 1 U8R L C6  ? -1.8   2.287  -0.087 1 22
+HETATM O O   . U8R L 1 1 . 1 U8R L O   ? -0.984 3.172  -0.28  1 23
+HETATM H H1  . U8R L 1 1 . 1 U8R L H1  ? 2.123  -0.077 -2.76  1 24
+HETATM H H2  . U8R L 1 1 . 1 U8R L H2  ? 2.872  0.426  1.417  1 25
+HETATM H H3  . U8R L 1 1 . 1 U8R L H3  ? -3.449 3.671  0.094  1 26
+HETATM H H4  . U8R L 1 1 . 1 U8R L H4  ? -5.121 1.938  0.489  1 27
+HETATM H H5  . U8R L 1 1 . 1 U8R L H5  ? -0.021 -1.721 0.39   1 28
+HETATM H H6  . U8R L 1 1 . 1 U8R L H6  ? -1.706 -3.157 -1.831 1 29
+HETATM H H7  . U8R L 1 1 . 1 U8R L H7  ? 0.121  -3.272 -1.612 1 30
+HETATM H H8  . U8R L 1 1 . 1 U8R L H8  ? -0.218 -4.229 0.712  1 31
+HETATM H H9  . U8R L 1 1 . 1 U8R L H9  ? -2.046 -4.114 0.493  1 32
+HETATM H H10 . U8R L 1 1 . 1 U8R L H10 ? 5.831  -0.361 -0.049 1 33
+HETATM H H11 . U8R L 1 1 . 1 U8R L H11 ? 0.493  0.933  1.785  1 34
+HETATM H H12 . U8R L 1 1 . 1 U8R L H12 ? -0.257 0.435  -2.396 1 35
+HETATM H H13 . U8R L 1 1 . 1 U8R L H13 ? -3.667 -2.786 0.55   1 36
+#

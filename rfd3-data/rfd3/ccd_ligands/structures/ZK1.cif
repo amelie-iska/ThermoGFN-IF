@@ -1,0 +1,65 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O OAA  . ZK1 L 1 1 . 1 ZK1 L OAA  ? -3.807 -3.413 0.24   1 1
+HETATM O OAB  . ZK1 L 1 1 . 1 ZK1 L OAB  ? -4.346 -0.826 0.875  1 2
+HETATM O OAC  . ZK1 L 1 1 . 1 ZK1 L OAC  ? -1.72  1.898  -1.454 1 3
+HETATM O OAD  . ZK1 L 1 1 . 1 ZK1 L OAD  ? -3.009 3.618  -0.132 1 4
+HETATM O OAE  . ZK1 L 1 1 . 1 ZK1 L OAE  ? -4.196 1.509  -1.158 1 5
+HETATM F FAF  . ZK1 L 1 1 . 1 ZK1 L FAF  ? 3.149  -3.262 -0.748 1 6
+HETATM F FAG  . ZK1 L 1 1 . 1 ZK1 L FAG  ? 3.93   -1.646 0.666  1 7
+HETATM F FAH  . ZK1 L 1 1 . 1 ZK1 L FAH  ? 3.609  -1.171 -1.545 1 8
+HETATM C CAI  . ZK1 L 1 1 . 1 ZK1 L CAI  ? 0.135  0.248  0.445  1 9
+HETATM C CAJ  . ZK1 L 1 1 . 1 ZK1 L CAJ  ? 0.689  -2.397 -0.205 1 10
+HETATM C CAK  . ZK1 L 1 1 . 1 ZK1 L CAK  ? 3.765  2.355  1.589  1 11
+HETATM C CAL  . ZK1 L 1 1 . 1 ZK1 L CAL  ? 3.478  2.799  -0.747 1 12
+HETATM C CAM  . ZK1 L 1 1 . 1 ZK1 L CAM  ? 2.582  1.384  1.562  1 13
+HETATM C CAN  . ZK1 L 1 1 . 1 ZK1 L CAN  ? 2.292  1.833  -0.798 1 14
+HETATM C CAO  . ZK1 L 1 1 . 1 ZK1 L CAO  ? -2.475 1.117  1.022  1 15
+HETATM N NAP  . ZK1 L 1 1 . 1 ZK1 L NAP  ? -1.644 -2.952 -0.002 1 16
+HETATM O OAQ  . ZK1 L 1 1 . 1 ZK1 L OAQ  ? 3.587  3.343  0.571  1 17
+HETATM C CAR  . ZK1 L 1 1 . 1 ZK1 L CAR  ? 1.435  -0.146 0.171  1 18
+HETATM C CAS  . ZK1 L 1 1 . 1 ZK1 L CAS  ? 1.709  -1.471 -0.154 1 19
+HETATM C CAT  . ZK1 L 1 1 . 1 ZK1 L CAT  ? -2.913 -2.591 0.277  1 20
+HETATM C CAU  . ZK1 L 1 1 . 1 ZK1 L CAU  ? -3.208 -1.173 0.631  1 21
+HETATM C CAV  . ZK1 L 1 1 . 1 ZK1 L CAV  ? -0.62  -2.009 0.063  1 22
+HETATM C CAW  . ZK1 L 1 1 . 1 ZK1 L CAW  ? -0.897 -0.682 0.395  1 23
+HETATM N NAX  . ZK1 L 1 1 . 1 ZK1 L NAX  ? 2.473  0.789  0.222  1 24
+HETATM N NAY  . ZK1 L 1 1 . 1 ZK1 L NAY  ? -2.2   -0.279 0.677  1 25
+HETATM C CAZ  . ZK1 L 1 1 . 1 ZK1 L CAZ  ? 3.125  -1.895 -0.451 1 26
+HETATM P PBA  . ZK1 L 1 1 . 1 ZK1 L PBA  ? -2.836 2.06   -0.496 1 27
+HETATM H HOAD . ZK1 L 1 1 . 1 ZK1 L HOAD ? -3.204 4.181  -0.894 1 28
+HETATM H HOAE . ZK1 L 1 1 . 1 ZK1 L HOAE ? -4.971 1.584  -0.585 1 29
+HETATM H HAI  . ZK1 L 1 1 . 1 ZK1 L HAI  ? -0.075 1.276  0.701  1 30
+HETATM H HAJ  . ZK1 L 1 1 . 1 ZK1 L HAJ  ? 0.905  -3.424 -0.461 1 31
+HETATM H HAK  . ZK1 L 1 1 . 1 ZK1 L HAK  ? 3.815  2.841  2.563  1 32
+HETATM H HAKA . ZK1 L 1 1 . 1 ZK1 L HAKA ? 4.69   1.807  1.407  1 33
+HETATM H HAL  . ZK1 L 1 1 . 1 ZK1 L HAL  ? 4.394  2.265  -0.997 1 34
+HETATM H HALA . ZK1 L 1 1 . 1 ZK1 L HALA ? 3.321  3.606  -1.463 1 35
+HETATM H HAM  . ZK1 L 1 1 . 1 ZK1 L HAM  ? 2.741  0.595  2.298  1 36
+HETATM H HAMA . ZK1 L 1 1 . 1 ZK1 L HAMA ? 1.664  1.922  1.797  1 37
+HETATM H HAN  . ZK1 L 1 1 . 1 ZK1 L HAN  ? 1.369  2.378  -0.6   1 38
+HETATM H HANA . ZK1 L 1 1 . 1 ZK1 L HANA ? 2.239  1.373  -1.785 1 39
+HETATM H HAO  . ZK1 L 1 1 . 1 ZK1 L HAO  ? -3.334 1.163  1.691  1 40
+HETATM H HAOA . ZK1 L 1 1 . 1 ZK1 L HAOA ? -1.605 1.547  1.518  1 41
+HETATM H HNAP . ZK1 L 1 1 . 1 ZK1 L HNAP ? -1.442 -3.872 -0.232 1 42
+#

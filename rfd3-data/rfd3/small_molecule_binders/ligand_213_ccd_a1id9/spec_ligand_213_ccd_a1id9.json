@@ -1,0 +1,10 @@
+{
+  "ligand_213_ccd_a1id9": {
+    "input": "./data/rfd3/ccd_ligands/structures/A1ID9.cif",
+    "ligand": "A1ID9",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1ID9": "ALL"
+    }
+  }
+}

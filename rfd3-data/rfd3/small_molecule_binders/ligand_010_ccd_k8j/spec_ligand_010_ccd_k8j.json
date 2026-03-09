@@ -1,0 +1,10 @@
+{
+  "ligand_010_ccd_k8j": {
+    "input": "./data/rfd3/ccd_ligands/structures/K8J.cif",
+    "ligand": "K8J",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "K8J": "ALL"
+    }
+  }
+}

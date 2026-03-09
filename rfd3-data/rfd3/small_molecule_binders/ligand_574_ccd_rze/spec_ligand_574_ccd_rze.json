@@ -1,0 +1,10 @@
+{
+  "ligand_574_ccd_rze": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RZE.cif",
+    "ligand": "RZE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RZE": "ALL"
+    }
+  }
+}

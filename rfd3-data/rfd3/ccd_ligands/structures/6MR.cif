@@ -1,0 +1,73 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C CD2  . 6MR L 1 1 . 1 6MR L CD2  ? -4.502 2.441  9.172  1 1
+HETATM C CE3  . 6MR L 1 1 . 1 6MR L CE3  ? -5.707 3.132  8.932  1 2
+HETATM C CZ3  . 6MR L 1 1 . 1 6MR L CZ3  ? -6.116 4.122  9.832  1 3
+HETATM C CH2  . 6MR L 1 1 . 1 6MR L CH2  ? -5.349 4.428  10.955 1 4
+HETATM C CZ2  . 6MR L 1 1 . 1 6MR L CZ2  ? -4.151 3.756  11.213 1 5
+HETATM C CE2  . 6MR L 1 1 . 1 6MR L CE2  ? -3.754 2.768  10.305 1 6
+HETATM N NE1  . 6MR L 1 1 . 1 6MR L NE1  ? -2.641 1.958  10.303 1 7
+HETATM C CD1  . 6MR L 1 1 . 1 6MR L CD1  ? -2.66  1.132  9.211  1 8
+HETATM C CG   . 6MR L 1 1 . 1 6MR L CG   ? -3.8   1.407  8.492  1 9
+HETATM C CB   . 6MR L 1 1 . 1 6MR L CB   ? -4.211 0.743  7.238  1 10
+HETATM C CA   . 6MR L 1 1 . 1 6MR L CA   ? -3.681 1.429  5.957  1 11
+HETATM C C    . 6MR L 1 1 . 1 6MR L C    ? -4.172 0.711  4.708  1 12
+HETATM O O    . 6MR L 1 1 . 1 6MR L O    ? -5.519 0.672  4.567  1 13
+HETATM O OXT  . 6MR L 1 1 . 1 6MR L OXT  ? -3.414 0.198  3.892  1 14
+HETATM N N    . 6MR L 1 1 . 1 6MR L N    ? -2.242 1.511  5.974  1 15
+HETATM S SAZ  . 6MR L 1 1 . 1 6MR L SAZ  ? -1.418 2.792  5.177  1 16
+HETATM O OBE  . 6MR L 1 1 . 1 6MR L OBE  ? -1.864 2.846  3.798  1 17
+HETATM O OAP  . 6MR L 1 1 . 1 6MR L OAP  ? -0.001 2.737  5.483  1 18
+HETATM C CAY  . 6MR L 1 1 . 1 6MR L CAY  ? -2.072 4.203  6.017  1 19
+HETATM C CAX  . 6MR L 1 1 . 1 6MR L CAX  ? -1.431 4.674  7.149  1 20
+HETATM C CAW  . 6MR L 1 1 . 1 6MR L CAW  ? -1.948 5.786  7.813  1 21
+HETATM C CAO  . 6MR L 1 1 . 1 6MR L CAO  ? -3.216 4.811  5.527  1 22
+HETATM C CAN  . 6MR L 1 1 . 1 6MR L CAN  ? -3.733 5.924  6.19   1 23
+HETATM C CAM  . 6MR L 1 1 . 1 6MR L CAM  ? -3.099 6.411  7.333  1 24
+HETATM C CAL  . 6MR L 1 1 . 1 6MR L CAL  ? -3.635 7.566  8.022  1 25
+HETATM C CAK  . 6MR L 1 1 . 1 6MR L CAK  ? -3.461 7.699  9.399  1 26
+HETATM C CAJ  . 6MR L 1 1 . 1 6MR L CAJ  ? -3.977 8.813  10.062 1 27
+HETATM C CAT  . 6MR L 1 1 . 1 6MR L CAT  ? -4.667 9.792  9.348  1 28
+HETATM I I    . 6MR L 1 1 . 1 6MR L I    ? -5.437 11.45  10.337 1 29
+HETATM C CAU  . 6MR L 1 1 . 1 6MR L CAU  ? -4.842 9.658  7.971  1 30
+HETATM C CAV  . 6MR L 1 1 . 1 6MR L CAV  ? -4.326 8.545  7.308  1 31
+HETATM H HE3  . 6MR L 1 1 . 1 6MR L HE3  ? -6.316 2.905  8.062  1 32
+HETATM H HZ3  . 6MR L 1 1 . 1 6MR L HZ3  ? -7.044 4.659  9.652  1 33
+HETATM H HH2  . 6MR L 1 1 . 1 6MR L HH2  ? -5.686 5.2    11.641 1 34
+HETATM H HZ2  . 6MR L 1 1 . 1 6MR L HZ2  ? -3.555 3.995  12.087 1 35
+HETATM H HNE1 . 6MR L 1 1 . 1 6MR L HNE1 ? -1.916 1.971  11.007 1 36
+HETATM H HD1  . 6MR L 1 1 . 1 6MR L HD1  ? -1.86  0.424  9.045  1 37
+HETATM H HB1  . 6MR L 1 1 . 1 6MR L HB1  ? -5.317 0.692  7.188  1 38
+HETATM H HB2  . 6MR L 1 1 . 1 6MR L HB2  ? -3.897 -0.322 7.224  1 39
+HETATM H HA   . 6MR L 1 1 . 1 6MR L HA   ? -4.043 2.462  5.893  1 40
+HETATM H HO   . 6MR L 1 1 . 1 6MR L HO   ? -5.835 0.204  3.765  1 41
+HETATM H HN   . 6MR L 1 1 . 1 6MR L HN   ? -1.746 1.059  6.768  1 42
+HETATM H HAX  . 6MR L 1 1 . 1 6MR L HAX  ? -0.533 4.195  7.531  1 43
+HETATM H HAW  . 6MR L 1 1 . 1 6MR L HAW  ? -1.443 6.154  8.703  1 44
+HETATM H HAO  . 6MR L 1 1 . 1 6MR L HAO  ? -3.717 4.439  4.638  1 45
+HETATM H HAN  . 6MR L 1 1 . 1 6MR L HAN  ? -4.631 6.4    5.804  1 46
+HETATM H HAK  . 6MR L 1 1 . 1 6MR L HAK  ? -2.924 6.945  9.969  1 47
+HETATM H HAJ  . 6MR L 1 1 . 1 6MR L HAJ  ? -3.83  8.898  11.136 1 48
+HETATM H HAU  . 6MR L 1 1 . 1 6MR L HAU  ? -5.377 10.41  7.396  1 49
+HETATM H HAV  . 6MR L 1 1 . 1 6MR L HAV  ? -4.47  8.455  6.233  1 50
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_107_ccd_vuu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/VUU.cif",
+    "ligand": "VUU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "VUU": "ALL"
+    }
+  }
+}

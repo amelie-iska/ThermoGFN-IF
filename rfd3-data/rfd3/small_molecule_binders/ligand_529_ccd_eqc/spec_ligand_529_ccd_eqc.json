@@ -1,0 +1,10 @@
+{
+  "ligand_529_ccd_eqc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/EQC.cif",
+    "ligand": "EQC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "EQC": "ALL"
+    }
+  }
+}

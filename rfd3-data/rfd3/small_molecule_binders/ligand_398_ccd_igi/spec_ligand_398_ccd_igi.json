@@ -1,0 +1,10 @@
+{
+  "ligand_398_ccd_igi": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/IGI.cif",
+    "ligand": "IGI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "IGI": "ALL"
+    }
+  }
+}

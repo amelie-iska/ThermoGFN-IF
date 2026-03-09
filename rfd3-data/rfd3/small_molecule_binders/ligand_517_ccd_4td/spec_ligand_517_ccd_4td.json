@@ -1,0 +1,10 @@
+{
+  "ligand_517_ccd_4td": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4TD.cif",
+    "ligand": "4TD",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4TD": "ALL"
+    }
+  }
+}

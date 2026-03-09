@@ -1,0 +1,10 @@
+{
+  "ligand_514_ccd_mxk": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/MXK.cif",
+    "ligand": "MXK",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MXK": "ALL"
+    }
+  }
+}

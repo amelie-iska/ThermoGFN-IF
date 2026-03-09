@@ -1,0 +1,98 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM CL CLA  . A5T L 1 1 . 1 A5T L CLA  ? -6.722 -4.029 -1.227 1 1
+HETATM C  C36  . A5T L 1 1 . 1 A5T L C36  ? -6.7   -2.303 -1.048 1 2
+HETATM C  C33  . A5T L 1 1 . 1 A5T L C33  ? -5.983 -1.722 -0.016 1 3
+HETATM CL CLR3 . A5T L 1 1 . 1 A5T L CLR3 ? -5.106 -2.721 1.101  1 4
+HETATM C  C38  . A5T L 1 1 . 1 A5T L C38  ? -7.394 -1.505 -1.941 1 5
+HETATM C  C37  . A5T L 1 1 . 1 A5T L C37  ? -7.376 -0.131 -1.799 1 6
+HETATM C  C34  . A5T L 1 1 . 1 A5T L C34  ? -6.664 0.448  -0.765 1 7
+HETATM C  C32  . A5T L 1 1 . 1 A5T L C32  ? -5.966 -0.346 0.125  1 8
+HETATM C  C29  . A5T L 1 1 . 1 A5T L C29  ? -5.186 0.286  1.249  1 9
+HETATM N  N26  . A5T L 1 1 . 1 A5T L N26  ? -3.822 -0.248 1.258  1 10
+HETATM C  C28  . A5T L 1 1 . 1 A5T L C28  ? -3.465 -1.329 2.179  1 11
+HETATM C  C31  . A5T L 1 1 . 1 A5T L C31  ? -2.747 -2.547 1.594  1 12
+HETATM C  C30  . A5T L 1 1 . 1 A5T L C30  ? -1.979 -1.551 2.466  1 13
+HETATM C  C22  . A5T L 1 1 . 1 A5T L C22  ? -2.895 0.256  0.419  1 14
+HETATM O  O25  . A5T L 1 1 . 1 A5T L O25  ? -1.978 -0.445 0.033  1 15
+HETATM C  C20  . A5T L 1 1 . 1 A5T L C20  ? -2.993 1.646  -0.03  1 16
+HETATM C  C23  . A5T L 1 1 . 1 A5T L C23  ? -4.319 2.354  0.068  1 17
+HETATM N  N27  . A5T L 1 1 . 1 A5T L N27  ? -4.347 3.468  -0.893 1 18
+HETATM C  C24  . A5T L 1 1 . 1 A5T L C24  ? -3.207 4.364  -0.67  1 19
+HETATM C  C21  . A5T L 1 1 . 1 A5T L C21  ? -1.908 3.658  -1.033 1 20
+HETATM C  C    . A5T L 1 1 . 1 A5T L C    ? -4.434 2.944  1.484  1 21
+HETATM N  NB   . A5T L 1 1 . 1 A5T L NB   ? -3.247 3.781  1.722  1 22
+HETATM C  CA   . A5T L 1 1 . 1 A5T L CA   ? -3.187 4.886  0.758  1 23
+HETATM C  C19  . A5T L 1 1 . 1 A5T L C19  ? -1.9   2.25   -0.509 1 24
+HETATM C  C18  . A5T L 1 1 . 1 A5T L C18  ? -0.633 1.5    -0.529 1 25
+HETATM C  C16  . A5T L 1 1 . 1 A5T L C16  ? -0.028 1.175  -1.747 1 26
+HETATM C  C14  . A5T L 1 1 . 1 A5T L C14  ? 1.159  0.472  -1.757 1 27
+HETATM C  C17  . A5T L 1 1 . 1 A5T L C17  ? -0.027 1.113  0.67   1 28
+HETATM C  C15  . A5T L 1 1 . 1 A5T L C15  ? 1.16   0.411  0.643  1 29
+HETATM C  C13  . A5T L 1 1 . 1 A5T L C13  ? 1.75   0.089  -0.566 1 30
+HETATM C  C12  . A5T L 1 1 . 1 A5T L C12  ? 3.047  -0.679 -0.586 1 31
+HETATM C  C10  . A5T L 1 1 . 1 A5T L C10  ? 4.221  0.302  -0.558 1 32
+HETATM C  C8   . A5T L 1 1 . 1 A5T L C8   ? 5.537  -0.477 -0.579 1 33
+HETATM O  O5   . A5T L 1 1 . 1 A5T L O5   ? 6.634  0.439  -0.553 1 34
+HETATM C  C3   . A5T L 1 1 . 1 A5T L C3   ? 7.884  -0.095 -0.567 1 35
+HETATM C  C6   . A5T L 1 1 . 1 A5T L C6   ? 8.525  -0.335 -1.776 1 36
+HETATM F  F1   . A5T L 1 1 . 1 A5T L F1   ? 7.906  -0.038 -2.939 1 37
+HETATM C  C2   . A5T L 1 1 . 1 A5T L C2   ? 8.524  -0.395 0.626  1 38
+HETATM CL CL11 . A5T L 1 1 . 1 A5T L CL11 ? 7.73   -0.091 2.139  1 39
+HETATM C  C4   . A5T L 1 1 . 1 A5T L C4   ? 9.799  -0.938 0.609  1 40
+HETATM F  F2   . A5T L 1 1 . 1 A5T L F2   ? 10.423 -1.23  1.771  1 41
+HETATM C  C7   . A5T L 1 1 . 1 A5T L C7   ? 10.432 -1.181 -0.597 1 42
+HETATM C  C9   . A5T L 1 1 . 1 A5T L C9   ? 9.797  -0.877 -1.788 1 43
+HETATM H  H38  . A5T L 1 1 . 1 A5T L H38  ? -7.95  -1.957 -2.749 1 44
+HETATM H  H37  . A5T L 1 1 . 1 A5T L H37  ? -7.917 0.491  -2.496 1 45
+HETATM H  H34  . A5T L 1 1 . 1 A5T L H34  ? -6.65  1.523  -0.655 1 46
+HETATM H  H29  . A5T L 1 1 . 1 A5T L H29  ? -5.152 1.366  1.105  1 47
+HETATM H  H29A . A5T L 1 1 . 1 A5T L H29A ? -5.671 0.061  2.199  1 48
+HETATM H  H28  . A5T L 1 1 . 1 A5T L H28  ? -4.167 -1.503 2.995  1 49
+HETATM H  H31  . A5T L 1 1 . 1 A5T L H31  ? -2.975 -3.522 2.026  1 50
+HETATM H  H31A . A5T L 1 1 . 1 A5T L H31A ? -2.54  -2.544 0.524  1 51
+HETATM H  H30  . A5T L 1 1 . 1 A5T L H30  ? -1.266 -0.893 1.969  1 52
+HETATM H  H30A . A5T L 1 1 . 1 A5T L H30A ? -1.702 -1.871 3.471  1 53
+HETATM H  H23  . A5T L 1 1 . 1 A5T L H23  ? -5.134 1.659  -0.135 1 54
+HETATM H  HN27 . A5T L 1 1 . 1 A5T L HN27 ? -4.359 3.126  -1.842 1 55
+HETATM H  H24  . A5T L 1 1 . 1 A5T L H24  ? -3.313 5.218  -1.34  1 56
+HETATM H  H21  . A5T L 1 1 . 1 A5T L H21  ? -1.8   3.641  -2.117 1 57
+HETATM H  H21A . A5T L 1 1 . 1 A5T L H21A ? -1.07  4.203  -0.598 1 58
+HETATM H  H    . A5T L 1 1 . 1 A5T L H    ? -5.335 3.552  1.558  1 59
+HETATM H  HA   . A5T L 1 1 . 1 A5T L HA   ? -4.471 2.138  2.217  1 60
+HETATM H  HNB  . A5T L 1 1 . 1 A5T L HNB  ? -3.232 4.126  2.669  1 61
+HETATM H  HAA  . A5T L 1 1 . 1 A5T L HAA  ? -2.27  5.452  0.919  1 62
+HETATM H  HAB  . A5T L 1 1 . 1 A5T L HAB  ? -4.044 5.542  0.912  1 63
+HETATM H  H16  . A5T L 1 1 . 1 A5T L H16  ? -0.488 1.473  -2.677 1 64
+HETATM H  H14  . A5T L 1 1 . 1 A5T L H14  ? 1.627  0.221  -2.697 1 65
+HETATM H  H17  . A5T L 1 1 . 1 A5T L H17  ? -0.486 1.364  1.615  1 66
+HETATM H  H15  . A5T L 1 1 . 1 A5T L H15  ? 1.629  0.112  1.569  1 67
+HETATM H  H12  . A5T L 1 1 . 1 A5T L H12  ? 3.097  -1.33  0.286  1 68
+HETATM H  H12A . A5T L 1 1 . 1 A5T L H12A ? 3.098  -1.281 -1.493 1 69
+HETATM H  H10  . A5T L 1 1 . 1 A5T L H10  ? 4.17   0.953  -1.431 1 70
+HETATM H  H10A . A5T L 1 1 . 1 A5T L H10A ? 4.169  0.905  0.348  1 71
+HETATM H  H8   . A5T L 1 1 . 1 A5T L H8   ? 5.587  -1.129 0.294  1 72
+HETATM H  H8A  . A5T L 1 1 . 1 A5T L H8A  ? 5.589  -1.08  -1.486 1 73
+HETATM H  H7   . A5T L 1 1 . 1 A5T L H7   ? 11.425 -1.604 -0.609 1 74
+HETATM H  H9   . A5T L 1 1 . 1 A5T L H9   ? 10.295 -1.063 -2.728 1 75
+#

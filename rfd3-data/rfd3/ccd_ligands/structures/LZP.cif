@@ -1,0 +1,105 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . LZP L 1 1 . 1 LZP L C1   ? 11.36   5.629  -0.9   1 1
+HETATM C C2   . LZP L 1 1 . 1 LZP L C2   ? 11.388  6.291  0.313  1 2
+HETATM C C3   . LZP L 1 1 . 1 LZP L C3   ? 11.117  5.604  1.482  1 3
+HETATM C C4   . LZP L 1 1 . 1 LZP L C4   ? 10.817  4.255  1.437  1 4
+HETATM C C5   . LZP L 1 1 . 1 LZP L C5   ? 10.789  3.593  0.224  1 5
+HETATM C C6   . LZP L 1 1 . 1 LZP L C6   ? 11.061  4.28   -0.944 1 6
+HETATM C C7   . LZP L 1 1 . 1 LZP L C7   ? 10.463  2.123  0.176  1 7
+HETATM C C8   . LZP L 1 1 . 1 LZP L C8   ? 8.588   0.676  -0.03  1 8
+HETATM C C9   . LZP L 1 1 . 1 LZP L C9   ? 9.475   -0.389 0.049  1 9
+HETATM C C10  . LZP L 1 1 . 1 LZP L C10  ? 9.01    -1.691 -0.006 1 10
+HETATM C C11  . LZP L 1 1 . 1 LZP L C11  ? 7.66    -1.94  -0.14  1 11
+HETATM C C12  . LZP L 1 1 . 1 LZP L C12  ? 6.758   -0.875 -0.22  1 12
+HETATM C C13  . LZP L 1 1 . 1 LZP L C13  ? 7.231   0.439  -0.164 1 13
+HETATM C C14  . LZP L 1 1 . 1 LZP L C14  ? 5.316   -1.136 -0.364 1 14
+HETATM C C15  . LZP L 1 1 . 1 LZP L C15  ? 4.81    -2.554 -0.425 1 15
+HETATM C C16  . LZP L 1 1 . 1 LZP L C16  ? 3.31    -2.546 -0.572 1 16
+HETATM C C17  . LZP L 1 1 . 1 LZP L C17  ? 2.563   -3.833 -0.656 1 17
+HETATM C C18  . LZP L 1 1 . 1 LZP L C18  ? 0.467   -2.568 -0.608 1 18
+HETATM C C19  . LZP L 1 1 . 1 LZP L C19  ? -0.468  -2.567 0.608  1 19
+HETATM C C20  . LZP L 1 1 . 1 LZP L C20  ? -0.468  -5.097 0.609  1 20
+HETATM C C21  . LZP L 1 1 . 1 LZP L C21  ? 0.467   -5.098 -0.607 1 21
+HETATM N N1   . LZP L 1 1 . 1 LZP L N1   ? 1.215   -3.833 -0.625 1 22
+HETATM N N2   . LZP L 1 1 . 1 LZP L N2   ? -1.215  -3.832 0.626  1 23
+HETATM O O1   . LZP L 1 1 . 1 LZP L O1   ? 9.052   1.952  0.031  1 24
+HETATM O O2   . LZP L 1 1 . 1 LZP L O2   ? 4.536   -0.21  -0.433 1 25
+HETATM O O3   . LZP L 1 1 . 1 LZP L O3   ? 2.714   -1.497 -0.622 1 26
+HETATM O O4   . LZP L 1 1 . 1 LZP L O4   ? 3.167   -4.881 -0.753 1 27
+HETATM C C22  . LZP L 1 1 . 1 LZP L C22  ? -2.563  -3.832 0.658  1 28
+HETATM C C23  . LZP L 1 1 . 1 LZP L C23  ? -3.31   -2.545 0.572  1 29
+HETATM C C24  . LZP L 1 1 . 1 LZP L C24  ? -4.81   -2.553 0.425  1 30
+HETATM C C25  . LZP L 1 1 . 1 LZP L C25  ? -5.316  -1.135 0.362  1 31
+HETATM C C26  . LZP L 1 1 . 1 LZP L C26  ? -7.231  0.44   0.159  1 32
+HETATM C C27  . LZP L 1 1 . 1 LZP L C27  ? -6.758  -0.874 0.218  1 33
+HETATM C C28  . LZP L 1 1 . 1 LZP L C28  ? -7.66   -1.94  0.139  1 34
+HETATM C C29  . LZP L 1 1 . 1 LZP L C29  ? -9.01   -1.691 0.003  1 35
+HETATM C C30  . LZP L 1 1 . 1 LZP L C30  ? -9.475  -0.389 -0.055 1 36
+HETATM C C31  . LZP L 1 1 . 1 LZP L C31  ? -8.587  0.676  0.022  1 37
+HETATM C C32  . LZP L 1 1 . 1 LZP L C32  ? -10.464 2.123  -0.177 1 38
+HETATM C C33  . LZP L 1 1 . 1 LZP L C33  ? -10.821 4.258  -1.434 1 39
+HETATM C C34  . LZP L 1 1 . 1 LZP L C34  ? -10.79  3.593  -0.222 1 40
+HETATM C C35  . LZP L 1 1 . 1 LZP L C35  ? -11.058 4.278  0.948  1 41
+HETATM C C36  . LZP L 1 1 . 1 LZP L C36  ? -11.357 5.627  0.907  1 42
+HETATM C C37  . LZP L 1 1 . 1 LZP L C37  ? -11.387 6.292  -0.305 1 43
+HETATM C C38  . LZP L 1 1 . 1 LZP L C38  ? -11.118 5.607  -1.475 1 44
+HETATM O O5   . LZP L 1 1 . 1 LZP L O5   ? -3.167  -4.88  0.756  1 45
+HETATM O O6   . LZP L 1 1 . 1 LZP L O6   ? -2.714  -1.496 0.621  1 46
+HETATM O O7   . LZP L 1 1 . 1 LZP L O7   ? -4.536  -0.21  0.43   1 47
+HETATM O O8   . LZP L 1 1 . 1 LZP L O8   ? -9.052  1.952  -0.035 1 48
+HETATM H H1   . LZP L 1 1 . 1 LZP L H1   ? 11.568  6.166  -1.813 1 49
+HETATM H H2   . LZP L 1 1 . 1 LZP L H2   ? 11.622  7.345  0.348  1 50
+HETATM H H3   . LZP L 1 1 . 1 LZP L H3   ? 11.139  6.122  2.43   1 51
+HETATM H H4   . LZP L 1 1 . 1 LZP L H4   ? 10.606  3.719  2.35   1 52
+HETATM H H6   . LZP L 1 1 . 1 LZP L H6   ? 11.039  3.763  -1.892 1 53
+HETATM H H7   . LZP L 1 1 . 1 LZP L H7   ? 10.973  1.666  -0.672 1 54
+HETATM H H7A  . LZP L 1 1 . 1 LZP L H7A  ? 10.794  1.647  1.099  1 55
+HETATM H H9   . LZP L 1 1 . 1 LZP L H9   ? 10.533  -0.201 0.154  1 56
+HETATM H H10  . LZP L 1 1 . 1 LZP L H10  ? 9.706   -2.514 0.055  1 57
+HETATM H H11  . LZP L 1 1 . 1 LZP L H11  ? 7.3     -2.958 -0.184 1 58
+HETATM H H13  . LZP L 1 1 . 1 LZP L H13  ? 6.54    1.267  -0.225 1 59
+HETATM H H15  . LZP L 1 1 . 1 LZP L H15  ? 5.256   -3.062 -1.28  1 60
+HETATM H H15A . LZP L 1 1 . 1 LZP L H15A ? 5.082   -3.077 0.491  1 61
+HETATM H H18  . LZP L 1 1 . 1 LZP L H18  ? -0.12   -2.479 -1.522 1 62
+HETATM H H18A . LZP L 1 1 . 1 LZP L H18A ? 1.164   -1.733 -0.535 1 63
+HETATM H H19  . LZP L 1 1 . 1 LZP L H19  ? 0.12    -2.477 1.521  1 64
+HETATM H H19A . LZP L 1 1 . 1 LZP L H19A ? -1.164  -1.732 0.533  1 65
+HETATM H H20  . LZP L 1 1 . 1 LZP L H20  ? -1.164  -5.933 0.536  1 66
+HETATM H H20A . LZP L 1 1 . 1 LZP L H20A ? 0.12    -5.187 1.523  1 67
+HETATM H H21  . LZP L 1 1 . 1 LZP L H21  ? 1.164   -5.934 -0.532 1 68
+HETATM H H21A . LZP L 1 1 . 1 LZP L H21A ? -0.12   -5.189 -1.52  1 69
+HETATM H H24  . LZP L 1 1 . 1 LZP L H24  ? -5.082  -3.078 -0.491 1 70
+HETATM H H24A . LZP L 1 1 . 1 LZP L H24A ? -5.256  -3.061 1.28   1 71
+HETATM H H26  . LZP L 1 1 . 1 LZP L H26  ? -6.54   1.267  0.224  1 72
+HETATM H H28  . LZP L 1 1 . 1 LZP L H28  ? -7.3    -2.957 0.183  1 73
+HETATM H H29  . LZP L 1 1 . 1 LZP L H29  ? -9.706  -2.514 -0.058 1 74
+HETATM H H30  . LZP L 1 1 . 1 LZP L H30  ? -10.533 -0.201 -0.161 1 75
+HETATM H H32  . LZP L 1 1 . 1 LZP L H32  ? -10.972 1.664  0.671  1 76
+HETATM H H32A . LZP L 1 1 . 1 LZP L H32A ? -10.796 1.648  -1.1   1 77
+HETATM H H33  . LZP L 1 1 . 1 LZP L H33  ? -10.607 3.724  -2.348 1 78
+HETATM H H35  . LZP L 1 1 . 1 LZP L H35  ? -11.034 3.759  1.895  1 79
+HETATM H H36  . LZP L 1 1 . 1 LZP L H36  ? -11.567 6.162  1.821  1 80
+HETATM H H37  . LZP L 1 1 . 1 LZP L H37  ? -11.622 7.345  -0.337 1 81
+HETATM H H38  . LZP L 1 1 . 1 LZP L H38  ? -11.143 6.126  -2.422 1 82
+#

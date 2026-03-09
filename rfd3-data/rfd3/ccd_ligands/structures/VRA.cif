@@ -1,0 +1,74 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1   . VRA L 1 1 . 1 VRA L C1   ? -2.099 0.818  0.838  1 1
+HETATM C C2   . VRA L 1 1 . 1 VRA L C2   ? -1.471 0.657  -0.393 1 2
+HETATM C C3   . VRA L 1 1 . 1 VRA L C3   ? -2.226 0.37   -1.522 1 3
+HETATM C C4   . VRA L 1 1 . 1 VRA L C4   ? -3.598 0.245  -1.42  1 4
+HETATM C C5   . VRA L 1 1 . 1 VRA L C5   ? -4.221 0.405  -0.196 1 5
+HETATM C C6   . VRA L 1 1 . 1 VRA L C6   ? -3.472 0.692  0.933  1 6
+HETATM N N7   . VRA L 1 1 . 1 VRA L N7   ? -0.082 0.784  -0.493 1 7
+HETATM C C8   . VRA L 1 1 . 1 VRA L C8   ? 0.755  -0.147 0.139  1 8
+HETATM C C9   . VRA L 1 1 . 1 VRA L C9   ? 2.086  0.172  0.394  1 9
+HETATM C C10  . VRA L 1 1 . 1 VRA L C10  ? 2.911  -0.756 1.021  1 10
+HETATM C C11  . VRA L 1 1 . 1 VRA L C11  ? 2.408  -1.993 1.39   1 11
+HETATM C C12  . VRA L 1 1 . 1 VRA L C12  ? 1.084  -2.309 1.135  1 12
+HETATM C C13  . VRA L 1 1 . 1 VRA L C13  ? 0.255  -1.388 0.516  1 13
+HETATM I I14  . VRA L 1 1 . 1 VRA L I14  ? -6.302 0.215  -0.049 1 14
+HETATM F F15  . VRA L 1 1 . 1 VRA L F15  ? -1.367 1.092  1.941  1 15
+HETATM F F16  . VRA L 1 1 . 1 VRA L F16  ? -1.037 -1.697 0.274  1 16
+HETATM F F17  . VRA L 1 1 . 1 VRA L F17  ? 0.598  -3.517 1.496  1 17
+HETATM N N18  . VRA L 1 1 . 1 VRA L N18  ? 2.594  1.426  0.019  1 18
+HETATM S S19  . VRA L 1 1 . 1 VRA L S19  ? 4.152  1.836  0.4    1 19
+HETATM O O20  . VRA L 1 1 . 1 VRA L O20  ? 4.253  3.206  0.038  1 20
+HETATM O O21  . VRA L 1 1 . 1 VRA L O21  ? 4.303  1.423  1.751  1 21
+HETATM C C22  . VRA L 1 1 . 1 VRA L C22  ? 5.171  0.811  -0.697 1 22
+HETATM C C23  . VRA L 1 1 . 1 VRA L C23  ? 6.686  1.023  -0.656 1 23
+HETATM C C24  . VRA L 1 1 . 1 VRA L C24  ? 6.073  -0.239 -0.046 1 24
+HETATM C C25  . VRA L 1 1 . 1 VRA L C25  ? 4.542  0.464  -2.048 1 25
+HETATM C C26  . VRA L 1 1 . 1 VRA L C26  ? 3.369  -0.495 -1.833 1 26
+HETATM C C27  . VRA L 1 1 . 1 VRA L C27  ? 2.858  -0.987 -3.188 1 27
+HETATM O O28  . VRA L 1 1 . 1 VRA L O28  ? 1.691  -1.789 -2.994 1 28
+HETATM O O29  . VRA L 1 1 . 1 VRA L O29  ? 3.803  -1.611 -1.053 1 29
+HETATM O O30  . VRA L 1 1 . 1 VRA L O30  ? 4.213  -0.448 1.272  1 30
+HETATM C C31  . VRA L 1 1 . 1 VRA L C31  ? 4.852  -1.153 2.338  1 31
+HETATM H H3   . VRA L 1 1 . 1 VRA L H3   ? -1.741 0.244  -2.478 1 32
+HETATM H H4   . VRA L 1 1 . 1 VRA L H4   ? -4.186 0.022  -2.299 1 33
+HETATM H H6   . VRA L 1 1 . 1 VRA L H6   ? -3.961 0.812  1.888  1 34
+HETATM H HN7  . VRA L 1 1 . 1 VRA L HN7  ? 0.303  1.517  -0.998 1 35
+HETATM H H11  . VRA L 1 1 . 1 VRA L H11  ? 3.05   -2.713 1.876  1 36
+HETATM H HN18 . VRA L 1 1 . 1 VRA L HN18 ? 2.031  2.053  -0.463 1 37
+HETATM H H23  . VRA L 1 1 . 1 VRA L H23  ? 7.234  0.914  -1.592 1 38
+HETATM H H23A . VRA L 1 1 . 1 VRA L H23A ? 7.07   1.778  0.029  1 39
+HETATM H H24  . VRA L 1 1 . 1 VRA L H24  ? 6.054  -0.315 1.041  1 40
+HETATM H H24A . VRA L 1 1 . 1 VRA L H24A ? 6.218  -1.178 -0.58  1 41
+HETATM H H25  . VRA L 1 1 . 1 VRA L H25  ? 4.183  1.375  -2.527 1 42
+HETATM H H25A . VRA L 1 1 . 1 VRA L H25A ? 5.288  -0.012 -2.684 1 43
+HETATM H H26  . VRA L 1 1 . 1 VRA L H26  ? 2.566  0.025  -1.309 1 44
+HETATM H H27  . VRA L 1 1 . 1 VRA L H27  ? 2.61   -0.131 -3.816 1 45
+HETATM H H27A . VRA L 1 1 . 1 VRA L H27A ? 3.631  -1.582 -3.674 1 46
+HETATM H HO28 . VRA L 1 1 . 1 VRA L HO28 ? 1.312  -2.136 -3.813 1 47
+HETATM H HO29 . VRA L 1 1 . 1 VRA L HO29 ? 4.517  -2.121 -1.459 1 48
+HETATM H H31  . VRA L 1 1 . 1 VRA L H31  ? 4.934  -2.208 2.078  1 49
+HETATM H H31A . VRA L 1 1 . 1 VRA L H31A ? 5.848  -0.741 2.5    1 50
+HETATM H H31B . VRA L 1 1 . 1 VRA L H31B ? 4.263  -1.048 3.248  1 51
+#

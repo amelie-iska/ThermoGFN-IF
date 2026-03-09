@@ -1,0 +1,10 @@
+{
+  "ligand_475_ccd_ygu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/YGU.cif",
+    "ligand": "YGU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YGU": "ALL"
+    }
+  }
+}

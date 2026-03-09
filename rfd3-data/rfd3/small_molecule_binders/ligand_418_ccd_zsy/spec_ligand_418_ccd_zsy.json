@@ -1,0 +1,10 @@
+{
+  "ligand_418_ccd_zsy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/ZSY.cif",
+    "ligand": "ZSY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ZSY": "ALL"
+    }
+  }
+}

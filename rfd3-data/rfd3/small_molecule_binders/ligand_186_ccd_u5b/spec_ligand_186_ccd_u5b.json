@@ -1,0 +1,10 @@
+{
+  "ligand_186_ccd_u5b": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/U5B.cif",
+    "ligand": "U5B",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "U5B": "ALL"
+    }
+  }
+}

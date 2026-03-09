@@ -1,0 +1,10 @@
+{
+  "ligand_091_ccd_1eb": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/1EB.cif",
+    "ligand": "1EB",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "1EB": "ALL"
+    }
+  }
+}

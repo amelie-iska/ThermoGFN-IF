@@ -1,0 +1,10 @@
+{
+  "ligand_362_ccd_283": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/283.cif",
+    "ligand": "283",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "283": "ALL"
+    }
+  }
+}

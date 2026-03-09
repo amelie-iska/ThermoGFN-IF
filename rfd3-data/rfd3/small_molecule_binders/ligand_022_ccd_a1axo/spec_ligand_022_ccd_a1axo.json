@@ -1,0 +1,10 @@
+{
+  "ligand_022_ccd_a1axo": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1AXO.cif",
+    "ligand": "A1AXO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1AXO": "ALL"
+    }
+  }
+}

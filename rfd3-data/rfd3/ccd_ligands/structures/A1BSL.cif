@@ -1,0 +1,59 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N  N1  . A1BSL L 1 1 . 1 A1BSL L N1  ? 1.475  -0.305 0.144  1 1
+HETATM C  C4  . A1BSL L 1 1 . 1 A1BSL L C4  ? -4.183 -1.034 -0.427 1 2
+HETATM C  C5  . A1BSL L 1 1 . 1 A1BSL L C5  ? -2.866 -1.143 -0.016 1 3
+HETATM C  C6  . A1BSL L 1 1 . 1 A1BSL L C6  ? -2.127 0.001  0.25   1 4
+HETATM C  C7  . A1BSL L 1 1 . 1 A1BSL L C7  ? 0.2    -0.105 -0.246 1 5
+HETATM C  C8  . A1BSL L 1 1 . 1 A1BSL L C8  ? 1.923  -0.535 1.53   1 6
+HETATM C  C10 . A1BSL L 1 1 . 1 A1BSL L C10 ? 3.888  -0.57  0.147  1 7
+HETATM O  O2  . A1BSL L 1 1 . 1 A1BSL L O2  ? 5.507  1.13   0.384  1 8
+HETATM C  C11 . A1BSL L 1 1 . 1 A1BSL L C11 ? 5.05   0.262  -0.329 1 9
+HETATM N  N2  . A1BSL L 1 1 . 1 A1BSL L N2  ? 5.583  0.041  -1.547 1 10
+HETATM C  C9  . A1BSL L 1 1 . 1 A1BSL L C9  ? 3.409  -0.096 1.544  1 11
+HETATM C  C12 . A1BSL L 1 1 . 1 A1BSL L C12 ? 2.648  -0.334 -0.742 1 12
+HETATM O  O1  . A1BSL L 1 1 . 1 A1BSL L O1  ? -0.054 0.075  -1.421 1 13
+HETATM N  N   . A1BSL L 1 1 . 1 A1BSL L N   ? -0.792 -0.106 0.666  1 14
+HETATM C  C1  . A1BSL L 1 1 . 1 A1BSL L C1  ? -2.714 1.255  0.103  1 15
+HETATM O  O   . A1BSL L 1 1 . 1 A1BSL L O   ? -1.995 2.379  0.368  1 16
+HETATM C  C   . A1BSL L 1 1 . 1 A1BSL L C   ? -2.664 3.631  0.201  1 17
+HETATM CL CL  . A1BSL L 1 1 . 1 A1BSL L CL  ? -2.14  -2.709 0.166  1 18
+HETATM C  C3  . A1BSL L 1 1 . 1 A1BSL L C3  ? -4.762 0.212  -0.578 1 19
+HETATM C  C2  . A1BSL L 1 1 . 1 A1BSL L C2  ? -4.033 1.355  -0.308 1 20
+HETATM H  H6  . A1BSL L 1 1 . 1 A1BSL L H6  ? -4.758 -1.924 -0.634 1 21
+HETATM H  H8  . A1BSL L 1 1 . 1 A1BSL L H8  ? 1.341  0.072  2.223  1 22
+HETATM H  H9  . A1BSL L 1 1 . 1 A1BSL L H9  ? 1.838  -1.591 1.785  1 23
+HETATM H  H   . A1BSL L 1 1 . 1 A1BSL L H   ? 4.154  -1.627 0.169  1 24
+HETATM H  H13 . A1BSL L 1 1 . 1 A1BSL L H13 ? 5.218  -0.654 -2.118 1 25
+HETATM H  H12 . A1BSL L 1 1 . 1 A1BSL L H12 ? 6.332  0.576  -1.854 1 26
+HETATM H  H10 . A1BSL L 1 1 . 1 A1BSL L H10 ? 3.495  0.987  1.64   1 27
+HETATM H  H11 . A1BSL L 1 1 . 1 A1BSL L H11 ? 3.958  -0.602 2.338  1 28
+HETATM H  H14 . A1BSL L 1 1 . 1 A1BSL L H14 ? 2.548  -1.147 -1.462 1 29
+HETATM H  H15 . A1BSL L 1 1 . 1 A1BSL L H15 ? 2.742  0.618  -1.265 1 30
+HETATM H  H7  . A1BSL L 1 1 . 1 A1BSL L H7  ? -0.582 -0.181 1.61   1 31
+HETATM H  H2  . A1BSL L 1 1 . 1 A1BSL L H2  ? -1.98  4.444  0.445  1 32
+HETATM H  H1  . A1BSL L 1 1 . 1 A1BSL L H1  ? -2.994 3.731  -0.833 1 33
+HETATM H  H3  . A1BSL L 1 1 . 1 A1BSL L H3  ? -3.528 3.672  0.864  1 34
+HETATM H  H5  . A1BSL L 1 1 . 1 A1BSL L H5  ? -5.79  0.292  -0.899 1 35
+HETATM H  H4  . A1BSL L 1 1 . 1 A1BSL L H4  ? -4.49  2.327  -0.423 1 36
+#

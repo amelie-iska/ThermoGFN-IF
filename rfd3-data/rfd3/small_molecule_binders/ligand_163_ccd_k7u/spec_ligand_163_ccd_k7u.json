@@ -1,0 +1,10 @@
+{
+  "ligand_163_ccd_k7u": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/K7U.cif",
+    "ligand": "K7U",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "K7U": "ALL"
+    }
+  }
+}

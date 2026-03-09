@@ -1,0 +1,55 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM O  "O5'"  . BVD L 1 1 . 1 BVD L "O5'"  ? -1.405 2.285  5.403  1 1
+HETATM C  "C5'"  . BVD L 1 1 . 1 BVD L "C5'"  ? -0.444 1.229  5.453  1 2
+HETATM C  "C4'"  . BVD L 1 1 . 1 BVD L "C4'"  ? -0.872 0.105  4.507  1 3
+HETATM O  "O4'"  . BVD L 1 1 . 1 BVD L "O4'"  ? -0.882 0.569  3.139  1 4
+HETATM C  "C1'"  . BVD L 1 1 . 1 BVD L "C1'"  ? -0.784 -0.594 2.301  1 5
+HETATM N  N1     . BVD L 1 1 . 1 BVD L N1     ? -0.016 -0.276 1.095  1 6
+HETATM C  C6     . BVD L 1 1 . 1 BVD L C6     ? -0.595 -0.445 -0.129 1 7
+HETATM C  C2     . BVD L 1 1 . 1 BVD L C2     ? 1.24   0.18   1.218  1 8
+HETATM O  O2     . BVD L 1 1 . 1 BVD L O2     ? 1.714  0.315  2.329  1 9
+HETATM N  N3     . BVD L 1 1 . 1 BVD L N3     ? 1.993  0.484  0.146  1 10
+HETATM C  C4     . BVD L 1 1 . 1 BVD L C4     ? 1.493  0.344  -1.099 1 11
+HETATM O  O4     . BVD L 1 1 . 1 BVD L O4     ? 2.168  0.622  -2.074 1 12
+HETATM C  C5     . BVD L 1 1 . 1 BVD L C5     ? 0.117  -0.149 -1.256 1 13
+HETATM C  C5A    . BVD L 1 1 . 1 BVD L C5A    ? -0.478 -0.319 -2.596 1 14
+HETATM C  C5B    . BVD L 1 1 . 1 BVD L C5B    ? 0.187  0.077  -3.674 1 15
+HETATM BR BR     . BVD L 1 1 . 1 BVD L BR     ? -0.631 -0.008 -5.376 1 16
+HETATM C  "C2'"  . BVD L 1 1 . 1 BVD L "C2'"  ? -0.06  -1.685 3.114  1 17
+HETATM C  "C3'"  . BVD L 1 1 . 1 BVD L "C3'"  ? 0.18   -1.031 4.499  1 18
+HETATM O  "O3'"  . BVD L 1 1 . 1 BVD L "O3'"  ? -0.061 -1.966 5.553  1 19
+HETATM H  "HO5'" . BVD L 1 1 . 1 BVD L "HO5'" ? -1.098 2.971  6.012  1 20
+HETATM H  "H5'1" . BVD L 1 1 . 1 BVD L "H5'1" ? 0.53   1.609  5.148  1 21
+HETATM H  "H5'2" . BVD L 1 1 . 1 BVD L "H5'2" ? -0.381 0.843  6.471  1 22
+HETATM H  "H4'"  . BVD L 1 1 . 1 BVD L "H4'"  ? -1.851 -0.28  4.789  1 23
+HETATM H  "H1'"  . BVD L 1 1 . 1 BVD L "H1'"  ? -1.781 -0.938 2.026  1 24
+HETATM H  H6     . BVD L 1 1 . 1 BVD L H6     ? -1.608 -0.81  -0.207 1 25
+HETATM H  HN3    . BVD L 1 1 . 1 BVD L HN3    ? 2.899  0.808  0.269  1 26
+HETATM H  H5A    . BVD L 1 1 . 1 BVD L H5A    ? -1.455 -0.767 -2.7   1 27
+HETATM H  H5B    . BVD L 1 1 . 1 BVD L H5B    ? 1.197  0.449  -3.578 1 28
+HETATM H  "H2'1" . BVD L 1 1 . 1 BVD L "H2'1" ? -0.692 -2.567 3.217  1 29
+HETATM H  "H2'2" . BVD L 1 1 . 1 BVD L "H2'2" ? 0.887  -1.946 2.644  1 30
+HETATM H  "H3'"  . BVD L 1 1 . 1 BVD L "H3'"  ? 1.189  -0.624 4.566  1 31
+HETATM H  "HO3'" . BVD L 1 1 . 1 BVD L "HO3'" ? 0.568  -2.69  5.434  1 32
+#

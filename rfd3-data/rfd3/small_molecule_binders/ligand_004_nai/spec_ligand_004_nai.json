@@ -1,0 +1,10 @@
+{
+  "ligand_004_nai": {
+    "input": "./models/foundry/models/rfd3/docs/input_pdbs/M0255_1mg5.pdb",
+    "ligand": "NAI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NAI": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_096_ccd_3ri": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/3RI.cif",
+    "ligand": "3RI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3RI": "ALL"
+    }
+  }
+}

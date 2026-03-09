@@ -1,0 +1,10 @@
+{
+  "ligand_483_ccd_9le": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/9LE.cif",
+    "ligand": "9LE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "9LE": "ALL"
+    }
+  }
+}

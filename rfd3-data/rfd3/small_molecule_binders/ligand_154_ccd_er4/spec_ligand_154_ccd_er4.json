@@ -1,0 +1,10 @@
+{
+  "ligand_154_ccd_er4": {
+    "input": "./data/rfd3/ccd_ligands/structures/ER4.cif",
+    "ligand": "ER4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ER4": "ALL"
+    }
+  }
+}

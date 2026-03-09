@@ -1,0 +1,83 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C10  . 7ZB L 1 1 . 1 7ZB L C10  ? -1.919 2.095  -0.132 1 1
+HETATM C  C01  . 7ZB L 1 1 . 1 7ZB L C01  ? 5.188  -4.606 -2.288 1 2
+HETATM C  C02  . 7ZB L 1 1 . 1 7ZB L C02  ? 4.203  -4.22  -1.215 1 3
+HETATM C  C03  . 7ZB L 1 1 . 1 7ZB L C03  ? 3.44   -3.078 -1.358 1 4
+HETATM C  C04  . 7ZB L 1 1 . 1 7ZB L C04  ? 2.532  -2.723 -0.369 1 5
+HETATM C  C06  . 7ZB L 1 1 . 1 7ZB L C06  ? 0.454  -1.545 -0.044 1 6
+HETATM C  C08  . 7ZB L 1 1 . 1 7ZB L C08  ? -1.545 -0.415 0.19   1 7
+HETATM C  C09  . 7ZB L 1 1 . 1 7ZB L C09  ? -2.367 0.788  -0.033 1 8
+HETATM C  C11  . 7ZB L 1 1 . 1 7ZB L C11  ? -0.512 2.549  -0.039 1 9
+HETATM C  C12  . 7ZB L 1 1 . 1 7ZB L C12  ? 0.376  1.906  0.822  1 10
+HETATM C  C13  . 7ZB L 1 1 . 1 7ZB L C13  ? 1.686  2.334  0.904  1 11
+HETATM C  C14  . 7ZB L 1 1 . 1 7ZB L C14  ? 2.118  3.399  0.134  1 12
+HETATM C  C16  . 7ZB L 1 1 . 1 7ZB L C16  ? 1.24   4.042  -0.723 1 13
+HETATM C  C17  . 7ZB L 1 1 . 1 7ZB L C17  ? -0.069 3.619  -0.818 1 14
+HETATM C  C19  . 7ZB L 1 1 . 1 7ZB L C19  ? -4.071 2.135  -0.359 1 15
+HETATM C  C21  . 7ZB L 1 1 . 1 7ZB L C21  ? -4.655 -0.299 -0.154 1 16
+HETATM C  C22  . 7ZB L 1 1 . 1 7ZB L C22  ? -5.577 -0.18  1.063  1 17
+HETATM C  C23  . 7ZB L 1 1 . 1 7ZB L C23  ? -6.576 -1.34  1.055  1 18
+HETATM C  C25  . 7ZB L 1 1 . 1 7ZB L C25  ? -6.504 -1.461 -1.365 1 19
+HETATM C  C26  . 7ZB L 1 1 . 1 7ZB L C26  ? -5.503 -0.305 -1.429 1 20
+HETATM C  C27  . 7ZB L 1 1 . 1 7ZB L C27  ? -2.076 -1.526 0.858  1 21
+HETATM C  C28  . 7ZB L 1 1 . 1 7ZB L C28  ? -1.268 -2.632 1.042  1 22
+HETATM C  C30  . 7ZB L 1 1 . 1 7ZB L C30  ? 2.395  -3.518 0.761  1 23
+HETATM C  C31  . 7ZB L 1 1 . 1 7ZB L C31  ? 3.161  -4.659 0.898  1 24
+HETATM C  C32  . 7ZB L 1 1 . 1 7ZB L C32  ? 3.012  -5.523 2.124  1 25
+HETATM C  C33  . 7ZB L 1 1 . 1 7ZB L C33  ? 4.06   -5.012 -0.091 1 26
+HETATM N  N05  . 7ZB L 1 1 . 1 7ZB L N05  ? 1.758  -1.567 -0.51  1 27
+HETATM N  N07  . 7ZB L 1 1 . 1 7ZB L N07  ? -0.284 -0.465 -0.243 1 28
+HETATM N  N18  . 7ZB L 1 1 . 1 7ZB L N18  ? -2.996 2.874  -0.334 1 29
+HETATM N  N20  . 7ZB L 1 1 . 1 7ZB L N20  ? -3.735 0.84   -0.184 1 30
+HETATM N  N24  . 7ZB L 1 1 . 1 7ZB L N24  ? -7.363 -1.301 -0.184 1 31
+HETATM N  N29  . 7ZB L 1 1 . 1 7ZB L N29  ? -0.024 -2.609 0.585  1 32
+HETATM BR BR15 . 7ZB L 1 1 . 1 7ZB L BR15 ? 3.913  3.98   0.252  1 33
+HETATM H  H1   . 7ZB L 1 1 . 1 7ZB L H1   ? 6.156  -4.152 -2.073 1 34
+HETATM H  H2   . 7ZB L 1 1 . 1 7ZB L H2   ? 5.293  -5.69  -2.312 1 35
+HETATM H  H3   . 7ZB L 1 1 . 1 7ZB L H3   ? 4.829  -4.254 -3.255 1 36
+HETATM H  H4   . 7ZB L 1 1 . 1 7ZB L H4   ? 3.549  -2.461 -2.238 1 37
+HETATM H  H5   . 7ZB L 1 1 . 1 7ZB L H5   ? 0.04   1.075  1.424  1 38
+HETATM H  H6   . 7ZB L 1 1 . 1 7ZB L H6   ? 2.374  1.837  1.571  1 39
+HETATM H  H7   . 7ZB L 1 1 . 1 7ZB L H7   ? 1.583  4.873  -1.322 1 40
+HETATM H  H8   . 7ZB L 1 1 . 1 7ZB L H8   ? -0.752 4.118  -1.49  1 41
+HETATM H  H9   . 7ZB L 1 1 . 1 7ZB L H9   ? -5.076 2.503  -0.506 1 42
+HETATM H  H10  . 7ZB L 1 1 . 1 7ZB L H10  ? -4.085 -1.226 -0.091 1 43
+HETATM H  H11  . 7ZB L 1 1 . 1 7ZB L H11  ? -4.982 -0.219 1.975  1 44
+HETATM H  H12  . 7ZB L 1 1 . 1 7ZB L H12  ? -6.117 0.766  1.019  1 45
+HETATM H  H13  . 7ZB L 1 1 . 1 7ZB L H13  ? -6.035 -2.285 1.112  1 46
+HETATM H  H14  . 7ZB L 1 1 . 1 7ZB L H14  ? -7.243 -1.251 1.912  1 47
+HETATM H  H15  . 7ZB L 1 1 . 1 7ZB L H15  ? -7.119 -1.459 -2.264 1 48
+HETATM H  H16  . 7ZB L 1 1 . 1 7ZB L H16  ? -5.964 -2.405 -1.295 1 49
+HETATM H  H17  . 7ZB L 1 1 . 1 7ZB L H17  ? -6.043 0.639  -1.512 1 50
+HETATM H  H18  . 7ZB L 1 1 . 1 7ZB L H18  ? -4.856 -0.432 -2.296 1 51
+HETATM H  H19  . 7ZB L 1 1 . 1 7ZB L H19  ? -3.094 -1.519 1.22   1 52
+HETATM H  H20  . 7ZB L 1 1 . 1 7ZB L H20  ? -1.645 -3.505 1.553  1 53
+HETATM H  H21  . 7ZB L 1 1 . 1 7ZB L H21  ? 1.689  -3.245 1.532  1 54
+HETATM H  H22  . 7ZB L 1 1 . 1 7ZB L H22  ? 2.247  -6.278 1.945  1 55
+HETATM H  H23  . 7ZB L 1 1 . 1 7ZB L H23  ? 3.961  -6.013 2.341  1 56
+HETATM H  H24  . 7ZB L 1 1 . 1 7ZB L H24  ? 2.72   -4.904 2.972  1 57
+HETATM H  H25  . 7ZB L 1 1 . 1 7ZB L H25  ? 4.658  -5.905 0.018  1 58
+HETATM H  H26  . 7ZB L 1 1 . 1 7ZB L H26  ? 2.134  -0.78  -0.935 1 59
+HETATM H  H27  . 7ZB L 1 1 . 1 7ZB L H27  ? -8.093 -1.998 -0.171 1 60
+#

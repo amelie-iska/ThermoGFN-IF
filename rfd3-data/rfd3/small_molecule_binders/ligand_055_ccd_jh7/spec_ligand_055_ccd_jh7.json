@@ -1,0 +1,10 @@
+{
+  "ligand_055_ccd_jh7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/JH7.cif",
+    "ligand": "JH7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "JH7": "ALL"
+    }
+  }
+}

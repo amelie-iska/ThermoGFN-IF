@@ -1,0 +1,10 @@
+{
+  "ligand_045_ccd_dp3": {
+    "input": "./data/rfd3/ccd_ligands/structures/DP3.cif",
+    "ligand": "DP3",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DP3": "ALL"
+    }
+  }
+}

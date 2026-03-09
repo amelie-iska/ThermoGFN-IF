@@ -1,0 +1,10 @@
+{
+  "ligand_105_ccd_wk5": {
+    "input": "./data/rfd3/ccd_ligands/structures/WK5.cif",
+    "ligand": "WK5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "WK5": "ALL"
+    }
+  }
+}

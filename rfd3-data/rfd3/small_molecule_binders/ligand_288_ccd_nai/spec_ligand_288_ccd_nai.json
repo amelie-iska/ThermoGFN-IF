@@ -1,0 +1,10 @@
+{
+  "ligand_288_ccd_nai": {
+    "input": "./data/rfd3/ccd_ligands/structures/NAI.cif",
+    "ligand": "NAI",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NAI": "ALL"
+    }
+  }
+}

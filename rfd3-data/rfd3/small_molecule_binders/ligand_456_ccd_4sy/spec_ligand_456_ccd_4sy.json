@@ -1,0 +1,10 @@
+{
+  "ligand_456_ccd_4sy": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4SY.cif",
+    "ligand": "4SY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4SY": "ALL"
+    }
+  }
+}

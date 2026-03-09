@@ -1,0 +1,70 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C  C10 . Q0M L 1 1 . 1 Q0M L C10 ? 1.733  -1.219 -0.232 1 1
+HETATM C  C13 . Q0M L 1 1 . 1 Q0M L C13 ? 5.287  -0.061 0.241  1 2
+HETATM C  C15 . Q0M L 1 1 . 1 Q0M L C15 ? 0.292  3.74   1.948  1 3
+HETATM C  C17 . Q0M L 1 1 . 1 Q0M L C17 ? 0.968  2.424  0.431  1 4
+HETATM C  C01 . Q0M L 1 1 . 1 Q0M L C01 ? -3.515 -0.162 0.92   1 5
+HETATM C  C02 . Q0M L 1 1 . 1 Q0M L C02 ? -3.045 0.37   -0.267 1 6
+HETATM C  C03 . Q0M L 1 1 . 1 Q0M L C03 ? -2.072 -0.296 -0.989 1 7
+HETATM C  C04 . Q0M L 1 1 . 1 Q0M L C04 ? -1.566 -1.496 -0.526 1 8
+HETATM C  C05 . Q0M L 1 1 . 1 Q0M L C05 ? -2.035 -2.032 0.663  1 9
+HETATM C  C06 . Q0M L 1 1 . 1 Q0M L C06 ? -3.008 -1.359 1.39   1 10
+HETATM C  C07 . Q0M L 1 1 . 1 Q0M L C07 ? 3.103  1.134  0.33   1 11
+HETATM C  C08 . Q0M L 1 1 . 1 Q0M L C08 ? 3.815  -0.054 0.142  1 12
+HETATM C  C09 . Q0M L 1 1 . 1 Q0M L C09 ? 3.123  -1.238 -0.141 1 13
+HETATM C  C11 . Q0M L 1 1 . 1 Q0M L C11 ? 1.043  -0.031 -0.047 1 14
+HETATM C  C12 . Q0M L 1 1 . 1 Q0M L C12 ? 1.729  1.139  0.232  1 15
+HETATM C  C14 . Q0M L 1 1 . 1 Q0M L C14 ? 7.411  1.074  0.611  1 16
+HETATM C  C16 . Q0M L 1 1 . 1 Q0M L C16 ? 1.677  3.425  1.358  1 17
+HETATM C  C18 . Q0M L 1 1 . 1 Q0M L C18 ? -0.131 2.33   1.503  1 18
+HETATM C  C19 . Q0M L 1 1 . 1 Q0M L C19 ? 0.507  3.017  -0.835 1 19
+HETATM N  N01 . Q0M L 1 1 . 1 Q0M L N01 ? 1.034  -2.399 -0.515 1 20
+HETATM N  N02 . Q0M L 1 1 . 1 Q0M L N02 ? 5.949  1.081  0.513  1 21
+HETATM N  N03 . Q0M L 1 1 . 1 Q0M L N03 ? 0.151  3.474  -1.812 1 22
+HETATM O  O01 . Q0M L 1 1 . 1 Q0M L O01 ? -1.538 -3.212 1.12   1 23
+HETATM O  O02 . Q0M L 1 1 . 1 Q0M L O02 ? -0.78  -3.69  -1.579 1 24
+HETATM O  O03 . Q0M L 1 1 . 1 Q0M L O03 ? -0.023 -1.521 -2.565 1 25
+HETATM O  O04 . Q0M L 1 1 . 1 Q0M L O04 ? 3.804  -2.398 -0.326 1 26
+HETATM O  O05 . Q0M L 1 1 . 1 Q0M L O05 ? 5.902  -1.097 0.076  1 27
+HETATM S  S01 . Q0M L 1 1 . 1 Q0M L S01 ? -0.331 -2.347 -1.451 1 28
+HETATM BR BR1 . Q0M L 1 1 . 1 Q0M L BR1 ? -3.735 2.012  -0.904 1 29
+HETATM CL CL1 . Q0M L 1 1 . 1 Q0M L CL1 ? -3.597 -2.028 2.88   1 30
+HETATM H  H1  . Q0M L 1 1 . 1 Q0M L H1  ? 0.299  3.874  3.03   1 31
+HETATM H  H2  . Q0M L 1 1 . 1 Q0M L H2  ? -0.235 4.539  1.426  1 32
+HETATM H  H3  . Q0M L 1 1 . 1 Q0M L H3  ? -4.275 0.36   1.483  1 33
+HETATM H  H4  . Q0M L 1 1 . 1 Q0M L H4  ? -1.707 0.121  -1.916 1 34
+HETATM H  H5  . Q0M L 1 1 . 1 Q0M L H5  ? 3.632  2.05   0.549  1 35
+HETATM H  H6  . Q0M L 1 1 . 1 Q0M L H6  ? -0.034 -0.018 -0.122 1 36
+HETATM H  H7  . Q0M L 1 1 . 1 Q0M L H7  ? 7.719  0.395  1.406  1 37
+HETATM H  H8  . Q0M L 1 1 . 1 Q0M L H8  ? 7.837  0.741  -0.336 1 38
+HETATM H  H9  . Q0M L 1 1 . 1 Q0M L H9  ? 7.765  2.08   0.835  1 39
+HETATM H  H10 . Q0M L 1 1 . 1 Q0M L H10 ? 2.128  4.266  0.83   1 40
+HETATM H  H11 . Q0M L 1 1 . 1 Q0M L H11 ? 2.358  2.956  2.068  1 41
+HETATM H  H12 . Q0M L 1 1 . 1 Q0M L H12 ? 0.056  1.562  2.253  1 42
+HETATM H  H13 . Q0M L 1 1 . 1 Q0M L H13 ? -1.139 2.286  1.092  1 43
+HETATM H  H14 . Q0M L 1 1 . 1 Q0M L H14 ? 1.349  -3.246 -0.163 1 44
+HETATM H  H15 . Q0M L 1 1 . 1 Q0M L H15 ? 5.458  1.907  0.644  1 45
+HETATM H  H16 . Q0M L 1 1 . 1 Q0M L H16 ? -0.739 -3.121 1.658  1 46
+HETATM H  H17 . Q0M L 1 1 . 1 Q0M L H17 ? 4.06   -2.562 -1.244 1 47
+#

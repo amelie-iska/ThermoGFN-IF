@@ -1,0 +1,10 @@
+{
+  "ligand_134_ccd_s8g": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/S8G.cif",
+    "ligand": "S8G",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "S8G": "ALL"
+    }
+  }
+}

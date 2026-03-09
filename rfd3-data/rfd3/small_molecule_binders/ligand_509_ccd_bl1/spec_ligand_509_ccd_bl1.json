@@ -1,0 +1,10 @@
+{
+  "ligand_509_ccd_bl1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BL1.cif",
+    "ligand": "BL1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BL1": "ALL"
+    }
+  }
+}

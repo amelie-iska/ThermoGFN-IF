@@ -1,0 +1,90 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM N N1   . AKI L 1 1 . 1 AKI L N1   ? 4.321   -3.759 0.541  1 1
+HETATM C C2   . AKI L 1 1 . 1 AKI L C2   ? 3.031   -3.984 0.412  1 2
+HETATM N N3   . AKI L 1 1 . 1 AKI L N3   ? 2.159   -3.023 0.172  1 3
+HETATM C C4   . AKI L 1 1 . 1 AKI L C4   ? 2.554   -1.758 0.047  1 4
+HETATM C C5   . AKI L 1 1 . 1 AKI L C5   ? 3.92    -1.473 0.177  1 5
+HETATM C C6   . AKI L 1 1 . 1 AKI L C6   ? 4.812   -2.527 0.432  1 6
+HETATM C CAA  . AKI L 1 1 . 1 AKI L CAA  ? 3.931   3.372  0.636  1 7
+HETATM C CAB  . AKI L 1 1 . 1 AKI L CAB  ? 4.366   2.085  0.873  1 8
+HETATM C CAC  . AKI L 1 1 . 1 AKI L CAC  ? 4.277   1.125  -0.135 1 9
+HETATM C CAD  . AKI L 1 1 . 1 AKI L CAD  ? 3.747   1.474  -1.378 1 10
+HETATM C CAE  . AKI L 1 1 . 1 AKI L CAE  ? 3.315   2.765  -1.602 1 11
+HETATM C CAF  . AKI L 1 1 . 1 AKI L CAF  ? 3.407   3.713  -0.598 1 12
+HETATM C CAG  . AKI L 1 1 . 1 AKI L CAG  ? 4.742   -0.258 0.112  1 13
+HETATM C CAH  . AKI L 1 1 . 1 AKI L CAH  ? 6.029   -0.671 0.329  1 14
+HETATM O OAI  . AKI L 1 1 . 1 AKI L OAI  ? 6.049   -2.006 0.514  1 15
+HETATM C CAL  . AKI L 1 1 . 1 AKI L CAL  ? 7.212   0.209  0.354  1 16
+HETATM C CAM  . AKI L 1 1 . 1 AKI L CAM  ? 8.151   0.094  1.382  1 17
+HETATM C CAN  . AKI L 1 1 . 1 AKI L CAN  ? 9.255   0.92   1.4    1 18
+HETATM C CAO  . AKI L 1 1 . 1 AKI L CAO  ? 9.434   1.863  0.402  1 19
+HETATM C CAP  . AKI L 1 1 . 1 AKI L CAP  ? 8.508   1.983  -0.619 1 20
+HETATM C CAQ  . AKI L 1 1 . 1 AKI L CAQ  ? 7.402   1.159  -0.653 1 21
+HETATM C CAV  . AKI L 1 1 . 1 AKI L CAV  ? 0.216   -1.07  -0.339 1 22
+HETATM C CAW  . AKI L 1 1 . 1 AKI L CAW  ? -0.57   0.213  -0.613 1 23
+HETATM C CAX  . AKI L 1 1 . 1 AKI L CAX  ? -2.035  -0.116 -0.75  1 24
+HETATM C CAY  . AKI L 1 1 . 1 AKI L CAY  ? -2.852  -0.104 0.365  1 25
+HETATM C CAZ  . AKI L 1 1 . 1 AKI L CAZ  ? -4.194  -0.404 0.243  1 26
+HETATM C CBA  . AKI L 1 1 . 1 AKI L CBA  ? -4.723  -0.718 -1.002 1 27
+HETATM C CBB  . AKI L 1 1 . 1 AKI L CBB  ? -3.901  -0.729 -2.12  1 28
+HETATM C CBC  . AKI L 1 1 . 1 AKI L CBC  ? -2.56   -0.423 -1.992 1 29
+HETATM N NBD  . AKI L 1 1 . 1 AKI L NBD  ? -6.083  -1.023 -1.129 1 30
+HETATM C CBE  . AKI L 1 1 . 1 AKI L CBE  ? -6.991  -0.386 -0.364 1 31
+HETATM N NBF  . AKI L 1 1 . 1 AKI L NBF  ? -8.307  -0.609 -0.553 1 32
+HETATM C CBG  . AKI L 1 1 . 1 AKI L CBG  ? -9.252  0.131  0.166  1 33
+HETATM C CBH  . AKI L 1 1 . 1 AKI L CBH  ? -8.988  1.45   0.51   1 34
+HETATM C CBI  . AKI L 1 1 . 1 AKI L CBI  ? -9.924  2.178  1.219  1 35
+HETATM C CBJ  . AKI L 1 1 . 1 AKI L CBJ  ? -11.122 1.595  1.586  1 36
+HETATM C CBK  . AKI L 1 1 . 1 AKI L CBK  ? -11.388 0.281  1.246  1 37
+HETATM C CBL  . AKI L 1 1 . 1 AKI L CBL  ? -10.459 -0.451 0.532  1 38
+HETATM O OBM  . AKI L 1 1 . 1 AKI L OBM  ? -6.624  0.391  0.496  1 39
+HETATM N NBN  . AKI L 1 1 . 1 AKI L NBN  ? 1.64    -0.751 -0.206 1 40
+HETATM H H2   . AKI L 1 1 . 1 AKI L H2   ? 2.67    -4.998 0.507  1 41
+HETATM H HAA  . AKI L 1 1 . 1 AKI L HAA  ? 3.996   4.115  1.418  1 42
+HETATM H HAB  . AKI L 1 1 . 1 AKI L HAB  ? 4.775   1.821  1.837  1 43
+HETATM H HAD  . AKI L 1 1 . 1 AKI L HAD  ? 3.675   0.735  -2.162 1 44
+HETATM H HAE  . AKI L 1 1 . 1 AKI L HAE  ? 2.905   3.036  -2.563 1 45
+HETATM H HAF  . AKI L 1 1 . 1 AKI L HAF  ? 3.067   4.722  -0.779 1 46
+HETATM H HAM  . AKI L 1 1 . 1 AKI L HAM  ? 8.013   -0.641 2.162  1 47
+HETATM H HAN  . AKI L 1 1 . 1 AKI L HAN  ? 9.982   0.832  2.194  1 48
+HETATM H HAO  . AKI L 1 1 . 1 AKI L HAO  ? 10.3    2.507  0.421  1 49
+HETATM H HAP  . AKI L 1 1 . 1 AKI L HAP  ? 8.654   2.721  -1.394 1 50
+HETATM H HAQ  . AKI L 1 1 . 1 AKI L HAQ  ? 6.683   1.251  -1.453 1 51
+HETATM H HAV  . AKI L 1 1 . 1 AKI L HAV  ? -0.142  -1.526 0.585  1 52
+HETATM H HAVA . AKI L 1 1 . 1 AKI L HAVA ? 0.076   -1.767 -1.166 1 53
+HETATM H HAW  . AKI L 1 1 . 1 AKI L HAW  ? -0.43   0.909  0.213  1 54
+HETATM H HAWA . AKI L 1 1 . 1 AKI L HAWA ? -0.212  0.668  -1.537 1 55
+HETATM H HAY  . AKI L 1 1 . 1 AKI L HAY  ? -2.44   0.141  1.333  1 56
+HETATM H HAZ  . AKI L 1 1 . 1 AKI L HAZ  ? -4.832  -0.395 1.115  1 57
+HETATM H HBB  . AKI L 1 1 . 1 AKI L HBB  ? -4.309  -0.973 -3.09  1 58
+HETATM H HBC  . AKI L 1 1 . 1 AKI L HBC  ? -1.92   -0.427 -2.862 1 59
+HETATM H HNBD . AKI L 1 1 . 1 AKI L HNBD ? -6.372  -1.694 -1.768 1 60
+HETATM H HNBF . AKI L 1 1 . 1 AKI L HNBF ? -8.599  -1.283 -1.186 1 61
+HETATM H HBH  . AKI L 1 1 . 1 AKI L HBH  ? -8.052  1.906  0.223  1 62
+HETATM H HBI  . AKI L 1 1 . 1 AKI L HBI  ? -9.719  3.204  1.486  1 63
+HETATM H HBJ  . AKI L 1 1 . 1 AKI L HBJ  ? -11.852 2.166  2.141  1 64
+HETATM H HBK  . AKI L 1 1 . 1 AKI L HBK  ? -12.325 -0.172 1.535  1 65
+HETATM H HBL  . AKI L 1 1 . 1 AKI L HBL  ? -10.67  -1.475 0.263  1 66
+HETATM H HNBN . AKI L 1 1 . 1 AKI L HNBN ? 1.942   0.166  -0.294 1 67
+#

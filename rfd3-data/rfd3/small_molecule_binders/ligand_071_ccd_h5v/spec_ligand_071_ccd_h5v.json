@@ -1,0 +1,10 @@
+{
+  "ligand_071_ccd_h5v": {
+    "input": "./data/rfd3/ccd_ligands/structures/H5V.cif",
+    "ligand": "H5V",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "H5V": "ALL"
+    }
+  }
+}

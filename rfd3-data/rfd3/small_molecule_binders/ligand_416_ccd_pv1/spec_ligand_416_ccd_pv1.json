@@ -1,0 +1,10 @@
+{
+  "ligand_416_ccd_pv1": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/PV1.cif",
+    "ligand": "PV1",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "PV1": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_344_ccd_bi5": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/BI5.cif",
+    "ligand": "BI5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "BI5": "ALL"
+    }
+  }
+}

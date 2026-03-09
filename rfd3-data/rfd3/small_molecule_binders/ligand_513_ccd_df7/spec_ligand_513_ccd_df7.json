@@ -1,0 +1,10 @@
+{
+  "ligand_513_ccd_df7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/DF7.cif",
+    "ligand": "DF7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "DF7": "ALL"
+    }
+  }
+}

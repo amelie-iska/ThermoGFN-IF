@@ -1,0 +1,10 @@
+{
+  "ligand_417_ccd_68v": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/68V.cif",
+    "ligand": "68V",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "68V": "ALL"
+    }
+  }
+}

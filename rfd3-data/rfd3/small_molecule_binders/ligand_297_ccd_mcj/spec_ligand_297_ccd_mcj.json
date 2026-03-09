@@ -1,0 +1,10 @@
+{
+  "ligand_297_ccd_mcj": {
+    "input": "./data/rfd3/ccd_ligands/structures/MCJ.cif",
+    "ligand": "MCJ",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "MCJ": "ALL"
+    }
+  }
+}

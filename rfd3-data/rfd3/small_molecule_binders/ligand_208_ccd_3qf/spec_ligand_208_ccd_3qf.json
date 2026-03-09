@@ -1,0 +1,10 @@
+{
+  "ligand_208_ccd_3qf": {
+    "input": "./data/rfd3/ccd_ligands/structures/3QF.cif",
+    "ligand": "3QF",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "3QF": "ALL"
+    }
+  }
+}

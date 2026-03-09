@@ -1,0 +1,10 @@
+{
+  "ligand_212_ccd_g0d": {
+    "input": "./data/rfd3/ccd_ligands/structures/G0D.cif",
+    "ligand": "G0D",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "G0D": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_030_ccd_hfc": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/HFC.cif",
+    "ligand": "HFC",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HFC": "ALL"
+    }
+  }
+}

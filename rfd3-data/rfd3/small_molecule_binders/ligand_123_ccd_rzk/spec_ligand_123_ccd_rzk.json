@@ -1,0 +1,10 @@
+{
+  "ligand_123_ccd_rzk": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/RZK.cif",
+    "ligand": "RZK",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "RZK": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_156_ccd_7i4": {
+    "input": "./data/rfd3/ccd_ligands/structures/7I4.cif",
+    "ligand": "7I4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7I4": "ALL"
+    }
+  }
+}

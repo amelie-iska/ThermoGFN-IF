@@ -1,0 +1,10 @@
+{
+  "ligand_218_ccd_7t5": {
+    "input": "./data/rfd3/ccd_ligands/structures/7T5.cif",
+    "ligand": "7T5",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "7T5": "ALL"
+    }
+  }
+}

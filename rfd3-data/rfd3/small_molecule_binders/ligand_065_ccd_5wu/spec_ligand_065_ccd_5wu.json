@@ -1,0 +1,10 @@
+{
+  "ligand_065_ccd_5wu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/5WU.cif",
+    "ligand": "5WU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "5WU": "ALL"
+    }
+  }
+}

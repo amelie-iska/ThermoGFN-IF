@@ -1,0 +1,10 @@
+{
+  "ligand_030_ccd_ase": {
+    "input": "./data/rfd3/ccd_ligands/structures/ASE.cif",
+    "ligand": "ASE",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "ASE": "ALL"
+    }
+  }
+}

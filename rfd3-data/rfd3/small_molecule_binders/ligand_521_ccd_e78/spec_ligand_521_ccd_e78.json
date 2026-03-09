@@ -1,0 +1,10 @@
+{
+  "ligand_521_ccd_e78": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/E78.cif",
+    "ligand": "E78",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "E78": "ALL"
+    }
+  }
+}

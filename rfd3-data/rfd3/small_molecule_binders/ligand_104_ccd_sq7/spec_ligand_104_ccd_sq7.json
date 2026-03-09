@@ -1,0 +1,10 @@
+{
+  "ligand_104_ccd_sq7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/SQ7.cif",
+    "ligand": "SQ7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "SQ7": "ALL"
+    }
+  }
+}

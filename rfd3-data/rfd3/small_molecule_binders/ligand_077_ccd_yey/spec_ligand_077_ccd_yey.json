@@ -1,0 +1,10 @@
+{
+  "ligand_077_ccd_yey": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/YEY.cif",
+    "ligand": "YEY",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "YEY": "ALL"
+    }
+  }
+}

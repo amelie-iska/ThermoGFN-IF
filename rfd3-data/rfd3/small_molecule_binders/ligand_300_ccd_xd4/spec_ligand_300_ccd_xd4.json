@@ -1,0 +1,10 @@
+{
+  "ligand_300_ccd_xd4": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/XD4.cif",
+    "ligand": "XD4",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "XD4": "ALL"
+    }
+  }
+}

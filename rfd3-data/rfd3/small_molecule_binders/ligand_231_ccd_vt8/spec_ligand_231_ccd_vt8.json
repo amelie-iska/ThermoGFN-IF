@@ -1,0 +1,10 @@
+{
+  "ligand_231_ccd_vt8": {
+    "input": "./data/rfd3/ccd_ligands/structures/VT8.cif",
+    "ligand": "VT8",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "VT8": "ALL"
+    }
+  }
+}

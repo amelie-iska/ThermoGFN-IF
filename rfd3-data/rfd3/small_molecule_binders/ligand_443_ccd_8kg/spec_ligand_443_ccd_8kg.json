@@ -1,0 +1,10 @@
+{
+  "ligand_443_ccd_8kg": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8KG.cif",
+    "ligand": "8KG",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8KG": "ALL"
+    }
+  }
+}

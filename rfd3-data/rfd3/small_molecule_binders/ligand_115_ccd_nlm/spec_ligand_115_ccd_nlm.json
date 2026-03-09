@@ -1,0 +1,10 @@
+{
+  "ligand_115_ccd_nlm": {
+    "input": "./data/rfd3/ccd_ligands/structures/NLM.cif",
+    "ligand": "NLM",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "NLM": "ALL"
+    }
+  }
+}

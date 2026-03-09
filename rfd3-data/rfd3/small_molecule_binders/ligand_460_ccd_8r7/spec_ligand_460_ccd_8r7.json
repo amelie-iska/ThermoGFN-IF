@@ -1,0 +1,10 @@
+{
+  "ligand_460_ccd_8r7": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/8R7.cif",
+    "ligand": "8R7",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "8R7": "ALL"
+    }
+  }
+}

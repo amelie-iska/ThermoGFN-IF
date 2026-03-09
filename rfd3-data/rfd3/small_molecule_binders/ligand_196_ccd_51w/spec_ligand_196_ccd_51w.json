@@ -1,0 +1,10 @@
+{
+  "ligand_196_ccd_51w": {
+    "input": "./data/rfd3/ccd_ligands/structures/51W.cif",
+    "ligand": "51W",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "51W": "ALL"
+    }
+  }
+}

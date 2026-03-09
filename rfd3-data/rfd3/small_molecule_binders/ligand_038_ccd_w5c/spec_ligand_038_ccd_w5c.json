@@ -1,0 +1,10 @@
+{
+  "ligand_038_ccd_w5c": {
+    "input": "./data/rfd3/ccd_ligands/structures/W5C.cif",
+    "ligand": "W5C",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "W5C": "ALL"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+data_structure
+#
+loop_
+_atom_site.group_PDB 
+_atom_site.type_symbol 
+_atom_site.label_atom_id 
+_atom_site.label_alt_id 
+_atom_site.label_comp_id 
+_atom_site.label_asym_id 
+_atom_site.label_entity_id 
+_atom_site.label_seq_id 
+_atom_site.pdbx_PDB_ins_code 
+_atom_site.auth_seq_id 
+_atom_site.auth_comp_id 
+_atom_site.auth_asym_id 
+_atom_site.auth_atom_id 
+_atom_site.pdbx_formal_charge 
+_atom_site.Cartn_x 
+_atom_site.Cartn_y 
+_atom_site.Cartn_z 
+_atom_site.pdbx_PDB_model_num 
+_atom_site.id 
+HETATM C C1  . EBX L 1 1 . 1 EBX L C1  ? -4.796 -0.584 -0.181 1 1
+HETATM C C2  . EBX L 1 1 . 1 EBX L C2  ? -3.417 -0.792 -0.225 1 2
+HETATM C C3  . EBX L 1 1 . 1 EBX L C3  ? -2.572 0.313  -0.398 1 3
+HETATM C C4  . EBX L 1 1 . 1 EBX L C4  ? -3.149 1.571  -0.52  1 4
+HETATM C C5  . EBX L 1 1 . 1 EBX L C5  ? -4.528 1.694  -0.466 1 5
+HETATM C C6  . EBX L 1 1 . 1 EBX L C6  ? -5.706 -1.734 0.001  1 6
+HETATM C C7  . EBX L 1 1 . 1 EBX L C7  ? -7.92  -2.664 0.416  1 7
+HETATM C C8  . EBX L 1 1 . 1 EBX L C8  ? -7.569 -0.169 0.119  1 8
+HETATM C C11 . EBX L 1 1 . 1 EBX L C11 ? 0.877  2.57   0.861  1 9
+HETATM C C10 . EBX L 1 1 . 1 EBX L C10 ? 1.027  1.316  0.102  1 10
+HETATM C C12 . EBX L 1 1 . 1 EBX L C12 ? -0.594 2.36   0.84   1 11
+HETATM C C13 . EBX L 1 1 . 1 EBX L C13 ? 3.46   1.119  -0.178 1 12
+HETATM C C14 . EBX L 1 1 . 1 EBX L C14 ? 4.434  -0.03  -0.228 1 13
+HETATM C C15 . EBX L 1 1 . 1 EBX L C15 ? 3.806  2.129  -1.274 1 14
+HETATM C C16 . EBX L 1 1 . 1 EBX L C16 ? 2.897  3.353  -1.144 1 15
+HETATM C C17 . EBX L 1 1 . 1 EBX L C17 ? 5.409  -1.898 -0.838 1 16
+HETATM C C18 . EBX L 1 1 . 1 EBX L C18 ? 6.128  -1.398 0.183  1 17
+HETATM C C19 . EBX L 1 1 . 1 EBX L C19 ? 5.498  -0.195 0.578  1 18
+HETATM C C20 . EBX L 1 1 . 1 EBX L C20 ? 7.367  -2.004 0.79   1 19
+HETATM C C21 . EBX L 1 1 . 1 EBX L C21 ? 7.039  -3.394 1.338  1 20
+HETATM C C22 . EBX L 1 1 . 1 EBX L C22 ? 8.454  -2.121 -0.28  1 21
+HETATM C C9  . EBX L 1 1 . 1 EBX L C9  ? -0.365 1.12   0.076  1 22
+HETATM N N1  . EBX L 1 1 . 1 EBX L N1  ? -5.298 0.643  -0.297 1 23
+HETATM N N2  . EBX L 1 1 . 1 EBX L N2  ? -7.027 -1.528 0.174  1 24
+HETATM N N3  . EBX L 1 1 . 1 EBX L N3  ? -1.187 0.153  -0.448 1 25
+HETATM N N4  . EBX L 1 1 . 1 EBX L N4  ? 2.1    0.616  -0.388 1 26
+HETATM O O1  . EBX L 1 1 . 1 EBX L O1  ? -2.902 -2.042 -0.101 1 27
+HETATM O O2  . EBX L 1 1 . 1 EBX L O2  ? -5.263 -2.866 -0.005 1 28
+HETATM O O3  . EBX L 1 1 . 1 EBX L O3  ? -1.566 2.954  1.267  1 29
+HETATM O O4  . EBX L 1 1 . 1 EBX L O4  ? 1.631  3.411  1.314  1 30
+HETATM O O5  . EBX L 1 1 . 1 EBX L O5  ? 4.383  -1.066 -1.082 1 31
+HETATM H H1  . EBX L 1 1 . 1 EBX L H1  ? -2.528 2.445  -0.654 1 32
+HETATM H H2  . EBX L 1 1 . 1 EBX L H2  ? -4.977 2.672  -0.56  1 33
+HETATM H H4  . EBX L 1 1 . 1 EBX L H4  ? -7.993 -2.846 1.488  1 34
+HETATM H H5  . EBX L 1 1 . 1 EBX L H5  ? -8.909 -2.44  0.017  1 35
+HETATM H H6  . EBX L 1 1 . 1 EBX L H6  ? -7.521 -3.551 -0.077 1 36
+HETATM H H7  . EBX L 1 1 . 1 EBX L H7  ? -7.75  0.109  -0.92  1 37
+HETATM H H8  . EBX L 1 1 . 1 EBX L H8  ? -8.506 -0.129 0.674  1 38
+HETATM H H9  . EBX L 1 1 . 1 EBX L H9  ? -6.855 0.526  0.561  1 39
+HETATM H H10 . EBX L 1 1 . 1 EBX L H10 ? 3.521  1.604  0.796  1 40
+HETATM H H11 . EBX L 1 1 . 1 EBX L H11 ? 4.846  2.436  -1.169 1 41
+HETATM H H12 . EBX L 1 1 . 1 EBX L H12 ? 3.658  1.669  -2.251 1 42
+HETATM H H13 . EBX L 1 1 . 1 EBX L H13 ? 1.856  3.046  -1.248 1 43
+HETATM H H14 . EBX L 1 1 . 1 EBX L H14 ? 3.044  3.813  -0.167 1 44
+HETATM H H15 . EBX L 1 1 . 1 EBX L H15 ? 3.143  4.073  -1.925 1 45
+HETATM H H16 . EBX L 1 1 . 1 EBX L H16 ? 5.621  -2.812 -1.371 1 46
+HETATM H H17 . EBX L 1 1 . 1 EBX L H17 ? 5.812  0.465  1.373  1 47
+HETATM H H18 . EBX L 1 1 . 1 EBX L H18 ? 7.723  -1.368 1.601  1 48
+HETATM H H19 . EBX L 1 1 . 1 EBX L H19 ? 6.683  -4.03  0.527  1 49
+HETATM H H20 . EBX L 1 1 . 1 EBX L H20 ? 7.935  -3.832 1.777  1 50
+HETATM H H21 . EBX L 1 1 . 1 EBX L H21 ? 6.265  -3.31  2.101  1 51
+HETATM H H22 . EBX L 1 1 . 1 EBX L H22 ? 8.688  -1.131 -0.671 1 52
+HETATM H H23 . EBX L 1 1 . 1 EBX L H23 ? 9.351  -2.56  0.159  1 53
+HETATM H H24 . EBX L 1 1 . 1 EBX L H24 ? 8.099  -2.757 -1.091 1 54
+HETATM H H25 . EBX L 1 1 . 1 EBX L H25 ? -0.804 -0.641 -0.852 1 55
+HETATM H H26 . EBX L 1 1 . 1 EBX L H26 ? 1.959  -0.212 -0.873 1 56
+HETATM H H3  . EBX L 1 1 . 1 EBX L H3  ? -2.797 -2.509 -0.941 1 57
+#

@@ -1,0 +1,10 @@
+{
+  "ligand_220_ccd_4p6": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/4P6.cif",
+    "ligand": "4P6",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "4P6": "ALL"
+    }
+  }
+}

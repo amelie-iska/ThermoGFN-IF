@@ -1,0 +1,10 @@
+{
+  "ligand_264_ccd_j12": {
+    "input": "./data/rfd3/ccd_ligands/structures/J12.cif",
+    "ligand": "J12",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "J12": "ALL"
+    }
+  }
+}

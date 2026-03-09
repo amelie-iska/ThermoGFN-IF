@@ -1,0 +1,10 @@
+{
+  "ligand_202_ccd_0sw": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/0SW.cif",
+    "ligand": "0SW",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "0SW": "ALL"
+    }
+  }
+}

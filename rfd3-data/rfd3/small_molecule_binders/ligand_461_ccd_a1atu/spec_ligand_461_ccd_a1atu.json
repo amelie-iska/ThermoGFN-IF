@@ -1,0 +1,10 @@
+{
+  "ligand_461_ccd_a1atu": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/A1ATU.cif",
+    "ligand": "A1ATU",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A1ATU": "ALL"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ligand_231_ccd_n7m": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/N7M.cif",
+    "ligand": "N7M",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "N7M": "ALL"
+    }
+  }
+}

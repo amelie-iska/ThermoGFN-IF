@@ -1,0 +1,10 @@
+{
+  "ligand_251_ccd_hno": {
+    "input": "/home/iska/amelie-ai/ThermoGFN/data/rfd3/ccd_ligands/structures/HNO.cif",
+    "ligand": "HNO",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "HNO": "ALL"
+    }
+  }
+}

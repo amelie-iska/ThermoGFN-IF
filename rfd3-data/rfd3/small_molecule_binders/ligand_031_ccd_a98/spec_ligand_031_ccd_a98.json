@@ -1,0 +1,10 @@
+{
+  "ligand_031_ccd_a98": {
+    "input": "./data/rfd3/ccd_ligands/structures/A98.cif",
+    "ligand": "A98",
+    "length": "20-400",
+    "select_fixed_atoms": {
+      "A98": "ALL"
+    }
+  }
+}
