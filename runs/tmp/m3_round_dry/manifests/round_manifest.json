@@ -1,0 +1,268 @@
+{
+  "completed_utc": "2026-03-04T00:04:15.038851+00:00",
+  "dataset_path": "runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+  "mode": "production",
+  "pass": true,
+  "round_id": 0,
+  "run_id": "dry",
+  "started_utc": "2026-03-04T00:04:15.038385+00:00",
+  "steps": [
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_fit_surrogate.py",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models",
+        "--round-id",
+        "0",
+        "--ensemble-size",
+        "8",
+        "--max-checkpoints",
+        "5",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038506+00:00",
+      "duration_s": 0.0,
+      "name": "fit_surrogate",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038452+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_train_teacher_gfn.py",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models",
+        "--round-id",
+        "0",
+        "--steps",
+        "30000",
+        "--gamma-off",
+        "0.5",
+        "--max-checkpoints",
+        "5",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038538+00:00",
+      "duration_s": 0.0,
+      "name": "train_teacher",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038519+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_distill_student.py",
+        "--teacher-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models/teacher_round_0.ckpt",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models",
+        "--round-id",
+        "0",
+        "--steps",
+        "15000",
+        "--max-checkpoints",
+        "5",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038559+00:00",
+      "duration_s": 0.0,
+      "name": "distill_student",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038546+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_generate_student_pool.py",
+        "--student-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models/student_round_0.ckpt",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/candidate_pool_round_0.jsonl",
+        "--run-id",
+        "dry",
+        "--round-id",
+        "0",
+        "--pool-size",
+        "10",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038582+00:00",
+      "duration_s": 0.0,
+      "name": "generate_pool",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038566+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/env/dispatch.py",
+        "--env-name",
+        "spurs",
+        "--cmd",
+        "python /home/iska/amelie-ai/ThermoGFN/scripts/prep/oracles/spurs_score_single.py --candidate-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/candidate_pool_round_0.jsonl --output-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/candidate_pool_spurs_round_0.jsonl --repo-id cyclization9/SPURS --chain A"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038618+00:00",
+      "duration_s": 0.0,
+      "name": "spurs_score",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038603+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_select_bioemu_batch.py",
+        "--input-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/candidate_pool_spurs_round_0.jsonl",
+        "--output-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/bioemu_selected_round_0.jsonl",
+        "--budget",
+        "4"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038644+00:00",
+      "duration_s": 0.0,
+      "name": "select_bioemu",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038632+00:00"
+    },
+    {
+      "cmd": [
+        "bash",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/env/setup_bioemu_colabfold_runtime.sh",
+        "--bioemu-env",
+        "bioemu",
+        "--check-only"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038667+00:00",
+      "duration_s": 0.0,
+      "name": "bioemu_runtime_check",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038654+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/env/dispatch.py",
+        "--env-name",
+        "bioemu",
+        "--cmd",
+        "python /home/iska/amelie-ai/ThermoGFN/scripts/prep/oracles/bioemu_sample_and_features.py --candidate-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/bioemu_selected_round_0.jsonl --output-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/bioemu_scored_round_0.jsonl --model-name bioemu-v1.1 --num-samples 2048 --batch-size-100 64 --target-vram-frac 0.9 --batch-size-100-min 1 --batch-size-100-max 512 --vram-control-metric reserved --low-utilization-mult 0.5 --batch-size-100-max-growth-factor 6.0 --batch-size-100-max-shrink-factor 0.5 --sort-by-length-desc --no-filter-samples --auto-batch-from-vram"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038697+00:00",
+      "duration_s": 0.0,
+      "name": "bioemu_score",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038684+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_select_uma_batch.py",
+        "--input-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/bioemu_scored_round_0.jsonl",
+        "--output-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/uma_selected_round_0.jsonl",
+        "--budget",
+        "2"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038723+00:00",
+      "duration_s": 0.0,
+      "name": "select_uma",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038711+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/env/dispatch.py",
+        "--env-name",
+        "uma-qc",
+        "--cmd",
+        "python /home/iska/amelie-ai/ThermoGFN/scripts/prep/oracles/uma_md_screen.py --candidate-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/uma_selected_round_0.jsonl --output-path /home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/uma_scored_round_0.jsonl --model-name uma-s-1p1 --workers 1 --replicates 4"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038749+00:00",
+      "duration_s": 0.0,
+      "name": "uma_score",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038737+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/prep/oracles/fuse_scores.py",
+        "--candidate-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/uma_scored_round_0.jsonl",
+        "--output-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/fused_scored_round_0.jsonl"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038773+00:00",
+      "duration_s": 0.0,
+      "name": "fuse_scores",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038762+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_append_labels.py",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--labeled-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/fused_scored_round_0.jsonl",
+        "--output-dr-next",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/D_1.jsonl",
+        "--summary-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/manifests/append_summary.json"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038799+00:00",
+      "duration_s": 0.0,
+      "name": "append_labels",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038788+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/eval/eval_design_metrics.py",
+        "--input-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/data/fused_scored_round_0.jsonl",
+        "--output",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/metrics/round_metrics.json"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038822+00:00",
+      "duration_s": 0.0,
+      "name": "eval_design_metrics",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038812+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/eval/eval_m3_teacher_student.py",
+        "--teacher-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models/teacher_round_0.ckpt",
+        "--student-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/models/student_round_0.ckpt",
+        "--output",
+        "/home/iska/amelie-ai/ThermoGFN/runs/tmp/m3_round_dry/metrics/teacher_student_eval.json"
+      ],
+      "completed_utc": "2026-03-04T00:04:15.038845+00:00",
+      "duration_s": 0.0,
+      "name": "eval_teacher_student",
+      "returncode": 0,
+      "started_utc": "2026-03-04T00:04:15.038834+00:00"
+    }
+  ]
+}

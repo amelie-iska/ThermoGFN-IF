@@ -1,0 +1,51 @@
+[prefetch] REPO_ROOT=/home/iska/amelie-ai/ThermoGFN
+[prefetch] HF_HOME=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface
+[prefetch] TORCH_HOME=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/torch
+[prefetch] timeout=1800s heartbeat=15s
+[prefetch] bioemu_env=bioemu
+[prefetch] colabfold_dir=/home/iska/amelie-ai/ThermoGFN/.cache/bioemu/colabfold
+[prefetch] network preflight: DNS checks
+[prefetch][net] ok: huggingface.co
+[prefetch][net] ok: dl.fbaipublicfiles.com
+[prefetch][net] ok: api.colabfold.com
+[prefetch][net] ok: storage.googleapis.com
+[prefetch] LigandMPNN model parameters
+[prefetch][ligandmpnn] ensuring model_params directory is populated
+[prefetch][ligandmpnn] checkpoint already present: ./model_params/ligandmpnn_v_32_010_25.pt
+[prefetch][ligandmpnn] completed in 15s
+[prefetch] SPURS base model + multi model
+[prefetch][spurs] launching prefetch worker
+torch geometric not found, GNN examples will not work until it is.
+spurs:prefetch:   0%|          | 0/2 [00:00<?, ?it/s][prefetch][spurs] fetching spurs
+[prefetch][spurs] ready spurs
+spurs:prefetch:  50%|█████     | 1/2 [00:07<00:07,  7.68s/it][prefetch][spurs] fetching spurs_multi
+[prefetch][spurs] still running (15s elapsed)
+[prefetch][spurs] ready spurs_multi
+spurs:prefetch: 100%|██████████| 2/2 [00:13<00:00,  6.78s/it]spurs:prefetch: 100%|██████████| 2/2 [00:13<00:00,  6.91s/it]
+[prefetch][spurs] complete elapsed=13.82s
+[prefetch][spurs] completed in 30s
+[prefetch] BioEmu checkpoints
+[prefetch][bioemu] launching prefetch worker
+bioemu:prefetch:   0%|          | 0/3 [00:00<?, ?it/s][prefetch][bioemu] fetching bioemu-v1.0
+[prefetch][bioemu] ready bioemu-v1.0 ckpt=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.0/checkpoint.ckpt cfg=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.0/config.yaml
+[prefetch][bioemu] fetching bioemu-v1.1
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[prefetch][bioemu] ready bioemu-v1.1 ckpt=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.1/checkpoint.ckpt cfg=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.1/config.yaml
+bioemu:prefetch:  67%|██████▋   | 2/3 [00:00<00:00,  3.50it/s][prefetch][bioemu] fetching bioemu-v1.2
+[prefetch][bioemu] ready bioemu-v1.2 ckpt=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.2/checkpoint.ckpt cfg=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.2/config.yaml
+bioemu:prefetch: 100%|██████████| 3/3 [00:00<00:00,  3.55it/s]
+[prefetch][bioemu] complete elapsed=0.85s
+[prefetch][bioemu] completed in 15s
+[prefetch] BioEmu ColabFold runtime
+[bioemu-colabfold] repo_root=/home/iska/amelie-ai/ThermoGFN
+[bioemu-colabfold] target_dir=/home/iska/amelie-ai/ThermoGFN/.cache/bioemu/colabfold
+[bioemu-colabfold] bioemu_env=bioemu
+[bioemu-colabfold] runtime already ready
+[prefetch][bioemu-colabfold] completed in 15s
+[prefetch] UMA model unit
+[prefetch][uma-qc] launching prefetch worker
+[prefetch][uma] fetching uma-s-1p1
+[prefetch][uma] ready type=MLIPPredictUnit
+[prefetch][uma] complete elapsed=2.18s
+[prefetch][uma-qc] completed in 15s
+[prefetch] done

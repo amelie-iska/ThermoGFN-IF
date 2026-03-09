@@ -1,0 +1,38 @@
+{
+  "optional": {
+    "ADFLIP": {
+      "path": "/home/iska/miniconda3/envs/ADFLIP",
+      "status": "ready"
+    },
+    "foundry": {
+      "path": null,
+      "status": "missing"
+    },
+    "protrek": {
+      "path": "/home/iska/miniconda3/envs/protrek",
+      "status": "ready"
+    },
+    "rfd3": {
+      "path": "/home/iska/miniconda3/envs/rfd3",
+      "status": "ready"
+    }
+  },
+  "required": {
+    "bioemu": {
+      "path": "/home/iska/miniconda3/envs/bioemu",
+      "status": "ready"
+    },
+    "ligandmpnn_env": {
+      "path": "/home/iska/miniconda3/envs/ligandmpnn_env",
+      "status": "ready"
+    },
+    "spurs": {
+      "path": "/home/iska/miniconda3/envs/spurs",
+      "status": "ready"
+    },
+    "uma-qc": {
+      "path": "/home/iska/miniconda3/envs/uma-qc",
+      "status": "ready"
+    }
+  }
+}

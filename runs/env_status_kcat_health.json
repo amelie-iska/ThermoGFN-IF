@@ -1,0 +1,32 @@
+{
+  "optional": {},
+  "required": {
+    "KcatNet": {
+      "health_details": {
+        "stderr_tail": "uld be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.\n  trfm.load_state_dict(torch.load(str(_THIS_DIR / \"trfm_12_23000.pkl\"), map_location=\"cpu\"))\n",
+        "stdout_tail": "ok\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/KcatNet",
+      "status": "ready"
+    },
+    "apodock": {
+      "health_details": {
+        "stderr_tail": "",
+        "stdout_tail": "tch_size BATCH_SIZE\n                        Batch size for data loading\n  --csv_file CSV_FILE   Path to the input CSV file\n  --cpkt_path CPKT_PATH\n                        Path to the model checkpoint\n  --device DEVICE       Device to run the model on (e.g., cuda:0, cpu)\n  --cfg CFG             Configuration file name\n  --organism_set_path ORGANISM_SET_PATH\n                        Path to the organism set file\n  --temp_set_path TEMP_SET_PATH\n                        Path to the temporary set file\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/apodock",
+      "status": "ready"
+    },
+    "ligandmpnn_env": {
+      "health_details": {
+        "stderr_tail": "",
+        "stdout_tail": "d for fixed\n                        residues (default: 0)\n  --force_hetatm FORCE_HETATM\n                        To force ligand atoms to be written as HETATM to PDB\n                        file after packing. (default: 0)\n  --packed_suffix PACKED_SUFFIX\n                        Suffix for packed PDB paths (default: _packed)\n  --pack_with_ligand_context PACK_WITH_LIGAND_CONTEXT\n                        1-pack side chains using ligand context, 0 - do not\n                        use it. (default: 1)\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/ligandmpnn_env",
+      "status": "ready"
+    }
+  }
+}

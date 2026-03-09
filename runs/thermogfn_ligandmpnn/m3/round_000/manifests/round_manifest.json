@@ -1,0 +1,111 @@
+{
+  "dataset_path": "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+  "mode": "production",
+  "round_id": 0,
+  "run_id": "thermogfn_ligandmpnn",
+  "started_utc": "2026-03-03T09:50:28.829070+00:00",
+  "steps": [
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_fit_surrogate.py",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/models",
+        "--round-id",
+        "0",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-03T09:50:28.953003+00:00",
+      "duration_s": 0.12379473098553717,
+      "name": "fit_surrogate",
+      "returncode": 0,
+      "started_utc": "2026-03-03T09:50:28.829134+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_train_teacher_gfn.py",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/models",
+        "--round-id",
+        "0",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-03T09:50:29.099876+00:00",
+      "duration_s": 0.14662322378717363,
+      "name": "train_teacher",
+      "returncode": 0,
+      "started_utc": "2026-03-03T09:50:28.953200+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_distill_student.py",
+        "--teacher-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/models/teacher_round_0.ckpt",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-dir",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/models",
+        "--round-id",
+        "0",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-03T09:50:29.209534+00:00",
+      "duration_s": 0.10951505787670612,
+      "name": "distill_student",
+      "returncode": 0,
+      "started_utc": "2026-03-03T09:50:29.099981+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/train/m3_generate_student_pool.py",
+        "--student-ckpt",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/models/student_round_0.ckpt",
+        "--input-dr",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+        "--output-path",
+        "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/data/candidate_pool_round_0.jsonl",
+        "--run-id",
+        "thermogfn_ligandmpnn",
+        "--round-id",
+        "0",
+        "--pool-size",
+        "50000",
+        "--seed",
+        "13"
+      ],
+      "completed_utc": "2026-03-03T09:50:31.473640+00:00",
+      "duration_s": 2.2639645179733634,
+      "name": "generate_pool",
+      "returncode": 0,
+      "started_utc": "2026-03-03T09:50:29.209635+00:00"
+    },
+    {
+      "cmd": [
+        "python",
+        "/home/iska/amelie-ai/ThermoGFN/scripts/env/dispatch.py",
+        "--env-name",
+        "spurs",
+        "--cmd",
+        "python /home/iska/amelie-ai/ThermoGFN/scripts/prep/oracles/spurs_score_single.py --candidate-path /home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/data/candidate_pool_round_0.jsonl --output-path /home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/m3/round_000/data/candidate_pool_spurs_round_0.jsonl",
+        "--require-ready",
+        "--env-status-json",
+        "runs/thermogfn_ligandmpnn/env_status_health.json"
+      ],
+      "completed_utc": "2026-03-03T09:50:32.360764+00:00",
+      "duration_s": 0.8868712258990854,
+      "name": "spurs_score",
+      "returncode": 1,
+      "started_utc": "2026-03-03T09:50:31.473848+00:00"
+    }
+  ]
+}

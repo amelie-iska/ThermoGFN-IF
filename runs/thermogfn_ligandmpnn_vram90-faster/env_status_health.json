@@ -1,0 +1,58 @@
+{
+  "optional": {
+    "ADFLIP": {
+      "path": "/home/iska/miniconda3/envs/ADFLIP",
+      "status": "ready"
+    },
+    "foundry": {
+      "path": null,
+      "status": "missing"
+    },
+    "protrek": {
+      "path": "/home/iska/miniconda3/envs/protrek",
+      "status": "ready"
+    },
+    "rfd3": {
+      "path": "/home/iska/miniconda3/envs/rfd3",
+      "status": "ready"
+    }
+  },
+  "required": {
+    "bioemu": {
+      "health_details": {
+        "stderr_tail": "mote server. If sequence is an a3m file, this is ignored.\n    -f, --filter_samples=FILTER_SAMPLES\n        Type: bool\n        Default: True\n        Filter out unphysical samples with e.g. long bond distances or steric clashes.\n    --base_seed=BASE_SEED\n        Type: Optional[int | None]\n        Default: None\n        Base random seed for sampling. If set, each batch's seed will be set to base_seed + (num samples already generated).\n\nNOTES\n    You can also use flags syntax for POSITIONAL ARGUMENTS\n",
+        "stdout_tail": ""
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/bioemu",
+      "status": "ready"
+    },
+    "ligandmpnn_env": {
+      "health_details": {
+        "stderr_tail": "",
+        "stdout_tail": "d for fixed\n                        residues (default: 0)\n  --force_hetatm FORCE_HETATM\n                        To force ligand atoms to be written as HETATM to PDB\n                        file after packing. (default: 0)\n  --packed_suffix PACKED_SUFFIX\n                        Suffix for packed PDB paths (default: _packed)\n  --pack_with_ligand_context PACK_WITH_LIGAND_CONTEXT\n                        1-pack side chains using ligand context, 0 - do not\n                        use it. (default: 1)\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/ligandmpnn_env",
+      "status": "ready"
+    },
+    "spurs": {
+      "health_details": {
+        "stderr_tail": "",
+        "stdout_tail": "ok\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/spurs",
+      "status": "ready"
+    },
+    "uma-qc": {
+      "health_details": {
+        "stderr_tail": "",
+        "stdout_tail": "ok\n"
+      },
+      "health_ok": true,
+      "path": "/home/iska/miniconda3/envs/uma-qc",
+      "status": "ready"
+    }
+  }
+}

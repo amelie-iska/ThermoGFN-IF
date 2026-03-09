@@ -1,0 +1,31 @@
+[prefetch] REPO_ROOT=/home/iska/amelie-ai/ThermoGFN
+[prefetch] HF_HOME=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface
+[prefetch] TORCH_HOME=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/torch
+[prefetch] timeout=1800s heartbeat=15s
+[prefetch] bioemu_env=bioemu
+[prefetch] colabfold_dir=/home/iska/amelie-ai/ThermoGFN/.cache/bioemu/colabfold
+[prefetch] network preflight: DNS checks
+[prefetch][net] ok: huggingface.co
+[prefetch][net] ok: dl.fbaipublicfiles.com
+[prefetch][net] ok: api.colabfold.com
+[prefetch][net] ok: storage.googleapis.com
+[prefetch] LigandMPNN model parameters
+[prefetch][ligandmpnn] ensuring model_params directory is populated
+[prefetch][ligandmpnn] checkpoint already present: ./model_params/ligandmpnn_v_32_010_25.pt
+[prefetch][ligandmpnn] completed in 15s
+[prefetch] SPURS base model + multi model
+[prefetch][spurs] launching prefetch worker
+torch geometric not found, GNN examples will not work until it is.
+spurs:prefetch:   0%|          | 0/2 [00:00<?, ?it/s][prefetch][spurs] fetching spurs
+[prefetch][spurs] ready spurs
+spurs:prefetch:  50%|█████     | 1/2 [00:07<00:07,  7.89s/it][prefetch][spurs] fetching spurs_multi
+[prefetch][spurs] still running (15s elapsed)
+[prefetch][spurs] ready spurs_multi
+spurs:prefetch: 100%|██████████| 2/2 [00:13<00:00,  6.73s/it]spurs:prefetch: 100%|██████████| 2/2 [00:13<00:00,  6.91s/it]
+[prefetch][spurs] complete elapsed=13.81s
+[prefetch][spurs] completed in 30s
+[prefetch] BioEmu checkpoints
+[prefetch][bioemu] launching prefetch worker
+bioemu:prefetch:   0%|          | 0/3 [00:00<?, ?it/s][prefetch][bioemu] fetching bioemu-v1.0
+[prefetch][bioemu] ready bioemu-v1.0 ckpt=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.0/checkpoint.ckpt cfg=/home/iska/amelie-ai/ThermoGFN/.cache/huggingface/hub/models--microsoft--bioemu/snapshots/1fec9d4473a9da04f5e60026a70d7a93fb893e9e/checkpoints/bioemu-v1.0/config.yaml
+bioemu:prefetch:  33%|███▎      | 1/3 [00:00<00:01,  1.58it/s][prefetch][bioemu] fetching bioemu-v1.1

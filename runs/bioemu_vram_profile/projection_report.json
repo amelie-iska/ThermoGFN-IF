@@ -1,0 +1,69 @@
+{
+  "batch_size_100": 10,
+  "elapsed_sec": 1366.752882501809,
+  "failures": [],
+  "input_jsonl": "/home/iska/amelie-ai/ThermoGFN/runs/thermogfn_ligandmpnn/bootstrap/D_0_train.jsonl",
+  "model_name": "bioemu-v1.1",
+  "num_samples": 128,
+  "projection": {
+    "alpha_reserved_bytes_per_L2B": 12998.619644970415,
+    "projected_max_batch_size_100_at_length_100": 174,
+    "projected_max_length_at_effective_batch_1": 1322,
+    "target_vram_frac": 0.9,
+    "total_vram_bytes": 25252724736
+  },
+  "rows": [
+    {
+      "candidate_id": "f433829b37250195",
+      "effective_batch": 10,
+      "length": 100,
+      "peak_alloc_bytes": 857696768,
+      "peak_frac_alloc": 0.03396452370849618,
+      "peak_frac_reserved": 0.04326725941151129,
+      "peak_reserved_bytes": 1092616192,
+      "total_vram_bytes": 25252724736
+    },
+    {
+      "candidate_id": "4263727932931c83",
+      "effective_batch": 3,
+      "length": 180,
+      "peak_alloc_bytes": 817414656,
+      "peak_frac_alloc": 0.03236936467432771,
+      "peak_frac_reserved": 0.042353747216642534,
+      "peak_reserved_bytes": 1069547520,
+      "total_vram_bytes": 25252724736
+    },
+    {
+      "candidate_id": "26ac8566d5b4fb21",
+      "effective_batch": 1,
+      "length": 260,
+      "peak_alloc_bytes": 609606144,
+      "peak_frac_alloc": 0.02414021260568973,
+      "peak_frac_reserved": 0.03479650996818279,
+      "peak_reserved_bytes": 878706688,
+      "total_vram_bytes": 25252724736
+    },
+    {
+      "candidate_id": "769cab94e5312eec",
+      "effective_batch": 1,
+      "length": 340,
+      "peak_alloc_bytes": 932795392,
+      "peak_frac_alloc": 0.036938405726579575,
+      "peak_frac_reserved": 0.05406331262359664,
+      "peak_reserved_bytes": 1365245952,
+      "total_vram_bytes": 25252724736
+    },
+    {
+      "candidate_id": "887ea2e2021ce1d7",
+      "effective_batch": 1,
+      "length": 400,
+      "peak_alloc_bytes": 1235137024,
+      "peak_frac_alloc": 0.048911039775410954,
+      "peak_frac_reserved": 0.07308097558950084,
+      "peak_reserved_bytes": 1845493760,
+      "total_vram_bytes": 25252724736
+    }
+  ],
+  "scored_path": "/home/iska/amelie-ai/ThermoGFN/runs/bioemu_vram_profile/scored_5.jsonl",
+  "selected_path": "/home/iska/amelie-ai/ThermoGFN/runs/bioemu_vram_profile/selected_5.jsonl"
+}
