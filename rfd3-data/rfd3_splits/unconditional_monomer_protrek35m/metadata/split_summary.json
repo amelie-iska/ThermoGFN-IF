@@ -1,0 +1,13 @@
+{
+  "n_designs": 3000,
+  "n_train": 2400,
+  "n_test": 600,
+  "test_fraction_requested": 0.2,
+  "test_fraction_actual": 0.2,
+  "seq_threshold": 0.9,
+  "structure_threshold": 0.9,
+  "seed": 13,
+  "n_seq_clusters": 2956,
+  "n_structure_clusters": 2986,
+  "n_combined_clusters": 2944
+}

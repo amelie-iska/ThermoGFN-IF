@@ -1,0 +1,39 @@
+{
+    "diffused_index_map": {},
+    "metrics": {
+        "max_ca_deviation": 0.14626550674438477,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "non_loop_fraction": 0.592485549132948,
+        "loop_fraction": 0.407514450867052,
+        "helix_fraction": 0.5057803468208093,
+        "sheet_fraction": 0.08670520231213873,
+        "num_ss_elements": 18,
+        "radius_of_gyration": 18.031630219516554,
+        "alanine_content": 0.32947976878612717,
+        "glycine_content": 0.06069364161849711,
+        "num_residues": 346,
+        "diffused_com": [
+            1.3318370580673218,
+            0.8867376446723938,
+            -0.30137813091278076
+        ]
+    },
+    "specification": {
+        "length": "20-400",
+        "extra": {
+            "example": "unconditional_monomer",
+            "task_name": "spec_unconditional_monomer_unconditional_monomer",
+            "sampled_contig": "346",
+            "num_tokens_in": 346,
+            "num_residues_in": 346,
+            "num_chains": 1,
+            "num_atoms": 1730,
+            "num_residues": 347,
+            "example_id": "spec_unconditional_monomer_unconditional_monomer_937"
+        }
+    },
+    "ckpt_path": "/home/iska/amelie-ai/ThermoGFN/weights/rfd3_latest.ckpt",
+    "seed": null
+}
