@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "etflow"
+dynamic = ["version"]
+description = "Equivariant Flow Matching for Molecular Conformer Generation"
+authors = [
+  { name = "Majdi Hassan", email = "majdi.hassan@mila.quebec" },
+  { name = "Nikhil Shenoy", email = "nikhilshenoy98@gmail.com" },
+  { name = "Jungyoon Lee", email = "jungyoon.lee@mila.quebec" },
+  { name = "Hannes Stark", email = "hstark@mit.edu" },
+  { name = "Stephan Thaler", email = "stephan@valencelabs.com" },
+  { name = "Dominique Beaini", email = "dominique@valencelabs.com" }
+]
+requires-python = ">=3.8"
+license = { text = "MIT" }
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "tqdm",
+    "pydantic",
+    "fsspec",
+    "pandas",
+    "scipy",
+    "numpy==1.26.4",
+    "datamol",
+    "rdkit",
+    "py3Dmol",
+    "torch",
+    "torch-geometric",
+    "lightning",
+    "torchmetrics",
+    "torch-cluster",
+    "wandb",
+    "matplotlib",
+    "seaborn"
+]
+
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools_scm]
+fallback_version = "dev"
+
+[tool.isort]
+profile = "black"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["etflow", "etflow.*"]
+exclude = []
+namespaces = true
+
+[tool.pylint.messages_control]
+disable = [
+  "no-member",
+  "too-many-arguments",
+  "too-few-public-methods",
+  "no-else-return",
+  "duplicate-code",
+  "too-many-branches",
+  "redefined-builtin",
+  "dangerous-default-value",
+]
+
+[tool.ruff]
+line-length = 100
+ignore = ["E741"]

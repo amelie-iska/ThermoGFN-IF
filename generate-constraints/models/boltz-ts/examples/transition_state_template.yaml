@@ -1,0 +1,30 @@
+version: 1
+
+sequences:
+  - protein:
+      id: A
+      sequence: MALLTLFNQIWQEGQLQSSTSSFNIFLVPILCLSIFILFSLTRSSSPSEKNRKLKLPPSPPRLPWIGNLHQLGSFPHRSLRALSKKYGDVMFMHFGKVPTLIVSSAEMAKDVMKTQDIVFCSRPQTTAPSILFYDGHDIAFAPYGEYWRQVRRICVLELLSLKRVHQFQYARVEEVAELVSKIRKASASANGAPINLGELLVSTSNNIICRCILGQKFEDKEDNWFGETTKELMTQVMSFSFGDFFPSLKWIDRARGYLAYLKSIWLEFDKFFDKLIDEHKAAQKEGKPRKKDIVDILLDVQNDGSLDFELTTSNVKAILQDMFVGGSDTSWTAAIWLMSELSQNPRVMKKVQEEVRRVAGKRGYVEESDINEMKYLTCVIKENLRLHPPAPLLLPREAMSDVKLGGFDIPAKTQVFVNAYAVQRDPKVWDKPDEFMPERFEENNVGFVGQDFELIPFGAGRRVCPGLAFGVASAQYVLANMLYWFDWKLPSGGSKLAETLDMSEVYGLTVHKKSPLYLVPTPYSP
+      msa: 0  # use MSA server or provide path if available
+  - ligand:
+      id: T
+      smiles: OP(O)O.[H]C([H])O.[H]O[C@H](C([H])([H])O[H])[C@@]([H])(O[H])[C@]([H])(O[H])C([H])O  # multi-fragment, matches full SDF connectivity
+
+templates:
+  - sdf: data/local_maxima_6_full.sdf
+    chain_id: T
+    atom_map: identical
+    force: true
+    threshold: 0.75
+
+constraints:
+  - pocket:
+      binder: T
+      contacts: [
+        [A, 465]
+      ]
+      max_distance: 6.0
+      force: true
+
+properties:
+  - affinity:
+      binder: T
