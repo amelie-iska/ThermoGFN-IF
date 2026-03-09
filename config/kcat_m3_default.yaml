@@ -1,0 +1,100 @@
+run:
+  run_id: thermogfn_kcat_default
+  seed: 13
+  strict_gates: true
+
+data:
+  # Kcat training requires split roots with substrate metadata, or a metadata
+  # overlay passed to scripts/orchestration/run_full_kcat_pipeline.sh.
+  split_roots: []
+  bootstrap:
+    index_path: runs/bootstrap/design_index.jsonl
+    baselines_path: runs/bootstrap/baselines.jsonl
+    d0_train_path: runs/bootstrap/D_0_train.jsonl
+    d0_test_path: runs/bootstrap/D_0_test.jsonl
+    d0_all_path: runs/bootstrap/D_0_all.jsonl
+
+generator:
+  backend: ligandmpnn
+  ligandmpnn:
+    env_name: ligandmpnn_env
+    model_type: ligand_mpnn
+    checkpoint: ""
+    use_atom_context: 1
+    parse_atoms_with_zero_occupancy: 0
+    run_heartbeat_sec: 5
+    batch_size: 1
+    number_of_batches: 1
+    temperature: 0.2
+  adflip:
+    env_name: ADFLIP
+    device: cuda:0
+    steps: 32
+    threshold: 0.9
+    checkpoint: models/ADFLIP/results/weights/ADFLIP_ICML_camera_ready.pt
+
+oracles:
+  envs:
+    kcatnet: KcatNet
+    graphkcat: apodock
+  kcatnet:
+    model_root: models/KcatNet
+    checkpoint: models/KcatNet/RESULT/model_KcatNet.pt
+    config_path: models/KcatNet/config_KcatNet.json
+    degree_path: models/KcatNet/Dataset/degree.pt
+    device: cuda:0
+    batch_size: 8
+    std_default: 0.25
+    prott5_model: Rostlab/prot_t5_xl_uniref50
+    prott5_dir: ""
+  graphkcat:
+    model_root: models/GraphKcat
+    checkpoint: models/GraphKcat/checkpoint/paper.pt
+    cfg: TrainConfig_kcat_enz
+    batch_size: 2
+    device: cuda:0
+    distance_cutoff_a: 8.0
+    std_default: 0.25
+    heartbeat_sec: 30
+  fusion:
+    w_kcatnet: 0.65
+    w_graphkcat: 0.45
+    w_agreement: 0.15
+    kappa_kcatnet: 1.0
+    kappa_graphkcat: 1.0
+
+round:
+  pool_size: 50000
+  kcatnet_budget: 1024
+  graphkcat_budget: 256
+  max_checkpoints: 5
+  step_heartbeat_sec: 30
+
+method3:
+  rounds: 8
+  surrogate_ensemble_size: 8
+  teacher_steps: 30000
+  teacher_gamma_off: 0.5
+  student_steps: 15000
+  periodic_eval:
+    enabled: true
+  early_stop:
+    overfit_gap_top8_mean_reward: null
+    overfit_gap_best_reward: null
+    patience_rounds: 1
+
+periodic_eval:
+  num_candidates: 256
+  kcatnet_budget: 256
+  graphkcat_budget: 128
+
+env:
+  required:
+    - ligandmpnn_env
+    - KcatNet
+    - apodock
+  optional:
+    - ADFLIP
+    - spurs
+    - bioemu
+    - uma-qc

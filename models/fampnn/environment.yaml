@@ -1,0 +1,29 @@
+name: fampnn
+channels:
+  - conda-forge
+  - pyg
+  - salilab
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - ca-certificates
+  - openssl
+  - scipy
+  - certifi
+  - pyg
+  - conda-forge::gemmi
+  - biopython
+  - tqdm
+  - natsort
+  - omegaconf
+  - rdkit
+  - pip
+  - einops
+  - pip:
+    - hydra-core
+    - torchtyping
+    - dm-tree
+    - timm
+    - jaxtyping
+    - joblib

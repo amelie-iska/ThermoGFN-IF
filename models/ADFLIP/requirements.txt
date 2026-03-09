@@ -1,0 +1,13 @@
+ProDy==2.4.1
+ema-pytorch==0.4.8
+lightning==2.1.0
+matplotlib
+numpy==1.23.5
+omegaconf==2.3.0
+pandas
+scipy
+sortedcontainers==2.4.0
+torch==2.1.0
+torch_geometric
+torchmetrics==1.2.0
+tqdm

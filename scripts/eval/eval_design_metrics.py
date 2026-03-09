@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Compute design metrics for candidate records."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+import sys
+import time
+
+
+def _repo_root() -> Path:
+    p = Path(__file__).resolve()
+    for parent in p.parents:
+        if (parent / "train").exists() and (parent / "scripts").exists():
+            return parent
+    raise RuntimeError("Could not locate repository root")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input-path", required=True)
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--log-level", default="INFO")
+    args = parser.parse_args()
+
+    t0 = time.perf_counter()
+    root = _repo_root()
+    sys.path.insert(0, str(root))
+    from train.thermogfn.io_utils import read_records
+    from train.thermogfn.eval_utils import compute_design_metrics
+    from train.thermogfn.progress import configure_logging
+
+    logger = configure_logging("eval.design_metrics", level=args.log_level)
+    rows = read_records(root / args.input_path)
+    logger.info("Computing design metrics for n=%d", len(rows))
+    metrics = compute_design_metrics(rows)
+    out = root / args.output
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(metrics, indent=2, sort_keys=True))
+    logger.info("Wrote metrics to %s elapsed=%.2fs", out, time.perf_counter() - t0)
+    print(out)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

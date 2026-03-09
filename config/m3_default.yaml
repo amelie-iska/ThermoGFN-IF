@@ -1,0 +1,121 @@
+run:
+  run_id: thermogfn_ligandmpnn_default
+  seed: 13
+  strict_gates: true
+
+data:
+  split_roots:
+    - data/rfd3_splits/unconditional_monomer_protrek35m
+  bootstrap:
+    index_path: runs/bootstrap/design_index.jsonl
+    baselines_path: runs/bootstrap/baselines.jsonl
+    d0_train_path: runs/bootstrap/D_0_train.jsonl
+    d0_test_path: runs/bootstrap/D_0_test.jsonl
+    d0_all_path: runs/bootstrap/D_0_all.jsonl
+
+generator:
+  backend: ligandmpnn
+  ligandmpnn:
+    env_name: ligandmpnn_env
+    model_type: ligand_mpnn
+    checkpoint: ""
+    use_atom_context: 1
+    parse_atoms_with_zero_occupancy: 0
+    run_heartbeat_sec: 5
+    batch_size: 1
+    number_of_batches: 1
+    temperature: 0.2
+  adflip:
+    env_name: ADFLIP
+    device: cuda:0
+    steps: 32
+    threshold: 0.9
+    checkpoint: models/ADFLIP/results/weights/ADFLIP_ICML_camera_ready.pt
+
+oracles:
+  envs:
+    spurs: spurs
+    bioemu: bioemu
+    uma: uma-qc
+  spurs:
+    repo_id: cyclization9/SPURS
+    chain: A
+  bioemu:
+    model_name: bioemu-v1.1
+    num_samples: 2048
+    tiered_enabled: true
+    tier1_num_samples: 256
+    tier2_num_samples: 512
+    tier3_num_samples: 2048
+    tier2_top_frac: 0.20
+    tier2_top_min: 1
+    tier3_top_frac_original: 0.05
+    tier3_top_min: 1
+    tier_rank_metric: risk_adjusted
+    tier_risk_kappa: 0.5
+    batch_size_100: 96
+    auto_batch_from_vram: true
+    target_vram_frac: 0.90
+    batch_size_100_min: 4
+    batch_size_100_max: 384
+    max_proteins_per_step: 48
+    vram_control_metric: reserved
+    low_utilization_mult: 0.6
+    batch_size_100_max_growth_factor: 3.0
+    batch_size_100_max_shrink_factor: 0.6
+    sort_by_length_desc: true
+    filter_samples: false
+  uma:
+    model_name: uma-s-1p1
+    workers: 1
+    replicates: 4
+    temps: "300,330,360,390,420"
+    atom_budget: 10000
+    atom_budget_min: 6000
+    atom_budget_max: 10000
+    max_candidates_per_step: 32
+    target_vram_frac: 0.90
+    vram_control_metric: reserved
+    atom_budget_max_growth_factor: 1.8
+    atom_budget_max_shrink_factor: 0.6
+    auto_atom_budget_from_vram: true
+    estimate_prepared_atoms: true
+    hydration_shell_ang: 3.5
+    hydration_ph: 7.1
+
+round:
+  pool_size: 50000
+  bioemu_budget: 512
+  uma_budget: 64
+  max_checkpoints: 5
+  step_heartbeat_sec: 30
+
+method3:
+  rounds: 8
+  surrogate_ensemble_size: 8
+  teacher_steps: 30000
+  teacher_gamma_off: 0.5
+  student_steps: 15000
+  periodic_eval:
+    enabled: true
+  early_stop:
+    overfit_gap_top8_mean_reward: null
+    overfit_gap_best_reward: null
+    patience_rounds: 1
+
+periodic_eval:
+  num_candidates: 128
+
+inference:
+  final:
+    num_candidates: 512
+    top_k: 64
+
+env:
+  required:
+    - ligandmpnn_env
+    - spurs
+    - bioemu
+    - uma-qc
+  optional:
+    - ADFLIP

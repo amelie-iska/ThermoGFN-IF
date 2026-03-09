@@ -1,0 +1,26 @@
+job:
+  device_type: CPU
+  scheduler:
+    mode: LOCAL
+
+test_data_path: None
+target_data_path: None
+
+runner:
+  _target_: fairchem.core.components.calculate.ElasticityRunner
+  calculator:
+    _target_: fairchem.core.FAIRChemCalculator.from_model_checkpoint
+    name_or_path: uma-s-1p1
+    task_name: omat
+  input_data:
+    _target_: fairchem.core.datasets.atoms_sequence.AtomsDatasetSequence
+    dataset:
+      _target_: fairchem.core.datasets.ase_datasets.AseDBDataset
+      config:
+        src: ${test_data_path}
+
+reducer:
+  _target_: fairchem.core.components.benchmark.JsonDFReducer
+  target_data_path: ${target_data_path}
+  benchmark_name: "test-elasticity"
+  index_name: sid

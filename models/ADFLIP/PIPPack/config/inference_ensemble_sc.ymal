@@ -1,0 +1,30 @@
+defaults:
+- _self_
+- override hydra/hydra_logging: disabled
+- override hydra/job_logging: disabled
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+inference:
+  batch_size: 10000
+  debug: false
+  force_cpu: false
+  model_names:
+  - pippack_model_1
+  - pippack_model_2
+  - pippack_model_3
+  n_recycle: 3
+  output_dir: dataset/sample/6qi7_sample/sidechain/
+  pdb_path: dataset/sample/6qi7_sample/
+  replace_seqs: true
+  resample_args:
+    clash_overlap_tolerance: 0.6
+    max_iters: 10
+    metropolis_temp: 5.0e-06
+    pro_tolerance_factor: 12
+    sample_temp: 0.5
+  seed: 42
+  temperature: 0.0
+  use_resample: true
+  weights_path: model_weights/

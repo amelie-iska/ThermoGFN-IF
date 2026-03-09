@@ -1,0 +1,44 @@
+# Run settings
+seed: 0
+batch_size: 16
+
+# Inputs
+checkpoint_path: weights/fampnn_0_3.pt
+out_dir: outputs/seq_design
+
+num_seqs_per_pdb: 1
+pdb_dir: null
+pdb_key_list: null  # list of keys to use from the pdb_dir, null to use all .pdb files
+presort_by_length: false  # sort pdbs by sequence length (longest first). Can be helpful for efficiency.
+
+# Fixed positions: path to csv with 3 columns: pdb_name, fixed_pos_seq, fixed_pos_scn.
+fixed_pos_csv: null  # e.g. 2fyzA, "A1-100,B1-100", "A1-100". If pdb_name is not in the csv, no fixed positions are used.
+fixed_pos_verbose: true  # print fixed positions to stdout
+
+# Sequence design options
+seq_only: false  # true to not pack sidechains during sampling
+temperature: 0.1
+repack_last: true  # after design, repack the final sequence obtained in a single step
+psce_threshold: 0.3  # only keep sidechains below this PSCE threshold during design; null to keep all
+
+timestep_schedule:
+  num_steps: 100
+  mode: "linear"
+  t_start: 0.0
+  t_end: 1.0
+
+# Sidechain diffusion parameters
+scn_diffusion:
+  num_steps: 50
+  timestep_schedule:
+    num_steps: ${scn_diffusion.num_steps}
+    mode: "linear"
+    t_start: 0.0
+    t_end: 1.0
+  step_scale: 1.5
+  churn_cfg:
+    s_churn: 0
+    s_noise: 1.0
+    s_t_min: 0.01
+    s_t_max: 50.0
+    num_steps: ${scn_diffusion.num_steps}
