@@ -25,6 +25,33 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         self.assertFalse(ok)
         self.assertEqual(reason, "dummy_atom")
 
+    def test_validate_pair_ligands_checks_both_states(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            reactant_path = tmp / "reactant.json"
+            product_path = tmp / "product.json"
+
+            reactant_path.write_text(
+                '[{"name":"pair_1__reactant","components":[{"seq":"MAAA","chain_id":"A"},{"smiles":"CCO","chain_id":"B"}],"metadata":{"pair_id":"pair_1","ligand_smiles":"CCO"}}]',
+                encoding="utf-8",
+            )
+            product_path.write_text(
+                '[{"name":"pair_1__product","components":[{"seq":"MAAA","chain_id":"A"},{"smiles":"*CCO","chain_id":"B"}],"metadata":{"pair_id":"pair_1","ligand_smiles":"*CCO"}}]',
+                encoding="utf-8",
+            )
+
+            invalid_pair_reason, counts = MODULE._validate_pair_ligands(
+                {
+                    "reactant": ("state_json", [reactant_path]),
+                    "product": ("state_json", [product_path]),
+                },
+                selected_pair_ids={"pair_1"},
+            )
+
+            self.assertEqual(invalid_pair_reason, {"pair_1": "dummy_atom"})
+            self.assertEqual(counts["invalid_pair_total"], 1)
+            self.assertEqual(counts["invalid_pair_dummy_atom"], 1)
+
     def test_trim_a3m_depth_keeps_first_n_sequences(self):
         a3m = (
             ">query\n"

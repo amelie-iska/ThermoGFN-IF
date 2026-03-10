@@ -173,48 +173,74 @@ def _validate_pair_ligands(
         "invalid_pair_non_embeddable": 0,
     }
 
-    remaining = None if selected_pair_ids is None else set(selected_pair_ids)
-    for _state, (_layout, paths) in payloads_by_state.items():
-        for path in paths:
-            if remaining is not None and not remaining:
-                return invalid_pair_reason, counts
-            for example in _load_examples_from_path(path):
-                if remaining is not None:
+    requested_states = tuple(payloads_by_state.keys())
+    active_pair_ids = None if selected_pair_ids is None else set(selected_pair_ids)
+    pair_states_seen: dict[str, set[str]] = {}
+    resolved_pair_ids: set[str] = set()
+    progress = (
+        tqdm(total=len(selected_pair_ids), desc="Validate Pairs", unit="pair")
+        if selected_pair_ids is not None
+        else None
+    )
+
+    def resolve_pair(pair_id: str) -> None:
+        if pair_id in resolved_pair_ids:
+            return
+        resolved_pair_ids.add(pair_id)
+        if active_pair_ids is not None:
+            active_pair_ids.discard(pair_id)
+        if progress is not None:
+            progress.update(1)
+            progress.set_postfix_str(
+                f"valid={len(resolved_pair_ids) - len(invalid_pair_reason)} invalid={len(invalid_pair_reason)}"
+            )
+
+    try:
+        for state, (_layout, paths) in payloads_by_state.items():
+            for path in paths:
+                if active_pair_ids is not None and not active_pair_ids:
+                    return invalid_pair_reason, counts
+                for example in _load_examples_from_path(path):
                     pair_id = _example_pair_id(example)
-                    if pair_id not in remaining:
+                    if active_pair_ids is not None and pair_id not in active_pair_ids:
                         continue
-                else:
-                    pair_id = _example_pair_id(example)
-                if pair_id in invalid_pair_reason:
-                    if remaining is not None:
-                        remaining.discard(pair_id)
-                    continue
-                ligand_component = _ligand_smiles_component(example)
-                if ligand_component is None:
-                    if remaining is not None:
-                        remaining.discard(pair_id)
-                    continue
-                smiles = str(ligand_component.get("smiles") or "").strip()
-                if not smiles:
-                    invalid_pair_reason[pair_id] = "missing_smiles"
-                    counts["invalid_pair_total"] += 1
-                    counts["invalid_pair_non_embeddable"] += 1
-                    if remaining is not None:
-                        remaining.discard(pair_id)
-                    continue
-                ok, reason = _validate_smiles_for_rf3(smiles, validation_cache=validation_cache)
-                if ok:
-                    if remaining is not None:
-                        remaining.discard(pair_id)
-                    continue
-                invalid_pair_reason[pair_id] = str(reason or "invalid_smiles")
-                counts["invalid_pair_total"] += 1
-                if reason == "dummy_atom":
-                    counts["invalid_pair_dummy_atom"] += 1
-                else:
-                    counts["invalid_pair_non_embeddable"] += 1
-                if remaining is not None:
-                    remaining.discard(pair_id)
+                    if pair_id in resolved_pair_ids:
+                        continue
+
+                    ligand_smiles = str(
+                        (example.get("metadata") or {}).get("ligand_smiles")
+                        or (example.get("components") or [{}])[-1].get("smiles")
+                        or ""
+                    ).strip()
+                    pair_states_seen.setdefault(pair_id, set()).add(state)
+
+                    if not ligand_smiles:
+                        invalid_pair_reason[pair_id] = "missing_smiles"
+                        counts["invalid_pair_total"] += 1
+                        counts["invalid_pair_non_embeddable"] += 1
+                        resolve_pair(pair_id)
+                        continue
+
+                    ok, reason = _validate_smiles_for_rf3(
+                        ligand_smiles,
+                        validation_cache=validation_cache,
+                    )
+                    if not ok:
+                        invalid_pair_reason[pair_id] = str(reason or "invalid_smiles")
+                        counts["invalid_pair_total"] += 1
+                        if reason == "dummy_atom":
+                            counts["invalid_pair_dummy_atom"] += 1
+                        else:
+                            counts["invalid_pair_non_embeddable"] += 1
+                        resolve_pair(pair_id)
+                        continue
+
+                    if len(pair_states_seen[pair_id]) >= len(requested_states):
+                        resolve_pair(pair_id)
+    finally:
+        if progress is not None:
+            progress.close()
+
     return invalid_pair_reason, counts
 
 
@@ -660,7 +686,6 @@ def _validate_smiles_for_rf3(
     if not _RDKIT_EMBED_VALIDATOR_READY:
         try:
             from rdkit import Chem, RDLogger
-            from rdkit.Chem import AllChem
 
             RDLogger.DisableLog("rdApp.*")
 
@@ -668,13 +693,6 @@ def _validate_smiles_for_rf3(
                 mol = Chem.MolFromSmiles(raw_smiles)
                 if mol is None:
                     return (False, "rdkit_parse")
-                mol = Chem.AddHs(mol)
-                try:
-                    code = AllChem.EmbedMolecule(mol, AllChem.ETKDGv3())
-                except Exception:
-                    return (False, "rdkit_embed_exception")
-                if code != 0:
-                    return (False, f"rdkit_embed_code_{code}")
                 return (True, None)
 
             _RDKIT_EMBED_VALIDATOR = _validator

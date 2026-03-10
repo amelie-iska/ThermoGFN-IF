@@ -611,12 +611,20 @@ exports `CUDA_VISIBLE_DEVICES=0,1,2,3`, so inference is launched against all
 four GPUs by default. The wrapper fails fast if the requested GPU count and
 visible device list do not match.
 
+Startup validation progress is now reported with a `Validate Pairs` tqdm bar.
+That stage cheaply rejects dummy-atom ligands up front and selects the first
+valid docking pairs needed for the requested cap.
+
 MSA progress is now reported with outer `MSA Chunks` and `MSA Seqs` tqdm bars.
 In `local_direct` mode, the `MSA Chunks` postfix shows which chunk is currently
 bound to each active GPU worker, so long-running chunk phases no longer look
 like a frozen run. In `server` mode, the older inner Boltz/MMSeqs time-estimate
 bar is suppressed so retries and chunk restarts no longer look like lost global
 progress.
+
+During RF3 input loading, invalid SMILES-only examples that still fail atomworks
+/ RDKit ligand construction are now skipped per example instead of aborting the
+entire shard.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 

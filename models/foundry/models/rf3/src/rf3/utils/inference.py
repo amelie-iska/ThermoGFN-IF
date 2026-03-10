@@ -27,6 +27,7 @@ from rf3.utils.io import (
     get_sharded_output_path,
 )
 from torch.utils.data import Dataset
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -294,7 +295,7 @@ def _process_single_path(
     sharding_pattern: str | None,
     template_selection: list[str] | str | None,
     ground_truth_conformer_selection: list[str] | str | None,
-) -> list[InferenceInput]:
+) -> tuple[list[InferenceInput], list[tuple[str, str]]]:
     """Worker function to process a single input file path.
 
     This function is defined at module level to be picklable for multiprocessing.
@@ -307,7 +308,7 @@ def _process_single_path(
       ground_truth_conformer_selection: Override for conformer selection.
 
     Returns:
-      List of InferenceInput objects (may be empty if file is skipped).
+      Tuple of (valid inference inputs, skipped example_id/reason pairs).
     """
 
     def example_exists(example_id: str) -> bool:
@@ -320,6 +321,7 @@ def _process_single_path(
         return (example_dir / f"{example_id}_metrics.csv").exists()
 
     inference_inputs = []
+    skipped_examples: list[tuple[str, str]] = []
 
     if path.suffix == ".json":
         # Load JSON and convert each entry
@@ -333,33 +335,39 @@ def _process_single_path(
         for item in data:
             example_id = item["name"]
             if not example_exists(example_id):
-                inference_inputs.append(
-                    InferenceInput.from_json_dict(
-                        item,
-                        template_selection=template_selection,
-                        ground_truth_conformer_selection=ground_truth_conformer_selection,
+                try:
+                    inference_inputs.append(
+                        InferenceInput.from_json_dict(
+                            item,
+                            template_selection=template_selection,
+                            ground_truth_conformer_selection=ground_truth_conformer_selection,
+                        )
                     )
-                )
+                except Exception as exc:
+                    skipped_examples.append((example_id, str(exc)))
 
     elif any(path.name.endswith(ext) for ext in CIF_LIKE_EXTENSIONS):
         # CIF/PDB file
         example_id = extract_example_id_from_path(path)
         if not example_exists(example_id):
-            inference_inputs.append(
-                InferenceInput.from_cif_path(
-                    path,
-                    example_id=example_id,
-                    template_selection=template_selection,
-                    ground_truth_conformer_selection=ground_truth_conformer_selection,
+            try:
+                inference_inputs.append(
+                    InferenceInput.from_cif_path(
+                        path,
+                        example_id=example_id,
+                        template_selection=template_selection,
+                        ground_truth_conformer_selection=ground_truth_conformer_selection,
+                    )
                 )
-            )
+            except Exception as exc:
+                skipped_examples.append((example_id, str(exc)))
     else:
         raise ValueError(
             f"Unsupported file type: {path.suffix} (path: {path}). "
             f"Supported: {CIF_LIKE_EXTENSIONS | DICTIONARY_LIKE_EXTENSIONS}"
         )
 
-    return inference_inputs
+    return inference_inputs, skipped_examples
 
 
 def prepare_inference_inputs_from_paths(
@@ -409,6 +417,7 @@ def prepare_inference_inputs_from_paths(
 
     # Process files in parallel using all available CPUs
     inference_inputs = []
+    skipped_examples: list[tuple[str, str]] = []
     with ProcessPoolExecutor(max_workers=num_cpus) as executor:
         # Submit all tasks
         futures = [
@@ -423,12 +432,34 @@ def prepare_inference_inputs_from_paths(
             for path in paths_to_raw_input_files
         ]
 
-        # Collect results as they complete
-        for future in futures:
-            result = future.result()
-            inference_inputs.extend(result)
+        progress = tqdm(total=len(futures), desc="RF3 Inputs", unit="file")
+        try:
+            # Collect results as they complete
+            for future in futures:
+                result_inputs, result_skips = future.result()
+                inference_inputs.extend(result_inputs)
+                skipped_examples.extend(result_skips)
+                progress.update(1)
+                progress.set_postfix_str(
+                    f"loaded={len(inference_inputs)} skipped={len(skipped_examples)}"
+                )
+        finally:
+            progress.close()
 
-    logger.info(f"Loaded {len(inference_inputs)} inference inputs")
+    if skipped_examples:
+        for example_id, reason in skipped_examples[:20]:
+            logger.warning("Skipping inference input %s: %s", example_id, reason)
+        if len(skipped_examples) > 20:
+            logger.warning(
+                "Skipped %d additional inference inputs; suppressing further per-example warnings",
+                len(skipped_examples) - 20,
+            )
+
+    logger.info(
+        "Loaded %d inference inputs (skipped=%d)",
+        len(inference_inputs),
+        len(skipped_examples),
+    )
     return inference_inputs
 
 
