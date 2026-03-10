@@ -1,6 +1,7 @@
 # ThermoGFN-IF
 
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if) [![bioRxiv](https://img.shields.io/badge/bioRxiv-Preprint-007a33.svg)](https://www.biorxiv.org/)
+
 
 ThermoGFN-IF implementation scaffold for tri-fidelity protein design with Method III-first training. 
 
@@ -764,3 +765,14 @@ Existing RF3 generation/split scripts are retained:
 - `scripts/run_rfd3_inference.sh`
 - `scripts/protrek_cluster_split.py`
 - `scripts/run_protrek_split_unconditional_monomer.sh`
+
+
+
+Observe It
+
+  - Attach: tmux attach -t rf3_3k
+  - Detach: Ctrl-b then d
+  - Follow the log without attaching: tail -f /home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded/
+    tmux.log
+  - Stop the run: tmux send-keys -t rf3_3k C-c
+  - Kill the session: tmux kill-session -t rf3_3k

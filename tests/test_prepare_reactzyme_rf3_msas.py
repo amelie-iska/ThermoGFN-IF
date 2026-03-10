@@ -76,19 +76,27 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         trimmed = MODULE._trim_a3m_depth(a3m, 0)
         self.assertEqual(trimmed, a3m)
 
-    def test_map_local_a3m_texts_to_sequences_uses_query_sequence(self):
+    def test_map_local_a3m_texts_to_sequences_uses_filename_index(self):
         chunk = ["SEQAAAA", "SEQBBBB"]
         mapping = MODULE._map_local_a3m_texts_to_sequences(
             chunk,
             {
-                "0.a3m": ">q1\nSEQBBBB\n>hit\nSEQBBBB\n",
+                "0.a3m": ">q1\nWRONGSEQ\n>hit\nSEQBBBB\n",
                 "1.a3m": ">q0\nSEQAAAA\n>hit\nSEQAAAA\n",
             },
         )
 
         self.assertEqual(set(mapping.keys()), set(chunk))
         self.assertIn("SEQAAAA", mapping["SEQAAAA"])
-        self.assertIn("SEQBBBB", mapping["SEQBBBB"])
+        self.assertIn("SEQBBBB", mapping["SEQBBBB"].splitlines()[1])
+
+    def test_replace_first_a3m_query_sequence(self):
+        original = ">query\nWRONGSEQ\n>hit\nABCdef\n"
+        rewritten = MODULE._replace_first_a3m_query_sequence(original, "SEQAAAA")
+
+        self.assertEqual(rewritten.splitlines()[1], "SEQAAAA")
+        self.assertIn(">hit", rewritten)
+        self.assertIn("ABCdef", rewritten)
 
     def test_a3m_matches_sequence_validates_query_row(self):
         with tempfile.TemporaryDirectory() as tmpdir:

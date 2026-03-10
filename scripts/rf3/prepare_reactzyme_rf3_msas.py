@@ -646,6 +646,37 @@ def _normalize_a3m_query_sequence(a3m_text: str) -> str:
     return "".join(ch for ch in _extract_first_a3m_query_sequence(a3m_text) if ch.isupper())
 
 
+def _replace_first_a3m_query_sequence(a3m_text: str, sequence: str) -> str:
+    lines = a3m_text.splitlines()
+    if not lines:
+        return a3m_text
+
+    output: list[str] = []
+    replacing_first_sequence = False
+    wrote_replacement = False
+    for line in lines:
+        if line.startswith(">"):
+            output.append(line)
+            if not wrote_replacement:
+                output.append(sequence)
+                wrote_replacement = True
+                replacing_first_sequence = True
+            else:
+                replacing_first_sequence = False
+            continue
+        if replacing_first_sequence:
+            continue
+        output.append(line)
+
+    if lines[0].startswith(">") and not wrote_replacement:
+        output.append(sequence)
+
+    rewritten = "\n".join(output)
+    if a3m_text.endswith("\n"):
+        rewritten += "\n"
+    return rewritten
+
+
 def _a3m_matches_sequence(msa_path: Path, sequence: str) -> bool:
     try:
         a3m_text = msa_path.read_text(encoding="utf-8")
@@ -658,25 +689,29 @@ def _map_local_a3m_texts_to_sequences(
     chunk: Sequence[str],
     a3m_text_by_name: dict[str, str],
 ) -> dict[str, str]:
-    expected_by_query = {sequence: sequence for sequence in chunk}
     mapping: dict[str, str] = {}
-    unmatched: list[str] = []
+    mismatched_queries: list[str] = []
 
     for name, a3m_text in sorted(a3m_text_by_name.items()):
+        try:
+            idx = int(Path(name).stem)
+        except ValueError as exc:
+            raise RuntimeError(f"Unexpected local MMSeqs A3M filename: {name}") from exc
+        if idx < 0 or idx >= len(chunk):
+            raise RuntimeError(f"Out-of-range local MMSeqs A3M filename: {name}")
+
+        sequence = chunk[idx]
         query_sequence = _normalize_a3m_query_sequence(a3m_text)
-        source_sequence = expected_by_query.pop(query_sequence, None)
-        if source_sequence is None or source_sequence in mapping:
-            unmatched.append(f"{name}:{len(query_sequence)}")
-            continue
-        mapping[source_sequence] = a3m_text
+        if query_sequence != sequence:
+            mismatched_queries.append(f"{name}:{len(query_sequence)}->{len(sequence)}")
+            a3m_text = _replace_first_a3m_query_sequence(a3m_text, sequence)
+        mapping[sequence] = a3m_text
 
     if len(mapping) != len(chunk):
-        expected_lengths = sorted(len(sequence) for sequence in chunk)
+        missing_indices = [idx for idx, sequence in enumerate(chunk) if sequence not in mapping]
         raise RuntimeError(
             "Could not map local MMSeqs A3M outputs back to input sequences. "
-            f"matched={len(mapping)}/{len(chunk)} "
-            f"expected_lengths={expected_lengths[:8]} "
-            f"unmatched_files={unmatched[:8]}"
+            f"matched={len(mapping)}/{len(chunk)} missing_indices={missing_indices[:8]}"
         )
 
     return mapping
