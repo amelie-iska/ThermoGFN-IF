@@ -461,6 +461,12 @@ def main() -> int:
         help="Optional limit on accepted manifest rows before state expansion.",
     )
     parser.add_argument(
+        "--max-docked-pairs",
+        type=int,
+        default=2000,
+        help="Maximum number of accepted docking pairs to emit. Use 0 to disable the cap.",
+    )
+    parser.add_argument(
         "--allow-missing-pocket",
         action="store_true",
         help="Allow rows without pocket annotations.",
@@ -489,6 +495,7 @@ def main() -> int:
     )
     pocket_cache_dir = _resolve_existing_path(args.pocket_cache, source_root=root)
     output_root = (root / args.output_root).resolve()
+    max_docked_pairs = None if int(args.max_docked_pairs) <= 0 else int(args.max_docked_pairs)
 
     required_statuses = (
         set(args.required_statuses)
@@ -603,7 +610,8 @@ def main() -> int:
             continue
 
         accepted_rows = int(summary["accepted_rows"])
-        if args.max_examples is not None and accepted_rows >= args.max_examples:
+        accepted_cap = args.max_examples if args.max_examples is not None else max_docked_pairs
+        if accepted_cap is not None and accepted_rows >= accepted_cap:
             break
 
         summary["accepted_rows"] = accepted_rows + 1
@@ -675,6 +683,7 @@ def main() -> int:
         "requested_states": list(requested_states),
         "required_statuses": sorted(required_statuses),
         "ligand_source": args.ligand_source,
+        "max_docked_pairs": None if max_docked_pairs is None else int(max_docked_pairs),
         "max_seq_len": int(args.max_seq_len),
         "max_ligand_atoms": int(args.max_ligand_atoms),
         "max_pairs_per_sequence": int(args.max_pairs_per_sequence),
