@@ -544,8 +544,8 @@ smaller ETFlow train manifest. On the current local dataset, that path yields a
 much larger pocket-constrained candidate set than the template-manifest subset.
 
 The builder now defaults to `--max-docked-pairs 2000`. This cap is on accepted
-reactant/product docking pairs before state expansion. Use `--max-docked-pairs 0`
-to disable it.
+reactant/product docking pairs after invalid dummy-atom / unparsable pairs are
+filtered out and before state expansion. Use `--max-docked-pairs 0` to disable it.
 
 ### 5. Generate local MSAs and run Foundry RF3
 
@@ -580,7 +580,7 @@ The RF3 local-MSA wrapper also now defaults to:
 
 - `--msa-backend local_direct`
 - `--msa-batch-size 64`
-- `--msa-concurrency 4`
+- `--msa-concurrency 8`
 - `--use-filter`
 - `--cuda-devices 0,1,2,3`
 - `--rf3-gpus 4`
@@ -588,9 +588,10 @@ The RF3 local-MSA wrapper also now defaults to:
 In `local_direct` mode, the MSA prep step bypasses the ColabFold ticket API and
 runs local MMSeqs2 jobs directly against the shared UniRef30 database under
 `../enzyme-quiver/MMseqs2/local_msa`. The wrapper binds up to four concurrent
-MSA chunk workers across `CUDA_VISIBLE_DEVICES=0,1,2,3`, so the local MMSeqs2
-GPU prefilter stage is dispatched across the four visible GPUs instead of
-queueing behind the older ticket-server path.
+MSA chunk workers across `CUDA_VISIBLE_DEVICES=0,1,2,3`, and now defaults to
+eight total chunk workers so CPU-heavy MMSeqs post-processing can overlap while
+GPU search workers continue to feed the four visible GPUs instead of leaving
+them idle between stages.
 
 The legacy server-backed route is still available if needed:
 
@@ -613,14 +614,18 @@ visible device list do not match.
 
 Startup validation progress is now reported with a `Validate Pairs` tqdm bar.
 That stage cheaply rejects dummy-atom ligands up front and selects the first
-valid docking pairs needed for the requested cap.
+valid docking pairs needed for the requested cap. The startup log now reports
+`selected_pairs=<cap>` separately from `scanned_candidate_pairs=<window>` so the
+requested cap is visibly enforced after filtering rather than looking like a
+pre-filter cutoff.
 
 MSA progress is now reported with outer `MSA Chunks` and `MSA Seqs` tqdm bars.
 In `local_direct` mode, the `MSA Chunks` postfix shows which chunk is currently
-bound to each active GPU worker, so long-running chunk phases no longer look
-like a frozen run. In `server` mode, the older inner Boltz/MMSeqs time-estimate
-bar is suppressed so retries and chunk restarts no longer look like lost global
-progress.
+bound to each active worker, and `MSA Seqs` now starts at the number of cached
+unique sequences and reports cached / completed / active counts immediately, so
+long-running chunk phases no longer look like a frozen run. In `server` mode,
+the older inner Boltz/MMSeqs time-estimate bar is suppressed so retries and
+chunk restarts no longer look like lost global progress.
 
 During RF3 input loading, invalid SMILES-only examples that still fail atomworks
 / RDKit ligand construction are now skipped per example instead of aborting the

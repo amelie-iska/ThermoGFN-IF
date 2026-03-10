@@ -19,7 +19,7 @@ USE_ENV_DB=0
 USE_FILTER=1
 PAIRING_STRATEGY="greedy"
 MSA_BATCH_SIZE=64
-MSA_CONCURRENCY=4
+MSA_CONCURRENCY=8
 MSA_RETRIES=2
 MSA_DEPTH=2048
 MSA_THREADS_PER_JOB=0
@@ -62,7 +62,7 @@ Options:
   --no-use-filter        Disable MMSeqs filtering
   --pairing-strategy X   Pairing strategy for run_mmseqs2 (default: greedy)
   --msa-batch-size N     Sequences per MMSeqs2 batch request (default: 64)
-  --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 4)
+  --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 8)
   --msa-retries N        Retries per MMSeqs2 batch request (default: 2)
   --msa-depth N          Max sequences retained per written A3M (default: 2048; 0 disables)
   --msa-threads-per-job N

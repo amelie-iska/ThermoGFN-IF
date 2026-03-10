@@ -249,13 +249,18 @@ def _merge_invalid_pair_counts(dst: dict[str, int], src: dict[str, int]) -> None
         dst[key] = int(dst.get(key, 0)) + int(value)
 
 
+def _msa_cache_path_for_sequence(msa_cache_dir: Path, sequence: str) -> Path:
+    seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
+    return msa_cache_dir / f"{seq_hash}.a3m"
+
+
 def _select_valid_pair_ids(
     input_root: Path,
     requested_states: Sequence[str],
     max_docked_pairs: int | None,
     *,
     payloads_by_state: dict[str, tuple[str, list[Path]]],
-) -> tuple[set[str] | None, dict[str, str], dict[str, int]]:
+) -> tuple[set[str] | None, dict[str, str], dict[str, int], int]:
     ordered_pair_ids = _ordered_pair_ids(input_root, requested_states)
     if max_docked_pairs is None:
         invalid_pair_reason, invalid_pair_counts = _validate_pair_ligands(
@@ -265,7 +270,7 @@ def _select_valid_pair_ids(
         selected_pair_ids = {
             pair_id for pair_id in ordered_pair_ids if pair_id not in invalid_pair_reason
         }
-        return selected_pair_ids, invalid_pair_reason, invalid_pair_counts
+        return selected_pair_ids, invalid_pair_reason, invalid_pair_counts, len(ordered_pair_ids)
 
     selected_pairs: list[str] = []
     invalid_pair_reason: dict[str, str] = {}
@@ -276,11 +281,13 @@ def _select_valid_pair_ids(
     }
     cursor = 0
     total_pairs = len(ordered_pair_ids)
+    scanned_pair_count = 0
     while len(selected_pairs) < max_docked_pairs and cursor < total_pairs:
         needed = max_docked_pairs - len(selected_pairs)
         batch_size = max(needed * 2, 512)
         candidate_ids = ordered_pair_ids[cursor : min(total_pairs, cursor + batch_size)]
         cursor += len(candidate_ids)
+        scanned_pair_count += len(candidate_ids)
         candidate_set = set(candidate_ids)
         batch_invalid_reason, batch_invalid_counts = _validate_pair_ligands(
             payloads_by_state,
@@ -295,7 +302,7 @@ def _select_valid_pair_ids(
             if len(selected_pairs) >= max_docked_pairs:
                 break
 
-    return set(selected_pairs), invalid_pair_reason, invalid_pair_counts
+    return set(selected_pairs), invalid_pair_reason, invalid_pair_counts, scanned_pair_count
 
 
 def _copy_manifest_with_pair_filter(
@@ -755,8 +762,7 @@ def _generate_msas_via_server(
     seq_to_path: dict[str, Path] = {}
     missing_sequences: list[str] = []
     for sequence in unique_sequences:
-        seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
-        msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+        msa_path = _msa_cache_path_for_sequence(msa_cache_dir, sequence)
         if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
             seq_to_path[sequence] = msa_path.resolve()
         else:
@@ -774,7 +780,9 @@ def _generate_msas_via_server(
         missing_sequences[idx : idx + msa_batch_size]
         for idx in range(0, len(missing_sequences), msa_batch_size)
     ]
+    total_unique = len(unique_sequences)
     total_missing = len(missing_sequences)
+    total_cached = total_unique - total_missing
     total_chunks = len(chunks)
 
     def _run_chunk(chunk: Sequence[str], chunk_idx: int) -> dict[str, str]:
@@ -846,15 +854,21 @@ def _generate_msas_via_server(
     chunk_errors: list[str] = []
     max_workers = min(len(chunks), msa_concurrency)
     chunk_bar = tqdm(total=total_chunks, desc="MSA Chunks", unit="chunk")
-    seq_bar = tqdm(total=total_missing, desc="MSA Seqs", unit="seq")
+    seq_bar = tqdm(total=total_unique, initial=total_cached, desc="MSA Seqs", unit="seq")
+    chunk_bar.set_postfix_str(f"done=0/{total_chunks}")
+    seq_bar.set_postfix_str(f"cached={total_cached} missing={total_missing}")
     try:
         if max_workers <= 1:
             for idx, chunk in enumerate(chunks):
                 chunk_bar.set_postfix_str(f"chunk={idx + 1}/{total_chunks} size={len(chunk)}")
+                seq_bar.set_postfix_str(f"cached={total_cached} missing={total_missing} active=1")
                 try:
                     chunk_results.append(_run_chunk(chunk, idx))
                     chunk_bar.update(1)
                     seq_bar.update(len(chunk))
+                    seq_bar.set_postfix_str(
+                        f"cached={total_cached} done={seq_bar.n - total_cached}/{total_missing}"
+                    )
                 except Exception as exc:
                     chunk_errors.append(f"chunk={idx} size={len(chunk)} error={exc}")
         else:
@@ -873,6 +887,9 @@ def _generate_msas_via_server(
                         seq_bar.update(size)
                         chunk_bar.set_postfix_str(
                             f"completed={chunk_bar.n}/{total_chunks} last={idx + 1} size={size}"
+                        )
+                        seq_bar.set_postfix_str(
+                            f"cached={total_cached} done={seq_bar.n - total_cached}/{total_missing}"
                         )
                     except Exception as exc:
                         chunk_errors.append(f"chunk={idx} size={size} error={exc}")
@@ -925,8 +942,7 @@ def _generate_msas_local_direct(
     seq_to_path: dict[str, Path] = {}
     missing_sequences: list[str] = []
     for sequence in unique_sequences:
-        seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
-        msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+        msa_path = _msa_cache_path_for_sequence(msa_cache_dir, sequence)
         if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
             seq_to_path[sequence] = msa_path.resolve()
         else:
@@ -946,9 +962,11 @@ def _generate_msas_local_direct(
         missing_sequences[idx : idx + msa_batch_size]
         for idx in range(0, len(missing_sequences), msa_batch_size)
     ]
+    total_unique = len(unique_sequences)
     total_missing = len(missing_sequences)
+    total_cached = total_unique - total_missing
     total_chunks = len(chunks)
-    worker_count = max(1, min(len(chunks), msa_concurrency, len(cuda_devices)))
+    worker_count = max(1, min(len(chunks), msa_concurrency))
 
     cpu_count = os.cpu_count() or 1
     threads_per_job = int(msa_threads_per_job)
@@ -956,11 +974,11 @@ def _generate_msas_local_direct(
         threads_per_job = max(8, min(16, cpu_count // worker_count))
 
     chunk_bar = tqdm(total=total_chunks, desc="MSA Chunks", unit="chunk")
-    seq_bar = tqdm(total=total_missing, desc="MSA Seqs", unit="seq")
+    seq_bar = tqdm(total=total_unique, initial=total_cached, desc="MSA Seqs", unit="seq")
     progress_lock = threading.Lock()
     results: list[dict[str, str]] = []
     errors: list[str] = []
-    active_workers: dict[str, str] = {}
+    active_workers: dict[str, tuple[str, int]] = {}
     work_queue: Queue[tuple[int, Sequence[str]]] = Queue()
     for idx, chunk in enumerate(chunks):
         work_queue.put((idx, chunk))
@@ -970,10 +988,21 @@ def _generate_msas_local_direct(
     def _active_summary() -> str:
         if not active_workers:
             return "idle"
-        parts = [f"{gpu}:{label}" for gpu, label in sorted(active_workers.items())]
+        parts = []
+        for worker, (label, size) in sorted(active_workers.items()):
+            parts.append(f"{worker}:{label}({size})")
         return " | ".join(parts[:4])
 
+    def _update_progress_postfix() -> None:
+        chunk_bar.set_postfix_str(f"done={chunk_bar.n}/{total_chunks} active={_active_summary()}")
+        seq_done = max(0, seq_bar.n - total_cached)
+        active_seq_count = sum(size for _, size in active_workers.values())
+        seq_bar.set_postfix_str(
+            f"cached={total_cached} done={seq_done}/{total_missing} active={active_seq_count}"
+        )
+
     def _worker(worker_idx: int, device: str) -> None:
+        worker_key = f"w{worker_idx}@{device or 'default'}"
         while True:
             try:
                 chunk_idx, chunk = work_queue.get_nowait()
@@ -981,8 +1010,8 @@ def _generate_msas_local_direct(
                 return
 
             with progress_lock:
-                active_workers[device or f"worker{worker_idx}"] = f"chunk={chunk_idx + 1}/{total_chunks}"
-                chunk_bar.set_postfix_str(_active_summary())
+                active_workers[worker_key] = (f"chunk={chunk_idx + 1}/{total_chunks}", len(chunk))
+                _update_progress_postfix()
 
             last_error: Exception | None = None
             chunk_result: dict[str, str] | None = None
@@ -1014,7 +1043,7 @@ def _generate_msas_local_direct(
                             )
 
             with progress_lock:
-                active_workers.pop(device or f"worker{worker_idx}", None)
+                active_workers.pop(worker_key, None)
                 if chunk_result is None:
                     errors.append(
                         f"chunk={chunk_idx} gpu={device or 'default'} size={len(chunk)} error={last_error}"
@@ -1027,15 +1056,14 @@ def _generate_msas_local_direct(
                     results.append(chunk_result)
                     chunk_bar.update(1)
                     seq_bar.update(len(chunk))
-                chunk_bar.set_postfix_str(
-                    f"done={chunk_bar.n}/{total_chunks} active={_active_summary()}"
-                )
+                _update_progress_postfix()
             work_queue.task_done()
 
     threads: list[threading.Thread] = []
     try:
+        _update_progress_postfix()
         for worker_idx in range(worker_count):
-            device = cuda_devices[worker_idx]
+            device = cuda_devices[worker_idx % len(cuda_devices)]
             thread = threading.Thread(
                 target=_worker,
                 args=(worker_idx, device),
@@ -1187,7 +1215,7 @@ def main() -> int:
     parser.add_argument("--no-use-filter", dest="use_filter", action="store_false", help="Disable MMSeqs filtering.")
     parser.add_argument("--pairing-strategy", default="greedy", help="Pairing strategy passed to run_mmseqs2.")
     parser.add_argument("--msa-batch-size", type=int, default=64, help="Sequences per MMSeqs2 batch request.")
-    parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
+    parser.add_argument("--msa-concurrency", type=int, default=8, help="Number of concurrent MMSeqs2 batch requests.")
     parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
     parser.add_argument(
         "--cuda-devices",
@@ -1263,7 +1291,7 @@ def main() -> int:
         state: _list_payload_paths_for_state(input_root, state) for state in requested_states
     }
     max_docked_pairs = None if int(args.max_docked_pairs) <= 0 else int(args.max_docked_pairs)
-    selected_pair_ids, invalid_pair_reason, invalid_pair_counts = _select_valid_pair_ids(
+    selected_pair_ids, invalid_pair_reason, invalid_pair_counts, scanned_pair_count = _select_valid_pair_ids(
         input_root,
         requested_states,
         max_docked_pairs,
@@ -1287,12 +1315,28 @@ def main() -> int:
                 existing_msa_count += 1
         state_example_counts[state] = state_count
 
+    unique_sequences = list(dict.fromkeys(sequences))
+    cached_unique_sequences = (
+        sum(
+            1
+            for sequence in unique_sequences
+            if _msa_cache_path_for_sequence(msa_cache_dir, sequence).exists()
+        )
+        if args.reuse_cache
+        else 0
+    )
+    missing_unique_sequences = len(unique_sequences) - cached_unique_sequences
+    selected_pair_count = None if selected_pair_ids is None else len(selected_pair_ids)
+
     logger.info(
-        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s, backend=%s, skipped_invalid_pairs=%d)",
+        "Preparing MSAs for %d examples (selected_pairs=%s scanned_candidate_pairs=%d unique_sequences=%d cached=%d missing=%d already_have_msa_path=%d backend=%s skipped_invalid_pairs=%d)",
         sum(state_example_counts.values()),
-        len(set(sequences)),
+        "unlimited" if selected_pair_count is None else selected_pair_count,
+        scanned_pair_count,
+        len(unique_sequences),
+        cached_unique_sequences,
+        missing_unique_sequences,
         existing_msa_count,
-        "unlimited" if max_docked_pairs is None else max_docked_pairs,
         args.msa_backend,
         len(invalid_pair_reason),
     )
@@ -1411,12 +1455,15 @@ def main() -> int:
             "written_examples": written_examples,
             "written_payloads": written_payloads,
             "unique_sequences": len(set(sequences)),
+            "cached_unique_sequences": cached_unique_sequences,
+            "missing_unique_sequences": missing_unique_sequences,
+            "scanned_candidate_pairs": scanned_pair_count,
             "invalid_pairs_total": len(invalid_pair_reason),
             "invalid_pair_dummy_atom": int(invalid_pair_counts["invalid_pair_dummy_atom"]),
             "invalid_pair_non_embeddable": int(
                 invalid_pair_counts["invalid_pair_non_embeddable"]
             ),
-            "selected_pairs": None if selected_pair_ids is None else len(selected_pair_ids),
+            "selected_pairs": selected_pair_count,
         },
         "elapsed_sec": round(time.perf_counter() - t0, 3),
     }
