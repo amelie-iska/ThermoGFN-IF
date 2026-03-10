@@ -170,6 +170,35 @@ def _infer_boltz_src_path(local_msa_root: Path) -> Path:
     )
 
 
+def _count_a3m_sequences(a3m_text: str) -> int:
+    return sum(1 for line in a3m_text.splitlines() if line.startswith(">"))
+
+
+def _trim_a3m_depth(a3m_text: str, max_depth: int | None) -> str:
+    if max_depth is None or max_depth <= 0:
+        return a3m_text
+
+    blocks: list[list[str]] = []
+    current: list[str] = []
+    for line in a3m_text.splitlines(keepends=True):
+        if line.startswith(">"):
+            if current:
+                blocks.append(current)
+            current = [line]
+        elif current:
+            current.append(line)
+    if current:
+        blocks.append(current)
+
+    if not blocks:
+        return a3m_text
+
+    trimmed = "".join("".join(block) for block in blocks[:max_depth])
+    if a3m_text.endswith("\n") and not trimmed.endswith("\n"):
+        trimmed += "\n"
+    return trimmed
+
+
 def _generate_msas(
     sequences: Sequence[str],
     *,
@@ -183,6 +212,7 @@ def _generate_msas(
     msa_batch_size: int,
     msa_concurrency: int,
     msa_retries: int,
+    msa_depth: int | None,
 ) -> dict[str, Path]:
     if str(boltz_src_path) not in sys.path:
         sys.path.insert(0, str(boltz_src_path))
@@ -287,12 +317,13 @@ def _generate_msas(
                 except Exception as exc:
                     chunk_errors.append(f"chunk={idx} error={exc}")
 
-    for mapping in chunk_results:
-        for sequence, a3m in mapping.items():
-            seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
-            msa_path = msa_cache_dir / f"{seq_hash}.a3m"
-            msa_path.write_text(a3m, encoding="utf-8")
-            seq_to_path[sequence] = msa_path.resolve()
+        for mapping in chunk_results:
+            for sequence, a3m in mapping.items():
+                a3m = _trim_a3m_depth(a3m, msa_depth)
+                seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
+                msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+                msa_path.write_text(a3m, encoding="utf-8")
+                seq_to_path[sequence] = msa_path.resolve()
 
     unresolved = [sequence for sequence in missing_sequences if sequence not in seq_to_path]
     if unresolved:
@@ -361,6 +392,12 @@ def main() -> int:
     parser.add_argument("--msa-batch-size", type=int, default=1, help="Sequences per MMSeqs2 batch request.")
     parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
     parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
+    parser.add_argument(
+        "--msa-depth",
+        type=int,
+        default=2048,
+        help="Maximum number of sequences retained in each written A3M, including the query. Use 0 to disable trimming.",
+    )
     parser.add_argument("--shards", type=int, default=1, help="Number of round-robin shard JSON files to emit per state.")
     parser.add_argument(
         "--max-docked-pairs",
@@ -395,6 +432,7 @@ def main() -> int:
     requested_states = (
         ("reactant", "product") if args.states == "both" else (args.states,)
     )
+    msa_depth = None if int(args.msa_depth) <= 0 else int(args.msa_depth)
 
     logger.info("Loading RF3 examples from %s", input_root)
     payloads_by_state = {
@@ -441,6 +479,7 @@ def main() -> int:
         msa_batch_size=int(args.msa_batch_size),
         msa_concurrency=int(args.msa_concurrency),
         msa_retries=int(args.msa_retries),
+        msa_depth=msa_depth,
     )
 
     output_root.mkdir(parents=True, exist_ok=True)
@@ -521,6 +560,7 @@ def main() -> int:
         "boltz_src_path": str(boltz_src_path),
         "msa_cache_dir": str(msa_cache_dir),
         "msa_server_url": args.msa_server_url,
+        "msa_depth": None if msa_depth is None else int(msa_depth),
         "reuse_cache": bool(args.reuse_cache),
         "use_env_db": bool(args.use_env_db),
         "use_filter": bool(args.use_filter),

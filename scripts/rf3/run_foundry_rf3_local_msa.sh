@@ -20,6 +20,7 @@ PAIRING_STRATEGY="greedy"
 MSA_BATCH_SIZE=1
 MSA_CONCURRENCY=4
 MSA_RETRIES=2
+MSA_DEPTH=2048
 SHARDS=1
 MAX_DOCKED_PAIRS=2000
 N_RECYCLES=10
@@ -53,6 +54,7 @@ Options:
   --msa-batch-size N     Sequences per MMSeqs2 batch request (default: 1)
   --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 4)
   --msa-retries N        Retries per MMSeqs2 batch request (default: 2)
+  --msa-depth N          Max sequences retained per written A3M (default: 2048; 0 disables)
   --shards N             Output shard count for prepared JSONs (default: 1)
   --max-docked-pairs N   Max docking pairs to prepare/predict (default: 2000; 0 disables)
   --max-examples N       Backward-compatible alias for --max-docked-pairs
@@ -103,6 +105,8 @@ while [[ $# -gt 0 ]]; do
       MSA_CONCURRENCY="$2"; shift 2 ;;
     --msa-retries)
       MSA_RETRIES="$2"; shift 2 ;;
+    --msa-depth)
+      MSA_DEPTH="$2"; shift 2 ;;
     --shards)
       SHARDS="$2"; shift 2 ;;
     --max-docked-pairs)
@@ -153,6 +157,7 @@ PREP_ARGS=(
   --msa-batch-size "${MSA_BATCH_SIZE}"
   --msa-concurrency "${MSA_CONCURRENCY}"
   --msa-retries "${MSA_RETRIES}"
+  --msa-depth "${MSA_DEPTH}"
   --shards "${SHARDS}"
   --max-docked-pairs "${MAX_DOCKED_PAIRS}"
 )

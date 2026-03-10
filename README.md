@@ -514,6 +514,7 @@ bash scripts/rf3/run_foundry_rf3_local_msa.sh \
   --out-root runs/rf3_reactzyme_out_smiles_full \
   --ckpt-path rf3 \
   --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
+  --msa-depth 2048 \
   --reuse-cache
 ```
 
@@ -526,6 +527,10 @@ the same cap is enforced at MSA-prep/prediction time even if the input root
 contains a much larger prebuilt set. The wrapper also accepts the legacy alias
 `--max-examples` for the same cap. Use `--max-docked-pairs 0` to process the
 entire input root.
+
+The MSA-prep path now also defaults to `--msa-depth 2048`, which trims each
+written `.a3m` to at most 2048 sequences including the query before RF3 reads
+it. Use `--msa-depth 0` to disable trimming.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 
