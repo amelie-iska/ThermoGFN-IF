@@ -11,6 +11,7 @@ UNIREF30_ROOT="/opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302"
 CONFIG_PATH=""
 CLEANUP_UNIREF100=0
 GPU_SERVER=""
+CUDA_DEVICES="${CUDA_DEVICES:-0,1,2,3}"
 FOREGROUND=0
 HOST=""
 PORT=""
@@ -32,6 +33,7 @@ Options:
   --config PATH             Output config path (default: <msa-root>/config.uniref30.json)
   --cleanup-uniref100       Remove accidental local uniref100_db* artifacts first
   --gpu-server N            Forward --gpu-server to sibling start script
+  --cuda-devices LIST       Export CUDA_VISIBLE_DEVICES for mmseqs-server (default: 0,1,2,3)
   --foreground              Run attached instead of background mode
   --host HOST               Override host in generated config
   --port PORT               Override port in generated config and start command
@@ -55,6 +57,8 @@ while [[ $# -gt 0 ]]; do
       CLEANUP_UNIREF100=1; shift ;;
     --gpu-server)
       GPU_SERVER="$2"; shift 2 ;;
+    --cuda-devices)
+      CUDA_DEVICES="$2"; shift 2 ;;
     --foreground)
       FOREGROUND=1; shift ;;
     --host)
@@ -88,6 +92,15 @@ fi
 if [[ ! -f "${CONFIGURE_SCRIPT}" ]]; then
   echo "Missing configure script: ${CONFIGURE_SCRIPT}" >&2
   exit 1
+fi
+
+if [[ -n "${CUDA_DEVICES}" ]]; then
+  IFS=',' read -r -a _cuda_device_list <<< "${CUDA_DEVICES}"
+  if [[ "${#_cuda_device_list[@]}" -ne 4 ]]; then
+    echo "Expected exactly 4 CUDA devices for MMSeqs GPU server, got: ${CUDA_DEVICES}" >&2
+    echo "Pass --cuda-devices explicitly if this host should use a different set." >&2
+    exit 1
+  fi
 fi
 
 cfg_cmd=(bash "${CONFIGURE_SCRIPT}" --msa-root "${MSA_ROOT}" --uniref30-root "${UNIREF30_ROOT}")
@@ -130,6 +143,11 @@ if [[ -n "${PORT}" ]]; then
 fi
 if [[ "${FOREGROUND}" -eq 1 ]]; then
   start_cmd+=(--foreground)
+fi
+
+if [[ -n "${CUDA_DEVICES}" ]]; then
+  echo "[msa-uniref30] CUDA_VISIBLE_DEVICES=${CUDA_DEVICES}"
+  exec env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${start_cmd[@]}"
 fi
 
 exec "${start_cmd[@]}"

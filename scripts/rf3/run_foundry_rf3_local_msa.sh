@@ -23,6 +23,8 @@ MSA_RETRIES=2
 MSA_DEPTH=2048
 SHARDS=1
 MAX_DOCKED_PAIRS=2000
+CUDA_DEVICES="${CUDA_DEVICES:-0,1,2,3}"
+RF3_GPUS=4
 N_RECYCLES=10
 DIFFUSION_BATCH_SIZE=5
 NUM_STEPS=50
@@ -47,6 +49,8 @@ Options:
   --boltz-src-path PATH  Explicit Boltz client src path for MSA generation
   --msa-server-url URL   Local MMSeqs2 server URL (default: http://127.0.0.1:8080/api)
   --msa-cache-dir PATH   Directory for generated .a3m files
+  --cuda-devices LIST    Export CUDA_VISIBLE_DEVICES for RF3 inference (default: 0,1,2,3)
+  --rf3-gpus N           Number of GPUs for RF3 inference (default: 4)
   --reuse-cache          Reuse cached .a3m files
   --use-env-db           Request environmental DB
   --use-filter           Enable MMSeqs filtering
@@ -91,6 +95,10 @@ while [[ $# -gt 0 ]]; do
       MSA_SERVER_URL="$2"; shift 2 ;;
     --msa-cache-dir)
       MSA_CACHE_DIR="$2"; shift 2 ;;
+    --cuda-devices)
+      CUDA_DEVICES="$2"; shift 2 ;;
+    --rf3-gpus)
+      RF3_GPUS="$2"; shift 2 ;;
     --reuse-cache)
       REUSE_CACHE=1; shift ;;
     --use-env-db)
@@ -138,6 +146,43 @@ fi
 if [[ ! -x "${ENV_DIR}/bin/python" ]]; then
   echo "Missing python executable: ${ENV_DIR}/bin/python" >&2
   exit 1
+fi
+
+if ! [[ "${RF3_GPUS}" =~ ^[0-9]+$ ]] || (( RF3_GPUS <= 0 )); then
+  echo "Invalid --rf3-gpus value: ${RF3_GPUS}" >&2
+  exit 2
+fi
+
+count_csv_items() {
+  local csv="$1"
+  local IFS=','
+  local items=()
+  read -r -a items <<< "${csv}"
+  echo "${#items[@]}"
+}
+
+detect_system_gpu_count() {
+  if command -v nvidia-smi >/dev/null 2>&1; then
+    local count
+    count="$(nvidia-smi --query-gpu=index --format=csv,noheader 2>/dev/null | wc -l | tr -d ' ' || true)"
+    echo "${count}"
+    return 0
+  fi
+  echo ""
+}
+
+if [[ -n "${CUDA_DEVICES}" ]]; then
+  visible_gpu_count="$(count_csv_items "${CUDA_DEVICES}")"
+  if (( visible_gpu_count != RF3_GPUS )); then
+    echo "RF3 requested ${RF3_GPUS} GPUs but CUDA_VISIBLE_DEVICES would expose ${visible_gpu_count}: ${CUDA_DEVICES}" >&2
+    echo "Pass matching --rf3-gpus and --cuda-devices values." >&2
+    exit 2
+  fi
+  system_gpu_count="$(detect_system_gpu_count)"
+  if [[ -n "${system_gpu_count}" && "${system_gpu_count}" != "0" && "${visible_gpu_count}" -gt "${system_gpu_count}" ]]; then
+    echo "Requested CUDA devices ${CUDA_DEVICES}, but only ${system_gpu_count} system GPU(s) are visible." >&2
+    exit 1
+  fi
 fi
 
 PYTHON_BIN="${ENV_DIR}/bin/python"
@@ -198,6 +243,8 @@ run_state() {
         "inputs=${shard_json}"
         "out_dir=${shard_out}"
         "ckpt_path=${CKPT_PATH}"
+        "devices_per_node=${RF3_GPUS}"
+        "num_nodes=1"
         "n_recycles=${N_RECYCLES}"
         "diffusion_batch_size=${DIFFUSION_BATCH_SIZE}"
         "num_steps=${NUM_STEPS}"
@@ -205,8 +252,12 @@ run_state() {
       for override in "${HYDRA_OVERRIDES[@]}"; do
         shard_cmd+=("${override}")
       done
-      echo "[foundry-rf3-run] running state=${state} shard=${shard_name} inputs=${shard_json} out_dir=${shard_out}"
-      "${shard_cmd[@]}"
+      echo "[foundry-rf3-run] running state=${state} shard=${shard_name} inputs=${shard_json} out_dir=${shard_out} gpus=${RF3_GPUS} devices=${CUDA_DEVICES}"
+      if [[ -n "${CUDA_DEVICES}" ]]; then
+        env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${shard_cmd[@]}"
+      else
+        "${shard_cmd[@]}"
+      fi
     done
     return
   fi
@@ -221,6 +272,8 @@ run_state() {
     "inputs=${input_json}"
     "out_dir=${state_out}"
     "ckpt_path=${CKPT_PATH}"
+    "devices_per_node=${RF3_GPUS}"
+    "num_nodes=1"
     "n_recycles=${N_RECYCLES}"
     "diffusion_batch_size=${DIFFUSION_BATCH_SIZE}"
     "num_steps=${NUM_STEPS}"
@@ -229,8 +282,12 @@ run_state() {
     cmd+=("${override}")
   done
 
-  echo "[foundry-rf3-run] running state=${state} inputs=${input_json} out_dir=${state_out}"
-  "${cmd[@]}"
+  echo "[foundry-rf3-run] running state=${state} inputs=${input_json} out_dir=${state_out} gpus=${RF3_GPUS} devices=${CUDA_DEVICES}"
+  if [[ -n "${CUDA_DEVICES}" ]]; then
+    env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${cmd[@]}"
+  else
+    "${cmd[@]}"
+  fi
 }
 
 case "${STATES}" in

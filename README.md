@@ -440,6 +440,11 @@ The UniRef30 helper now defaults to a faster local server config:
 - `--local-workers 4`
 - `--parallel-databases 2`
 - `--parallel-stages`
+- `--cuda-devices 0,1,2,3`
+
+The MMSeqs GPU backend uses all visible GPUs. The wrapper now makes that
+explicit by exporting `CUDA_VISIBLE_DEVICES=0,1,2,3` by default before starting
+`mmseqs-server`.
 
 The default local server URL expected by the RF3 prep scripts is `http://127.0.0.1:8080/api`.
 
@@ -560,9 +565,16 @@ The RF3 local-MSA wrapper also now defaults to:
 
 - `--msa-server-url http://127.0.0.1:8080/api`
 - `--msa-batch-size 64`
+- `--cuda-devices 0,1,2,3`
+- `--rf3-gpus 4`
 
 Those defaults avoid the extra failed root-path submission and reduce MMSeqs job
 overhead substantially for large ReactZyme runs.
+
+For RF3 itself, the wrapper now passes `devices_per_node=4` to Foundry and
+exports `CUDA_VISIBLE_DEVICES=0,1,2,3`, so inference is launched against all
+four GPUs by default. The wrapper fails fast if the requested GPU count and
+visible device list do not match.
 
 MSA progress is now reported with outer `MSA Chunks` and `MSA Seqs` tqdm bars.
 The older inner Boltz/MMSeqs time-estimate bar is suppressed so retries and
