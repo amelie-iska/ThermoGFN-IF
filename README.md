@@ -353,6 +353,7 @@ What this flow does:
 - filters to enzyme sequences with length `<= 600`,
 - filters each ligand SDF template to at most `256` total atoms,
 - caps each exact enzyme sequence at `2` accepted docking pairs across different reactions,
+- in SMILES mode, skips ligand pairs with dummy atoms (`*`) or ligands that fail RDKit 3D embedding instead of substituting atoms,
 - emits Boltz-style pocket constraint blocks and routes them into RF3 inference-time token-pair threshold conditioning.
 
 The default strict builder uses:
@@ -531,6 +532,11 @@ If you pass `--ligand-source smiles`, the builder omits `templates`,
 `template_selection`, and `ground_truth_conformer_selection`, and instead emits
 the ReactZyme multi-fragment SMILES directly as the ligand component while
 keeping the same pocket constraints.
+
+For RF3 output quality, the SMILES path now rejects chemically underspecified or
+non-embeddable ligands rather than inventing replacement atoms. In practice,
+dummy-atom (`*`) ligands and ligands that fail RDKit ETKDG embedding are
+skipped before MSA prep / RF3 inference.
 
 If you pass `--input-source reactzyme_split`, the builder explodes the full
 `cleaned_uniprot_rhea.tsv` plus `rhea_molecules.tsv` tables instead of using the

@@ -16,6 +16,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class TestPrepareReactzymeRf3Msas(unittest.TestCase):
+    def test_validate_smiles_for_rf3_rejects_dummy_atoms(self):
+        ok, reason = MODULE._validate_smiles_for_rf3(
+            "*C",
+            validation_cache={},
+        )
+
+        self.assertFalse(ok)
+        self.assertEqual(reason, "dummy_atom")
+
     def test_trim_a3m_depth_keeps_first_n_sequences(self):
         a3m = (
             ">query\n"

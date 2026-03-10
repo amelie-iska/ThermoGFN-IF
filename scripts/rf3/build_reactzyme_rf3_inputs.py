@@ -239,6 +239,58 @@ def _count_smiles_atoms(smiles: str) -> int:
     return total_atoms
 
 
+_RDKIT_EMBED_VALIDATOR = None
+_RDKIT_EMBED_VALIDATOR_READY = False
+
+
+def _validate_smiles_for_rf3(
+    smiles: str,
+    *,
+    validation_cache: dict[str, tuple[bool, str | None]],
+) -> tuple[bool, str | None]:
+    cached = validation_cache.get(smiles)
+    if cached is not None:
+        return cached
+
+    if "*" in smiles:
+        validation_cache[smiles] = (False, "dummy_atom")
+        return validation_cache[smiles]
+
+    global _RDKIT_EMBED_VALIDATOR
+    global _RDKIT_EMBED_VALIDATOR_READY
+    if not _RDKIT_EMBED_VALIDATOR_READY:
+        try:
+            from rdkit import Chem, RDLogger
+            from rdkit.Chem import AllChem
+
+            RDLogger.DisableLog("rdApp.*")
+
+            def _validator(raw_smiles: str) -> tuple[bool, str | None]:
+                mol = Chem.MolFromSmiles(raw_smiles)
+                if mol is None:
+                    return (False, "rdkit_parse")
+                mol = Chem.AddHs(mol)
+                try:
+                    code = AllChem.EmbedMolecule(mol, AllChem.ETKDGv3())
+                except Exception:
+                    return (False, "rdkit_embed_exception")
+                if code != 0:
+                    return (False, f"rdkit_embed_code_{code}")
+                return (True, None)
+
+            _RDKIT_EMBED_VALIDATOR = _validator
+        except Exception:
+            _RDKIT_EMBED_VALIDATOR = None
+        _RDKIT_EMBED_VALIDATOR_READY = True
+
+    if _RDKIT_EMBED_VALIDATOR is None:
+        validation_cache[smiles] = (True, None)
+        return validation_cache[smiles]
+
+    validation_cache[smiles] = _RDKIT_EMBED_VALIDATOR(smiles)
+    return validation_cache[smiles]
+
+
 def _build_rf3_example(
     *,
     pair_id: str,
@@ -538,8 +590,12 @@ def main() -> int:
         "skipped_missing_smiles": 0,
         "skipped_missing_sdf": 0,
         "skipped_ligand_atom_limit": 0,
+        "skipped_invalid_ligand_smiles": 0,
+        "skipped_invalid_ligand_dummy_atom": 0,
+        "skipped_invalid_ligand_non_embeddable": 0,
         "skipped_sequence_pair_cap": 0,
     }
+    smiles_validation_cache: dict[str, tuple[bool, str | None]] = {}
 
     for row in input_rows:
         if args.max_rows is not None and int(summary["total_rows_scanned"]) >= args.max_rows:
@@ -588,6 +644,24 @@ def main() -> int:
                     break
                 atom_count = _count_sdf_atoms(sdf_path)
             else:
+                ok, reason = _validate_smiles_for_rf3(
+                    smiles,
+                    validation_cache=smiles_validation_cache,
+                )
+                if not ok:
+                    summary["skipped_invalid_ligand_smiles"] = int(
+                        summary["skipped_invalid_ligand_smiles"]
+                    ) + 1
+                    if reason == "dummy_atom":
+                        summary["skipped_invalid_ligand_dummy_atom"] = int(
+                            summary["skipped_invalid_ligand_dummy_atom"]
+                        ) + 1
+                    else:
+                        summary["skipped_invalid_ligand_non_embeddable"] = int(
+                            summary["skipped_invalid_ligand_non_embeddable"]
+                        ) + 1
+                    missing_state = True
+                    break
                 atom_count = _count_smiles_atoms(smiles)
             if atom_count > args.max_ligand_atoms:
                 summary["skipped_ligand_atom_limit"] = int(

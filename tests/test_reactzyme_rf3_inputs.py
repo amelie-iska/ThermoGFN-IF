@@ -39,6 +39,15 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
         self.assertEqual(MODULE._count_smiles_atoms("[H+].[H+].[O][O-].[O][O-]"), 6)
         self.assertEqual(MODULE._count_smiles_atoms("CCO.O"), 4)
 
+    def test_validate_smiles_for_rf3_rejects_dummy_atoms(self):
+        ok, reason = MODULE._validate_smiles_for_rf3(
+            "*N[C@H](C(*)=O)O",
+            validation_cache={},
+        )
+
+        self.assertFalse(ok)
+        self.assertEqual(reason, "dummy_atom")
+
     def test_extract_pocket_positions_supports_points_and_ranges(self):
         features = [
             {"type": "Binding site", "location": {"position": {"value": 8}}},
@@ -323,6 +332,92 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
             self.assertEqual(reactant_examples[0]["components"][1]["smiles"], "CC.O")
             self.assertNotIn("templates", reactant_examples[0])
             self.assertEqual(reactant_examples[0]["metadata"]["ligand_source"], "smiles")
+
+    def test_main_smiles_mode_skips_dummy_atom_pairs(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            source_root = tmp / "generate-constraints_0"
+            output_root = tmp / "out"
+            pocket_cache = source_root / "pocket_cache"
+            output_templates = source_root / "output_sdf_templates" / "train"
+            pocket_cache.mkdir(parents=True)
+            output_templates.mkdir(parents=True)
+
+            seq_tsv = source_root / "cleaned_uniprot_rhea.tsv"
+            seq_tsv.write_text(
+                "\n".join(
+                    [
+                        "Entry\tSequence",
+                        "P1\tMAAA",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (pocket_cache / "P1.json").write_text(
+                json.dumps(
+                    {
+                        "features": [
+                            {
+                                "type": "Binding site",
+                                "location": {"position": {"value": 7}},
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            manifest_path = output_templates / "manifest.csv"
+            rows = [
+                {
+                    "pair_id": "pair_1",
+                    "row_id": "row_1",
+                    "rhea_id": "RHEA:1",
+                    "uniprot_id": "P1",
+                    "status": "reactant:ok|product:ok",
+                    "reactant_smiles": "*CC.O",
+                    "product_smiles": "C.CC",
+                    "reactant_sdf": "",
+                    "product_sdf": "",
+                }
+            ]
+            with manifest_path.open("w", encoding="utf-8", newline="") as handle:
+                import csv
+
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
+                writer.writeheader()
+                writer.writerows(rows)
+
+            argv = sys.argv[:]
+            try:
+                sys.argv = [
+                    str(MODULE_PATH),
+                    "--source-root",
+                    str(source_root),
+                    "--manifest",
+                    str(manifest_path),
+                    "--sequence-tsv",
+                    str(seq_tsv),
+                    "--pocket-cache",
+                    str(pocket_cache),
+                    "--output-root",
+                    str(output_root),
+                    "--ligand-source",
+                    "smiles",
+                    "--log-level",
+                    "ERROR",
+                ]
+                rc = MODULE.main()
+            finally:
+                sys.argv = argv
+
+            self.assertEqual(rc, 0)
+            summary = json.loads((output_root / "summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(summary["counts"]["accepted_rows"], 0)
+            self.assertEqual(summary["counts"]["emitted_examples"], 0)
+            self.assertEqual(summary["counts"]["skipped_invalid_ligand_smiles"], 1)
+            self.assertEqual(summary["counts"]["skipped_invalid_ligand_dummy_atom"], 1)
 
     def test_main_reactzyme_split_mode_writes_shards_without_example_files(self):
         with tempfile.TemporaryDirectory() as tmpdir:

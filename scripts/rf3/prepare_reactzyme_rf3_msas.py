@@ -112,37 +112,44 @@ def _example_pair_id(example: dict) -> str:
     return name
 
 
-def _select_pair_ids(input_root: Path, requested_states: Sequence[str], max_docked_pairs: int | None) -> set[str] | None:
-    if max_docked_pairs is None or max_docked_pairs <= 0:
-        return None
+def _ordered_pair_ids(input_root: Path, requested_states: Sequence[str]) -> list[str]:
+    ordered: list[str] = []
+    seen: set[str] = set()
 
     manifest_path = input_root / "manifest.jsonl"
-    selected: list[str] = []
-    seen: set[str] = set()
     if manifest_path.exists():
         with manifest_path.open("r", encoding="utf-8") as handle:
             for line in handle:
                 row = json.loads(line)
                 pair_id = str(row.get("pair_id") or "").strip()
-                if not pair_id or pair_id in seen:
-                    continue
-                seen.add(pair_id)
-                selected.append(pair_id)
-                if len(selected) >= max_docked_pairs:
-                    return set(selected)
+                if pair_id and pair_id not in seen:
+                    seen.add(pair_id)
+                    ordered.append(pair_id)
 
     for state in requested_states:
         _, paths = _list_payload_paths_for_state(input_root, state)
         for path in paths:
             for example in _load_examples_from_path(path):
                 pair_id = _example_pair_id(example)
-                if not pair_id or pair_id in seen:
-                    continue
-                seen.add(pair_id)
-                selected.append(pair_id)
-                if len(selected) >= max_docked_pairs:
-                    return set(selected)
-    return set(selected)
+                if pair_id and pair_id not in seen:
+                    seen.add(pair_id)
+                    ordered.append(pair_id)
+    return ordered
+
+
+def _select_pair_ids(
+    input_root: Path,
+    requested_states: Sequence[str],
+    max_docked_pairs: int | None,
+    *,
+    allowed_pair_ids: set[str] | None = None,
+) -> set[str] | None:
+    ordered = _ordered_pair_ids(input_root, requested_states)
+    if allowed_pair_ids is not None:
+        ordered = [pair_id for pair_id in ordered if pair_id in allowed_pair_ids]
+    if max_docked_pairs is None or max_docked_pairs <= 0:
+        return None if allowed_pair_ids is None else set(ordered)
+    return set(ordered[:max_docked_pairs])
 
 
 def _iter_examples_from_payloads(paths: Iterable[Path], selected_pair_ids: set[str] | None) -> Iterable[dict]:
@@ -153,6 +160,138 @@ def _iter_examples_from_payloads(paths: Iterable[Path], selected_pair_ids: set[s
             yield example
 
 
+def _validate_pair_ligands(
+    payloads_by_state: dict[str, tuple[str, list[Path]]],
+    *,
+    selected_pair_ids: set[str] | None,
+) -> tuple[dict[str, str], dict[str, int]]:
+    validation_cache: dict[str, tuple[bool, str | None]] = {}
+    invalid_pair_reason: dict[str, str] = {}
+    counts = {
+        "invalid_pair_total": 0,
+        "invalid_pair_dummy_atom": 0,
+        "invalid_pair_non_embeddable": 0,
+    }
+
+    remaining = None if selected_pair_ids is None else set(selected_pair_ids)
+    for _state, (_layout, paths) in payloads_by_state.items():
+        for path in paths:
+            if remaining is not None and not remaining:
+                return invalid_pair_reason, counts
+            for example in _load_examples_from_path(path):
+                if remaining is not None:
+                    pair_id = _example_pair_id(example)
+                    if pair_id not in remaining:
+                        continue
+                else:
+                    pair_id = _example_pair_id(example)
+                if pair_id in invalid_pair_reason:
+                    if remaining is not None:
+                        remaining.discard(pair_id)
+                    continue
+                ligand_component = _ligand_smiles_component(example)
+                if ligand_component is None:
+                    if remaining is not None:
+                        remaining.discard(pair_id)
+                    continue
+                smiles = str(ligand_component.get("smiles") or "").strip()
+                if not smiles:
+                    invalid_pair_reason[pair_id] = "missing_smiles"
+                    counts["invalid_pair_total"] += 1
+                    counts["invalid_pair_non_embeddable"] += 1
+                    if remaining is not None:
+                        remaining.discard(pair_id)
+                    continue
+                ok, reason = _validate_smiles_for_rf3(smiles, validation_cache=validation_cache)
+                if ok:
+                    if remaining is not None:
+                        remaining.discard(pair_id)
+                    continue
+                invalid_pair_reason[pair_id] = str(reason or "invalid_smiles")
+                counts["invalid_pair_total"] += 1
+                if reason == "dummy_atom":
+                    counts["invalid_pair_dummy_atom"] += 1
+                else:
+                    counts["invalid_pair_non_embeddable"] += 1
+                if remaining is not None:
+                    remaining.discard(pair_id)
+    return invalid_pair_reason, counts
+
+
+def _merge_invalid_pair_counts(dst: dict[str, int], src: dict[str, int]) -> None:
+    for key, value in src.items():
+        dst[key] = int(dst.get(key, 0)) + int(value)
+
+
+def _select_valid_pair_ids(
+    input_root: Path,
+    requested_states: Sequence[str],
+    max_docked_pairs: int | None,
+    *,
+    payloads_by_state: dict[str, tuple[str, list[Path]]],
+) -> tuple[set[str] | None, dict[str, str], dict[str, int]]:
+    ordered_pair_ids = _ordered_pair_ids(input_root, requested_states)
+    if max_docked_pairs is None:
+        invalid_pair_reason, invalid_pair_counts = _validate_pair_ligands(
+            payloads_by_state,
+            selected_pair_ids=None,
+        )
+        selected_pair_ids = {
+            pair_id for pair_id in ordered_pair_ids if pair_id not in invalid_pair_reason
+        }
+        return selected_pair_ids, invalid_pair_reason, invalid_pair_counts
+
+    selected_pairs: list[str] = []
+    invalid_pair_reason: dict[str, str] = {}
+    invalid_pair_counts = {
+        "invalid_pair_total": 0,
+        "invalid_pair_dummy_atom": 0,
+        "invalid_pair_non_embeddable": 0,
+    }
+    cursor = 0
+    total_pairs = len(ordered_pair_ids)
+    while len(selected_pairs) < max_docked_pairs and cursor < total_pairs:
+        needed = max_docked_pairs - len(selected_pairs)
+        batch_size = max(needed * 2, 512)
+        candidate_ids = ordered_pair_ids[cursor : min(total_pairs, cursor + batch_size)]
+        cursor += len(candidate_ids)
+        candidate_set = set(candidate_ids)
+        batch_invalid_reason, batch_invalid_counts = _validate_pair_ligands(
+            payloads_by_state,
+            selected_pair_ids=candidate_set,
+        )
+        _merge_invalid_pair_counts(invalid_pair_counts, batch_invalid_counts)
+        invalid_pair_reason.update(batch_invalid_reason)
+        for pair_id in candidate_ids:
+            if pair_id in batch_invalid_reason:
+                continue
+            selected_pairs.append(pair_id)
+            if len(selected_pairs) >= max_docked_pairs:
+                break
+
+    return set(selected_pairs), invalid_pair_reason, invalid_pair_counts
+
+
+def _copy_manifest_with_pair_filter(
+    src_manifest: Path,
+    dst_manifest: Path,
+    *,
+    selected_pair_ids: set[str] | None,
+) -> None:
+    dst_manifest.parent.mkdir(parents=True, exist_ok=True)
+    if selected_pair_ids is None:
+        shutil.copy2(src_manifest, dst_manifest)
+        return
+
+    with src_manifest.open("r", encoding="utf-8") as src, dst_manifest.open(
+        "w", encoding="utf-8"
+    ) as dst:
+        for line in src:
+            row = json.loads(line)
+            if str(row.get("pair_id") or "").strip() in selected_pair_ids:
+                dst.write(line)
+
+
 def _protein_component(example: dict) -> dict:
     components = example.get("components") or []
     proteins = [component for component in components if "seq" in component]
@@ -161,6 +300,14 @@ def _protein_component(example: dict) -> dict:
             f"Expected exactly one protein component in example {example.get('name')}, found {len(proteins)}"
         )
     return proteins[0]
+
+
+def _ligand_smiles_component(example: dict) -> dict | None:
+    components = example.get("components") or []
+    for component in components:
+        if "smiles" in component:
+            return component
+    return None
 
 
 def _infer_boltz_src_path(local_msa_root: Path) -> Path:
@@ -489,6 +636,58 @@ class _QuietTqdm:
 
     def update(self, n: int = 1) -> None:
         self.n += n
+
+
+_RDKIT_EMBED_VALIDATOR = None
+_RDKIT_EMBED_VALIDATOR_READY = False
+
+
+def _validate_smiles_for_rf3(
+    smiles: str,
+    *,
+    validation_cache: dict[str, tuple[bool, str | None]],
+) -> tuple[bool, str | None]:
+    cached = validation_cache.get(smiles)
+    if cached is not None:
+        return cached
+
+    if "*" in smiles:
+        validation_cache[smiles] = (False, "dummy_atom")
+        return validation_cache[smiles]
+
+    global _RDKIT_EMBED_VALIDATOR
+    global _RDKIT_EMBED_VALIDATOR_READY
+    if not _RDKIT_EMBED_VALIDATOR_READY:
+        try:
+            from rdkit import Chem, RDLogger
+            from rdkit.Chem import AllChem
+
+            RDLogger.DisableLog("rdApp.*")
+
+            def _validator(raw_smiles: str) -> tuple[bool, str | None]:
+                mol = Chem.MolFromSmiles(raw_smiles)
+                if mol is None:
+                    return (False, "rdkit_parse")
+                mol = Chem.AddHs(mol)
+                try:
+                    code = AllChem.EmbedMolecule(mol, AllChem.ETKDGv3())
+                except Exception:
+                    return (False, "rdkit_embed_exception")
+                if code != 0:
+                    return (False, f"rdkit_embed_code_{code}")
+                return (True, None)
+
+            _RDKIT_EMBED_VALIDATOR = _validator
+        except Exception:
+            _RDKIT_EMBED_VALIDATOR = None
+        _RDKIT_EMBED_VALIDATOR_READY = True
+
+    if _RDKIT_EMBED_VALIDATOR is None:
+        validation_cache[smiles] = (True, None)
+        return validation_cache[smiles]
+
+    validation_cache[smiles] = _RDKIT_EMBED_VALIDATOR(smiles)
+    return validation_cache[smiles]
 
 
 def _write_generated_msas(
@@ -1046,7 +1245,12 @@ def main() -> int:
         state: _list_payload_paths_for_state(input_root, state) for state in requested_states
     }
     max_docked_pairs = None if int(args.max_docked_pairs) <= 0 else int(args.max_docked_pairs)
-    selected_pair_ids = _select_pair_ids(input_root, requested_states, max_docked_pairs)
+    selected_pair_ids, invalid_pair_reason, invalid_pair_counts = _select_valid_pair_ids(
+        input_root,
+        requested_states,
+        max_docked_pairs,
+        payloads_by_state=payloads_by_state,
+    )
 
     sequences: list[str] = []
     existing_msa_count = 0
@@ -1066,12 +1270,13 @@ def main() -> int:
         state_example_counts[state] = state_count
 
     logger.info(
-        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s, backend=%s)",
+        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s, backend=%s, skipped_invalid_pairs=%d)",
         sum(state_example_counts.values()),
         len(set(sequences)),
         existing_msa_count,
         "unlimited" if max_docked_pairs is None else max_docked_pairs,
         args.msa_backend,
+        len(invalid_pair_reason),
     )
 
     t0 = time.perf_counter()
@@ -1098,16 +1303,11 @@ def main() -> int:
 
     output_root.mkdir(parents=True, exist_ok=True)
     if (input_root / "manifest.jsonl").exists():
-        if selected_pair_ids is None:
-            shutil.copy2(input_root / "manifest.jsonl", output_root / "manifest.jsonl")
-        else:
-            with (input_root / "manifest.jsonl").open("r", encoding="utf-8") as src, (
-                output_root / "manifest.jsonl"
-            ).open("w", encoding="utf-8") as dst:
-                for line in src:
-                    row = json.loads(line)
-                    if str(row.get("pair_id") or "").strip() in selected_pair_ids:
-                        dst.write(line)
+        _copy_manifest_with_pair_filter(
+            input_root / "manifest.jsonl",
+            output_root / "manifest.jsonl",
+            selected_pair_ids=selected_pair_ids,
+        )
 
     written_examples = 0
     written_payloads = 0
@@ -1193,6 +1393,11 @@ def main() -> int:
             "written_examples": written_examples,
             "written_payloads": written_payloads,
             "unique_sequences": len(set(sequences)),
+            "invalid_pairs_total": len(invalid_pair_reason),
+            "invalid_pair_dummy_atom": int(invalid_pair_counts["invalid_pair_dummy_atom"]),
+            "invalid_pair_non_embeddable": int(
+                invalid_pair_counts["invalid_pair_non_embeddable"]
+            ),
             "selected_pairs": None if selected_pair_ids is None else len(selected_pair_ids),
         },
         "elapsed_sec": round(time.perf_counter() - t0, 3),
