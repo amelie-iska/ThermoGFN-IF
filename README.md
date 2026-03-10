@@ -435,7 +435,30 @@ bash scripts/env/start_local_mmseqs2_uniref30_server.sh \
   --cleanup-uniref100
 ```
 
-The default local server URL expected by the RF3 prep scripts is `http://127.0.0.1:8080`.
+The UniRef30 helper now defaults to a faster local server config:
+
+- `--local-workers 4`
+- `--parallel-databases 2`
+- `--parallel-stages`
+
+The default local server URL expected by the RF3 prep scripts is `http://127.0.0.1:8080/api`.
+
+If a previous RF3/MMSeqs run left stale jobs queued, stop the server, clear the
+job queue, and restart it before launching a new large RF3 batch:
+
+```bash
+kill "$(cat ../enzyme-quiver/MMseqs2/local_msa/run/mmseqs-server.pid)"
+rm -f ../enzyme-quiver/MMseqs2/local_msa/run/mmseqs-server.pid
+rm -rf /opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa/jobs/*
+
+bash scripts/env/start_local_mmseqs2_uniref30_server.sh \
+  --msa-root /opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa \
+  --uniref30-root /opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302 \
+  --cleanup-uniref100 \
+  --local-workers 4 \
+  --parallel-databases 2 \
+  --parallel-stages
+```
 
 ### 4. Build RF3 JSON inputs from ReactZyme
 
@@ -514,6 +537,7 @@ bash scripts/rf3/run_foundry_rf3_local_msa.sh \
   --out-root runs/rf3_reactzyme_out_smiles_full \
   --ckpt-path rf3 \
   --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
+  --msa-batch-size 64 \
   --msa-depth 2048 \
   --reuse-cache
 ```
@@ -531,6 +555,14 @@ entire input root.
 The MSA-prep path now also defaults to `--msa-depth 2048`, which trims each
 written `.a3m` to at most 2048 sequences including the query before RF3 reads
 it. Use `--msa-depth 0` to disable trimming.
+
+The RF3 local-MSA wrapper also now defaults to:
+
+- `--msa-server-url http://127.0.0.1:8080/api`
+- `--msa-batch-size 64`
+
+Those defaults avoid the extra failed root-path submission and reduce MMSeqs job
+overhead substantially for large ReactZyme runs.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 

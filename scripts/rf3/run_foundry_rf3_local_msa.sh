@@ -11,13 +11,13 @@ CKPT_PATH="rf3"
 CHECKPOINT_DIRS=""
 LOCAL_MSA_ROOT="${REPO_ROOT}/../enzyme-quiver/MMseqs2/local_msa"
 BOLTZ_SRC_PATH=""
-MSA_SERVER_URL="http://127.0.0.1:8080"
+MSA_SERVER_URL="http://127.0.0.1:8080/api"
 MSA_CACHE_DIR=""
 REUSE_CACHE=0
 USE_ENV_DB=0
 USE_FILTER=0
 PAIRING_STRATEGY="greedy"
-MSA_BATCH_SIZE=1
+MSA_BATCH_SIZE=64
 MSA_CONCURRENCY=4
 MSA_RETRIES=2
 MSA_DEPTH=2048
@@ -45,13 +45,13 @@ Options:
   --checkpoint-dirs PATH Colon-separated checkpoint search dirs
   --local-msa-root PATH  Shared MMSeqs2 local workspace
   --boltz-src-path PATH  Explicit Boltz client src path for MSA generation
-  --msa-server-url URL   Local MMSeqs2 server URL
+  --msa-server-url URL   Local MMSeqs2 server URL (default: http://127.0.0.1:8080/api)
   --msa-cache-dir PATH   Directory for generated .a3m files
   --reuse-cache          Reuse cached .a3m files
   --use-env-db           Request environmental DB
   --use-filter           Enable MMSeqs filtering
   --pairing-strategy X   Pairing strategy for run_mmseqs2 (default: greedy)
-  --msa-batch-size N     Sequences per MMSeqs2 batch request (default: 1)
+  --msa-batch-size N     Sequences per MMSeqs2 batch request (default: 64)
   --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 4)
   --msa-retries N        Retries per MMSeqs2 batch request (default: 2)
   --msa-depth N          Max sequences retained per written A3M (default: 2048; 0 disables)

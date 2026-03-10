@@ -382,14 +382,14 @@ def main() -> int:
     )
     parser.add_argument(
         "--msa-server-url",
-        default="http://127.0.0.1:8080",
+        default="http://127.0.0.1:8080/api",
         help="Local MMSeqs2 server URL.",
     )
     parser.add_argument("--reuse-cache", action="store_true", help="Reuse cached .a3m files.")
     parser.add_argument("--use-env-db", action="store_true", help="Request the environmental DB as well.")
     parser.add_argument("--use-filter", action="store_true", help="Enable MMSeqs filtering.")
     parser.add_argument("--pairing-strategy", default="greedy", help="Pairing strategy passed to run_mmseqs2.")
-    parser.add_argument("--msa-batch-size", type=int, default=1, help="Sequences per MMSeqs2 batch request.")
+    parser.add_argument("--msa-batch-size", type=int, default=64, help="Sequences per MMSeqs2 batch request.")
     parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
     parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
     parser.add_argument(

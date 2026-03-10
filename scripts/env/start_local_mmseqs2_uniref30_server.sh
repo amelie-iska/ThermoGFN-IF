@@ -14,6 +14,9 @@ GPU_SERVER=""
 FOREGROUND=0
 HOST=""
 PORT=""
+LOCAL_WORKERS=""
+PARALLEL_DATABASES=""
+PARALLEL_STAGES=""
 
 usage() {
   cat <<'USAGE'
@@ -32,6 +35,10 @@ Options:
   --foreground              Run attached instead of background mode
   --host HOST               Override host in generated config
   --port PORT               Override port in generated config and start command
+  --local-workers N         Override generated local worker count
+  --parallel-databases N    Override generated parallel-databases count
+  --parallel-stages         Enable generated ColabFold parallel stages
+  --no-parallel-stages      Disable generated ColabFold parallel stages
   -h, --help                Show help
 USAGE
 }
@@ -54,6 +61,14 @@ while [[ $# -gt 0 ]]; do
       HOST="$2"; shift 2 ;;
     --port)
       PORT="$2"; shift 2 ;;
+    --local-workers)
+      LOCAL_WORKERS="$2"; shift 2 ;;
+    --parallel-databases)
+      PARALLEL_DATABASES="$2"; shift 2 ;;
+    --parallel-stages)
+      PARALLEL_STAGES="true"; shift ;;
+    --no-parallel-stages)
+      PARALLEL_STAGES="false"; shift ;;
     -h|--help)
       usage
       exit 0
@@ -87,6 +102,17 @@ if [[ -n "${HOST}" ]]; then
 fi
 if [[ -n "${PORT}" ]]; then
   cfg_cmd+=(--port "${PORT}")
+fi
+if [[ -n "${LOCAL_WORKERS}" ]]; then
+  cfg_cmd+=(--local-workers "${LOCAL_WORKERS}")
+fi
+if [[ -n "${PARALLEL_DATABASES}" ]]; then
+  cfg_cmd+=(--parallel-databases "${PARALLEL_DATABASES}")
+fi
+if [[ "${PARALLEL_STAGES}" == "true" ]]; then
+  cfg_cmd+=(--parallel-stages)
+elif [[ "${PARALLEL_STAGES}" == "false" ]]; then
+  cfg_cmd+=(--no-parallel-stages)
 fi
 
 "${cfg_cmd[@]}"

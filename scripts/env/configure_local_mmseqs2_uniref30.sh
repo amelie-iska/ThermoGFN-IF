@@ -11,9 +11,9 @@ WRITE_LEGACY_CONFIG=1
 CLEANUP_UNIREF100=0
 HOST="127.0.0.1"
 PORT="8080"
-LOCAL_WORKERS="1"
-PARALLEL_DATABASES="1"
-PARALLEL_STAGES="false"
+LOCAL_WORKERS="4"
+PARALLEL_DATABASES="2"
+PARALLEL_STAGES="true"
 
 usage() {
   cat <<'USAGE'
@@ -29,9 +29,9 @@ Options:
   --config PATH             Output config path (default: <msa-root>/config.uniref30.json)
   --host HOST               Server host in generated config (default: 127.0.0.1)
   --port PORT               Server port in generated config (default: 8080)
-  --local-workers N         Local worker count in generated config (default: 1)
-  --parallel-databases N    Parallel databases in generated config (default: 1)
-  --parallel-stages         Enable ColabFold parallel stages
+  --local-workers N         Local worker count in generated config (default: 4)
+  --parallel-databases N    Parallel databases in generated config (default: 2)
+  --parallel-stages         Enable ColabFold parallel stages (default)
   --no-parallel-stages      Disable ColabFold parallel stages
   --no-legacy-config        Do not also write <msa-root>/config.uniref100.json
   --cleanup-uniref100       Remove accidental local uniref100_db* artifacts under <msa-root>
