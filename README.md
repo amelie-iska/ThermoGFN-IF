@@ -424,6 +424,11 @@ bash scripts/env/configure_local_mmseqs2_uniref30.sh \
 
 `configure_local_mmseqs2_uniref30.sh` writes `config.uniref30.json` and a compatibility `config.uniref100.json` in the local workspace, both pointing at the existing UniRef30 DB. It does not download or rebuild the database.
 
+If the existing padded UniRef30 bundle is missing MMSeqs GPU `.idx` artifacts,
+the configurator now runs a one-time `mmseqs createindex` repair in place
+before writing the config. On this host that repair takes a couple of minutes
+and is required for `gpuserver` to preload the UniRef30 index successfully.
+
 If you truly need to build a fresh database from scratch, the `setup_local_mmseqs2_uniref100_workaround.sh` path still exists, but it is not the preferred workflow for the current RF3 setup.
 
 ### 3. Start the shared MMSeqs2-GPU server
@@ -445,6 +450,10 @@ The UniRef30 helper now defaults to a faster local server config:
 The MMSeqs GPU backend uses all visible GPUs. The wrapper now makes that
 explicit by exporting `CUDA_VISIBLE_DEVICES=0,1,2,3` by default before starting
 `mmseqs-server`.
+
+When the server is healthy on this host, `nvidia-smi` should show roughly
+`13-14 GiB` resident on each of the four L40S GPUs from the preloaded UniRef30
+GPU index, before any RF3 MSA jobs are submitted.
 
 The default local server URL expected by the RF3 prep scripts is `http://127.0.0.1:8080/api`.
 

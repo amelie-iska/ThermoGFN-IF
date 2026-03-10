@@ -3,14 +3,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
-SIBLING_START="${REPO_ROOT}/../enzyme-quiver/scripts/start_local_mmseqs2_server.sh"
 CONFIGURE_SCRIPT="${SCRIPT_DIR}/configure_local_mmseqs2_uniref30.sh"
 
 MSA_ROOT="${REPO_ROOT}/../enzyme-quiver/MMseqs2/local_msa"
 UNIREF30_ROOT="/opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302"
 CONFIG_PATH=""
 CLEANUP_UNIREF100=0
-GPU_SERVER=""
+GPU_SERVER="1"
 CUDA_DEVICES="${CUDA_DEVICES:-0,1,2,3}"
 FOREGROUND=0
 HOST=""
@@ -18,6 +17,8 @@ PORT=""
 LOCAL_WORKERS=""
 PARALLEL_DATABASES=""
 PARALLEL_STAGES=""
+LOG_FILE=""
+PID_FILE=""
 
 usage() {
   cat <<'USAGE'
@@ -25,7 +26,7 @@ Usage:
   bash scripts/env/start_local_mmseqs2_uniref30_server.sh [options]
 
 Generate a local MMSeqs2 server config that points at the existing UniRef30 DB,
-then start the sibling MMseqs2 server wrapper with GPU backend enabled.
+then launch `mmseqs-server -local` with the GPU backend enabled.
 
 Options:
   --msa-root PATH           Local MSA workspace root
@@ -41,6 +42,8 @@ Options:
   --parallel-databases N    Override generated parallel-databases count
   --parallel-stages         Enable generated ColabFold parallel stages
   --no-parallel-stages      Disable generated ColabFold parallel stages
+  --log-file PATH           Log file for detached server mode (default: <msa-root>/logs/mmseqs-server.log)
+  --pid-file PATH           PID file for detached server mode (default: <msa-root>/run/mmseqs-server.pid)
   -h, --help                Show help
 USAGE
 }
@@ -73,6 +76,10 @@ while [[ $# -gt 0 ]]; do
       PARALLEL_STAGES="true"; shift ;;
     --no-parallel-stages)
       PARALLEL_STAGES="false"; shift ;;
+    --log-file)
+      LOG_FILE="$2"; shift 2 ;;
+    --pid-file)
+      PID_FILE="$2"; shift 2 ;;
     -h|--help)
       usage
       exit 0
@@ -85,10 +92,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ ! -f "${SIBLING_START}" ]]; then
-  echo "Missing sibling start script: ${SIBLING_START}" >&2
-  exit 1
-fi
 if [[ ! -f "${CONFIGURE_SCRIPT}" ]]; then
   echo "Missing configure script: ${CONFIGURE_SCRIPT}" >&2
   exit 1
@@ -133,21 +136,84 @@ fi
 if [[ -z "${CONFIG_PATH}" ]]; then
   CONFIG_PATH="${MSA_ROOT}/config.uniref30.json"
 fi
+MMSEQS_SERVER_BIN="${MSA_ROOT}/ColabFold/MsaServer/bin/mmseqs-server"
+MMSEQS_BIN="${MSA_ROOT}/ColabFold/MsaServer/bin/mmseqs"
+LOG_FILE_DEFAULT="${MSA_ROOT}/logs/mmseqs-server.log"
+PID_FILE_DEFAULT="${MSA_ROOT}/run/mmseqs-server.pid"
 
-start_cmd=(bash "${SIBLING_START}" --msa-root "${MSA_ROOT}" --config "${CONFIG_PATH}" --gpu-backend)
-if [[ -n "${GPU_SERVER}" ]]; then
-  start_cmd+=(--gpu-server "${GPU_SERVER}")
+if [[ ! -f "${CONFIG_PATH}" ]]; then
+  echo "Missing MMSeqs server config: ${CONFIG_PATH}" >&2
+  exit 1
 fi
-if [[ -n "${PORT}" ]]; then
-  start_cmd+=(--port "${PORT}")
+if [[ ! -x "${MMSEQS_SERVER_BIN}" ]]; then
+  echo "Missing mmseqs-server binary: ${MMSEQS_SERVER_BIN}" >&2
+  exit 1
 fi
+if [[ ! -x "${MMSEQS_BIN}" ]]; then
+  echo "Missing mmseqs binary: ${MMSEQS_BIN}" >&2
+  exit 1
+fi
+
+server_cmd=("${MMSEQS_SERVER_BIN}" -local -config "${CONFIG_PATH}" -paths.colabfold.gpu.gpu 1 -paths.colabfold.gpu.server "${GPU_SERVER}")
 if [[ "${FOREGROUND}" -eq 1 ]]; then
-  start_cmd+=(--foreground)
+  if [[ -n "${CUDA_DEVICES}" ]]; then
+    echo "[msa-uniref30] CUDA_VISIBLE_DEVICES=${CUDA_DEVICES}"
+    exec env LOCAL=true CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${server_cmd[@]}"
+  fi
+  exec env LOCAL=true "${server_cmd[@]}"
 fi
 
+if [[ -z "${LOG_FILE}" ]]; then
+  LOG_FILE="${LOG_FILE_DEFAULT}"
+fi
+if [[ -z "${PID_FILE}" ]]; then
+  PID_FILE="${PID_FILE_DEFAULT}"
+fi
+mkdir -p "$(dirname "${LOG_FILE}")" "$(dirname "${PID_FILE}")"
+
+if [[ -f "${PID_FILE}" ]]; then
+  old_pid="$(cat "${PID_FILE}" 2>/dev/null || true)"
+  if [[ -n "${old_pid}" ]] && kill -0 "${old_pid}" 2>/dev/null; then
+    echo "Error: mmseqs-server appears to already be running (pid=${old_pid})." >&2
+    echo "Stop it first: kill ${old_pid}" >&2
+    exit 1
+  fi
+  rm -f "${PID_FILE}"
+fi
+
+foreground_detached_cmd=("${server_cmd[@]}")
+echo "[msa-uniref30] detached launch via setsid"
+echo "[msa-uniref30] log=${LOG_FILE}"
+echo "[msa-uniref30] pid_file=${PID_FILE}"
 if [[ -n "${CUDA_DEVICES}" ]]; then
   echo "[msa-uniref30] CUDA_VISIBLE_DEVICES=${CUDA_DEVICES}"
-  exec env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${start_cmd[@]}"
+  setsid env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${foreground_detached_cmd[@]}" </dev/null >"${LOG_FILE}" 2>&1 &
+else
+  setsid "${foreground_detached_cmd[@]}" </dev/null >"${LOG_FILE}" 2>&1 &
+fi
+pid=$!
+echo "${pid}" > "${PID_FILE}"
+echo "[msa-uniref30] pid=${pid}"
+echo "[msa-uniref30] waiting for localhost:${PORT:-8080}..."
+
+check_port="${PORT:-8080}"
+ok=0
+for _ in $(seq 1 30); do
+  if curl -sS --max-time 2 "http://127.0.0.1:${check_port}/api/" >/dev/null 2>&1 \
+     || curl -sS --max-time 2 "http://127.0.0.1:${check_port}/" >/dev/null 2>&1; then
+    if kill -0 "${pid}" 2>/dev/null; then
+      ok=1
+      break
+    fi
+  fi
+  sleep 1
+done
+if [[ "${ok}" == "1" ]]; then
+  echo "[msa-uniref30] server is reachable on http://127.0.0.1:${check_port}"
+  exit 0
 fi
 
-exec "${start_cmd[@]}"
+echo "[msa-uniref30] error: detached server did not stay reachable; recent log:" >&2
+tail -n 80 "${LOG_FILE}" >&2 || true
+rm -f "${PID_FILE}"
+exit 1

@@ -14,6 +14,7 @@ PORT="8080"
 LOCAL_WORKERS="4"
 PARALLEL_DATABASES="2"
 PARALLEL_STAGES="true"
+INDEX_THREADS="${INDEX_THREADS:-$(nproc)}"
 
 usage() {
   cat <<'USAGE'
@@ -33,6 +34,7 @@ Options:
   --parallel-databases N    Parallel databases in generated config (default: 2)
   --parallel-stages         Enable ColabFold parallel stages (default)
   --no-parallel-stages      Disable ColabFold parallel stages
+  --index-threads N         Threads for one-time createindex repair if GPU .idx artifacts are missing (default: nproc)
   --no-legacy-config        Do not also write <msa-root>/config.uniref100.json
   --cleanup-uniref100       Remove accidental local uniref100_db* artifacts under <msa-root>
   -h, --help                Show help
@@ -63,6 +65,8 @@ while [[ $# -gt 0 ]]; do
       PARALLEL_STAGES="true"; shift ;;
     --no-parallel-stages)
       PARALLEL_STAGES="false"; shift ;;
+    --index-threads)
+      INDEX_THREADS="$2"; shift 2 ;;
     --no-legacy-config)
       WRITE_LEGACY_CONFIG=0; shift ;;
     --cleanup-uniref100)
@@ -119,8 +123,13 @@ if [[ ! -e "${SELECTED_DB}" ]]; then
   echo "Expected ${UNIREF30_DB} or ${UNIREF30_DB_PAD}" >&2
   exit 1
 fi
-if [[ "${SELECTED_DB}" == "${UNIREF30_DB_PAD}" && ! -e "${UNIREF30_DB_PAD}.index" && ! -e "${UNIREF30_DB_PAD}.idx" && ! -e "${UNIREF30_DB_PAD}.idx.0" ]]; then
-  echo "GPU padded UniRef30 DB is present but index artifacts are missing: ${UNIREF30_DB_PAD}" >&2
+if [[ "${SELECTED_DB}" == "${UNIREF30_DB_PAD}" && ! -e "${UNIREF30_DB_PAD}.idx" && ! -e "${UNIREF30_DB_PAD}.idx.0" ]]; then
+  echo "[mmseqs2-uniref30-config] missing GPU .idx artifacts for ${UNIREF30_DB_PAD}; running one-time createindex repair (threads=${INDEX_THREADS})"
+  mkdir -p "${MSA_ROOT}/tmp"
+  "${MMSEQS_BIN}" createindex "${UNIREF30_DB_PAD}" "${MSA_ROOT}/tmp" --threads "${INDEX_THREADS}"
+fi
+if [[ "${SELECTED_DB}" == "${UNIREF30_DB_PAD}" && ! -e "${UNIREF30_DB_PAD}.idx" && ! -e "${UNIREF30_DB_PAD}.idx.0" ]]; then
+  echo "GPU padded UniRef30 DB is present but GPU .idx artifacts are still missing after createindex: ${UNIREF30_DB_PAD}" >&2
   exit 1
 fi
 
