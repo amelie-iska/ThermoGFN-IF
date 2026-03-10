@@ -1,6 +1,10 @@
 import importlib.util
+import sys
+import tempfile
+import types
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -35,6 +39,63 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         a3m = ">query\nAAAA\n>hit1\nBBBB\n>hit2\nCCCC\n"
         trimmed = MODULE._trim_a3m_depth(a3m, 0)
         self.assertEqual(trimmed, a3m)
+
+    def test_generate_msas_serial_writes_trimmed_a3ms(self):
+        mmseqs2_mod = types.ModuleType("boltz.data.msa.mmseqs2")
+        mmseqs2_mod.logger = types.SimpleNamespace(disabled=False)
+        mmseqs2_mod.tqdm = object()
+
+        def fake_run_mmseqs2(seqs, **kwargs):
+            lines = []
+            for idx, _seq in enumerate(seqs):
+                lines.append(
+                    (
+                        f">query_{idx}\nAAAA\n"
+                        f">hit1_{idx}\nBBBB\n"
+                        f">hit2_{idx}\nCCCC\n"
+                    )
+                )
+            return lines
+
+        mmseqs2_mod.run_mmseqs2 = fake_run_mmseqs2
+
+        boltz_mod = types.ModuleType("boltz")
+        data_mod = types.ModuleType("boltz.data")
+        msa_mod = types.ModuleType("boltz.data.msa")
+        boltz_mod.data = data_mod
+        data_mod.msa = msa_mod
+        msa_mod.mmseqs2 = mmseqs2_mod
+
+        fake_modules = {
+            "boltz": boltz_mod,
+            "boltz.data": data_mod,
+            "boltz.data.msa": msa_mod,
+            "boltz.data.msa.mmseqs2": mmseqs2_mod,
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            cache_dir = Path(tmpdir)
+            with mock.patch.dict(sys.modules, fake_modules, clear=False):
+                seq_to_path = MODULE._generate_msas(
+                    ["SEQ1", "SEQ2", "SEQ1"],
+                    boltz_src_path=REPO_ROOT,
+                    msa_cache_dir=cache_dir,
+                    host_url="http://127.0.0.1:8080/api",
+                    use_env=False,
+                    use_filter=False,
+                    pairing_strategy="greedy",
+                    reuse_cache=False,
+                    msa_batch_size=1,
+                    msa_concurrency=1,
+                    msa_retries=1,
+                    msa_depth=2,
+                )
+
+            self.assertEqual(set(seq_to_path.keys()), {"SEQ1", "SEQ2"})
+            for msa_path in seq_to_path.values():
+                self.assertTrue(msa_path.exists())
+                a3m = msa_path.read_text(encoding="utf-8")
+                self.assertEqual(MODULE._count_a3m_sequences(a3m), 2)
 
 
 if __name__ == "__main__":

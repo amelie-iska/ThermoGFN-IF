@@ -564,6 +564,10 @@ The RF3 local-MSA wrapper also now defaults to:
 Those defaults avoid the extra failed root-path submission and reduce MMSeqs job
 overhead substantially for large ReactZyme runs.
 
+MSA progress is now reported with outer `MSA Chunks` and `MSA Seqs` tqdm bars.
+The older inner Boltz/MMSeqs time-estimate bar is suppressed so retries and
+chunk restarts no longer look like lost global progress.
+
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 
 Useful RF3 overrides can be passed through with repeated `--hydra-override`, for example:
