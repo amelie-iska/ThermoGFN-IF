@@ -35,6 +35,10 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
 
             self.assertEqual(MODULE._count_sdf_atoms(sdf_path), 10)
 
+    def test_count_smiles_atoms_handles_multifragment_smiles(self):
+        self.assertEqual(MODULE._count_smiles_atoms("[H+].[H+].[O][O-].[O][O-]"), 6)
+        self.assertEqual(MODULE._count_smiles_atoms("CCO.O"), 4)
+
     def test_extract_pocket_positions_supports_points_and_ranges(self):
         features = [
             {"type": "Binding site", "location": {"position": {"value": 8}}},
@@ -59,6 +63,7 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
             protein_sequence="MPEPTIDE",
             ligand_smiles="CCO.O",
             ligand_sdf=Path("/tmp/test_reactant.sdf"),
+            ligand_source="sdf",
             pocket_positions=[7, 11],
             protein_chain_id="A",
             ligand_chain_id="B",
@@ -77,6 +82,32 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
         self.assertEqual(example["templates"][0]["sdf"], "/tmp/test_reactant.sdf")
         self.assertEqual(example["metadata"]["fragment_count"], 2)
         self.assertEqual(example["metadata"]["ligand_atom_count"], 42)
+
+    def test_build_rf3_example_smiles_mode_omits_templates(self):
+        example = MODULE._build_rf3_example(
+            pair_id="train__row__RHEA_1",
+            state="reactant",
+            uniprot_id="P12345",
+            rhea_id="RHEA:1",
+            row_id="train_0",
+            protein_sequence="MPEPTIDE",
+            ligand_smiles="CCO.O",
+            ligand_sdf=None,
+            ligand_source="smiles",
+            pocket_positions=[7, 11],
+            protein_chain_id="A",
+            ligand_chain_id="B",
+            pocket_distance_threshold=8.0,
+            template_threshold=0.5,
+            ligand_atom_count=4,
+        )
+
+        self.assertEqual(example["components"][1]["smiles"], "CCO.O")
+        self.assertNotIn("templates", example)
+        self.assertNotIn("template_selection", example)
+        self.assertNotIn("ground_truth_conformer_selection", example)
+        self.assertEqual(example["metadata"]["ligand_source"], "smiles")
+        self.assertIsNone(example["metadata"]["ligand_sdf"])
 
     def test_main_applies_atom_limit_and_sequence_pair_cap(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -206,6 +237,92 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
                 [row["pair_id"] for row in map(json.loads, (output_root / "manifest.jsonl").read_text(encoding="utf-8").splitlines()) if row["state"] == "reactant"],
                 ["pair_1", "pair_2"],
             )
+
+    def test_main_smiles_mode_does_not_require_sdf_templates(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            source_root = tmp / "generate-constraints_0"
+            output_root = tmp / "out"
+            pocket_cache = source_root / "pocket_cache"
+            output_templates = source_root / "output_sdf_templates" / "train"
+            pocket_cache.mkdir(parents=True)
+            output_templates.mkdir(parents=True)
+
+            seq_tsv = source_root / "cleaned_uniprot_rhea.tsv"
+            seq_tsv.write_text(
+                "\n".join(
+                    [
+                        "Entry\tSequence",
+                        "P1\tMAAA",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (pocket_cache / "P1.json").write_text(
+                json.dumps(
+                    {
+                        "features": [
+                            {
+                                "type": "Binding site",
+                                "location": {"position": {"value": 7}},
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            manifest_path = output_templates / "manifest.csv"
+            rows = [
+                {
+                    "pair_id": "pair_1",
+                    "row_id": "row_1",
+                    "rhea_id": "RHEA:1",
+                    "uniprot_id": "P1",
+                    "status": "reactant:ok|product:ok",
+                    "reactant_smiles": "CC.O",
+                    "product_smiles": "C.CC",
+                    "reactant_sdf": "",
+                    "product_sdf": "",
+                }
+            ]
+            with manifest_path.open("w", encoding="utf-8", newline="") as handle:
+                import csv
+
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
+                writer.writeheader()
+                writer.writerows(rows)
+
+            argv = sys.argv[:]
+            try:
+                sys.argv = [
+                    str(MODULE_PATH),
+                    "--source-root",
+                    str(source_root),
+                    "--manifest",
+                    str(manifest_path),
+                    "--sequence-tsv",
+                    str(seq_tsv),
+                    "--pocket-cache",
+                    str(pocket_cache),
+                    "--output-root",
+                    str(output_root),
+                    "--ligand-source",
+                    "smiles",
+                    "--log-level",
+                    "ERROR",
+                ]
+                rc = MODULE.main()
+            finally:
+                sys.argv = argv
+
+            self.assertEqual(rc, 0)
+            reactant_examples = json.loads((output_root / "reactant.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(reactant_examples), 1)
+            self.assertEqual(reactant_examples[0]["components"][1]["smiles"], "CC.O")
+            self.assertNotIn("templates", reactant_examples[0])
+            self.assertEqual(reactant_examples[0]["metadata"]["ligand_source"], "smiles")
 
 
 if __name__ == "__main__":

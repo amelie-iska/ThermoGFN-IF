@@ -166,6 +166,32 @@ def _count_sdf_atoms(path: Path) -> int:
     return total_atoms
 
 
+def _count_smiles_atoms(smiles: str) -> int:
+    total_atoms = 0
+    i = 0
+    n = len(smiles)
+    one_char_atoms = set("BCNOPSFIbcnops*")
+    while i < n:
+        ch = smiles[i]
+        if ch == "[":
+            end = smiles.find("]", i + 1)
+            if end == -1:
+                raise ValueError(f"Unclosed bracket atom in SMILES: {smiles}")
+            total_atoms += 1
+            i = end + 1
+            continue
+        if i + 1 < n and smiles[i : i + 2] in {"Cl", "Br"}:
+            total_atoms += 1
+            i += 2
+            continue
+        if ch in one_char_atoms:
+            total_atoms += 1
+        i += 1
+    if total_atoms <= 0:
+        raise ValueError(f"Could not infer any atoms from SMILES: {smiles}")
+    return total_atoms
+
+
 def _build_rf3_example(
     *,
     pair_id: str,
@@ -175,7 +201,8 @@ def _build_rf3_example(
     row_id: str,
     protein_sequence: str,
     ligand_smiles: str,
-    ligand_sdf: Path,
+    ligand_sdf: Path | None,
+    ligand_source: str,
     pocket_positions: list[int],
     protein_chain_id: str,
     ligand_chain_id: str,
@@ -185,8 +212,22 @@ def _build_rf3_example(
 ) -> dict:
     example_name = _job_name(pair_id, state)
     contacts = [[protein_chain_id, int(pos)] for pos in pocket_positions]
+    if ligand_source == "sdf":
+        if ligand_sdf is None:
+            raise ValueError("ligand_sdf is required when ligand_source='sdf'")
+        ligand_component = {
+            "path": str(ligand_sdf),
+            "chain_id": ligand_chain_id,
+        }
+    elif ligand_source == "smiles":
+        ligand_component = {
+            "smiles": ligand_smiles,
+            "chain_id": ligand_chain_id,
+        }
+    else:
+        raise ValueError(f"Unsupported ligand_source: {ligand_source}")
 
-    return {
+    payload = {
         "version": 1,
         "name": example_name,
         "components": [
@@ -194,21 +235,7 @@ def _build_rf3_example(
                 "seq": protein_sequence,
                 "chain_id": protein_chain_id,
             },
-            {
-                "path": str(ligand_sdf),
-                "chain_id": ligand_chain_id,
-            },
-        ],
-        "template_selection": [ligand_chain_id],
-        "ground_truth_conformer_selection": [ligand_chain_id],
-        "templates": [
-            {
-                "sdf": str(ligand_sdf),
-                "chain_id": ligand_chain_id,
-                "atom_map": "identical",
-                "force": True,
-                "threshold": float(template_threshold),
-            }
+            ligand_component,
         ],
         "constraints": [
             {
@@ -236,15 +263,29 @@ def _build_rf3_example(
             "uniprot_id": uniprot_id,
             "protein_chain_id": protein_chain_id,
             "ligand_chain_id": ligand_chain_id,
+            "ligand_source": ligand_source,
             "sequence_length": len(protein_sequence),
             "ligand_smiles": ligand_smiles,
             "fragment_count": ligand_smiles.count(".") + 1 if ligand_smiles else 0,
             "ligand_atom_count": int(ligand_atom_count),
             "pocket_positions": pocket_positions,
             "pocket_count": len(pocket_positions),
-            "ligand_sdf": str(ligand_sdf),
+            "ligand_sdf": str(ligand_sdf) if ligand_sdf is not None else None,
         },
     }
+    if ligand_source == "sdf":
+        payload["template_selection"] = [ligand_chain_id]
+        payload["ground_truth_conformer_selection"] = [ligand_chain_id]
+        payload["templates"] = [
+            {
+                "sdf": str(ligand_sdf),
+                "chain_id": ligand_chain_id,
+                "atom_map": "identical",
+                "force": True,
+                "threshold": float(template_threshold),
+            }
+        ]
+    return payload
 
 
 def main() -> int:
@@ -297,7 +338,13 @@ def main() -> int:
         "--max-ligand-atoms",
         type=int,
         default=256,
-        help="Maximum allowed total atom count per ligand SDF template.",
+        help="Maximum allowed total atom count per ligand input.",
+    )
+    parser.add_argument(
+        "--ligand-source",
+        choices=("sdf", "smiles"),
+        default="sdf",
+        help="Emit ligand components as SDF templates or direct SMILES strings.",
     )
     parser.add_argument(
         "--max-pairs-per-sequence",
@@ -431,7 +478,7 @@ def main() -> int:
                 summary["skipped_missing_pocket"] = int(summary["skipped_missing_pocket"]) + 1
                 continue
 
-            state_payloads: list[tuple[str, str, Path, int]] = []
+            state_payloads: list[tuple[str, str, Path | None, int]] = []
             missing_state = False
             for state in requested_states:
                 smiles = str(row.get(f"{state}_smiles") or "").strip()
@@ -440,16 +487,19 @@ def main() -> int:
                     summary["skipped_missing_smiles"] = int(summary["skipped_missing_smiles"]) + 1
                     missing_state = True
                     break
-                if not sdf_raw:
-                    summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
-                    missing_state = True
-                    break
-                sdf_path = _resolve_existing_path(sdf_raw, source_root=source_root)
-                if not sdf_path.exists():
-                    summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
-                    missing_state = True
-                    break
-                atom_count = _count_sdf_atoms(sdf_path)
+                sdf_path: Path | None = None
+                if sdf_raw:
+                    candidate_sdf = _resolve_existing_path(sdf_raw, source_root=source_root)
+                    if candidate_sdf.exists():
+                        sdf_path = candidate_sdf
+                if args.ligand_source == "sdf":
+                    if sdf_path is None:
+                        summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
+                        missing_state = True
+                        break
+                    atom_count = _count_sdf_atoms(sdf_path)
+                else:
+                    atom_count = _count_smiles_atoms(smiles)
                 if atom_count > args.max_ligand_atoms:
                     summary["skipped_ligand_atom_limit"] = int(
                         summary["skipped_ligand_atom_limit"]
@@ -486,6 +536,7 @@ def main() -> int:
                     protein_sequence=sequence,
                     ligand_smiles=smiles,
                     ligand_sdf=sdf_path,
+                    ligand_source=args.ligand_source,
                     pocket_positions=pocket_positions,
                     protein_chain_id=args.protein_chain_id,
                     ligand_chain_id=args.ligand_chain_id,
@@ -505,8 +556,9 @@ def main() -> int:
                         "sequence_length": len(sequence),
                         "fragment_count": example["metadata"]["fragment_count"],
                         "ligand_atom_count": atom_count,
+                        "ligand_source": args.ligand_source,
                         "pocket_count": len(pocket_positions),
-                        "ligand_sdf": str(sdf_path),
+                        "ligand_sdf": str(sdf_path) if sdf_path is not None else "",
                         "example_json": str(
                             (output_root / "examples" / state / f"{example['name']}.json").resolve()
                         ),
@@ -536,6 +588,7 @@ def main() -> int:
         "output_root": str(output_root),
         "requested_states": list(requested_states),
         "required_statuses": sorted(required_statuses),
+        "ligand_source": args.ligand_source,
         "max_seq_len": int(args.max_seq_len),
         "max_ligand_atoms": int(args.max_ligand_atoms),
         "max_pairs_per_sequence": int(args.max_pairs_per_sequence),

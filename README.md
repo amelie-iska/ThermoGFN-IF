@@ -446,6 +446,13 @@ python scripts/rf3/build_reactzyme_rf3_inputs.py \
   --source-root generate-constraints_0 \
   --output-root runs/rf3_reactzyme_inputs \
   --max-seq-len 600
+
+# no-template mode: use multi-fragment SMILES directly and keep pocket constraints
+python scripts/rf3/build_reactzyme_rf3_inputs.py \
+  --source-root generate-constraints_0 \
+  --output-root runs/rf3_reactzyme_inputs_smiles \
+  --max-seq-len 600 \
+  --ligand-source smiles
 ```
 
 The builder defaults also enforce:
@@ -466,6 +473,11 @@ The emitted JSONs use:
 - ligand chain `B`
 - whole-ligand SDF templating via `ground_truth_conformer_selection=["B"]`
 - Boltz-style `constraints[].pocket` records with `max_distance`
+
+If you pass `--ligand-source smiles`, the builder omits `templates`,
+`template_selection`, and `ground_truth_conformer_selection`, and instead emits
+the ReactZyme multi-fragment SMILES directly as the ligand component while
+keeping the same pocket constraints.
 
 ### 5. Generate local MSAs and run Foundry RF3
 
