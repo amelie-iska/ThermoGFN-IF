@@ -57,8 +57,8 @@ oracles:
     std_default: 0.25
     heartbeat_sec: 30
   fusion:
-    w_kcatnet: 0.65
-    w_graphkcat: 0.45
+    w_kcatnet: 0.55
+    w_graphkcat: 0.55
     w_agreement: 0.15
     kappa_kcatnet: 1.0
     kappa_graphkcat: 1.0

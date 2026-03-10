@@ -126,11 +126,29 @@ def _materialize_ligand_sdf(rec: dict, ligand_out: Path, root: Path) -> str:
     return str(ligand_out)
 
 
-def _run_with_heartbeat(cmd: list[str], cwd: Path, logger, step_name: str, heartbeat_sec: float) -> int:
+def _graphkcat_subprocess_env(base_env: dict[str, str]) -> dict[str, str]:
+    env = dict(base_env)
+    conda_prefix = env.get("CONDA_PREFIX", "").strip()
+    if conda_prefix:
+        llvm_path = Path(conda_prefix) / "lib" / "libLLVM-15.so"
+        if llvm_path.exists():
+            prior = env.get("LD_PRELOAD", "").strip()
+            env["LD_PRELOAD"] = f"{llvm_path}:{prior}" if prior else str(llvm_path)
+    return env
+
+
+def _run_with_heartbeat(
+    cmd: list[str],
+    cwd: Path,
+    logger,
+    step_name: str,
+    heartbeat_sec: float,
+    env: dict[str, str] | None = None,
+) -> int:
     logger.info("CMD: %s", " ".join(str(c) for c in cmd))
     t0 = time.perf_counter()
     hb = max(1.0, float(heartbeat_sec))
-    proc = subprocess.Popen(cmd, cwd=str(cwd))  # noqa: S603
+    proc = subprocess.Popen(cmd, cwd=str(cwd), env=env)  # noqa: S603
     while True:
         try:
             rc = proc.wait(timeout=hb)
@@ -278,7 +296,17 @@ def main() -> int:
             str(temp_set),
         ]
 
-        rc = _run_with_heartbeat(cmd, cwd=model_root, logger=logger, step_name="graphkcat:predict", heartbeat_sec=args.heartbeat_sec)
+        predict_env = _graphkcat_subprocess_env(os.environ)
+        if predict_env.get("LD_PRELOAD"):
+            logger.info("GraphKcat using LD_PRELOAD=%s", predict_env["LD_PRELOAD"])
+        rc = _run_with_heartbeat(
+            cmd,
+            cwd=model_root,
+            logger=logger,
+            step_name="graphkcat:predict",
+            heartbeat_sec=args.heartbeat_sec,
+            env=predict_env,
+        )
         if rc != 0:
             raise RuntimeError(f"GraphKcat predict.py failed rc={rc}")
 

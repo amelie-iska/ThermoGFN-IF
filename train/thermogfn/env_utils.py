@@ -115,8 +115,16 @@ def run_health_check(env_name: str) -> tuple[bool, dict[str, Any]]:
             "print('ok')\n"
             "PY"
         ),
-        "apodock": "cd models/GraphKcat && python predict.py --help",
-        "graphkcat": "cd models/GraphKcat && python predict.py --help",
+        "apodock": (
+            "if [[ -f \"$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then "
+            "export LD_PRELOAD=\"$CONDA_PREFIX/lib/libLLVM-15.so${LD_PRELOAD:+:$LD_PRELOAD}\"; "
+            "fi && cd models/GraphKcat && python predict.py --help"
+        ),
+        "graphkcat": (
+            "if [[ -f \"$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then "
+            "export LD_PRELOAD=\"$CONDA_PREFIX/lib/libLLVM-15.so${LD_PRELOAD:+:$LD_PRELOAD}\"; "
+            "fi && cd models/GraphKcat && python predict.py --help"
+        ),
         "spurs": (
             "python - <<'PY'\n"
             "import contextlib\n"

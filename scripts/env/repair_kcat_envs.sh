@@ -10,10 +10,10 @@ KCATNET_ENV="KcatNet"
 GRAPHKCAT_ENV="apodock"
 ATTEMPTS=6
 RETRY_SLEEP_SEC=20
-KCATNET_SOLVER="libmamba"
-GRAPHKCAT_SOLVER="libmamba"
+KCATNET_SOLVER="classic"
+GRAPHKCAT_SOLVER="classic"
 CPU_ONLY=0
-INCLUDE_LIGANDMPNN=1
+INCLUDE_LIGANDMPNN=0
 
 usage() {
   cat <<'USAGE'
@@ -27,18 +27,21 @@ Options:
   --cuda VERSION               pytorch-cuda version for both envs (default: 12.1)
   --kcatnet-env NAME           KcatNet env name (default: KcatNet)
   --graphkcat-env NAME         GraphKcat env name (default: apodock)
-  --kcatnet-solver NAME        Solver for KcatNet env (default: libmamba)
-  --graphkcat-solver NAME      Solver for GraphKcat env (default: libmamba)
+  --kcatnet-solver NAME        Solver for KcatNet env (default: classic)
+  --graphkcat-solver NAME      Solver for GraphKcat env (default: classic)
   --attempts N                 Retry attempts per solver (default: 6)
   --retry-sleep N              Sleep seconds between retries (default: 20)
   --cpu-only                   Build CPU-only torch stacks
-  --no-ligandmpnn-check        Exclude ligandmpnn_env from final health check
+  --include-ligandmpnn-check   Include ligandmpnn_env in final health check
+  --no-ligandmpnn-check        Backward-compatible alias; ligandmpnn check is
+                               already off by default
   -h, --help                   Show help
 
 Notes:
   - Repairs both Kcat oracle envs in place by re-running the curated env
     installers.
-  - Runs strict health checks at the end.
+  - Runs strict health checks at the end for the envs it actually repairs.
+  - ligandmpnn_env is not repaired here, so that health check is opt-in.
 USAGE
 }
 
@@ -64,6 +67,8 @@ while [[ $# -gt 0 ]]; do
       RETRY_SLEEP_SEC="$2"; shift 2 ;;
     --cpu-only)
       CPU_ONLY=1; shift ;;
+    --include-ligandmpnn-check)
+      INCLUDE_LIGANDMPNN=1; shift ;;
     --no-ligandmpnn-check)
       INCLUDE_LIGANDMPNN=0; shift ;;
     -h|--help)
@@ -87,6 +92,7 @@ echo "[repair-kcat-envs] out_json=${OUT_JSON}"
 echo "[repair-kcat-envs] python=${PYTHON_VERSION} cuda=${CUDA_VERSION} cpu_only=${CPU_ONLY}"
 echo "[repair-kcat-envs] kcatnet_env=${KCATNET_ENV} graphkcat_env=${GRAPHKCAT_ENV}"
 echo "[repair-kcat-envs] attempts=${ATTEMPTS} retry_sleep_sec=${RETRY_SLEEP_SEC}"
+echo "[repair-kcat-envs] include_ligandmpnn_check=${INCLUDE_LIGANDMPNN}"
 
 echo "[repair-kcat-envs] repairing ${KCATNET_ENV}"
 "${REPO_ROOT}/scripts/env/create_kcatnet_env.sh" \

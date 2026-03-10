@@ -1,0 +1,405 @@
+#!/usr/bin/env python3
+"""Attach local MMSeqs2-generated MSAs to ReactZyme RF3 JSON inputs."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import logging
+import shutil
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from typing import Sequence
+
+
+def _repo_root() -> Path:
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if (parent / "train").exists() and (parent / "scripts").exists():
+            return parent
+    raise RuntimeError("Could not locate repository root")
+
+
+def _configure_logging(level: str) -> logging.Logger:
+    logger = logging.getLogger("rf3.reactzyme.msa")
+    logger.handlers.clear()
+    logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(
+        logging.Formatter(
+            fmt="%(asctime)s | %(levelname)s | %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+    )
+    logger.addHandler(handler)
+    logger.propagate = False
+    return logger
+
+
+def _resolve_path(raw: str, *, base_dir: Path) -> Path:
+    path = Path(str(raw)).expanduser()
+    if path.is_absolute():
+        return path
+    return (base_dir / path).resolve()
+
+
+def _load_examples_for_state(input_root: Path, state: str) -> list[dict]:
+    example_dir = input_root / "examples" / state
+    if example_dir.exists():
+        examples: list[dict] = []
+        for json_path in sorted(example_dir.glob("*.json")):
+            payload = json.loads(json_path.read_text(encoding="utf-8"))
+            if isinstance(payload, list):
+                examples.extend(payload)
+            else:
+                examples.append(payload)
+        if examples:
+            return examples
+
+    state_json = input_root / f"{state}.json"
+    if state_json.exists():
+        payload = json.loads(state_json.read_text(encoding="utf-8"))
+        return payload if isinstance(payload, list) else [payload]
+
+    raise FileNotFoundError(f"Could not locate RF3 JSON inputs for state '{state}' under {input_root}")
+
+
+def _protein_component(example: dict) -> dict:
+    components = example.get("components") or []
+    proteins = [component for component in components if "seq" in component]
+    if len(proteins) != 1:
+        raise ValueError(
+            f"Expected exactly one protein component in example {example.get('name')}, found {len(proteins)}"
+        )
+    return proteins[0]
+
+
+def _infer_boltz_src_path(local_msa_root: Path) -> Path:
+    candidates = [
+        local_msa_root / "boltz-client" / "src",
+        local_msa_root / "boltz" / "src",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate.resolve()
+    raise FileNotFoundError(
+        "Could not infer Boltz source path under local MSA root. "
+        "Pass --boltz-src-path explicitly."
+    )
+
+
+def _generate_msas(
+    sequences: Sequence[str],
+    *,
+    boltz_src_path: Path,
+    msa_cache_dir: Path,
+    host_url: str,
+    use_env: bool,
+    use_filter: bool,
+    pairing_strategy: str,
+    reuse_cache: bool,
+    msa_batch_size: int,
+    msa_concurrency: int,
+    msa_retries: int,
+) -> dict[str, Path]:
+    if str(boltz_src_path) not in sys.path:
+        sys.path.insert(0, str(boltz_src_path))
+    from boltz.data.msa.mmseqs2 import run_mmseqs2  # type: ignore
+
+    unique_sequences: list[str] = []
+    for sequence in sequences:
+        if sequence not in unique_sequences:
+            unique_sequences.append(sequence)
+
+    msa_cache_dir.mkdir(parents=True, exist_ok=True)
+    seq_to_path: dict[str, Path] = {}
+    missing_sequences: list[str] = []
+    for sequence in unique_sequences:
+        seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
+        msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+        if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
+            seq_to_path[sequence] = msa_path.resolve()
+        else:
+            missing_sequences.append(sequence)
+
+    if not missing_sequences:
+        return seq_to_path
+
+    if msa_batch_size <= 0:
+        msa_batch_size = len(missing_sequences)
+    if msa_concurrency <= 0:
+        msa_concurrency = 1
+
+    chunks = [
+        missing_sequences[idx : idx + msa_batch_size]
+        for idx in range(0, len(missing_sequences), msa_batch_size)
+    ]
+
+    def _run_chunk(chunk: Sequence[str], chunk_idx: int) -> dict[str, str]:
+        chunk_hash = hashlib.sha1("||".join(chunk).encode("utf-8")).hexdigest()[:12]
+        prefix = str((msa_cache_dir / f"mmseqs_{chunk_hash}_{chunk_idx:03d}").resolve())
+
+        def _run(host: str):
+            return run_mmseqs2(
+                list(chunk),
+                prefix=prefix,
+                use_env=use_env,
+                use_filter=use_filter,
+                use_pairing=False,
+                pairing_strategy=pairing_strategy,
+                host_url=host,
+                msa_server_username=None,
+                msa_server_password=None,
+                auth_headers=None,
+            )
+
+        attempts = max(1, int(msa_retries))
+        last_error: Exception | None = None
+        result = None
+        for _ in range(attempts):
+            try:
+                result = _run(host_url)
+                last_error = None
+                break
+            except Exception as exc:
+                last_error = exc
+                fallback_host = host_url.rstrip("/")
+                if not fallback_host.endswith("/api"):
+                    fallback_host = f"{fallback_host}/api"
+                    try:
+                        result = _run(fallback_host)
+                        last_error = None
+                        break
+                    except Exception as fallback_exc:
+                        last_error = fallback_exc
+
+        if last_error is not None or result is None:
+            raise RuntimeError(
+                f"MSA request failed for chunk {chunk_idx} after {attempts} attempt(s)"
+            ) from last_error
+
+        lines = result[0] if isinstance(result, tuple) else result
+        if len(lines) != len(chunk):
+            raise RuntimeError(
+                f"MSA response size mismatch for chunk {chunk_idx}: got {len(lines)} alignments for {len(chunk)} sequences"
+            )
+        return {sequence: a3m for sequence, a3m in zip(chunk, lines)}
+
+    chunk_results: list[dict[str, str]] = []
+    chunk_errors: list[str] = []
+    max_workers = min(len(chunks), msa_concurrency)
+    if max_workers <= 1:
+        for idx, chunk in enumerate(chunks):
+            try:
+                chunk_results.append(_run_chunk(chunk, idx))
+            except Exception as exc:
+                chunk_errors.append(f"chunk={idx} size={len(chunk)} error={exc}")
+    else:
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            futures = [pool.submit(_run_chunk, chunk, idx) for idx, chunk in enumerate(chunks)]
+            future_to_idx = {future: idx for idx, future in enumerate(futures)}
+            for future in as_completed(futures):
+                idx = future_to_idx[future]
+                try:
+                    chunk_results.append(future.result())
+                except Exception as exc:
+                    chunk_errors.append(f"chunk={idx} error={exc}")
+
+    for mapping in chunk_results:
+        for sequence, a3m in mapping.items():
+            seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
+            msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+            msa_path.write_text(a3m, encoding="utf-8")
+            seq_to_path[sequence] = msa_path.resolve()
+
+    unresolved = [sequence for sequence in missing_sequences if sequence not in seq_to_path]
+    if unresolved:
+        details = "; ".join(chunk_errors) if chunk_errors else "unknown"
+        raise RuntimeError(
+            f"MSA generation failed for {len(unresolved)} sequence(s): {details}"
+        )
+
+    return seq_to_path
+
+
+def _write_json(path: Path, payload: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def _shard_round_robin(items: list[dict], n_shards: int) -> list[list[dict]]:
+    shards = [[] for _ in range(max(1, n_shards))]
+    for idx, item in enumerate(items):
+        shards[idx % len(shards)].append(item)
+    return shards
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--input-root",
+        required=True,
+        help="RF3 input directory emitted by build_reactzyme_rf3_inputs.py.",
+    )
+    parser.add_argument(
+        "--output-root",
+        required=True,
+        help="Directory to write JSONs updated with msa_path entries.",
+    )
+    parser.add_argument(
+        "--states",
+        choices=("both", "reactant", "product"),
+        default="both",
+        help="Which state JSONs to process.",
+    )
+    parser.add_argument(
+        "--local-msa-root",
+        default="../enzyme-quiver/MMseqs2/local_msa",
+        help="Shared local MMSeqs2 root. Used to infer the Boltz client path when needed.",
+    )
+    parser.add_argument(
+        "--boltz-src-path",
+        default=None,
+        help="Optional explicit path to Boltz client src for run_mmseqs2.",
+    )
+    parser.add_argument(
+        "--msa-cache-dir",
+        default=None,
+        help="Optional explicit MSA cache directory. Defaults to <output-root>/msas.",
+    )
+    parser.add_argument(
+        "--msa-server-url",
+        default="http://127.0.0.1:8080",
+        help="Local MMSeqs2 server URL.",
+    )
+    parser.add_argument("--reuse-cache", action="store_true", help="Reuse cached .a3m files.")
+    parser.add_argument("--use-env-db", action="store_true", help="Request the environmental DB as well.")
+    parser.add_argument("--use-filter", action="store_true", help="Enable MMSeqs filtering.")
+    parser.add_argument("--pairing-strategy", default="greedy", help="Pairing strategy passed to run_mmseqs2.")
+    parser.add_argument("--msa-batch-size", type=int, default=1, help="Sequences per MMSeqs2 batch request.")
+    parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
+    parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
+    parser.add_argument("--shards", type=int, default=1, help="Number of round-robin shard JSON files to emit per state.")
+    parser.add_argument("--log-level", default="INFO", help="Logging level.")
+    args = parser.parse_args()
+
+    root = _repo_root()
+    logger = _configure_logging(args.log_level)
+
+    input_root = _resolve_path(args.input_root, base_dir=root)
+    output_root = _resolve_path(args.output_root, base_dir=root)
+    local_msa_root = _resolve_path(args.local_msa_root, base_dir=root)
+    boltz_src_path = (
+        _resolve_path(args.boltz_src_path, base_dir=root)
+        if args.boltz_src_path
+        else _infer_boltz_src_path(local_msa_root)
+    )
+    msa_cache_dir = (
+        _resolve_path(args.msa_cache_dir, base_dir=root)
+        if args.msa_cache_dir
+        else (output_root / "msas").resolve()
+    )
+    requested_states = (
+        ("reactant", "product") if args.states == "both" else (args.states,)
+    )
+
+    logger.info("Loading RF3 examples from %s", input_root)
+    examples_by_state = {
+        state: _load_examples_for_state(input_root, state) for state in requested_states
+    }
+
+    sequences: list[str] = []
+    existing_msa_count = 0
+    for examples in examples_by_state.values():
+        for example in examples:
+            protein = _protein_component(example)
+            sequence = str(protein.get("seq") or "").strip()
+            if not sequence:
+                raise ValueError(f"Protein component is missing seq for example {example.get('name')}")
+            sequences.append(sequence)
+            msa_path = protein.get("msa_path")
+            if msa_path and Path(str(msa_path)).exists():
+                existing_msa_count += 1
+
+    logger.info(
+        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path)",
+        sum(len(examples) for examples in examples_by_state.values()),
+        len(set(sequences)),
+        existing_msa_count,
+    )
+
+    t0 = time.perf_counter()
+    seq_to_msa = _generate_msas(
+        sequences=sequences,
+        boltz_src_path=boltz_src_path,
+        msa_cache_dir=msa_cache_dir,
+        host_url=args.msa_server_url,
+        use_env=bool(args.use_env_db),
+        use_filter=bool(args.use_filter),
+        pairing_strategy=args.pairing_strategy,
+        reuse_cache=bool(args.reuse_cache),
+        msa_batch_size=int(args.msa_batch_size),
+        msa_concurrency=int(args.msa_concurrency),
+        msa_retries=int(args.msa_retries),
+    )
+
+    output_root.mkdir(parents=True, exist_ok=True)
+    if (input_root / "manifest.jsonl").exists():
+        shutil.copy2(input_root / "manifest.jsonl", output_root / "manifest.jsonl")
+
+    written_examples = 0
+    for state, examples in examples_by_state.items():
+        updated: list[dict] = []
+        for example in examples:
+            protein = _protein_component(example)
+            sequence = str(protein["seq"]).strip()
+            msa_path = seq_to_msa.get(sequence)
+            if msa_path is None:
+                raise RuntimeError(f"Missing generated MSA for example {example.get('name')}")
+            protein["msa_path"] = str(msa_path)
+            updated.append(example)
+            _write_json(output_root / "examples" / state / f"{example['name']}.json", example)
+            written_examples += 1
+
+        _write_json(output_root / f"{state}.json", updated)
+        for shard_idx, shard in enumerate(_shard_round_robin(updated, args.shards)):
+            _write_json(output_root / "shards" / state / f"shard_{shard_idx:03d}.json", shard)
+
+    summary = {
+        "input_root": str(input_root),
+        "output_root": str(output_root),
+        "requested_states": list(requested_states),
+        "local_msa_root": str(local_msa_root),
+        "boltz_src_path": str(boltz_src_path),
+        "msa_cache_dir": str(msa_cache_dir),
+        "msa_server_url": args.msa_server_url,
+        "reuse_cache": bool(args.reuse_cache),
+        "use_env_db": bool(args.use_env_db),
+        "use_filter": bool(args.use_filter),
+        "pairing_strategy": args.pairing_strategy,
+        "msa_batch_size": int(args.msa_batch_size),
+        "msa_concurrency": int(args.msa_concurrency),
+        "msa_retries": int(args.msa_retries),
+        "counts": {
+            "states": {state: len(examples) for state, examples in examples_by_state.items()},
+            "written_examples": written_examples,
+            "unique_sequences": len(set(sequences)),
+        },
+        "elapsed_sec": round(time.perf_counter() - t0, 3),
+    }
+    _write_json(output_root / "summary.json", summary)
+    logger.info(
+        "Wrote RF3 inputs with msa_path to %s (written_examples=%d elapsed=%.2fs)",
+        output_root,
+        written_examples,
+        summary["elapsed_sec"],
+    )
+    print(output_root / "summary.json")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

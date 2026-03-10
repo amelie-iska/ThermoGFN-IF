@@ -6,7 +6,7 @@ ENV_NAME="apodock"
 PYTHON_VERSION="3.10"
 CUDA_VERSION="12.1"
 CPU_ONLY=0
-SOLVER="libmamba"
+SOLVER="classic"
 ATTEMPTS=4
 RETRY_SLEEP_SEC=15
 TORCH_VERSION="2.4.0"
@@ -15,6 +15,7 @@ TORCHAUDIO_VERSION="2.4.0"
 PYG_VERSION="2.6.1"
 PYG_SCATTER_VERSION="2.1.2"
 PYG_CLUSTER_VERSION="1.6.3"
+TORCH_RUNTIME_CANDIDATES=("2023.1.0:2023.1.0" "2021.4.0:2021.4.0" ":")
 
 usage() {
   cat <<'USAGE'
@@ -26,7 +27,7 @@ Options:
   --python VERSION    Python version (default: 3.10)
   --cuda VERSION      pytorch-cuda version (default: 12.1)
   --cpu-only          Install CPU-only torch stack
-  --solver NAME       Conda solver: libmamba|classic (default: libmamba)
+  --solver NAME       Conda solver: libmamba|classic (default: classic)
   --attempts N        Retry attempts per solver for download/extract failures (default: 4)
   --retry-sleep N     Sleep seconds between retries (default: 15)
   -h, --help          Show help
@@ -36,6 +37,9 @@ Notes:
   That file is an exported workstation lockfile pinned to Python 3.8 and
   includes broken pip requirements for current package indexes. Instead, this
   script builds a curated GraphKcat inference/runtime environment.
+  Re-running it also repairs the GPU torch runtime by trying older MKL/OpenMP
+  combinations from the checked-in env specs when newer solver choices trigger
+  the libtorch `iJIT_NotifyEvent` import error.
 USAGE
 }
 
@@ -145,6 +149,97 @@ run_pip_step() {
   return 1
 }
 
+repair_torch_runtime_with_versions() {
+  local mkl_version="$1"
+  local intel_openmp_version="$2"
+  local runtime_label="${mkl_version:-solver-defaults}"
+  local -a cmd=(
+    conda install -y -n "$ENV_NAME"
+    --override-channels
+    -c pytorch
+    -c nvidia
+    -c defaults
+    --force-reinstall
+    "defaults::blas=*=mkl"
+  )
+  if [[ -n "$mkl_version" && -n "$intel_openmp_version" ]]; then
+    cmd+=(
+      "defaults::mkl=${mkl_version}"
+      "defaults::intel-openmp=${intel_openmp_version}"
+    )
+  else
+    cmd+=(
+      defaults::mkl
+      defaults::intel-openmp
+    )
+  fi
+  if [[ "$CPU_ONLY" -eq 1 ]]; then
+    cmd+=(
+      "pytorch::pytorch=${TORCH_VERSION}=py${PYTHON_VERSION}_cpu_*"
+      "pytorch::torchvision=${TORCHVISION_VERSION}=py${PYTHON_TAG}_cpu"
+      "pytorch::torchaudio=${TORCHAUDIO_VERSION}=py${PYTHON_TAG}_cpu"
+      cpuonly
+    )
+  else
+    cmd+=(
+      "pytorch::pytorch=${TORCH_VERSION}=py${PYTHON_VERSION}_cuda${CUDA_VERSION}*"
+      "pytorch::torchvision=${TORCHVISION_VERSION}=py${PYTHON_TAG}_cu${CUDA_TAG}"
+      "pytorch::torchaudio=${TORCHAUDIO_VERSION}=py${PYTHON_TAG}_cu${CUDA_TAG}"
+      "pytorch::pytorch-cuda=${CUDA_VERSION}"
+      "pytorch::pytorch-mutex=*=cuda"
+    )
+  fi
+
+  echo "[graphkcat-env] repairing torch runtime (mkl=${runtime_label})"
+  if ! run_conda_with_solver "repair-torch-runtime" "$SOLVER" "${cmd[@]}"; then
+    if [[ "$SOLVER" != "classic" ]]; then
+      echo "[graphkcat-env] repair-torch-runtime failed with ${SOLVER}; retrying via classic solver"
+      run_conda_with_solver "repair-torch-runtime" "classic" "${cmd[@]}"
+    else
+      return 1
+    fi
+  fi
+}
+
+repair_torch_runtime() {
+  local candidate
+  local mkl_version
+  local intel_openmp_version
+  for candidate in "${TORCH_RUNTIME_CANDIDATES[@]}"; do
+    IFS=":" read -r mkl_version intel_openmp_version <<<"$candidate"
+    if repair_torch_runtime_with_versions "$mkl_version" "$intel_openmp_version"; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+validate_imports() {
+  conda run -n "$ENV_NAME" bash -lc "if [[ -f \"\$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then export LD_PRELOAD=\"\$CONDA_PREFIX/lib/libLLVM-15.so\${LD_PRELOAD:+:\$LD_PRELOAD}\"; fi; cd '$REPO_ROOT/models/GraphKcat' && python predict.py --help"
+}
+
+validate_imports_with_runtime_repair() {
+  local log_file
+  log_file="$(mktemp)"
+  if validate_imports >"$log_file" 2>&1; then
+    cat "$log_file"
+    rm -f "$log_file"
+    return 0
+  fi
+
+  cat "$log_file" >&2
+  if grep -Fq "iJIT_NotifyEvent" "$log_file"; then
+    echo "[graphkcat-env] detected libtorch iJIT runtime failure; normalizing the torch + CUDA runtime"
+    rm -f "$log_file"
+    repair_torch_runtime
+    validate_imports
+    return $?
+  fi
+
+  rm -f "$log_file"
+  return 1
+}
+
 if ! conda env list | awk '{print $1}' | grep -qx "$ENV_NAME"; then
   run_conda_step "create-base" conda create -y -n "$ENV_NAME" "python=${PYTHON_VERSION}" pip
 else
@@ -190,19 +285,6 @@ conda run -n "$ENV_NAME" python -m pip install --upgrade pip
 run_pip_step "install-pip-runtime" "fair-esm==2.0.0" "unimol-tools==0.1.4.post1"
 
 echo "[graphkcat-env] validating imports"
-conda run -n "$ENV_NAME" python - <<'PY'
-import torch
-import pandas
-import esm
-import pymol
-from rdkit import Chem
-from torch_geometric.data import HeteroData
-import torch_cluster
-import torch_scatter
-from unimol_tools import UniMolRepr
-
-print("cuda_available", torch.cuda.is_available())
-print("ok")
-PY
+validate_imports_with_runtime_repair
 
 echo "[graphkcat-env] done"

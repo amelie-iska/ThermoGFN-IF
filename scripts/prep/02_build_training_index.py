@@ -148,14 +148,15 @@ def main() -> int:
     logger.info("Building index from %d split roots", len(split_roots))
     for split_root in iter_progress(split_roots, total=len(split_roots), desc="index:roots", no_progress=args.no_progress):
         split_abs = root / split_root
-        if not split_abs.exists():
+        try:
+            paths = discover_split(split_abs)
+        except FileNotFoundError:
             if args.allow_missing:
                 logger.warning("Skipping missing split root (allow-missing): %s", split_abs)
                 continue
-            raise FileNotFoundError(f"Split root not found: {split_abs}")
-        paths = discover_split(split_abs)
+            raise
         chunk = build_design_index(paths)
-        logger.info("Loaded split root %s: n=%d", split_root, len(chunk))
+        logger.info("Loaded split root %s (resolved=%s): n=%d", split_root, paths.root, len(chunk))
         split_name = Path(split_root).name
         task_type = _infer_task_type(split_name)
         for row in chunk:

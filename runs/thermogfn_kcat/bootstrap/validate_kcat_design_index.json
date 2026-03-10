@@ -1,0 +1,26 @@
+{
+  "elapsed_sec": 0.0694,
+  "input": "/home/ubuntu/amelie/ThermoGFN/runs/thermogfn_kcat/bootstrap/design_index.jsonl",
+  "missing_examples": [
+    "stem=spec_unconditional_monomer_unconditional_monomer_0_model_0",
+    "stem=spec_unconditional_monomer_unconditional_monomer_0_model_1",
+    "stem=spec_unconditional_monomer_unconditional_monomer_0_model_2",
+    "stem=spec_unconditional_monomer_unconditional_monomer_100_model_0",
+    "stem=spec_unconditional_monomer_unconditional_monomer_100_model_1",
+    "stem=spec_unconditional_monomer_unconditional_monomer_100_model_2",
+    "stem=spec_unconditional_monomer_unconditional_monomer_101_model_0",
+    "stem=spec_unconditional_monomer_unconditional_monomer_101_model_1",
+    "stem=spec_unconditional_monomer_unconditional_monomer_101_model_2",
+    "stem=spec_unconditional_monomer_unconditional_monomer_102_model_0"
+  ],
+  "n_missing_substrate": 3000,
+  "n_rows": 3000,
+  "ok": false,
+  "stage": "design_index",
+  "substrate_keys": [
+    "substrate_smiles",
+    "Smiles",
+    "smiles",
+    "ligand_smiles"
+  ]
+}

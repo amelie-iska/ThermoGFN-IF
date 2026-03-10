@@ -1,0 +1,50 @@
+{
+  "optional": {
+    "ADFLIP": {
+      "path": null,
+      "status": "missing"
+    },
+    "KcatNet": {
+      "path": null,
+      "status": "missing"
+    },
+    "apodock": {
+      "path": null,
+      "status": "missing"
+    },
+    "foundry": {
+      "path": null,
+      "status": "missing"
+    },
+    "graphkcat": {
+      "path": null,
+      "status": "missing"
+    },
+    "protrek": {
+      "path": "/home/ubuntu/miniconda3/envs/protrek",
+      "status": "ready"
+    },
+    "rfd3": {
+      "path": null,
+      "status": "missing"
+    }
+  },
+  "required": {
+    "bioemu": {
+      "path": null,
+      "status": "missing"
+    },
+    "ligandmpnn_env": {
+      "path": null,
+      "status": "missing"
+    },
+    "spurs": {
+      "path": null,
+      "status": "missing"
+    },
+    "uma-qc": {
+      "path": null,
+      "status": "missing"
+    }
+  }
+}

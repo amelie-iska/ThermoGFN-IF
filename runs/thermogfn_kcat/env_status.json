@@ -2,15 +2,15 @@
   "optional": {},
   "required": {
     "KcatNet": {
-      "path": "/home/iska/miniconda3/envs/KcatNet",
+      "path": "/home/ubuntu/miniconda3/envs/KcatNet",
       "status": "ready"
     },
     "apodock": {
-      "path": "/home/iska/miniconda3/envs/apodock",
+      "path": "/home/ubuntu/miniconda3/envs/apodock",
       "status": "ready"
     },
     "ligandmpnn_env": {
-      "path": "/home/iska/miniconda3/envs/ligandmpnn_env",
+      "path": "/home/ubuntu/miniconda3/envs/ligandmpnn_env",
       "status": "ready"
     }
   }

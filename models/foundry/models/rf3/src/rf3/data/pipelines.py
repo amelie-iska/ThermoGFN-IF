@@ -100,6 +100,7 @@ from atomworks.ml.transforms.symmetry import FindAutomorphismsWithNetworkX
 from omegaconf import DictConfig
 from rf3.data.cyclic_transform import AddCyclicBonds
 from rf3.data.extra_xforms import CheckForNaNsInInputs
+from rf3.data.pocket_constraints import AddPocketConstraintDistogram
 from rf3.data.pipeline_utils import (
     annotate_post_crop_hash,
     annotate_pre_crop_hash,
@@ -389,6 +390,7 @@ def build_af3_transform_pipeline(
             is_inference=is_inference,
         )
     )
+    transforms.append(AddPocketConstraintDistogram())
 
     # +----------------------------------------------------------------------+
     # +------------------ GROUND TRUTH REFERENCE CONFORMER ------------------+

@@ -33,10 +33,10 @@ optional_envs:
     health_check: "python -c 'import torch, esm, transformers; from torch_geometric.data import Data; from rdkit import Chem; print(\"ok\")'"
   graphkcat:
     role: kcat_oracle
-    health_check: "cd models/GraphKcat && python predict.py --help"
+    health_check: "if [[ -f \"$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then export LD_PRELOAD=\"$CONDA_PREFIX/lib/libLLVM-15.so${LD_PRELOAD:+:$LD_PRELOAD}\"; fi && cd models/GraphKcat && python predict.py --help"
   apodock:
     role: kcat_oracle
-    health_check: "cd models/GraphKcat && python predict.py --help"
+    health_check: "if [[ -f \"$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then export LD_PRELOAD=\"$CONDA_PREFIX/lib/libLLVM-15.so${LD_PRELOAD:+:$LD_PRELOAD}\"; fi && cd models/GraphKcat && python predict.py --help"
   protrek:
     role: optional_split_or_tooling
     health_check: ""

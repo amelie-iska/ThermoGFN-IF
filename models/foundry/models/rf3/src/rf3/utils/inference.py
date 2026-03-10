@@ -67,6 +67,7 @@ class InferenceInput:
     template_selection: list[str] | None = None
     ground_truth_conformer_selection: list[str] | None = None
     cyclic_chains: list[str] | None = None
+    constraints: list[dict] | None = None
 
     @classmethod
     def from_cif_path(
@@ -130,6 +131,7 @@ class InferenceInput:
             example_id=example_id,
             template_selection=final_template_sel,
             ground_truth_conformer_selection=final_conformer_sel,
+            constraints=None,
         )
 
     @classmethod
@@ -202,6 +204,7 @@ class InferenceInput:
             example_id=data["name"],
             template_selection=final_template_sel,
             ground_truth_conformer_selection=final_conformer_sel,
+            constraints=data.get("constraints"),
         )
 
     @classmethod
@@ -212,6 +215,7 @@ class InferenceInput:
         example_id: str | None = None,
         template_selection: list[str] | str | None = None,
         ground_truth_conformer_selection: list[str] | str | None = None,
+        constraints: list[dict] | None = None,
     ) -> "InferenceInput":
         """Create from AtomArray.
 
@@ -255,6 +259,7 @@ class InferenceInput:
             example_id=example_id or f"inference_{id(atom_array)}",
             template_selection=template_selection,
             ground_truth_conformer_selection=ground_truth_conformer_selection,
+            constraints=constraints,
         )
 
     def to_pipeline_input(self) -> dict:
@@ -279,6 +284,7 @@ class InferenceInput:
             "example_id": self.example_id,
             "atom_array": atom_array,
             "chain_info": self.chain_info,
+            "constraints": self.constraints,
         }
 
 

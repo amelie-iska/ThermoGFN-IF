@@ -18,8 +18,44 @@ class SplitPaths:
     metadata_dir: Path
 
 
-def discover_split(split_root: str | Path) -> SplitPaths:
+def _candidate_split_roots(root: Path) -> list[Path]:
+    candidates = [root]
+    parts = root.parts
+
+    # Common repo-local alias: data/rfd3_splits/... now lives under rfd3-data/rfd3_splits/...
+    for i in range(len(parts) - 1):
+        if parts[i] == "data" and parts[i + 1] == "rfd3_splits":
+            candidates.append(Path(*parts[:i], "rfd3-data", *parts[i + 1 :]))
+            break
+
+    # Also accept roots provided as rfd3_splits/... and anchor them under rfd3-data/.
+    for i, part in enumerate(parts):
+        if part == "rfd3_splits" and (i == 0 or parts[i - 1] != "rfd3-data"):
+            candidates.append(Path(*parts[:i], "rfd3-data", *parts[i:]))
+            break
+
+    unique: list[Path] = []
+    seen: set[Path] = set()
+    for candidate in candidates:
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        unique.append(candidate)
+    return unique
+
+
+def resolve_split_root(split_root: str | Path) -> Path:
     root = Path(split_root)
+    candidates = _candidate_split_roots(root)
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    tried = ", ".join(str(p) for p in candidates)
+    raise FileNotFoundError(f"Expected split path missing: {root} (tried: {tried})")
+
+
+def discover_split(split_root: str | Path) -> SplitPaths:
+    root = resolve_split_root(split_root)
     train_dir = root / "train"
     test_dir = root / "test"
     metadata_dir = root / "metadata"

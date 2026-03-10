@@ -6,7 +6,7 @@ ENV_NAME="KcatNet"
 PYTHON_VERSION="3.10"
 CUDA_VERSION="12.1"
 CPU_ONLY=0
-SOLVER="libmamba"
+SOLVER="classic"
 ATTEMPTS=4
 RETRY_SLEEP_SEC=15
 TORCH_VERSION="2.4.0"
@@ -14,6 +14,7 @@ TORCHVISION_VERSION="0.19.0"
 TORCHAUDIO_VERSION="2.4.0"
 PYG_VERSION="2.6.1"
 PYG_SCATTER_VERSION="2.1.2"
+TORCH_RUNTIME_CANDIDATES=("2021.4.0:2021.4.0" "2023.1.0:2023.1.0" ":")
 
 usage() {
   cat <<'USAGE'
@@ -25,7 +26,7 @@ Options:
   --python VERSION      Python version (default: 3.10)
   --cuda VERSION        pytorch-cuda version (default: 12.1)
   --cpu-only            Install CPU-only torch stack
-  --solver NAME         Conda solver: libmamba|classic (default: libmamba)
+  --solver NAME         Conda solver: libmamba|classic (default: classic)
   --attempts N          Retry attempts per solver for download/extract failures (default: 4)
   --retry-sleep N       Sleep seconds between retries (default: 15)
   -h, --help            Show help
@@ -35,6 +36,9 @@ Notes:
   - Re-running this script repairs an existing env in place.
   - Installs dependencies required by scripts/prep/oracles/kcatnet_score.py,
     including torch_scatter and a conda-forge Pillow/libtiff pair.
+  - Repairs the GPU torch runtime by trying older MKL/OpenMP combinations from
+    the checked-in env specs when newer solver choices trigger the libtorch
+    `iJIT_NotifyEvent` import error.
 USAGE
 }
 
@@ -144,6 +148,97 @@ run_pip_step() {
   return 1
 }
 
+repair_torch_runtime_with_versions() {
+  local mkl_version="$1"
+  local intel_openmp_version="$2"
+  local runtime_label="${mkl_version:-solver-defaults}"
+  local -a cmd=(
+    conda install -y -n "$ENV_NAME"
+    --override-channels
+    -c pytorch
+    -c nvidia
+    -c defaults
+    --force-reinstall
+    "defaults::blas=*=mkl"
+  )
+  if [[ -n "$mkl_version" && -n "$intel_openmp_version" ]]; then
+    cmd+=(
+      "defaults::mkl=${mkl_version}"
+      "defaults::intel-openmp=${intel_openmp_version}"
+    )
+  else
+    cmd+=(
+      defaults::mkl
+      defaults::intel-openmp
+    )
+  fi
+  if [[ "$CPU_ONLY" -eq 1 ]]; then
+    cmd+=(
+      "pytorch::pytorch=${TORCH_VERSION}=py${PYTHON_VERSION}_cpu_*"
+      "pytorch::torchvision=${TORCHVISION_VERSION}=py${PYTHON_TAG}_cpu"
+      "pytorch::torchaudio=${TORCHAUDIO_VERSION}=py${PYTHON_TAG}_cpu"
+      cpuonly
+    )
+  else
+    cmd+=(
+      "pytorch::pytorch=${TORCH_VERSION}=py${PYTHON_VERSION}_cuda${CUDA_VERSION}*"
+      "pytorch::torchvision=${TORCHVISION_VERSION}=py${PYTHON_TAG}_cu${CUDA_TAG}"
+      "pytorch::torchaudio=${TORCHAUDIO_VERSION}=py${PYTHON_TAG}_cu${CUDA_TAG}"
+      "pytorch::pytorch-cuda=${CUDA_VERSION}"
+      "pytorch::pytorch-mutex=*=cuda"
+    )
+  fi
+
+  echo "[kcatnet-env] repairing torch runtime (mkl=${runtime_label})"
+  if ! run_conda_with_solver "repair-torch-runtime" "$SOLVER" "${cmd[@]}"; then
+    if [[ "$SOLVER" != "classic" ]]; then
+      echo "[kcatnet-env] repair-torch-runtime failed with ${SOLVER}; retrying via classic solver"
+      run_conda_with_solver "repair-torch-runtime" "classic" "${cmd[@]}"
+    else
+      return 1
+    fi
+  fi
+}
+
+repair_torch_runtime() {
+  local candidate
+  local mkl_version
+  local intel_openmp_version
+  for candidate in "${TORCH_RUNTIME_CANDIDATES[@]}"; do
+    IFS=":" read -r mkl_version intel_openmp_version <<<"$candidate"
+    if repair_torch_runtime_with_versions "$mkl_version" "$intel_openmp_version"; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+validate_imports() {
+  conda run -n "$ENV_NAME" bash -lc "cd '$REPO_ROOT/models/KcatNet' && python -c \"import torch, esm, transformers, torch_scatter; from rdkit import Chem; from torch_geometric.data import Data; from models.model_kcat import KcatNet; from utils.protein_init import T5Tokenizer; print('cuda_available', torch.cuda.is_available()); print('ok')\""
+}
+
+validate_imports_with_runtime_repair() {
+  local log_file
+  log_file="$(mktemp)"
+  if validate_imports >"$log_file" 2>&1; then
+    cat "$log_file"
+    rm -f "$log_file"
+    return 0
+  fi
+
+  cat "$log_file" >&2
+  if grep -Fq "iJIT_NotifyEvent" "$log_file"; then
+    echo "[kcatnet-env] detected libtorch iJIT runtime failure; normalizing the torch + CUDA runtime"
+    rm -f "$log_file"
+    repair_torch_runtime
+    validate_imports
+    return $?
+  fi
+
+  rm -f "$log_file"
+  return 1
+}
+
 if ! conda env list | awk '{print $1}' | grep -qx "$ENV_NAME"; then
   run_conda_step "create-base" conda create -y -n "$ENV_NAME" "python=${PYTHON_VERSION}" pip
 else
@@ -206,6 +301,6 @@ conda run -n "$ENV_NAME" python -m pip install --upgrade pip
 run_pip_step "install-pip-runtime" "fair-esm==2.0.0" "transformers>=4.35,<4.46"
 
 echo "[kcatnet-env] validating imports"
-conda run -n "$ENV_NAME" bash -lc "cd '$REPO_ROOT/models/KcatNet' && python -c \"import torch, esm, transformers, torch_scatter; from rdkit import Chem; from torch_geometric.data import Data; from models.model_kcat import KcatNet; from utils.protein_init import T5Tokenizer; print('cuda_available', torch.cuda.is_available()); print('ok')\""
+validate_imports_with_runtime_repair
 
 echo "[kcatnet-env] done"
