@@ -76,6 +76,28 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         trimmed = MODULE._trim_a3m_depth(a3m, 0)
         self.assertEqual(trimmed, a3m)
 
+    def test_map_local_a3m_texts_to_sequences_uses_query_sequence(self):
+        chunk = ["SEQAAAA", "SEQBBBB"]
+        mapping = MODULE._map_local_a3m_texts_to_sequences(
+            chunk,
+            {
+                "0.a3m": ">q1\nSEQBBBB\n>hit\nSEQBBBB\n",
+                "1.a3m": ">q0\nSEQAAAA\n>hit\nSEQAAAA\n",
+            },
+        )
+
+        self.assertEqual(set(mapping.keys()), set(chunk))
+        self.assertIn("SEQAAAA", mapping["SEQAAAA"])
+        self.assertIn("SEQBBBB", mapping["SEQBBBB"])
+
+    def test_a3m_matches_sequence_validates_query_row(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "test.a3m"
+            path.write_text(">query\nSEQAAAA\n>hit\nSEQAAAA\n", encoding="utf-8")
+
+            self.assertTrue(MODULE._a3m_matches_sequence(path, "SEQAAAA"))
+            self.assertFalse(MODULE._a3m_matches_sequence(path, "SEQBBBB"))
+
     def test_generate_msas_serial_writes_trimmed_a3ms(self):
         mmseqs2_mod = types.ModuleType("boltz.data.msa.mmseqs2")
         mmseqs2_mod.logger = types.SimpleNamespace(disabled=False)
@@ -178,6 +200,45 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
                 self.assertTrue(msa_path.exists())
                 a3m = msa_path.read_text(encoding="utf-8")
                 self.assertEqual(MODULE._count_a3m_sequences(a3m), 2)
+
+    def test_generate_msas_local_direct_rebuilds_invalid_cached_a3m(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            cache_dir = Path(tmpdir)
+            bad_cache = MODULE._msa_cache_path_for_sequence(cache_dir, "SEQ1")
+            bad_cache.write_text(">query\nWRONGSEQ\n", encoding="utf-8")
+
+            def fake_run_local_chunk(chunk, **kwargs):
+                return {sequence: f">query\n{sequence}\n>hit\n{sequence}\n" for sequence in chunk}
+
+            with mock.patch.object(
+                MODULE,
+                "_infer_local_mmseqs_assets",
+                return_value={
+                    "mmseqs_bin": cache_dir / "mmseqs",
+                    "db_prefix": cache_dir / "uniref30_2302_db",
+                    "db_seq": cache_dir / "uniref30_2302_db_seq",
+                    "db_aln": cache_dir / "uniref30_2302_db_aln",
+                },
+            ), mock.patch.object(MODULE, "_run_local_mmseqs_chunk", side_effect=fake_run_local_chunk):
+                seq_to_path = MODULE._generate_msas_local_direct(
+                    ["SEQ1"],
+                    local_msa_root=cache_dir,
+                    msa_cache_dir=cache_dir,
+                    reuse_cache=True,
+                    msa_batch_size=1,
+                    msa_concurrency=1,
+                    msa_retries=1,
+                    msa_depth=2048,
+                    cuda_devices=["0"],
+                    use_filter=False,
+                    max_seqs=4096,
+                    num_iterations=3,
+                    msa_threads_per_job=1,
+                )
+
+            rewritten = seq_to_path["SEQ1"].read_text(encoding="utf-8")
+            self.assertIn("SEQ1", rewritten)
+            self.assertNotIn("WRONGSEQ", rewritten)
 
 
 if __name__ == "__main__":

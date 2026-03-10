@@ -29,6 +29,7 @@ SHARDS=1
 MAX_DOCKED_PAIRS=2000
 CUDA_DEVICES="${CUDA_DEVICES:-0,1,2,3}"
 RF3_GPUS=4
+RF3_LAUNCH_MODE="auto"
 N_RECYCLES=10
 DIFFUSION_BATCH_SIZE=5
 NUM_STEPS=50
@@ -56,6 +57,7 @@ Options:
   --msa-cache-dir PATH   Directory for generated .a3m files
   --cuda-devices LIST    Export CUDA_VISIBLE_DEVICES for RF3 inference (default: 0,1,2,3)
   --rf3-gpus N           Number of GPUs for RF3 inference (default: 4)
+  --rf3-launch-mode X    auto|sharded_single|ddp (default: auto)
   --reuse-cache          Reuse cached .a3m files
   --use-env-db           Request environmental DB
   --use-filter           Enable MMSeqs filtering (default)
@@ -112,6 +114,8 @@ while [[ $# -gt 0 ]]; do
       CUDA_DEVICES="$2"; shift 2 ;;
     --rf3-gpus)
       RF3_GPUS="$2"; shift 2 ;;
+    --rf3-launch-mode)
+      RF3_LAUNCH_MODE="$2"; shift 2 ;;
     --reuse-cache)
       REUSE_CACHE=1; shift ;;
     --use-env-db)
@@ -206,6 +210,32 @@ if [[ -n "${CUDA_DEVICES}" ]]; then
   fi
 fi
 
+case "${RF3_LAUNCH_MODE}" in
+  auto|sharded_single|ddp) ;;
+  *)
+    echo "Unsupported --rf3-launch-mode value: ${RF3_LAUNCH_MODE}" >&2
+    exit 2 ;;
+esac
+
+if [[ "${RF3_LAUNCH_MODE}" == "auto" ]]; then
+  if (( RF3_GPUS > 1 )); then
+    RF3_LAUNCH_MODE="sharded_single"
+  else
+    RF3_LAUNCH_MODE="ddp"
+  fi
+fi
+
+IFS=',' read -r -a CUDA_DEVICE_ARRAY <<< "${CUDA_DEVICES}"
+if (( RF3_GPUS > 1 )) && [[ "${RF3_LAUNCH_MODE}" == "sharded_single" ]] && (( SHARDS < RF3_GPUS )); then
+  SHARDS="${RF3_GPUS}"
+  echo "[foundry-rf3-run] increasing --shards to ${SHARDS} to match sharded single-GPU RF3 launch"
+fi
+if [[ "${RF3_LAUNCH_MODE}" == "sharded_single" ]] && (( ${#HYDRA_OVERRIDES[@]} > 0 )); then
+  echo "Hydra overrides are not supported with --rf3-launch-mode sharded_single." >&2
+  echo "Use --rf3-launch-mode ddp if you need raw Hydra overrides." >&2
+  exit 2
+fi
+
 PYTHON_BIN="${ENV_DIR}/bin/python"
 export PYTHONPATH="${REPO_ROOT}/models/foundry/src:${REPO_ROOT}/models/foundry/models/rf3/src${PYTHONPATH:+:${PYTHONPATH}}"
 DEFAULT_RF3_CKPT="${REPO_ROOT}/weights/rf3_foundry_01_24_latest_remapped.ckpt"
@@ -293,12 +323,130 @@ else
   "${PREP_ARGS[@]}"
 fi
 
+run_single_shard() {
+  local shard_json="$1"
+  local shard_out="$2"
+  local gpu_id="$3"
+  local log_path="$4"
+  local override
+  local -a shard_cmd=(
+    "${PYTHON_BIN}" "${REPO_ROOT}/scripts/rf3/run_foundry_rf3_direct.py"
+    --inputs "${shard_json}"
+    --out-dir "${shard_out}"
+    --ckpt-path "${CKPT_PATH}"
+    --devices-per-node 1
+    --num-nodes 1
+    --n-recycles "${N_RECYCLES}"
+    --diffusion-batch-size "${DIFFUSION_BATCH_SIZE}"
+    --num-steps "${NUM_STEPS}"
+    --local-msa-dirs "${PREPARED_ROOT}/msas"
+  )
+  env \
+    CUDA_VISIBLE_DEVICES="${gpu_id}" \
+    HYDRA_FULL_ERROR=1 \
+    "${shard_cmd[@]}" >"${log_path}" 2>&1
+}
+
+run_state_sharded_single() {
+  local state="$1"
+  local shard_dir="${PREPARED_ROOT}/shards/${state}"
+  local state_out="${OUT_ROOT}/${state}"
+  local log_dir="${state_out}/logs"
+  local -a shard_jsons=()
+  local -a running_pids=()
+  local -A pid_to_gpu=()
+  local -A pid_to_shard=()
+  local -A pid_to_log=()
+  local total_shards=0
+  local completed=0
+
+  mkdir -p "${state_out}" "${log_dir}"
+  if [[ -d "${shard_dir}" ]] && compgen -G "${shard_dir}/*.json" >/dev/null; then
+    mapfile -t shard_jsons < <(printf '%s\n' "${shard_dir}"/*.json | sort)
+  else
+    local input_json="${PREPARED_ROOT}/${state}.json"
+    if [[ ! -f "${input_json}" ]]; then
+      echo "Prepared input JSON missing: ${input_json}" >&2
+      exit 1
+    fi
+    shard_jsons=("${input_json}")
+  fi
+  total_shards="${#shard_jsons[@]}"
+
+  prune_finished_jobs() {
+    local -a still_running=()
+    local pid exit_code gpu_id shard_name log_path
+    for pid in "${running_pids[@]}"; do
+      if kill -0 "${pid}" 2>/dev/null; then
+        still_running+=("${pid}")
+        continue
+      fi
+      if wait "${pid}"; then
+        exit_code=0
+      else
+        exit_code=$?
+      fi
+      gpu_id="${pid_to_gpu[${pid}]}"
+      shard_name="${pid_to_shard[${pid}]}"
+      log_path="${pid_to_log[${pid}]}"
+      if (( exit_code != 0 )); then
+        echo "[foundry-rf3-run] shard failed state=${state} shard=${shard_name} gpu=${gpu_id} log=${log_path}" >&2
+        if [[ -f "${log_path}" ]]; then
+          tail -n 80 "${log_path}" >&2 || true
+        fi
+        for pid in "${still_running[@]}"; do
+          kill "${pid}" 2>/dev/null || true
+        done
+        exit "${exit_code}"
+      fi
+      completed=$((completed + 1))
+      echo "[foundry-rf3-run] shard completed state=${state} shard=${shard_name} gpu=${gpu_id} completed=${completed}/${total_shards}"
+      unset 'pid_to_gpu[$pid]' 'pid_to_shard[$pid]' 'pid_to_log[$pid]'
+    done
+    running_pids=("${still_running[@]}")
+    if (( total_shards > 0 )); then
+      echo "[foundry-rf3-run] state=${state} progress completed=${completed}/${total_shards} running=${#running_pids[@]}"
+    fi
+  }
+
+  local idx=0 shard_json shard_name shard_out gpu_slot gpu_id log_path
+  for shard_json in "${shard_jsons[@]}"; do
+    while (( ${#running_pids[@]} >= RF3_GPUS )); do
+      sleep 2
+      prune_finished_jobs
+    done
+    shard_name="$(basename "${shard_json}" .json)"
+    shard_out="${state_out}/${shard_name}"
+    gpu_slot=$(( idx % RF3_GPUS ))
+    gpu_id="${CUDA_DEVICE_ARRAY[${gpu_slot}]}"
+    log_path="${log_dir}/${shard_name}.log"
+    echo "[foundry-rf3-run] launching state=${state} shard=${shard_name} gpu=${gpu_id} log=${log_path}"
+    run_single_shard "${shard_json}" "${shard_out}" "${gpu_id}" "${log_path}" &
+    local pid=$!
+    running_pids+=("${pid}")
+    pid_to_gpu["${pid}"]="${gpu_id}"
+    pid_to_shard["${pid}"]="${shard_name}"
+    pid_to_log["${pid}"]="${log_path}"
+    idx=$((idx + 1))
+  done
+
+  while (( ${#running_pids[@]} > 0 )); do
+    sleep 2
+    prune_finished_jobs
+  done
+}
+
 run_state() {
   local state="$1"
   local input_json="${PREPARED_ROOT}/${state}.json"
   local shard_dir="${PREPARED_ROOT}/shards/${state}"
   local state_out="${OUT_ROOT}/${state}"
   local override
+
+  if [[ "${RF3_LAUNCH_MODE}" == "sharded_single" ]]; then
+    run_state_sharded_single "${state}"
+    return
+  fi
 
   if [[ -d "${shard_dir}" ]] && compgen -G "${shard_dir}/*.json" >/dev/null; then
     local shard_json

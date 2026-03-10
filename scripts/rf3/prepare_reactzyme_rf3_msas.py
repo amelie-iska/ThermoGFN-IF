@@ -615,17 +615,71 @@ def _run_local_mmseqs_chunk(
             cwd=base,
         )
 
-        mapping: dict[str, str] = {}
-        for idx, sequence in enumerate(chunk):
+        a3m_text_by_name: dict[str, str] = {}
+        for idx in range(len(chunk)):
             a3m_path = base / f"{idx}.a3m"
             if not a3m_path.exists():
                 raise RuntimeError(f"Expected unpacked A3M missing for chunk {chunk_idx}: {a3m_path}")
-            mapping[sequence] = a3m_path.read_text(encoding="utf-8")
-        return mapping
+            a3m_text_by_name[a3m_path.name] = a3m_path.read_text(encoding="utf-8")
+        return _map_local_a3m_texts_to_sequences(chunk, a3m_text_by_name)
 
 
 def _count_a3m_sequences(a3m_text: str) -> int:
     return sum(1 for line in a3m_text.splitlines() if line.startswith(">"))
+
+
+def _extract_first_a3m_query_sequence(a3m_text: str) -> str:
+    sequence_lines: list[str] = []
+    started = False
+    for line in a3m_text.splitlines():
+        if line.startswith(">"):
+            if started:
+                break
+            started = True
+            continue
+        if started:
+            sequence_lines.append(line.strip())
+    return "".join(sequence_lines)
+
+
+def _normalize_a3m_query_sequence(a3m_text: str) -> str:
+    return "".join(ch for ch in _extract_first_a3m_query_sequence(a3m_text) if ch.isupper())
+
+
+def _a3m_matches_sequence(msa_path: Path, sequence: str) -> bool:
+    try:
+        a3m_text = msa_path.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return _normalize_a3m_query_sequence(a3m_text) == sequence
+
+
+def _map_local_a3m_texts_to_sequences(
+    chunk: Sequence[str],
+    a3m_text_by_name: dict[str, str],
+) -> dict[str, str]:
+    expected_by_query = {sequence: sequence for sequence in chunk}
+    mapping: dict[str, str] = {}
+    unmatched: list[str] = []
+
+    for name, a3m_text in sorted(a3m_text_by_name.items()):
+        query_sequence = _normalize_a3m_query_sequence(a3m_text)
+        source_sequence = expected_by_query.pop(query_sequence, None)
+        if source_sequence is None or source_sequence in mapping:
+            unmatched.append(f"{name}:{len(query_sequence)}")
+            continue
+        mapping[source_sequence] = a3m_text
+
+    if len(mapping) != len(chunk):
+        expected_lengths = sorted(len(sequence) for sequence in chunk)
+        raise RuntimeError(
+            "Could not map local MMSeqs A3M outputs back to input sequences. "
+            f"matched={len(mapping)}/{len(chunk)} "
+            f"expected_lengths={expected_lengths[:8]} "
+            f"unmatched_files={unmatched[:8]}"
+        )
+
+    return mapping
 
 
 def _trim_a3m_depth(a3m_text: str, max_depth: int | None) -> str:
@@ -763,9 +817,16 @@ def _generate_msas_via_server(
     missing_sequences: list[str] = []
     for sequence in unique_sequences:
         msa_path = _msa_cache_path_for_sequence(msa_cache_dir, sequence)
-        if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
+        if (
+            reuse_cache
+            and msa_path.exists()
+            and msa_path.stat().st_size > 0
+            and _a3m_matches_sequence(msa_path, sequence)
+        ):
             seq_to_path[sequence] = msa_path.resolve()
         else:
+            if msa_path.exists() and not _a3m_matches_sequence(msa_path, sequence):
+                msa_path.unlink(missing_ok=True)
             missing_sequences.append(sequence)
 
     if not missing_sequences:
@@ -943,9 +1004,16 @@ def _generate_msas_local_direct(
     missing_sequences: list[str] = []
     for sequence in unique_sequences:
         msa_path = _msa_cache_path_for_sequence(msa_cache_dir, sequence)
-        if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
+        if (
+            reuse_cache
+            and msa_path.exists()
+            and msa_path.stat().st_size > 0
+            and _a3m_matches_sequence(msa_path, sequence)
+        ):
             seq_to_path[sequence] = msa_path.resolve()
         else:
+            if msa_path.exists() and not _a3m_matches_sequence(msa_path, sequence):
+                msa_path.unlink(missing_ok=True)
             missing_sequences.append(sequence)
 
     if not missing_sequences:

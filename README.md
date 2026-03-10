@@ -584,6 +584,7 @@ The RF3 local-MSA wrapper also now defaults to:
 - `--use-filter`
 - `--cuda-devices 0,1,2,3`
 - `--rf3-gpus 4`
+- `--rf3-launch-mode auto`
 
 In `local_direct` mode, the MSA prep step bypasses the ColabFold ticket API and
 runs local MMSeqs2 jobs directly against the shared UniRef30 database under
@@ -607,10 +608,48 @@ bash scripts/rf3/run_foundry_rf3_local_msa.sh \
   --reuse-cache
 ```
 
-For RF3 itself, the wrapper now passes `devices_per_node=4` to Foundry and
-exports `CUDA_VISIBLE_DEVICES=0,1,2,3`, so inference is launched against all
-four GPUs by default. The wrapper fails fast if the requested GPU count and
-visible device list do not match.
+For RF3 itself, the wrapper now defaults to `--rf3-launch-mode auto`. On a
+multi-GPU host that resolves to `sharded_single`, which launches one
+single-process RF3 shard per visible GPU instead of using PyTorch DDP/NCCL.
+That is the preferred path on this host because it avoids the NCCL/TCPStore
+watchdog failures seen with the upstream multi-rank Hydra launch while still
+keeping all four GPUs busy. The wrapper still exports
+`CUDA_VISIBLE_DEVICES=0,1,2,3` by default and fails fast if the requested GPU
+count and visible device list do not match.
+
+```bash
+bash scripts/rf3/run_foundry_rf3_local_msa.sh \
+    --env-dir .venvs/foundry-rf3 \
+    --input-root runs/rf3_reactzyme_inputs_smiles_full \
+    --prepared-root runs/rf3_reactzyme_inputs_smiles_full_with_msa \
+    --out-root runs/rf3_reactzyme_out_smiles_full \
+    --ckpt-path rf3 \
+    --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
+    --reuse-cache \
+    --max-examples 3000 \
+    --msa-depth 2048 \
+    --msa-concurrency 8 \
+    --rf3-gpus 4 \
+    --cuda-devices 0,1,2,3
+```
+
+If you explicitly need the upstream Hydra / DDP launcher, opt into it:
+
+```bash
+bash scripts/rf3/run_foundry_rf3_local_msa.sh \
+  --env-dir .venvs/foundry-rf3 \
+  --input-root runs/rf3_reactzyme_inputs_smiles_full \
+  --prepared-root runs/rf3_reactzyme_inputs_smiles_full_with_msa \
+  --out-root runs/rf3_reactzyme_out_smiles_full \
+  --ckpt-path rf3 \
+  --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
+  --rf3-launch-mode ddp \
+  --reuse-cache
+```
+
+`--hydra-override` is only supported in `ddp` mode. In the default
+`sharded_single` mode, the wrapper calls the RF3 inference engine directly per
+shard instead of routing through the Hydra CLI.
 
 Startup validation progress is now reported with a `Validate Pairs` tqdm bar.
 That stage cheaply rejects dummy-atom ligands up front and selects the first
@@ -633,18 +672,33 @@ entire shard.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 
-Useful RF3 overrides can be passed through with repeated `--hydra-override`, for example:
+For long runs on this host, `tmux` is the safest way to launch and monitor the
+job:
 
 ```bash
+tmux new -s rf3_3k
+
+# inside tmux
+source .venvs/foundry-rf3/bin/activate
 bash scripts/rf3/run_foundry_rf3_local_msa.sh \
   --env-dir .venvs/foundry-rf3 \
-  --input-root runs/rf3_reactzyme_inputs \
-  --prepared-root runs/rf3_reactzyme_inputs_with_msa \
-  --out-root runs/rf3_reactzyme_out \
-  --ckpt-path ./weights/rf3_foundry_01_24_latest_remapped.ckpt \
+  --input-root runs/rf3_reactzyme_inputs_smiles_full \
+  --prepared-root runs/rf3_reactzyme_inputs_smiles_full_with_msa \
+  --out-root runs/rf3_reactzyme_out_smiles_full \
+  --ckpt-path rf3 \
   --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
   --reuse-cache \
-  --hydra-override verbose=true
+  --max-examples 3000 \
+  --msa-depth 2048 \
+  --msa-concurrency 8 \
+  --rf3-gpus 4 \
+  --cuda-devices 0,1,2,3
+
+# detach from tmux
+# Ctrl-b then d
+
+# reattach later
+tmux attach -t rf3_3k
 ```
 
 ### Pocket constraint format
