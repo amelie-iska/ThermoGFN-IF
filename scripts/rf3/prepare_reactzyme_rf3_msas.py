@@ -7,11 +7,16 @@ import argparse
 import hashlib
 import json
 import logging
+import os
 import shutil
+import subprocess
 import sys
+import tempfile
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from queue import Empty, Queue
 from typing import Iterable, Sequence
 
 from tqdm import tqdm
@@ -172,6 +177,273 @@ def _infer_boltz_src_path(local_msa_root: Path) -> Path:
     )
 
 
+def _parse_cuda_devices(raw: str | None) -> list[str]:
+    if raw is None:
+        return []
+    return [item.strip() for item in str(raw).split(",") if item.strip()]
+
+
+def _infer_local_mmseqs_assets(local_msa_root: Path) -> dict[str, Path]:
+    mmseqs_bin = (local_msa_root / "ColabFold" / "MsaServer" / "bin" / "mmseqs").resolve()
+    if not mmseqs_bin.exists():
+        raise FileNotFoundError(f"Could not locate local mmseqs binary: {mmseqs_bin}")
+
+    config_path = (local_msa_root / "config.uniref30.json").resolve()
+    db_prefix: Path | None = None
+    if config_path.exists():
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+        raw_uniref = (
+            payload.get("paths", {})
+            .get("colabfold", {})
+            .get("uniref")
+        )
+        if raw_uniref:
+            db_prefix = Path(str(raw_uniref)).expanduser().resolve()
+            if db_prefix.name.endswith("_pad"):
+                db_prefix = db_prefix.with_name(db_prefix.name[: -len("_pad")])
+
+    if db_prefix is None:
+        candidate = Path("/opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302/uniref30_2302_db")
+        if candidate.exists():
+            db_prefix = candidate.resolve()
+
+    if db_prefix is None or not db_prefix.exists():
+        raise FileNotFoundError(
+            "Could not infer the local UniRef30 MMSeqs2 database prefix. "
+            f"Checked config under {config_path} and the standard nvme path."
+        )
+
+    db_seq = db_prefix.with_name(f"{db_prefix.name}_seq")
+    db_aln = db_prefix.with_name(f"{db_prefix.name}_aln")
+    missing = [str(path) for path in (db_prefix, db_seq, db_aln) if not path.exists()]
+    if missing:
+        raise FileNotFoundError(
+            "Local UniRef30 database is incomplete for direct MMSeqs2 search. "
+            f"Missing: {missing}"
+        )
+
+    return {
+        "mmseqs_bin": mmseqs_bin,
+        "db_prefix": db_prefix,
+        "db_seq": db_seq,
+        "db_aln": db_aln,
+    }
+
+
+def _run_checked(
+    cmd: Sequence[str | Path],
+    *,
+    env: dict[str, str],
+    cwd: Path,
+) -> None:
+    text_cmd = [str(arg) for arg in cmd]
+    result = subprocess.run(
+        text_cmd,
+        cwd=str(cwd),
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    if result.returncode == 0:
+        return
+    tail = "\n".join(result.stdout.splitlines()[-40:])
+    raise RuntimeError(
+        f"Command failed (exit={result.returncode}): {' '.join(text_cmd)}\n{tail}"
+    )
+
+
+def _run_local_mmseqs_chunk(
+    chunk: Sequence[str],
+    *,
+    chunk_idx: int,
+    msa_cache_dir: Path,
+    mmseqs_bin: Path,
+    db_prefix: Path,
+    db_seq: Path,
+    db_aln: Path,
+    threads: int,
+    use_filter: bool,
+    max_seqs: int,
+    num_iterations: int,
+    cuda_device: str | None,
+) -> dict[str, str]:
+    if not chunk:
+        return {}
+
+    prefix = f"rf3_msa_chunk_{chunk_idx:04d}_"
+    with tempfile.TemporaryDirectory(prefix=prefix, dir=str(msa_cache_dir)) as tmpdir:
+        base = Path(tmpdir)
+        fasta_path = base / "job.fasta"
+        with fasta_path.open("w", encoding="utf-8") as handle:
+            for idx, sequence in enumerate(chunk):
+                handle.write(f">{idx}\n{sequence}\n")
+
+        env = os.environ.copy()
+        env["MMSEQS_CALL_DEPTH"] = "1"
+        if cuda_device:
+            env["CUDA_VISIBLE_DEVICES"] = cuda_device
+
+        qdb = base / "qdb"
+        res = base / "res"
+        tmp = base / "tmp"
+        prof_res = base / "prof_res"
+        prof_res_h = base / "prof_res_h"
+        res_exp = base / "res_exp"
+        res_exp_realign = base / "res_exp_realign"
+        res_exp_realign_filter = base / "res_exp_realign_filter"
+        uniref_a3m = base / "uniref.a3m"
+
+        search_cmd: list[str | Path] = [
+            mmseqs_bin,
+            "createdb",
+            fasta_path,
+            qdb,
+        ]
+        _run_checked(search_cmd, env=env, cwd=base)
+
+        search_cmd = [
+            mmseqs_bin,
+            "search",
+            qdb,
+            db_prefix,
+            res,
+            tmp,
+            "--threads",
+            str(threads),
+            "--num-iterations",
+            str(num_iterations),
+            "--db-load-mode",
+            "0",
+            "-a",
+            "-e",
+            "0.1",
+            "--max-seqs",
+            str(max_seqs),
+            "--gpu",
+            "1",
+            "--prefilter-mode",
+            "1",
+        ]
+        _run_checked(search_cmd, env=env, cwd=base)
+
+        profile_1 = tmp / "latest" / "profile_1"
+        if not profile_1.exists():
+            raise RuntimeError(f"MMSeqs2 search did not produce {profile_1}")
+
+        _run_checked([mmseqs_bin, "mvdb", profile_1, prof_res], env=env, cwd=base)
+        _run_checked([mmseqs_bin, "lndb", base / "qdb_h", prof_res_h], env=env, cwd=base)
+
+        expand_cmd: list[str | Path] = [
+            mmseqs_bin,
+            "expandaln",
+            qdb,
+            db_seq,
+            res,
+            db_aln,
+            res_exp,
+            "--db-load-mode",
+            "0",
+            "--threads",
+            str(threads),
+            "--expansion-mode",
+            "0",
+            "-e",
+            "inf",
+            "--expand-filter-clusters",
+            "1" if use_filter else "0",
+            "--max-seq-id",
+            "0.95",
+        ]
+        _run_checked(expand_cmd, env=env, cwd=base)
+
+        align_cmd: list[str | Path] = [
+            mmseqs_bin,
+            "align",
+            prof_res,
+            db_seq,
+            res_exp,
+            res_exp_realign,
+            "--db-load-mode",
+            "0",
+            "-e",
+            "10",
+            "--max-accept",
+            "100000" if use_filter else "1000000",
+            "--threads",
+            str(threads),
+            "--alt-ali",
+            "10",
+            "-a",
+        ]
+        _run_checked(align_cmd, env=env, cwd=base)
+
+        filterresult_cmd: list[str | Path] = [
+            mmseqs_bin,
+            "filterresult",
+            qdb,
+            db_seq,
+            res_exp_realign,
+            res_exp_realign_filter,
+            "--db-load-mode",
+            "0",
+            "--qid",
+            "0",
+            "--qsc",
+            "0.8" if use_filter else "-20.0",
+            "--diff",
+            "0",
+            "--threads",
+            str(threads),
+            "--max-seq-id",
+            "1.0",
+            "--filter-min-enable",
+            "100",
+        ]
+        _run_checked(filterresult_cmd, env=env, cwd=base)
+
+        result2msa_cmd: list[str | Path] = [
+            mmseqs_bin,
+            "result2msa",
+            qdb,
+            db_seq,
+            res_exp_realign_filter,
+            uniref_a3m,
+            "--msa-format-mode",
+            "6",
+            "--db-load-mode",
+            "0",
+            "--threads",
+            str(threads),
+            "--filter-msa",
+            "1" if use_filter else "0",
+            "--filter-min-enable",
+            "1000",
+            "--diff",
+            "3000",
+            "--qid",
+            "0.0,0.2,0.4,0.6,0.8,1.0",
+            "--qsc",
+            "0",
+            "--max-seq-id",
+            "0.95",
+        ]
+        _run_checked(result2msa_cmd, env=env, cwd=base)
+        _run_checked(
+            [mmseqs_bin, "unpackdb", uniref_a3m, base, "--unpack-name-mode", "0", "--unpack-suffix", ".a3m"],
+            env=env,
+            cwd=base,
+        )
+
+        mapping: dict[str, str] = {}
+        for idx, sequence in enumerate(chunk):
+            a3m_path = base / f"{idx}.a3m"
+            if not a3m_path.exists():
+                raise RuntimeError(f"Expected unpacked A3M missing for chunk {chunk_idx}: {a3m_path}")
+            mapping[sequence] = a3m_path.read_text(encoding="utf-8")
+        return mapping
+
+
 def _count_a3m_sequences(a3m_text: str) -> int:
     return sum(1 for line in a3m_text.splitlines() if line.startswith(">"))
 
@@ -236,7 +508,7 @@ def _write_generated_msas(
     return seq_to_path
 
 
-def _generate_msas(
+def _generate_msas_via_server(
     sequences: Sequence[str],
     *,
     boltz_src_path: Path,
@@ -409,6 +681,233 @@ def _generate_msas(
     return seq_to_path
 
 
+def _generate_msas_local_direct(
+    sequences: Sequence[str],
+    *,
+    local_msa_root: Path,
+    msa_cache_dir: Path,
+    reuse_cache: bool,
+    msa_batch_size: int,
+    msa_concurrency: int,
+    msa_retries: int,
+    msa_depth: int | None,
+    cuda_devices: list[str],
+    use_filter: bool,
+    max_seqs: int,
+    num_iterations: int,
+    msa_threads_per_job: int,
+) -> dict[str, Path]:
+    assets = _infer_local_mmseqs_assets(local_msa_root)
+
+    unique_sequences: list[str] = []
+    for sequence in sequences:
+        if sequence not in unique_sequences:
+            unique_sequences.append(sequence)
+
+    msa_cache_dir.mkdir(parents=True, exist_ok=True)
+    seq_to_path: dict[str, Path] = {}
+    missing_sequences: list[str] = []
+    for sequence in unique_sequences:
+        seq_hash = hashlib.sha1(sequence.encode("utf-8")).hexdigest()[:16]
+        msa_path = msa_cache_dir / f"{seq_hash}.a3m"
+        if reuse_cache and msa_path.exists() and msa_path.stat().st_size > 0:
+            seq_to_path[sequence] = msa_path.resolve()
+        else:
+            missing_sequences.append(sequence)
+
+    if not missing_sequences:
+        return seq_to_path
+
+    if msa_batch_size <= 0:
+        msa_batch_size = len(missing_sequences)
+    if msa_concurrency <= 0:
+        msa_concurrency = 1
+    if not cuda_devices:
+        cuda_devices = [""]
+
+    chunks = [
+        missing_sequences[idx : idx + msa_batch_size]
+        for idx in range(0, len(missing_sequences), msa_batch_size)
+    ]
+    total_missing = len(missing_sequences)
+    total_chunks = len(chunks)
+    worker_count = max(1, min(len(chunks), msa_concurrency, len(cuda_devices)))
+
+    cpu_count = os.cpu_count() or 1
+    threads_per_job = int(msa_threads_per_job)
+    if threads_per_job <= 0:
+        threads_per_job = max(8, min(16, cpu_count // worker_count))
+
+    chunk_bar = tqdm(total=total_chunks, desc="MSA Chunks", unit="chunk")
+    seq_bar = tqdm(total=total_missing, desc="MSA Seqs", unit="seq")
+    progress_lock = threading.Lock()
+    results: list[dict[str, str]] = []
+    errors: list[str] = []
+    active_workers: dict[str, str] = {}
+    work_queue: Queue[tuple[int, Sequence[str]]] = Queue()
+    for idx, chunk in enumerate(chunks):
+        work_queue.put((idx, chunk))
+
+    attempts = max(1, int(msa_retries))
+
+    def _active_summary() -> str:
+        if not active_workers:
+            return "idle"
+        parts = [f"{gpu}:{label}" for gpu, label in sorted(active_workers.items())]
+        return " | ".join(parts[:4])
+
+    def _worker(worker_idx: int, device: str) -> None:
+        while True:
+            try:
+                chunk_idx, chunk = work_queue.get_nowait()
+            except Empty:
+                return
+
+            with progress_lock:
+                active_workers[device or f"worker{worker_idx}"] = f"chunk={chunk_idx + 1}/{total_chunks}"
+                chunk_bar.set_postfix_str(_active_summary())
+
+            last_error: Exception | None = None
+            chunk_result: dict[str, str] | None = None
+            for attempt_idx in range(attempts):
+                try:
+                    chunk_result = _run_local_mmseqs_chunk(
+                        chunk,
+                        chunk_idx=chunk_idx,
+                        msa_cache_dir=msa_cache_dir,
+                        mmseqs_bin=assets["mmseqs_bin"],
+                        db_prefix=assets["db_prefix"],
+                        db_seq=assets["db_seq"],
+                        db_aln=assets["db_aln"],
+                        threads=threads_per_job,
+                        use_filter=use_filter,
+                        max_seqs=max_seqs,
+                        num_iterations=num_iterations,
+                        cuda_device=device or None,
+                    )
+                    last_error = None
+                    break
+                except Exception as exc:
+                    last_error = exc
+                    if attempt_idx + 1 < attempts:
+                        with progress_lock:
+                            tqdm.write(
+                                f"[msa-direct] retrying chunk {chunk_idx + 1}/{total_chunks} "
+                                f"(gpu={device or 'default'} size={len(chunk)}) after error: {exc}"
+                            )
+
+            with progress_lock:
+                active_workers.pop(device or f"worker{worker_idx}", None)
+                if chunk_result is None:
+                    errors.append(
+                        f"chunk={chunk_idx} gpu={device or 'default'} size={len(chunk)} error={last_error}"
+                    )
+                    tqdm.write(
+                        f"[msa-direct] failed chunk {chunk_idx + 1}/{total_chunks} "
+                        f"(gpu={device or 'default'} size={len(chunk)}): {last_error}"
+                    )
+                else:
+                    results.append(chunk_result)
+                    chunk_bar.update(1)
+                    seq_bar.update(len(chunk))
+                chunk_bar.set_postfix_str(
+                    f"done={chunk_bar.n}/{total_chunks} active={_active_summary()}"
+                )
+            work_queue.task_done()
+
+    threads: list[threading.Thread] = []
+    try:
+        for worker_idx in range(worker_count):
+            device = cuda_devices[worker_idx]
+            thread = threading.Thread(
+                target=_worker,
+                args=(worker_idx, device),
+                name=f"msa-gpu-{device or worker_idx}",
+                daemon=True,
+            )
+            thread.start()
+            threads.append(thread)
+        for thread in threads:
+            thread.join()
+    finally:
+        chunk_bar.close()
+        seq_bar.close()
+
+    seq_to_path.update(
+        _write_generated_msas(
+            results,
+            msa_cache_dir=msa_cache_dir,
+            msa_depth=msa_depth,
+        )
+    )
+    unresolved = [sequence for sequence in missing_sequences if sequence not in seq_to_path]
+    if unresolved:
+        details = "; ".join(errors) if errors else "unknown"
+        raise RuntimeError(
+            f"Local direct MSA generation failed for {len(unresolved)} sequence(s): {details}"
+        )
+    return seq_to_path
+
+
+def _generate_msas(
+    sequences: Sequence[str],
+    *,
+    msa_backend: str,
+    local_msa_root: Path,
+    boltz_src_path: Path | None,
+    msa_cache_dir: Path,
+    host_url: str,
+    use_env: bool,
+    use_filter: bool,
+    pairing_strategy: str,
+    reuse_cache: bool,
+    msa_batch_size: int,
+    msa_concurrency: int,
+    msa_retries: int,
+    msa_depth: int | None,
+    cuda_devices: list[str],
+    max_seqs: int,
+    num_iterations: int,
+    msa_threads_per_job: int,
+) -> dict[str, Path]:
+    if msa_backend == "server":
+        if boltz_src_path is None:
+            raise ValueError("boltz_src_path is required when --msa-backend=server")
+        return _generate_msas_via_server(
+            sequences=sequences,
+            boltz_src_path=boltz_src_path,
+            msa_cache_dir=msa_cache_dir,
+            host_url=host_url,
+            use_env=use_env,
+            use_filter=use_filter,
+            pairing_strategy=pairing_strategy,
+            reuse_cache=reuse_cache,
+            msa_batch_size=msa_batch_size,
+            msa_concurrency=msa_concurrency,
+            msa_retries=msa_retries,
+            msa_depth=msa_depth,
+        )
+
+    if msa_backend == "local_direct":
+        return _generate_msas_local_direct(
+            sequences=sequences,
+            local_msa_root=local_msa_root,
+            msa_cache_dir=msa_cache_dir,
+            reuse_cache=reuse_cache,
+            msa_batch_size=msa_batch_size,
+            msa_concurrency=msa_concurrency,
+            msa_retries=msa_retries,
+            msa_depth=msa_depth,
+            cuda_devices=cuda_devices,
+            use_filter=use_filter,
+            max_seqs=max_seqs,
+            num_iterations=num_iterations,
+            msa_threads_per_job=msa_threads_per_job,
+        )
+
+    raise ValueError(f"Unsupported MSA backend: {msa_backend}")
+
+
 def _write_json(path: Path, payload: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -445,9 +944,15 @@ def main() -> int:
         help="Shared local MMSeqs2 root. Used to infer the Boltz client path when needed.",
     )
     parser.add_argument(
+        "--msa-backend",
+        choices=("local_direct", "server"),
+        default="local_direct",
+        help="MSA generation backend. local_direct uses local MMSeqs2 GPU jobs directly; server uses the Boltz MMSeqs ticket API.",
+    )
+    parser.add_argument(
         "--boltz-src-path",
         default=None,
-        help="Optional explicit path to Boltz client src for run_mmseqs2.",
+        help="Optional explicit path to Boltz client src for run_mmseqs2. Only used with --msa-backend=server.",
     )
     parser.add_argument(
         "--msa-cache-dir",
@@ -461,11 +966,35 @@ def main() -> int:
     )
     parser.add_argument("--reuse-cache", action="store_true", help="Reuse cached .a3m files.")
     parser.add_argument("--use-env-db", action="store_true", help="Request the environmental DB as well.")
-    parser.add_argument("--use-filter", action="store_true", help="Enable MMSeqs filtering.")
+    parser.add_argument("--use-filter", dest="use_filter", action="store_true", help="Enable MMSeqs filtering (default).")
+    parser.add_argument("--no-use-filter", dest="use_filter", action="store_false", help="Disable MMSeqs filtering.")
     parser.add_argument("--pairing-strategy", default="greedy", help="Pairing strategy passed to run_mmseqs2.")
     parser.add_argument("--msa-batch-size", type=int, default=64, help="Sequences per MMSeqs2 batch request.")
     parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
     parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
+    parser.add_argument(
+        "--cuda-devices",
+        default=os.environ.get("CUDA_VISIBLE_DEVICES", "0,1,2,3"),
+        help="Comma-separated CUDA devices exposed to local_direct MSA workers (default: 0,1,2,3).",
+    )
+    parser.add_argument(
+        "--mmseqs-max-seqs",
+        type=int,
+        default=4096,
+        help="Maximum MMSeqs hits retained during local_direct search (default: 4096).",
+    )
+    parser.add_argument(
+        "--mmseqs-num-iterations",
+        type=int,
+        default=3,
+        help="MMSeqs search iterations for local_direct backend (default: 3).",
+    )
+    parser.add_argument(
+        "--msa-threads-per-job",
+        type=int,
+        default=0,
+        help="Threads per local_direct MMSeqs chunk. Use 0 to auto-size from CPU count and concurrency.",
+    )
     parser.add_argument(
         "--msa-depth",
         type=int,
@@ -485,6 +1014,7 @@ def main() -> int:
         ),
     )
     parser.add_argument("--log-level", default="INFO", help="Logging level.")
+    parser.set_defaults(use_filter=True)
     args = parser.parse_args()
 
     root = _repo_root()
@@ -493,11 +1023,13 @@ def main() -> int:
     input_root = _resolve_path(args.input_root, base_dir=root)
     output_root = _resolve_path(args.output_root, base_dir=root)
     local_msa_root = _resolve_path(args.local_msa_root, base_dir=root)
-    boltz_src_path = (
-        _resolve_path(args.boltz_src_path, base_dir=root)
-        if args.boltz_src_path
-        else _infer_boltz_src_path(local_msa_root)
-    )
+    boltz_src_path = None
+    if args.msa_backend == "server":
+        boltz_src_path = (
+            _resolve_path(args.boltz_src_path, base_dir=root)
+            if args.boltz_src_path
+            else _infer_boltz_src_path(local_msa_root)
+        )
     msa_cache_dir = (
         _resolve_path(args.msa_cache_dir, base_dir=root)
         if args.msa_cache_dir
@@ -507,6 +1039,7 @@ def main() -> int:
         ("reactant", "product") if args.states == "both" else (args.states,)
     )
     msa_depth = None if int(args.msa_depth) <= 0 else int(args.msa_depth)
+    cuda_devices = _parse_cuda_devices(args.cuda_devices)
 
     logger.info("Loading RF3 examples from %s", input_root)
     payloads_by_state = {
@@ -533,16 +1066,19 @@ def main() -> int:
         state_example_counts[state] = state_count
 
     logger.info(
-        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s)",
+        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s, backend=%s)",
         sum(state_example_counts.values()),
         len(set(sequences)),
         existing_msa_count,
         "unlimited" if max_docked_pairs is None else max_docked_pairs,
+        args.msa_backend,
     )
 
     t0 = time.perf_counter()
     seq_to_msa = _generate_msas(
         sequences=sequences,
+        msa_backend=args.msa_backend,
+        local_msa_root=local_msa_root,
         boltz_src_path=boltz_src_path,
         msa_cache_dir=msa_cache_dir,
         host_url=args.msa_server_url,
@@ -554,6 +1090,10 @@ def main() -> int:
         msa_concurrency=int(args.msa_concurrency),
         msa_retries=int(args.msa_retries),
         msa_depth=msa_depth,
+        cuda_devices=cuda_devices,
+        max_seqs=int(args.mmseqs_max_seqs),
+        num_iterations=int(args.mmseqs_num_iterations),
+        msa_threads_per_job=int(args.msa_threads_per_job),
     )
 
     output_root.mkdir(parents=True, exist_ok=True)
@@ -630,10 +1170,12 @@ def main() -> int:
         "input_root": str(input_root),
         "output_root": str(output_root),
         "requested_states": list(requested_states),
+        "msa_backend": args.msa_backend,
         "local_msa_root": str(local_msa_root),
-        "boltz_src_path": str(boltz_src_path),
+        "boltz_src_path": None if boltz_src_path is None else str(boltz_src_path),
         "msa_cache_dir": str(msa_cache_dir),
         "msa_server_url": args.msa_server_url,
+        "cuda_devices": cuda_devices,
         "msa_depth": None if msa_depth is None else int(msa_depth),
         "reuse_cache": bool(args.reuse_cache),
         "use_env_db": bool(args.use_env_db),
@@ -642,6 +1184,9 @@ def main() -> int:
         "msa_batch_size": int(args.msa_batch_size),
         "msa_concurrency": int(args.msa_concurrency),
         "msa_retries": int(args.msa_retries),
+        "mmseqs_max_seqs": int(args.mmseqs_max_seqs),
+        "mmseqs_num_iterations": int(args.mmseqs_num_iterations),
+        "msa_threads_per_job": int(args.msa_threads_per_job),
         "max_docked_pairs": None if max_docked_pairs is None else int(max_docked_pairs),
         "counts": {
             "states": state_example_counts,

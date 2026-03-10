@@ -76,7 +76,7 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             cache_dir = Path(tmpdir)
             with mock.patch.dict(sys.modules, fake_modules, clear=False):
-                seq_to_path = MODULE._generate_msas(
+                seq_to_path = MODULE._generate_msas_via_server(
                     ["SEQ1", "SEQ2", "SEQ1"],
                     boltz_src_path=REPO_ROOT,
                     msa_cache_dir=cache_dir,
@@ -92,6 +92,52 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
                 )
 
             self.assertEqual(set(seq_to_path.keys()), {"SEQ1", "SEQ2"})
+            for msa_path in seq_to_path.values():
+                self.assertTrue(msa_path.exists())
+                a3m = msa_path.read_text(encoding="utf-8")
+                self.assertEqual(MODULE._count_a3m_sequences(a3m), 2)
+
+    def test_generate_msas_local_direct_writes_trimmed_a3ms(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            cache_dir = Path(tmpdir)
+
+            def fake_run_local_chunk(chunk, **kwargs):
+                return {
+                    sequence: (
+                        f">query_{idx}\nAAAA\n"
+                        f">hit1_{idx}\nBBBB\n"
+                        f">hit2_{idx}\nCCCC\n"
+                    )
+                    for idx, sequence in enumerate(chunk)
+                }
+
+            with mock.patch.object(
+                MODULE,
+                "_infer_local_mmseqs_assets",
+                return_value={
+                    "mmseqs_bin": cache_dir / "mmseqs",
+                    "db_prefix": cache_dir / "uniref30_2302_db",
+                    "db_seq": cache_dir / "uniref30_2302_db_seq",
+                    "db_aln": cache_dir / "uniref30_2302_db_aln",
+                },
+            ), mock.patch.object(MODULE, "_run_local_mmseqs_chunk", side_effect=fake_run_local_chunk):
+                seq_to_path = MODULE._generate_msas_local_direct(
+                    ["SEQ1", "SEQ2", "SEQ3", "SEQ1"],
+                    local_msa_root=cache_dir,
+                    msa_cache_dir=cache_dir,
+                    reuse_cache=False,
+                    msa_batch_size=2,
+                    msa_concurrency=2,
+                    msa_retries=1,
+                    msa_depth=2,
+                    cuda_devices=["0", "1"],
+                    use_filter=False,
+                    max_seqs=4096,
+                    num_iterations=3,
+                    msa_threads_per_job=1,
+                )
+
+            self.assertEqual(set(seq_to_path.keys()), {"SEQ1", "SEQ2", "SEQ3"})
             for msa_path in seq_to_path.values():
                 self.assertTrue(msa_path.exists())
                 a3m = msa_path.read_text(encoding="utf-8")

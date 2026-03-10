@@ -572,13 +572,33 @@ it. Use `--msa-depth 0` to disable trimming.
 
 The RF3 local-MSA wrapper also now defaults to:
 
-- `--msa-server-url http://127.0.0.1:8080/api`
+- `--msa-backend local_direct`
 - `--msa-batch-size 64`
+- `--msa-concurrency 4`
+- `--use-filter`
 - `--cuda-devices 0,1,2,3`
 - `--rf3-gpus 4`
 
-Those defaults avoid the extra failed root-path submission and reduce MMSeqs job
-overhead substantially for large ReactZyme runs.
+In `local_direct` mode, the MSA prep step bypasses the ColabFold ticket API and
+runs local MMSeqs2 jobs directly against the shared UniRef30 database under
+`../enzyme-quiver/MMseqs2/local_msa`. The wrapper binds up to four concurrent
+MSA chunk workers across `CUDA_VISIBLE_DEVICES=0,1,2,3`, so the local MMSeqs2
+GPU prefilter stage is dispatched across the four visible GPUs instead of
+queueing behind the older ticket-server path.
+
+The legacy server-backed route is still available if needed:
+
+```bash
+bash scripts/rf3/run_foundry_rf3_local_msa.sh \
+  --env-dir .venvs/foundry-rf3 \
+  --input-root runs/rf3_reactzyme_inputs_smiles_full \
+  --prepared-root runs/rf3_reactzyme_inputs_smiles_full_with_msa \
+  --out-root runs/rf3_reactzyme_out_smiles_full \
+  --ckpt-path rf3 \
+  --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
+  --msa-backend server \
+  --reuse-cache
+```
 
 For RF3 itself, the wrapper now passes `devices_per_node=4` to Foundry and
 exports `CUDA_VISIBLE_DEVICES=0,1,2,3`, so inference is launched against all
@@ -586,8 +606,11 @@ four GPUs by default. The wrapper fails fast if the requested GPU count and
 visible device list do not match.
 
 MSA progress is now reported with outer `MSA Chunks` and `MSA Seqs` tqdm bars.
-The older inner Boltz/MMSeqs time-estimate bar is suppressed so retries and
-chunk restarts no longer look like lost global progress.
+In `local_direct` mode, the `MSA Chunks` postfix shows which chunk is currently
+bound to each active GPU worker, so long-running chunk phases no longer look
+like a frozen run. In `server` mode, the older inner Boltz/MMSeqs time-estimate
+bar is suppressed so retries and chunk restarts no longer look like lost global
+progress.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 

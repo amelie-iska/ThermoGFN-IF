@@ -15,6 +15,9 @@ LOCAL_WORKERS="4"
 PARALLEL_DATABASES="2"
 PARALLEL_STAGES="true"
 INDEX_THREADS="${INDEX_THREADS:-$(nproc)}"
+MMSEQS_TUNE_ENABLE="true"
+MMSEQS_TUNE_MAX_SEQS="${MMSEQS_TUNE_MAX_SEQS:-4096}"
+MMSEQS_TUNE_NUM_ITERATIONS="${MMSEQS_TUNE_NUM_ITERATIONS:-3}"
 
 usage() {
   cat <<'USAGE'
@@ -35,6 +38,9 @@ Options:
   --parallel-stages         Enable ColabFold parallel stages (default)
   --no-parallel-stages      Disable ColabFold parallel stages
   --index-threads N         Threads for one-time createindex repair if GPU .idx artifacts are missing (default: nproc)
+  --mmseqs-max-seqs N       Tune MMSeqs search/gpuserver max-seqs (default: 4096)
+  --mmseqs-num-iterations N Tune MMSeqs search num-iterations (default: 3)
+  --disable-mmseqs-tune     Disable the MMSeqs tuned wrapper and use the raw binary
   --no-legacy-config        Do not also write <msa-root>/config.uniref100.json
   --cleanup-uniref100       Remove accidental local uniref100_db* artifacts under <msa-root>
   -h, --help                Show help
@@ -67,6 +73,12 @@ while [[ $# -gt 0 ]]; do
       PARALLEL_STAGES="false"; shift ;;
     --index-threads)
       INDEX_THREADS="$2"; shift 2 ;;
+    --mmseqs-max-seqs)
+      MMSEQS_TUNE_MAX_SEQS="$2"; shift 2 ;;
+    --mmseqs-num-iterations)
+      MMSEQS_TUNE_NUM_ITERATIONS="$2"; shift 2 ;;
+    --disable-mmseqs-tune)
+      MMSEQS_TUNE_ENABLE="false"; shift ;;
     --no-legacy-config)
       WRITE_LEGACY_CONFIG=0; shift ;;
     --cleanup-uniref100)
@@ -95,6 +107,7 @@ MSA_SERVER_DIR="${MSA_ROOT}/ColabFold/MsaServer"
 TEMPLATE_CONFIG="${MSA_SERVER_DIR}/config.json"
 MMSEQS_BIN="${MSA_SERVER_DIR}/bin/mmseqs"
 MMSEQS_SERVER_BIN="${MSA_SERVER_DIR}/bin/mmseqs-server"
+MMSEQS_FOR_CONFIG="${MMSEQS_BIN}"
 UNIREF30_DB="${UNIREF30_ROOT}/uniref30_2302_db"
 UNIREF30_DB_PAD="${UNIREF30_ROOT}/uniref30_2302_db_pad"
 RESULTS_DIR="${MSA_ROOT}/jobs"
@@ -139,13 +152,77 @@ if [[ "${CLEANUP_UNIREF100}" -eq 1 ]]; then
   find "${MSA_ROOT}/tmp" -maxdepth 3 \( -type f -o -type l \) \( -name 'uniref100*' -o -name 'download.sh' -o -name 'version' \) -print -delete 2>/dev/null || true
 fi
 
+if [[ "${MMSEQS_TUNE_ENABLE}" == "true" ]]; then
+  if ! [[ "${MMSEQS_TUNE_MAX_SEQS}" =~ ^[0-9]+$ ]] || (( MMSEQS_TUNE_MAX_SEQS <= 0 )); then
+    echo "Invalid --mmseqs-max-seqs value: ${MMSEQS_TUNE_MAX_SEQS}" >&2
+    exit 2
+  fi
+  if ! [[ "${MMSEQS_TUNE_NUM_ITERATIONS}" =~ ^[0-9]+$ ]] || (( MMSEQS_TUNE_NUM_ITERATIONS <= 0 )); then
+    echo "Invalid --mmseqs-num-iterations value: ${MMSEQS_TUNE_NUM_ITERATIONS}" >&2
+    exit 2
+  fi
+  MMSEQS_WRAPPER="${MSA_ROOT}/bin/mmseqs_tuned.sh"
+  mkdir -p "$(dirname "${MMSEQS_WRAPPER}")"
+  cat > "${MMSEQS_WRAPPER}" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+
+REAL_MMSEQS="${MMSEQS_BIN}"
+TUNE_MAX_SEQS="${MMSEQS_TUNE_MAX_SEQS}"
+TUNE_NUM_ITERATIONS="${MMSEQS_TUNE_NUM_ITERATIONS}"
+
+cmd="\${1:-}"
+if [[ -z "\${cmd}" ]]; then
+  exec "\${REAL_MMSEQS}"
+fi
+shift
+args=("\$@")
+
+rewrite_opt() {
+  local key="\$1"
+  local value="\$2"
+  local -a out=()
+  local seen=0
+  local i=0
+  while (( i < \${#args[@]} )); do
+    if [[ "\${args[i]}" == "\${key}" ]]; then
+      out+=("\${key}" "\${value}")
+      seen=1
+      i=\$((i + 2))
+      continue
+    fi
+    out+=("\${args[i]}")
+    i=\$((i + 1))
+  done
+  if (( seen == 0 )); then
+    out+=("\${key}" "\${value}")
+  fi
+  args=("\${out[@]}")
+}
+
+case "\${cmd}" in
+  search)
+    rewrite_opt "--num-iterations" "\${TUNE_NUM_ITERATIONS}"
+    rewrite_opt "--max-seqs" "\${TUNE_MAX_SEQS}"
+    ;;
+  ungappedprefilter|gpuserver)
+    rewrite_opt "--max-seqs" "\${TUNE_MAX_SEQS}"
+    ;;
+esac
+
+exec "\${REAL_MMSEQS}" "\${cmd}" "\${args[@]}"
+EOF
+  chmod +x "${MMSEQS_WRAPPER}"
+  MMSEQS_FOR_CONFIG="${MMSEQS_WRAPPER}"
+fi
+
 mkdir -p "${RESULTS_DIR}" "${MSA_SERVER_DIR}/databases"
 ln -sfn "${UNIREF30_DB}" "${MSA_SERVER_DIR}/databases/uniref30_2302_db"
 if [[ -e "${UNIREF30_DB_PAD}" ]]; then
   ln -sfn "${UNIREF30_DB_PAD}" "${MSA_SERVER_DIR}/databases/uniref30_2302_db_pad"
 fi
 
-python3 - "$TEMPLATE_CONFIG" "$CONFIG_PATH" "$LEGACY_CONFIG_PATH" "$SELECTED_DB" "$MMSEQS_BIN" "$HOST" "$PORT" "$RESULTS_DIR" "$LOCAL_WORKERS" "$PARALLEL_DATABASES" "$PARALLEL_STAGES" "$WRITE_LEGACY_CONFIG" <<'PY'
+python3 - "$TEMPLATE_CONFIG" "$CONFIG_PATH" "$LEGACY_CONFIG_PATH" "$SELECTED_DB" "$MMSEQS_FOR_CONFIG" "$HOST" "$PORT" "$RESULTS_DIR" "$LOCAL_WORKERS" "$PARALLEL_DATABASES" "$PARALLEL_STAGES" "$WRITE_LEGACY_CONFIG" <<'PY'
 import json
 import os
 import pathlib

@@ -11,16 +11,20 @@ CKPT_PATH="rf3"
 CHECKPOINT_DIRS=""
 LOCAL_MSA_ROOT="${REPO_ROOT}/../enzyme-quiver/MMseqs2/local_msa"
 BOLTZ_SRC_PATH=""
+MSA_BACKEND="local_direct"
 MSA_SERVER_URL="http://127.0.0.1:8080/api"
 MSA_CACHE_DIR=""
 REUSE_CACHE=0
 USE_ENV_DB=0
-USE_FILTER=0
+USE_FILTER=1
 PAIRING_STRATEGY="greedy"
 MSA_BATCH_SIZE=64
 MSA_CONCURRENCY=4
 MSA_RETRIES=2
 MSA_DEPTH=2048
+MSA_THREADS_PER_JOB=0
+MMSEQS_MAX_SEQS=4096
+MMSEQS_NUM_ITERATIONS=3
 SHARDS=1
 MAX_DOCKED_PAIRS=2000
 CUDA_DEVICES="${CUDA_DEVICES:-0,1,2,3}"
@@ -46,6 +50,7 @@ Options:
   --ckpt-path VALUE      RF3 checkpoint path or registered name (default: rf3)
   --checkpoint-dirs PATH Colon-separated checkpoint search dirs
   --local-msa-root PATH  Shared MMSeqs2 local workspace
+  --msa-backend VALUE    local_direct|server (default: local_direct)
   --boltz-src-path PATH  Explicit Boltz client src path for MSA generation
   --msa-server-url URL   Local MMSeqs2 server URL (default: http://127.0.0.1:8080/api)
   --msa-cache-dir PATH   Directory for generated .a3m files
@@ -53,12 +58,18 @@ Options:
   --rf3-gpus N           Number of GPUs for RF3 inference (default: 4)
   --reuse-cache          Reuse cached .a3m files
   --use-env-db           Request environmental DB
-  --use-filter           Enable MMSeqs filtering
+  --use-filter           Enable MMSeqs filtering (default)
+  --no-use-filter        Disable MMSeqs filtering
   --pairing-strategy X   Pairing strategy for run_mmseqs2 (default: greedy)
   --msa-batch-size N     Sequences per MMSeqs2 batch request (default: 64)
   --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 4)
   --msa-retries N        Retries per MMSeqs2 batch request (default: 2)
   --msa-depth N          Max sequences retained per written A3M (default: 2048; 0 disables)
+  --msa-threads-per-job N
+                         Threads per local_direct MMSeqs chunk (default: auto)
+  --mmseqs-max-seqs N    Tune MMSeqs search/gpuserver max-seqs (default: 4096)
+  --mmseqs-num-iterations N
+                         Tune MMSeqs search num-iterations (default: 3)
   --shards N             Output shard count for prepared JSONs (default: 1)
   --max-docked-pairs N   Max docking pairs to prepare/predict (default: 2000; 0 disables)
   --max-examples N       Backward-compatible alias for --max-docked-pairs
@@ -89,6 +100,8 @@ while [[ $# -gt 0 ]]; do
       CHECKPOINT_DIRS="$2"; shift 2 ;;
     --local-msa-root)
       LOCAL_MSA_ROOT="$2"; shift 2 ;;
+    --msa-backend)
+      MSA_BACKEND="$2"; shift 2 ;;
     --boltz-src-path)
       BOLTZ_SRC_PATH="$2"; shift 2 ;;
     --msa-server-url)
@@ -105,6 +118,8 @@ while [[ $# -gt 0 ]]; do
       USE_ENV_DB=1; shift ;;
     --use-filter)
       USE_FILTER=1; shift ;;
+    --no-use-filter)
+      USE_FILTER=0; shift ;;
     --pairing-strategy)
       PAIRING_STRATEGY="$2"; shift 2 ;;
     --msa-batch-size)
@@ -115,6 +130,12 @@ while [[ $# -gt 0 ]]; do
       MSA_RETRIES="$2"; shift 2 ;;
     --msa-depth)
       MSA_DEPTH="$2"; shift 2 ;;
+    --msa-threads-per-job)
+      MSA_THREADS_PER_JOB="$2"; shift 2 ;;
+    --mmseqs-max-seqs)
+      MMSEQS_MAX_SEQS="$2"; shift 2 ;;
+    --mmseqs-num-iterations)
+      MMSEQS_NUM_ITERATIONS="$2"; shift 2 ;;
     --shards)
       SHARDS="$2"; shift 2 ;;
     --max-docked-pairs)
@@ -191,18 +212,54 @@ if [[ -n "${CHECKPOINT_DIRS}" ]]; then
   export FOUNDRY_CHECKPOINT_DIRS="${CHECKPOINT_DIRS}${FOUNDRY_CHECKPOINT_DIRS:+:${FOUNDRY_CHECKPOINT_DIRS}}"
 fi
 
+case "${MSA_BACKEND}" in
+  local_direct|server) ;;
+  *)
+    echo "Unsupported --msa-backend value: ${MSA_BACKEND}" >&2
+    exit 2 ;;
+esac
+
+if [[ "${MSA_BACKEND}" == "server" ]]; then
+  MMSEQS_SERVER_RESTART_CMD=(
+    bash "${REPO_ROOT}/scripts/env/start_local_mmseqs2_uniref30_server.sh"
+    --msa-root "${LOCAL_MSA_ROOT}"
+    --uniref30-root "/opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302"
+    --cleanup-uniref100
+    --cuda-devices "${CUDA_DEVICES}"
+    --mmseqs-max-seqs "${MMSEQS_MAX_SEQS}"
+    --mmseqs-num-iterations "${MMSEQS_NUM_ITERATIONS}"
+  )
+  echo "[foundry-rf3-run] ensuring tuned MMSeqs2 server config (backend=server max_seqs=${MMSEQS_MAX_SEQS} num_iterations=${MMSEQS_NUM_ITERATIONS})"
+  if [[ -f "${LOCAL_MSA_ROOT}/run/mmseqs-server.pid" ]]; then
+    old_pid="$(cat "${LOCAL_MSA_ROOT}/run/mmseqs-server.pid" 2>/dev/null || true)"
+    if [[ -n "${old_pid}" ]] && kill -0 "${old_pid}" 2>/dev/null; then
+      kill "${old_pid}" || true
+      sleep 2
+    fi
+    rm -f "${LOCAL_MSA_ROOT}/run/mmseqs-server.pid"
+  fi
+  "${MMSEQS_SERVER_RESTART_CMD[@]}"
+else
+  echo "[foundry-rf3-run] using direct local MMSeqs2 GPU backend (max_seqs=${MMSEQS_MAX_SEQS} num_iterations=${MMSEQS_NUM_ITERATIONS})"
+fi
+
 PREP_ARGS=(
   "${PYTHON_BIN}" "${REPO_ROOT}/scripts/rf3/prepare_reactzyme_rf3_msas.py"
   --input-root "${INPUT_ROOT}"
   --output-root "${PREPARED_ROOT}"
   --states "${STATES}"
   --local-msa-root "${LOCAL_MSA_ROOT}"
+  --msa-backend "${MSA_BACKEND}"
   --msa-server-url "${MSA_SERVER_URL}"
   --pairing-strategy "${PAIRING_STRATEGY}"
   --msa-batch-size "${MSA_BATCH_SIZE}"
   --msa-concurrency "${MSA_CONCURRENCY}"
   --msa-retries "${MSA_RETRIES}"
   --msa-depth "${MSA_DEPTH}"
+  --msa-threads-per-job "${MSA_THREADS_PER_JOB}"
+  --cuda-devices "${CUDA_DEVICES}"
+  --mmseqs-max-seqs "${MMSEQS_MAX_SEQS}"
+  --mmseqs-num-iterations "${MMSEQS_NUM_ITERATIONS}"
   --shards "${SHARDS}"
   --max-docked-pairs "${MAX_DOCKED_PAIRS}"
 )
@@ -223,7 +280,11 @@ if [[ "${USE_FILTER}" -eq 1 ]]; then
 fi
 
 echo "[foundry-rf3-run] preparing local MSAs"
-"${PREP_ARGS[@]}"
+if [[ -n "${CUDA_DEVICES}" ]]; then
+  env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${PREP_ARGS[@]}"
+else
+  "${PREP_ARGS[@]}"
+fi
 
 run_state() {
   local state="$1"

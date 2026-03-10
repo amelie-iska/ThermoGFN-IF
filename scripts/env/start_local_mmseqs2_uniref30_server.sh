@@ -19,6 +19,9 @@ PARALLEL_DATABASES=""
 PARALLEL_STAGES=""
 LOG_FILE=""
 PID_FILE=""
+MMSEQS_MAX_SEQS="4096"
+MMSEQS_NUM_ITERATIONS="3"
+DISABLE_MMSEQS_TUNE=0
 
 usage() {
   cat <<'USAGE'
@@ -42,6 +45,9 @@ Options:
   --parallel-databases N    Override generated parallel-databases count
   --parallel-stages         Enable generated ColabFold parallel stages
   --no-parallel-stages      Disable generated ColabFold parallel stages
+  --mmseqs-max-seqs N       Tune MMSeqs search/gpuserver max-seqs (default: 4096)
+  --mmseqs-num-iterations N Tune MMSeqs search num-iterations (default: 3)
+  --disable-mmseqs-tune     Disable the MMSeqs tuned wrapper and use the raw binary
   --log-file PATH           Log file for detached server mode (default: <msa-root>/logs/mmseqs-server.log)
   --pid-file PATH           PID file for detached server mode (default: <msa-root>/run/mmseqs-server.pid)
   -h, --help                Show help
@@ -76,6 +82,12 @@ while [[ $# -gt 0 ]]; do
       PARALLEL_STAGES="true"; shift ;;
     --no-parallel-stages)
       PARALLEL_STAGES="false"; shift ;;
+    --mmseqs-max-seqs)
+      MMSEQS_MAX_SEQS="$2"; shift 2 ;;
+    --mmseqs-num-iterations)
+      MMSEQS_NUM_ITERATIONS="$2"; shift 2 ;;
+    --disable-mmseqs-tune)
+      DISABLE_MMSEQS_TUNE=1; shift ;;
     --log-file)
       LOG_FILE="$2"; shift 2 ;;
     --pid-file)
@@ -129,6 +141,11 @@ if [[ "${PARALLEL_STAGES}" == "true" ]]; then
   cfg_cmd+=(--parallel-stages)
 elif [[ "${PARALLEL_STAGES}" == "false" ]]; then
   cfg_cmd+=(--no-parallel-stages)
+fi
+if [[ "${DISABLE_MMSEQS_TUNE}" -eq 1 ]]; then
+  cfg_cmd+=(--disable-mmseqs-tune)
+else
+  cfg_cmd+=(--mmseqs-max-seqs "${MMSEQS_MAX_SEQS}" --mmseqs-num-iterations "${MMSEQS_NUM_ITERATIONS}")
 fi
 
 "${cfg_cmd[@]}"
