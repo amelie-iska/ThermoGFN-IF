@@ -453,6 +453,21 @@ python scripts/rf3/build_reactzyme_rf3_inputs.py \
   --output-root runs/rf3_reactzyme_inputs_smiles \
   --max-seq-len 600 \
   --ligand-source smiles
+
+# larger split-table build from the full cleaned ReactZyme sequence/reaction tables
+# this preserves pocket constraints, writes shard JSONs, and avoids emitting
+# hundreds of thousands of per-example files
+python scripts/rf3/build_reactzyme_rf3_inputs.py \
+  --source-root generate-constraints_0 \
+  --input-source reactzyme_split \
+  --sequence-tsv generate-constraints_0/data/reactzyme_data_split/cleaned_uniprot_rhea.tsv \
+  --rhea-molecules-tsv generate-constraints_0/data/reactzyme_data_split/rhea_molecules.tsv \
+  --output-root runs/rf3_reactzyme_inputs_smiles_full \
+  --max-seq-len 600 \
+  --ligand-source smiles \
+  --shards 256 \
+  --no-example-files \
+  --no-state-json
 ```
 
 The builder defaults also enforce:
@@ -479,18 +494,27 @@ If you pass `--ligand-source smiles`, the builder omits `templates`,
 the ReactZyme multi-fragment SMILES directly as the ligand component while
 keeping the same pocket constraints.
 
+If you pass `--input-source reactzyme_split`, the builder explodes the full
+`cleaned_uniprot_rhea.tsv` plus `rhea_molecules.tsv` tables instead of using the
+smaller ETFlow train manifest. On the current local dataset, that path yields a
+much larger pocket-constrained candidate set than the template-manifest subset.
+
 ### 5. Generate local MSAs and run Foundry RF3
 
 ```bash
 bash scripts/rf3/run_foundry_rf3_local_msa.sh \
   --env-dir .venvs/foundry-rf3 \
-  --input-root runs/rf3_reactzyme_inputs \
-  --prepared-root runs/rf3_reactzyme_inputs_with_msa \
-  --out-root runs/rf3_reactzyme_out \
+  --input-root runs/rf3_reactzyme_inputs_smiles_full \
+  --prepared-root runs/rf3_reactzyme_inputs_smiles_full_with_msa \
+  --out-root runs/rf3_reactzyme_out_smiles_full \
   --ckpt-path rf3 \
   --local-msa-root ../enzyme-quiver/MMseqs2/local_msa \
   --reuse-cache
 ```
+
+When shard JSONs are present under `input-root/shards/<state>/`, the MSA prep
+step and the RF3 runner process those shards directly rather than requiring a
+single monolithic `<state>.json`.
 
 The wrapper first prepares local MSAs and attaches `msa_path`, then runs Foundry RF3 on both reactant and product JSON bundles.
 

@@ -170,7 +170,34 @@ echo "[foundry-rf3-run] preparing local MSAs"
 run_state() {
   local state="$1"
   local input_json="${PREPARED_ROOT}/${state}.json"
+  local shard_dir="${PREPARED_ROOT}/shards/${state}"
   local state_out="${OUT_ROOT}/${state}"
+  local override
+
+  if [[ -d "${shard_dir}" ]] && compgen -G "${shard_dir}/*.json" >/dev/null; then
+    local shard_json
+    for shard_json in "${shard_dir}"/*.json; do
+      local shard_name
+      shard_name="$(basename "${shard_json}" .json)"
+      local shard_out="${state_out}/${shard_name}"
+      local -a shard_cmd=(
+        "${PYTHON_BIN}" "${REPO_ROOT}/models/foundry/models/rf3/src/rf3/inference.py"
+        "inputs=${shard_json}"
+        "out_dir=${shard_out}"
+        "ckpt_path=${CKPT_PATH}"
+        "n_recycles=${N_RECYCLES}"
+        "diffusion_batch_size=${DIFFUSION_BATCH_SIZE}"
+        "num_steps=${NUM_STEPS}"
+      )
+      for override in "${HYDRA_OVERRIDES[@]}"; do
+        shard_cmd+=("${override}")
+      done
+      echo "[foundry-rf3-run] running state=${state} shard=${shard_name} inputs=${shard_json} out_dir=${shard_out}"
+      "${shard_cmd[@]}"
+    done
+    return
+  fi
+
   if [[ ! -f "${input_json}" ]]; then
     echo "Prepared input JSON missing: ${input_json}" >&2
     exit 1
@@ -185,7 +212,6 @@ run_state() {
     "diffusion_batch_size=${DIFFUSION_BATCH_SIZE}"
     "num_steps=${NUM_STEPS}"
   )
-  local override
   for override in "${HYDRA_OVERRIDES[@]}"; do
     cmd+=("${override}")
   done

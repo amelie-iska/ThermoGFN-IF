@@ -11,7 +11,7 @@ import sys
 import time
 from collections import defaultdict
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Iterator
 
 
 def _repo_root() -> Path:
@@ -135,6 +135,53 @@ def _write_jsonl(path: Path, rows: Iterable[dict]) -> None:
 
 def _job_name(pair_id: str, state: str) -> str:
     return _sanitize_token(f"{pair_id}__{state}")
+
+
+def _load_rhea_molecules(tsv_path: Path) -> dict[str, tuple[str, str]]:
+    mapping: dict[str, tuple[str, str]] = {}
+    with tsv_path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        for row in reader:
+            rhea_id = str(row.get("Rhea ID") or "").strip()
+            substrate = str(row.get("substrate") or "").strip()
+            product = str(row.get("product") or "").strip()
+            if rhea_id:
+                mapping[rhea_id] = (substrate, product)
+    return mapping
+
+
+def _iter_template_manifest_rows(manifest_path: Path) -> Iterator[dict]:
+    with manifest_path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            yield row
+
+
+def _iter_reactzyme_split_rows(
+    sequence_tsv: Path,
+    rhea_molecules_tsv: Path,
+) -> Iterator[dict]:
+    rhea_map = _load_rhea_molecules(rhea_molecules_tsv)
+    with sequence_tsv.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        for row_idx, row in enumerate(reader):
+            uniprot_id = str(row.get("Entry") or "").strip()
+            sequence = str(row.get("Sequence") or "").strip()
+            rhea_ids = [part.strip() for part in str(row.get("Rhea ID") or "").split(";") if part.strip()]
+            for rid_idx, rhea_id in enumerate(rhea_ids):
+                reactant_smiles, product_smiles = rhea_map.get(rhea_id, ("", ""))
+                yield {
+                    "pair_id": f"split__{_sanitize_token(uniprot_id)}__{_sanitize_token(rhea_id)}__{rid_idx:02d}",
+                    "row_id": f"split_{row_idx}",
+                    "uniprot_id": uniprot_id,
+                    "sequence": sequence,
+                    "rhea_id": rhea_id,
+                    "status": "reactant:ok|product:ok",
+                    "reactant_smiles": reactant_smiles,
+                    "product_smiles": product_smiles,
+                    "reactant_sdf": "",
+                    "product_sdf": "",
+                }
 
 
 def _count_sdf_atoms(path: Path) -> int:
@@ -301,9 +348,20 @@ def main() -> int:
         help="Manifest CSV emitted by the ETFlow template generation step.",
     )
     parser.add_argument(
+        "--input-source",
+        choices=("template_manifest", "reactzyme_split"),
+        default="template_manifest",
+        help="Whether to build from the ETFlow template manifest or the full exploded ReactZyme split tables.",
+    )
+    parser.add_argument(
         "--sequence-tsv",
         default="generate-constraints_0/data/reactzyme_data_split/cleaned_uniprot_rhea.tsv",
         help="UniProt-to-sequence TSV used to recover enzyme sequences.",
+    )
+    parser.add_argument(
+        "--rhea-molecules-tsv",
+        default="generate-constraints_0/data/reactzyme_data_split/rhea_molecules.tsv",
+        help="Rhea-to-reactant/product mapping TSV used for full ReactZyme split builds.",
     )
     parser.add_argument(
         "--pocket-cache",
@@ -381,6 +439,16 @@ def main() -> int:
         help="Number of round-robin shard JSON files to emit per state.",
     )
     parser.add_argument(
+        "--no-example-files",
+        action="store_true",
+        help="Do not emit one JSON file per example under output/examples/<state>/.",
+    )
+    parser.add_argument(
+        "--no-state-json",
+        action="store_true",
+        help="Do not emit aggregate <state>.json files; write only shard JSONs.",
+    )
+    parser.add_argument(
         "--max-rows",
         type=int,
         default=None,
@@ -408,8 +476,17 @@ def main() -> int:
     logger = _configure_logging(args.log_level)
 
     source_root = _resolve_existing_path(args.source_root, source_root=root)
-    manifest_path = _resolve_existing_path(args.manifest, source_root=root)
     sequence_tsv = _resolve_existing_path(args.sequence_tsv, source_root=root)
+    manifest_path = (
+        _resolve_existing_path(args.manifest, source_root=root)
+        if args.input_source == "template_manifest"
+        else None
+    )
+    rhea_molecules_tsv = (
+        _resolve_existing_path(args.rhea_molecules_tsv, source_root=root)
+        if args.input_source == "reactzyme_split"
+        else None
+    )
     pocket_cache_dir = _resolve_existing_path(args.pocket_cache, source_root=root)
     output_root = (root / args.output_root).resolve()
 
@@ -424,9 +501,16 @@ def main() -> int:
         else (args.states,)
     )
 
-    logger.info("Loading UniProt sequences from %s", sequence_tsv)
-    seq_by_uniprot = _load_uniprot_sequences(sequence_tsv)
-    logger.info("Loaded %d UniProt sequences", len(seq_by_uniprot))
+    if args.input_source == "template_manifest":
+        logger.info("Loading UniProt sequences from %s", sequence_tsv)
+        seq_by_uniprot = _load_uniprot_sequences(sequence_tsv)
+        logger.info("Loaded %d UniProt sequences", len(seq_by_uniprot))
+        input_rows = _iter_template_manifest_rows(manifest_path)
+    else:
+        seq_by_uniprot = {}
+        assert rhea_molecules_tsv is not None
+        logger.info("Using full ReactZyme split tables from %s and %s", sequence_tsv, rhea_molecules_tsv)
+        input_rows = _iter_reactzyme_split_rows(sequence_tsv, rhea_molecules_tsv)
 
     logger.info("Loading pocket cache from %s", pocket_cache_dir)
     pocket_cache = _load_pocket_cache(pocket_cache_dir, logger)
@@ -450,140 +534,142 @@ def main() -> int:
         "skipped_sequence_pair_cap": 0,
     }
 
-    with manifest_path.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle)
-        for row in reader:
-            if args.max_rows is not None and int(summary["total_rows_scanned"]) >= args.max_rows:
+    for row in input_rows:
+        if args.max_rows is not None and int(summary["total_rows_scanned"]) >= args.max_rows:
+            break
+        summary["total_rows_scanned"] = int(summary["total_rows_scanned"]) + 1
+
+        status = str(row.get("status") or "").strip()
+        if status not in required_statuses:
+            summary["skipped_status"] = int(summary["skipped_status"]) + 1
+            continue
+
+        uniprot_id = str(row.get("uniprot_id") or row.get("Entry") or "").strip()
+        sequence = str(row.get("sequence") or "").strip() or seq_by_uniprot.get(uniprot_id, "")
+        if not sequence:
+            summary["skipped_missing_sequence"] = int(summary["skipped_missing_sequence"]) + 1
+            continue
+        if len(sequence) > args.max_seq_len:
+            summary["skipped_sequence_too_long"] = int(
+                summary["skipped_sequence_too_long"]
+            ) + 1
+            continue
+
+        pocket_positions = pocket_cache.get(uniprot_id, [])
+        if not pocket_positions and not args.allow_missing_pocket:
+            summary["skipped_missing_pocket"] = int(summary["skipped_missing_pocket"]) + 1
+            continue
+
+        state_payloads: list[tuple[str, str, Path | None, int]] = []
+        missing_state = False
+        for state in requested_states:
+            smiles = str(row.get(f"{state}_smiles") or "").strip()
+            sdf_raw = str(row.get(f"{state}_sdf") or "").strip()
+            if not smiles:
+                summary["skipped_missing_smiles"] = int(summary["skipped_missing_smiles"]) + 1
+                missing_state = True
                 break
-            summary["total_rows_scanned"] = int(summary["total_rows_scanned"]) + 1
-
-            status = str(row.get("status") or "").strip()
-            if status not in required_statuses:
-                summary["skipped_status"] = int(summary["skipped_status"]) + 1
-                continue
-
-            uniprot_id = str(row.get("uniprot_id") or "").strip()
-            sequence = seq_by_uniprot.get(uniprot_id, "")
-            if not sequence:
-                summary["skipped_missing_sequence"] = int(summary["skipped_missing_sequence"]) + 1
-                continue
-            if len(sequence) > args.max_seq_len:
-                summary["skipped_sequence_too_long"] = int(
-                    summary["skipped_sequence_too_long"]
-                ) + 1
-                continue
-
-            pocket_positions = pocket_cache.get(uniprot_id, [])
-            if not pocket_positions and not args.allow_missing_pocket:
-                summary["skipped_missing_pocket"] = int(summary["skipped_missing_pocket"]) + 1
-                continue
-
-            state_payloads: list[tuple[str, str, Path | None, int]] = []
-            missing_state = False
-            for state in requested_states:
-                smiles = str(row.get(f"{state}_smiles") or "").strip()
-                sdf_raw = str(row.get(f"{state}_sdf") or "").strip()
-                if not smiles:
-                    summary["skipped_missing_smiles"] = int(summary["skipped_missing_smiles"]) + 1
+            sdf_path: Path | None = None
+            if sdf_raw:
+                candidate_sdf = _resolve_existing_path(sdf_raw, source_root=source_root)
+                if candidate_sdf.exists():
+                    sdf_path = candidate_sdf
+            if args.ligand_source == "sdf":
+                if sdf_path is None:
+                    summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
                     missing_state = True
                     break
-                sdf_path: Path | None = None
-                if sdf_raw:
-                    candidate_sdf = _resolve_existing_path(sdf_raw, source_root=source_root)
-                    if candidate_sdf.exists():
-                        sdf_path = candidate_sdf
-                if args.ligand_source == "sdf":
-                    if sdf_path is None:
-                        summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
-                        missing_state = True
-                        break
-                    atom_count = _count_sdf_atoms(sdf_path)
-                else:
-                    atom_count = _count_smiles_atoms(smiles)
-                if atom_count > args.max_ligand_atoms:
-                    summary["skipped_ligand_atom_limit"] = int(
-                        summary["skipped_ligand_atom_limit"]
-                    ) + 1
-                    missing_state = True
-                    break
-                state_payloads.append((state, smiles, sdf_path, atom_count))
-            if missing_state:
-                continue
-
-            pair_id = str(row.get("pair_id") or "").strip()
-            row_id = str(row.get("row_id") or "").strip()
-            rhea_id = str(row.get("rhea_id") or "").strip()
-
-            if accepted_pairs_by_sequence[sequence] >= args.max_pairs_per_sequence:
-                summary["skipped_sequence_pair_cap"] = int(
-                    summary["skipped_sequence_pair_cap"]
+                atom_count = _count_sdf_atoms(sdf_path)
+            else:
+                atom_count = _count_smiles_atoms(smiles)
+            if atom_count > args.max_ligand_atoms:
+                summary["skipped_ligand_atom_limit"] = int(
+                    summary["skipped_ligand_atom_limit"]
                 ) + 1
-                continue
-
-            accepted_rows = int(summary["accepted_rows"])
-            if args.max_examples is not None and accepted_rows >= args.max_examples:
+                missing_state = True
                 break
+            state_payloads.append((state, smiles, sdf_path, atom_count))
+        if missing_state:
+            continue
 
-            summary["accepted_rows"] = accepted_rows + 1
-            accepted_pairs_by_sequence[sequence] += 1
-            for state, smiles, sdf_path, atom_count in state_payloads:
-                example = _build_rf3_example(
-                    pair_id=pair_id,
-                    state=state,
-                    uniprot_id=uniprot_id,
-                    rhea_id=rhea_id,
-                    row_id=row_id,
-                    protein_sequence=sequence,
-                    ligand_smiles=smiles,
-                    ligand_sdf=sdf_path,
-                    ligand_source=args.ligand_source,
-                    pocket_positions=pocket_positions,
-                    protein_chain_id=args.protein_chain_id,
-                    ligand_chain_id=args.ligand_chain_id,
-                    pocket_distance_threshold=args.pocket_distance_threshold,
-                    template_threshold=args.template_threshold,
-                    ligand_atom_count=atom_count,
-                )
-                examples_by_state[state].append(example)
-                manifest_rows.append(
-                    {
-                        "pair_id": pair_id,
-                        "example_name": example["name"],
-                        "state": state,
-                        "row_id": row_id,
-                        "rhea_id": rhea_id,
-                        "uniprot_id": uniprot_id,
-                        "sequence_length": len(sequence),
-                        "fragment_count": example["metadata"]["fragment_count"],
-                        "ligand_atom_count": atom_count,
-                        "ligand_source": args.ligand_source,
-                        "pocket_count": len(pocket_positions),
-                        "ligand_sdf": str(sdf_path) if sdf_path is not None else "",
-                        "example_json": str(
-                            (output_root / "examples" / state / f"{example['name']}.json").resolve()
-                        ),
-                    }
-                )
-                summary["emitted_examples"] = int(summary["emitted_examples"]) + 1
+        pair_id = str(row.get("pair_id") or "").strip()
+        row_id = str(row.get("row_id") or "").strip()
+        rhea_id = str(row.get("rhea_id") or "").strip()
+
+        if accepted_pairs_by_sequence[sequence] >= args.max_pairs_per_sequence:
+            summary["skipped_sequence_pair_cap"] = int(
+                summary["skipped_sequence_pair_cap"]
+            ) + 1
+            continue
+
+        accepted_rows = int(summary["accepted_rows"])
+        if args.max_examples is not None and accepted_rows >= args.max_examples:
+            break
+
+        summary["accepted_rows"] = accepted_rows + 1
+        accepted_pairs_by_sequence[sequence] += 1
+        for state, smiles, sdf_path, atom_count in state_payloads:
+            example = _build_rf3_example(
+                pair_id=pair_id,
+                state=state,
+                uniprot_id=uniprot_id,
+                rhea_id=rhea_id,
+                row_id=row_id,
+                protein_sequence=sequence,
+                ligand_smiles=smiles,
+                ligand_sdf=sdf_path,
+                ligand_source=args.ligand_source,
+                pocket_positions=pocket_positions,
+                protein_chain_id=args.protein_chain_id,
+                ligand_chain_id=args.ligand_chain_id,
+                pocket_distance_threshold=args.pocket_distance_threshold,
+                template_threshold=args.template_threshold,
+                ligand_atom_count=atom_count,
+            )
+            examples_by_state[state].append(example)
+            manifest_rows.append(
+                {
+                    "pair_id": pair_id,
+                    "example_name": example["name"],
+                    "state": state,
+                    "row_id": row_id,
+                    "rhea_id": rhea_id,
+                    "uniprot_id": uniprot_id,
+                    "sequence_length": len(sequence),
+                    "fragment_count": example["metadata"]["fragment_count"],
+                    "ligand_atom_count": atom_count,
+                    "ligand_source": args.ligand_source,
+                    "pocket_count": len(pocket_positions),
+                    "ligand_sdf": str(sdf_path) if sdf_path is not None else "",
+                    "example_json": str(
+                        (output_root / "examples" / state / f"{example['name']}.json").resolve()
+                    ),
+                }
+            )
+            summary["emitted_examples"] = int(summary["emitted_examples"]) + 1
 
     output_root.mkdir(parents=True, exist_ok=True)
     for state, examples in examples_by_state.items():
-        example_dir = output_root / "examples" / state
-        for example in examples:
-            _write_json(example_dir / f"{example['name']}.json", example)
+        if not args.no_example_files:
+            example_dir = output_root / "examples" / state
+            for example in examples:
+                _write_json(example_dir / f"{example['name']}.json", example)
 
         shard_dir = output_root / "shards" / state
         for shard_idx, shard in enumerate(_shard_round_robin(examples, args.shards)):
             _write_json(shard_dir / f"shard_{shard_idx:03d}.json", shard)
 
-        _write_json(output_root / f"{state}.json", examples)
+        if not args.no_state_json:
+            _write_json(output_root / f"{state}.json", examples)
 
     _write_jsonl(output_root / "manifest.jsonl", manifest_rows)
 
     summary_payload = {
         "source_root": str(source_root),
-        "manifest": str(manifest_path),
+        "input_source": args.input_source,
+        "manifest": str(manifest_path) if manifest_path is not None else None,
         "sequence_tsv": str(sequence_tsv),
+        "rhea_molecules_tsv": str(rhea_molecules_tsv) if rhea_molecules_tsv is not None else None,
         "pocket_cache": str(pocket_cache_dir),
         "output_root": str(output_root),
         "requested_states": list(requested_states),
@@ -597,6 +683,8 @@ def main() -> int:
         "protein_chain_id": args.protein_chain_id,
         "ligand_chain_id": args.ligand_chain_id,
         "allow_missing_pocket": bool(args.allow_missing_pocket),
+        "write_example_files": not bool(args.no_example_files),
+        "write_state_json": not bool(args.no_state_json),
         "counts": summary,
         "elapsed_sec": round(time.perf_counter() - t0, 3),
     }

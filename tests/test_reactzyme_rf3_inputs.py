@@ -324,6 +324,95 @@ class TestReactzymeRf3Inputs(unittest.TestCase):
             self.assertNotIn("templates", reactant_examples[0])
             self.assertEqual(reactant_examples[0]["metadata"]["ligand_source"], "smiles")
 
+    def test_main_reactzyme_split_mode_writes_shards_without_example_files(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            source_root = tmp / "generate-constraints_0"
+            output_root = tmp / "out"
+            pocket_cache = source_root / "pocket_cache"
+            split_dir = source_root / "data" / "reactzyme_data_split"
+            pocket_cache.mkdir(parents=True)
+            split_dir.mkdir(parents=True)
+
+            seq_tsv = split_dir / "cleaned_uniprot_rhea.tsv"
+            seq_tsv.write_text(
+                "\n".join(
+                    [
+                        "Entry\tEC number\tRhea ID\tDate of creation\tSequence",
+                        "P1\t1.1.1.1\tRHEA:1;RHEA:2\t20240101\tMAAA",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            rhea_tsv = split_dir / "rhea_molecules.tsv"
+            rhea_tsv.write_text(
+                "\n".join(
+                    [
+                        "Rhea ID\tsubstrate\tproduct",
+                        "RHEA:1\tCC.O\tC.CC",
+                        "RHEA:2\tN.O\tN=O",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            (pocket_cache / "P1.json").write_text(
+                json.dumps(
+                    {
+                        "features": [
+                            {
+                                "type": "Binding site",
+                                "location": {"position": {"value": 7}},
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            argv = sys.argv[:]
+            try:
+                sys.argv = [
+                    str(MODULE_PATH),
+                    "--source-root",
+                    str(source_root),
+                    "--input-source",
+                    "reactzyme_split",
+                    "--sequence-tsv",
+                    str(seq_tsv),
+                    "--rhea-molecules-tsv",
+                    str(rhea_tsv),
+                    "--pocket-cache",
+                    str(pocket_cache),
+                    "--output-root",
+                    str(output_root),
+                    "--ligand-source",
+                    "smiles",
+                    "--shards",
+                    "2",
+                    "--no-example-files",
+                    "--no-state-json",
+                    "--log-level",
+                    "ERROR",
+                ]
+                rc = MODULE.main()
+            finally:
+                sys.argv = argv
+
+            self.assertEqual(rc, 0)
+            summary = json.loads((output_root / "summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(summary["input_source"], "reactzyme_split")
+            self.assertEqual(summary["counts"]["accepted_rows"], 2)
+            self.assertFalse((output_root / "examples").exists())
+            self.assertFalse((output_root / "reactant.json").exists())
+            reactant_shards = sorted((output_root / "shards" / "reactant").glob("*.json"))
+            self.assertEqual(len(reactant_shards), 2)
+            shard_examples = json.loads(reactant_shards[0].read_text(encoding="utf-8"))
+            self.assertTrue(all("constraints" in ex for ex in shard_examples))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -67,6 +67,31 @@ def _load_examples_for_state(input_root: Path, state: str) -> list[dict]:
     raise FileNotFoundError(f"Could not locate RF3 JSON inputs for state '{state}' under {input_root}")
 
 
+def _list_payload_paths_for_state(input_root: Path, state: str) -> tuple[str, list[Path]]:
+    example_dir = input_root / "examples" / state
+    if example_dir.exists():
+        paths = sorted(example_dir.glob("*.json"))
+        if paths:
+            return ("examples", paths)
+
+    shard_dir = input_root / "shards" / state
+    if shard_dir.exists():
+        paths = sorted(shard_dir.glob("*.json"))
+        if paths:
+            return ("shards", paths)
+
+    state_json = input_root / f"{state}.json"
+    if state_json.exists():
+        return ("state_json", [state_json])
+
+    raise FileNotFoundError(f"Could not locate RF3 JSON inputs for state '{state}' under {input_root}")
+
+
+def _load_examples_from_path(path: Path) -> list[dict]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return payload if isinstance(payload, list) else [payload]
+
+
 def _protein_component(example: dict) -> dict:
     components = example.get("components") or []
     proteins = [component for component in components if "seq" in component]
@@ -307,26 +332,31 @@ def main() -> int:
     )
 
     logger.info("Loading RF3 examples from %s", input_root)
-    examples_by_state = {
-        state: _load_examples_for_state(input_root, state) for state in requested_states
+    payloads_by_state = {
+        state: _list_payload_paths_for_state(input_root, state) for state in requested_states
     }
 
     sequences: list[str] = []
     existing_msa_count = 0
-    for examples in examples_by_state.values():
-        for example in examples:
-            protein = _protein_component(example)
-            sequence = str(protein.get("seq") or "").strip()
-            if not sequence:
-                raise ValueError(f"Protein component is missing seq for example {example.get('name')}")
-            sequences.append(sequence)
-            msa_path = protein.get("msa_path")
-            if msa_path and Path(str(msa_path)).exists():
-                existing_msa_count += 1
+    state_example_counts: dict[str, int] = {}
+    for state, (_, paths) in payloads_by_state.items():
+        state_count = 0
+        for path in paths:
+            for example in _load_examples_from_path(path):
+                protein = _protein_component(example)
+                sequence = str(protein.get("seq") or "").strip()
+                if not sequence:
+                    raise ValueError(f"Protein component is missing seq for example {example.get('name')}")
+                sequences.append(sequence)
+                state_count += 1
+                msa_path = protein.get("msa_path")
+                if msa_path and Path(str(msa_path)).exists():
+                    existing_msa_count += 1
+        state_example_counts[state] = state_count
 
     logger.info(
         "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path)",
-        sum(len(examples) for examples in examples_by_state.values()),
+        sum(state_example_counts.values()),
         len(set(sequences)),
         existing_msa_count,
     )
@@ -351,22 +381,60 @@ def main() -> int:
         shutil.copy2(input_root / "manifest.jsonl", output_root / "manifest.jsonl")
 
     written_examples = 0
-    for state, examples in examples_by_state.items():
-        updated: list[dict] = []
-        for example in examples:
-            protein = _protein_component(example)
-            sequence = str(protein["seq"]).strip()
-            msa_path = seq_to_msa.get(sequence)
-            if msa_path is None:
-                raise RuntimeError(f"Missing generated MSA for example {example.get('name')}")
-            protein["msa_path"] = str(msa_path)
-            updated.append(example)
-            _write_json(output_root / "examples" / state / f"{example['name']}.json", example)
-            written_examples += 1
+    written_payloads = 0
+    for state, (layout, paths) in payloads_by_state.items():
+        if layout == "examples":
+            updated: list[dict] = []
+            for path in paths:
+                for example in _load_examples_from_path(path):
+                    protein = _protein_component(example)
+                    sequence = str(protein["seq"]).strip()
+                    msa_path = seq_to_msa.get(sequence)
+                    if msa_path is None:
+                        raise RuntimeError(f"Missing generated MSA for example {example.get('name')}")
+                    protein["msa_path"] = str(msa_path)
+                    updated.append(example)
+                    _write_json(output_root / "examples" / state / f"{example['name']}.json", example)
+                    written_examples += 1
+            _write_json(output_root / f"{state}.json", updated)
+            for shard_idx, shard in enumerate(_shard_round_robin(updated, args.shards)):
+                _write_json(output_root / "shards" / state / f"shard_{shard_idx:03d}.json", shard)
+                written_payloads += 1
+            continue
 
-        _write_json(output_root / f"{state}.json", updated)
-        for shard_idx, shard in enumerate(_shard_round_robin(updated, args.shards)):
-            _write_json(output_root / "shards" / state / f"shard_{shard_idx:03d}.json", shard)
+        if layout == "state_json":
+            updated: list[dict] = []
+            for path in paths:
+                for example in _load_examples_from_path(path):
+                    protein = _protein_component(example)
+                    sequence = str(protein["seq"]).strip()
+                    msa_path = seq_to_msa.get(sequence)
+                    if msa_path is None:
+                        raise RuntimeError(f"Missing generated MSA for example {example.get('name')}")
+                    protein["msa_path"] = str(msa_path)
+                    updated.append(example)
+                    written_examples += 1
+            _write_json(output_root / f"{state}.json", updated)
+            for shard_idx, shard in enumerate(_shard_round_robin(updated, args.shards)):
+                _write_json(output_root / "shards" / state / f"shard_{shard_idx:03d}.json", shard)
+                written_payloads += 1
+            continue
+
+        if layout == "shards":
+            for path in paths:
+                updated = []
+                for example in _load_examples_from_path(path):
+                    protein = _protein_component(example)
+                    sequence = str(protein["seq"]).strip()
+                    msa_path = seq_to_msa.get(sequence)
+                    if msa_path is None:
+                        raise RuntimeError(f"Missing generated MSA for example {example.get('name')}")
+                    protein["msa_path"] = str(msa_path)
+                    updated.append(example)
+                    written_examples += 1
+                _write_json(output_root / "shards" / state / path.name, updated)
+                written_payloads += 1
+            continue
 
     summary = {
         "input_root": str(input_root),
@@ -384,8 +452,9 @@ def main() -> int:
         "msa_concurrency": int(args.msa_concurrency),
         "msa_retries": int(args.msa_retries),
         "counts": {
-            "states": {state: len(examples) for state, examples in examples_by_state.items()},
+            "states": state_example_counts,
             "written_examples": written_examples,
+            "written_payloads": written_payloads,
             "unique_sequences": len(set(sequences)),
         },
         "elapsed_sec": round(time.perf_counter() - t0, 3),
