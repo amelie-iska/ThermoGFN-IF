@@ -400,25 +400,39 @@ The shared path `../enzyme-quiver/MMseqs2/local_msa` is a symlink to:
 
 - `/opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa`
 
-If that target does not exist yet, initialize it once with:
+The preferred database on this host is the already prepared GPU-ready UniRef30 bundle at:
+
+- `/opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302`
+
+If the shared `local_msa` workspace is missing its helper repos or MMSeqs binaries, install just the workspace pieces first and skip any DB download:
 
 ```bash
 bash scripts/env/setup_local_mmseqs2_uniref100_workaround.sh \
   --msa-root /opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa \
   --gpu-binary \
-  --create-index \
-  --gpu-index \
-  --threads "$(nproc)"
+  --skip-db-download
 ```
 
-This wrapper generates and runs a patched temporary copy of `../enzyme-quiver/scripts/setup_local_mmseqs2_uniref100.sh`, which avoids a clone-order bug in the sibling script when `ColabFold` already exists as a stale non-git directory. It writes the local server config, clones the required helper repos, downloads/builds the UniRef100 DB, and creates the padded GPU index used by `mmseqs-server`.
+Then point that workspace at the existing UniRef30 DB and optionally remove accidental local UniRef100 artifacts:
+
+```bash
+bash scripts/env/configure_local_mmseqs2_uniref30.sh \
+  --msa-root /opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa \
+  --uniref30-root /opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302 \
+  --cleanup-uniref100
+```
+
+`configure_local_mmseqs2_uniref30.sh` writes `config.uniref30.json` and a compatibility `config.uniref100.json` in the local workspace, both pointing at the existing UniRef30 DB. It does not download or rebuild the database.
+
+If you truly need to build a fresh database from scratch, the `setup_local_mmseqs2_uniref100_workaround.sh` path still exists, but it is not the preferred workflow for the current RF3 setup.
 
 ### 3. Start the shared MMSeqs2-GPU server
 
 ```bash
-bash ../enzyme-quiver/scripts/start_local_mmseqs2_server.sh \
+bash scripts/env/start_local_mmseqs2_uniref30_server.sh \
   --msa-root /opt/dlami/nvme/enzyme-quiver/MMseqs2/local_msa \
-  --gpu-backend
+  --uniref30-root /opt/dlami/nvme/project-MORA/mmseqs2/databases/uniref30_2302 \
+  --cleanup-uniref100
 ```
 
 The default local server URL expected by the RF3 prep scripts is `http://127.0.0.1:8080`.
