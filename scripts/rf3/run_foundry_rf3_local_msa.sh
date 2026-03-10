@@ -21,6 +21,7 @@ MSA_BATCH_SIZE=1
 MSA_CONCURRENCY=4
 MSA_RETRIES=2
 SHARDS=1
+MAX_DOCKED_PAIRS=2000
 N_RECYCLES=10
 DIFFUSION_BATCH_SIZE=5
 NUM_STEPS=50
@@ -53,6 +54,8 @@ Options:
   --msa-concurrency N    Parallel MMSeqs2 batch requests (default: 4)
   --msa-retries N        Retries per MMSeqs2 batch request (default: 2)
   --shards N             Output shard count for prepared JSONs (default: 1)
+  --max-docked-pairs N   Max docking pairs to prepare/predict (default: 2000; 0 disables)
+  --max-examples N       Backward-compatible alias for --max-docked-pairs
   --n-recycles N         RF3 recycle count (default: 10)
   --diffusion-batch-size N
                          RF3 diffusion batch size (default: 5)
@@ -102,6 +105,10 @@ while [[ $# -gt 0 ]]; do
       MSA_RETRIES="$2"; shift 2 ;;
     --shards)
       SHARDS="$2"; shift 2 ;;
+    --max-docked-pairs)
+      MAX_DOCKED_PAIRS="$2"; shift 2 ;;
+    --max-examples)
+      MAX_DOCKED_PAIRS="$2"; shift 2 ;;
     --n-recycles)
       N_RECYCLES="$2"; shift 2 ;;
     --diffusion-batch-size)
@@ -147,6 +154,7 @@ PREP_ARGS=(
   --msa-concurrency "${MSA_CONCURRENCY}"
   --msa-retries "${MSA_RETRIES}"
   --shards "${SHARDS}"
+  --max-docked-pairs "${MAX_DOCKED_PAIRS}"
 )
 if [[ -n "${BOLTZ_SRC_PATH}" ]]; then
   PREP_ARGS+=(--boltz-src-path "${BOLTZ_SRC_PATH}")

@@ -12,7 +12,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Sequence
+from typing import Iterable, Sequence
 
 
 def _repo_root() -> Path:
@@ -90,6 +90,60 @@ def _list_payload_paths_for_state(input_root: Path, state: str) -> tuple[str, li
 def _load_examples_from_path(path: Path) -> list[dict]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     return payload if isinstance(payload, list) else [payload]
+
+
+def _example_pair_id(example: dict) -> str:
+    metadata = example.get("metadata") or {}
+    pair_id = str(metadata.get("pair_id") or "").strip()
+    if pair_id:
+        return pair_id
+    name = str(example.get("name") or "").strip()
+    if "__reactant" in name:
+        return name.rsplit("__reactant", 1)[0]
+    if "__product" in name:
+        return name.rsplit("__product", 1)[0]
+    return name
+
+
+def _select_pair_ids(input_root: Path, requested_states: Sequence[str], max_docked_pairs: int | None) -> set[str] | None:
+    if max_docked_pairs is None or max_docked_pairs <= 0:
+        return None
+
+    manifest_path = input_root / "manifest.jsonl"
+    selected: list[str] = []
+    seen: set[str] = set()
+    if manifest_path.exists():
+        with manifest_path.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                row = json.loads(line)
+                pair_id = str(row.get("pair_id") or "").strip()
+                if not pair_id or pair_id in seen:
+                    continue
+                seen.add(pair_id)
+                selected.append(pair_id)
+                if len(selected) >= max_docked_pairs:
+                    return set(selected)
+
+    for state in requested_states:
+        _, paths = _list_payload_paths_for_state(input_root, state)
+        for path in paths:
+            for example in _load_examples_from_path(path):
+                pair_id = _example_pair_id(example)
+                if not pair_id or pair_id in seen:
+                    continue
+                seen.add(pair_id)
+                selected.append(pair_id)
+                if len(selected) >= max_docked_pairs:
+                    return set(selected)
+    return set(selected)
+
+
+def _iter_examples_from_payloads(paths: Iterable[Path], selected_pair_ids: set[str] | None) -> Iterable[dict]:
+    for path in paths:
+        for example in _load_examples_from_path(path):
+            if selected_pair_ids is not None and _example_pair_id(example) not in selected_pair_ids:
+                continue
+            yield example
 
 
 def _protein_component(example: dict) -> dict:
@@ -308,6 +362,17 @@ def main() -> int:
     parser.add_argument("--msa-concurrency", type=int, default=4, help="Number of concurrent MMSeqs2 batch requests.")
     parser.add_argument("--msa-retries", type=int, default=2, help="Retries per MMSeqs2 batch request.")
     parser.add_argument("--shards", type=int, default=1, help="Number of round-robin shard JSON files to emit per state.")
+    parser.add_argument(
+        "--max-docked-pairs",
+        "--max-examples",
+        dest="max_docked_pairs",
+        type=int,
+        default=2000,
+        help=(
+            "Maximum number of docking pairs to prepare for inference. "
+            "Use 0 to disable the cap."
+        ),
+    )
     parser.add_argument("--log-level", default="INFO", help="Logging level.")
     args = parser.parse_args()
 
@@ -335,30 +400,32 @@ def main() -> int:
     payloads_by_state = {
         state: _list_payload_paths_for_state(input_root, state) for state in requested_states
     }
+    max_docked_pairs = None if int(args.max_docked_pairs) <= 0 else int(args.max_docked_pairs)
+    selected_pair_ids = _select_pair_ids(input_root, requested_states, max_docked_pairs)
 
     sequences: list[str] = []
     existing_msa_count = 0
     state_example_counts: dict[str, int] = {}
     for state, (_, paths) in payloads_by_state.items():
         state_count = 0
-        for path in paths:
-            for example in _load_examples_from_path(path):
-                protein = _protein_component(example)
-                sequence = str(protein.get("seq") or "").strip()
-                if not sequence:
-                    raise ValueError(f"Protein component is missing seq for example {example.get('name')}")
-                sequences.append(sequence)
-                state_count += 1
-                msa_path = protein.get("msa_path")
-                if msa_path and Path(str(msa_path)).exists():
-                    existing_msa_count += 1
+        for example in _iter_examples_from_payloads(paths, selected_pair_ids):
+            protein = _protein_component(example)
+            sequence = str(protein.get("seq") or "").strip()
+            if not sequence:
+                raise ValueError(f"Protein component is missing seq for example {example.get('name')}")
+            sequences.append(sequence)
+            state_count += 1
+            msa_path = protein.get("msa_path")
+            if msa_path and Path(str(msa_path)).exists():
+                existing_msa_count += 1
         state_example_counts[state] = state_count
 
     logger.info(
-        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path)",
+        "Preparing MSAs for %d examples (%d unique sequences, %d already have msa_path, max_docked_pairs=%s)",
         sum(state_example_counts.values()),
         len(set(sequences)),
         existing_msa_count,
+        "unlimited" if max_docked_pairs is None else max_docked_pairs,
     )
 
     t0 = time.perf_counter()
@@ -378,7 +445,16 @@ def main() -> int:
 
     output_root.mkdir(parents=True, exist_ok=True)
     if (input_root / "manifest.jsonl").exists():
-        shutil.copy2(input_root / "manifest.jsonl", output_root / "manifest.jsonl")
+        if selected_pair_ids is None:
+            shutil.copy2(input_root / "manifest.jsonl", output_root / "manifest.jsonl")
+        else:
+            with (input_root / "manifest.jsonl").open("r", encoding="utf-8") as src, (
+                output_root / "manifest.jsonl"
+            ).open("w", encoding="utf-8") as dst:
+                for line in src:
+                    row = json.loads(line)
+                    if str(row.get("pair_id") or "").strip() in selected_pair_ids:
+                        dst.write(line)
 
     written_examples = 0
     written_payloads = 0
@@ -386,7 +462,7 @@ def main() -> int:
         if layout == "examples":
             updated: list[dict] = []
             for path in paths:
-                for example in _load_examples_from_path(path):
+                for example in _iter_examples_from_payloads([path], selected_pair_ids):
                     protein = _protein_component(example)
                     sequence = str(protein["seq"]).strip()
                     msa_path = seq_to_msa.get(sequence)
@@ -405,7 +481,7 @@ def main() -> int:
         if layout == "state_json":
             updated: list[dict] = []
             for path in paths:
-                for example in _load_examples_from_path(path):
+                for example in _iter_examples_from_payloads([path], selected_pair_ids):
                     protein = _protein_component(example)
                     sequence = str(protein["seq"]).strip()
                     msa_path = seq_to_msa.get(sequence)
@@ -423,7 +499,7 @@ def main() -> int:
         if layout == "shards":
             for path in paths:
                 updated = []
-                for example in _load_examples_from_path(path):
+                for example in _iter_examples_from_payloads([path], selected_pair_ids):
                     protein = _protein_component(example)
                     sequence = str(protein["seq"]).strip()
                     msa_path = seq_to_msa.get(sequence)
@@ -432,8 +508,9 @@ def main() -> int:
                     protein["msa_path"] = str(msa_path)
                     updated.append(example)
                     written_examples += 1
-                _write_json(output_root / "shards" / state / path.name, updated)
-                written_payloads += 1
+                if updated:
+                    _write_json(output_root / "shards" / state / path.name, updated)
+                    written_payloads += 1
             continue
 
     summary = {
@@ -451,11 +528,13 @@ def main() -> int:
         "msa_batch_size": int(args.msa_batch_size),
         "msa_concurrency": int(args.msa_concurrency),
         "msa_retries": int(args.msa_retries),
+        "max_docked_pairs": None if max_docked_pairs is None else int(max_docked_pairs),
         "counts": {
             "states": state_example_counts,
             "written_examples": written_examples,
             "written_payloads": written_payloads,
             "unique_sequences": len(set(sequences)),
+            "selected_pairs": None if selected_pair_ids is None else len(selected_pair_ids),
         },
         "elapsed_sec": round(time.perf_counter() - t0, 3),
     }
