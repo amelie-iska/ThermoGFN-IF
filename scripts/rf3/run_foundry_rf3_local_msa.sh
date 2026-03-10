@@ -208,8 +208,15 @@ fi
 
 PYTHON_BIN="${ENV_DIR}/bin/python"
 export PYTHONPATH="${REPO_ROOT}/models/foundry/src:${REPO_ROOT}/models/foundry/models/rf3/src${PYTHONPATH:+:${PYTHONPATH}}"
+DEFAULT_RF3_CKPT="${REPO_ROOT}/weights/rf3_foundry_01_24_latest_remapped.ckpt"
+if [[ "${CKPT_PATH}" == "rf3" && -f "${DEFAULT_RF3_CKPT}" ]]; then
+  echo "[foundry-rf3-run] using repo-local RF3 checkpoint ${DEFAULT_RF3_CKPT}"
+  CKPT_PATH="${DEFAULT_RF3_CKPT}"
+fi
 if [[ -n "${CHECKPOINT_DIRS}" ]]; then
   export FOUNDRY_CHECKPOINT_DIRS="${CHECKPOINT_DIRS}${FOUNDRY_CHECKPOINT_DIRS:+:${FOUNDRY_CHECKPOINT_DIRS}}"
+elif [[ -d "${REPO_ROOT}/weights" ]]; then
+  export FOUNDRY_CHECKPOINT_DIRS="${REPO_ROOT}/weights${FOUNDRY_CHECKPOINT_DIRS:+:${FOUNDRY_CHECKPOINT_DIRS}}"
 fi
 
 case "${MSA_BACKEND}" in
