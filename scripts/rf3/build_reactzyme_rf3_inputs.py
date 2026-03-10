@@ -9,6 +9,7 @@ import json
 import logging
 import sys
 import time
+from collections import defaultdict
 from pathlib import Path
 from typing import Iterable
 
@@ -136,6 +137,35 @@ def _job_name(pair_id: str, state: str) -> str:
     return _sanitize_token(f"{pair_id}__{state}")
 
 
+def _count_sdf_atoms(path: Path) -> int:
+    text = path.read_text(encoding="utf-8")
+    total_atoms = 0
+    for raw_block in text.split("$$$$"):
+        block = raw_block.strip()
+        if not block:
+            continue
+        lines = block.splitlines()
+
+        counts_v3000 = next((line for line in lines if "V3000" in line and "COUNTS" in line), None)
+        if counts_v3000 is not None:
+            parts = counts_v3000.split()
+            try:
+                counts_idx = parts.index("COUNTS")
+                total_atoms += int(parts[counts_idx + 1])
+                continue
+            except Exception as exc:
+                raise ValueError(f"Could not parse V3000 atom count in {path}") from exc
+
+        if len(lines) < 4:
+            raise ValueError(f"SDF block too short to parse atom count in {path}")
+        counts_line = lines[3]
+        try:
+            total_atoms += int(counts_line[:3].strip())
+        except Exception as exc:
+            raise ValueError(f"Could not parse V2000 atom count in {path}") from exc
+    return total_atoms
+
+
 def _build_rf3_example(
     *,
     pair_id: str,
@@ -151,6 +181,7 @@ def _build_rf3_example(
     ligand_chain_id: str,
     pocket_distance_threshold: float,
     template_threshold: float,
+    ligand_atom_count: int,
 ) -> dict:
     example_name = _job_name(pair_id, state)
     contacts = [[protein_chain_id, int(pos)] for pos in pocket_positions]
@@ -208,6 +239,7 @@ def _build_rf3_example(
             "sequence_length": len(protein_sequence),
             "ligand_smiles": ligand_smiles,
             "fragment_count": ligand_smiles.count(".") + 1 if ligand_smiles else 0,
+            "ligand_atom_count": int(ligand_atom_count),
             "pocket_positions": pocket_positions,
             "pocket_count": len(pocket_positions),
             "ligand_sdf": str(ligand_sdf),
@@ -260,6 +292,18 @@ def main() -> int:
         type=int,
         default=600,
         help="Maximum allowed enzyme sequence length.",
+    )
+    parser.add_argument(
+        "--max-ligand-atoms",
+        type=int,
+        default=256,
+        help="Maximum allowed total atom count per ligand SDF template.",
+    )
+    parser.add_argument(
+        "--max-pairs-per-sequence",
+        type=int,
+        default=2,
+        help="Maximum number of accepted docking pairs per exact protein sequence.",
     )
     parser.add_argument(
         "--pocket-distance-threshold",
@@ -344,6 +388,7 @@ def main() -> int:
     t0 = time.perf_counter()
     examples_by_state: dict[str, list[dict]] = {state: [] for state in requested_states}
     manifest_rows: list[dict] = []
+    accepted_pairs_by_sequence: dict[str, int] = defaultdict(int)
     summary: dict[str, int | float | list[str] | str] = {
         "total_rows_scanned": 0,
         "accepted_rows": 0,
@@ -354,6 +399,8 @@ def main() -> int:
         "skipped_missing_pocket": 0,
         "skipped_missing_smiles": 0,
         "skipped_missing_sdf": 0,
+        "skipped_ligand_atom_limit": 0,
+        "skipped_sequence_pair_cap": 0,
     }
 
     with manifest_path.open("r", encoding="utf-8", newline="") as handle:
@@ -384,7 +431,7 @@ def main() -> int:
                 summary["skipped_missing_pocket"] = int(summary["skipped_missing_pocket"]) + 1
                 continue
 
-            state_payloads: list[tuple[str, str, Path]] = []
+            state_payloads: list[tuple[str, str, Path, int]] = []
             missing_state = False
             for state in requested_states:
                 smiles = str(row.get(f"{state}_smiles") or "").strip()
@@ -402,7 +449,14 @@ def main() -> int:
                     summary["skipped_missing_sdf"] = int(summary["skipped_missing_sdf"]) + 1
                     missing_state = True
                     break
-                state_payloads.append((state, smiles, sdf_path))
+                atom_count = _count_sdf_atoms(sdf_path)
+                if atom_count > args.max_ligand_atoms:
+                    summary["skipped_ligand_atom_limit"] = int(
+                        summary["skipped_ligand_atom_limit"]
+                    ) + 1
+                    missing_state = True
+                    break
+                state_payloads.append((state, smiles, sdf_path, atom_count))
             if missing_state:
                 continue
 
@@ -410,12 +464,19 @@ def main() -> int:
             row_id = str(row.get("row_id") or "").strip()
             rhea_id = str(row.get("rhea_id") or "").strip()
 
+            if accepted_pairs_by_sequence[sequence] >= args.max_pairs_per_sequence:
+                summary["skipped_sequence_pair_cap"] = int(
+                    summary["skipped_sequence_pair_cap"]
+                ) + 1
+                continue
+
             accepted_rows = int(summary["accepted_rows"])
             if args.max_examples is not None and accepted_rows >= args.max_examples:
                 break
 
             summary["accepted_rows"] = accepted_rows + 1
-            for state, smiles, sdf_path in state_payloads:
+            accepted_pairs_by_sequence[sequence] += 1
+            for state, smiles, sdf_path, atom_count in state_payloads:
                 example = _build_rf3_example(
                     pair_id=pair_id,
                     state=state,
@@ -430,6 +491,7 @@ def main() -> int:
                     ligand_chain_id=args.ligand_chain_id,
                     pocket_distance_threshold=args.pocket_distance_threshold,
                     template_threshold=args.template_threshold,
+                    ligand_atom_count=atom_count,
                 )
                 examples_by_state[state].append(example)
                 manifest_rows.append(
@@ -442,6 +504,7 @@ def main() -> int:
                         "uniprot_id": uniprot_id,
                         "sequence_length": len(sequence),
                         "fragment_count": example["metadata"]["fragment_count"],
+                        "ligand_atom_count": atom_count,
                         "pocket_count": len(pocket_positions),
                         "ligand_sdf": str(sdf_path),
                         "example_json": str(
@@ -474,6 +537,8 @@ def main() -> int:
         "requested_states": list(requested_states),
         "required_statuses": sorted(required_statuses),
         "max_seq_len": int(args.max_seq_len),
+        "max_ligand_atoms": int(args.max_ligand_atoms),
+        "max_pairs_per_sequence": int(args.max_pairs_per_sequence),
         "pocket_distance_threshold": float(args.pocket_distance_threshold),
         "template_threshold": float(args.template_threshold),
         "protein_chain_id": args.protein_chain_id,

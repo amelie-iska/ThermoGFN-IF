@@ -351,6 +351,8 @@ What this flow does:
 - uses the ETFlow-generated SDF templates from `generate-constraints_0/output_sdf_templates/train`,
 - keeps the original multi-fragment (`.` separated) SMILES in JSON metadata,
 - filters to enzyme sequences with length `<= 600`,
+- filters each ligand SDF template to at most `256` total atoms,
+- caps each exact enzyme sequence at `2` accepted docking pairs across different reactions,
 - emits Boltz-style pocket constraint blocks and routes them into RF3 inference-time token-pair threshold conditioning.
 
 The default strict builder uses:
@@ -358,6 +360,8 @@ The default strict builder uses:
 - `status == reactant:ok|product:ok`,
 - sequence present in `generate-constraints_0/data/reactzyme_data_split/cleaned_uniprot_rhea.tsv`,
 - pocket annotations present in `generate-constraints_0/pocket_cache`,
+- ligand template atom count `<= 256` for every emitted reactant/product state,
+- no more than `2` accepted docking pairs for the same exact protein sequence,
 - existing reactant and product SDFs.
 
 On the current local snapshot, that yields a clean subset of `198` source rows.
@@ -429,6 +433,11 @@ python scripts/rf3/build_reactzyme_rf3_inputs.py \
   --output-root runs/rf3_reactzyme_inputs \
   --max-seq-len 600
 ```
+
+The builder defaults also enforce:
+
+- `--max-ligand-atoms 256`
+- `--max-pairs-per-sequence 2`
 
 Outputs:
 
