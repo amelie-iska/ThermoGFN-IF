@@ -76,35 +76,41 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         trimmed = MODULE._trim_a3m_depth(a3m, 0)
         self.assertEqual(trimmed, a3m)
 
-    def test_map_local_a3m_texts_to_sequences_uses_filename_index(self):
+    def test_map_local_a3m_texts_to_sequences_uses_query_sequence(self):
         chunk = ["SEQAAAA", "SEQBBBB"]
         mapping = MODULE._map_local_a3m_texts_to_sequences(
             chunk,
             {
-                "0.a3m": ">q1\nWRONGSEQ\n>hit\nSEQBBBB\n",
-                "1.a3m": ">q0\nSEQAAAA\n>hit\nSEQAAAA\n",
+                "56.a3m": ">2\nSEQBBBB\n>hit\nSEQBBBB\n",
+                "12.a3m": ">9\nSEQAAAA\n>hit\nSEQAAAA\n",
             },
         )
 
         self.assertEqual(set(mapping.keys()), set(chunk))
-        self.assertIn("SEQAAAA", mapping["SEQAAAA"])
+        self.assertIn("SEQAAAA", mapping["SEQAAAA"].splitlines()[1])
         self.assertIn("SEQBBBB", mapping["SEQBBBB"].splitlines()[1])
 
-    def test_replace_first_a3m_query_sequence(self):
-        original = ">query\nWRONGSEQ\n>hit\nABCdef\n"
-        rewritten = MODULE._replace_first_a3m_query_sequence(original, "SEQAAAA")
+    def test_a3m_has_uniform_aligned_columns(self):
+        valid = ">query\nAAAA\n>hit\nAaaAAA\n"
+        invalid = ">query\nAAAAAA\n>hit\nAAAA\n"
 
-        self.assertEqual(rewritten.splitlines()[1], "SEQAAAA")
-        self.assertIn(">hit", rewritten)
-        self.assertIn("ABCdef", rewritten)
+        self.assertTrue(MODULE._a3m_has_uniform_aligned_columns(valid))
+        self.assertFalse(MODULE._a3m_has_uniform_aligned_columns(invalid))
 
-    def test_a3m_matches_sequence_validates_query_row(self):
+    def test_a3m_is_valid_cache_validates_structure(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             path = Path(tmpdir) / "test.a3m"
-            path.write_text(">query\nSEQAAAA\n>hit\nSEQAAAA\n", encoding="utf-8")
+            path.write_text(">query\nAAAAAA\n>hit\nAAAAAA\n", encoding="utf-8")
+            self.assertTrue(MODULE._a3m_is_valid_cache(path, "AAAAAA"))
 
-            self.assertTrue(MODULE._a3m_matches_sequence(path, "SEQAAAA"))
-            self.assertFalse(MODULE._a3m_matches_sequence(path, "SEQBBBB"))
+            path.write_text(">query\nAAAAAA\n>hit\nAAAA\n", encoding="utf-8")
+            self.assertFalse(MODULE._a3m_is_valid_cache(path, "AAAAAA"))
+
+    def test_a3m_is_valid_cache_rejects_query_sequence_mismatch(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "test.a3m"
+            path.write_text(">query\nAAAAAA\n>hit\nAAAAAA\n", encoding="utf-8")
+            self.assertFalse(MODULE._a3m_is_valid_cache(path, "AAAAAAA"))
 
     def test_generate_msas_serial_writes_trimmed_a3ms(self):
         mmseqs2_mod = types.ModuleType("boltz.data.msa.mmseqs2")
@@ -170,7 +176,7 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
             def fake_run_local_chunk(chunk, **kwargs):
                 return {
                     sequence: (
-                        f">query_{idx}\nAAAA\n"
+                        f">query_{idx}\n{sequence}\n"
                         f">hit1_{idx}\nBBBB\n"
                         f">hit2_{idx}\nCCCC\n"
                     )
@@ -213,7 +219,7 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             cache_dir = Path(tmpdir)
             bad_cache = MODULE._msa_cache_path_for_sequence(cache_dir, "SEQ1")
-            bad_cache.write_text(">query\nWRONGSEQ\n", encoding="utf-8")
+            bad_cache.write_text(">query\nAAAAAA\n>hit\nAAAA\n", encoding="utf-8")
 
             def fake_run_local_chunk(chunk, **kwargs):
                 return {sequence: f">query\n{sequence}\n>hit\n{sequence}\n" for sequence in chunk}
@@ -245,8 +251,7 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
                 )
 
             rewritten = seq_to_path["SEQ1"].read_text(encoding="utf-8")
-            self.assertIn("SEQ1", rewritten)
-            self.assertNotIn("WRONGSEQ", rewritten)
+            self.assertEqual(rewritten, ">query\nSEQ1\n>hit\nSEQ1\n")
 
 
 if __name__ == "__main__":

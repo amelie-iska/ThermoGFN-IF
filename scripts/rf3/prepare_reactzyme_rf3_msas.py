@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import shutil
+import string
 import subprocess
 import sys
 import tempfile
@@ -621,7 +622,32 @@ def _run_local_mmseqs_chunk(
             if not a3m_path.exists():
                 raise RuntimeError(f"Expected unpacked A3M missing for chunk {chunk_idx}: {a3m_path}")
             a3m_text_by_name[a3m_path.name] = a3m_path.read_text(encoding="utf-8")
-        return _map_local_a3m_texts_to_sequences(chunk, a3m_text_by_name)
+        try:
+            return _map_local_a3m_texts_to_sequences(chunk, a3m_text_by_name)
+        except RuntimeError:
+            if len(chunk) <= 1:
+                raise
+
+    # Retry ambiguous batch mappings as singleton jobs to avoid cross-query misassignment.
+    singleton_results: dict[str, str] = {}
+    for offset, sequence in enumerate(chunk):
+        singleton_results.update(
+            _run_local_mmseqs_chunk(
+                [sequence],
+                chunk_idx=(chunk_idx * 1000) + offset,
+                msa_cache_dir=msa_cache_dir,
+                mmseqs_bin=mmseqs_bin,
+                db_prefix=db_prefix,
+                db_seq=db_seq,
+                db_aln=db_aln,
+                threads=threads,
+                use_filter=use_filter,
+                max_seqs=max_seqs,
+                num_iterations=num_iterations,
+                cuda_device=cuda_device,
+            )
+        )
+    return singleton_results
 
 
 def _count_a3m_sequences(a3m_text: str) -> int:
@@ -646,43 +672,30 @@ def _normalize_a3m_query_sequence(a3m_text: str) -> str:
     return "".join(ch for ch in _extract_first_a3m_query_sequence(a3m_text) if ch.isupper())
 
 
-def _replace_first_a3m_query_sequence(a3m_text: str, sequence: str) -> str:
-    lines = a3m_text.splitlines()
-    if not lines:
-        return a3m_text
-
-    output: list[str] = []
-    replacing_first_sequence = False
-    wrote_replacement = False
-    for line in lines:
-        if line.startswith(">"):
-            output.append(line)
-            if not wrote_replacement:
-                output.append(sequence)
-                wrote_replacement = True
-                replacing_first_sequence = True
-            else:
-                replacing_first_sequence = False
+def _a3m_has_uniform_aligned_columns(a3m_text: str) -> bool:
+    aligned_lengths: set[int] = set()
+    table = str.maketrans(dict.fromkeys(string.ascii_lowercase))
+    saw_sequence = False
+    for line in a3m_text.splitlines():
+        if not line or line.startswith(">"):
             continue
-        if replacing_first_sequence:
-            continue
-        output.append(line)
-
-    if lines[0].startswith(">") and not wrote_replacement:
-        output.append(sequence)
-
-    rewritten = "\n".join(output)
-    if a3m_text.endswith("\n"):
-        rewritten += "\n"
-    return rewritten
+        saw_sequence = True
+        aligned_lengths.add(len(line.rstrip().translate(table)))
+        if len(aligned_lengths) > 1:
+            return False
+    return saw_sequence and len(aligned_lengths) == 1
 
 
-def _a3m_matches_sequence(msa_path: Path, sequence: str) -> bool:
+def _a3m_is_valid_cache(msa_path: Path, expected_sequence: str | None = None) -> bool:
     try:
         a3m_text = msa_path.read_text(encoding="utf-8")
     except OSError:
         return False
-    return _normalize_a3m_query_sequence(a3m_text) == sequence
+    if not _a3m_has_uniform_aligned_columns(a3m_text):
+        return False
+    if expected_sequence is None:
+        return True
+    return _normalize_a3m_query_sequence(a3m_text) == expected_sequence
 
 
 def _map_local_a3m_texts_to_sequences(
@@ -690,28 +703,24 @@ def _map_local_a3m_texts_to_sequences(
     a3m_text_by_name: dict[str, str],
 ) -> dict[str, str]:
     mapping: dict[str, str] = {}
-    mismatched_queries: list[str] = []
+    remaining = set(chunk)
+    unmatched_files: list[str] = []
+    expected_lengths = sorted({len(sequence) for sequence in chunk})
 
     for name, a3m_text in sorted(a3m_text_by_name.items()):
-        try:
-            idx = int(Path(name).stem)
-        except ValueError as exc:
-            raise RuntimeError(f"Unexpected local MMSeqs A3M filename: {name}") from exc
-        if idx < 0 or idx >= len(chunk):
-            raise RuntimeError(f"Out-of-range local MMSeqs A3M filename: {name}")
-
-        sequence = chunk[idx]
         query_sequence = _normalize_a3m_query_sequence(a3m_text)
-        if query_sequence != sequence:
-            mismatched_queries.append(f"{name}:{len(query_sequence)}->{len(sequence)}")
-            a3m_text = _replace_first_a3m_query_sequence(a3m_text, sequence)
-        mapping[sequence] = a3m_text
+        if query_sequence in remaining:
+            mapping[query_sequence] = a3m_text
+            remaining.remove(query_sequence)
+            continue
+        unmatched_files.append(f"{name}:{len(query_sequence)}")
 
     if len(mapping) != len(chunk):
-        missing_indices = [idx for idx, sequence in enumerate(chunk) if sequence not in mapping]
         raise RuntimeError(
             "Could not map local MMSeqs A3M outputs back to input sequences. "
-            f"matched={len(mapping)}/{len(chunk)} missing_indices={missing_indices[:8]}"
+            f"matched={len(mapping)}/{len(chunk)} "
+            f"expected_lengths={expected_lengths[:8]} "
+            f"unmatched_files={unmatched_files[:8]}"
         )
 
     return mapping
@@ -856,11 +865,11 @@ def _generate_msas_via_server(
             reuse_cache
             and msa_path.exists()
             and msa_path.stat().st_size > 0
-            and _a3m_matches_sequence(msa_path, sequence)
+            and _a3m_is_valid_cache(msa_path, sequence)
         ):
             seq_to_path[sequence] = msa_path.resolve()
         else:
-            if msa_path.exists() and not _a3m_matches_sequence(msa_path, sequence):
+            if msa_path.exists() and not _a3m_is_valid_cache(msa_path, sequence):
                 msa_path.unlink(missing_ok=True)
             missing_sequences.append(sequence)
 
@@ -1043,11 +1052,11 @@ def _generate_msas_local_direct(
             reuse_cache
             and msa_path.exists()
             and msa_path.stat().st_size > 0
-            and _a3m_matches_sequence(msa_path, sequence)
+            and _a3m_is_valid_cache(msa_path, sequence)
         ):
             seq_to_path[sequence] = msa_path.resolve()
         else:
-            if msa_path.exists() and not _a3m_matches_sequence(msa_path, sequence):
+            if msa_path.exists() and not _a3m_is_valid_cache(msa_path, sequence):
                 msa_path.unlink(missing_ok=True)
             missing_sequences.append(sequence)
 
