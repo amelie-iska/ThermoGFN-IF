@@ -1,6 +1,7 @@
 import json
 import logging
 import re
+import traceback
 from dataclasses import dataclass, field
 from os import PathLike
 from pathlib import Path
@@ -522,203 +523,229 @@ class RF3InferenceEngine(BaseInferenceEngine):
                     input_spec.example_id, out_dir, sharding_pattern
                 )
                 example_out_dir.mkdir(parents=True, exist_ok=True)
+            try:
+                # Run through Transform pipeline
+                pipeline_output = self.pipeline(input_spec.to_pipeline_input())
 
-            # Run through Transform pipeline
-            pipeline_output = self.pipeline(input_spec.to_pipeline_input())
+                # Setup early stopping function if configured
+                should_early_stop_fn = None
+                if (
+                    "confidence_feats" in pipeline_output
+                    and self.early_stopping_plddt_threshold
+                    and self.early_stopping_plddt_threshold > 0
+                ):
+                    should_early_stop_fn = should_early_stop_by_mean_plddt(
+                        self.early_stopping_plddt_threshold,
+                        pipeline_output["confidence_feats"]["is_real_atom"],
+                        self.cfg.trainer.loss.confidence_loss.plddt.max_value,
+                    )
 
-            # Setup early stopping function if configured
-            should_early_stop_fn = None
-            if (
-                "confidence_feats" in pipeline_output
-                and self.early_stopping_plddt_threshold
-                and self.early_stopping_plddt_threshold > 0
-            ):
-                should_early_stop_fn = should_early_stop_by_mean_plddt(
-                    self.early_stopping_plddt_threshold,
-                    pipeline_output["confidence_feats"]["is_real_atom"],
-                    self.cfg.trainer.loss.confidence_loss.plddt.max_value,
+                # Model inference
+                with torch.no_grad():
+                    pipeline_output = self.trainer.fabric.to_device(pipeline_output)
+                    if should_early_stop_fn:
+                        valid_step_outs = self.trainer.validation_step(
+                            batch=pipeline_output,
+                            batch_idx=0,
+                            compute_metrics=True,
+                            should_early_stop_fn=should_early_stop_fn,
+                        )
+                    else:
+                        valid_step_outs = self.trainer.validation_step(
+                            batch=pipeline_output,
+                            batch_idx=0,
+                            compute_metrics=True,
+                        )
+                    network_output = valid_step_outs["network_output"]
+                    metrics_output = valid_step_outs["metrics_output"]
+
+                # Handle early stopping
+                if network_output.get("early_stopped", False):
+                    ranked_logger.warning(
+                        f"Early stopping triggered for {input_spec.example_id} "
+                        f"with mean pLDDT {network_output['mean_plddt']:.2f} < "
+                        f"{self.early_stopping_plddt_threshold:.2f}!"
+                    )
+
+                    if out_dir:
+                        # Save early stop info to disk
+                        dict_to_save = {
+                            k: v for k, v in network_output.items() if v is not None
+                        }
+                        df_to_save = pd.DataFrame([dict_to_save])
+                        df_to_save.to_csv(example_out_dir / "score.csv", index=False)
+
+                        df_to_save = pd.DataFrame([metrics_output])
+                        df_to_save.to_csv(
+                            example_out_dir / f"{input_spec.example_id}_metrics.csv",
+                            index=False,
+                        )
+                    else:
+                        # Store in results dict
+                        results[input_spec.example_id] = {
+                            "early_stopped": True,
+                            "mean_plddt": network_output["mean_plddt"],
+                            "metrics": metrics_output,
+                        }
+
+                    continue
+
+                # Build predicted structures
+                atom_array_stack = build_stack_from_atom_array_and_batched_coords(
+                    network_output["X_L"], pipeline_output["atom_array"]
+                )
+                num_samples = (
+                    len(atom_array_stack)
+                    if isinstance(atom_array_stack, AtomArrayStack)
+                    else 1
                 )
 
-            # Model inference
-            with torch.no_grad():
-                pipeline_output = self.trainer.fabric.to_device(pipeline_output)
-                if should_early_stop_fn:
-                    valid_step_outs = self.trainer.validation_step(
-                        batch=pipeline_output,
-                        batch_idx=0,
-                        compute_metrics=True,
-                        should_early_stop_fn=should_early_stop_fn,
-                    )
-                else:
-                    valid_step_outs = self.trainer.validation_step(
-                        batch=pipeline_output,
-                        batch_idx=0,
-                        compute_metrics=True,
-                    )
-                network_output = valid_step_outs["network_output"]
-                metrics_output = valid_step_outs["metrics_output"]
+                # Build RF3Output objects for each sample
+                rf3_outputs: list[RF3Output] = []
+                for sample_idx in range(num_samples):
+                    # Get atom array for this sample
+                    if isinstance(atom_array_stack, AtomArrayStack):
+                        sample_atom_array = atom_array_stack[sample_idx]
+                    else:
+                        sample_atom_array = atom_array_stack
 
-            # Handle early stopping
-            if network_output.get("early_stopped", False):
-                ranked_logger.warning(
-                    f"Early stopping triggered for {input_spec.example_id} "
-                    f"with mean pLDDT {network_output['mean_plddt']:.2f} < "
-                    f"{self.early_stopping_plddt_threshold:.2f}!"
-                )
+                    # Compile confidence outputs in AF3 format (if available)
+                    summary_confidences = {}
+                    confidences = None
+                    if "plddt" in network_output:
+                        conf_outs = compile_af3_style_confidence_outputs(
+                            plddt_logits=network_output["plddt"],
+                            pae_logits=network_output["pae"],
+                            pde_logits=network_output["pde"],
+                            chain_iid_token_lvl=pipeline_output["ground_truth"][
+                                "chain_iid_token_lvl"
+                            ],
+                            is_real_atom=pipeline_output["confidence_feats"][
+                                "is_real_atom"
+                            ],
+                            atom_array=pipeline_output["atom_array"],
+                            confidence_loss_cfg=self.cfg.trainer.loss.confidence_loss,
+                            batch_idx=sample_idx,
+                        )
+                        summary_confidences = conf_outs["summary_confidences"]
+                        confidences = conf_outs["confidences"]
 
+                        # Annotate b-factor with pLDDT if requested
+                        if annotate_b_factor_with_plddt:
+                            atom_array_list = annotate_atom_array_b_factor_with_plddt(
+                                atom_array_stack,
+                                conf_outs["plddt"],
+                                pipeline_output["confidence_feats"]["is_real_atom"],
+                            )
+                            sample_atom_array = atom_array_list[sample_idx]
+
+                    # Add metrics (ptm, iptm, has_clash) to summary_confidences
+                    if metrics_output:
+                        ptm_key = f"ptm.ptm_{sample_idx}"
+                        iptm_key = f"iptm.iptm_{sample_idx}"
+                        clash_key = f"count_clashing_chains.has_clash_{sample_idx}"
+
+                        ptm_val = metrics_output.get(ptm_key)
+                        iptm_val = metrics_output.get(iptm_key)
+                        has_clash = bool(metrics_output.get(clash_key, 0))
+
+                        # Convert to native Python floats for JSON serialization
+                        ptm = float(ptm_val) if ptm_val is not None else None
+                        iptm = float(iptm_val) if iptm_val is not None else None
+
+                        summary_confidences["ptm"] = ptm
+                        summary_confidences["iptm"] = iptm
+                        summary_confidences["has_clash"] = has_clash
+
+                        ranking_score = compute_ranking_score(
+                            iptm=iptm,
+                            ptm=ptm,
+                            has_clash=has_clash,
+                        )
+                        summary_confidences["ranking_score"] = round(ranking_score, 4)
+
+                    rf3_outputs.append(
+                        RF3Output(
+                            example_id=input_spec.example_id,
+                            atom_array=sample_atom_array,
+                            summary_confidences=summary_confidences,
+                            confidences=confidences,
+                            sample_idx=sample_idx,
+                            seed=self.seed if self.seed is not None else 0,
+                        )
+                    )
+
+                # Save or return results
                 if out_dir:
-                    # Save early stop info to disk
-                    dict_to_save = {
-                        k: v for k, v in network_output.items() if v is not None
-                    }
-                    df_to_save = pd.DataFrame([dict_to_save])
-                    df_to_save.to_csv(example_out_dir / "score.csv", index=False)
-
-                    df_to_save = pd.DataFrame([metrics_output])
-                    df_to_save.to_csv(
-                        example_out_dir / f"{input_spec.example_id}_metrics.csv",
-                        index=False,
+                    # Save to disk in AlphaFold3-style directory structure
+                    # Top-level: ranking_scores.csv, best model, best summary
+                    dump_ranking_scores(
+                        rf3_outputs, example_out_dir, input_spec.example_id
                     )
-                else:
-                    # Store in results dict
-                    results[input_spec.example_id] = {
-                        "early_stopped": True,
-                        "mean_plddt": network_output["mean_plddt"],
-                        "metrics": metrics_output,
-                    }
-
-                continue
-
-            # Build predicted structures
-            atom_array_stack = build_stack_from_atom_array_and_batched_coords(
-                network_output["X_L"], pipeline_output["atom_array"]
-            )
-            num_samples = (
-                len(atom_array_stack)
-                if isinstance(atom_array_stack, AtomArrayStack)
-                else 1
-            )
-
-            # Build RF3Output objects for each sample
-            rf3_outputs: list[RF3Output] = []
-            for sample_idx in range(num_samples):
-                # Get atom array for this sample
-                if isinstance(atom_array_stack, AtomArrayStack):
-                    sample_atom_array = atom_array_stack[sample_idx]
-                else:
-                    sample_atom_array = atom_array_stack
-
-                # Compile confidence outputs in AF3 format (if available)
-                summary_confidences = {}
-                confidences = None
-                if "plddt" in network_output:
-                    conf_outs = compile_af3_style_confidence_outputs(
-                        plddt_logits=network_output["plddt"],
-                        pae_logits=network_output["pae"],
-                        pde_logits=network_output["pde"],
-                        chain_iid_token_lvl=pipeline_output["ground_truth"][
-                            "chain_iid_token_lvl"
-                        ],
-                        is_real_atom=pipeline_output["confidence_feats"][
-                            "is_real_atom"
-                        ],
-                        atom_array=pipeline_output["atom_array"],
-                        confidence_loss_cfg=self.cfg.trainer.loss.confidence_loss,
-                        batch_idx=sample_idx,
+                    dump_top_ranked_outputs(
+                        rf3_outputs,
+                        example_out_dir,
+                        input_spec.example_id,
+                        file_type=file_type,
                     )
-                    summary_confidences = conf_outs["summary_confidences"]
-                    confidences = conf_outs["confidences"]
 
-                    # Annotate b-factor with pLDDT if requested
-                    if annotate_b_factor_with_plddt:
-                        atom_array_list = annotate_atom_array_b_factor_with_plddt(
-                            atom_array_stack,
-                            conf_outs["plddt"],
-                            pipeline_output["confidence_feats"]["is_real_atom"],
-                        )
-                        sample_atom_array = atom_array_list[sample_idx]
+                    # Per-sample subdirectories
+                    if dump_predictions:
+                        for rf3_out in rf3_outputs:
+                            sample_subdir = (
+                                example_out_dir
+                                / f"seed-{rf3_out.seed}_sample-{rf3_out.sample_idx}"
+                            )
+                            rf3_out.dump(
+                                out_dir=sample_subdir,
+                                file_type=file_type,
+                                dump_full_confidences=True,
+                            )
 
-                # Add metrics (ptm, iptm, has_clash) to summary_confidences
-                if metrics_output:
-                    ptm_key = f"ptm.ptm_{sample_idx}"
-                    iptm_key = f"iptm.iptm_{sample_idx}"
-                    clash_key = f"count_clashing_chains.has_clash_{sample_idx}"
-
-                    ptm_val = metrics_output.get(ptm_key)
-                    iptm_val = metrics_output.get(iptm_key)
-                    has_clash = bool(metrics_output.get(clash_key, 0))
-
-                    # Convert to native Python floats for JSON serialization
-                    ptm = float(ptm_val) if ptm_val is not None else None
-                    iptm = float(iptm_val) if iptm_val is not None else None
-
-                    summary_confidences["ptm"] = ptm
-                    summary_confidences["iptm"] = iptm
-                    summary_confidences["has_clash"] = has_clash
-
-                    ranking_score = compute_ranking_score(
-                        iptm=iptm,
-                        ptm=ptm,
-                        has_clash=has_clash,
-                    )
-                    summary_confidences["ranking_score"] = round(ranking_score, 4)
-
-                rf3_outputs.append(
-                    RF3Output(
-                        example_id=input_spec.example_id,
-                        atom_array=sample_atom_array,
-                        summary_confidences=summary_confidences,
-                        confidences=confidences,
-                        sample_idx=sample_idx,
-                        seed=self.seed if self.seed is not None else 0,
-                    )
-                )
-
-            # Save or return results
-            if out_dir:
-                # Save to disk in AlphaFold3-style directory structure
-                # Top-level: ranking_scores.csv, best model, best summary
-                dump_ranking_scores(rf3_outputs, example_out_dir, input_spec.example_id)
-                dump_top_ranked_outputs(
-                    rf3_outputs,
-                    example_out_dir,
-                    input_spec.example_id,
-                    file_type=file_type,
-                )
-
-                # Per-sample subdirectories
-                if dump_predictions:
-                    for rf3_out in rf3_outputs:
-                        sample_subdir = (
-                            example_out_dir
-                            / f"seed-{rf3_out.seed}_sample-{rf3_out.sample_idx}"
-                        )
-                        rf3_out.dump(
-                            out_dir=sample_subdir,
+                    if dump_trajectories:
+                        dump_structures(
+                            atom_arrays=network_output["X_denoised_L_traj"],
+                            base_path=example_out_dir / "denoised",
+                            one_model_per_file=True,
                             file_type=file_type,
-                            dump_full_confidences=True,
+                        )
+                        dump_structures(
+                            atom_arrays=network_output["X_noisy_L_traj"],
+                            base_path=example_out_dir / "noisy",
+                            one_model_per_file=True,
+                            file_type=file_type,
                         )
 
-                if dump_trajectories:
-                    dump_structures(
-                        atom_arrays=network_output["X_denoised_L_traj"],
-                        base_path=example_out_dir / "denoised",
-                        one_model_per_file=True,
-                        file_type=file_type,
+                    ranked_logger.info(
+                        f"Outputs for {input_spec.example_id} written to {example_out_dir}!"
                     )
-                    dump_structures(
-                        atom_arrays=network_output["X_noisy_L_traj"],
-                        base_path=example_out_dir / "noisy",
-                        one_model_per_file=True,
-                        file_type=file_type,
-                    )
-
-                ranked_logger.info(
-                    f"Outputs for {input_spec.example_id} written to {example_out_dir}!"
+                else:
+                    # Store in memory - return list of RF3Output objects
+                    results[input_spec.example_id] = rf3_outputs
+            except KeyboardInterrupt:
+                raise
+            except Exception as exc:
+                ranked_logger.exception(
+                    "Skipping failed RF3 example %s due to %s: %s",
+                    input_spec.example_id,
+                    type(exc).__name__,
+                    exc,
                 )
-            else:
-                # Store in memory - return list of RF3Output objects
-                results[input_spec.example_id] = rf3_outputs
+                if out_dir:
+                    failure_path = example_out_dir / "error.txt"
+                    failure_path.write_text(
+                        "".join(
+                            traceback.format_exception(
+                                type(exc), exc, exc.__traceback__
+                            )
+                        ),
+                        encoding="utf-8",
+                    )
+                elif results is not None:
+                    results[input_spec.example_id] = {
+                        "error": f"{type(exc).__name__}: {exc}",
+                    }
+                continue
 
         # merge results across ranks
         self.trainer.fabric.barrier()

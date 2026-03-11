@@ -15,6 +15,7 @@ MSA_BACKEND="local_direct"
 MSA_SERVER_URL="http://127.0.0.1:8080/api"
 MSA_CACHE_DIR=""
 REUSE_CACHE=0
+SKIP_MSA_PREP=0
 USE_ENV_DB=0
 USE_FILTER=1
 PAIRING_STRATEGY="greedy"
@@ -55,6 +56,7 @@ Options:
   --boltz-src-path PATH  Explicit Boltz client src path for MSA generation
   --msa-server-url URL   Local MMSeqs2 server URL (default: http://127.0.0.1:8080/api)
   --msa-cache-dir PATH   Directory for generated .a3m files
+  --skip-msa-prep        Reuse an existing prepared-root and skip MSA generation
   --cuda-devices LIST    Export CUDA_VISIBLE_DEVICES for RF3 inference (default: 0,1,2,3)
   --rf3-gpus N           Number of GPUs for RF3 inference (default: 4)
   --rf3-launch-mode X    auto|sharded_single|ddp (default: auto)
@@ -110,6 +112,8 @@ while [[ $# -gt 0 ]]; do
       MSA_SERVER_URL="$2"; shift 2 ;;
     --msa-cache-dir)
       MSA_CACHE_DIR="$2"; shift 2 ;;
+    --skip-msa-prep)
+      SKIP_MSA_PREP=1; shift ;;
     --cuda-devices)
       CUDA_DEVICES="$2"; shift 2 ;;
     --rf3-gpus)
@@ -237,6 +241,19 @@ if [[ "${RF3_LAUNCH_MODE}" == "sharded_single" ]] && (( ${#HYDRA_OVERRIDES[@]} >
 fi
 
 PYTHON_BIN="${ENV_DIR}/bin/python"
+INPUT_ROOT="$(realpath "${INPUT_ROOT}")"
+PREPARED_ROOT="$(realpath -m "${PREPARED_ROOT}")"
+OUT_ROOT="$(realpath -m "${OUT_ROOT}")"
+LOCAL_MSA_ROOT="$(realpath -m "${LOCAL_MSA_ROOT}")"
+if [[ -n "${MSA_CACHE_DIR}" ]]; then
+  MSA_CACHE_DIR="$(realpath -m "${MSA_CACHE_DIR}")"
+fi
+
+EFFECTIVE_MSA_DIR="${PREPARED_ROOT}/msas"
+if [[ -n "${MSA_CACHE_DIR}" ]]; then
+  EFFECTIVE_MSA_DIR="${MSA_CACHE_DIR}"
+fi
+
 export PYTHONPATH="${REPO_ROOT}/models/foundry/src:${REPO_ROOT}/models/foundry/models/rf3/src${PYTHONPATH:+:${PYTHONPATH}}"
 DEFAULT_RF3_CKPT="${REPO_ROOT}/weights/rf3_foundry_01_24_latest_remapped.ckpt"
 if [[ "${CKPT_PATH}" == "rf3" && -f "${DEFAULT_RF3_CKPT}" ]]; then
@@ -317,10 +334,22 @@ if [[ "${USE_FILTER}" -eq 1 ]]; then
 fi
 
 echo "[foundry-rf3-run] preparing local MSAs"
-if [[ -n "${CUDA_DEVICES}" ]]; then
-  env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${PREP_ARGS[@]}"
+if [[ "${SKIP_MSA_PREP}" -eq 0 ]]; then
+  if [[ -n "${CUDA_DEVICES}" ]]; then
+    env CUDA_VISIBLE_DEVICES="${CUDA_DEVICES}" "${PREP_ARGS[@]}"
+  else
+    "${PREP_ARGS[@]}"
+  fi
+elif [[ ! -f "${PREPARED_ROOT}/summary.json" ]]; then
+  echo "Missing prepared RF3 inputs at ${PREPARED_ROOT}; cannot use --skip-msa-prep" >&2
+  exit 1
 else
-  "${PREP_ARGS[@]}"
+  echo "[foundry-rf3-run] skipping MSA prep and reusing prepared inputs at ${PREPARED_ROOT}"
+fi
+
+if [[ "${EFFECTIVE_MSA_DIR}" != "${PREPARED_ROOT}/msas" && -d "${EFFECTIVE_MSA_DIR}" ]]; then
+  mkdir -p "${PREPARED_ROOT}"
+  ln -sfn "${EFFECTIVE_MSA_DIR}" "${PREPARED_ROOT}/msas"
 fi
 
 run_single_shard() {
@@ -339,8 +368,10 @@ run_single_shard() {
     --n-recycles "${N_RECYCLES}"
     --diffusion-batch-size "${DIFFUSION_BATCH_SIZE}"
     --num-steps "${NUM_STEPS}"
-    --local-msa-dirs "${PREPARED_ROOT}/msas"
   )
+  if [[ -d "${EFFECTIVE_MSA_DIR}" ]]; then
+    shard_cmd+=(--local-msa-dirs "${EFFECTIVE_MSA_DIR}")
+  fi
   env \
     CUDA_VISIBLE_DEVICES="${gpu_id}" \
     HYDRA_FULL_ERROR=1 \
