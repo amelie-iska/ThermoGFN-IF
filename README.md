@@ -1,7 +1,6 @@
 # ThermoGFN-IF
 
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if) [![bioRxiv](https://img.shields.io/badge/bioRxiv-Preprint-007a33.svg)](https://www.biorxiv.org/)
-
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if) [![bioRxiv](https://img.shields.io/badge/bioRxiv-Preprint-007a33.svg)](https://www.biorxiv.org/) [![Paper](https://img.shields.io/badge/PDF-Download%20Paper-blue)](./assets/paper/main.pdf)
 
 ThermoGFN-IF implementation scaffold for tri-fidelity protein design with Method III-first training. 
 

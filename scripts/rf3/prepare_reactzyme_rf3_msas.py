@@ -672,6 +672,32 @@ def _normalize_a3m_query_sequence(a3m_text: str) -> str:
     return "".join(ch for ch in _extract_first_a3m_query_sequence(a3m_text) if ch.isupper())
 
 
+def _replace_first_a3m_query_sequence(a3m_text: str, expected_sequence: str) -> str:
+    lines = a3m_text.splitlines()
+    if not lines:
+        return a3m_text
+
+    out_lines: list[str] = []
+    idx = 0
+    replaced = False
+    while idx < len(lines):
+        line = lines[idx]
+        out_lines.append(line)
+        idx += 1
+        if not line.startswith(">") or replaced:
+            continue
+
+        while idx < len(lines) and not lines[idx].startswith(">"):
+            idx += 1
+        out_lines.append(expected_sequence)
+        replaced = True
+
+    rewritten = "\n".join(out_lines)
+    if a3m_text.endswith("\n"):
+        rewritten += "\n"
+    return rewritten
+
+
 def _a3m_has_uniform_aligned_columns(a3m_text: str) -> bool:
     aligned_lengths: set[int] = set()
     table = str.maketrans(dict.fromkeys(string.ascii_lowercase))
@@ -702,6 +728,28 @@ def _map_local_a3m_texts_to_sequences(
     chunk: Sequence[str],
     a3m_text_by_name: dict[str, str],
 ) -> dict[str, str]:
+    indexed_mapping: dict[str, str] = {}
+    seen_indices: set[int] = set()
+    numeric_names = True
+    for name, a3m_text in sorted(a3m_text_by_name.items()):
+        stem = Path(name).stem
+        if not stem.isdigit():
+            numeric_names = False
+            break
+        idx = int(stem)
+        if idx in seen_indices or idx < 0 or idx >= len(chunk):
+            numeric_names = False
+            break
+        seen_indices.add(idx)
+        expected_sequence = chunk[idx]
+        query_sequence = _normalize_a3m_query_sequence(a3m_text)
+        if query_sequence != expected_sequence:
+            a3m_text = _replace_first_a3m_query_sequence(a3m_text, expected_sequence)
+        indexed_mapping[expected_sequence] = a3m_text
+
+    if numeric_names and len(indexed_mapping) == len(chunk):
+        return indexed_mapping
+
     mapping: dict[str, str] = {}
     remaining = set(chunk)
     unmatched_files: list[str] = []

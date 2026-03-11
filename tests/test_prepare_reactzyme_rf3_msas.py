@@ -90,6 +90,30 @@ class TestPrepareReactzymeRf3Msas(unittest.TestCase):
         self.assertIn("SEQAAAA", mapping["SEQAAAA"].splitlines()[1])
         self.assertIn("SEQBBBB", mapping["SEQBBBB"].splitlines()[1])
 
+    def test_map_local_a3m_texts_to_sequences_prefers_numeric_file_index(self):
+        chunk = ["SEQAAAA", "SEQBBBB"]
+        mapping = MODULE._map_local_a3m_texts_to_sequences(
+            chunk,
+            {
+                "1.a3m": ">query\nWRONGSEQ\n>hit\nSEQBBBB\n",
+                "0.a3m": ">query\nALSO_WRONG\n>hit\nSEQAAAA\n",
+            },
+        )
+
+        self.assertEqual(set(mapping.keys()), set(chunk))
+        self.assertEqual(mapping["SEQAAAA"].splitlines()[1], "SEQAAAA")
+        self.assertEqual(mapping["SEQBBBB"].splitlines()[1], "SEQBBBB")
+
+    def test_replace_first_a3m_query_sequence_rewrites_only_query_block(self):
+        a3m = ">query\nBADSEQ\n>hit1\nAAAA\n>hit2\nBBBB\n"
+
+        rewritten = MODULE._replace_first_a3m_query_sequence(a3m, "SEQAAAA")
+
+        self.assertEqual(rewritten.splitlines()[1], "SEQAAAA")
+        self.assertIn(">hit1", rewritten)
+        self.assertIn(">hit2", rewritten)
+        self.assertTrue(rewritten.endswith("\n"))
+
     def test_a3m_has_uniform_aligned_columns(self):
         valid = ">query\nAAAA\n>hit\nAaaAAA\n"
         invalid = ">query\nAAAAAA\n>hit\nAAAA\n"
