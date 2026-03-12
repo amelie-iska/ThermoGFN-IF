@@ -2,15 +2,55 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 import math
+import netrc
+import os
 from pathlib import Path
+import sys
 from typing import Any
 
-try:  # pragma: no cover - import behavior depends on environment
-    import wandb
-except Exception:  # noqa: BLE001
-    wandb = None
+
+def _import_real_wandb():
+    """Import the installed wandb package, not the local ./wandb artifact dir."""
+
+    try:  # pragma: no cover - depends on runtime env
+        mod = importlib.import_module("wandb")
+        if hasattr(mod, "init") and hasattr(mod, "log"):
+            return mod
+    except Exception:  # noqa: BLE001
+        pass
+
+    repo_root = Path(__file__).resolve().parents[2]
+    cwd = Path.cwd().resolve()
+    original_path = list(sys.path)
+    try:  # pragma: no cover - depends on runtime env
+        filtered: list[str] = []
+        for entry in original_path:
+            if entry in {"", "."}:
+                continue
+            try:
+                resolved = Path(entry).resolve()
+            except Exception:  # noqa: BLE001
+                filtered.append(entry)
+                continue
+            if resolved == cwd or resolved == repo_root:
+                continue
+            filtered.append(entry)
+        sys.path[:] = filtered
+        sys.modules.pop("wandb", None)
+        mod = importlib.import_module("wandb")
+        if hasattr(mod, "init") and hasattr(mod, "log"):
+            return mod
+    except Exception:  # noqa: BLE001
+        return None
+    finally:
+        sys.path[:] = original_path
+    return None
+
+
+wandb = _import_real_wandb()
 
 
 def flatten_metrics(obj: dict[str, Any], prefix: str = "") -> dict[str, Any]:
@@ -58,6 +98,20 @@ def read_history_jsonl(path: str | Path) -> list[dict[str, Any]]:
     return rows
 
 
+def _has_wandb_credentials() -> bool:
+    api_key = os.environ.get("WANDB_API_KEY", "").strip()
+    if api_key:
+        return True
+    try:
+        auth = netrc.netrc()
+    except (FileNotFoundError, netrc.NetrcParseError, OSError):
+        return False
+    for host in ("api.wandb.ai", "wandb.ai"):
+        if host in auth.hosts:
+            return True
+    return False
+
+
 class WandbRun:
     """Thin wrapper that keeps wandb optional and centralized."""
 
@@ -83,7 +137,11 @@ class WandbRun:
             raise RuntimeError("wandb logging requested, but wandb is not installed in this environment")
         resolved_mode = mode
         if resolved_mode in {None, "", "auto"}:
-            resolved_mode = "online" if getattr(wandb.api, "api_key", None) else "offline"
+            env_mode = os.environ.get("WANDB_MODE", "").strip().lower()
+            if env_mode in {"online", "offline", "disabled"}:
+                resolved_mode = env_mode
+            else:
+                resolved_mode = "online" if _has_wandb_credentials() else "offline"
         self._run = wandb.init(
             project=project,
             entity=entity,
