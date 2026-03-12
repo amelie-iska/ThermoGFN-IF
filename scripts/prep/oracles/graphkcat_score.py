@@ -140,10 +140,6 @@ def _materialize_ligand_sdf(rec: dict, ligand_out: Path, root: Path) -> str:
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         raise ValueError(f"invalid substrate smiles for candidate_id={rec.get('candidate_id')}: {smiles}")
-    if len(Chem.GetMolFrags(mol)) != 1:
-        raise ValueError(
-            f"GraphKcat requires a single connected substrate molecule for candidate_id={rec.get('candidate_id')}"
-        )
     unsupported_atoms = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - GRAPHKCAT_SUPPORTED_ATOMS)
     if unsupported_atoms:
         raise ValueError(
@@ -185,18 +181,26 @@ def _run_with_heartbeat(
     step_name: str,
     heartbeat_sec: float,
     env: dict[str, str] | None = None,
-) -> int:
+) -> tuple[int, dict]:
     logger.info("CMD: %s", " ".join(str(c) for c in cmd))
     t0 = time.perf_counter()
     hb = max(1.0, float(heartbeat_sec))
+    from train.thermogfn.progress import PeakVRAMMonitor
+
+    monitor = PeakVRAMMonitor()
+    monitor.start()
     proc = subprocess.Popen(cmd, cwd=str(cwd), env=env)  # noqa: S603
-    while True:
-        try:
-            rc = proc.wait(timeout=hb)
-            logger.info("STEP %s finished rc=%d elapsed=%.1fs", step_name, rc, time.perf_counter() - t0)
-            return rc
-        except subprocess.TimeoutExpired:
-            logger.info("STEP %s still running elapsed=%.1fs", step_name, time.perf_counter() - t0)
+    try:
+        while True:
+            try:
+                rc = proc.wait(timeout=hb)
+                logger.info("STEP %s finished rc=%d elapsed=%.1fs", step_name, rc, time.perf_counter() - t0)
+                break
+            except subprocess.TimeoutExpired:
+                logger.info("STEP %s still running elapsed=%.1fs", step_name, time.perf_counter() - t0)
+    finally:
+        snapshot = monitor.stop()
+    return rc, snapshot
 
 
 def main() -> int:
@@ -228,7 +232,7 @@ def main() -> int:
 
     from train.thermogfn.io_utils import read_records, write_json, write_records
     from train.thermogfn.metrics_utils import summarize_graphkcat_rows
-    from train.thermogfn.progress import configure_logging, iter_progress, make_progress
+    from train.thermogfn.progress import configure_logging, iter_progress, log_peak_vram_snapshot, make_progress
 
     logger = configure_logging("oracle.graphkcat", level=args.log_level)
     if abs(float(args.distance_cutoff_a) - 8.0) > 1e-6:
@@ -367,7 +371,7 @@ def main() -> int:
             if predict_env.get("LD_PRELOAD"):
                 logger.info("GraphKcat using LD_PRELOAD=%s", predict_env["LD_PRELOAD"])
             overall_bar.set_postfix(stage="predict", prepared=prepared_ok, errors=len(prep_errors))
-            rc = _run_with_heartbeat(
+            rc, predict_peak_vram = _run_with_heartbeat(
                 cmd,
                 cwd=model_root,
                 logger=logger,
@@ -375,6 +379,7 @@ def main() -> int:
                 heartbeat_sec=args.heartbeat_sec,
                 env=predict_env,
             )
+            log_peak_vram_snapshot(logger, predict_peak_vram, label="graphkcat:predict")
             overall_bar.update(1)
             overall_bar.set_postfix(stage="predict", prepared=prepared_ok, errors=len(prep_errors), rc=rc)
             if rc != 0 and len(prep_errors) != len(rows):
@@ -445,6 +450,8 @@ def main() -> int:
 
         write_records(root / args.output_path, out_rows)
         summary = summarize_graphkcat_rows(out_rows)
+        if 'predict_peak_vram' in locals():
+            summary["predict_peak_vram"] = predict_peak_vram
         if args.summary_path:
             write_json(root / args.summary_path, summary)
         overall_bar.update(1)

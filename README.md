@@ -9,7 +9,7 @@ Important implementation note:
 - the edit-trajectory GFlowNet formulation in the paper is the target methodology,
 - the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment.
 
-The default catalytic path is nevertheless fully real in its oracle stack: whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands are multi-fragment or inorganic and therefore outside GraphKcat's reliable preprocessing regime.
+The default catalytic path is nevertheless fully real in its oracle stack: whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands include metal or inorganic fragments outside the current GraphKcat ligand vocabulary. Multi-fragment ligands composed of supported GraphKcat atom types are now accepted and can be scored when GraphKcat is enabled explicitly.
 
 ## Required conda environments
 
@@ -569,6 +569,7 @@ Use `--no-progress` only when you need log-only operation, for example in CI or 
 - The broad screen, sMD, and PMF are all real FAIRChem/ASE runs through `mora-uma`; this path does not use static proxy replacements.
 - GraphKcat remains available as an optional auxiliary oracle, but it is disabled in the default catalytic training preset because the RF3-derived catalytic ligands frequently violate its single-fragment organic preprocessing assumptions.
 - The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
+- Round and experiment manifests now record per-stage peak VRAM from `nvidia-smi`, and the GraphKcat summary JSON records peak VRAM for the `predict.py` stage as well.
 
 ### Tested end-to-end real rounds
 

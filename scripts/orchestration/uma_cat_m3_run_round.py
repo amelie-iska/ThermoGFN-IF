@@ -29,21 +29,28 @@ def _run(
     dry_run: bool = False,
     heartbeat_sec: float = 30.0,
     step_name: str = "",
-) -> tuple[int, float]:
+    peak_monitor_cls=None,
+) -> tuple[int, float, dict]:
     logger.info("CMD: %s", " ".join(cmd))
     t0 = time.perf_counter()
     if dry_run:
-        return 0, 0.0
+        return 0, 0.0, {}
     hb = max(1.0, float(heartbeat_sec))
+    monitor = peak_monitor_cls() if peak_monitor_cls is not None else None
+    if monitor is not None:
+        monitor.start()
     proc = subprocess.Popen(cmd)  # noqa: S603
-    while True:
-        try:
-            rc = proc.wait(timeout=hb)
-            break
-        except subprocess.TimeoutExpired:
-            elapsed = time.perf_counter() - t0
-            logger.info("STEP %s still running elapsed=%.1fs", step_name or "<unnamed>", elapsed)
-    return rc, time.perf_counter() - t0
+    try:
+        while True:
+            try:
+                rc = proc.wait(timeout=hb)
+                break
+            except subprocess.TimeoutExpired:
+                elapsed = time.perf_counter() - t0
+                logger.info("STEP %s still running elapsed=%.1fs", step_name or "<unnamed>", elapsed)
+    finally:
+        snapshot = monitor.stop() if monitor is not None else {}
+    return rc, time.perf_counter() - t0, snapshot
 
 
 def _q(v: str | Path) -> str:
@@ -206,7 +213,7 @@ def main() -> int:
     from train.thermogfn.config_utils import cfg_get, load_yaml_config
     from train.thermogfn.io_utils import read_records
     from train.thermogfn.metrics_utils import summarize_candidate_records
-    from train.thermogfn.progress import configure_logging, make_progress
+    from train.thermogfn.progress import PeakVRAMMonitor, configure_logging, log_peak_vram_snapshot, make_progress
     from train.thermogfn.wandb_utils import WandbRun, parse_tags, read_history_jsonl
 
     logger = configure_logging("orchestrate.uma_cat_round", level=args.log_level)
@@ -570,15 +577,17 @@ def main() -> int:
         if step_bar is not None:
             step_bar.set_postfix_str(f"running={name} step={idx}/{total_steps}")
         logger.info("STEP [%d/%d] start %s", idx, total_steps, name)
-        rc, dt = _run(
+        rc, dt, peak_vram = _run(
             cmd,
             logger=logger,
             dry_run=args.dry_run,
             heartbeat_sec=args.step_heartbeat_sec,
             step_name=name,
+            peak_monitor_cls=PeakVRAMMonitor,
         )
         ended = datetime.now(timezone.utc).isoformat()
         logger.info("STEP [%d/%d] end %s rc=%d duration=%.2fs", idx, total_steps, name, rc, dt)
+        log_peak_vram_snapshot(logger, peak_vram, label=f"step:{name}")
         manifest["steps"].append(
             {
                 "name": name,
@@ -587,6 +596,7 @@ def main() -> int:
                 "started_utc": started,
                 "completed_utc": ended,
                 "duration_s": dt,
+                "peak_vram": peak_vram,
             }
         )
         if step_bar is not None:
@@ -598,6 +608,9 @@ def main() -> int:
                 "step_index": idx,
                 "step_duration_s": float(dt),
                 "step_returncode": int(rc),
+                "step_peak_vram_mib": float(peak_vram.get("peak_vram_mib", 0.0) or 0.0),
+                "step_peak_vram_gib": float(peak_vram.get("peak_vram_gib", 0.0) or 0.0),
+                "step_peak_vram_frac": float(peak_vram.get("peak_vram_frac", 0.0) or 0.0),
                 "step_name": name,
             },
             step=_phase_step(idx, 997),

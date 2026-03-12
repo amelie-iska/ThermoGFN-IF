@@ -59,8 +59,6 @@ def _validate_graphkcat_smiles(smiles):
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         raise ValueError("invalid substrate smiles")
-    if len(Chem.GetMolFrags(mol)) != 1:
-        raise ValueError("GraphKcat requires a single connected substrate molecule")
     unsupported = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - SUPPORTED_LIGAND_ATOMS)
     if unsupported:
         raise ValueError(

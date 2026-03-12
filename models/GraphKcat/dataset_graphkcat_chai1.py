@@ -528,7 +528,10 @@ def inter_graph_all_atom(ligand, pocket, dis_threshold=5.):
         graph_inter.add_edge(i, j + atom_num_l, feats=feats)
 
     if graph_inter.number_of_edges() == 0:
-        raise ValueError("complex interaction graph has no edges")
+        nearest = np.unravel_index(np.argmin(dis_matrix_lp), dis_matrix_lp.shape)
+        i, j = int(nearest[0]), int(nearest[1])
+        feats = torch.tensor([1, 0, 0, dis_matrix_lp[i, j]])
+        graph_inter.add_edge(i, j + atom_num_l, feats=feats)
     graph_inter = graph_inter.to_directed()
     edge_index_inter = torch.stack([torch.LongTensor((u, v)) for u, v, _ in graph_inter.edges(data=True)]).T
     edge_attrs_inter = torch.stack([feats['feats'] for _, _, feats in graph_inter.edges(data=True)]).float()
@@ -560,11 +563,12 @@ def get_subgraph_mol(mol):
         raise ValueError("ligand RDKit mol has zero atoms")
     if mol.GetNumConformers() == 0:
         raise ValueError("ligand RDKit mol has no conformer")
-    sub_mols = tokenizer.tokenize(mol)
-    if sub_mols is None:
-        raise ValueError("ligand tokenization returned None")
 
     def _process_tokenized(tokenized_mol, atom_positions, atom_offset=0, node_offset=0):
+        if tokenized_mol is None:
+            raise ValueError("ligand tokenization returned None")
+        if isinstance(tokenized_mol, list):
+            raise ValueError("unexpected nested multi-fragment tokenization result")
         directed = tokenized_mol.to_directed()
         edges = list(directed.edges)
         if len(edges) == 0:
@@ -575,6 +579,8 @@ def get_subgraph_mol(mol):
         for i in range(len(tokenized_mol)):
             node = tokenized_mol.get_node(i)
             node_mol = node.mol
+            if node.smiles not in vocab_dict:
+                raise ValueError(f"unsupported ligand subgraph token for GraphKcat: {node.smiles}")
             sub_type = vocab_dict[node.smiles]
             SanitizeMol(node_mol, SanitizeFlags.SANITIZE_SETAROMATICITY)
             subgraphs.append(mol2graph(node_mol))
@@ -590,72 +596,56 @@ def get_subgraph_mol(mol):
             node_class.append(sub_type)
         return subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, remapped_edges
 
-    if isinstance(sub_mols, list):
-        fragment_mols = Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=False)
-        combined_subgraphs, combined_subgraph_pos_mean = [], []
-        combined_all_atom_index, combined_node_class, combined_subgraph_pos = [], [], []
-        combined_edges = []
-        atom_offset = 0
-        node_offset = 0
-        for frag_mol in fragment_mols:
-            if frag_mol is None or frag_mol.GetNumAtoms() == 0:
-                raise ValueError("ligand fragment tokenization produced empty fragment")
-            if frag_mol.GetNumConformers() == 0:
-                raise ValueError("ligand fragment has no conformer")
-            frag_tokenized = tokenizer.tokenize(frag_mol)
-            frag_positions = frag_mol.GetConformer().GetPositions()
-            subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
-                frag_tokenized, frag_positions, atom_offset=atom_offset, node_offset=node_offset
-            )
-            combined_subgraphs.extend(subgraphs)
-            combined_subgraph_pos_mean.extend(subgraph_pos_mean)
-            combined_all_atom_index.extend(all_atom_index)
-            combined_node_class.extend(node_class)
-            combined_subgraph_pos.extend(subgraph_pos)
-            combined_edges.extend(edges)
-            atom_offset += frag_mol.GetNumAtoms()
-            node_offset += len(frag_tokenized)
+    fragment_mols = Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=False)
+    if len(fragment_mols) == 0:
+        raise ValueError("ligand has no RDKit fragments")
 
-        if len(combined_subgraphs) == 0:
-            raise ValueError("ligand tokenization produced no subgraphs")
-        if len(combined_edges) == 0:
-            raise ValueError("ligand tokenization produced no subgraph edges")
-        pos = torch.stack(combined_subgraph_pos_mean)
-        node_class = torch.tensor(combined_node_class)
-        edge_index = torch.tensor(list(combined_edges)).T
-        edge_features = bond_features_sub_graph(combined_edges, pos)
+    combined_subgraphs, combined_subgraph_pos_mean = [], []
+    combined_all_atom_index, combined_node_class, combined_subgraph_pos = [], [], []
+    combined_edges = []
+    atom_offset = 0
+    node_offset = 0
+    for frag_mol in fragment_mols:
+        if frag_mol is None or frag_mol.GetNumAtoms() == 0:
+            raise ValueError("ligand fragment tokenization produced empty fragment")
+        if frag_mol.GetNumConformers() == 0:
+            raise ValueError("ligand fragment has no conformer")
+        frag_tokenized = tokenizer.tokenize(frag_mol)
+        if isinstance(frag_tokenized, list):
+            if len(frag_tokenized) != 1:
+                raise ValueError("fragment tokenization produced nested fragment list")
+            frag_tokenized = frag_tokenized[0]
+        frag_positions = frag_mol.GetConformer().GetPositions()
+        subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
+            frag_tokenized, frag_positions, atom_offset=atom_offset, node_offset=node_offset
+        )
+        combined_subgraphs.extend(subgraphs)
+        combined_subgraph_pos_mean.extend(subgraph_pos_mean)
+        combined_all_atom_index.extend(all_atom_index)
+        combined_node_class.extend(node_class)
+        combined_subgraph_pos.extend(subgraph_pos)
+        combined_edges.extend(edges)
+        atom_offset += frag_mol.GetNumAtoms()
+        node_offset += len(frag_tokenized)
 
-        all_atom_pos = mol.GetConformer().GetPositions()
-        node_batch = []
-        for i in range(len(all_atom_pos)):
-            for j, k in enumerate(combined_all_atom_index):
-                if i in k.keys():
-                    node_batch.append(j)
-
-        assert len(combined_subgraphs) == len(node_class) == len(pos)
-        return combined_subgraphs, pos, node_batch, node_class, edge_features, edge_index, combined_subgraph_pos
+    if len(combined_subgraphs) == 0:
+        raise ValueError("ligand tokenization produced no subgraphs")
+    if len(combined_edges) == 0:
+        raise ValueError("ligand tokenization produced no subgraph edges")
+    pos = torch.stack(combined_subgraph_pos_mean)
+    node_class = torch.tensor(combined_node_class)
+    edge_index = torch.tensor(list(combined_edges)).T
+    edge_features = bond_features_sub_graph(combined_edges, pos)
 
     all_atom_pos = mol.GetConformer().GetPositions()
-    subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
-        sub_mols, all_atom_pos
-    )
-    if len(subgraphs) == 0:
-        raise ValueError("ligand tokenization produced no subgraphs")
-    if len(edges) == 0:
-        raise ValueError("ligand tokenization produced no subgraph edges")
-    pos = torch.stack(subgraph_pos_mean)
-    node_class = torch.tensor(node_class)
-    edge_index = torch.tensor(list(edges)).T
-    edge_features = bond_features_sub_graph(edges, pos)
-
     node_batch = []
     for i in range(len(all_atom_pos)):
-        for j, k in enumerate(all_atom_index):
+        for j, k in enumerate(combined_all_atom_index):
             if i in k.keys():
                 node_batch.append(j)
 
-    assert len(subgraphs) == len(node_class) == len(pos)
-    return subgraphs, pos, node_batch, node_class, edge_features, edge_index, subgraph_pos
+    assert len(combined_subgraphs) == len(node_class) == len(pos)
+    return combined_subgraphs, pos, node_batch, node_class, edge_features, edge_index, combined_subgraph_pos
 
 def get_CA_coord(res):
     # 获取残基的CA原子的坐标
@@ -762,8 +752,6 @@ def mols2graphs(complex_path, pdbid, organism_set, temp_set, \
         raise ValueError(f"ligand SDF has zero atoms: {ligand_path}")
     if ligand.GetNumConformers() == 0:
         raise ValueError(f"ligand SDF has no conformer: {ligand_path}")
-    if len(Chem.GetMolFrags(ligand)) != 1:
-        raise ValueError(f"multi-fragment ligands unsupported by GraphKcat: {ligand_path}")
     ligand_symbols = {atom.GetSymbol() for atom in ligand.GetAtoms()}
     unsupported_atoms = sorted(symbol for symbol in ligand_symbols if symbol not in SUPPORTED_LIGAND_ATOMS)
     if unsupported_atoms:

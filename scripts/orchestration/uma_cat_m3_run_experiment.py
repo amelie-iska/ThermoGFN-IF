@@ -27,21 +27,28 @@ def _run(
     dry_run: bool = False,
     heartbeat_sec: float = 30.0,
     step_name: str = "",
-) -> tuple[int, float]:
+    peak_monitor_cls=None,
+) -> tuple[int, float, dict]:
     logger.info("CMD: %s", " ".join(cmd))
     t0 = time.perf_counter()
     if dry_run:
-        return 0, 0.0
+        return 0, 0.0, {}
     hb = max(1.0, float(heartbeat_sec))
+    monitor = peak_monitor_cls() if peak_monitor_cls is not None else None
+    if monitor is not None:
+        monitor.start()
     proc = subprocess.Popen(cmd)  # noqa: S603
-    while True:
-        try:
-            rc = proc.wait(timeout=hb)
-            break
-        except subprocess.TimeoutExpired:
-            elapsed = time.perf_counter() - t0
-            logger.info("STEP %s still running elapsed=%.1fs", step_name or "<unnamed>", elapsed)
-    return rc, time.perf_counter() - t0
+    try:
+        while True:
+            try:
+                rc = proc.wait(timeout=hb)
+                break
+            except subprocess.TimeoutExpired:
+                elapsed = time.perf_counter() - t0
+                logger.info("STEP %s still running elapsed=%.1fs", step_name or "<unnamed>", elapsed)
+    finally:
+        snapshot = monitor.stop() if monitor is not None else {}
+    return rc, time.perf_counter() - t0, snapshot
 
 
 def _q(v: str | Path) -> str:
@@ -146,7 +153,7 @@ def main() -> int:
     root = _repo_root()
     sys.path.insert(0, str(root))
     from train.thermogfn.config_utils import cfg_get, load_yaml_config
-    from train.thermogfn.progress import configure_logging, make_progress
+    from train.thermogfn.progress import PeakVRAMMonitor, configure_logging, log_peak_vram_snapshot, make_progress
     from train.thermogfn.wandb_utils import WandbRun, parse_tags
 
     logger = configure_logging("orchestrate.uma_cat_experiment", level=args.log_level)
@@ -378,7 +385,15 @@ def main() -> int:
             if value is not None:
                 cmd.extend([flag, str(value)])
 
-        rc, dt = _run(cmd, logger, dry_run=args.dry_run, heartbeat_sec=args.step_heartbeat_sec, step_name=f"round_{round_id}")
+        rc, dt, peak_vram = _run(
+            cmd,
+            logger,
+            dry_run=args.dry_run,
+            heartbeat_sec=args.step_heartbeat_sec,
+            step_name=f"round_{round_id}",
+            peak_monitor_cls=PeakVRAMMonitor,
+        )
+        log_peak_vram_snapshot(logger, peak_vram, label=f"round_{round_id}")
         gate_path = round_dir / "manifests" / "round_gate_report.json"
         gate = json.loads(gate_path.read_text()) if gate_path.exists() else {}
         next_dr = round_dir / "data" / f"D_{round_id + 1}.jsonl"
@@ -390,6 +405,7 @@ def main() -> int:
                 "uma_run_pmf": int(effective_uma_run_pmf) if effective_uma_run_pmf is not None else None,
                 "returncode": int(rc),
                 "duration_s": float(dt),
+                "peak_vram": peak_vram,
                 "gate": gate,
                 "next_dataset_path": str(next_dr),
             }
@@ -408,6 +424,9 @@ def main() -> int:
                 ),
                 "round/returncode": int(rc),
                 "round/duration_s": float(dt),
+                "round/peak_vram_mib": float(peak_vram.get("peak_vram_mib", 0.0) or 0.0),
+                "round/peak_vram_gib": float(peak_vram.get("peak_vram_gib", 0.0) or 0.0),
+                "round/peak_vram_frac": float(peak_vram.get("peak_vram_frac", 0.0) or 0.0),
                 "round/output_dir": str(round_dir),
                 **({"round/metrics": round_metrics} if round_metrics else {}),
                 **({"round/teacher_student": teacher_student} if teacher_student else {}),

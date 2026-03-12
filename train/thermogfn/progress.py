@@ -1,9 +1,13 @@
-"""Shared logging and progress utilities for CLI scripts."""
+"""Shared logging, progress, and GPU monitoring utilities for CLI scripts."""
 
 from __future__ import annotations
 
 import logging
 import os
+import shutil
+import subprocess
+import threading
+import time
 from collections.abc import Iterable, Iterator
 from typing import TypeVar
 
@@ -208,3 +212,104 @@ def log_peak_vram(logger: logging.Logger, *, label: str = "inference") -> None:
         logger.info("%s total_vram_gib=%.3f", label, total_gib)
     except Exception as exc:  # noqa: BLE001
         logger.warning("%s peak_vram_log_failed error=%s", label, exc)
+
+
+class PeakVRAMMonitor:
+    """Track peak GPU memory usage via `nvidia-smi` while a subprocess runs."""
+
+    def __init__(self, *, poll_interval_sec: float = 2.0) -> None:
+        self.poll_interval_sec = max(0.25, float(poll_interval_sec))
+        self._stop = threading.Event()
+        self._thread: threading.Thread | None = None
+        self._peaks: dict[int, dict[str, object]] = {}
+        self._available = shutil.which("nvidia-smi") is not None
+
+    def _sample(self) -> None:
+        if not self._available:
+            return
+        try:
+            proc = subprocess.run(  # noqa: S603
+                [
+                    "nvidia-smi",
+                    "--query-gpu=index,memory.used,memory.total,name",
+                    "--format=csv,noheader,nounits",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            if proc.returncode != 0:
+                return
+            for raw in proc.stdout.splitlines():
+                parts = [part.strip() for part in raw.split(",")]
+                if len(parts) < 4:
+                    continue
+                idx = int(parts[0])
+                used_mib = float(parts[1])
+                total_mib = float(parts[2])
+                name = parts[3]
+                prev = self._peaks.get(idx)
+                if prev is None or used_mib >= float(prev["used_mib"]):
+                    self._peaks[idx] = {
+                        "used_mib": used_mib,
+                        "total_mib": total_mib,
+                        "name": name,
+                    }
+        except Exception:
+            return
+
+    def _loop(self) -> None:
+        while not self._stop.is_set():
+            self._sample()
+            self._stop.wait(self.poll_interval_sec)
+
+    def start(self) -> None:
+        if not self._available or self._thread is not None:
+            return
+        self._sample()
+        self._thread = threading.Thread(target=self._loop, name="peak-vram-monitor", daemon=True)
+        self._thread.start()
+
+    def stop(self) -> dict[str, object]:
+        if not self._available:
+            return {"available": False}
+        self._stop.set()
+        if self._thread is not None:
+            self._thread.join(timeout=max(1.0, self.poll_interval_sec * 2.0))
+        self._sample()
+        if not self._peaks:
+            return {"available": True, "peak_vram_mib": 0.0, "peak_vram_gib": 0.0, "peak_vram_frac": 0.0}
+        peak_device = max(self._peaks, key=lambda idx: float(self._peaks[idx]["used_mib"]))
+        peak = self._peaks[peak_device]
+        used_mib = float(peak["used_mib"])
+        total_mib = float(peak["total_mib"])
+        payload: dict[str, object] = {
+            "available": True,
+            "peak_vram_mib": used_mib,
+            "peak_vram_gib": used_mib / 1024.0,
+            "peak_vram_frac": (used_mib / total_mib) if total_mib > 0 else 0.0,
+            "peak_vram_device": int(peak_device),
+            "peak_vram_device_name": str(peak["name"]),
+            "per_gpu_peak_mib": {str(idx): float(info["used_mib"]) for idx, info in sorted(self._peaks.items())},
+        }
+        return payload
+
+
+def log_peak_vram_snapshot(logger: logging.Logger, snapshot: dict[str, object], *, label: str) -> None:
+    """Log a stage-level peak VRAM snapshot from `PeakVRAMMonitor`."""
+    if not snapshot:
+        logger.info("%s peak_vram=unavailable no_snapshot", label)
+        return
+    if not bool(snapshot.get("available", False)):
+        logger.info("%s peak_vram=unavailable nvidia_smi_missing", label)
+        return
+    logger.info(
+        "%s peak_vram_mib=%.1f peak_vram_gib=%.3f peak_vram_frac=%.3f device=%s name=%s per_gpu_peak_mib=%s",
+        label,
+        float(snapshot.get("peak_vram_mib", 0.0)),
+        float(snapshot.get("peak_vram_gib", 0.0)),
+        float(snapshot.get("peak_vram_frac", 0.0)),
+        snapshot.get("peak_vram_device", "n/a"),
+        snapshot.get("peak_vram_device_name", "n/a"),
+        snapshot.get("per_gpu_peak_mib", {}),
+    )
