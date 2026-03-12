@@ -107,6 +107,8 @@ Any one of these constitutes a Volume Trigger:
 #### Enterprise obligation
 If You anticipate meeting an Enterprise Trigger, You must obtain an Enterprise Commercial License **before** exceeding the trigger.
 
+For the avoidance of doubt, retraining, fine-tuning, continued training, distillation, merging, quantization, conversion, or any other creation or use of Derivative Weights does **not** create an exemption from this Section 6. Any Commercial Use of Derivative Weights is aggregated with Commercial Use of the original Model Weights for purposes of the Enterprise Triggers, and once any Enterprise Trigger is met or exceeded, continued Commercial Use of either the Model Weights or any Derivative Weights requires an Enterprise Commercial License.
+
 ### 7) Redistribution & Sharing
 
 #### 7.1 Sharing Model Weights
