@@ -2,7 +2,7 @@
 
 > **Not legal advice.** This is a licensing draft intended to be reviewed and finalized by qualified counsel.
 >
-> **Scope.** ThermoGFN-IF is a reaction-conditioned generative framework for enzyme sequence and structure design, enzyme-ligand complexes, catalytic endpoint-conditioned transition paths and trajectories, and protein inpainting (the “Model”), as described in the ThermoGFN-IF paper.  
+> **Scope.** ThermoGFN-IF is a reaction-conditioned generative framework for enzyme sequence design, enzyme-ligand complexes, catalytic endpoint-conditioned transition paths and trajectories, with kinetic parameters, thermostability, and binding affinity as conditioning inputs (the “Model”), as described in the ThermoGFN-IF paper.  
 > This repository/distribution includes (a) software code, and (b) trained model weights/checkpoints.
 
 ---
