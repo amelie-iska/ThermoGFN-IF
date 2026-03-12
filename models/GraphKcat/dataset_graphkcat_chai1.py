@@ -24,6 +24,8 @@ RDLogger.DisableLog('rdApp.*')
 np.set_printoptions(threshold=np.inf)
 warnings.filterwarnings('ignore')
 
+SUPPORTED_LIGAND_ATOMS = {"B", "Br", "C", "Cl", "F", "H", "I", "N", "Na", "O", "P", "S"}
+
 # %%
 def one_of_k_encoding(k, possible_values):
     if k not in possible_values:
@@ -66,7 +68,8 @@ def get_edge_index(mol, graph):
         graph.add_edge(i, j)
         edge_features.append(feats)
         edge_features.append(feats)
-
+    if len(edge_features) == 0:
+        raise ValueError("molecule has no bond edges")
     return torch.stack(edge_features)
 
 def bond_features(bond):
@@ -83,6 +86,8 @@ def bond_features_sub_graph(edge_index,pos_sub_graph):
     # print(edge_index)
     if len(pos_sub_graph) == 1:
         return torch.zeros((1, 16)) # 1 * 16
+    if len(edge_index) == 0:
+        raise ValueError("subgraph graph has no edges")
 
     for i,j in edge_index:
         # print(i,j)
@@ -227,6 +232,12 @@ def one_hot_seq(seq):
 def get_pro_node_batch(rdkit_mol, res_list_coords):
     if rdkit_mol is None:
         raise ValueError("pocket rdkit mol is None")
+    if rdkit_mol.GetNumAtoms() == 0:
+        raise ValueError("pocket rdkit mol has zero atoms")
+    if rdkit_mol.GetNumConformers() == 0:
+        raise ValueError("pocket rdkit mol has no conformer")
+    if len(res_list_coords) == 0:
+        raise ValueError("pocket residue coordinate list is empty")
     pos_mol = rdkit_mol.GetConformer().GetPositions()
     node_batch = []
     # for i in range(len(pos_mol)):
@@ -244,24 +255,19 @@ def get_pro_node_batch(rdkit_mol, res_list_coords):
 
 
 def _load_pdb_mol_robust(pdb_path):
-    mol = Chem.MolFromPDBFile(pdb_path, sanitize=True, removeHs=True)
-    if mol is not None:
-        return mol
-    mol = Chem.MolFromPDBFile(
-        pdb_path,
-        sanitize=False,
-        removeHs=True,
-        proximityBonding=False,
-    )
-    if mol is not None:
-        return mol
-    mol = Chem.MolFromPDBFile(
-        pdb_path,
-        sanitize=False,
-        removeHs=True,
-        proximityBonding=True,
-    )
-    if mol is not None:
+    attempts = [
+        dict(sanitize=True, removeHs=True),
+        dict(sanitize=False, removeHs=True, proximityBonding=False),
+        dict(sanitize=False, removeHs=True, proximityBonding=True),
+    ]
+    for kwargs in attempts:
+        mol = Chem.MolFromPDBFile(pdb_path, **kwargs)
+        if mol is None:
+            continue
+        if mol.GetNumAtoms() == 0:
+            continue
+        if mol.GetNumConformers() == 0:
+            continue
         return mol
     raise ValueError(f"failed to parse PDB with RDKit: {pdb_path}")
             
@@ -271,6 +277,10 @@ def get_protein_graph(protein, pocket, saprot_feature=None, topk=16):
 
     protein_res_list = get_clean_res_list(protein.get_residues(), verbose=False, ensure_ca_exist=True)
     pocket_res_list = get_clean_res_list(pocket.get_residues(), verbose=False, ensure_ca_exist=True)
+    if len(protein_res_list) == 0:
+        raise ValueError("protein contains no standard residues with CA atoms")
+    if len(pocket_res_list) == 0:
+        raise ValueError("pocket contains no standard residues with CA atoms")
     pocket_coords_full, pocket_coords, pocket_coords_main = get_pro_coord(pocket_res_list)
     # print(protein_res_list)
     # print(pocket_res_list)
@@ -468,6 +478,14 @@ def temp_bin_encoding(values, bins, method='onehot', device='cpu'):
 def inter_graph_all_atom(ligand, pocket, dis_threshold=5.):
     atom_num_l = ligand.GetNumAtoms()
     atom_num_p = pocket.GetNumAtoms()
+    if atom_num_l == 0:
+        raise ValueError("ligand has zero atoms")
+    if atom_num_p == 0:
+        raise ValueError("pocket has zero atoms")
+    if ligand.GetNumConformers() == 0:
+        raise ValueError("ligand has no conformer")
+    if pocket.GetNumConformers() == 0:
+        raise ValueError("pocket has no conformer")
 
     graph_inter = nx.Graph()
     pos_l = ligand.GetConformer().GetPositions()
@@ -509,6 +527,8 @@ def inter_graph_all_atom(ligand, pocket, dis_threshold=5.):
         feats = torch.tensor([1, 0, 0, dis_matrix_lp[i, j]])
         graph_inter.add_edge(i, j + atom_num_l, feats=feats)
 
+    if graph_inter.number_of_edges() == 0:
+        raise ValueError("complex interaction graph has no edges")
     graph_inter = graph_inter.to_directed()
     edge_index_inter = torch.stack([torch.LongTensor((u, v)) for u, v, _ in graph_inter.edges(data=True)]).T
     edge_attrs_inter = torch.stack([feats['feats'] for _, _, feats in graph_inter.edges(data=True)]).float()
@@ -534,7 +554,15 @@ def get_sub_graph_dict(vocab_txt):
 
 def get_subgraph_mol(mol):
     tokenizer = Tokenizer('./sub_utils/zinc_350.txt')
+    if mol is None:
+        raise ValueError("ligand RDKit mol is None")
+    if mol.GetNumAtoms() == 0:
+        raise ValueError("ligand RDKit mol has zero atoms")
+    if mol.GetNumConformers() == 0:
+        raise ValueError("ligand RDKit mol has no conformer")
     sub_mols = tokenizer.tokenize(mol)
+    if sub_mols is None:
+        raise ValueError("ligand tokenization returned None")
 
     def _process_tokenized(tokenized_mol, atom_positions, atom_offset=0, node_offset=0):
         directed = tokenized_mol.to_directed()
@@ -570,6 +598,10 @@ def get_subgraph_mol(mol):
         atom_offset = 0
         node_offset = 0
         for frag_mol in fragment_mols:
+            if frag_mol is None or frag_mol.GetNumAtoms() == 0:
+                raise ValueError("ligand fragment tokenization produced empty fragment")
+            if frag_mol.GetNumConformers() == 0:
+                raise ValueError("ligand fragment has no conformer")
             frag_tokenized = tokenizer.tokenize(frag_mol)
             frag_positions = frag_mol.GetConformer().GetPositions()
             subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
@@ -584,6 +616,10 @@ def get_subgraph_mol(mol):
             atom_offset += frag_mol.GetNumAtoms()
             node_offset += len(frag_tokenized)
 
+        if len(combined_subgraphs) == 0:
+            raise ValueError("ligand tokenization produced no subgraphs")
+        if len(combined_edges) == 0:
+            raise ValueError("ligand tokenization produced no subgraph edges")
         pos = torch.stack(combined_subgraph_pos_mean)
         node_class = torch.tensor(combined_node_class)
         edge_index = torch.tensor(list(combined_edges)).T
@@ -603,6 +639,10 @@ def get_subgraph_mol(mol):
     subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
         sub_mols, all_atom_pos
     )
+    if len(subgraphs) == 0:
+        raise ValueError("ligand tokenization produced no subgraphs")
+    if len(edges) == 0:
+        raise ValueError("ligand tokenization produced no subgraph edges")
     pos = torch.stack(subgraph_pos_mean)
     node_class = torch.tensor(node_class)
     edge_index = torch.tensor(list(edges)).T
@@ -718,6 +758,18 @@ def mols2graphs(complex_path, pdbid, organism_set, temp_set, \
         ligand = Chem.MolFromMolFile(ligand_path, sanitize=False, removeHs=True)
     if ligand is None:
         raise ValueError(f"failed to parse ligand SDF: {ligand_path}")
+    if ligand.GetNumAtoms() == 0:
+        raise ValueError(f"ligand SDF has zero atoms: {ligand_path}")
+    if ligand.GetNumConformers() == 0:
+        raise ValueError(f"ligand SDF has no conformer: {ligand_path}")
+    if len(Chem.GetMolFrags(ligand)) != 1:
+        raise ValueError(f"multi-fragment ligands unsupported by GraphKcat: {ligand_path}")
+    ligand_symbols = {atom.GetSymbol() for atom in ligand.GetAtoms()}
+    unsupported_atoms = sorted(symbol for symbol in ligand_symbols if symbol not in SUPPORTED_LIGAND_ATOMS)
+    if unsupported_atoms:
+        raise ValueError(
+            f"unsupported ligand atom types for GraphKcat: {','.join(unsupported_atoms)}"
+        )
     if any([atom.GetSymbol() == 'Si' for atom in ligand.GetAtoms()]):
         print(f"Silicon found in {pdbid}, skipping...")
         return

@@ -6,12 +6,16 @@ MAX_VALENCE = {'B': 3, 'Br':1, 'C':4, 'Cl':1, 'F':1, 'I':1, 'N':5, 'O':2, 'P':5,
 def smi2mol(smiles: str, kekulize=False, sanitize=True):
     '''turn smiles to molecule'''
     mol = Chem.MolFromSmiles(smiles, sanitize=sanitize)
+    if mol is None:
+        return None
     if kekulize:
         Chem.Kekulize(mol, True)
     return mol
 
 
 def mol2smi(mol, canonical=True):
+    if mol is None:
+        raise ValueError("mol2smi received None molecule")
     return Chem.MolToSmiles(mol, canonical=canonical)
 
 

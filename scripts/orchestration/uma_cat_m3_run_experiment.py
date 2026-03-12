@@ -101,6 +101,7 @@ def main() -> int:
     parser.add_argument("--uma-smd-steps-per-image", type=int, default=None)
     parser.add_argument("--uma-smd-replicas", type=int, default=None)
     parser.add_argument("--uma-run-pmf", type=int, default=None)
+    parser.add_argument("--uma-run-pmf-every", type=int, default=None)
     parser.add_argument("--uma-pmf-windows", type=int, default=None)
     parser.add_argument("--uma-pmf-steps-per-window", type=int, default=None)
     parser.add_argument("--uma-pmf-save-every", type=int, default=None)
@@ -201,6 +202,13 @@ def main() -> int:
     args.wandb_run_name = str(
         args.wandb_run_name or cfg_get(cfg, "logging.wandb.run_name", f"{args.run_id}-experiment")
     )
+    args.uma_run_pmf_every = int(
+        args.uma_run_pmf_every
+        if args.uma_run_pmf_every is not None
+        else cfg_get(cfg, "oracles.uma_cat.pmf.every_n_rounds", 1)
+    )
+    if args.uma_run_pmf_every < 1:
+        raise ValueError("--uma-run-pmf-every must be >= 1")
     if not args.strict_gates and bool(cfg_get(cfg, "run.strict_gates", False)):
         args.strict_gates = True
 
@@ -227,6 +235,7 @@ def main() -> int:
             "graphkcat_prefilter_fraction": args.graphkcat_prefilter_fraction,
             "teacher_steps": args.teacher_steps,
             "student_steps": args.student_steps,
+            "uma_run_pmf_every": args.uma_run_pmf_every,
             "strict_gates": args.strict_gates,
             "config_path": str(cfg_path),
         },
@@ -252,8 +261,14 @@ def main() -> int:
     round_script = root / "scripts/orchestration/uma_cat_m3_run_round.py"
     for round_id in range(int(args.start_round), int(args.start_round) + int(args.num_rounds)):
         round_dir = exp_root / f"round_{round_id:03d}"
+        effective_uma_run_pmf = args.uma_run_pmf
+        if effective_uma_run_pmf is not None and int(effective_uma_run_pmf):
+            effective_uma_run_pmf = 1 if (int(round_id) % int(args.uma_run_pmf_every) == 0) else 0
         if round_bar is not None:
-            round_bar.set_postfix_str(f"running round={round_id} dataset={current_dr.name}")
+            pmf_suffix = ""
+            if effective_uma_run_pmf is not None:
+                pmf_suffix = f" pmf={'on' if int(effective_uma_run_pmf) else 'off'}"
+            round_bar.set_postfix_str(f"running round={round_id} dataset={current_dr.name}{pmf_suffix}")
         cmd = [
             "python",
             str(round_script),
@@ -337,7 +352,7 @@ def main() -> int:
             "--uma-smd-images": args.uma_smd_images,
             "--uma-smd-steps-per-image": args.uma_smd_steps_per_image,
             "--uma-smd-replicas": args.uma_smd_replicas,
-            "--uma-run-pmf": args.uma_run_pmf,
+            "--uma-run-pmf": effective_uma_run_pmf,
             "--uma-pmf-windows": args.uma_pmf_windows,
             "--uma-pmf-steps-per-window": args.uma_pmf_steps_per_window,
             "--uma-pmf-save-every": args.uma_pmf_save_every,
@@ -372,6 +387,7 @@ def main() -> int:
                 "round_id": int(round_id),
                 "dataset_path": str(current_dr),
                 "output_dir": str(round_dir),
+                "uma_run_pmf": int(effective_uma_run_pmf) if effective_uma_run_pmf is not None else None,
                 "returncode": int(rc),
                 "duration_s": float(dt),
                 "gate": gate,
@@ -385,6 +401,11 @@ def main() -> int:
         wandb_run.log(
             {
                 "round/index": int(round_id),
+                **(
+                    {"round/uma_run_pmf": int(effective_uma_run_pmf)}
+                    if effective_uma_run_pmf is not None
+                    else {}
+                ),
                 "round/returncode": int(rc),
                 "round/duration_s": float(dt),
                 "round/output_dir": str(round_dir),

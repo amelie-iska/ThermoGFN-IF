@@ -9,16 +9,14 @@ Important implementation note:
 - the edit-trajectory GFlowNet formulation in the paper is the target methodology,
 - the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment.
 
-The default catalytic path is nevertheless fully real in its oracle stack: packed-structure GraphKcat scoring with MC-dropout uncertainty, whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates.
+The default catalytic path is nevertheless fully real in its oracle stack: whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands are multi-fragment or inorganic and therefore outside GraphKcat's reliable preprocessing regime.
 
 ## Required conda environments
 
-Default catalytic RL path (`UMA-cat + GraphKcat`):
+Default catalytic RL path (`UMA-cat` only):
 
 - `ligandmpnn_env`
 - `mora-uma`
-- `apodock`
-
 Legacy / non-default stability-binding pipeline:
 
 - `spurs`
@@ -34,7 +32,6 @@ Minimal readiness checks for the default catalytic path:
 ```bash
 conda run -n ligandmpnn_env python -c "import torch; print(torch.cuda.is_available())"
 conda run -n mora-uma python -c "import fairchem"
-conda run -n apodock python -c "import torch; print(torch.cuda.is_available())"
 ```
 
 Full production-path readiness checks for the older stability/binding pipeline:
@@ -95,7 +92,7 @@ Primary runtime configs:
 - UMA catalytic broad-screen controls,
 - forward / reverse sMD controls,
 - optional PMF controls,
-- GraphKcat refinement controls,
+- optional GraphKcat refinement controls,
 - catalytic fusion weights,
 - Method III round budgets for `uma_cat_budget` and `graphkcat_budget`,
 - W&B defaults under `logging.wandb` for round-level and experiment-level telemetry.
@@ -190,21 +187,18 @@ scripts/orchestration/run_full_production_pipeline.sh \
   --uma-budget 64
 ```
 
-## Default catalytic RL path: whole-enzyme UMA + sMD/PMF + GraphKcat
+## Default catalytic RL path: whole-enzyme UMA + sMD/PMF
 
 This is now the primary catalytic Method III path in the repo. It is self-contained and does not depend on the sibling `enzyme-quiver` repository at runtime.
 
 Core idea:
 
 - build catalytic candidates from RF3 reactant-bound and product-bound outputs,
-- repack the full student pool with LigandMPNN so GraphKcat sees mutant-specific structures rather than seed structures,
-- run GraphKcat first across that packed mutant pool,
-- keep the top GraphKcat tranche as a catalytic prefilter,
+- repack the selected student candidates with LigandMPNN,
 - run a broad whole-enzyme UMA equilibrium screen from the reactant-bound basin,
 - optionally run forward and reverse steered UMA dynamics between reactant-bound and product-bound states,
 - optionally reconstruct a path umbrella PMF from the sMD-derived path,
-- use GraphKcat MC-dropout as the first-pass structural catalytic oracle,
-- fuse UMA-cat and GraphKcat into the Method III reward.
+- use UMA-cat as the default catalytic oracle during RL.
 
 The implemented catalytic scalar is a transition-state-style log-rate proxy:
 
@@ -240,14 +234,13 @@ oracles:
   envs:
     packer: ligandmpnn_env
     uma_cat: mora-uma
-    graphkcat: apodock
 ```
 
 Default catalytic routing in that config:
 
 - `generator.backend = ligandmpnn`
-- `round.graphkcat_prefilter_fraction = 0.5`
-- `round.graphkcat_prefilter_risk_kappa = 0.5`
+- `round.graphkcat_prefilter_fraction = 0.0`
+- `round.graphkcat_budget = 0`
 - `oracles.uma_cat.broad.steps = 1000` with `replicas = 3`
 - `oracles.uma_cat.smd.images = 32`, `steps_per_image = 40`, `replicas = 3`
 - `oracles.uma_cat.smd.k_steer_eva2 = 1.5` for gentler steering than the earlier default
@@ -255,30 +248,18 @@ Default catalytic routing in that config:
 - `oracles.uma_cat.smd.reverse = true`
 - `oracles.uma_cat.pmf.enabled = false`
 - `oracles.uma_cat.pmf.windows = 20`, `steps_per_window = 200`, `replicas = 2` when PMF is enabled
-- GraphKcat enabled
+- GraphKcat disabled by default in the RL loop
 - SPURS, BioEmu, KcatNet, MMKcat, and thermostability UMA are not part of this default RL loop
 
 That means the default round order is:
 
 1. student proposes the pool
-2. LigandMPNN packs the full pool onto the endpoint complexes
-3. GraphKcat scores the packed mutant pool with MC-dropout
-3. top `50%` by risk-adjusted `graphkcat_log_kcat` survive the prefilter
-4. UMA-cat acquisition selects the expensive subset from within that screened set
-5. UMA-cat runs broad dynamics plus optional sMD / PMF
-6. fused reward is computed from UMA-cat and GraphKcat
+2. UMA-cat acquisition selects the expensive subset
+3. LigandMPNN packs that selected subset onto the endpoint complexes
+4. UMA-cat runs broad dynamics plus optional sMD / PMF
+5. fused reward is computed from UMA-cat
 
-The implemented GraphKcat prefilter statistic is the risk-adjusted score
-
-```text
-graphkcat_prefilter_score = graphkcat_log_kcat - kappa * graphkcat_std
-```
-
-with `graphkcat_std` coming from MC-dropout by default.
-
-Important environment note:
-
-- `apodock` needs `huggingface_hub` available so Uni-Mol can fetch its weights on first use.
+GraphKcat is still available as an optional auxiliary oracle, but it is not part of the default path because many catalytic reactant/product ligands in the RF3-derived dataset are disconnected, metal-containing, or otherwise incompatible with the current GraphKcat preprocessing stack.
 
 ### Tested RF3-to-catalytic dataset build
 
@@ -430,7 +411,7 @@ Compatibility fallback note:
 - if MC-dropout is explicitly disabled or the model does not emit uncertainty columns, the wrapper can still fall back to `--std-default`,
 - but that fallback is **not** the default methodology and is not used in the default catalytic config.
 
-### Fuse UMA-cat and GraphKcat into the RL reward
+### Fuse UMA-cat and optional GraphKcat into the RL reward
 
 ```bash
 python scripts/prep/oracles/fuse_catalytic_scores.py \
@@ -460,7 +441,8 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --output-dir runs/uma_cat_demo/round_000 \
   --pool-size 50000 \
   --uma-cat-budget 256 \
-  --graphkcat-prefilter-fraction 0.5
+  --graphkcat-prefilter-fraction 0.0 \
+  --graphkcat-budget 0
 ```
 
 Dry-run version:
@@ -474,7 +456,8 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --output-dir runs/tmp/uma_cat_round_dry \
   --pool-size 4 \
   --uma-cat-budget 1 \
-  --graphkcat-prefilter-fraction 0.5 \
+  --graphkcat-prefilter-fraction 0.0 \
+  --graphkcat-budget 0 \
   --teacher-steps 1 \
   --student-steps 1 \
   --dry-run \
@@ -503,7 +486,7 @@ python scripts/orchestration/uma_cat_m3_run_experiment.py \
   --num-rounds 1 \
   --pool-size 4 \
   --uma-cat-budget 1 \
-  --graphkcat-budget 1 \
+  --graphkcat-budget 0 \
   --teacher-steps 1 \
   --student-steps 1 \
   --dry-run \
@@ -578,12 +561,13 @@ Use `--no-progress` only when you need log-only operation, for example in CI or 
 - The implemented `Method III` controller is now a real trajectory-balance GFlowNet teacher over the canonical edit DAG, followed by one-shot student distillation.
 - The teacher uses explicit `STOP -> position -> amino-acid` factorization on canonical edit trajectories reconstructed from labeled candidates, with per-seed `log Z` and a TB loss on terminal reward.
 - The deployed student is still one shot. It is distilled from teacher samples into `K`, position, and residue-replacement marginals so deployment remains fast while teacher training remains truly reward-proportional.
-- The default catalytic path contains no mock scoring branch: LigandMPNN packing, GraphKcat inference, UMA broad screening, sMD, and optional PMF are all real runtime stages.
+- The default catalytic path contains no mock scoring branch: LigandMPNN packing, UMA broad screening, sMD, and optional PMF are all real runtime stages.
 - `oracles.uma_cat.smd.enabled` and `oracles.uma_cat.smd.reverse` control forward/reverse steering.
 - `oracles.uma_cat.pmf.enabled` toggles the PMF stage. It is off by default because it is materially more expensive.
+- `oracles.uma_cat.pmf.every_n_rounds` controls PMF cadence when PMF is enabled. `1` means every round, `2` means every other round, and so on.
 - The default UMA profile is now intentionally higher quality than the earlier smoke-style settings: longer broad screening, more replicas, and gentler but longer sMD pulls.
 - The broad screen, sMD, and PMF are all real FAIRChem/ASE runs through `mora-uma`; this path does not use static proxy replacements.
-- GraphKcat is the default auxiliary structural catalytic oracle in this path, and it is now evaluated on packed mutant structures before UMA-cat selection.
+- GraphKcat remains available as an optional auxiliary oracle, but it is disabled in the default catalytic training preset because the RF3-derived catalytic ligands frequently violate its single-fragment organic preprocessing assumptions.
 - The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
 
 ### Tested end-to-end real rounds
@@ -601,9 +585,8 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --output-dir runs/tmp/uma_cat_round_real_v3 \
   --pool-size 2 \
   --uma-cat-budget 1 \
-  --graphkcat-budget 1 \
-  --graphkcat-prefilter-fraction 0.5 \
-  --graphkcat-mc-dropout-samples 2 \
+  --graphkcat-budget 0 \
+  --graphkcat-prefilter-fraction 0.0 \
   --teacher-steps 1 \
   --student-steps 1 \
   --uma-broad-steps 1 \
@@ -630,9 +613,8 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --output-dir runs/tmp/uma_cat_tb_round_v2 \
   --pool-size 2 \
   --uma-cat-budget 1 \
-  --graphkcat-budget 1 \
-  --graphkcat-prefilter-fraction 0.5 \
-  --graphkcat-mc-dropout-samples 2 \
+  --graphkcat-budget 0 \
+  --graphkcat-prefilter-fraction 0.0 \
   --teacher-steps 64 \
   --student-steps 128 \
   --uma-broad-steps 1 \
@@ -659,8 +641,7 @@ The full catalytic round completed:
 - surrogate fit
 - trajectory-balance teacher fit
 - student distillation
-- packed-pool GraphKcat scoring with MC-dropout
-- GraphKcat top-50% prefilter
+- UMA subset packing with LigandMPNN
 - UMA-cat broad screen
 - forward and reverse sMD
 - catalytic fusion

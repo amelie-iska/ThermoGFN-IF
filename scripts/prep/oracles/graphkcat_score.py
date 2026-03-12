@@ -42,6 +42,9 @@ def _pick_substrate_smiles(rec: dict) -> str | None:
     return None
 
 
+GRAPHKCAT_SUPPORTED_ATOMS = {"B", "Br", "C", "Cl", "F", "H", "I", "N", "Na", "O", "P", "S"}
+
+
 def _to_float(value, default: float) -> float:
     try:
         if value is None:
@@ -137,6 +140,20 @@ def _materialize_ligand_sdf(rec: dict, ligand_out: Path, root: Path) -> str:
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         raise ValueError(f"invalid substrate smiles for candidate_id={rec.get('candidate_id')}: {smiles}")
+    if len(Chem.GetMolFrags(mol)) != 1:
+        raise ValueError(
+            f"GraphKcat requires a single connected substrate molecule for candidate_id={rec.get('candidate_id')}"
+        )
+    unsupported_atoms = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - GRAPHKCAT_SUPPORTED_ATOMS)
+    if unsupported_atoms:
+        raise ValueError(
+            "GraphKcat unsupported ligand atom types for candidate_id="
+            f"{rec.get('candidate_id')}: {','.join(unsupported_atoms)}"
+        )
+    if mol.GetNumBonds() == 0:
+        raise ValueError(
+            f"GraphKcat requires a bonded substrate molecule for candidate_id={rec.get('candidate_id')}"
+        )
     mol = Chem.AddHs(mol)
     if AllChem.EmbedMolecule(mol, AllChem.ETKDG()) != 0:
         raise RuntimeError(f"RDKit embedding failed for candidate_id={rec.get('candidate_id')}")

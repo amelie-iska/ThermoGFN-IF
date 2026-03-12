@@ -70,6 +70,7 @@ oracles:
       force_clip_eva: 20.0
     pmf:
       enabled: false
+      every_n_rounds: 1
       windows: 20
       steps_per_window: 200
       save_every: 10
@@ -88,16 +89,16 @@ oracles:
     heartbeat_sec: 30
   fusion:
     w_uma_cat: 0.90
-    w_graphkcat: 0.55
-    w_agreement: 0.20
+    w_graphkcat: 0.0
+    w_agreement: 0.0
     kappa_uma_cat: 1.0
     kappa_graphkcat: 1.0
 
 round:
   pool_size: 50000
   uma_cat_budget: 256
-  graphkcat_budget: 128
-  graphkcat_prefilter_fraction: 0.5
+  graphkcat_budget: 0
+  graphkcat_prefilter_fraction: 0.0
   graphkcat_prefilter_risk_kappa: 0.5
   max_checkpoints: 5
   step_heartbeat_sec: 30
@@ -126,8 +127,8 @@ env:
   required:
     - ligandmpnn_env
     - mora-uma
-    - apodock
   optional:
+    - apodock
     - ADFLIP
     - KcatNet
     - spurs

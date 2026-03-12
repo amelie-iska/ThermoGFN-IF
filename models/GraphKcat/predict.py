@@ -6,6 +6,7 @@ import argparse
 import pandas as pd
 import torch
 import torch.nn as nn
+from rdkit import Chem
 from model_enz import bottle_view_graph
 from dataset_graphkcat_chai1 import GraphDataset, PLIDataLoader
 import numpy as np
@@ -20,49 +21,117 @@ from unimol_tools import UniMolRepr
 from preprocessing_inference import extract_pocket_and_ligand, get_pocket_by_sdf, \
       transfer_conformation, extract_sequence_from_pdb, get_unimol2_embedding, get_esm2_embeddings, three_to_one
 
+SUPPORTED_LIGAND_ATOMS = {"B", "Br", "C", "Cl", "F", "H", "I", "N", "Na", "O", "P", "S"}
+
+
+def _load_pdb_mol_robust(pdb_path):
+    attempts = [
+        dict(sanitize=True, removeHs=True),
+        dict(sanitize=False, removeHs=True, proximityBonding=False),
+        dict(sanitize=False, removeHs=True, proximityBonding=True),
+    ]
+    for kwargs in attempts:
+        mol = Chem.MolFromPDBFile(pdb_path, **kwargs)
+        if mol is None:
+            continue
+        if mol.GetNumAtoms() == 0:
+            continue
+        if mol.GetNumConformers() == 0:
+            continue
+        return mol
+    return None
+
+
+def _load_ligand_sdf_robust(sdf_path):
+    for sanitize in (True, False):
+        mol = Chem.MolFromMolFile(sdf_path, sanitize=sanitize, removeHs=True)
+        if mol is None:
+            continue
+        if mol.GetNumAtoms() == 0:
+            continue
+        if mol.GetNumConformers() == 0:
+            continue
+        return mol
+    return None
+
+
+def _validate_graphkcat_smiles(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        raise ValueError("invalid substrate smiles")
+    if len(Chem.GetMolFrags(mol)) != 1:
+        raise ValueError("GraphKcat requires a single connected substrate molecule")
+    unsupported = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - SUPPORTED_LIGAND_ATOMS)
+    if unsupported:
+        raise ValueError(
+            f"unsupported ligand atom types for GraphKcat: {','.join(unsupported)}"
+        )
+    if mol.GetNumBonds() == 0:
+        raise ValueError("GraphKcat requires a bonded substrate molecule")
+    return mol
+
+
 def preprocessing(df, clf, esm_model,alphabet, batch_converter, cutoff=8):
+    valid_rows = []
     for i, row in df.iterrows():
         cid = row["id"]
-        has_complex = 'complex' in row.index and row['complex'] and not pd.isna(row['complex'])
-        if has_complex:
-            data_dir = os.path.dirname(row["complex"])
-            complex = row["complex"]
-            complex_path = complex
-            if not os.path.exists(complex_path):
-                print(f"Complex {complex} does not exist in {data_dir}")
-                continue
-            extract_pocket_and_ligand(complex_path, cutoff=cutoff)
-        else:
-            data_dir = os.path.dirname(row["ligand"])
-            ligand_path = row["ligand"]
-            protein_path = row["protein"]
-            if not os.path.exists(ligand_path):
-                print(f"Ligand {ligand_path} does not exist")
-                continue
-            if not os.path.exists(protein_path):
-                print(f"Protein {protein_path} does not exist")
-                continue
-            pocket_path = get_pocket_by_sdf(ligand_path, protein_path, distance=cutoff)
-            # df.at[i, "pocket"] = pocket_path
-        if not os.path.exists(os.path.join(data_dir, f"{cid}_ligand.sdf")):
+        try:
+            has_complex = 'complex' in row.index and row['complex'] and not pd.isna(row['complex'])
+            if has_complex:
+                data_dir = os.path.dirname(row["complex"])
+                complex = row["complex"]
+                complex_path = complex
+                if not os.path.exists(complex_path):
+                    raise FileNotFoundError(f"complex does not exist: {complex_path}")
+                extract_pocket_and_ligand(complex_path, cutoff=cutoff)
+                protein_path = os.path.join(data_dir, f"{cid}_protein.pdb")
+                pocket_path = os.path.join(data_dir, f"Pocket_{cutoff}A.pdb")
+            else:
+                data_dir = os.path.dirname(row["ligand"])
+                ligand_path = row["ligand"]
+                protein_path = row["protein"]
+                if not os.path.exists(ligand_path):
+                    raise FileNotFoundError(f"ligand does not exist: {ligand_path}")
+                if not os.path.exists(protein_path):
+                    raise FileNotFoundError(f"protein does not exist: {protein_path}")
+                pocket_path = get_pocket_by_sdf(ligand_path, protein_path, distance=cutoff)
+
             smiles = row["Smiles"]
-            transfer_conformation(os.path.join(data_dir, f"{cid}_ligand.pdb"),
-                                   smiles, os.path.join(data_dir, f"{cid}_ligand.sdf"))
-            
-        seq = extract_sequence_from_pdb(protein_path)
+            _validate_graphkcat_smiles(smiles)
 
-        print(f"Processing {cid} with sequence length {len(seq)}")
-        if os.path.exists(os.path.join(data_dir, f"{cid}_unimol_1b.pt")) and \
-           os.path.exists(os.path.join(data_dir, f"{cid}_esm2_3b.pt")):
-            print(f"Embeddings for {cid} already exist, skipping...")
-            continue
+            ligand_sdf = os.path.join(data_dir, f"{cid}_ligand.sdf")
+            if not os.path.exists(ligand_sdf):
+                transfer_conformation(
+                    os.path.join(data_dir, f"{cid}_ligand.pdb"),
+                    smiles,
+                    ligand_sdf,
+                )
 
-        mol_embedding = get_unimol2_embedding(clf, row["Smiles"], embedding_type="atomic_reprs")
-        esm_embedding = get_esm2_embeddings(esm_model, alphabet, batch_converter, seq, mean=False)
+            if _load_ligand_sdf_robust(ligand_sdf) is None:
+                raise ValueError(f"failed to parse generated ligand SDF: {ligand_sdf}")
+            if _load_pdb_mol_robust(pocket_path) is None:
+                raise ValueError(f"failed to parse pocket PDB with RDKit: {pocket_path}")
 
-        torch.save(mol_embedding, os.path.join(data_dir, f"{cid}_unimol_1b.pt"))
-        torch.save(esm_embedding, os.path.join(data_dir, f"{cid}_esm2_3b.pt"))
-    return pocket_path, seq
+            seq = extract_sequence_from_pdb(protein_path)
+            if not seq:
+                raise ValueError(f"empty protein sequence extracted from {protein_path}")
+
+            print(f"Processing {cid} with sequence length {len(seq)}")
+            if os.path.exists(os.path.join(data_dir, f"{cid}_unimol_1b.pt")) and \
+               os.path.exists(os.path.join(data_dir, f"{cid}_esm2_3b.pt")):
+                print(f"Embeddings for {cid} already exist, skipping...")
+                valid_rows.append(row)
+                continue
+
+            mol_embedding = get_unimol2_embedding(clf, smiles, embedding_type="atomic_reprs")
+            esm_embedding = get_esm2_embeddings(esm_model, alphabet, batch_converter, seq, mean=False)
+
+            torch.save(mol_embedding, os.path.join(data_dir, f"{cid}_unimol_1b.pt"))
+            torch.save(esm_embedding, os.path.join(data_dir, f"{cid}_esm2_3b.pt"))
+            valid_rows.append(row)
+        except Exception as exc:
+            print(f"Error: {cid} preprocessing failed, skipping... {exc}")
+    return pd.DataFrame(valid_rows).reset_index(drop=True)
 
 
 def compute_km_loss_and_pcc(pred_km, y_km):
@@ -261,7 +330,7 @@ def main():
     test_df = pd.read_csv(args.csv_file)
     organism_set = args.organism_set_path
     temp_set = args.temp_set_path
-    preprocessing(test_df, clf, model_esm, alphabet, batch_converter, cutoff=8)
+    test_df = preprocessing(test_df, clf, model_esm, alphabet, batch_converter, cutoff=8)
     test2016_set = GraphDataset(test_df, organism_set, temp_set, dis_threshold=8)
     test_df = test2016_set.data_df.reset_index(drop=True)
     if len(test2016_set) == 0:

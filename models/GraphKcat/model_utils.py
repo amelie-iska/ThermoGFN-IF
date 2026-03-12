@@ -17,6 +17,8 @@ def read_mol(sdf_fileName, mol2_fileName, verbose=False):
     mol = Chem.MolFromMolFile(sdf_fileName, sanitize=False)
     problem = False
     try:
+        if mol is None:
+            raise ValueError(f"failed to parse SDF: {sdf_fileName}")
         Chem.SanitizeMol(mol)
         mol = Chem.RemoveHs(mol)
         sm = Chem.MolToSmiles(mol)
@@ -27,6 +29,8 @@ def read_mol(sdf_fileName, mol2_fileName, verbose=False):
         mol = Chem.MolFromMol2File(mol2_fileName, sanitize=False)
         problem = False
         try:
+            if mol is None:
+                raise ValueError(f"failed to parse MOL2: {mol2_fileName}")
             Chem.SanitizeMol(mol)
             mol = Chem.RemoveHs(mol)
             sm = Chem.MolToSmiles(mol)
