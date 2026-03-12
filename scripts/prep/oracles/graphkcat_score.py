@@ -211,7 +211,7 @@ def main() -> int:
 
     from train.thermogfn.io_utils import read_records, write_json, write_records
     from train.thermogfn.metrics_utils import summarize_graphkcat_rows
-    from train.thermogfn.progress import configure_logging, iter_progress
+    from train.thermogfn.progress import configure_logging, iter_progress, make_progress
 
     logger = configure_logging("oracle.graphkcat", level=args.log_level)
     if abs(float(args.distance_cutoff_a) - 8.0) > 1e-6:
@@ -248,175 +248,207 @@ def main() -> int:
         args.batch_size,
         args.device,
     )
-
-    if args.work_dir:
-        work_root = Path(args.work_dir)
-        if not work_root.is_absolute():
-            work_root = root / work_root
-        work_root.mkdir(parents=True, exist_ok=True)
-        td_ctx = tempfile.TemporaryDirectory(prefix="graphkcat_", dir=str(work_root))
-    else:
-        td_ctx = tempfile.TemporaryDirectory(prefix="graphkcat_")
-
-    with td_ctx as td:
-        td_path = Path(td)
-        data_root = td_path / "data"
-        data_root.mkdir(parents=True, exist_ok=True)
-
-        csv_path = td_path / "input.csv"
-        out_dir = td_path / "output"
-        out_dir.mkdir(parents=True, exist_ok=True)
-
-        fieldnames = ["id", "complex", "ligand", "protein", "Organism", "substrate", "Smiles", "pH", "Temp"]
-        prep_errors: dict[str, str] = {}
-        with csv_path.open("w", newline="", encoding="utf-8") as fh:
-            writer = csv.DictWriter(fh, fieldnames=fieldnames)
-            writer.writeheader()
-
-            for rec in iter_progress(rows, total=len(rows), desc="graphkcat:prepare", no_progress=args.no_progress):
-                cid = str(rec.get("candidate_id") or "").strip()
-                if not cid:
-                    prep_errors[cid] = "candidate missing candidate_id"
-                    continue
-
-                try:
-                    cdir = data_root / cid
-                    cdir.mkdir(parents=True, exist_ok=True)
-                    protein_path = cdir / f"{cid}_protein.pdb"
-                    ligand_path = cdir / f"{cid}_ligand.sdf"
-
-                    _materialize_protein_pdb(rec, protein_path, root)
-                    _materialize_ligand_sdf(rec, ligand_path, root)
-
-                    smiles = _pick_substrate_smiles(rec)
-                    if not smiles:
-                        raise ValueError(f"missing substrate smiles for candidate_id={cid}")
-
-                    writer.writerow(
-                        {
-                            "id": cid,
-                            "complex": "",
-                            "ligand": str(ligand_path),
-                            "protein": str(protein_path),
-                            "Organism": rec.get("Organism") or rec.get("organism") or args.organism_default,
-                            "substrate": rec.get("substrate") or "",
-                            "Smiles": smiles,
-                            "pH": _to_float(rec.get("pH", rec.get("ph")), args.ph_default),
-                            "Temp": _to_float(rec.get("Temp", rec.get("temp")), args.temp_default),
-                        }
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    prep_errors[cid] = str(exc)
-                    logger.error("GraphKcat preparation failed candidate_id=%s error=%s", cid or "<unknown>", exc)
-
-        cmd = [
-            sys.executable,
-            str(model_root / "predict.py"),
-            "--csv_file",
-            str(csv_path),
-            "--output_dir",
-            str(out_dir),
-            "--batch_size",
-            str(args.batch_size),
-            "--cpkt_path",
-            str(ckpt),
-            "--device",
-            str(args.device),
-            "--cfg",
-            str(args.cfg),
-            "--organism_set_path",
-            str(organism_set),
-            "--temp_set_path",
-            str(temp_set),
-            "--mc_dropout_samples",
-            str(args.mc_dropout_samples),
-            "--mc_dropout_seed",
-            str(args.mc_dropout_seed),
-        ]
-
-        predict_env = _graphkcat_subprocess_env(os.environ)
-        if predict_env.get("LD_PRELOAD"):
-            logger.info("GraphKcat using LD_PRELOAD=%s", predict_env["LD_PRELOAD"])
-        rc = _run_with_heartbeat(
-            cmd,
-            cwd=model_root,
-            logger=logger,
-            step_name="graphkcat:predict",
-            heartbeat_sec=args.heartbeat_sec,
-            env=predict_env,
-        )
-        if rc != 0 and len(prep_errors) != len(rows):
-            raise RuntimeError(f"GraphKcat predict.py failed rc={rc}")
-        if rc != 0 and len(prep_errors) == len(rows):
-            logger.warning("GraphKcat predict skipped because all candidates failed preparation")
-
-        out_csv = out_dir / "inference_results.csv"
-        if not out_csv.exists() and len(prep_errors) != len(rows):
-            raise FileNotFoundError(f"GraphKcat output CSV missing: {out_csv}")
-
-        by_id: dict[str, dict] = {}
-        if out_csv.exists():
-            with out_csv.open("r", encoding="utf-8") as fh:
-                for row in csv.DictReader(fh):
-                    rid = str(row.get("id") or "").strip()
-                    if rid:
-                        by_id[rid] = row
-
-        out_rows: list[dict] = []
-        for rec in iter_progress(rows, total=len(rows), desc="graphkcat:merge", no_progress=args.no_progress):
-            row = dict(rec)
-            cid = str(rec.get("candidate_id") or "").strip()
-            if cid in prep_errors:
-                row["graphkcat_status"] = "error"
-                row["graphkcat_error"] = prep_errors[cid]
-                row["graphkcat_std"] = float("nan")
-                out_rows.append(row)
-                continue
-            pred = by_id.get(cid)
-            if pred is None:
-                row["graphkcat_status"] = "error"
-                row["graphkcat_error"] = f"missing prediction for candidate_id={cid}"
-                row["graphkcat_std"] = float("nan")
-                out_rows.append(row)
-                continue
-            try:
-                row["graphkcat_log_kcat"] = float(pred["pred_log_kcat_graphkcat"])
-                row["graphkcat_log_km"] = float(pred["pred_log_km_graphkcat"])
-                row["graphkcat_log_kcat_km"] = float(pred["pred_log_kcat_km_graphkcat"])
-                std_val = pred.get("pred_log_kcat_graphkcat_std")
-                if std_val not in {None, ""}:
-                    row["graphkcat_std"] = float(std_val)
-                    row["graphkcat_log_km_std"] = float(pred.get("pred_log_km_graphkcat_std", "nan"))
-                    row["graphkcat_log_kcat_km_std"] = float(pred.get("pred_log_kcat_km_graphkcat_std", "nan"))
-                    row["graphkcat_std_source"] = "mc_dropout"
-                    row["graphkcat_uncertainty_samples"] = int(args.mc_dropout_samples)
-                else:
-                    row["graphkcat_std"] = float(args.std_default)
-                    row["graphkcat_std_source"] = "constant_default"
-                    row["graphkcat_uncertainty_samples"] = 0
-            except Exception as exc:  # noqa: BLE001
-                row["graphkcat_status"] = "error"
-                row["graphkcat_error"] = f"parse error candidate_id={cid}: {exc}"
-                row["graphkcat_std"] = float("nan")
-                out_rows.append(row)
-                continue
-            row["graphkcat_status"] = "ok"
-            out_rows.append(row)
-
-    write_records(root / args.output_path, out_rows)
-    summary = summarize_graphkcat_rows(out_rows)
-    if args.summary_path:
-        write_json(root / args.summary_path, summary)
-    logger.info(
-        "GraphKcat summary: ok_fraction=%.3f ok=%d/%d mean_log_kcat=%.4f",
-        float(summary.get("ok_fraction", 0.0)),
-        int(summary.get("status_counts", {}).get("ok", 0)),
-        int(summary.get("n", 0)),
-        float(summary.get("log_kcat", {}).get("mean", 0.0)),
+    overall_bar = make_progress(
+        total=4,
+        desc="graphkcat:overall",
+        no_progress=args.no_progress,
+        leave=True,
+        unit="stage",
     )
-    logger.info("GraphKcat scoring complete: wrote=%d elapsed=%.2fs", len(out_rows), time.perf_counter() - t0)
-    print(root / args.output_path)
-    return 0
+    overall_bar.set_postfix_str(f"stage=prepare candidates={len(rows)}")
+    try:
+        if args.work_dir:
+            work_root = Path(args.work_dir)
+            if not work_root.is_absolute():
+                work_root = root / work_root
+            work_root.mkdir(parents=True, exist_ok=True)
+            td_ctx = tempfile.TemporaryDirectory(prefix="graphkcat_", dir=str(work_root))
+        else:
+            td_ctx = tempfile.TemporaryDirectory(prefix="graphkcat_")
+
+        with td_ctx as td:
+            td_path = Path(td)
+            data_root = td_path / "data"
+            data_root.mkdir(parents=True, exist_ok=True)
+
+            csv_path = td_path / "input.csv"
+            out_dir = td_path / "output"
+            out_dir.mkdir(parents=True, exist_ok=True)
+
+            fieldnames = ["id", "complex", "ligand", "protein", "Organism", "substrate", "Smiles", "pH", "Temp"]
+            prep_errors: dict[str, str] = {}
+            with csv_path.open("w", newline="", encoding="utf-8") as fh:
+                writer = csv.DictWriter(fh, fieldnames=fieldnames)
+                writer.writeheader()
+
+                for rec in iter_progress(rows, total=len(rows), desc="graphkcat:prepare", no_progress=args.no_progress):
+                    cid = str(rec.get("candidate_id") or "").strip()
+                    if not cid:
+                        prep_errors[cid] = "candidate missing candidate_id"
+                        continue
+
+                    try:
+                        cdir = data_root / cid
+                        cdir.mkdir(parents=True, exist_ok=True)
+                        protein_path = cdir / f"{cid}_protein.pdb"
+                        ligand_path = cdir / f"{cid}_ligand.sdf"
+
+                        _materialize_protein_pdb(rec, protein_path, root)
+                        _materialize_ligand_sdf(rec, ligand_path, root)
+
+                        smiles = _pick_substrate_smiles(rec)
+                        if not smiles:
+                            raise ValueError(f"missing substrate smiles for candidate_id={cid}")
+
+                        writer.writerow(
+                            {
+                                "id": cid,
+                                "complex": "",
+                                "ligand": str(ligand_path),
+                                "protein": str(protein_path),
+                                "Organism": rec.get("Organism") or rec.get("organism") or args.organism_default,
+                                "substrate": rec.get("substrate") or "",
+                                "Smiles": smiles,
+                                "pH": _to_float(rec.get("pH", rec.get("ph")), args.ph_default),
+                                "Temp": _to_float(rec.get("Temp", rec.get("temp")), args.temp_default),
+                            }
+                        )
+                    except Exception as exc:  # noqa: BLE001
+                        prep_errors[cid] = str(exc)
+                        logger.error("GraphKcat preparation failed candidate_id=%s error=%s", cid or "<unknown>", exc)
+
+            prepared_ok = len(rows) - len(prep_errors)
+            overall_bar.update(1)
+            overall_bar.set_postfix(stage="prepare", prepared=prepared_ok, errors=len(prep_errors))
+
+            cmd = [
+                sys.executable,
+                str(model_root / "predict.py"),
+                "--csv_file",
+                str(csv_path),
+                "--output_dir",
+                str(out_dir),
+                "--batch_size",
+                str(args.batch_size),
+                "--cpkt_path",
+                str(ckpt),
+                "--device",
+                str(args.device),
+                "--cfg",
+                str(args.cfg),
+                "--organism_set_path",
+                str(organism_set),
+                "--temp_set_path",
+                str(temp_set),
+                "--mc_dropout_samples",
+                str(args.mc_dropout_samples),
+                "--mc_dropout_seed",
+                str(args.mc_dropout_seed),
+            ]
+
+            predict_env = _graphkcat_subprocess_env(os.environ)
+            if predict_env.get("LD_PRELOAD"):
+                logger.info("GraphKcat using LD_PRELOAD=%s", predict_env["LD_PRELOAD"])
+            overall_bar.set_postfix(stage="predict", prepared=prepared_ok, errors=len(prep_errors))
+            rc = _run_with_heartbeat(
+                cmd,
+                cwd=model_root,
+                logger=logger,
+                step_name="graphkcat:predict",
+                heartbeat_sec=args.heartbeat_sec,
+                env=predict_env,
+            )
+            overall_bar.update(1)
+            overall_bar.set_postfix(stage="predict", prepared=prepared_ok, errors=len(prep_errors), rc=rc)
+            if rc != 0 and len(prep_errors) != len(rows):
+                raise RuntimeError(f"GraphKcat predict.py failed rc={rc}")
+            if rc != 0 and len(prep_errors) == len(rows):
+                logger.warning("GraphKcat predict skipped because all candidates failed preparation")
+
+            out_csv = out_dir / "inference_results.csv"
+            if not out_csv.exists() and len(prep_errors) != len(rows):
+                raise FileNotFoundError(f"GraphKcat output CSV missing: {out_csv}")
+
+            by_id: dict[str, dict] = {}
+            if out_csv.exists():
+                with out_csv.open("r", encoding="utf-8") as fh:
+                    for row in csv.DictReader(fh):
+                        rid = str(row.get("id") or "").strip()
+                        if rid:
+                            by_id[rid] = row
+
+            out_rows: list[dict] = []
+            for rec in iter_progress(rows, total=len(rows), desc="graphkcat:merge", no_progress=args.no_progress):
+                row = dict(rec)
+                cid = str(rec.get("candidate_id") or "").strip()
+                if cid in prep_errors:
+                    row["graphkcat_status"] = "error"
+                    row["graphkcat_error"] = prep_errors[cid]
+                    row["graphkcat_std"] = float("nan")
+                    out_rows.append(row)
+                    continue
+                pred = by_id.get(cid)
+                if pred is None:
+                    row["graphkcat_status"] = "error"
+                    row["graphkcat_error"] = f"missing prediction for candidate_id={cid}"
+                    row["graphkcat_std"] = float("nan")
+                    out_rows.append(row)
+                    continue
+                try:
+                    row["graphkcat_log_kcat"] = float(pred["pred_log_kcat_graphkcat"])
+                    row["graphkcat_log_km"] = float(pred["pred_log_km_graphkcat"])
+                    row["graphkcat_log_kcat_km"] = float(pred["pred_log_kcat_km_graphkcat"])
+                    std_val = pred.get("pred_log_kcat_graphkcat_std")
+                    if std_val not in {None, ""}:
+                        row["graphkcat_std"] = float(std_val)
+                        row["graphkcat_log_km_std"] = float(pred.get("pred_log_km_graphkcat_std", "nan"))
+                        row["graphkcat_log_kcat_km_std"] = float(pred.get("pred_log_kcat_km_graphkcat_std", "nan"))
+                        row["graphkcat_std_source"] = "mc_dropout"
+                        row["graphkcat_uncertainty_samples"] = int(args.mc_dropout_samples)
+                    else:
+                        row["graphkcat_std"] = float(args.std_default)
+                        row["graphkcat_std_source"] = "constant_default"
+                        row["graphkcat_uncertainty_samples"] = 0
+                except Exception as exc:  # noqa: BLE001
+                    row["graphkcat_status"] = "error"
+                    row["graphkcat_error"] = f"parse error candidate_id={cid}: {exc}"
+                    row["graphkcat_std"] = float("nan")
+                    out_rows.append(row)
+                    continue
+                row["graphkcat_status"] = "ok"
+                out_rows.append(row)
+
+        status_counts = summarize_graphkcat_rows(out_rows).get("status_counts", {})
+        overall_bar.update(1)
+        overall_bar.set_postfix(
+            stage="merge",
+            ok=int(status_counts.get("ok", 0)),
+            errors=int(status_counts.get("error", 0)),
+        )
+
+        write_records(root / args.output_path, out_rows)
+        summary = summarize_graphkcat_rows(out_rows)
+        if args.summary_path:
+            write_json(root / args.summary_path, summary)
+        overall_bar.update(1)
+        overall_bar.set_postfix(
+            stage="write",
+            written=len(out_rows),
+            ok=int(summary.get("status_counts", {}).get("ok", 0)),
+            errors=int(summary.get("status_counts", {}).get("error", 0)),
+        )
+        logger.info(
+            "GraphKcat summary: ok_fraction=%.3f ok=%d/%d mean_log_kcat=%.4f",
+            float(summary.get("ok_fraction", 0.0)),
+            int(summary.get("status_counts", {}).get("ok", 0)),
+            int(summary.get("n", 0)),
+            float(summary.get("log_kcat", {}).get("mean", 0.0)),
+        )
+        logger.info("GraphKcat scoring complete: wrote=%d elapsed=%.2fs", len(out_rows), time.perf_counter() - t0)
+        print(root / args.output_path)
+        return 0
+    finally:
+        overall_bar.close()
 
 
 if __name__ == "__main__":

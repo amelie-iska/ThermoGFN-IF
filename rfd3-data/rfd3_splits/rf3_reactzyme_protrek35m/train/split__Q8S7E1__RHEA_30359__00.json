@@ -1,0 +1,66 @@
+{
+  "pair_id": "split__Q8S7E1__RHEA_30359__00",
+  "rhea_id": "RHEA:30359",
+  "uniprot_id": "Q8S7E1",
+  "sequence": "MTTVASLSLLPHLLIKPSFRCCSRKGVGRYGGIKVYAVLGDDGADYAKNNAWEALFHVDDPGPRVPIAKGKFLDVNQALEVVRFDIQYCDWRARQDLLTIMVLHNKVVEVLNPLAREFKSIGTLRKELAELQEELAKAHNQVHLSETRVSSALDKLAQMETLVNDRLLQDGGSSASTAECTSLAPSTSSASRVVNKKPPRRSLNVSGPVQPYNPSLKNFWYPVAFSSDLKDDTMVPIDCFEEQWVIFRGKDGRPGCVMNTCAHRACPLHLGSVNEGRIQCPYHGWEYSTDGKCEKMPSTKMLNVRIRSLPCFEQEGMVWIWPGNDPPKSTIPSLLPPSGFTIHAEIVMELPVEHGLLLDNLLDLAHAPFTHTSTFAKGWSVPSLVKFLTPSSGLQGYWDPYPIDMEFRPPCMVLSTIGISKPGKLEGKSTKQCSTHLHQLHICLPSSRNKTRLLYRMSLDFAPWIKHVPFMHILWSHFAEKVLNEDLRLVLGQQERMINGANVWNWPVSYDKLGIRYRLWRDAIERGVDRLPFSNQSESGS",
+  "sequence_length": 541,
+  "substrate_smiles": "C=CC1=C(C)/C2=C/C3=[N+]4C(=C5C6=C(C(=O)[C-]5C(=O)OC)/C(C)=C5/C=C7/C(CC)=C(C)C8=[N+]7[Mg-2]4(N65)N2/C1=C\\8)[C@@H](CCC(=O)[O-])[C@@H]3C.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.O=O.O=O.[H+].[H+]",
+  "product_smiles": "C=CC1=C(C)/C2=C/C3=[N+]4C(=C5C6=C(C(=O)[C-]5C(=O)OC)/C(C)=C5/C=C7/C(CC)=C(C=O)C8=[N+]7[Mg-2]4(N65)N2/C1=C\\8)[C@@H](CCC(=O)[O-])[C@@H]3C.NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)=C1.NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)=C1.[H]O[H].[H]O[H].[H]O[H]",
+  "ligand_smiles": "C=CC1=C(C)/C2=C/C3=[N+]4C(=C5C6=C(C(=O)[C-]5C(=O)OC)/C(C)=C5/C=C7/C(CC)=C(C)C8=[N+]7[Mg-2]4(N65)N2/C1=C\\8)[C@@H](CCC(=O)[O-])[C@@H]3C.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.O=O.O=O.[H+].[H+]",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    261,
+    263,
+    280,
+    283,
+    359,
+    363,
+    366,
+    371
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_096/split__Q8S7E1__RHEA_30359__00__product/split__Q8S7E1__RHEA_30359__00__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_096/split__Q8S7E1__RHEA_30359__00__product/split__Q8S7E1__RHEA_30359__00__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 1166,
+    "structure_cluster": 1149,
+    "combined_cluster": 1090,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "541",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__Q8S7E1__RHEA_30359__00",
+      "sampled_contig": "541",
+      "num_residues": 541,
+      "sequence_length": 541,
+      "split": "train",
+      "pair_id": "split__Q8S7E1__RHEA_30359__00",
+      "rhea_id": "RHEA:30359",
+      "uniprot_id": "Q8S7E1",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "C=CC1=C(C)/C2=C/C3=[N+]4C(=C5C6=C(C(=O)[C-]5C(=O)OC)/C(C)=C5/C=C7/C(CC)=C(C)C8=[N+]7[Mg-2]4(N65)N2/C1=C\\8)[C@@H](CCC(=O)[O-])[C@@H]3C.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.O=O.O=O.[H+].[H+]",
+      "product_smiles": "C=CC1=C(C)/C2=C/C3=[N+]4C(=C5C6=C(C(=O)[C-]5C(=O)OC)/C(C)=C5/C=C7/C(CC)=C(C=O)C8=[N+]7[Mg-2]4(N65)N2/C1=C\\8)[C@@H](CCC(=O)[O-])[C@@H]3C.NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)=C1.NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](OP(=O)([O-])[O-])[C@@H]3O)[C@@H](O)[C@H]2O)=C1.[H]O[H].[H]O[H].[H]O[H]",
+      "pocket_positions": [
+        261,
+        263,
+        280,
+        283,
+        359,
+        363,
+        366,
+        371
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_096/split__Q8S7E1__RHEA_30359__00__product/split__Q8S7E1__RHEA_30359__00__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_096/split__Q8S7E1__RHEA_30359__00__product/split__Q8S7E1__RHEA_30359__00__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_096/split__Q8S7E1__RHEA_30359__00__reactant/split__Q8S7E1__RHEA_30359__00__reactant_model.cif"
+    }
+  }
+}

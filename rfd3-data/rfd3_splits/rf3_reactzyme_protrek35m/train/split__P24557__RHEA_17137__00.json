@@ -1,0 +1,52 @@
+{
+  "pair_id": "split__P24557__RHEA_17137__00",
+  "rhea_id": "RHEA:17137",
+  "uniprot_id": "P24557",
+  "sequence": "MEALGFLKLEVNGPMVTVALSVALLALLKWYSTSAFSRLEKLGLRHPKPSPFIGNLTFFRQGFWESQMELRKLYGPLCGYYLGRRMFIVISEPDMIKQVLVENFSNFTNRMASGLEFKSVADSVLFLRDKRWEEVRGALMSAFSPEKLNEMVPLISQACDLLLAHLKRYAESGDAFDIQRCYCNYTTDVVASVAFGTPVDSWQAPEDPFVKHCKRFFEFCIPRPILVLLLSFPSIMVPLARILPNKNRDELNGFFNKLIRNVIALRDQQAAEERRRDFLQMVLDARHSASPMGVQDFDIVRDVFSSTGCKPNPSRQHQPSPMARPLTVDEIVGQAFIFLIAGYEIITNTLSFATYLLATNPDCQEKLLREVDVFKEKHMAPEFCSLEEGLPYLDMVIAETLRMYPPAFRFTREAAQDCEVLGQRIPAGAVLEMAVGALHHDPEHWPSPETFNPERFTAEARQQHRPFTYLPFGAGPRSCLGVRLGLLEVKLTLLHVLHKFRFQACPETQVPLQLESKSALGPKNGVYIKIVSR",
+  "sequence_length": 533,
+  "substrate_smiles": "CCCCC[C@H](O)/C=C/[C@@H]1[C@@H](C/C=C\\CCCC(=O)[O-])[C@@H]2C[C@H]1OO2",
+  "product_smiles": "CCCCC[C@H](O)/C=C/[C@H]1O[C@H]2C[C@H](O2)[C@@H]1C/C=C\\CCCC(=O)[O-]",
+  "ligand_smiles": "CCCCC[C@H](O)/C=C/[C@@H]1[C@@H](C/C=C\\CCCC(=O)[O-])[C@@H]2C[C@H]1OO2",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    479
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_073/split__P24557__RHEA_17137__00__product/split__P24557__RHEA_17137__00__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_073/split__P24557__RHEA_17137__00__product/split__P24557__RHEA_17137__00__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 555,
+    "structure_cluster": 540,
+    "combined_cluster": 521,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "533",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__P24557__RHEA_17137__00",
+      "sampled_contig": "533",
+      "num_residues": 533,
+      "sequence_length": 533,
+      "split": "train",
+      "pair_id": "split__P24557__RHEA_17137__00",
+      "rhea_id": "RHEA:17137",
+      "uniprot_id": "P24557",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "CCCCC[C@H](O)/C=C/[C@@H]1[C@@H](C/C=C\\CCCC(=O)[O-])[C@@H]2C[C@H]1OO2",
+      "product_smiles": "CCCCC[C@H](O)/C=C/[C@H]1O[C@H]2C[C@H](O2)[C@@H]1C/C=C\\CCCC(=O)[O-]",
+      "pocket_positions": [
+        479
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_073/split__P24557__RHEA_17137__00__product/split__P24557__RHEA_17137__00__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_073/split__P24557__RHEA_17137__00__product/split__P24557__RHEA_17137__00__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_073/split__P24557__RHEA_17137__00__reactant/split__P24557__RHEA_17137__00__reactant_model.cif"
+    }
+  }
+}

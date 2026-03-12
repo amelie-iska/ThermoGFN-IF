@@ -1,0 +1,54 @@
+{
+  "pair_id": "split__E9Q3E1__RHEA_33739__01",
+  "rhea_id": "RHEA:33739",
+  "uniprot_id": "E9Q3E1",
+  "sequence": "MSAAETGSEPSQGAGPSEATLHSLREAFNAGRTRPTEFRTAQLRSLGRFLQENKELLQDALAKDVGKSGFESDMSEIILCENEVDLALKNLQTWMKDEPVSTNLLTKLSSAFIRKEPFGLVLIIAPWNYPVNLMIIPLVGAIAAGNCVVLKPSEISKNTEKVLAELLPQYLDQSCFAVMLGGPEETRQLLEHKFDYIFFTGSPRVGKIVMTAAAKHLTPITLELGGKNPCYVDDNCDPQTVANRVAWFRYFNAGQTCVAPDYILCSQEMQERLVPALQNSITRFYGDNPQTSPNLGRIINQKHFKRLQGLLGCGRVAIGGQSDEGERYIAPTVLVDVQETEPVMQEEIFGPILPLVTVRSLDEAIEFINRREKPLALYAFSNNNQVVNQMLERTSSGGFGGNDGFLYLTLPALPLGGVGNSGMGRYHGKFSFDTFSHHRACLLRSPGMEKLNDLRYPPYGPWNQQLISWAIGSRSCTLL",
+  "sequence_length": 479,
+  "substrate_smiles": "CCCCCCCCCCCCCCCC(=O)[O-].NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.[H+].[H+]",
+  "product_smiles": "NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)=C1.[H]C(=O)CCCCCCCCCCCCCCC.[H]O[H]",
+  "ligand_smiles": "CCCCCCCCCCCCCCCC(=O)[O-].NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.[H+].[H+]",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    223,
+    257
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_250/split__E9Q3E1__RHEA_33739__01__product/split__E9Q3E1__RHEA_33739__01__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_250/split__E9Q3E1__RHEA_33739__01__product/split__E9Q3E1__RHEA_33739__01__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 298,
+    "structure_cluster": 289,
+    "combined_cluster": 281,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "479",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__E9Q3E1__RHEA_33739__01",
+      "sampled_contig": "479",
+      "num_residues": 479,
+      "sequence_length": 479,
+      "split": "train",
+      "pair_id": "split__E9Q3E1__RHEA_33739__01",
+      "rhea_id": "RHEA:33739",
+      "uniprot_id": "E9Q3E1",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "CCCCCCCCCCCCCCCC(=O)[O-].NC(=O)C1=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)C=CC1.[H+].[H+]",
+      "product_smiles": "NC(=O)C1=CC=C[N+]([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OC[C@H]3O[C@@H](N4C=NC5=C4N=CN=C5N)[C@H](O)[C@@H]3O)[C@@H](O)[C@H]2O)=C1.[H]C(=O)CCCCCCCCCCCCCCC.[H]O[H]",
+      "pocket_positions": [
+        223,
+        257
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_250/split__E9Q3E1__RHEA_33739__01__product/split__E9Q3E1__RHEA_33739__01__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_250/split__E9Q3E1__RHEA_33739__01__product/split__E9Q3E1__RHEA_33739__01__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_250/split__E9Q3E1__RHEA_33739__01__reactant/split__E9Q3E1__RHEA_33739__01__reactant_model.cif"
+    }
+  }
+}

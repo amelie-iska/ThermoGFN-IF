@@ -1,0 +1,58 @@
+{
+  "pair_id": "split__A0A0J5ZXG5__RHEA_69603__00",
+  "rhea_id": "RHEA:69603",
+  "uniprot_id": "A0A0J5ZXG5",
+  "sequence": "MALADDLKKWVGETFTGKWEVQETTSVPNPEDLRLNSNHAKDLKAATVLYADLDGSTDMVNTKKWQFSAQIYKTFLKCASDIIRDEGGNITAYDGDRVMAVFTGNSKNTSAARCALKINSAVLDIIQPAIAKKWQTDFVLRHVVGIDTSQLRTARIGIRGDNDLVWIGRAANYAAKLTNLAGKPTRITADVYNKLADKLKYANGVDMWAPEHWDDMGIWTYTSTWKWTV",
+  "sequence_length": 229,
+  "substrate_smiles": "O=C1C=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OP(=O)([O-])[O-])[C@@H](O)[C@H]2O)C(=O)N1",
+  "product_smiles": "O=C1C=CN([C@@H]2O[C@@H]3COP(=O)([O-])O[C@H]3[C@H]2O)C(=O)N1.O=P([O-])([O-])OP(=O)([O-])O",
+  "ligand_smiles": "O=C1C=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OP(=O)([O-])[O-])[C@@H](O)[C@H]2O)C(=O)N1",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    50,
+    52,
+    96,
+    97
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__product/split__A0A0J5ZXG5__RHEA_69603__00__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__product/split__A0A0J5ZXG5__RHEA_69603__00__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 35,
+    "structure_cluster": 34,
+    "combined_cluster": 34,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "229",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__A0A0J5ZXG5__RHEA_69603__00",
+      "sampled_contig": "229",
+      "num_residues": 229,
+      "sequence_length": 229,
+      "split": "train",
+      "pair_id": "split__A0A0J5ZXG5__RHEA_69603__00",
+      "rhea_id": "RHEA:69603",
+      "uniprot_id": "A0A0J5ZXG5",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "O=C1C=CN([C@@H]2O[C@H](COP(=O)([O-])OP(=O)([O-])OP(=O)([O-])[O-])[C@@H](O)[C@H]2O)C(=O)N1",
+      "product_smiles": "O=C1C=CN([C@@H]2O[C@@H]3COP(=O)([O-])O[C@H]3[C@H]2O)C(=O)N1.O=P([O-])([O-])OP(=O)([O-])O",
+      "pocket_positions": [
+        50,
+        52,
+        96,
+        97
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__product/split__A0A0J5ZXG5__RHEA_69603__00__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__product/split__A0A0J5ZXG5__RHEA_69603__00__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_077/split__A0A0J5ZXG5__RHEA_69603__00__reactant/split__A0A0J5ZXG5__RHEA_69603__00__reactant_model.cif"
+    }
+  }
+}

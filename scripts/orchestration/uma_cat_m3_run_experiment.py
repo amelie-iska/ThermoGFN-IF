@@ -233,11 +233,13 @@ def main() -> int:
     )
     round_bar = make_progress(
         total=int(args.num_rounds),
-        desc="uma-cat:rounds",
+        desc=f"train:run:{args.run_id}",
         no_progress=args.no_progress,
         leave=True,
         unit="round",
     )
+    if round_bar is not None:
+        round_bar.set_postfix_str(f"dataset={current_dr.name} total_rounds={int(args.num_rounds)}")
 
     manifest = {
         "run_id": args.run_id,
@@ -250,6 +252,8 @@ def main() -> int:
     round_script = root / "scripts/orchestration/uma_cat_m3_run_round.py"
     for round_id in range(int(args.start_round), int(args.start_round) + int(args.num_rounds)):
         round_dir = exp_root / f"round_{round_id:03d}"
+        if round_bar is not None:
+            round_bar.set_postfix_str(f"running round={round_id} dataset={current_dr.name}")
         cmd = [
             "python",
             str(round_script),
@@ -393,7 +397,7 @@ def main() -> int:
         )
         if round_bar is not None:
             round_bar.update(1)
-            round_bar.set_postfix_str(f"round={round_id} rc={rc} dt={dt:.1f}s")
+            round_bar.set_postfix_str(f"completed={round_id + 1}/{int(args.num_rounds)} last_rc={rc} dt={dt:.1f}s")
         if rc != 0:
             logger.error("UMA-cat experiment stopping at round=%d rc=%d", round_id, rc)
             break
@@ -402,7 +406,11 @@ def main() -> int:
     manifest["completed_utc"] = time.time()
     manifest_path = exp_root / "experiment_manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True))
-    round_bar.close()
+    if round_bar is not None:
+        round_bar.set_postfix_str(
+            f"done rounds={len(manifest['rounds'])}/{int(args.num_rounds)} elapsed={time.perf_counter() - wall_t0:.1f}s"
+        )
+        round_bar.close()
     wandb_run.summary_update(
         {
             "manifest_path": str(manifest_path),

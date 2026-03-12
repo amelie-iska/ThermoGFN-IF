@@ -1,0 +1,27 @@
+{
+  "counts": {
+    "test": 601,
+    "train": 2382
+  },
+  "elapsed_s": 0.23960802098736167,
+  "errors": [],
+  "ok": true,
+  "split_root": "/home/ubuntu/amelie/ThermoGFN/rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m",
+  "summary": {
+    "n_combined_clusters": 1471,
+    "n_pairs": 2983,
+    "n_seq_clusters": 1570,
+    "n_structure_clusters": 1563,
+    "n_test": 601,
+    "n_train": 2382,
+    "prepared_input_root": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7",
+    "product_root": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product",
+    "reactant_root": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant",
+    "seed": 13,
+    "seq_threshold": 0.9,
+    "structure_similarity_mode": "max_cross_state",
+    "structure_threshold": 0.9,
+    "test_fraction_actual": 0.201475025142474,
+    "test_fraction_requested": 0.2
+  }
+}

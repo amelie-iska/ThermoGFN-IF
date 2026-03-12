@@ -87,6 +87,8 @@ def parse_spec_file(path: Path) -> dict:
         length = int(sampled_contig.split(",")[0]) if sampled_contig.isdigit() else int(sampled_contig)
     except Exception:  # noqa: BLE001
         length = int(extra.get("num_residues") or extra.get("num_residues_in") or 0)
+    cif_override = extra.get("representative_structure_path") or obj.get("representative_structure_path")
+    cif_gz_override = extra.get("representative_structure_gz_path") or obj.get("representative_structure_gz_path")
     row = {
         "spec_path": str(path),
         "stem": path.stem,
@@ -96,8 +98,8 @@ def parse_spec_file(path: Path) -> dict:
         "num_atoms": int(extra.get("num_atoms") or 0),
         "sampled_contig": sampled_contig,
         "length_estimate": length,
-        "cif_path": str(path.with_suffix(".cif")),
-        "cif_gz_path": str(path.with_suffix(".cif.gz")),
+        "cif_path": str(cif_override or path.with_suffix(".cif")),
+        "cif_gz_path": str(cif_gz_override or path.with_suffix(".cif.gz")),
     }
     # Optional metadata fields used by Kcat workflows and mixed-modality datasets.
     optional_keys = (
@@ -118,6 +120,20 @@ def parse_spec_file(path: Path) -> dict:
         "protein_path",
         "ligand_path",
         "complex_path",
+        "pair_id",
+        "rhea_id",
+        "uniprot_id",
+        "reactant_complex_path",
+        "product_complex_path",
+        "reactant_protein_path",
+        "product_protein_path",
+        "representative_structure_path",
+        "representative_structure_gz_path",
+        "protein_chain_id",
+        "ligand_chain_id",
+        "sequence",
+        "sequence_length",
+        "pocket_positions",
     )
     for key in optional_keys:
         if key in extra:

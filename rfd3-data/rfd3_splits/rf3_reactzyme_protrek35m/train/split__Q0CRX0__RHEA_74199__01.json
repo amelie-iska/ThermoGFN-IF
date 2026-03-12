@@ -1,0 +1,60 @@
+{
+  "pair_id": "split__Q0CRX0__RHEA_74199__01",
+  "rhea_id": "RHEA:74199",
+  "uniprot_id": "Q0CRX0",
+  "sequence": "MGFYRNLVLVAASCTQALGLCPAPRCDSPDIRHEWGELSREDRLSYISAVQCMKDRPPELSVEEVPAVRSRYDDFTAVHINYTLQIHNSGIFLPWHRHFIWLWEKALREECGFTGTLPYWDWVMWPNLAASPLFDGTETSLSGDGEFNATEQPTELNPEPGLTITIPRGAGGGCVRTGPFKDWVINMGPFAFNESYEPALPDHAFDYNPRCLVRSLNDWVIQTYNNQTVVDTLLDSPDIVEFQNIMGGFPNPPIPIGPHAMGHRSLGPDMLDFFASPQDPAFWQHHGMVDRLWTVWQDADEPWRRFALNGSSTTWYKDDTPEVTLQTTVEFGILDEPRPLYELMSPTAGPYCYTYT",
+  "sequence_length": 356,
+  "substrate_smiles": "O=C1O/C(=C\\C2=CC=C(O)C=C2)C([O-])=C1C1=CC=C(O)C=C1.O=O",
+  "product_smiles": "O=C1C=CC(/C=C2\\OC(=O)C(C3=CC=C(O)C=C3)=C2[O-])=CC1=O.[H]O[H]",
+  "ligand_smiles": "O=C1O/C(=C\\C2=CC=C(O)C=C2)C([O-])=C1C1=CC=C(O)C=C1.O=O",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    87,
+    96,
+    203,
+    263,
+    286
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_049/split__Q0CRX0__RHEA_74199__01__product/split__Q0CRX0__RHEA_74199__01__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_049/split__Q0CRX0__RHEA_74199__01__product/split__Q0CRX0__RHEA_74199__01__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 622,
+    "structure_cluster": 608,
+    "combined_cluster": 585,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "356",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__Q0CRX0__RHEA_74199__01",
+      "sampled_contig": "356",
+      "num_residues": 356,
+      "sequence_length": 356,
+      "split": "train",
+      "pair_id": "split__Q0CRX0__RHEA_74199__01",
+      "rhea_id": "RHEA:74199",
+      "uniprot_id": "Q0CRX0",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "O=C1O/C(=C\\C2=CC=C(O)C=C2)C([O-])=C1C1=CC=C(O)C=C1.O=O",
+      "product_smiles": "O=C1C=CC(/C=C2\\OC(=O)C(C3=CC=C(O)C=C3)=C2[O-])=CC1=O.[H]O[H]",
+      "pocket_positions": [
+        87,
+        96,
+        203,
+        263,
+        286
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_049/split__Q0CRX0__RHEA_74199__01__product/split__Q0CRX0__RHEA_74199__01__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_049/split__Q0CRX0__RHEA_74199__01__product/split__Q0CRX0__RHEA_74199__01__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_049/split__Q0CRX0__RHEA_74199__01__reactant/split__Q0CRX0__RHEA_74199__01__reactant_model.cif"
+    }
+  }
+}

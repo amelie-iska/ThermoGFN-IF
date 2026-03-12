@@ -567,6 +567,8 @@ def main() -> int:
         step_counter["value"] += 1
         idx = step_counter["value"]
         started = datetime.now(timezone.utc).isoformat()
+        if step_bar is not None:
+            step_bar.set_postfix_str(f"running={name} step={idx}/{total_steps}")
         logger.info("STEP [%d/%d] start %s", idx, total_steps, name)
         rc, dt = _run(
             cmd,
@@ -589,7 +591,7 @@ def main() -> int:
         )
         if step_bar is not None:
             step_bar.update(1)
-            step_bar.set_postfix_str(f"{name} rc={rc} dt={dt:.1f}s")
+            step_bar.set_postfix_str(f"completed={idx}/{total_steps} last={name} rc={rc} dt={dt:.1f}s")
         _post_step_history_metrics(name, idx)
         wandb_run.log(
             {
@@ -855,14 +857,17 @@ def main() -> int:
         total_steps += 2
     step_bar = make_progress(
         total=total_steps,
-        desc=f"uma-cat:round:{args.round_id}",
+        desc=f"train:round:{args.round_id}",
         no_progress=args.no_progress,
         leave=True,
         unit="step",
     )
+    if step_bar is not None:
+        step_bar.set_postfix_str(f"dataset={dataset_path.name} total_steps={total_steps}")
 
     def _finalize(rc: int) -> int:
         if step_bar is not None:
+            step_bar.set_postfix_str(f"done rc={rc} elapsed={time.perf_counter() - wall_t0:.1f}s")
             step_bar.close()
         gate_payload = _read_json_if_exists(round_dir / "manifests" / "round_gate_report.json")
         if gate_payload:

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -94,11 +95,35 @@ def _decomposition(protein_chain_id: str, ligand_chain_id: str | None) -> dict:
     }
 
 
+def _count_atoms_in_structure(path: str | Path) -> int:
+    p = Path(path)
+    opener = gzip.open if p.suffix == ".gz" else open
+    count = 0
+    with opener(p, "rt", encoding="utf-8") as handle:
+        for line in handle:
+            if line.startswith("ATOM ") or line.startswith("HETATM "):
+                count += 1
+    if count <= 0:
+        raise RuntimeError(f"No atoms found in structure: {p}")
+    return count
+
+
+def _rows_from_split_root(split_root: Path, split_name: str) -> list[dict]:
+    from train.thermogfn.split_utils import discover_split, iter_split_specs
+
+    paths = discover_split(split_root)
+    rows: list[dict] = []
+    for spec_path in iter_split_specs(paths, split_name):
+        rows.append(json.loads(spec_path.read_text()))
+    return rows
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--prepared-input-root", required=True)
-    parser.add_argument("--reactant-root", required=True)
-    parser.add_argument("--product-root", required=True)
+    parser.add_argument("--prepared-input-root", default="")
+    parser.add_argument("--reactant-root", default="")
+    parser.add_argument("--product-root", default="")
+    parser.add_argument("--split-root", default="")
     parser.add_argument("--output-path", required=True)
     parser.add_argument("--run-id", default="uma_cat_bootstrap")
     parser.add_argument("--split", default="train")
@@ -114,97 +139,160 @@ def main() -> int:
 
     from train.thermogfn.io_utils import write_records
     from train.thermogfn.progress import configure_logging
-    from train.thermogfn.uma_cat_runtime import count_atoms_in_structure
 
     logger = configure_logging("rf3.build_uma_cat_dataset", level=args.log_level)
 
-    prepared_root = Path(args.prepared_input_root)
-    if not prepared_root.is_absolute():
-        prepared_root = root / prepared_root
-    reactant_root = Path(args.reactant_root)
-    if not reactant_root.is_absolute():
-        reactant_root = root / reactant_root
-    product_root = Path(args.product_root)
-    if not product_root.is_absolute():
-        product_root = root / product_root
     output_path = Path(args.output_path)
     if not output_path.is_absolute():
         output_path = root / output_path
 
-    input_map = _collect_inputs(prepared_root.resolve())
-    reactant_models = _collect_model_paths(reactant_root.resolve(), "reactant")
-    product_models = _collect_model_paths(product_root.resolve(), "product")
-    logger.info(
-        "Collected RF3 records: prepared_pairs=%d reactant_models=%d product_models=%d",
-        len(input_map),
-        len(reactant_models),
-        len(product_models),
-    )
-
     rows: list[dict] = []
-    pair_ids = sorted(set(input_map) & set(reactant_models) & set(product_models))
-    if args.limit > 0:
-        pair_ids = pair_ids[: int(args.limit)]
+    if args.split_root:
+        split_root = Path(args.split_root)
+        if not split_root.is_absolute():
+            split_root = root / split_root
+        specs = _rows_from_split_root(split_root.resolve(), args.split)
+        if args.limit > 0:
+            specs = specs[: int(args.limit)]
+        logger.info("Collected RF3 split specs: split_root=%s split=%s rows=%d", split_root, args.split, len(specs))
+        for spec in specs:
+            pair_id = str(spec.get("pair_id") or "").strip()
+            seq = str(spec.get("sequence") or "").strip()
+            reactant_model = str(spec.get("reactant_complex_path") or "").strip()
+            product_model = str(spec.get("product_complex_path") or "").strip()
+            protein_chain_id = str(spec.get("protein_chain_id") or "A")
+            ligand_chain_id = spec.get("ligand_chain_id")
+            if not pair_id or not seq or not reactant_model or not product_model:
+                logger.warning("Skipping invalid split spec missing core fields: %s", pair_id or "<unknown>")
+                continue
+            try:
+                atom_count = int(spec.get("prepared_atom_count") or _count_atoms_in_structure(reactant_model))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Skipping pair_id=%s due to atom-count failure: %s", pair_id, exc)
+                continue
+            row = {
+                "candidate_id": _candidate_id(pair_id, seq),
+                "run_id": args.run_id,
+                "round_id": int(args.round_id),
+                "task_type": "ligand",
+                "backbone_id": pair_id,
+                "seed_id": pair_id,
+                "sequence": seq,
+                "mutations": [],
+                "K": 0,
+                "prepared_atom_count": int(atom_count),
+                "eligibility": {"bioemu": False, "uma_whole": True, "uma_local": False},
+                "source": "baseline",
+                "schema_version": "v1",
+                "split": args.split,
+                "pair_id": pair_id,
+                "rhea_id": spec.get("rhea_id"),
+                "uniprot_id": spec.get("uniprot_id"),
+                "substrate_smiles": spec.get("substrate_smiles") or spec.get("ligand_smiles"),
+                "product_smiles": spec.get("product_smiles"),
+                "ligand_smiles": spec.get("ligand_smiles") or spec.get("substrate_smiles"),
+                "reactant_complex_path": reactant_model,
+                "product_complex_path": product_model,
+                "reactant_protein_path": spec.get("reactant_protein_path") or reactant_model,
+                "product_protein_path": spec.get("product_protein_path") or product_model,
+                "cif_path": spec.get("representative_structure_path") or reactant_model,
+                "complex_path": reactant_model,
+                "protein_chain_id": protein_chain_id,
+                "ligand_chain_id": ligand_chain_id,
+                "pocket_positions": [int(x) for x in (spec.get("pocket_positions") or [])],
+                "sequence_length": int(spec.get("sequence_length") or len(seq)),
+                "novelty": 0.0,
+                "pack_unc": 0.0,
+                "decomposition": _decomposition(protein_chain_id, ligand_chain_id),
+            }
+            rows.append(row)
+    else:
+        if not args.prepared_input_root or not args.reactant_root or not args.product_root:
+            raise RuntimeError(
+                "--prepared-input-root, --reactant-root, and --product-root are required unless --split-root is used."
+            )
+        prepared_root = Path(args.prepared_input_root)
+        if not prepared_root.is_absolute():
+            prepared_root = root / prepared_root
+        reactant_root = Path(args.reactant_root)
+        if not reactant_root.is_absolute():
+            reactant_root = root / reactant_root
+        product_root = Path(args.product_root)
+        if not product_root.is_absolute():
+            product_root = root / product_root
 
-    for pair_id in pair_ids:
-        reactant_input = input_map[pair_id].get("reactant")
-        product_input = input_map[pair_id].get("product")
-        if not reactant_input or not product_input:
-            continue
+        input_map = _collect_inputs(prepared_root.resolve())
+        reactant_models = _collect_model_paths(reactant_root.resolve(), "reactant")
+        product_models = _collect_model_paths(product_root.resolve(), "product")
+        logger.info(
+            "Collected RF3 records: prepared_pairs=%d reactant_models=%d product_models=%d",
+            len(input_map),
+            len(reactant_models),
+            len(product_models),
+        )
+        pair_ids = sorted(set(input_map) & set(reactant_models) & set(product_models))
+        if args.limit > 0:
+            pair_ids = pair_ids[: int(args.limit)]
 
-        meta = reactant_input.get("metadata", {})
-        seq = _get_component_seq(reactant_input)
-        if not seq:
-            logger.warning("Skipping pair_id=%s due to empty sequence", pair_id)
-            continue
-        protein_chain_id = str(meta.get("protein_chain_id") or "A")
-        ligand_chain_id = meta.get("ligand_chain_id")
-        pocket_positions = [int(x) for x in (meta.get("pocket_positions") or [])]
-        reactant_model = reactant_models[pair_id]
-        product_model = product_models[pair_id]
+        for pair_id in pair_ids:
+            reactant_input = input_map[pair_id].get("reactant")
+            product_input = input_map[pair_id].get("product")
+            if not reactant_input or not product_input:
+                continue
 
-        try:
-            atom_count = count_atoms_in_structure(reactant_model)
-        except Exception as exc:  # noqa: BLE001
-            logger.warning("Skipping pair_id=%s due to atom-count failure: %s", pair_id, exc)
-            continue
+            meta = reactant_input.get("metadata", {})
+            seq = _get_component_seq(reactant_input)
+            if not seq:
+                logger.warning("Skipping pair_id=%s due to empty sequence", pair_id)
+                continue
+            protein_chain_id = str(meta.get("protein_chain_id") or "A")
+            ligand_chain_id = meta.get("ligand_chain_id")
+            pocket_positions = [int(x) for x in (meta.get("pocket_positions") or [])]
+            reactant_model = reactant_models[pair_id]
+            product_model = product_models[pair_id]
 
-        row = {
-            "candidate_id": _candidate_id(pair_id, seq),
-            "run_id": args.run_id,
-            "round_id": int(args.round_id),
-            "task_type": "ligand",
-            "backbone_id": pair_id,
-            "seed_id": pair_id,
-            "sequence": seq,
-            "mutations": [],
-            "K": 0,
-            "prepared_atom_count": int(atom_count),
-            "eligibility": {"bioemu": False, "uma_whole": True, "uma_local": False},
-            "source": "baseline",
-            "schema_version": "v1",
-            "split": args.split,
-            "pair_id": pair_id,
-            "rhea_id": meta.get("rhea_id"),
-            "uniprot_id": meta.get("uniprot_id"),
-            "substrate_smiles": meta.get("ligand_smiles") or _get_component_smiles(reactant_input),
-            "product_smiles": product_input.get("metadata", {}).get("ligand_smiles") or _get_component_smiles(product_input),
-            "ligand_smiles": meta.get("ligand_smiles") or _get_component_smiles(reactant_input),
-            "reactant_complex_path": reactant_model,
-            "product_complex_path": product_model,
-            "reactant_protein_path": reactant_model,
-            "product_protein_path": product_model,
-            "cif_path": reactant_model,
-            "complex_path": reactant_model,
-            "protein_chain_id": protein_chain_id,
-            "ligand_chain_id": ligand_chain_id,
-            "pocket_positions": pocket_positions,
-            "sequence_length": len(seq),
-            "novelty": 0.0,
-            "pack_unc": 0.0,
-            "decomposition": _decomposition(protein_chain_id, ligand_chain_id),
-        }
-        rows.append(row)
+            try:
+                atom_count = _count_atoms_in_structure(reactant_model)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Skipping pair_id=%s due to atom-count failure: %s", pair_id, exc)
+                continue
+
+            row = {
+                "candidate_id": _candidate_id(pair_id, seq),
+                "run_id": args.run_id,
+                "round_id": int(args.round_id),
+                "task_type": "ligand",
+                "backbone_id": pair_id,
+                "seed_id": pair_id,
+                "sequence": seq,
+                "mutations": [],
+                "K": 0,
+                "prepared_atom_count": int(atom_count),
+                "eligibility": {"bioemu": False, "uma_whole": True, "uma_local": False},
+                "source": "baseline",
+                "schema_version": "v1",
+                "split": args.split,
+                "pair_id": pair_id,
+                "rhea_id": meta.get("rhea_id"),
+                "uniprot_id": meta.get("uniprot_id"),
+                "substrate_smiles": meta.get("ligand_smiles") or _get_component_smiles(reactant_input),
+                "product_smiles": product_input.get("metadata", {}).get("ligand_smiles") or _get_component_smiles(product_input),
+                "ligand_smiles": meta.get("ligand_smiles") or _get_component_smiles(reactant_input),
+                "reactant_complex_path": reactant_model,
+                "product_complex_path": product_model,
+                "reactant_protein_path": reactant_model,
+                "product_protein_path": product_model,
+                "cif_path": reactant_model,
+                "complex_path": reactant_model,
+                "protein_chain_id": protein_chain_id,
+                "ligand_chain_id": ligand_chain_id,
+                "pocket_positions": pocket_positions,
+                "sequence_length": len(seq),
+                "novelty": 0.0,
+                "pack_unc": 0.0,
+                "decomposition": _decomposition(protein_chain_id, ligand_chain_id),
+            }
+            rows.append(row)
 
     write_records(output_path, rows)
     logger.info("Built UMA-cat dataset: rows=%d output=%s elapsed=%.2fs", len(rows), output_path, time.perf_counter() - t0)

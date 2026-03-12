@@ -248,9 +248,13 @@ Default catalytic routing in that config:
 - `generator.backend = ligandmpnn`
 - `round.graphkcat_prefilter_fraction = 0.5`
 - `round.graphkcat_prefilter_risk_kappa = 0.5`
+- `oracles.uma_cat.broad.steps = 1000` with `replicas = 3`
+- `oracles.uma_cat.smd.images = 32`, `steps_per_image = 40`, `replicas = 3`
+- `oracles.uma_cat.smd.k_steer_eva2 = 1.5` for gentler steering than the earlier default
 - `oracles.uma_cat.smd.enabled = true`
 - `oracles.uma_cat.smd.reverse = true`
 - `oracles.uma_cat.pmf.enabled = false`
+- `oracles.uma_cat.pmf.windows = 20`, `steps_per_window = 200`, `replicas = 2` when PMF is enabled
 - GraphKcat enabled
 - SPURS, BioEmu, KcatNet, MMKcat, and thermostability UMA are not part of this default RL loop
 
@@ -302,6 +306,19 @@ Each row carries:
 - `protein_chain_id`
 - `ligand_chain_id`
 - `pocket_positions`
+
+The same builder can also consume the new RF3 split root directly:
+
+```bash
+python scripts/rf3/build_uma_cat_dataset.py \
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --split train \
+  --output-path runs/tmp/uma_cat_rf3_train.jsonl \
+  --run-id uma_cat_rf3_train \
+  --round-id 0
+```
+
+That path reads the split `train/*.json` or `test/*.json` specs and writes the catalytic JSONL expected by the Method III training loop.
 
 ### Pack reactant and product endpoints with LigandMPNN
 
@@ -564,6 +581,7 @@ Use `--no-progress` only when you need log-only operation, for example in CI or 
 - The default catalytic path contains no mock scoring branch: LigandMPNN packing, GraphKcat inference, UMA broad screening, sMD, and optional PMF are all real runtime stages.
 - `oracles.uma_cat.smd.enabled` and `oracles.uma_cat.smd.reverse` control forward/reverse steering.
 - `oracles.uma_cat.pmf.enabled` toggles the PMF stage. It is off by default because it is materially more expensive.
+- The default UMA profile is now intentionally higher quality than the earlier smoke-style settings: longer broad screening, more replicas, and gentler but longer sMD pulls.
 - The broad screen, sMD, and PMF are all real FAIRChem/ASE runs through `mora-uma`; this path does not use static proxy replacements.
 - GraphKcat is the default auxiliary structural catalytic oracle in this path, and it is now evaluated on packed mutant structures before UMA-cat selection.
 - The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
@@ -1212,6 +1230,96 @@ The RF3 input JSONs now accept Boltz-style pocket constraints:
 
 When present, RF3 converts these constraints into inference-time token-pair threshold conditioning. When absent, RF3 keeps its previous behavior.
 
+### RF3 pair-level ProTrek train/test split
+
+Once reactant-bound and product-bound RF3 structures exist, the repo can build a pair-level train/test split directly from those docked endpoint states.
+
+Why this split is needed:
+
+- catalytic evaluation should hold out whole enzyme-reaction pairs rather than only rows from a flat metadata table,
+- sequence-only splitting is too weak because non-identical enzymes can still collapse to very similar RF3 pocket geometries,
+- reactant-only or product-only structure splitting is too weak because the catalytic task depends on both endpoint basins.
+
+The implemented split uses ProTrek in two channels:
+
+- sequence similarity from the ProTrek protein encoder,
+- structure similarity from the ProTrek structure encoder applied to both the reactant-bound and product-bound RF3 structures.
+
+One-time ProTrek env setup if `protrek` is not already provisioned:
+
+```bash
+conda create -n protrek python=3.10 -y
+conda run -n protrek pip install -r models/ProTrek/requirements.txt
+```
+
+For RF3 pairs `i` and `j`, the structural similarity is the maximum cosine similarity across all cross-state comparisons:
+
+- reactant-reactant,
+- reactant-product,
+- product-reactant,
+- product-product.
+
+Two pairs are connected in the combined similarity graph if either:
+
+- sequence similarity is at least `seq_threshold`, or
+- max-cross-state structural similarity is at least `structure_threshold`.
+
+Connected components of that graph are then assigned to train or test as whole clusters. This prevents obvious leakage between near-duplicate endpoint pairs while preserving a pair-level catalytic dataset for downstream training.
+
+Preferred one-command wrapper:
+
+```bash
+bash scripts/run_protrek_split_rf3_pairs.sh \
+  --output-dir rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --seq-threshold 0.90 \
+  --structure-threshold 0.90 \
+  --test-fraction 0.20 \
+  --batch-size 32 \
+  --seed 13 \
+  --device cuda
+```
+
+The wrapper runs under the `protrek` conda env by default and points at:
+
+- prepared RF3 inputs: `runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7`
+- reactant RF3 outputs: `runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant`
+- product RF3 outputs: `runs/rf3_reactzyme_out_smiles_full_sharded_v9/product`
+- ProTrek weights: `models/ProTrek/weights/ProTrek_35M`
+- Foldseek binary: `models/ProTrek/bin/foldseek`
+
+Direct Python entrypoint:
+
+```bash
+conda run -n protrek python scripts/rf3/protrek_cluster_split_rf3_pairs.py \
+  --prepared-input-root runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7 \
+  --reactant-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant \
+  --product-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/product \
+  --output-dir rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --foldseek-bin models/ProTrek/bin/foldseek \
+  --weights-dir models/ProTrek/weights/ProTrek_35M \
+  --seq-threshold 0.90 \
+  --structure-threshold 0.90 \
+  --test-fraction 0.20 \
+  --batch-size 32 \
+  --seed 13 \
+  --device cuda
+```
+
+Validate the split before using it:
+
+```bash
+python scripts/rf3/validate_protrek_rf3_split.py \
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --output rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m/metadata/validation_report.json
+```
+
+The split root contains:
+
+- `train/*.json` and `test/*.json`: pair-level RF3 specs,
+- `metadata/pair_index.csv`: manifest for all retained pairs,
+- `metadata/split_summary.json`: thresholds, counts, and source roots,
+- `metadata/seq_clusters.json`, `metadata/structure_clusters.json`, `metadata/combined_clusters.json`.
+
 Kcat records must include substrate chemistry metadata (`substrate_smiles` or `Smiles`) and structural pointers (`protein_path`/`cif_path`, optional `ligand_path`) for oracle inference.
 
 ## Inference workflow
@@ -1254,6 +1362,9 @@ Existing RF3 generation/split scripts are retained:
 - `scripts/run_rfd3_inference.sh`
 - `scripts/protrek_cluster_split.py`
 - `scripts/run_protrek_split_unconditional_monomer.sh`
+- `scripts/rf3/protrek_cluster_split_rf3_pairs.py`
+- `scripts/rf3/validate_protrek_rf3_split.py`
+- `scripts/run_protrek_split_rf3_pairs.sh`
 
 
 

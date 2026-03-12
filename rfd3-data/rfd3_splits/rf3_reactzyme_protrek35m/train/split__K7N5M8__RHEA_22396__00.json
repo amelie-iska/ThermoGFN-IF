@@ -1,0 +1,60 @@
+{
+  "pair_id": "split__K7N5M8__RHEA_22396__00",
+  "rhea_id": "RHEA:22396",
+  "uniprot_id": "K7N5M8",
+  "sequence": "MPVDLSTTLSWKSATGEAATMLDELQPNILKAHVRDRLTVLFLGFGDAAEARTFLNGLSGLMKSARTHLQEVEAHKLTKAVGTPYLGVGLTAHGYATLGVTAPADPSFTAGAKAAVEKLADPAVTEWEGHYQQTIDAVLLLGDATAGPVRTLRRQVEALRPASVTVVGEESGLGLANANGDGIEHFGYVDGRSQPLFLTEDVDAERDTTDGVNDWDPSAPLEQVLVPDPAAPDPTVHFGSYFVFRKLEQNVRLFKEAERDLAHDLGLRGEDRERAGAMLVGRFEDGTPLTAQSAPGSHHPVGNDFSYDSDKLGQKCPFHAHIRKTNPRGSGGAEAPEEERKHLMARRGQTYGRRHDDPNADLPPRLRPAKDVGLLFMAFNSNLGNQFEFTQQIWANNPAFPFPPDGSQPGLDPVIGQGARAPQKYAPEWGHNNVAEATDPIPQAVTMKGGEYFFMPSLAFLRSL",
+  "sequence_length": 464,
+  "substrate_smiles": "COC1=CC(C(O)C(CO)OC2=CC=CC=C2OC)=CC=C1O.[H]OO[H]",
+  "product_smiles": "COC1=CC=CC=C1O.[H]C(=O)C1=CC(OC)=C(O)C=C1.[H]C(=O)CO.[H]O[H]",
+  "ligand_smiles": "COC1=CC(C(O)C(CO)OC2=CC=CC=C2OC)=CC=C1O.[H]OO[H]",
+  "protein_chain_id": "A",
+  "ligand_chain_id": "B",
+  "pocket_positions": [
+    203,
+    258,
+    273,
+    284,
+    321
+  ],
+  "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif",
+  "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_099/split__K7N5M8__RHEA_22396__00__product/split__K7N5M8__RHEA_22396__00__product_model.cif",
+  "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif",
+  "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_099/split__K7N5M8__RHEA_22396__00__product/split__K7N5M8__RHEA_22396__00__product_model.cif",
+  "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif",
+  "protrek": {
+    "sequence_cluster": 399,
+    "structure_cluster": 385,
+    "combined_cluster": 372,
+    "structure_similarity_mode": "max_cross_state"
+  },
+  "specification": {
+    "length": "464",
+    "extra": {
+      "task_name": "rf3_reactzyme_protrek_pair_split",
+      "example_id": "split__K7N5M8__RHEA_22396__00",
+      "sampled_contig": "464",
+      "num_residues": 464,
+      "sequence_length": 464,
+      "split": "train",
+      "pair_id": "split__K7N5M8__RHEA_22396__00",
+      "rhea_id": "RHEA:22396",
+      "uniprot_id": "K7N5M8",
+      "protein_chain_id": "A",
+      "ligand_chain_id": "B",
+      "substrate_smiles": "COC1=CC(C(O)C(CO)OC2=CC=CC=C2OC)=CC=C1O.[H]OO[H]",
+      "product_smiles": "COC1=CC=CC=C1O.[H]C(=O)C1=CC(OC)=C(O)C=C1.[H]C(=O)CO.[H]O[H]",
+      "pocket_positions": [
+        203,
+        258,
+        273,
+        284,
+        321
+      ],
+      "reactant_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif",
+      "product_complex_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_099/split__K7N5M8__RHEA_22396__00__product/split__K7N5M8__RHEA_22396__00__product_model.cif",
+      "reactant_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif",
+      "product_protein_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/product/shard_099/split__K7N5M8__RHEA_22396__00__product/split__K7N5M8__RHEA_22396__00__product_model.cif",
+      "representative_structure_path": "/home/ubuntu/amelie/ThermoGFN/runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant/shard_099/split__K7N5M8__RHEA_22396__00__reactant/split__K7N5M8__RHEA_22396__00__reactant_model.cif"
+    }
+  }
+}

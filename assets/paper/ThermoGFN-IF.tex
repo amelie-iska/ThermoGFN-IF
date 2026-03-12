@@ -1950,6 +1950,55 @@ We therefore recommend that every catalytic record store:
 \end{enumerate}
 The local repository enforces a minimum version of this requirement through an explicit metadata validator: Kcat-mode examples lacking substrate metadata are rejected before active-learning rounds begin. This is a useful discipline to preserve in the manuscript because catalytic design pipelines fail more often from metadata sloppiness than from neural-network architecture.
 
+\subsection{RosettaFold3-derived catalytic train/test splits with ProTrek}
+
+The catalytic RF3 corpus is not split at the level of individual rows from a metadata table. It is split at the level of \emph{paired endpoint examples}. Each example
+\begin{equation}
+    z_i = (s_i, A_i, B_i, \eta_i)
+\end{equation}
+contains the enzyme sequence $s_i$, the reactant-bound RF3 complex $A_i$, the product-bound RF3 complex $B_i$, and the associated reaction metadata $\eta_i$ such as substrate identity, product identity, chain IDs, and pocket annotations. This pairing matters because the catalytic active-learning loop conditions on both endpoint basins. A split that only respects sequence identity or only one endpoint geometry would underestimate leakage.
+
+To reduce both sequence-level and structure-level leakage, we construct train/test partitions with ProTrek \citep{su2025trimodal}. Let
+\begin{equation}
+    u_i \in \RR^{d_{\mathrm{seq}}}
+\end{equation}
+denote the ProTrek sequence embedding of the enzyme sequence $s_i$, and let
+\begin{equation}
+    v_i^{A}, v_i^{B} \in \RR^{d_{\mathrm{str}}}
+\end{equation}
+denote ProTrek structure embeddings of the reactant-bound and product-bound RF3 endpoint structures, respectively. Sequence similarity is defined by cosine similarity,
+\begin{equation}
+    S_{\mathrm{seq}}(i,j) = \cos(u_i,u_j).
+\end{equation}
+Structural similarity is defined on the pair, not on a single endpoint:
+\begin{equation}
+\label{eq:rf3_pair_struct_sim}
+    S_{\mathrm{str}}(i,j)
+    =
+    \max
+    \left\{
+    \cos(v_i^{A},v_j^{A}),
+    \cos(v_i^{A},v_j^{B}),
+    \cos(v_i^{B},v_j^{A}),
+    \cos(v_i^{B},v_j^{B})
+    \right\}.
+\end{equation}
+The maximum cross-state similarity in Eq.~\eqref{eq:rf3_pair_struct_sim} is deliberate. It prevents leakage not only between nearly identical reactant-bound complexes, but also between cases where one candidate's reactant-bound state is geometrically close to another candidate's product-bound state. That situation is common in catalytic datasets and would be missed by a one-endpoint split.
+
+We then form a combined similarity graph over paired RF3 examples. Nodes are examples $z_i$, and an undirected edge $(i,j)$ is added whenever
+\begin{equation}
+    S_{\mathrm{seq}}(i,j) \ge \tau_{\mathrm{seq}}
+    \qquad\text{or}\qquad
+    S_{\mathrm{str}}(i,j) \ge \tau_{\mathrm{str}}.
+\end{equation}
+Connected components of this graph define combined ProTrek clusters. Entire clusters, rather than individual examples, are assigned to train or test, typically with defaults near
+\begin{equation}
+    \tau_{\mathrm{seq}} = \tau_{\mathrm{str}} = 0.90
+\end{equation}
+and a target test fraction of roughly $20\%$. This yields a split that is stricter than a sequence-only partition while remaining computationally practical on large RF3 corpora.
+
+Operationally, each retained split example stores the fields needed by the catalytic Method~III loop: sequence, substrate/product metadata, reactant-bound complex path, product-bound complex path, protein chain ID, ligand chain ID when present, and pocket positions. The train/test split is validated before downstream use by checking that all referenced endpoint files exist and that the split manifest, counts, and pair-level metadata are internally consistent. The resulting train/test partition is therefore defined over the same RF3 paired endpoint objects that the catalytic oracles and the GFlowNet-style RL loop actually consume.
+
 
 \subsection{Oracle calibration sets}
 
@@ -2407,7 +2456,7 @@ PPO editor &  &  &  &  &  &  \\
 
 \section{Appendix E: bibliography notes and source provenance}
 
-The methodology in this manuscript was derived from nine primary source clusters reviewed in detail: the ADFLIP ICML paper for all-atom inverse folding, multistate conditioning, and training-free guidance, the SPURS article for scalable thermostability prediction, the BioEmu preprint for scalable equilibrium-ensemble emulation and stability-relevant protein dynamics, the core GFlowNet theory papers, the 2021--2022 GFlowNet literature on non-iterative diverse candidate generation and biological sequence active learning, the UMA or OMol25 releases for MLIP-based molecular simulation and data provenance, the KcatNet, GraphKcat, and MMKcat papers for catalytic turnover and kinetic-parameter prediction, and the nonequilibrium free-energy literature underlying Jarzynski, Crooks, and Hummer--Szabo style path reconstruction \citep{yi2025adflip,li2026spurs,lewis2024bioemu,bengio2021noniter,bengio2023gflownet,malkin2022trajectory,madan2023subtb,jain2022bioseqgfn,wood2025uma,levine2025omol25,pan2026kcatnet,luo2025graphkcat,sun2025mmkcat,jarzynski1997nonequilibrium,crooks1999entropy,hummer2001free}. In addition, the updated large-system deployment scope in this paper is informed both by the FAIR Chemistry public documentation of large-system UMA-MD execution, including a worked $8000$-atom example and reported throughput on larger systems, and by the BioEmu results on scalable equilibrium sampling and protein stability estimation \citep{fairchem2025github,lewis2024bioemu}. All proposed additions beyond those sources are explicitly framed as methodological proposals rather than established results.
+The methodology in this manuscript was derived from ten primary source clusters reviewed in detail: the ADFLIP ICML paper for all-atom inverse folding, multistate conditioning, and training-free guidance, the SPURS article for scalable thermostability prediction, the BioEmu preprint for scalable equilibrium-ensemble emulation and stability-relevant protein dynamics, the core GFlowNet theory papers, the 2021--2022 GFlowNet literature on non-iterative diverse candidate generation and biological sequence active learning, the UMA or OMol25 releases for MLIP-based molecular simulation and data provenance, the KcatNet, GraphKcat, and MMKcat papers for catalytic turnover and kinetic-parameter prediction, the ProTrek paper for joint sequence-structure embedding and similarity-aware clustering of RF3 endpoint pairs, and the nonequilibrium free-energy literature underlying Jarzynski, Crooks, and Hummer--Szabo style path reconstruction \citep{yi2025adflip,li2026spurs,lewis2024bioemu,bengio2021noniter,bengio2023gflownet,malkin2022trajectory,madan2023subtb,jain2022bioseqgfn,wood2025uma,levine2025omol25,pan2026kcatnet,luo2025graphkcat,sun2025mmkcat,su2025trimodal,jarzynski1997nonequilibrium,crooks1999entropy,hummer2001free}. In addition, the updated large-system deployment scope in this paper is informed both by the FAIR Chemistry public documentation of large-system UMA-MD execution, including a worked $8000$-atom example and reported throughput on larger systems, and by the BioEmu results on scalable equilibrium sampling and protein stability estimation \citep{fairchem2025github,lewis2024bioemu}. All proposed additions beyond those sources are explicitly framed as methodological proposals rather than established results.
 
 \begin{thebibliography}{99}
 
@@ -2556,6 +2605,11 @@ Richard W. Shuai, Talal Widatalla, Po-Ssu Huang, and Brian L. Hie.
 Xin Sun, Yu Guang Wang, and Yiqing Shen.
 \newblock A multimodal deep learning framework for enzyme turnover prediction with missing modality.
 \newblock \emph{Computers in Biology and Medicine}, 193:110348, 2025.
+
+\bibitem[Su et~al.(2025)Su et~al.]{su2025trimodal}
+Jin Su, Yan He, Shiyang You, Shiyu Jiang, Xibin Zhou, Xuting Zhang, Yuxuan Wang, Xining Su, Igor Tolstoy, Xing Chang, and others.
+\newblock A trimodal protein language model enables advanced protein searches.
+\newblock \emph{Nature Biotechnology}, pages 1--7, 2025.
 
 
 \bibitem[Yi et~al.(2025)Yi, Jamali, and Scheres]{yi2025adflip}

@@ -48,32 +48,32 @@ oracles:
       temperature_k: 300.0
       timestep_fs: 0.1
       friction_per_fs: 0.01
-      steps: 500
-      replicas: 2
-      save_every: 10
+      steps: 1000
+      replicas: 3
+      save_every: 20
       contact_cutoff_a: 4.5
       ligand_rmsd_max_a: 2.5
       pocket_rmsd_max_a: 2.0
       min_contacts: 4
       min_distance_safe_a: 1.5
-      anchor_stride: 8
+      anchor_stride: 6
     smd:
       enabled: true
       reverse: true
       timestep_fs: 0.1
       friction_per_fs: 0.01
-      images: 24
-      steps_per_image: 25
-      replicas: 2
-      k_steer_eva2: 2.0
+      images: 32
+      steps_per_image: 40
+      replicas: 3
+      k_steer_eva2: 1.5
       k_anchor_eva2: 0.05
-      force_clip_eva: 25.0
+      force_clip_eva: 20.0
     pmf:
       enabled: false
-      windows: 16
-      steps_per_window: 100
-      save_every: 5
-      replicas: 1
+      windows: 20
+      steps_per_window: 200
+      save_every: 10
+      replicas: 2
       k_window_eva2: 2.0
   graphkcat:
     model_root: models/GraphKcat
