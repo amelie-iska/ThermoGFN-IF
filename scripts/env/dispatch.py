@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shutil
 import subprocess
 import sys
 import threading
@@ -18,6 +20,80 @@ def _repo_root() -> Path:
         if (parent / "scripts").exists() and (parent / "train").exists():
             return parent
     raise RuntimeError("Could not locate repository root")
+
+
+def _conda_root() -> Path | None:
+    raw = os.environ.get("CONDA_ROOT")
+    if raw:
+        p = Path(raw)
+        if p.exists():
+            return p
+    raw = os.environ.get("CONDA_EXE")
+    if raw:
+        p = Path(raw).resolve()
+        for parent in (p.parent, p.parent.parent):
+            if (parent / "envs").exists():
+                return parent
+    which_conda = shutil.which("conda")
+    if which_conda:
+        p = Path(which_conda).resolve()
+        for parent in p.parents:
+            if (parent / "envs").exists():
+                return parent
+    try:
+        result = subprocess.run(
+            ["conda", "info", "--base"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except Exception:  # noqa: BLE001
+        result = None
+    if result is not None:
+        p = Path(result.stdout.strip())
+        if p.exists() and (p / "envs").exists():
+            return p
+    exe = Path(sys.executable).resolve()
+    if exe.parent.name == "bin":
+        candidate = exe.parent.parent
+        if (candidate / "envs").exists():
+            return candidate
+    return None
+
+
+def _env_prefix(env_name: str) -> Path | None:
+    conda_root = _conda_root()
+    if conda_root is None:
+        return None
+    prefix = conda_root / "envs" / env_name
+    if prefix.exists():
+        return prefix
+    return None
+
+
+def _env_site_packages(env_name: str) -> Path | None:
+    prefix = _env_prefix(env_name)
+    if prefix is None:
+        return None
+    python_bin = prefix / "bin" / "python"
+    if python_bin.exists():
+        try:
+            result = subprocess.run(
+                [str(python_bin), "-c", "import sys; print(f'python{sys.version_info.major}.{sys.version_info.minor}')"],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            version = result.stdout.strip()
+            candidate = prefix / "lib" / version / "site-packages"
+            if candidate.exists():
+                return candidate
+        except Exception:  # noqa: BLE001
+            pass
+    candidates = sorted(prefix.glob("lib/python*/site-packages"))
+    if not candidates:
+        return None
+    return candidates[-1]
 
 
 def _stream_pipe(src, dst, sink_chunks: list[str]) -> None:
@@ -81,8 +157,21 @@ def main() -> int:
     uv_cache_dir.mkdir(parents=True, exist_ok=True)
     pip_cache_dir.mkdir(parents=True, exist_ok=True)
     bioemu_colabfold_home.mkdir(parents=True, exist_ok=True)
+    env_prefix = _env_prefix(args.env_name)
+    env_site = _env_site_packages(args.env_name)
+
+    path_export = ""
+    if env_prefix is not None:
+        path_export = f'export PATH="{env_prefix / "bin"}:$PATH"; '
+    site_export = ""
+    if env_site is not None:
+        site_export = f'export PYTHONPATH="{env_site}"; '
 
     wrapped_cmd = (
+        'unset PYTHONHOME PYTHONPATH VIRTUAL_ENV __PYVENV_LAUNCHER__; '
+        'export PYTHONNOUSERSITE=1; '
+        f"{path_export}"
+        f"{site_export}"
         f'export HF_HOME="${{HF_HOME:-{hf_home}}}"; '
         f'export HUGGINGFACE_HUB_CACHE="${{HUGGINGFACE_HUB_CACHE:-{hub_cache}}}"; '
         f'export TRANSFORMERS_CACHE="${{TRANSFORMERS_CACHE:-{tx_cache}}}"; '
@@ -95,7 +184,16 @@ def main() -> int:
         f'mkdir -p "$HF_HOME" "$HUGGINGFACE_HUB_CACHE" "$TRANSFORMERS_CACHE" "$TORCH_HOME" "$XDG_CACHE_HOME" "$UV_CACHE_DIR" "$PIP_CACHE_DIR" "$BIOEMU_COLABFOLD_DIR"; '
         f"{args.cmd}"
     )
-    cmd = ["conda", "run", "--no-capture-output", "-n", args.env_name, "bash", "-lc", wrapped_cmd]
+    cmd = ["conda", "run", "--no-capture-output", "-n", args.env_name, "bash", "-c", wrapped_cmd]
+    child_env = os.environ.copy()
+    for key in (
+        "PYTHONHOME",
+        "PYTHONPATH",
+        "VIRTUAL_ENV",
+        "__PYVENV_LAUNCHER__",
+    ):
+        child_env.pop(key, None)
+    child_env["PYTHONNOUSERSITE"] = "1"
     start = datetime.now(timezone.utc)
     proc = subprocess.Popen(
         cmd,
@@ -103,6 +201,7 @@ def main() -> int:
         stderr=subprocess.PIPE,
         text=True,
         bufsize=1,
+        env=child_env,
     )
     stdout_chunks: list[str] = []
     stderr_chunks: list[str] = []

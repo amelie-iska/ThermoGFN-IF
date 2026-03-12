@@ -476,6 +476,8 @@ def main() -> int:
                 str(args.teacher_steps),
                 "--gamma-off",
                 str(args.teacher_gamma_off),
+                "--surrogate-ckpt",
+                str(surrogate_ckpt),
                 "--max-checkpoints",
                 str(args.max_checkpoints),
                 "--seed",

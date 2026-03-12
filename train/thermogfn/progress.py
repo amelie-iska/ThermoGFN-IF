@@ -15,6 +15,87 @@ except Exception:  # noqa: BLE001
     tqdm = None
 
 
+class _SimpleProgressBar:
+    """Fallback progress helper with a tqdm-like surface."""
+
+    def __init__(
+        self,
+        *,
+        total: int | None,
+        desc: str | None = None,
+        leave: bool = False,
+        unit: str | None = None,
+    ) -> None:
+        self.total = total
+        self.desc = desc or "progress"
+        self.leave = leave
+        self.unit = unit or "item"
+        self.count = 0
+        self._closed = False
+        self._print_start()
+
+    def _print_start(self) -> None:
+        if self.total is None:
+            print(f"{self.desc}: start", flush=True)
+        else:
+            print(f"{self.desc}: start total={self.total}", flush=True)
+
+    def _print_update(self, *, force: bool = False) -> None:
+        if self._closed:
+            return
+        if self.total is None:
+            if force or self.count == 1 or (self.count % 25) == 0:
+                print(f"{self.desc}: {self.count} {self.unit}", flush=True)
+            return
+        step = max(1, int(self.total) // 20)
+        if force or self.count == 1 or self.count == int(self.total) or (self.count % step) == 0:
+            print(f"{self.desc}: {self.count}/{self.total}", flush=True)
+
+    def update(self, n: int = 1) -> None:
+        self.count += int(n)
+        self._print_update()
+
+    def set_postfix(self, ordered_dict=None, refresh: bool = True, **kwargs) -> None:  # noqa: ARG002
+        payload = {}
+        if ordered_dict:
+            payload.update(dict(ordered_dict))
+        payload.update(kwargs)
+        if payload:
+            summary = " ".join(f"{k}={v}" for k, v in payload.items())
+            print(f"{self.desc}: {summary}", flush=True)
+
+    def set_postfix_str(self, s: str, refresh: bool = True) -> None:  # noqa: ARG002
+        if s:
+            print(f"{self.desc}: {s}", flush=True)
+
+    def close(self) -> None:
+        if self._closed:
+            return
+        self._print_update(force=True)
+        if self.leave:
+            if self.total is None:
+                print(f"{self.desc}: done n={self.count}", flush=True)
+            else:
+                print(f"{self.desc}: done total={self.total}", flush=True)
+        self._closed = True
+
+
+class _NullProgressBar:
+    """No-op progress helper used when progress bars are disabled."""
+
+    def update(self, n: int = 1) -> None:  # noqa: ARG002
+        return
+
+    def set_postfix(self, ordered_dict=None, refresh: bool = True, **kwargs) -> None:  # noqa: ARG002
+        return
+
+    def set_postfix_str(self, s: str, refresh: bool = True) -> None:  # noqa: ARG002
+        return
+
+    def close(self) -> None:
+        return
+
+
 def configure_logging(name: str, level: str = "INFO") -> logging.Logger:
     """Configure timestamped process-wide logging and return a named logger."""
     resolved = getattr(logging, level.upper(), logging.INFO)
@@ -56,27 +137,29 @@ def iter_progress(
             yield item
         return
     if tqdm is None:
-        label = desc or "progress"
-        if total is None:
-            count = 0
-            print(f"{label}: start", flush=True)
-            for item in iterable:
-                count += 1
-                if count == 1 or (count % 100) == 0:
-                    print(f"{label}: {count}", flush=True)
-                yield item
-            print(f"{label}: done n={count}", flush=True)
-            return
-        step = max(1, int(total) // 20)
-        count = 0
-        print(f"{label}: start total={total}", flush=True)
+        pbar = _SimpleProgressBar(total=total, desc=desc, leave=leave)
         for item in iterable:
-            count += 1
-            if count == 1 or count == int(total) or (count % step) == 0:
-                print(f"{label}: {count}/{total}", flush=True)
+            pbar.update(1)
             yield item
+        pbar.close()
         return
     yield from tqdm(iterable, total=total, desc=desc, dynamic_ncols=True, leave=leave)
+
+
+def make_progress(
+    *,
+    total: int | None,
+    desc: str | None = None,
+    no_progress: bool = False,
+    leave: bool = True,
+    unit: str | None = None,
+):
+    """Return a tqdm-compatible progress bar or a lightweight fallback."""
+    if not progress_enabled(no_progress):
+        return _NullProgressBar()
+    if tqdm is None:
+        return _SimpleProgressBar(total=total, desc=desc, leave=leave, unit=unit)
+    return tqdm(total=total, desc=desc, dynamic_ncols=True, leave=leave, unit=unit)
 
 
 def reset_peak_vram_tracking() -> None:

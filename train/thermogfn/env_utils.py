@@ -140,6 +140,22 @@ def run_health_check(env_name: str) -> tuple[bool, dict[str, Any]]:
             "./scripts/env/setup_bioemu_colabfold_runtime.sh --bioemu-env bioemu --check-only >/dev/null"
         ),
         "uma-qc": "python -c \"import fairchem.core as f; from ase.md.langevin import Langevin; print('ok')\"",
+        "mora-uma": (
+            "export PYTHONPATH=\"$(pwd)/models/fairchem/src:${PYTHONPATH:-}\" && "
+            "python - <<'PY'\n"
+            "from ase import Atoms\n"
+            "from fairchem.core import FAIRChemCalculator, pretrained_mlip\n"
+            "predictor = pretrained_mlip.get_predict_unit('uma-s-1p1', device='cpu')\n"
+            "calc = FAIRChemCalculator(predictor, task_name='omol')\n"
+            "atoms = Atoms('H2', positions=[[0,0,0],[0,0,0.74]])\n"
+            "atoms.info['charge'] = 0\n"
+            "atoms.info['spin'] = 0\n"
+            "atoms.calc = calc\n"
+            "atoms.get_potential_energy()\n"
+            "atoms.get_forces()\n"
+            "print('ok')\n"
+            "PY"
+        ),
     }
     cmd = checks.get(env_name)
     if cmd is None:

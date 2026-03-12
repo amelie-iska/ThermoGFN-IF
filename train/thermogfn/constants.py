@@ -1,7 +1,7 @@
 """Project-wide constants."""
 
 REQUIRED_ENVS = ("ligandmpnn_env", "spurs", "bioemu", "uma-qc")
-OPTIONAL_ENVS = ("ADFLIP", "KcatNet", "apodock", "graphkcat", "protrek", "foundry", "rfd3")
+OPTIONAL_ENVS = ("ADFLIP", "KcatNet", "apodock", "graphkcat", "protrek", "foundry", "rfd3", "mora-uma")
 
 AMINO_ACIDS = "ACDEFGHIKLMNPQRSTVWY"
 
@@ -20,6 +20,9 @@ DEFAULT_SCORE_WEIGHTS = {
 
 DEFAULT_ACQ_ALPHA = (0.40, 0.15, 0.15, 0.10, 0.10, 0.10)
 DEFAULT_ACQ_BETA = (0.35, 0.15, 0.20, 0.10, 0.10, 0.10)
+
+# UMA catalytic-stage acquisition defaults.
+DEFAULT_ACQ_UMA_CAT = (0.35, 0.20, 0.20, 0.15, 0.10)
 
 # Kcat-stage acquisition defaults.
 DEFAULT_ACQ_KCATNET = (0.35, 0.25, 0.20, 0.20)

@@ -7,6 +7,7 @@ from .constants import (
     DEFAULT_ACQ_BETA,
     DEFAULT_ACQ_GRAPHKCAT,
     DEFAULT_ACQ_KCATNET,
+    DEFAULT_ACQ_UMA_CAT,
 )
 
 
@@ -60,14 +61,41 @@ def score_kcatnet_acquisition(rec: dict, alpha: tuple[float, ...] = DEFAULT_ACQ_
     )
 
 
+def score_uma_cat_acquisition(rec: dict, alpha: tuple[float, ...] = DEFAULT_ACQ_UMA_CAT) -> float:
+    novelty = float(rec.get("novelty", 0.0))
+    pack_unc = float(rec.get("pack_unc", 0.0))
+    k = int(rec.get("K", 0))
+    l = max(1, int(rec.get("sequence_length", len(rec.get("sequence", "")) or 1)))
+    atom_count = int(rec.get("prepared_atom_count", 0))
+    has_reactant = 1.0 if rec.get("reactant_complex_path") else 0.0
+    has_product = 1.0 if rec.get("product_complex_path") else 0.0
+    has_mech = 1.0 if rec.get("pocket_positions") and rec.get("protein_chain_id") else 0.0
+    path_ok = has_reactant * has_product * has_mech
+    atom_indicator = 1.0 if atom_count > 0 else 0.0
+    return (
+        alpha[0] * novelty
+        + alpha[1] * pack_unc
+        + alpha[2] * (k / l)
+        + alpha[3] * path_ok
+        + alpha[4] * atom_indicator
+    )
+
+
 def score_graphkcat_acquisition(
     rec: dict,
     beta: tuple[float, ...] = DEFAULT_ACQ_GRAPHKCAT,
     *,
     risk_kappa: float = 0.5,
 ) -> float:
-    kn_mean = rec.get("kcatnet_log10", rec.get("mmkcat_log10"))
-    kn_std = float(rec.get("kcatnet_std", rec.get("mmkcat_std", 0.0)))
+    kn_mean = rec.get("graphkcat_log_kcat")
+    kn_std = rec.get("graphkcat_std")
+    if kn_mean is None:
+        kn_mean = rec.get("uma_cat_log10_rate_proxy")
+        kn_std = rec.get("uma_cat_log10_rate_std", rec.get("uma_cat_std"))
+    if kn_mean is None:
+        kn_mean = rec.get("kcatnet_log10", rec.get("mmkcat_log10"))
+        kn_std = rec.get("kcatnet_std", rec.get("mmkcat_std", 0.0))
+    kn_std = float(kn_std or 0.0)
     kn_risk = float(kn_mean) - float(risk_kappa) * kn_std if kn_mean is not None else 0.0
     novelty = float(rec.get("novelty", 0.0))
     k = int(rec.get("K", 0))

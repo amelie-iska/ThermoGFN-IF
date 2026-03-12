@@ -643,9 +643,17 @@ class bottle_view_graph(nn.Module):
 
         # 批量处理嵌入
         if self.ligand_nn_embedding:
-            sub_node_type_embs = torch.cat([d["ligand"].x for d in data], dim=0)
-            sub_node_type_embs = self.embedding(sub_node_type_embs)
             x_lig_subs = torch.cat(x_list_lig_sub, dim=0)
+            sub_node_type_raw = torch.cat([d["ligand"].x for d in data], dim=0)
+            # The packaged inference path can surface ligand descriptors either as token IDs
+            # (shape [n] or [n, 1]) or as already materialized per-node feature vectors
+            # (shape [n, hidden]). Support both.
+            if sub_node_type_raw.dim() == 1 or (sub_node_type_raw.dim() == 2 and sub_node_type_raw.shape[1] == 1):
+                sub_node_type_embs = self.embedding(sub_node_type_raw.reshape(-1).long())
+            elif sub_node_type_raw.dim() == 2 and sub_node_type_raw.shape[0] == x_lig_subs.shape[0]:
+                sub_node_type_embs = sub_node_type_raw.float()
+            else:
+                sub_node_type_embs = self.embedding(sub_node_type_raw.reshape(-1).long())
             all_emb_ligs = self.lin_node_lig(self.layer_norm_lig(torch.cat([sub_node_type_embs, x_lig_subs], dim=1).float()))
         else:
             all_emb_ligs = torch.cat(x_list_lig_sub, dim=0)

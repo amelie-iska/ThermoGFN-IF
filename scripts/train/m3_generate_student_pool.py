@@ -25,6 +25,7 @@ def main() -> int:
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--round-id", type=int, required=True)
     parser.add_argument("--pool-size", type=int, default=50000)
+    parser.add_argument("--metrics-path", default=None)
     parser.add_argument("--split", default="train")
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--log-level", default="INFO")
@@ -35,7 +36,8 @@ def main() -> int:
     root = _repo_root()
     sys.path.insert(0, str(root))
 
-    from train.thermogfn.io_utils import read_records, write_records
+    from train.thermogfn.io_utils import read_records, write_json, write_records
+    from train.thermogfn.metrics_utils import summarize_candidate_records
     from train.thermogfn.progress import configure_logging, iter_progress
     from train.thermogfn.method3_core import load_state, generate_student_candidates
     from train.thermogfn.schemas import validate_records, ensure_unique_ids
@@ -75,6 +77,8 @@ def main() -> int:
         return 3
 
     write_records(root / args.output_path, pool)
+    if args.metrics_path:
+        write_json(root / args.metrics_path, summarize_candidate_records(pool))
     logger.info("Student pool complete: wrote=%d elapsed=%.2fs", len(pool), time.perf_counter() - t0)
     print(root / args.output_path)
     return 0

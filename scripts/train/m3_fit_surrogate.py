@@ -24,6 +24,7 @@ def main() -> int:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--round-id", type=int, required=True)
     parser.add_argument("--ensemble-size", type=int, default=8)
+    parser.add_argument("--history-path", default=None)
     parser.add_argument("--max-checkpoints", type=int, default=5)
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--log-level", default="INFO")
@@ -35,6 +36,7 @@ def main() -> int:
     sys.path.insert(0, str(root))
 
     from train.thermogfn.io_utils import read_records
+    from train.thermogfn.io_utils import write_json, write_jsonl
     from train.thermogfn.progress import configure_logging
     from train.thermogfn.method3_core import fit_surrogate_ensemble, save_state
     from train.thermogfn.checkpoint_utils import prune_round_checkpoints
@@ -42,12 +44,19 @@ def main() -> int:
     logger = configure_logging("train.m3_fit_surrogate", level=args.log_level)
     records = read_records(root / args.input_dr)
     logger.info("Fitting surrogate: n_records=%d ensemble_size=%d", len(records), args.ensemble_size)
+    history_rows: list[dict] = []
+
+    def _on_metric(row: dict) -> None:
+        payload = {"round_id": args.round_id, **row}
+        history_rows.append(payload)
+
     surrogate = fit_surrogate_ensemble(
         records,
         ensemble_size=args.ensemble_size,
         seed=args.seed + args.round_id,
         show_progress=not args.no_progress,
         progress_desc="surrogate:models",
+        metrics_callback=_on_metric,
     )
 
     outdir = root / args.output_dir
@@ -62,7 +71,11 @@ def main() -> int:
         "ensemble_size": args.ensemble_size,
         "n_models": len(surrogate.get("models", [])),
     }
-    (outdir / "surrogate_metrics.json").write_text(json.dumps(metrics, indent=2, sort_keys=True))
+    write_json(outdir / "surrogate_metrics.json", metrics)
+    if args.history_path:
+        write_jsonl(root / args.history_path, history_rows)
+    else:
+        write_json(outdir / "surrogate_history.json", history_rows)
     logger.info("Surrogate checkpoint written: %s elapsed=%.2fs", ckpt, time.perf_counter() - t0)
     print(ckpt)
     return 0

@@ -5,6 +5,7 @@ import os
 import argparse
 import pandas as pd
 import torch
+import torch.nn as nn
 from model_enz import bottle_view_graph
 from dataset_graphkcat_chai1 import GraphDataset, PLIDataLoader
 import numpy as np
@@ -109,31 +110,68 @@ def compute_km_loss_and_pcc(pred_km, y_km):
             # np.save("valid_pred_kcat.npy", valid_pred_km.detach().cpu().numpy())
             # np.save("valid_y_kcat.npy", valid_y_km.detach().cpu().numpy())
     return loss_km, pcc_km, pred_km
-def val(model, dataloader, device):
-    model.eval()
-
+def _predict_once(model, dataloader, device):
     pred_kcat_list = []
     pred_km_list = []
     for data in dataloader:
-        
         with torch.no_grad():
-            data = [data[i].to(device) for i in range(len(data))]
-
+            # GraphKcat mutates node features in-place during the forward pass.
+            # Clone each graph so repeated inference passes (for MC-dropout or
+            # multiple epochs over the same dataset) do not corrupt the cached
+            # raw input features stored in the dataset.
+            data = [data[i].clone().to(device) for i in range(len(data))]
             pred_kcat, pred_km,_,_,_,_,_,_,_,_,_,_ = model(data)
-            
-
             pred_kcat_list.append(pred_kcat.detach().cpu().numpy())
             pred_km_list.append(pred_km.detach().cpu().numpy())
-            
-            
-    # pred = np.concatenate(pred_list, axis=0)
-    # label = np.concatenate(label_list, axis=0)
+
     pred_kcat = np.concatenate(pred_kcat_list, axis=0)
     pred_km = np.concatenate(pred_km_list, axis=0)
     log_pred_kcat = pred_kcat
-    log_pred_km = pred_km 
-    log_pred_kcat_km = log_pred_kcat - log_pred_km 
+    log_pred_km = pred_km
+    log_pred_kcat_km = log_pred_kcat - log_pred_km
     return log_pred_kcat, log_pred_km, log_pred_kcat_km
+
+
+def _enable_mc_dropout(model):
+    model.eval()
+    for module in model.modules():
+        if isinstance(module, nn.Dropout):
+            module.train()
+
+
+def val(model, dataloader, device, mc_dropout_samples=1, mc_dropout_seed=13):
+    mc_samples = max(1, int(mc_dropout_samples))
+    if mc_samples == 1:
+        model.eval()
+        log_pred_kcat, log_pred_km, log_pred_kcat_km = _predict_once(model, dataloader, device)
+        zeros = np.zeros_like(log_pred_kcat, dtype=np.float32)
+        return log_pred_kcat, zeros, log_pred_km, zeros, log_pred_kcat_km, zeros
+
+    pred_kcat_samples = []
+    pred_km_samples = []
+    pred_kcat_km_samples = []
+    for sample_idx in range(mc_samples):
+        sample_seed = int(mc_dropout_seed) + sample_idx
+        torch.manual_seed(sample_seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(sample_seed)
+        _enable_mc_dropout(model)
+        log_pred_kcat, log_pred_km, log_pred_kcat_km = _predict_once(model, dataloader, device)
+        pred_kcat_samples.append(log_pred_kcat)
+        pred_km_samples.append(log_pred_km)
+        pred_kcat_km_samples.append(log_pred_kcat_km)
+
+    kcat_stack = np.stack(pred_kcat_samples, axis=0)
+    km_stack = np.stack(pred_km_samples, axis=0)
+    kcat_km_stack = np.stack(pred_kcat_km_samples, axis=0)
+    return (
+        np.mean(kcat_stack, axis=0),
+        np.std(kcat_stack, axis=0, ddof=1 if mc_samples > 1 else 0),
+        np.mean(km_stack, axis=0),
+        np.std(km_stack, axis=0, ddof=1 if mc_samples > 1 else 0),
+        np.mean(kcat_km_stack, axis=0),
+        np.std(kcat_km_stack, axis=0, ddof=1 if mc_samples > 1 else 0),
+    )
 
 
 def get_ca_coords_and_sequence(pdb_file, chain_id):
@@ -186,6 +224,8 @@ def parse_args():
     parser.add_argument('--cfg', type=str, default='TrainConfig_kcat_enz', help='Configuration file name')
     parser.add_argument('--organism_set_path', type=str, default='./sub_utils/all_organism_set.npy', help='Path to the organism set file')
     parser.add_argument('--temp_set_path', type=str, default='./sub_utils/temp_set.npy', help='Path to the temporary set file')
+    parser.add_argument('--mc_dropout_samples', type=int, default=8, help='Number of MC-dropout samples for predictive uncertainty')
+    parser.add_argument('--mc_dropout_seed', type=int, default=13, help='Base seed for MC-dropout inference')
     return parser.parse_args()
 
 def main():
@@ -223,6 +263,17 @@ def main():
     temp_set = args.temp_set_path
     preprocessing(test_df, clf, model_esm, alphabet, batch_converter, cutoff=8)
     test2016_set = GraphDataset(test_df, organism_set, temp_set, dis_threshold=8)
+    test_df = test2016_set.data_df.reset_index(drop=True)
+    if len(test2016_set) == 0:
+        test_df["pred_log_kcat_graphkcat"] = []
+        test_df["pred_log_kcat_graphkcat_std"] = []
+        test_df["pred_log_km_graphkcat"] = []
+        test_df["pred_log_km_graphkcat_std"] = []
+        test_df["pred_log_kcat_km_graphkcat"] = []
+        test_df["pred_log_kcat_km_graphkcat_std"] = []
+        test_df.to_csv(output_dir / "inference_results.csv", index=False)
+        print(f"Results saved to {output_dir / 'inference_results.csv'}")
+        return
     test2016_loader = PLIDataLoader(test2016_set, batch_size=batch_size, shuffle=False, num_workers=0)
     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
     model = bottle_view_graph(node_dim=35,
@@ -240,10 +291,26 @@ def main():
     load_model_dict(model, args.cpkt_path)
     model = model.to(device)
     os.makedirs(output_dir, exist_ok=True)
-    log_pred_kcat, log_pred_km, log_pred_kcat_km = val(model, test2016_loader, device)
+    (
+        log_pred_kcat,
+        std_pred_kcat,
+        log_pred_km,
+        std_pred_km,
+        log_pred_kcat_km,
+        std_pred_kcat_km,
+    ) = val(
+        model,
+        test2016_loader,
+        device,
+        mc_dropout_samples=args.mc_dropout_samples,
+        mc_dropout_seed=args.mc_dropout_seed,
+    )
     test_df["pred_log_kcat_graphkcat"] = log_pred_kcat
+    test_df["pred_log_kcat_graphkcat_std"] = std_pred_kcat
     test_df["pred_log_km_graphkcat"] = log_pred_km
+    test_df["pred_log_km_graphkcat_std"] = std_pred_km
     test_df["pred_log_kcat_km_graphkcat"] = log_pred_kcat_km
+    test_df["pred_log_kcat_km_graphkcat_std"] = std_pred_kcat_km
     test_df.to_csv(output_dir / "inference_results.csv", index=False)
     print(f"Results saved to {output_dir / 'inference_results.csv'}")
 

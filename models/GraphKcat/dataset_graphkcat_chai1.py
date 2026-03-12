@@ -159,6 +159,10 @@ def inter_graph_cg(pos_sub_graph, pos_protein, dis_threshold=8.0):
     node_idx_lp = np.where(dis_matrix_lp < dis_threshold)
     src = node_idx_lp[0]  # Ligand node indices (source)
     dst = node_idx_lp[1]  # Protein node indices (target)
+    if len(src) == 0:
+        nearest = np.unravel_index(np.argmin(dis_matrix_lp), dis_matrix_lp.shape)
+        src = np.asarray([nearest[0]], dtype=np.int64)
+        dst = np.asarray([nearest[1]], dtype=np.int64)
 
     # Generate edge index
     edge_index_inter = torch.tensor([src, dst+pos_sub_graph.shape[0]], dtype=torch.long) # the index of protein nodes should be added by the number of ligand nodes
@@ -221,6 +225,8 @@ def one_hot_seq(seq):
     return one_hot
 
 def get_pro_node_batch(rdkit_mol, res_list_coords):
+    if rdkit_mol is None:
+        raise ValueError("pocket rdkit mol is None")
     pos_mol = rdkit_mol.GetConformer().GetPositions()
     node_batch = []
     # for i in range(len(pos_mol)):
@@ -235,6 +241,29 @@ def get_pro_node_batch(rdkit_mol, res_list_coords):
     assert len(node_batch) == len(pos_mol)
 
     return node_batch
+
+
+def _load_pdb_mol_robust(pdb_path):
+    mol = Chem.MolFromPDBFile(pdb_path, sanitize=True, removeHs=True)
+    if mol is not None:
+        return mol
+    mol = Chem.MolFromPDBFile(
+        pdb_path,
+        sanitize=False,
+        removeHs=True,
+        proximityBonding=False,
+    )
+    if mol is not None:
+        return mol
+    mol = Chem.MolFromPDBFile(
+        pdb_path,
+        sanitize=False,
+        removeHs=True,
+        proximityBonding=True,
+    )
+    if mol is not None:
+        return mol
+    raise ValueError(f"failed to parse PDB with RDKit: {pdb_path}")
             
 
 def get_protein_graph(protein, pocket, saprot_feature=None, topk=16):
@@ -505,73 +534,87 @@ def get_sub_graph_dict(vocab_txt):
 
 def get_subgraph_mol(mol):
     tokenizer = Tokenizer('./sub_utils/zinc_350.txt')
-    # print(mol.GetNumAtoms())
-    # smi = Chem.MolToSmiles(mol)
-
-    # print(smi)
-    total_mol = mol
     sub_mols = tokenizer.tokenize(mol)
-    # print(sub_mols.get_node(0).smiles)
-    # smiles = sub_mols.get_node(0).smiles
-    # print(vocab_dict[smiles])
-    len_sub_mols = len(sub_mols)
-    # print(len_sub_mols)
-    all_atom_pos = mol.GetConformer().GetPositions()
-    # print(sub_mols)
-    sub_mols_directed = sub_mols.to_directed()
-    edges = sub_mols_directed.edges
-    # print(edges)
-    if len(edges) == 0:
-        # self loop
-        edges = [(0, 0)]        
-    edge_index = torch.tensor(list(edges)).T
-    # edge_features = bond_features_sub_graph(sub_mols, edges)
-    
-    subgraphs, subgraph_pos_mean, all_atom_index, node_class,subgraph_pos = [], [], [], [], []
-    for i in range(len(sub_mols)):
-        node = sub_mols.get_node(i)
-        mol = node.mol
-        # print(mol.smiles)
-        sub_type = vocab_dict[node.smiles]
-        # print(sub_type)
-        SanitizeMol(mol, SanitizeFlags.SANITIZE_SETAROMATICITY)  # 保证分子的完整性
-        subgraphs.append(mol2graph(mol))
-        
-        # single_atom.append(1)
-        node_poses_index = sub_mols.get_node(i).atom_mapping
-        node_poses =[all_atom_pos[i] for i in node_poses_index.keys()] #  atom map: {7: 4, 13: 6, 8: 5, 6: 3, 5: 2, 4: 1, 3: 0}
-        # reverse node_poses_list as the order of atom in mol is reversed
-        node_poses = [node_poses[i] for i in range(len(node_poses)-1, -1, -1)]
-        
 
-    
-        node_pos = np.mean(node_poses, axis=0)
-        subgraph_pos_mean.append(torch.FloatTensor(node_pos))
-        all_atom_index.append(node_poses_index)
-        subgraph_pos.append(torch.FloatTensor(node_poses))
-        node_class.append(sub_type)
+    def _process_tokenized(tokenized_mol, atom_positions, atom_offset=0, node_offset=0):
+        directed = tokenized_mol.to_directed()
+        edges = list(directed.edges)
+        if len(edges) == 0:
+            edges = [(0, 0)]
+
+        subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos = [], [], [], [], []
+        remapped_edges = [(u + node_offset, v + node_offset) for u, v in edges]
+        for i in range(len(tokenized_mol)):
+            node = tokenized_mol.get_node(i)
+            node_mol = node.mol
+            sub_type = vocab_dict[node.smiles]
+            SanitizeMol(node_mol, SanitizeFlags.SANITIZE_SETAROMATICITY)
+            subgraphs.append(mol2graph(node_mol))
+
+            node_poses_index = tokenized_mol.get_node(i).atom_mapping
+            node_poses = [atom_positions[idx] for idx in node_poses_index.keys()]
+            node_poses = [node_poses[j] for j in range(len(node_poses) - 1, -1, -1)]
+
+            node_pos = np.mean(node_poses, axis=0)
+            subgraph_pos_mean.append(torch.FloatTensor(node_pos))
+            all_atom_index.append({int(atom_offset + key): val for key, val in node_poses_index.items()})
+            subgraph_pos.append(torch.FloatTensor(node_poses))
+            node_class.append(sub_type)
+        return subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, remapped_edges
+
+    if isinstance(sub_mols, list):
+        fragment_mols = Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=False)
+        combined_subgraphs, combined_subgraph_pos_mean = [], []
+        combined_all_atom_index, combined_node_class, combined_subgraph_pos = [], [], []
+        combined_edges = []
+        atom_offset = 0
+        node_offset = 0
+        for frag_mol in fragment_mols:
+            frag_tokenized = tokenizer.tokenize(frag_mol)
+            frag_positions = frag_mol.GetConformer().GetPositions()
+            subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
+                frag_tokenized, frag_positions, atom_offset=atom_offset, node_offset=node_offset
+            )
+            combined_subgraphs.extend(subgraphs)
+            combined_subgraph_pos_mean.extend(subgraph_pos_mean)
+            combined_all_atom_index.extend(all_atom_index)
+            combined_node_class.extend(node_class)
+            combined_subgraph_pos.extend(subgraph_pos)
+            combined_edges.extend(edges)
+            atom_offset += frag_mol.GetNumAtoms()
+            node_offset += len(frag_tokenized)
+
+        pos = torch.stack(combined_subgraph_pos_mean)
+        node_class = torch.tensor(combined_node_class)
+        edge_index = torch.tensor(list(combined_edges)).T
+        edge_features = bond_features_sub_graph(combined_edges, pos)
+
+        all_atom_pos = mol.GetConformer().GetPositions()
+        node_batch = []
+        for i in range(len(all_atom_pos)):
+            for j, k in enumerate(combined_all_atom_index):
+                if i in k.keys():
+                    node_batch.append(j)
+
+        assert len(combined_subgraphs) == len(node_class) == len(pos)
+        return combined_subgraphs, pos, node_batch, node_class, edge_features, edge_index, combined_subgraph_pos
+
+    all_atom_pos = mol.GetConformer().GetPositions()
+    subgraphs, subgraph_pos_mean, all_atom_index, node_class, subgraph_pos, edges = _process_tokenized(
+        sub_mols, all_atom_pos
+    )
     pos = torch.stack(subgraph_pos_mean)
     node_class = torch.tensor(node_class)
-    # print(len(subgraphs))
-    # print(len(node_class))
-    # single_atom = torch.tensor(single_atom)
+    edge_index = torch.tensor(list(edges)).T
     edge_features = bond_features_sub_graph(edges, pos)
-    # print(pos.shape)
-    # print(edge_features.shape)
-    # print(edge_index.shape)
 
-    node_batch = [] # 
+    node_batch = []
     for i in range(len(all_atom_pos)):
-        # i: 1,2,3,4,5,6,7,8,9,10
         for j, k in enumerate(all_atom_index):
             if i in k.keys():
-                node_batch.append(j)  # get the index of the subgraph
-    # print(node_batch)
-                
-                
+                node_batch.append(j)
 
     assert len(subgraphs) == len(node_class) == len(pos)
-
     return subgraphs, pos, node_batch, node_class, edge_features, edge_index, subgraph_pos
 
 def get_CA_coord(res):
@@ -671,6 +714,10 @@ def mols2graphs(complex_path, pdbid, organism_set, temp_set, \
                         f'{pdbid}_ligand.sdf'
                         )
     ligand = Chem.MolFromMolFile(ligand_path, sanitize=True, removeHs=True)
+    if ligand is None:
+        ligand = Chem.MolFromMolFile(ligand_path, sanitize=False, removeHs=True)
+    if ligand is None:
+        raise ValueError(f"failed to parse ligand SDF: {ligand_path}")
     if any([atom.GetSymbol() == 'Si' for atom in ligand.GetAtoms()]):
         print(f"Silicon found in {pdbid}, skipping...")
         return
@@ -703,7 +750,7 @@ def mols2graphs(complex_path, pdbid, organism_set, temp_set, \
         res2pdb(res_list, pdbid, res_list_pdb_dir)
 
     pocket = res_list_pdb_dir
-    pocket_mol = Chem.MolFromPDBFile(pocket, sanitize=True, removeHs=True)
+    pocket_mol = _load_pdb_mol_robust(pocket)
     # print(pocket_mol.GetNumAtoms())
     subgraphs_node, pos_sub_graph, node_batch_lig, node_class, edge_features_l, edge_index_l,subgraphs_node_pos = get_subgraph_mol(ligand)
 
@@ -776,6 +823,7 @@ class GraphDataset(Dataset):
         # dis_thresholds = repeat(self.dis_threshold, len(data_df))
         # dis_thresholds = list(dis_thresholds)
         graph_data_list = []
+        valid_rows = []
         # complex_id_list = []
         for i, row in data_df.iterrows():
             cid, organism, ph, temp = row['id'], str(row['Organism']), row['pH'], row['Temp']
@@ -786,15 +834,21 @@ class GraphDataset(Dataset):
                 complex_dir = os.path.dirname(row['complex'])
             else:
                 complex_dir = os.path.dirname(row['ligand'])
-            data = mols2graphs(complex_dir, cid, organism_set, temp_set, \
-                             organism, ph, temp, dis_threshold=dis_threshold)
+            try:
+                data = mols2graphs(complex_dir, cid, organism_set, temp_set, \
+                                 organism, ph, temp, dis_threshold=dis_threshold)
+            except Exception as exc:
+                print(f"Error: {cid} preprocessing failed, skipping... {exc}")
+                continue
             if data is None:
                 print(f"Error: {cid} has no data, skipping...")
                 continue
             graph_data_list.append(data)
+            valid_rows.append(row)
 
 
         self.graph_data_list = graph_data_list
+        self.data_df = pd.DataFrame(valid_rows).reset_index(drop=True)
 
         # self.complex_ids = complex_id_list
 
@@ -810,7 +864,7 @@ class GraphDataset(Dataset):
         return data_list
 
     def __len__(self):
-        return len(self.data_df)
+        return len(self.graph_data_list)
 
 
 if __name__ == '__main__':

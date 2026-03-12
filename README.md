@@ -2,20 +2,42 @@
 
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if) [![bioRxiv](https://img.shields.io/badge/bioRxiv-Preprint-007a33.svg)](https://www.biorxiv.org/) [![Paper](https://img.shields.io/badge/PDF-Download%20Paper-blue)](./assets/paper/main.pdf)
 
-ThermoGFN-IF implementation scaffold for multi-fidelity protein design with Method III-first training. 
+ThermoGFN-IF implementation scaffold for multi-fidelity protein design with Method III-first training.
+
+Important implementation note:
+
+- the edit-trajectory GFlowNet formulation in the paper is the target methodology,
+- the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment.
+
+The default catalytic path is nevertheless fully real in its oracle stack: packed-structure GraphKcat scoring with MC-dropout uncertainty, whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates.
 
 ## Required conda environments
 
+Default catalytic RL path (`UMA-cat + GraphKcat`):
+
 - `ligandmpnn_env`
+- `mora-uma`
+- `apodock`
+
+Legacy / non-default stability-binding pipeline:
+
 - `spurs`
 - `bioemu`
 - `uma-qc`
 
-Optional (legacy generator backend):
+Optional legacy generator backend:
 
 - `ADFLIP`
 
-Check readiness:
+Minimal readiness checks for the default catalytic path:
+
+```bash
+conda run -n ligandmpnn_env python -c "import torch; print(torch.cuda.is_available())"
+conda run -n mora-uma python -c "import fairchem"
+conda run -n apodock python -c "import torch; print(torch.cuda.is_available())"
+```
+
+Full production-path readiness checks for the older stability/binding pipeline:
 
 ```bash
 ./scripts/env/check_envs.sh runs/env_status.json
@@ -23,7 +45,7 @@ Check readiness:
 RUN_HEALTH_CHECKS=1 ./scripts/env/check_envs.sh runs/env_status_health.json
 ```
 
-Prefetch production oracle assets into a writable local cache before training:
+Prefetch production oracle assets into a writable local cache before running the older stability/binding path:
 
 ```bash
 ./scripts/env/prefetch_production_oracles.sh
@@ -53,11 +75,12 @@ Future splits can be plugged in when generated under `rfd3-data/rfd3_splits/` or
 
 ## Configuration (single source of truth)
 
-Primary runtime config:
+Primary runtime configs:
 
-- `config/m3_default.yaml`
+- `config/m3_default.yaml` for the older stability/binding Method III path
+- `config/uma_cat_m3_default.yaml` for the default catalytic Method III path
 
-This now includes:
+`config/m3_default.yaml` includes:
 
 - generator backend and LigandMPNN generation controls (`batch_size`, `number_of_batches`, `temperature`, atom-context flags),
 - Method III round controls (`pool_size`, `bioemu_budget`, `uma_budget`, checkpoint retention),
@@ -65,6 +88,17 @@ This now includes:
 - oracle settings (`spurs repo/chain`, `bioemu model+num_samples`, `uma model+workers+replicates`),
 - BioEmu VRAM-aware batching (`oracles.bioemu.batch_size_100`, `oracles.bioemu.auto_batch_from_vram`, `oracles.bioemu.target_vram_frac`, min/max bounds),
 - periodic test sizing and final inference selection (`periodic_eval.num_candidates`, `inference.final.num_candidates`, `inference.final.top_k`).
+
+`config/uma_cat_m3_default.yaml` is the default self-contained catalytic RL config and includes:
+
+- generator backend and LigandMPNN packing controls,
+- UMA catalytic broad-screen controls,
+- forward / reverse sMD controls,
+- optional PMF controls,
+- GraphKcat refinement controls,
+- catalytic fusion weights,
+- Method III round budgets for `uma_cat_budget` and `graphkcat_budget`,
+- W&B defaults under `logging.wandb` for round-level and experiment-level telemetry.
 
 All updated orchestration scripts accept `--config` and allow CLI overrides.
 
@@ -156,9 +190,471 @@ scripts/orchestration/run_full_production_pipeline.sh \
   --uma-budget 64
 ```
 
-## Kcat-only disjoint stage (KcatNet + GraphKcat)
+## Default catalytic RL path: whole-enzyme UMA + sMD/PMF + GraphKcat
 
-Kcat mode is wired as a separate Method III loop and does not call SPURS/BioEmu/UMA.
+This is now the primary catalytic Method III path in the repo. It is self-contained and does not depend on the sibling `enzyme-quiver` repository at runtime.
+
+Core idea:
+
+- build catalytic candidates from RF3 reactant-bound and product-bound outputs,
+- repack the full student pool with LigandMPNN so GraphKcat sees mutant-specific structures rather than seed structures,
+- run GraphKcat first across that packed mutant pool,
+- keep the top GraphKcat tranche as a catalytic prefilter,
+- run a broad whole-enzyme UMA equilibrium screen from the reactant-bound basin,
+- optionally run forward and reverse steered UMA dynamics between reactant-bound and product-bound states,
+- optionally reconstruct a path umbrella PMF from the sMD-derived path,
+- use GraphKcat MC-dropout as the first-pass structural catalytic oracle,
+- fuse UMA-cat and GraphKcat into the Method III reward.
+
+The implemented catalytic scalar is a transition-state-style log-rate proxy:
+
+```text
+log10 k_proxy = log10(k_B T / h) - (Delta G_gate + Delta G_barrier) / (RT ln 10)
+```
+
+where:
+
+- `Delta G_gate` comes from productive-pose / gNAC occupancy in the broad whole-enzyme UMA screen,
+- `Delta G_barrier` comes from the PMF if enabled, otherwise from the sMD Jarzynski-style barrier estimate.
+
+The default catalytic uncertainty propagated into reward fusion is also physically structured:
+
+```text
+sigma(log10 k_proxy) = sqrt(sigma(Delta G_gate)^2 + sigma(Delta G_barrier)^2) / (RT ln 10)
+```
+
+where:
+
+- `sigma(Delta G_gate)` comes from productive-pose occupancy uncertainty,
+- `sigma(Delta G_barrier)` comes from PMF barrier uncertainty when PMF is enabled,
+- otherwise `sigma(Delta G_barrier)` comes from the sMD barrier uncertainty plus a forward/reverse hysteresis term.
+
+The default config is:
+
+- `config/uma_cat_m3_default.yaml`
+
+Default active oracle env bindings:
+
+```yaml
+oracles:
+  envs:
+    packer: ligandmpnn_env
+    uma_cat: mora-uma
+    graphkcat: apodock
+```
+
+Default catalytic routing in that config:
+
+- `generator.backend = ligandmpnn`
+- `round.graphkcat_prefilter_fraction = 0.5`
+- `round.graphkcat_prefilter_risk_kappa = 0.5`
+- `oracles.uma_cat.smd.enabled = true`
+- `oracles.uma_cat.smd.reverse = true`
+- `oracles.uma_cat.pmf.enabled = false`
+- GraphKcat enabled
+- SPURS, BioEmu, KcatNet, MMKcat, and thermostability UMA are not part of this default RL loop
+
+That means the default round order is:
+
+1. student proposes the pool
+2. LigandMPNN packs the full pool onto the endpoint complexes
+3. GraphKcat scores the packed mutant pool with MC-dropout
+3. top `50%` by risk-adjusted `graphkcat_log_kcat` survive the prefilter
+4. UMA-cat acquisition selects the expensive subset from within that screened set
+5. UMA-cat runs broad dynamics plus optional sMD / PMF
+6. fused reward is computed from UMA-cat and GraphKcat
+
+The implemented GraphKcat prefilter statistic is the risk-adjusted score
+
+```text
+graphkcat_prefilter_score = graphkcat_log_kcat - kappa * graphkcat_std
+```
+
+with `graphkcat_std` coming from MC-dropout by default.
+
+Important environment note:
+
+- `apodock` needs `huggingface_hub` available so Uni-Mol can fetch its weights on first use.
+
+### Tested RF3-to-catalytic dataset build
+
+This bridge uses prepared RF3 inputs plus the finished reactant/product RF3 outputs:
+
+```bash
+conda run -n mora-uma python scripts/rf3/build_uma_cat_dataset.py \
+  --prepared-input-root runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7 \
+  --reactant-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant \
+  --product-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/product \
+  --output-path runs/tmp/uma_cat_smoke_dataset.jsonl \
+  --run-id uma_cat_smoke \
+  --split train \
+  --round-id 0 \
+  --limit 2
+```
+
+Each row carries:
+
+- `sequence`
+- `substrate_smiles`
+- `product_smiles`
+- `reactant_complex_path`
+- `product_complex_path`
+- `protein_chain_id`
+- `ligand_chain_id`
+- `pocket_positions`
+
+### Pack reactant and product endpoints with LigandMPNN
+
+```bash
+head -n 1 runs/tmp/uma_cat_smoke_dataset.jsonl > runs/tmp/uma_cat_smoke_dataset_1.jsonl
+
+conda run -n ligandmpnn_env python scripts/prep/oracles/ligandmpnn_pack_candidates.py \
+  --candidate-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
+  --output-path runs/tmp/uma_cat_smoke_packed.jsonl \
+  --output-root runs/tmp/uma_cat_smoke_packed_structures \
+  --ligandmpnn-root models/LigandMPNN \
+  --checkpoint-sc models/LigandMPNN/model_params/ligandmpnn_sc_v_32_002_16.pt \
+  --device cuda:0 \
+  --pack-with-ligand-context 1 \
+  --repack-everything 1 \
+  --sc-num-denoising-steps 1 \
+  --sc-num-samples 1
+```
+
+This writes:
+
+- `reactant_complex_packed_path`
+- `reactant_protein_packed_path`
+- `product_complex_packed_path`
+- `product_protein_packed_path`
+
+### Run whole-enzyme UMA catalytic scoring
+
+Broad screen + forward/reverse sMD + PMF smoke command:
+
+```bash
+conda run -n mora-uma python scripts/prep/oracles/uma_catalytic_score.py \
+  --candidate-path runs/tmp/uma_cat_smoke_packed.jsonl \
+  --output-path runs/tmp/uma_cat_smoke_scored.jsonl \
+  --artifact-root runs/tmp/uma_cat_smoke_artifacts \
+  --model-name uma-s-1p1 \
+  --device cuda:0 \
+  --calculator-workers 1 \
+  --temperature-k 300 \
+  --broad-steps 5 \
+  --broad-replicas 1 \
+  --broad-save-every 5 \
+  --run-smd 1 \
+  --run-reverse-smd 1 \
+  --smd-images 3 \
+  --smd-steps-per-image 1 \
+  --smd-replicas 1 \
+  --run-pmf 1 \
+  --pmf-windows 3 \
+  --pmf-steps-per-window 2 \
+  --pmf-save-every 1 \
+  --pmf-replicas 1
+```
+
+What this stage computes:
+
+- broad productive-pose occupancy `uma_cat_p_gnac`
+- gating free energy `uma_cat_delta_g_gate_kcal_mol`
+- forward and reverse work statistics
+- sMD barrier `uma_cat_delta_g_smd_barrier_kcal_mol`
+- optional PMF barrier `uma_cat_delta_g_pmf_barrier_kcal_mol`
+- forward/reverse mismatch `uma_cat_forward_reverse_gap_kcal_mol`
+- near-TS candidate count `uma_cat_near_ts_count`
+- final catalytic scalar `uma_cat_log10_rate_proxy`
+
+Per-candidate artifacts are written under `--artifact-root`, including:
+
+- `summary.json`
+- `broad_rows.jsonl`
+- `broad_replicates.json`
+- `smd_work_profile.jsonl`
+- `smd_summary.json`
+- `smd_reverse_summary.json`
+- `smd_near_ts.json`
+- `pmf_summary.json`
+
+### Run GraphKcat on the same packed candidates
+
+```bash
+conda run -n apodock python scripts/prep/oracles/graphkcat_score.py \
+  --candidate-path runs/tmp/uma_cat_smoke_packed.jsonl \
+  --output-path runs/tmp/uma_cat_smoke_graph.jsonl \
+  --model-root models/GraphKcat \
+  --checkpoint models/GraphKcat/checkpoint/paper.pt \
+  --cfg TrainConfig_kcat_enz \
+  --batch-size 1 \
+  --device cuda:0 \
+  --distance-cutoff-a 8.0 \
+  --std-default 0.25 \
+  --mc-dropout-samples 8 \
+  --mc-dropout-seed 13 \
+  --work-dir runs/tmp/uma_cat_smoke_graph_work
+```
+
+By default this wrapper now:
+
+- materializes the **packed mutant protein structure** for GraphKcat scoring,
+- runs MC-dropout predictive inference,
+- writes:
+  - `graphkcat_log_kcat`
+  - `graphkcat_log_km`
+  - `graphkcat_log_kcat_km`
+  - `graphkcat_std`
+  - `graphkcat_log_km_std`
+  - `graphkcat_log_kcat_km_std`
+
+Compatibility fallback note:
+
+- if MC-dropout is explicitly disabled or the model does not emit uncertainty columns, the wrapper can still fall back to `--std-default`,
+- but that fallback is **not** the default methodology and is not used in the default catalytic config.
+
+### Fuse UMA-cat and GraphKcat into the RL reward
+
+```bash
+python scripts/prep/oracles/fuse_catalytic_scores.py \
+  --candidate-path runs/tmp/uma_cat_smoke_scored.jsonl \
+  --graphkcat-path runs/tmp/uma_cat_smoke_graph.jsonl \
+  --output-path runs/tmp/uma_cat_smoke_fused.jsonl
+```
+
+The fused rows include:
+
+- `rho_UCAT`
+- `rho_G`
+- `z_UCAT`
+- `z_GK`
+- `z_agree`
+- `score`
+- `reward`
+
+### Run a full UMA-cat Method III round
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_demo \
+  --round-id 0 \
+  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
+  --output-dir runs/uma_cat_demo/round_000 \
+  --pool-size 50000 \
+  --uma-cat-budget 256 \
+  --graphkcat-prefilter-fraction 0.5
+```
+
+Dry-run version:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_smoke_round \
+  --round-id 0 \
+  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
+  --output-dir runs/tmp/uma_cat_round_dry \
+  --pool-size 4 \
+  --uma-cat-budget 1 \
+  --graphkcat-prefilter-fraction 0.5 \
+  --teacher-steps 1 \
+  --student-steps 1 \
+  --dry-run \
+  --no-progress
+```
+
+### Run a multi-round UMA-cat Method III experiment
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_experiment.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_demo \
+  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
+  --output-root runs/uma_cat_demo \
+  --num-rounds 8
+```
+
+Dry-run version:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_experiment.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_smoke_exp \
+  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
+  --output-root runs/tmp/uma_cat_experiment_dry \
+  --num-rounds 1 \
+  --pool-size 4 \
+  --uma-cat-budget 1 \
+  --graphkcat-budget 1 \
+  --teacher-steps 1 \
+  --student-steps 1 \
+  --dry-run \
+  --no-progress
+```
+
+### W\&B, progress bars, and structured logs
+
+The default catalytic Method III config enables W\&B in `auto` mode:
+
+```yaml
+logging:
+  wandb:
+    enabled: true
+    mode: auto
+```
+
+That means the same command will sync online when credentials are available and fall back to a local offline run under `./wandb/` otherwise.
+
+To switch to live W\&B logging, export your credentials and override the mode:
+
+```bash
+export WANDB_API_KEY=...
+
+python scripts/orchestration/uma_cat_m3_run_experiment.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_demo_online \
+  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
+  --output-root runs/uma_cat_demo_online \
+  --num-rounds 2 \
+  --wandb-mode online \
+  --wandb-project thermogfn \
+  --wandb-group uma_cat_demo
+```
+
+The current implementation logs all of the following into W\&B and to structured files on disk:
+
+- surrogate bootstrap metrics: bootstrap index, bootstrap size, target mean/std, coefficient norm;
+- trajectory-balance teacher metrics: `loss`, `off_loss`, `on_loss`, `reg_loss`, `delta_abs`, `lr`, `grad_norm_pre_clip`, `grad_norm_post_clip`, `mean_stop_prob`, `mean_log_z`;
+- student-distillation metrics: sampled-fraction, sampled mutation-count mean, mutation-count entropy, distinct sampled `K`, distinct seed families;
+- generated-pool summary metrics: pool size, mutation-order summary, sequence uniqueness;
+- GraphKcat pool and selected-set summaries, including success fraction and mean predicted `log_kcat`;
+- UMA-cat summary metrics, including success fraction and mean catalytic `log10_rate_proxy`;
+- round-level summaries, teacher-student evaluation summaries, append summaries, and gate reports.
+
+For a catalytic round, the main metric files are:
+
+- `runs/<run_id>/round_<id>/metrics/surrogate_history_round_<id>.jsonl`
+- `runs/<run_id>/round_<id>/metrics/teacher_history_round_<id>.jsonl`
+- `runs/<run_id>/round_<id>/metrics/student_history_round_<id>.jsonl`
+- `runs/<run_id>/round_<id>/metrics/student_pool_metrics_round_<id>.json`
+- `runs/<run_id>/round_<id>/metrics/graphkcat_pool_summary_round_<id>.json`
+- `runs/<run_id>/round_<id>/metrics/graphkcat_selected_summary_round_<id>.json`
+- `runs/<run_id>/round_<id>/metrics/uma_cat_summary_round_<id>.json`
+- `runs/<run_id>/round_<id>/metrics/round_metrics.json`
+- `runs/<run_id>/round_<id>/metrics/teacher_student_eval.json`
+- `runs/<run_id>/round_<id>/manifests/append_summary.json`
+- `runs/<run_id>/round_<id>/manifests/round_gate_report.json`
+
+Progress reporting is also layered intentionally:
+
+- experiment runner: one tqdm bar over rounds;
+- round runner: one tqdm bar over orchestration steps;
+- trainer steps: detailed per-step logging for the surrogate, TB teacher, and student distillation;
+- oracle stages: their own tqdm or staged logging where available;
+- every long-running subprocess still emits heartbeat-style log lines via `--step-heartbeat-sec`.
+
+Use `--no-progress` only when you need log-only operation, for example in CI or when redirecting output to a file.
+
+### Practical notes
+
+- The implemented `Method III` controller is now a real trajectory-balance GFlowNet teacher over the canonical edit DAG, followed by one-shot student distillation.
+- The teacher uses explicit `STOP -> position -> amino-acid` factorization on canonical edit trajectories reconstructed from labeled candidates, with per-seed `log Z` and a TB loss on terminal reward.
+- The deployed student is still one shot. It is distilled from teacher samples into `K`, position, and residue-replacement marginals so deployment remains fast while teacher training remains truly reward-proportional.
+- The default catalytic path contains no mock scoring branch: LigandMPNN packing, GraphKcat inference, UMA broad screening, sMD, and optional PMF are all real runtime stages.
+- `oracles.uma_cat.smd.enabled` and `oracles.uma_cat.smd.reverse` control forward/reverse steering.
+- `oracles.uma_cat.pmf.enabled` toggles the PMF stage. It is off by default because it is materially more expensive.
+- The broad screen, sMD, and PMF are all real FAIRChem/ASE runs through `mora-uma`; this path does not use static proxy replacements.
+- GraphKcat is the default auxiliary structural catalytic oracle in this path, and it is now evaluated on packed mutant structures before UMA-cat selection.
+- The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
+
+### Tested end-to-end real rounds
+
+The following real rounds completed successfully after the current fixes.
+
+Bootstrap catalytic round:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_round_real_v3 \
+  --round-id 0 \
+  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
+  --output-dir runs/tmp/uma_cat_round_real_v3 \
+  --pool-size 2 \
+  --uma-cat-budget 1 \
+  --graphkcat-budget 1 \
+  --graphkcat-prefilter-fraction 0.5 \
+  --graphkcat-mc-dropout-samples 2 \
+  --teacher-steps 1 \
+  --student-steps 1 \
+  --uma-broad-steps 1 \
+  --uma-broad-replicas 1 \
+  --uma-broad-save-every 1 \
+  --uma-run-smd 1 \
+  --uma-run-reverse-smd 1 \
+  --uma-smd-images 2 \
+  --uma-smd-steps-per-image 1 \
+  --uma-smd-replicas 1 \
+  --uma-run-pmf 0 \
+  --step-heartbeat-sec 20 \
+  --no-progress
+```
+
+Strict labeled round with actual TB teacher training on oracle-derived reward:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_tb_round_v2 \
+  --round-id 1 \
+  --dataset-path runs/tmp/uma_cat_round_real_v3/data/D_1.jsonl \
+  --output-dir runs/tmp/uma_cat_tb_round_v2 \
+  --pool-size 2 \
+  --uma-cat-budget 1 \
+  --graphkcat-budget 1 \
+  --graphkcat-prefilter-fraction 0.5 \
+  --graphkcat-mc-dropout-samples 2 \
+  --teacher-steps 64 \
+  --student-steps 128 \
+  --uma-broad-steps 1 \
+  --uma-broad-replicas 1 \
+  --uma-broad-save-every 1 \
+  --uma-run-smd 1 \
+  --uma-run-reverse-smd 1 \
+  --uma-smd-images 2 \
+  --uma-smd-steps-per-image 1 \
+  --uma-smd-replicas 1 \
+  --uma-run-pmf 0 \
+  --step-heartbeat-sec 20 \
+  --no-progress
+```
+
+The strict labeled round passed all round gates, including teacher-student evaluation:
+
+- `teacher_mode = trajectory_balance_gflownet`
+- `is_true_gflownet = true`
+- `teacher_student_kl = 0.0`
+
+The full catalytic round completed:
+
+- surrogate fit
+- trajectory-balance teacher fit
+- student distillation
+- packed-pool GraphKcat scoring with MC-dropout
+- GraphKcat top-50% prefilter
+- UMA-cat broad screen
+- forward and reverse sMD
+- catalytic fusion
+- dataset append
+- design metrics
+- teacher-student evaluation
+
+## Legacy Kcat-only disjoint stage (KcatNet + GraphKcat)
+
+This remains available as an auxiliary sequence-first catalytic loop, but it is not the default catalytic RL method anymore.
+
+Kcat mode is wired as a separate Method III loop and does not call the self-contained whole-enzyme UMA catalytic stack.
 
 Primary config:
 

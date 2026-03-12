@@ -23,6 +23,7 @@ def main() -> int:
     parser.add_argument("--output-path", required=True)
     parser.add_argument("--budget", type=int, default=256)
     parser.add_argument("--risk-kappa", type=float, default=0.5)
+    parser.add_argument("--require-graphkcat-ok", action="store_true")
     parser.add_argument("--log-level", default="INFO")
     parser.add_argument("--no-progress", action="store_true")
     args = parser.parse_args()
@@ -37,11 +38,14 @@ def main() -> int:
 
     logger = configure_logging("train.select_graphkcat", level=args.log_level)
     rows = read_records(root / args.input_path)
+    if args.require_graphkcat_ok:
+        rows = [r for r in rows if str(r.get("graphkcat_status", "")).strip() == "ok"]
     logger.info(
-        "GraphKcat acquisition scoring start: rows=%d budget=%d risk_kappa=%.3f",
+        "GraphKcat acquisition scoring start: rows=%d budget=%d risk_kappa=%.3f require_ok=%s",
         len(rows),
         args.budget,
         args.risk_kappa,
+        args.require_graphkcat_ok,
     )
 
     for rec in iter_progress(rows, total=len(rows), desc="acq:graphkcat", no_progress=args.no_progress):

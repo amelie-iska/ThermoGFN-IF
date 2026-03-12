@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -59,9 +61,25 @@ def _cif_to_pdb(src: Path, dst: Path) -> None:
     io.save(str(dst))
 
 
+def _write_protein_only_pdb(src: Path, dst: Path) -> None:
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    keep = ("ATOM  ", "TER", "END", "MODEL ", "ENDMDL")
+    with src.open("r", encoding="utf-8") as in_fh, dst.open("w", encoding="utf-8") as out_fh:
+        for line in in_fh:
+            if line.startswith(keep):
+                out_fh.write(line)
+
+
 def _materialize_protein_pdb(rec: dict, protein_out: Path, root: Path) -> None:
     candidate_paths: list[Path] = []
-    for key in ("protein_path", "cif_path"):
+    for key in (
+        "reactant_protein_packed_path",
+        "protein_path",
+        "reactant_complex_packed_path",
+        "complex_path",
+        "cif_path",
+        "reactant_complex_path",
+    ):
         val = rec.get(key)
         if not val:
             continue
@@ -83,10 +101,16 @@ def _materialize_protein_pdb(rec: dict, protein_out: Path, root: Path) -> None:
 
     suffix = source.suffix.lower()
     if suffix == ".pdb":
-        shutil.copy2(source, protein_out)
+        _write_protein_only_pdb(source, protein_out)
         return
     if suffix in {".cif", ".mmcif"}:
-        _cif_to_pdb(source, protein_out)
+        with tempfile.NamedTemporaryFile(suffix=".pdb", delete=False) as tmp:
+            tmp_path = Path(tmp.name)
+        try:
+            _cif_to_pdb(source, tmp_path)
+            _write_protein_only_pdb(tmp_path, protein_out)
+        finally:
+            tmp_path.unlink(missing_ok=True)
         return
     raise ValueError(f"unsupported protein source extension: {source}")
 
@@ -172,8 +196,11 @@ def main() -> int:
     parser.add_argument("--ph-default", type=float, default=7.0)
     parser.add_argument("--temp-default", type=float, default=30.0)
     parser.add_argument("--std-default", type=float, default=0.25)
+    parser.add_argument("--mc-dropout-samples", type=int, default=8)
+    parser.add_argument("--mc-dropout-seed", type=int, default=13)
     parser.add_argument("--heartbeat-sec", type=float, default=30.0)
     parser.add_argument("--work-dir", default="")
+    parser.add_argument("--summary-path", default="")
     parser.add_argument("--log-level", default="INFO")
     parser.add_argument("--no-progress", action="store_true")
     args = parser.parse_args()
@@ -182,7 +209,8 @@ def main() -> int:
     root = _repo_root()
     sys.path.insert(0, str(root))
 
-    from train.thermogfn.io_utils import read_records, write_records
+    from train.thermogfn.io_utils import read_records, write_json, write_records
+    from train.thermogfn.metrics_utils import summarize_graphkcat_rows
     from train.thermogfn.progress import configure_logging, iter_progress
 
     logger = configure_logging("oracle.graphkcat", level=args.log_level)
@@ -240,6 +268,7 @@ def main() -> int:
         out_dir.mkdir(parents=True, exist_ok=True)
 
         fieldnames = ["id", "complex", "ligand", "protein", "Organism", "substrate", "Smiles", "pH", "Temp"]
+        prep_errors: dict[str, str] = {}
         with csv_path.open("w", newline="", encoding="utf-8") as fh:
             writer = csv.DictWriter(fh, fieldnames=fieldnames)
             writer.writeheader()
@@ -247,33 +276,38 @@ def main() -> int:
             for rec in iter_progress(rows, total=len(rows), desc="graphkcat:prepare", no_progress=args.no_progress):
                 cid = str(rec.get("candidate_id") or "").strip()
                 if not cid:
-                    raise ValueError("candidate missing candidate_id")
+                    prep_errors[cid] = "candidate missing candidate_id"
+                    continue
 
-                cdir = data_root / cid
-                cdir.mkdir(parents=True, exist_ok=True)
-                protein_path = cdir / f"{cid}_protein.pdb"
-                ligand_path = cdir / f"{cid}_ligand.sdf"
+                try:
+                    cdir = data_root / cid
+                    cdir.mkdir(parents=True, exist_ok=True)
+                    protein_path = cdir / f"{cid}_protein.pdb"
+                    ligand_path = cdir / f"{cid}_ligand.sdf"
 
-                _materialize_protein_pdb(rec, protein_path, root)
-                _materialize_ligand_sdf(rec, ligand_path, root)
+                    _materialize_protein_pdb(rec, protein_path, root)
+                    _materialize_ligand_sdf(rec, ligand_path, root)
 
-                smiles = _pick_substrate_smiles(rec)
-                if not smiles:
-                    raise ValueError(f"missing substrate smiles for candidate_id={cid}")
+                    smiles = _pick_substrate_smiles(rec)
+                    if not smiles:
+                        raise ValueError(f"missing substrate smiles for candidate_id={cid}")
 
-                writer.writerow(
-                    {
-                        "id": cid,
-                        "complex": "",
-                        "ligand": str(ligand_path),
-                        "protein": str(protein_path),
-                        "Organism": rec.get("Organism") or rec.get("organism") or args.organism_default,
-                        "substrate": rec.get("substrate") or "",
-                        "Smiles": smiles,
-                        "pH": _to_float(rec.get("pH", rec.get("ph")), args.ph_default),
-                        "Temp": _to_float(rec.get("Temp", rec.get("temp")), args.temp_default),
-                    }
-                )
+                    writer.writerow(
+                        {
+                            "id": cid,
+                            "complex": "",
+                            "ligand": str(ligand_path),
+                            "protein": str(protein_path),
+                            "Organism": rec.get("Organism") or rec.get("organism") or args.organism_default,
+                            "substrate": rec.get("substrate") or "",
+                            "Smiles": smiles,
+                            "pH": _to_float(rec.get("pH", rec.get("ph")), args.ph_default),
+                            "Temp": _to_float(rec.get("Temp", rec.get("temp")), args.temp_default),
+                        }
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    prep_errors[cid] = str(exc)
+                    logger.error("GraphKcat preparation failed candidate_id=%s error=%s", cid or "<unknown>", exc)
 
         cmd = [
             sys.executable,
@@ -294,6 +328,10 @@ def main() -> int:
             str(organism_set),
             "--temp_set_path",
             str(temp_set),
+            "--mc_dropout_samples",
+            str(args.mc_dropout_samples),
+            "--mc_dropout_seed",
+            str(args.mc_dropout_seed),
         ]
 
         predict_env = _graphkcat_subprocess_env(os.environ)
@@ -307,37 +345,75 @@ def main() -> int:
             heartbeat_sec=args.heartbeat_sec,
             env=predict_env,
         )
-        if rc != 0:
+        if rc != 0 and len(prep_errors) != len(rows):
             raise RuntimeError(f"GraphKcat predict.py failed rc={rc}")
+        if rc != 0 and len(prep_errors) == len(rows):
+            logger.warning("GraphKcat predict skipped because all candidates failed preparation")
 
         out_csv = out_dir / "inference_results.csv"
-        if not out_csv.exists():
+        if not out_csv.exists() and len(prep_errors) != len(rows):
             raise FileNotFoundError(f"GraphKcat output CSV missing: {out_csv}")
 
         by_id: dict[str, dict] = {}
-        with out_csv.open("r", encoding="utf-8") as fh:
-            for row in csv.DictReader(fh):
-                rid = str(row.get("id") or "").strip()
-                if rid:
-                    by_id[rid] = row
+        if out_csv.exists():
+            with out_csv.open("r", encoding="utf-8") as fh:
+                for row in csv.DictReader(fh):
+                    rid = str(row.get("id") or "").strip()
+                    if rid:
+                        by_id[rid] = row
 
         out_rows: list[dict] = []
         for rec in iter_progress(rows, total=len(rows), desc="graphkcat:merge", no_progress=args.no_progress):
+            row = dict(rec)
             cid = str(rec.get("candidate_id") or "").strip()
+            if cid in prep_errors:
+                row["graphkcat_status"] = "error"
+                row["graphkcat_error"] = prep_errors[cid]
+                row["graphkcat_std"] = float("nan")
+                out_rows.append(row)
+                continue
             pred = by_id.get(cid)
             if pred is None:
-                raise RuntimeError(f"GraphKcat missing prediction for candidate_id={cid}")
+                row["graphkcat_status"] = "error"
+                row["graphkcat_error"] = f"missing prediction for candidate_id={cid}"
+                row["graphkcat_std"] = float("nan")
+                out_rows.append(row)
+                continue
             try:
-                rec["graphkcat_log_kcat"] = float(pred["pred_log_kcat_graphkcat"])
-                rec["graphkcat_log_km"] = float(pred["pred_log_km_graphkcat"])
-                rec["graphkcat_log_kcat_km"] = float(pred["pred_log_kcat_km_graphkcat"])
+                row["graphkcat_log_kcat"] = float(pred["pred_log_kcat_graphkcat"])
+                row["graphkcat_log_km"] = float(pred["pred_log_km_graphkcat"])
+                row["graphkcat_log_kcat_km"] = float(pred["pred_log_kcat_km_graphkcat"])
+                std_val = pred.get("pred_log_kcat_graphkcat_std")
+                if std_val not in {None, ""}:
+                    row["graphkcat_std"] = float(std_val)
+                    row["graphkcat_log_km_std"] = float(pred.get("pred_log_km_graphkcat_std", "nan"))
+                    row["graphkcat_log_kcat_km_std"] = float(pred.get("pred_log_kcat_km_graphkcat_std", "nan"))
+                    row["graphkcat_std_source"] = "mc_dropout"
+                    row["graphkcat_uncertainty_samples"] = int(args.mc_dropout_samples)
+                else:
+                    row["graphkcat_std"] = float(args.std_default)
+                    row["graphkcat_std_source"] = "constant_default"
+                    row["graphkcat_uncertainty_samples"] = 0
             except Exception as exc:  # noqa: BLE001
-                raise RuntimeError(f"GraphKcat parse error candidate_id={cid}: {exc}") from exc
-            rec["graphkcat_std"] = float(args.std_default)
-            rec["graphkcat_status"] = "ok"
-            out_rows.append(rec)
+                row["graphkcat_status"] = "error"
+                row["graphkcat_error"] = f"parse error candidate_id={cid}: {exc}"
+                row["graphkcat_std"] = float("nan")
+                out_rows.append(row)
+                continue
+            row["graphkcat_status"] = "ok"
+            out_rows.append(row)
 
     write_records(root / args.output_path, out_rows)
+    summary = summarize_graphkcat_rows(out_rows)
+    if args.summary_path:
+        write_json(root / args.summary_path, summary)
+    logger.info(
+        "GraphKcat summary: ok_fraction=%.3f ok=%d/%d mean_log_kcat=%.4f",
+        float(summary.get("ok_fraction", 0.0)),
+        int(summary.get("status_counts", {}).get("ok", 0)),
+        int(summary.get("n", 0)),
+        float(summary.get("log_kcat", {}).get("mean", 0.0)),
+    )
     logger.info("GraphKcat scoring complete: wrote=%d elapsed=%.2fs", len(out_rows), time.perf_counter() - t0)
     print(root / args.output_path)
     return 0

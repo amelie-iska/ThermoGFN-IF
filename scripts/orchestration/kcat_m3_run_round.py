@@ -364,6 +364,7 @@ def main() -> int:
 
     teacher_ckpt = round_dir / "models" / f"teacher_round_{args.round_id}.ckpt"
     student_ckpt = round_dir / "models" / f"student_round_{args.round_id}.ckpt"
+    surrogate_ckpt = round_dir / "models" / f"surrogate_round_{args.round_id}.ckpt"
     pool = round_dir / "data" / f"candidate_pool_round_{args.round_id}.jsonl"
     kcatnet_sel = round_dir / "data" / f"kcatnet_selected_round_{args.round_id}.jsonl"
     kcatnet_scored = round_dir / "data" / f"kcatnet_scored_round_{args.round_id}.jsonl"
@@ -408,6 +409,8 @@ def main() -> int:
                 str(args.teacher_steps),
                 "--gamma-off",
                 str(args.teacher_gamma_off),
+                "--surrogate-ckpt",
+                str(surrogate_ckpt),
                 "--max-checkpoints",
                 str(args.max_checkpoints),
                 "--seed",

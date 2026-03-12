@@ -13,7 +13,7 @@ generator:
 required_envs:
   ligandmpnn_env:
     role: generator
-    health_check: "export PYTHONPATH=\"$(pwd)/scripts/vendor/pycompat:${PYTHONPATH:-}\" && cd models/LigandMPNN && python run.py --help"
+    health_check: "export PYTHONPATH=\"$(pwd)/scripts/vendor/pycompat:${PYTHONPATH:-}\" && python -c 'import ml_collections, torch, prody; print(\"ok\")' && cd models/LigandMPNN && python run.py --help"
   spurs:
     role: cheap_oracle
     health_check: "python -c 'import spurs.inference as s; print(\"ok\")'"

@@ -69,11 +69,11 @@
 
 
 \begin{abstract}
-We develop a complete methodology for fine-tuning the all-atom inverse protein folding model ADFLIP toward thermostable, binding-aware, and catalysis-aware protein design with Generative Flow Networks (GFlowNets). The proposal is motivated by seven complementary advances. First, ADFLIP is a discrete flow-matching inverse-folding model that natively conditions on all-atom structural context, progressively incorporates predicted sidechains during sequence generation, supports ensemble sampling across multiple structural states, and already provides a training-free guidance mechanism for plugging in arbitrary pretrained property predictors \citep{yi2025adflip,campbell2024flowmatchingdiscrete}. Second, SPURS rewires a protein language model and an inverse-folding model into a scalable stability predictor that can score all single mutations in one forward pass and support epistatic scoring with an explicit higher-order decoder \citep{li2026spurs}. Third, BioEmu provides a fast sequence-conditioned equilibrium-ensemble emulator that can generate large sets of statistically independent conformational samples efficiently and was trained using large structural corpora, more than 200 milliseconds of MD simulation, and experimental stability data \citep{lewis2024bioemu}. Fourth, Meta FAIR's UMA provides a family of atomistic ML potentials that can be used as a higher-fidelity MLIP-MD oracle when the prepared system is in a calibrated paradigm \citep{wood2025uma,levine2025omol25,fairchem2025github}. Fifth, KcatNet provides a wide-turnover geometric deep learning oracle for enzyme sequence and substrate pairs \citep{pan2026kcatnet}. Sixth, GraphKcat adds catalytic-pocket-aware structure conditioning and jointly predicts $\logkcat$, $\logKm$, and $\logeff$ \citep{luo2025graphkcat}. Seventh, MMKcat provides a multimodal missing-modality oracle that remains informative when product or structure channels are incomplete \citep{sun2025mmkcat}. We therefore propose a multi-oracle design stack in which ADFLIP is the generator and edit-policy substrate, SPURS is a cheap stability oracle, BioEmu is a fast whole-chain dynamics oracle, UMA is the higher-fidelity MLIP-MD oracle for calibrated physical rescoring, and KcatNet, GraphKcat, and MMKcat form a catalytic oracle bundle for reaction-conditioned enzyme-kinetic design.
+We develop a complete methodology for fine-tuning the all-atom inverse protein folding model ADFLIP toward thermostable, binding-aware, and catalysis-aware protein design with Generative Flow Networks (GFlowNets). The proposal is motivated by seven complementary advances. First, ADFLIP is a discrete flow-matching inverse-folding model that natively conditions on all-atom structural context, progressively incorporates predicted sidechains during sequence generation, supports ensemble sampling across multiple structural states, and already provides a training-free guidance mechanism for plugging in arbitrary pretrained property predictors \citep{yi2025adflip,campbell2024flowmatchingdiscrete}. Second, SPURS rewires a protein language model and an inverse-folding model into a scalable stability predictor that can score all single mutations in one forward pass and support epistatic scoring with an explicit higher-order decoder \citep{li2026spurs}. Third, BioEmu provides a fast sequence-conditioned equilibrium-ensemble emulator that can generate large sets of statistically independent conformational samples efficiently and was trained using large structural corpora, more than 200 milliseconds of MD simulation, and experimental stability data \citep{lewis2024bioemu}. Fourth, Meta FAIR's UMA provides a family of atomistic ML potentials that can be used as a higher-fidelity MLIP-MD oracle when the prepared system is in a calibrated paradigm \citep{wood2025uma,levine2025omol25,fairchem2025github}. Fifth, KcatNet provides a wide-turnover geometric deep learning oracle for enzyme sequence and substrate pairs \citep{pan2026kcatnet}. Sixth, GraphKcat adds catalytic-pocket-aware structure conditioning and jointly predicts $\logkcat$, $\logKm$, and $\logeff$ \citep{luo2025graphkcat}. Seventh, MMKcat provides a multimodal missing-modality oracle that remains informative when product or structure channels are incomplete \citep{sun2025mmkcat}. We therefore propose a multi-oracle design stack in which ADFLIP is the generator and edit-policy substrate, SPURS is a cheap stability oracle, BioEmu is a fast whole-chain dynamics oracle, UMA is the higher-fidelity MLIP-MD oracle for calibrated physical rescoring, and the catalytic branch is split between learned kinetic predictors and a new whole-enzyme UMA catalytic dynamics protocol that starts from docked reactant-bound and product-bound complexes.
 
-The manuscript makes ten methodological contributions. (i) It provides a technical review of ADFLIP, SPURS, BioEmu, UMA, KcatNet, GraphKcat, MMKcat, and the core GFlowNet literature, emphasizing the exact capabilities relevant to thermostability, binding, and catalysis optimization. (ii) It formalizes a variable-order multi-mutant protein design problem in which an ADFLIP-designed full-redesign seed may be transformed into a high-order variant with no scientific Hamming-distance cap beyond sequence length and rollout termination. (iii) It specifies a simultaneous multi-oracle method in which ADFLIP is the sole proposal backbone in the primary methodology, while SPURS, BioEmu, UMA, KcatNet, GraphKcat, and MMKcat are external oracle branches rather than proposal priors. (iv) It specifies a sequential curriculum in which full-redesign and single-mutant learning are followed by an explicit epistatic double-mutant stage, after which BioEmu and UMA refine higher-order candidates; higher-order SPURS epistasis remains an ablation. (v) It extends the non-iterative training paradigm already present in the manuscript into a teacher-student active-learning workflow whose teacher can optimize fused stability, binding, and catalytic targets, while the deployed ADFLIP student proposes full multi-mutant sequences in a single pass. (vi) It extends the generator, oracle stack, and reward construction to protein-protein interactions, multimers, protein-ligand systems, and reaction-conditioned enzyme design through explicit complex-versus-component and substrate-versus-product bookkeeping. (vii) It makes complex-aware training a first-class part of the standard curriculum through a mixed batch sampler over monomers, multimers, ligand complexes, and catalytic examples, with explicit warmup and delayed-introduction options. (viii) It treats the initial undesigned protein or complex as an explicitly scored baseline so that the first full-redesign step already receives absolute and relative oracle supervision. (ix) It adds a catalytic-oracle protocol with explicit uncertainty decomposition, metadata validation, and routing across KcatNet, GraphKcat, and MMKcat. (x) It adds target-conditioned inference so that users may request design candidates satisfying target thermostability, binding, and kinetic properties within explicit tolerances, subject to bounded retries and transparent reporting of predicted properties in either success or failure.
+The manuscript makes ten methodological contributions. (i) It provides a technical review of ADFLIP, SPURS, BioEmu, UMA, KcatNet, GraphKcat, MMKcat, and the core GFlowNet literature, emphasizing the exact capabilities relevant to thermostability, binding, and catalysis optimization. (ii) It formalizes a variable-order multi-mutant protein design problem in which an ADFLIP-designed full-redesign seed may be transformed into a high-order variant with no scientific Hamming-distance cap beyond sequence length and rollout termination. (iii) It specifies a simultaneous multi-oracle method in which ADFLIP is the sole proposal backbone in the primary methodology, while SPURS, BioEmu, UMA, and the catalytic oracles are external oracle branches rather than proposal priors. (iv) It specifies a sequential curriculum in which full-redesign and single-mutant learning are followed by an explicit epistatic double-mutant stage, after which BioEmu and UMA refine higher-order candidates; higher-order SPURS epistasis remains an ablation. (v) It extends the non-iterative training paradigm already present in the manuscript into a teacher-student active-learning workflow whose teacher can optimize fused stability, binding, and catalytic targets, while the deployed ADFLIP student proposes full multi-mutant sequences in a single pass. (vi) It extends the generator, oracle stack, and reward construction to protein-protein interactions, multimers, protein-ligand systems, and reaction-conditioned enzyme design through explicit complex-versus-component and substrate-versus-product bookkeeping. (vii) It makes complex-aware training a first-class part of the standard curriculum through a mixed batch sampler over monomers, multimers, ligand complexes, and catalytic examples, with explicit warmup and delayed-introduction options. (viii) It treats the initial undesigned protein or complex as an explicitly scored baseline so that the first full-redesign step already receives absolute and relative oracle supervision. (ix) It adds a catalytic-oracle protocol with explicit uncertainty decomposition, metadata validation, reactant-to-product steered whole-enzyme UMA dynamics, near-transition-state harvesting, and optional PMF refinement, with GraphKcat used as the default learned catalytic refinement branch and KcatNet/MMKcat retained as auxiliary predictors rather than the primary implemented RL path. (x) It adds target-conditioned inference so that users may request design candidates satisfying target thermostability, binding, and kinetic properties within explicit tolerances, subject to bounded retries and transparent reporting of predicted properties in either success or failure.
 
-A central design choice in the revised manuscript is how the stability and catalytic oracles are divided by scale and by metadata availability. When the prepared protein system fits within roughly $8000$ atoms, whole-protein UMA-MD is the default high-fidelity stability branch. In the $8000$--$10000$ atom range, downweighting UMA is a soft recommendation rather than a hard rule, and the training methodology does not include systems larger than roughly $10\,000$ atoms. A second central design choice is how catalytic prediction is routed. KcatNet is the wide catalytic screen, MMKcat is the missing-modality catalytic branch when products or structure channels are incomplete, and GraphKcat is the narrower pocket-aware refinement oracle when a protein structure and ligand geometry are available. A third central design choice is how the generator is positioned relative to complex and catalytic design. Under the present ADFLIP-centered formulation, mixed monomer, multimer, ligand, and reaction-conditioned training is a native operating mode rather than an architectural afterthought: ADFLIP already accepts all-atom context, including ligands, nucleotides, and ions, and already supports multi-state conditioning \citep{yi2025adflip}. No empirical results are fabricated or implied. Every performance statement about prior models is attributed to the corresponding source, and every newly introduced hyperparameter is explicitly labeled as a proposed default, a tunable range, or a diagnostic threshold.
+A central design choice in the revised manuscript is how the stability and catalytic oracles are divided by scale and by metadata availability. When the prepared protein system fits within roughly $8000$ atoms, whole-protein UMA-MD is the default high-fidelity stability branch. In the $8000$--$10000$ atom range, downweighting UMA is a soft recommendation rather than a hard rule, and the training methodology does not include systems larger than roughly $10\,000$ atoms. A second central design choice is how catalytic prediction is routed. In the default implemented catalytic RL path, whole-enzyme UMA provides the broad conformational-gating screen, forward and reverse steered UMA dynamics provide a real pathway and barrier signal between reactant-bound and product-bound basins, optional path umbrella sampling refines that barrier into a PMF, and GraphKcat supplies an orthogonal pocket-aware regression signal. KcatNet and MMKcat remain valuable auxiliary catalytic predictors, especially when structure or product modalities are incomplete, but they are not the default control loop in the repository's current catalytic Method~III specialization. A third central design choice is how the generator is positioned relative to complex and catalytic design. Under the present ADFLIP-centered formulation, mixed monomer, multimer, ligand, and reaction-conditioned training is a native operating mode rather than an architectural afterthought: ADFLIP already accepts all-atom context, including ligands, nucleotides, and ions, and already supports multi-state conditioning \citep{yi2025adflip}. No empirical results are fabricated or implied. Every performance statement about prior models is attributed to the corresponding source, and every newly introduced hyperparameter is explicitly labeled as a proposed default, a tunable range, or a diagnostic threshold.
 \end{abstract}
 
 
@@ -88,7 +88,7 @@ This manuscript addresses the following design question. Suppose a fixed target 
 
 The key practical observation is that the relevant oracles sit at different points on the cost-accuracy frontier and along different conditional axes. SPURS is cheap and broad: it produces backbone-conditioned mutation-effect estimates for all point mutations in one forward pass, and its higher-order decoder makes multi-mutant scoring possible \citep{li2026spurs}. BioEmu is cheap-to-middle-cost and dynamics-aware: it emulates protein equilibrium ensembles and has been trained on structural data, more than 200 milliseconds of MD, and experimental stabilities \citep{lewis2024bioemu}. UMA is slower but physically richer: it is a universal MLIP family trained across molecules, materials, and catalysts and exposed through the FAIR Chemistry software stack for energy, force, and MD workflows \citep{wood2025uma,fairchem2025github}. On the catalytic side, KcatNet is a wide-sequence-plus-substrate screen, MMKcat is robust to missing product or structure channels, and GraphKcat is narrower but pocket-aware and jointly predicts turnover, Michaelis constant, and catalytic efficiency \citep{pan2026kcatnet,luo2025graphkcat,sun2025mmkcat}. Yet UMA also introduces a crucial caveat. OMol25, the large DFT corpus underlying Meta's molecular release, contains broad chemical diversity but systems up to $\sim 350$ atoms; direct, claim-level use of UMA for whole-protein explicit-solvent folding free energies therefore requires explicit calibration on proteins \citep{levine2025omol25}. Likewise, catalytic predictors require explicit calibration against assay context, substrate identity, and metadata completeness. Rigorous methodology must therefore exploit each oracle's strengths without overclaiming its domain of validity.
 
-Our proposal is therefore a multi-oracle design system. ADFLIP is the generator. A GFlowNet edit policy traverses a variable-order mutation graph rooted at an ADFLIP seed sequence. SPURS provides dense state-wise mutation landscapes and terminal multi-mutant stability scores. BioEmu provides a whole-chain equilibrium screen that is especially useful for proteins whose prepared all-atom systems exceed roughly $8000$--$10000$ atoms or for classes where whole-protein UMA calibration is weaker. UMA is used as the high-fidelity MLIP-MD oracle whenever the prepared system fits within roughly $8000$ atoms, and as a mild down-weighted or hybrid fallback above that size. KcatNet, MMKcat, and GraphKcat provide a parallel catalytic bundle that maps reaction-conditioned examples to predicted $\logkcat$, $\logKm$, and $\logeff$. This leads to three complementary training procedures. The first, \methodI, mixes stability, binding, and catalytic supervision during a single fine-tuning run using asynchronous multi-stage acquisition and uncertainty-aware reward fusion. The second, \methodII, separates the problem into broad cheap-oracle exploration, dynamics refinement, and targeted high-fidelity rescoring. The third, \methodIII, adapts the active-learning style of earlier biological sequence-design GFlowNets \citep{jain2022bioseqgfn} into a round-based teacher-student workflow: a reward-proportional GFlowNet teacher is trained with off-policy dataset updates and uncertainty-aware acquisition, then distilled into a one-shot ADFLIP student that proposes full multi-mutant sequences without edit-time iteration. In the catalytic specialization already wired in this repository, \methodIII{} becomes a Kcat-only round-based loop whose wide stage uses KcatNet and MMKcat and whose narrow stage uses GraphKcat.
+Our proposal is therefore a multi-oracle design system. ADFLIP is the generator. An ideal GFlowNet edit policy traverses a variable-order mutation graph rooted at an ADFLIP seed sequence. SPURS provides dense state-wise mutation landscapes and terminal multi-mutant stability scores. BioEmu provides a whole-chain equilibrium screen that is especially useful for proteins whose prepared all-atom systems exceed roughly $8000$--$10000$ atoms or for classes where whole-protein UMA calibration is weaker. UMA is used as the high-fidelity MLIP-MD oracle whenever the prepared system fits within roughly $8000$ atoms, and as a mild down-weighted or hybrid fallback above that size. On the catalytic side, KcatNet, MMKcat, and GraphKcat provide learned kinetic predictors, while the default implemented catalytic RL path adds a dynamics-based whole-enzyme UMA branch that starts from docked reactant-bound and product-bound complexes, estimates conformational gating by productive-pose occupancy, probes the pathway by forward and reverse steered MD, and optionally reconstructs a PMF along an sMD-derived path. This leads to three complementary training procedures. The first, \methodI, mixes stability, binding, and catalytic supervision during a single fine-tuning run using asynchronous multi-stage acquisition and uncertainty-aware reward fusion. The second, \methodII, separates the problem into broad cheap-oracle exploration, dynamics refinement, and targeted high-fidelity rescoring. The third, \methodIII, adapts the active-learning style of earlier biological sequence-design GFlowNets \citep{jain2022bioseqgfn} into a round-based teacher-student workflow. In the ideal formulation, the teacher is a reward-proportional GFlowNet; in the current repository implementation, the teacher is a reward-weighted policy approximation distilled into a one-shot student. In the catalytic specialization already wired in this repository, \methodIII{} becomes a LigandMPNN-backed round-based loop whose primary catalytic feedback comes from packed-structure GraphKcat prefiltering followed by whole-enzyme UMA broad screening, forward/reverse sMD, optional PMF refinement, and catalytic reward fusion.
 
 The document is written with three principles in mind. First, all sign conventions, symbols, and units are made explicit. Second, the roles of cheap mutation signals, fast whole-chain dynamics signals, high-fidelity MLIP-MD scores, and eventual experimental readouts are kept distinct throughout. Third, because the paper is at present a methodology paper rather than a completed empirical study, every training or evaluation choice is labeled as a proposal rather than as an already validated best practice until evals are presented in supplementary material. The aim is not to imply unearned performance; the aim is to leave as few implementation ambiguities as possible.
 
@@ -205,6 +205,8 @@ GraphKcat occupies a different point on the catalytic cost-accuracy frontier \ci
 MMKcat fills the complementary missing-modality niche \citep{sun2025mmkcat}. Its key idea is that catalytic prediction is multimodal but the available modalities are often incomplete. The model treats substrates and enzyme sequence as essential inputs and allows other channels, notably products and structure-derived graphs, to be masked. In the present repository, MMKcat is run over a set of mask patterns and the resulting predictions are aggregated into a mean and a mask-disagreement standard deviation. Methodologically, this is valuable for two reasons. First, it preserves catalytic supervision on examples where product annotation is incomplete or structure materialization is noisy. Second, it exposes a native uncertainty signal that is semantically meaningful: disagreement across modality masks measures sensitivity to missing information rather than only checkpoint noise.
 
 The three catalytic models should therefore not be collapsed into a single generic ``Kcat oracle.'' They answer different questions. KcatNet is the wide enzyme-substrate turnover screen. MMKcat is the robust multimodal turnover oracle when products or structure channels are incomplete. GraphKcat is the narrower pocket-aware structural oracle that additionally predicts $\Km$ and $\kcatKm$. In the methodology developed later in the manuscript, catalytic routing follows exactly this logic: wide KcatNet or MMKcat screening first, then narrower GraphKcat refinement when structure and ligand geometry are available, followed by explicit multi-oracle fusion rather than blind trust in any single predictor.
+
+However, predictive catalytic models are not enough by themselves when the repository already contains docked reactant-bound and product-bound complexes for each reaction. In that setting the physically richer catalytic question is not only ``what turnover would a supervised regressor predict,'' but also ``does the full enzyme actually preorganize the reactants, and how difficult is it to move between the reactant-like and product-like bound basins under a realistic atomistic potential?'' This is the motivation for the new catalytic UMA branch implemented in the repository. It uses whole-enzyme equilibrium UMA dynamics to estimate generalized near-attack or productive-pose populations, then uses forward and reverse steered UMA dynamics between the docked reactant and product endpoint complexes to reveal likely reaction-pathway geometry, harvest near-transition-state-like structures, and initialize optional path umbrella PMFs. In other words, KcatNet, MMKcat, and GraphKcat remain important learned catalytic predictors, but the default catalytic RL path is no longer purely predictive. It is predictive \emph{and} dynamical.
 
 
 \section{Background on GFlowNets for variable-order sequence editing}
@@ -830,74 +832,73 @@ We standardize and harmonize the binding term so that larger is better:
 \end{equation}
 The source of $\widehat{\ddGbind}$ depends on which oracle branch is available. For cheap screening it is SPURS-based. For shortlisted candidates it is UMA-based and treated as the primary binding label.
 
-\subsection{Catalytic branch: KcatNet, MMKcat, and GraphKcat}
+\subsection{Catalytic branch: whole-enzyme UMA dynamics, GraphKcat, and auxiliary kinetic predictors}
 
-For catalytic tasks, the reward operates on a reaction-conditioned candidate $(x,\mathcal{R})$ rather than on a sequence alone. Let the reaction context be $\mathcal{R}=(\mathcal{S}_{\mathrm{sub}},\mathcal{S}_{\mathrm{prod}},\eta)$ as defined above. KcatNet and MMKcat primarily provide turnover predictions on the logarithmic scale,
-\begin{equation}
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}(x,\mathcal{R}),\qquad
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}(x,\mathcal{R}),
-\end{equation}
-while GraphKcat provides a triple
-\begin{equation}
-    \Big(
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{GK}},
-    \widehat \ell_{K_M}^{\mathrm{GK}},
-    \widehat \ell_{\mathrm{eff}}^{\mathrm{GK}}
-    \Big)(x,\mathcal{R}).
-\end{equation}
-Whenever GraphKcat is available, we retain the identity
-\begin{equation}
-    \widehat \ell_{\mathrm{eff}}^{\mathrm{GK}} \approx \widehat \ell_{k_{\rm cat}}^{\mathrm{GK}} - \widehat \ell_{K_M}^{\mathrm{GK}}
-\end{equation}
-as a consistency diagnostic rather than assuming that the three channels are numerically interchangeable.
+For catalytic tasks, the reward operates on a reaction-conditioned candidate $(x,\mathcal{R})$ rather than on a sequence alone. Let the reaction context be $\mathcal{R}=(\mathcal{S}_{\mathrm{sub}},\mathcal{S}_{\mathrm{prod}},\eta)$ as defined above, and assume that the current implementation has access to a reactant-bound complex and a product-bound complex for the same enzyme candidate. The default catalytic branch in the repository then proceeds in three layers.
 
-The wide catalytic branches are standardized and risk adjusted exactly as in the stability setting:
+First, a broad whole-enzyme UMA equilibrium screen estimates the productive-pose or generalized-NAC occupancy $p_{\mathrm{gNAC}}(x,\mathcal{R})$ in the reactant basin and converts it into a gating free energy
+\begin{equation}
+    \widehat{\Delta G}_{\mathrm{gate}}(x,\mathcal{R})
+    =
+    -RT\log\!\left(
+    \frac{\widehat p_{\mathrm{gNAC}}(x,\mathcal{R})}{1-\widehat p_{\mathrm{gNAC}}(x,\mathcal{R})}
+    \right).
+\end{equation}
+Second, forward and reverse steered whole-enzyme UMA dynamics between the reactant-bound and product-bound endpoint complexes estimate a nonequilibrium barrier surrogate $\widehat{\Delta G}_{\mathrm{sMD}}^\ddagger(x,\mathcal{R})$ and harvest near-transition-state-like frames. When the optional PMF stage is enabled, those path seeds initialize an umbrella PMF and the repository uses
+\begin{equation}
+    \widehat{\Delta G}_{\mathrm{bar}}(x,\mathcal{R})
+    =
+    \begin{cases}
+        \widehat{\Delta G}_{\mathrm{PMF}}^\ddagger(x,\mathcal{R}), & \text{if the PMF succeeds},\\
+        \widehat{\Delta G}_{\mathrm{sMD}}^\ddagger(x,\mathcal{R}), & \text{otherwise.}
+    \end{cases}
+\end{equation}
+Third, the catalytic barrier and gating terms are translated into a transition-state-style log-rate proxy,
+\begin{equation}
+\label{eq:ucatproxy}
+    \widehat \ell_{\mathrm{UMAcat}}(x,\mathcal{R})
+    =
+    \log_{10}\!\left(\frac{k_B T}{h}\right)
+    -
+    \frac{\widehat{\Delta G}_{\mathrm{gate}}(x,\mathcal{R})+\widehat{\Delta G}_{\mathrm{bar}}(x,\mathcal{R})}{RT\ln 10}.
+\end{equation}
+This quantity is the primary catalytic scalar used by the default Method~III implementation.
+
+GraphKcat provides the orthogonal learned structural catalytic branch. In the current repository implementation, the fused catalytic reward uses the turnover channel $\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}$ together with the UMA-cat log-rate proxy. The richer GraphKcat $\logKm$ and $\logeff$ channels remain scientifically useful and are retained elsewhere in the manuscript, but the default code path currently fuses UMA-cat with the GraphKcat turnover channel. We therefore define
 \begin{align}
-    z_{\mathrm{KN}}^{\mathrm{risk}}(x,\mathcal{R}) &=
-    \frac{\mu\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}\big]-\kappa_{\mathrm{KN}}\sigma\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}\big]-\mu_{\mathrm{KN}}}{\sigma_{\mathrm{KN}}},\\
-    z_{\mathrm{MM}}^{\mathrm{risk}}(x,\mathcal{R}) &=
-    \frac{\mu\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}\big]-\kappa_{\mathrm{MM}}\sigma\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}\big]-\mu_{\mathrm{MM}}}{\sigma_{\mathrm{MM}}},
+    z_{\mathrm{UCAT}}^{\mathrm{risk}}(x,\mathcal{R})
+    &=
+    \mu\!\left[\widehat \ell_{\mathrm{UMAcat}}(x,\mathcal{R})\right]
+    -
+    \kappa_{\mathrm{UCAT}}\sigma\!\left[\widehat \ell_{\mathrm{UMAcat}}(x,\mathcal{R})\right],\\
+    z_{\mathrm{GK}}^{\mathrm{risk}}(x,\mathcal{R})
+    &=
+    \mu\!\left[\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}(x,\mathcal{R})\right]
+    -
+    \kappa_{\mathrm{GK}}\sigma\!\left[\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}(x,\mathcal{R})\right],\\
+    z_{\mathrm{agree}}(x,\mathcal{R})
+    &=
+    -\left|
+    \widehat \ell_{\mathrm{UMAcat}}(x,\mathcal{R})
+    -
+    \widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}(x,\mathcal{R})
+    \right|.
 \end{align}
-where the MMKcat uncertainty term should include mask-disagreement variance across the modality patterns used during inference. For GraphKcat, we define three harmonized channels,
-\begin{align}
-    z_{\mathrm{GK},k}^{\mathrm{risk}}(x,\mathcal{R}) &=
-    \frac{\mu\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}\big]-\kappa_{\mathrm{GK},k}\sigma\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}\big]-\mu_{\mathrm{GK},k}}{\sigma_{\mathrm{GK},k}},\\
-    z_{\mathrm{GK},m}^{\mathrm{risk}}(x,\mathcal{R}) &=
-    \frac{-\mu\big[\widehat \ell_{K_M}^{\mathrm{GK}}\big]-\kappa_{\mathrm{GK},m}\sigma\big[\widehat \ell_{K_M}^{\mathrm{GK}}\big]-\mu_{\mathrm{GK},m}}{\sigma_{\mathrm{GK},m}},\\
-    z_{\mathrm{GK},e}^{\mathrm{risk}}(x,\mathcal{R}) &=
-    \frac{\mu\big[\widehat \ell_{\mathrm{eff}}^{\mathrm{GK}}\big]-\kappa_{\mathrm{GK},e}\sigma\big[\widehat \ell_{\mathrm{eff}}^{\mathrm{GK}}\big]-\mu_{\mathrm{GK},e}}{\sigma_{\mathrm{GK},e}}.
-\end{align}
-The sign flip in the $\Km$ channel makes larger $z_{\mathrm{GK},m}^{\mathrm{risk}}$ correspond to smaller $\Km$, hence better catalytic binding under Michaelis-Menten kinetics.
 
-To combine overlapping catalytic predictions, we introduce an agreement term
-\begin{equation}
-    z_{\mathrm{agree}}(x,\mathcal{R})=
-    -\tfrac12\left(
-    \big|\widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}-\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}\big|
-    +
-    \big|\widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}-\widehat \ell_{k_{\rm cat}}^{\mathrm{GK}}\big|
-    \right),
-\end{equation}
-with any missing term dropped when the corresponding predictor is unavailable. The fused catalytic score is then
+The implemented fused catalytic score is then
 \begin{equation}
 \label{eq:catfusion}
-\begin{aligned}
-    z_{\mathrm{cat}}^{\mathrm{risk}}(x,\mathcal{R}) ={}&
-    \rho_{\mathrm{KN}}(x,\mathcal{R})\,w_{\mathrm{KN}}\,z_{\mathrm{KN}}^{\mathrm{risk}}(x,\mathcal{R})
+    z_{\mathrm{cat}}^{\mathrm{risk}}(x,\mathcal{R})
+    =
+    \rho_{\mathrm{UCAT}}\,w_{\mathrm{UCAT}}\,z_{\mathrm{UCAT}}^{\mathrm{risk}}(x,\mathcal{R})
     +
-    \rho_{\mathrm{MM}}(x,\mathcal{R})\,w_{\mathrm{MM}}\,z_{\mathrm{MM}}^{\mathrm{risk}}(x,\mathcal{R})\\
-    &+
-    \rho_{\mathrm{GK}}(x,\mathcal{R})\Big(
-    w_{\mathrm{GK},k}\,z_{\mathrm{GK},k}^{\mathrm{risk}}(x,\mathcal{R})
+    \rho_{\mathrm{GK}}\,w_{\mathrm{GK}}\,z_{\mathrm{GK}}^{\mathrm{risk}}(x,\mathcal{R})
     +
-    w_{\mathrm{GK},m}\,z_{\mathrm{GK},m}^{\mathrm{risk}}(x,\mathcal{R})
-    +
-    w_{\mathrm{GK},e}\,z_{\mathrm{GK},e}^{\mathrm{risk}}(x,\mathcal{R})
-    \Big)\\
-    &+w_{\mathrm{agree}}\,z_{\mathrm{agree}}(x,\mathcal{R}).
-\end{aligned}
+    \rho_{\mathrm{UCAT}}\rho_{\mathrm{GK}}\,w_{\mathrm{agree}}\,z_{\mathrm{agree}}(x,\mathcal{R}),
 \end{equation}
-Here the reliability gates $\rho_{\mathrm{KN}},\rho_{\mathrm{MM}},\rho_{\mathrm{GK}}$ depend on metadata availability and structure availability. A sensible default is $\rho_{\mathrm{KN}}=1$ whenever a substrate SMILES is available, $\rho_{\mathrm{MM}}=1$ when the required multimodal channels exist and $0.5$ when products are missing but the selected mask family still makes inference meaningful, and $\rho_{\mathrm{GK}}=1$ only when a protein structure and a ligand conformer are both available.
+where $\rho_{\mathrm{UCAT}}$ and $\rho_{\mathrm{GK}}$ are reliability gates. In the current repository, failed UMA-cat evaluations are not allowed to silently collapse to a neutral score: they are clamped to a strongly negative reward contribution. This is a deliberate anti-cheating design choice.
+
+KcatNet and MMKcat remain valuable auxiliary catalytic predictors, especially for settings where product-bound structures are unavailable or when one wants a purely predictive wide-stage catalytic view. They can therefore be used as additional terms or ablations layered on top of Eq.~\eqref{eq:catfusion}. However, they are not the primary implemented control loop in the repository's current catalytic RL specialization.
 
 \subsection{Component-protection terms and no-cheating constraints}
 
@@ -1252,24 +1253,47 @@ The first two methods in this manuscript are edit-trajectory methods. They are a
 
 That use case is directly connected to earlier biological sequence-design work with GFlowNets. Jain et al.~proposed a round-based active-learning algorithm in which a GFlowNet acts as a generator of diverse biological sequences, is trained from both reward evaluations and off-policy trajectories reconstructed from an existing dataset, and is coupled to uncertainty-aware acquisition so that each round proposes a diverse, informative batch rather than a single maximizer \citep{jain2022bioseqgfn}. In the same paper, the authors explicitly identified non-autoregressive generators and multi-oracle outer loops as natural future extensions \citep{jain2022bioseqgfn}. The original GFlowNet paper also framed the approach as non-iterative diverse candidate generation in the sense that search is amortized during training and i.i.d. samples can then be drawn rapidly at deployment \citep{bengio2021noniter}. \methodIII{} is the adaptation of that idea to ADFLIP, SPURS, BioEmu, UMA, and the catalytic-oracle bundle.
 
-The key distinction is the following. \methodIII{} still uses a GFlowNet internally as the reward-proportional teacher, because the target distribution over complete sequences is multimodal and expensive. But the deployed proposal model is a one-shot student. For a given backbone and seed sequence, it predicts mutation count, mutation locations, and replacement residues in parallel, then runs a single structural realization step. There is no edit-time tree walk at deployment. This makes the method attractive when one wants to screen many candidate proteins or when a downstream workflow prefers a single precomputed batch per design round.
+The key distinction is the following. The \emph{ideal} \methodIII{} uses a GFlowNet internally as the reward-proportional teacher, because the target distribution over complete sequences is multimodal and expensive. But the deployed proposal model is a one-shot student. For a given backbone and seed sequence, it predicts mutation count, mutation locations, and replacement residues in parallel, then runs a single structural realization step. There is no edit-time tree walk at deployment. This makes the method attractive when one wants to screen many candidate proteins or when a downstream workflow prefers a single precomputed batch per design round.
+
+The current repository implementation now instantiates the teacher as a real trajectory-balance GFlowNet over the canonical edit DAG. Let $\tau=(s_0\rightarrow s_1\rightarrow\cdots\rightarrow s_T=x)$ denote the canonical edit trajectory from the baseline seed to terminal candidate $x$, where each nonterminal action factorizes into \texttt{STOP} / \texttt{continue}, a position choice, and a replacement-residue choice. The implemented forward policy is
+\begin{equation}
+    \PF_\theta(a_t\mid s_t)=
+    \PF_\theta(\mathtt{STOP}\mid s_t)
+    \quad\text{or}\quad
+    \PF_\theta(\neg\mathtt{STOP}\mid s_t)\,
+    \PF_\theta(j_t\mid s_t,\neg\mathtt{STOP})\,
+    \PF_\theta(a_t^{\mathrm{aa}}\mid j_t,s_t,\neg\mathtt{STOP}),
+\end{equation}
+with deterministic backward reconstruction under canonical edit ordering. The teacher is trained with a trajectory-balance residual
+\begin{equation}
+    \mathcal{L}_{\mathrm{TB}}(\tau)
+    =
+    \Bigg(
+        \log Z_\theta(s_0)
+        + \sum_{t=0}^{T-1}\log \PF_\theta(a_t\mid s_t)
+        - \log R_r(x)
+    \Bigg)^2,
+\end{equation}
+where $R_r(x)>0$ is the round-$r$ scalar reward or risk-adjusted surrogate reward. Off-policy trajectories are reconstructed from labeled candidates in $D_r$, and on-policy trajectories are sampled from the teacher itself and scored with the current surrogate ensemble. The one-shot student is then distilled from actual teacher samples rather than from empirical frequency tables. This means the repository path now matches the mathematical intent of \methodIII{}: reward-proportional training happens on an explicit trajectory model, while deployment remains one shot.
 
 \subsection{Conceptual structure}
 
 \methodIII{} has four trainable or updatable components per active-learning round $r$:
 \begin{enumerate}[leftmargin=1.5em]
     \item a \textbf{surrogate ensemble} $M_r$ that predicts the fused thermostability target and its epistemic uncertainty from backbone, seed sequence, and candidate sequence;
-    \item a \textbf{teacher GFlowNet} $\pi_{\theta,r}$ that samples complete edit trajectories with probability approximately proportional to the current acquisition reward;
+    \item a \textbf{trajectory-balance teacher policy} $\pi_{\theta,r}$ over canonical edit trajectories;
     \item a \textbf{one-shot ADFLIP student} $q_{\phi,r}$ that learns to imitate the teacher's terminal distribution without explicit edit-time iteration;
     \item a \textbf{triage stack} in which SPURS is run densely, BioEmu on a wider filtered subset, and UMA on a smaller high-value subset.
 \end{enumerate}
-The surrogate is needed because an active-learning round should be able to score many candidate sequences cheaply. The teacher is needed because reward-proportional exploration over multi-mutant sequence space is the core reason to use a GFlowNet at all. The student is needed because the deployment requirement here is one-shot generation rather than trajectory sampling. In the catalytic specialization, the triage stack becomes KcatNet and MMKcat at the wide stage and GraphKcat at the narrower structure-aware stage, with fused catalytic labels replacing or augmenting the stability-only reward.
+The surrogate is needed because an active-learning round should be able to score many candidate sequences cheaply. The teacher is needed because reward-proportional exploration over multi-mutant sequence space is the core reason to use a GFlowNet at all. In the implemented repository path, that role is played by an explicit flow-consistency teacher trained on reconstructed and sampled trajectories rather than by a reward-weighted empirical shortcut. The student is needed because the deployment requirement here is one-shot generation rather than trajectory sampling. In the catalytic specialization, the triage stack becomes packed-structure GraphKcat at the wide prefilter stage and whole-enzyme UMA dynamics on the narrower expensive subset, with fused catalytic labels replacing or augmenting the stability-only reward.
 
 \subsection{Teacher training with off-policy data}
 
-At round $r$, let $D_r$ denote the set of all candidates evaluated so far with whichever oracle bundle was available. Following the biological-sequence active-learning setting in Jain et al., teacher training uses both on-policy rollouts and off-policy reconstructed trajectories from the evaluated dataset \citep{jain2022bioseqgfn}. For each sequence in $D_r$, reconstruct a canonical edit trajectory relative to its seed sequence. If a candidate is $K$ mutations away from the seed, the reconstructed trajectory contains exactly those $K$ edits in canonical order followed by stop. These off-policy trajectories stabilize training, improve local support around already interesting mutants, and make efficient use of expensive labels.
+At round $r$, let $D_r$ denote the set of all candidates evaluated so far with whichever oracle bundle was available. Teacher training uses both on-policy rollouts and off-policy reconstructed trajectories from the evaluated dataset \citep{jain2022bioseqgfn}. For each sequence in $D_r$, reconstruct a canonical edit trajectory relative to its seed sequence. If a candidate is $K$ mutations away from the seed, the reconstructed trajectory contains exactly those $K$ edits in canonical order followed by stop. These off-policy trajectories stabilize training, improve local support around already interesting mutants, and make efficient use of expensive labels.
 
-We recommend a mixture ratio $\gamma_{\mathrm{off}}\in[0.25,0.60]$ between offline reconstructed trajectories and on-policy teacher rollouts, with a default of $0.5$ in early rounds and a decay toward $0.25$ once the student begins proposing genuinely novel high-quality candidates. The training objective can remain \SubTB{} or trajectory balance. \SubTB{} is preferable if teacher trajectories become long because it reduces variance on partial paths \citep{madan2023subtb}.
+The implemented repository path now follows this construction directly. The teacher maintains a learnable $\log Z$ for each seed family, a stop policy over edit depth, seed-conditioned position logits, and residue-replacement logits conditioned on the original residue identity. This is a deliberately compact parameterization, but it is still a genuine GFlowNet teacher because the optimization target is the trajectory-balance residual on explicit trajectories. On-policy teacher rollouts are scored with the current surrogate ensemble, yielding positive surrogate rewards that play the same role as expensive labels but at lower cost.
+
+We recommend a mixture ratio $\gamma_{\mathrm{off}}\in[0.25,0.60]$ between offline reconstructed trajectories and on-policy teacher rollouts, with a default of $0.5$ in early rounds and a decay toward $0.25$ once the student begins proposing genuinely novel high-quality candidates. The current repository path uses trajectory balance rather than \SubTB{}, which is reasonable because the canonical edit teacher is intentionally compact and the average mutation orders in the default catalytic loop remain moderate.
 
 \subsection{One-shot student parameterization}
 
@@ -1321,7 +1345,7 @@ A good default is $(\lambda_{\mathrm{distill}},\lambda_K,\lambda_{\mathrm{rank}}
 A typical \methodIII{} run uses 5--15 active-learning rounds. Each round has six stages.
 \begin{enumerate}[leftmargin=1.5em]
     \item Fit or update the surrogate ensemble $M_r$ on $D_r$.
-    \item Train the teacher GFlowNet with acquisition reward $R_r$ using a mix of on-policy and off-policy trajectories.
+    \item Train the teacher policy as a trajectory-balance GFlowNet with acquisition reward $R_r$ and a mixture of off-policy reconstructed trajectories and on-policy surrogate-scored rollouts.
     \item Distill the teacher into the one-shot student $q_{\phi,r}$.
     \item Sample a large candidate pool from the student, for example $10^4$--$10^5$ candidates across the current backbone minibatch, then filter by chemistry, structure (matching the starting backbone, and with desirable properties such as being well-packed), sequence diversity, and novelty.
     \item Run SPURS on all filtered candidates and BioEmu on a larger prioritized subset.
@@ -1333,7 +1357,7 @@ The default selection rule for the BioEmu and UMA batches is cluster-balanced to
 
 \subsection{Why \methodIII{} is genuinely non-iterative at deployment}
 
-The GFlowNet teacher remains sequential internally; that is unavoidable because reward-proportional training for compositional discrete objects is naturally expressed on a DAG. But the user-facing generation mechanism is non-iterative in the practically relevant sense. Once a round is complete, the student produces a complete multi-mutant proposal in one forward pass and one structural realization step. Compared with Methods I and II, this changes three things.
+The GFlowNet teacher remains sequential internally; that is unavoidable because reward-proportional training for compositional discrete objects is naturally expressed on a DAG. The implemented repository path keeps that sequential structure inside the teacher and collapses it only at the student-distillation stage, where teacher samples are summarized into one-shot student outputs. The user-facing generation mechanism therefore remains non-iterative in the practically relevant sense. Once a round is complete, the student produces a complete multi-mutant proposal in one forward pass and one structural realization step. Compared with Methods I and II, this changes three things.
 \begin{enumerate}[leftmargin=1.5em]
     \item \textbf{Latency:} proposal generation becomes much faster for large screening batches.
     \item \textbf{Engineering simplicity:} deployment no longer needs replay buffers, online reward correction, or tree traversal.
@@ -1344,14 +1368,14 @@ A practical deployment stack can still run SPURS on the full proposal batch, Bio
 \subsection{Pseudocode}
 
 \begin{algorithm}[H]
-\caption{\methodIII{}: active-learning GFlowNet teacher with one-shot ADFLIP student}
+\caption{\methodIII{}: active-learning teacher policy with one-shot ADFLIP student}
 \label{alg:method3}
 \begin{algorithmic}[1]
 \Require Initial dataset $D_0$, pretrained ADFLIP parameters $\theta_0$, student parameters $\phi_0$, round budget $R$, BioEmu batch size $b_{\mathrm B}$, UMA batch size $b_{\mathrm U}$
 \For{$r=0$ to $R-1$}
     \State Fit surrogate ensemble $M_r$ on $D_r$ to obtain mean $\mu_r(x)$ and uncertainty $\sigma_r(x)$
     \State Define acquisition-based reward $R_r(x)$ from $\mu_r(x)$, $\sigma_r(x)$, diversity penalties, and validity filters
-    \State Train teacher GFlowNet $\pi_{\theta,r}$ with on-policy samples and reconstructed off-policy trajectories from $D_r$
+    \State Train teacher policy for round $r$ as a trajectory-balance GFlowNet using reconstructed off-policy trajectories and surrogate-scored on-policy rollouts
     \State Build candidate pool $\mathcal{C}_r$ from teacher samples, replay elites, and evaluated sequences
     \State Distill teacher distribution on $\mathcal{C}_r$ into one-shot student $q_{\phi,r}$
     \State Sample a large proposal batch $B_r$ from $q_{\phi,r}$ in one pass per backbone
@@ -1372,43 +1396,47 @@ A practical deployment stack can still run SPURS on the full proposal batch, Bio
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Catalytic active learning with KcatNet, MMKcat, and GraphKcat}
+\subsection{Catalytic active learning with whole-enzyme UMA and GraphKcat}
 
-The catalytic specialization of \methodIII{} uses the same teacher-student structure but swaps the oracle stack. Each candidate is paired with a reaction context $\mathcal{R}$. The surrogate ensemble predicts a fused catalytic score rather than only a thermostability score. The teacher then samples mutation trajectories in proportion to catalytic reward or to a joint catalytic-stability reward when the task is multi-objective. The deployed student remains one shot: it proposes a full enzyme variant in one forward pass, after which reaction-conditioned catalytic oracles determine whether the candidate is worth retaining.
+The catalytic specialization of \methodIII{} uses the same teacher-student structure but changes the oracle stack and the physical interpretation of the expensive stage. Each candidate is paired with a reaction context $\mathcal{R}$ and, in the default implemented repository path, with two endpoint structures: a reactant-bound complex and a product-bound complex. The surrogate ensemble predicts a fused catalytic score rather than only a thermostability score. The teacher then assigns reward-weighted probability mass to catalytic candidates, and the deployed student remains one shot: it proposes a full enzyme variant in one forward pass, after which packed-structure GraphKcat and whole-enzyme UMA dynamics determine whether the candidate is worth retaining.
 
-The local repository already implements a concrete Kcat-only orchestration of this pattern. The current round runner first validates that each example carries substrate metadata, then trains or refreshes the surrogate, teacher, and student, generates a candidate pool, scores a wide batch with KcatNet, optionally supplements or replaces missing wide-stage labels with MMKcat, selects a narrower GraphKcat batch, fuses the resulting catalytic labels, and finally appends those labels to the active-learning dataset. The mathematical abstraction is the same as in the generic \methodIII{} loop, but the concrete oracle routing is catalytic and reaction conditioned rather than thermodynamic.
+The local repository already implements a concrete self-contained orchestration of this pattern. The current round runner first validates that each example carries substrate metadata, endpoint complex paths, protein chain identifiers, and pocket positions. It then trains or refreshes the surrogate, trajectory-balance teacher, and one-shot student, generates a candidate pool, repacks the full pool on endpoint complexes with LigandMPNN, runs packed-structure GraphKcat across that pool, keeps the top GraphKcat tranche, selects a catalytic batch from within that screened set, runs the broad whole-enzyme UMA screen, runs forward and reverse steered UMA dynamics, optionally launches a path umbrella PMF, fuses the resulting catalytic labels, and finally appends those labels to the active-learning dataset. The mathematical abstraction is the same as in the generic \methodIII{} loop, but the concrete oracle routing is now explicitly dynamical rather than only predictive.
 
-The corresponding catalytic acquisition scores are intentionally simple. For the wide stage,
+The corresponding catalytic acquisition scores reflect this asymmetry. For the broad catalytic stage we recommend
 \begin{equation}
-    A_{\mathrm{KN/MM}}(x,\mathcal{R})=
-    \alpha^{\mathrm{KN/MM}}_1 d_{\mathrm{nov}}(x)+
-    \alpha^{\mathrm{KN/MM}}_2 \packunc(x)+
-    \alpha^{\mathrm{KN/MM}}_3 \frac{K(x)}{L}+
-    \alpha^{\mathrm{KN/MM}}_4 \mathbf{1}[K(x)\ge 2],
+    A_{\mathrm{UCAT}}(x,\mathcal{R})=
+    \alpha^{\mathrm{UCAT}}_1 d_{\mathrm{nov}}(x)+
+    \alpha^{\mathrm{UCAT}}_2 \packunc(x)+
+    \alpha^{\mathrm{UCAT}}_3 \frac{K(x)}{L}+
+    \alpha^{\mathrm{UCAT}}_4 \mathbf{1}[K(x)\ge 2],
 \end{equation}
-which matches the implementation philosophy that catalytic screening should remain broad and diversity preserving. For the narrower structure-aware stage,
+which preserves diversity and mutation-order coverage before the expensive catalytic screen. For the narrower GraphKcat stage we recommend
 \begin{equation}
     A_{\mathrm{GK}}(x,\mathcal{R})=
-    \beta^{\mathrm{GK}}_1 z_{\mathrm{cat,wide}}^{\mathrm{risk}}(x,\mathcal{R})+
+    \beta^{\mathrm{GK}}_1 z_{\mathrm{UCAT}}^{\mathrm{risk}}(x,\mathcal{R})+
     \beta^{\mathrm{GK}}_2 d_{\mathrm{nov}}(x)+
     \beta^{\mathrm{GK}}_3 \mathbf{1}[K(x)\ge 2].
 \end{equation}
-Only candidates whose protein structure and ligand geometry can be materialized are eligible for GraphKcat. This design keeps the expensive catalytic branch focused on cases where its structural inductive bias is actually usable.
+Only candidates whose protein structure and ligand geometry can be materialized are eligible for GraphKcat. This design keeps the narrower learned catalytic branch focused on cases where its structural inductive bias is actually usable, while the broad dynamical stage remains the default source of catalytic signal.
 
 \begin{algorithm}[H]
-\caption{Catalytic \methodIII{} round with KcatNet, MMKcat, and GraphKcat}
+\caption{Catalytic \methodIII{} round with whole-enzyme UMA and GraphKcat}
 \label{alg:method3_kcat}
 \begin{algorithmic}[1]
-\Require Active-learning dataset $D_r$, reaction metadata, pretrained ADFLIP, wide-stage budgets $b_{\mathrm{KN}},b_{\mathrm{MM}}$, narrow-stage GraphKcat budget $b_{\mathrm{GK}}$
-\State Validate substrate metadata and mark missing-modality patterns admissible for MMKcat
+\Require Active-learning dataset $D_r$, reaction metadata, docked reactant-bound and product-bound endpoint complexes, pretrained generator, broad UMA-cat budget $b_{\mathrm{UCAT}}$, narrower GraphKcat budget $b_{\mathrm{GK}}$
+\State Validate substrate metadata, endpoint complex paths, protein chain IDs, and pocket positions
 \State Fit surrogate ensemble $M_r$ on fused catalytic labels from prior rounds
-\State Train teacher GFlowNet $\pi_{\theta,r}$ on catalytic or joint catalytic-stability reward
+    \State Train teacher policy on catalytic or joint catalytic-stability reward as a trajectory-balance GFlowNet over canonical edit trajectories
 \State Distill teacher terminal distribution into one-shot student $q_{\phi,r}$
 \State Sample a large candidate pool from $q_{\phi,r}$ and apply structural plausibility filters
-\State Select a wide candidate subset by $A_{\mathrm{KN/MM}}$ and run KcatNet; run MMKcat on admissible examples or on the subset where products or structure channels are incomplete
-\State Fuse wide-stage catalytic labels and uncertainties
+\State Select a broad candidate subset by $A_{\mathrm{UCAT}}$
+\State Repack each selected candidate onto reactant-bound and product-bound complexes with LigandMPNN
+\State Run whole-enzyme UMA equilibrium screening on the reactant-bound complexes to estimate productive-pose occupancy and $\widehat{\Delta G}_{\mathrm{gate}}$
+\State Run forward and reverse steered whole-enzyme UMA dynamics between the reactant-bound and product-bound complexes
+\State Optionally seed a path umbrella PMF from the steered trajectories and estimate $\widehat{\Delta G}_{\mathrm{PMF}}^\ddagger$
+\State Convert the catalytic dynamics outputs into $\widehat \ell_{\mathrm{UMAcat}}$ through Eq.~\eqref{eq:ucatproxy}
 \State Select a narrower structure-qualified subset by $A_{\mathrm{GK}}$ and run GraphKcat
-\State Fuse KcatNet, MMKcat, and GraphKcat through Eq.~\eqref{eq:catfusion} to obtain catalytic rewards
+\State Fuse UMA-cat and GraphKcat through Eq.~\eqref{eq:catfusion} to obtain catalytic rewards
 \State Append the newly labeled tuples to $D_{r+1}$ and continue to the next round
 \end{algorithmic}
 \end{algorithm}
@@ -1416,6 +1444,53 @@ Only candidates whose protein structure and ligand geometry can be materialized 
 \subsection{Recommended defaults for the first implementation}
 
 For a first implementation of \methodIII{}, we recommend 8 active-learning rounds, a teacher-training phase of 20k--40k gradient steps per round, and a student-distillation phase of 10k--20k steps per round. Use 8--16 surrogate ensemble members if compute allows; otherwise use 4 members and increase the conservative exploration bonus $\kappa_r$. Set the default round budget so that every selected candidate receives SPURS, at least 20--40\% of the filtered round pool receives BioEmu, and at least 30\% of the UMA batch comes from candidates whose mutation order exceeds the median mutation order in $D_r$. This prevents the active-learning loop from collapsing to small edits. Use a higher off-policy fraction in the first two rounds and decay it later. Because the student is one-shot, it is worth oversampling candidate proposals during rounds 4--8 and tightening cluster-based selection rather than narrowing the student itself too early.
+
+\subsection{Instrumentation, logging, and reproducibility}
+
+Multi-oracle active learning is difficult to debug if observability is treated as an afterthought. We therefore recommend that every round expose both optimization diagnostics and oracle-stage diagnostics as first-class outputs. In the current repository implementation, this instrumentation is not merely advisory; it is part of the default runtime path. Let $u$ index teacher updates and let $v$ index student-distillation updates. The teacher logs a telemetry vector
+\begin{equation}
+    m_u^{\mathrm{teacher}}=
+    \big(
+        \mathcal{L}_{\mathrm{TB}},
+        \mathcal{L}_{\mathrm{off}},
+        \mathcal{L}_{\mathrm{on}},
+        \mathcal{L}_{\mathrm{reg}},
+        \delta_{\mathrm{abs}},
+        \|\nabla\|_{\mathrm{pre}},
+        \|\nabla\|_{\mathrm{post}},
+        \bar p_{\mathrm{stop}},
+        \overline{\log Z},
+        \eta
+    \big)_u,
+\end{equation}
+where $\eta$ is the learning rate and $\delta_{\mathrm{abs}}$ is the absolute TB residual. The student logs
+\begin{equation}
+    m_v^{\mathrm{student}}=
+    \big(
+        f_{\mathrm{sampled}},
+        \EE[K],
+        H[K],
+        N_{\mathrm{distinct}\,K},
+        N_{\mathrm{seed\,families}}
+    \big)_v,
+\end{equation}
+which exposes whether the one-shot distillation path is collapsing to a narrow mutation-order regime or a narrow set of seed families. The surrogate logs bootstrap-level statistics rather than only a final checkpoint summary, allowing the user to detect whether the ensemble members are seeing materially different resampled data.
+
+The same principle applies to the oracle stages. For each stage $\mathcal{O}\in\{\mathrm{GraphKcat},\mathrm{UMAcat}\}$, the repository now emits a structured summary
+\begin{equation}
+    m_r^{\mathcal{O}}=
+    \big(
+        N_{\mathrm{attempted}},
+        N_{\mathrm{ok}},
+        f_{\mathrm{ok}},
+        \EE[\hat y_{\mathcal{O}}],
+        \Var[\hat y_{\mathcal{O}}],
+        \text{stage-specific failure counts}
+    \big)_r,
+\end{equation}
+for each active-learning round $r$. At the round level, the orchestration layer also records gate outcomes, append summaries, and teacher-student evaluation summaries. The intended use is twofold. First, these quantities make training failures diagnosable rather than anecdotal. Second, they make experimental reporting more credible because a later empirical paper can distinguish optimization failure, oracle failure, and data-censoring failure rather than collapsing them into a single negative result.
+
+In the repository implementation, these telemetry streams are written both to structured JSON/JSONL artifacts and to Weights \& Biases. The default runtime uses an automatic W\&B mode: it syncs online when credentials are available and falls back to offline artifact logging otherwise, so that telemetry is preserved on both connected and restricted machines. Progress reporting is likewise layered: an experiment-level progress bar tracks rounds, a round-level progress bar tracks orchestration stages, and the trainer and oracle subprocesses expose their own detailed progress bars or heartbeat-style logs. This is a mundane implementation detail compared with the oracle physics, but it is essential if the methodology is to be reproducible and if expensive catalytic runs are to be trusted rather than guessed at.
 
 \subsection{Expected strengths and likely failure modes}
 
@@ -1620,109 +1695,215 @@ Candidates with large uncertainty should not simply be discarded; they are often
 
 \subsection{Why a dedicated catalytic-oracle protocol is required}
 
-Catalytic design differs from thermostability design in a fundamental way: the property of interest is not only a function of the protein sequence and fold, but of a reaction context. Turnover depends on the substrate, may depend on products, may depend on assay context such as pH or temperature, and can be highly sensitive to local pocket geometry even when the global fold remains intact. A catalytic design paper that only says ``score \kcat{} somehow'' is therefore underspecified. The purpose of this section is to make the catalytic branch as explicit as the manuscript already makes the BioEmu and UMA branches.
+Catalytic design differs from thermostability design in a fundamental way: the property of interest is not only a function of the protein sequence and fold, but of a reaction context and a pathway. Turnover depends on the substrate, may depend on products, may depend on assay context such as pH or temperature, and can be highly sensitive to local pocket geometry even when the global fold remains intact. A catalytic design paper that only says ``score \kcat{} somehow'' is therefore underspecified. The purpose of this section is to make the catalytic branch as explicit as the manuscript already makes the BioEmu and UMA branches.
 
-The three catalytic oracles in this repository occupy deliberately different roles. KcatNet is the wide screen: sequence plus substrate, high throughput, relatively weak structural conditioning \citep{pan2026kcatnet}. MMKcat is the missing-modality branch: still focused on turnover, but able to remain usable when products or structure channels are incomplete \citep{sun2025mmkcat}. GraphKcat is the narrower structure-aware refinement branch: it requires a protein structure and ligand geometry, extracts a catalytic pocket, and predicts turnover, Michaelis constant, and catalytic efficiency jointly \citep{luo2025graphkcat}. The methodology therefore treats catalysis the same way it treats stability: not as a single scalar predictor, but as a routed oracle stack with explicit scope and uncertainty.
+The present repository now implements a self-contained catalytic protocol with two endpoint complexes per candidate:
+\begin{equation}
+    \mathcal{R}=\big(\mathcal{S}_{\mathrm{sub}},\mathcal{S}_{\mathrm{prod}},\eta,A,B\big),
+\end{equation}
+where $A$ is the reactant-bound enzyme complex and $B$ is the product-bound enzyme complex. The default implemented catalytic RL path uses these endpoints directly. It does \emph{not} rely only on static regressors. Instead, it combines whole-enzyme UMA equilibrium screening, forward and reverse steered UMA dynamics, optional path umbrella PMFs, and GraphKcat.
 
 \subsection{Reaction-conditioned inputs, metadata, and admissibility}
 
-Every catalytic example carries a reaction context
+Every catalytic example must carry substrate metadata, endpoint structures, and enough local geometry to identify the catalytic pocket. In the current repository, a valid record contains at least:
+\begin{itemize}[leftmargin=1.5em]
+    \item a designed enzyme sequence $s_x$,
+    \item a substrate identifier, usually a SMILES string,
+    \item a reactant-bound complex path,
+    \item a product-bound complex path,
+    \item a protein chain identifier,
+    \item a ligand chain identifier when the ligand is stored as a chain,
+    \item a set of pocket positions.
+\end{itemize}
+These are not optional conveniences. The default broad whole-enzyme UMA stage and the default sMD stage cannot run without them. The repository therefore validates them explicitly before catalytic active-learning rounds begin.
+
+Admissibility is branch specific. The whole-enzyme UMA stage is admissible only when the reactant-bound and product-bound endpoint complexes exist and fit the configured atom budget. GraphKcat is admissible only when the candidate enzyme structure can be materialized and a ligand conformer is available or can be embedded reliably enough to extract the catalytic pocket. KcatNet and MMKcat remain admissible whenever the necessary sequence and substrate or multimodal metadata are present, but they are auxiliary predictive branches rather than the default control loop.
+
+\subsection{Whole-enzyme UMA equilibrium screening and productive-pose statistics}
+
+The first catalytic question is not ``what barrier does the chemistry have'' but ``how often does the full enzyme organize the bound reactants into a productive arrangement?'' Let $\rho_A(R)$ denote the equilibrium density in the reactant-bound basin under the whole-enzyme UMA potential. The local implementation uses a default productive feature vector
 \begin{equation}
-    \mathcal{R} = (\mathcal{S}_{\mathrm{sub}},\mathcal{S}_{\mathrm{prod}},\eta).
-\end{equation}
-The substrate bundle $\mathcal{S}_{\mathrm{sub}}$ is mandatory for Kcat-mode learning and typically consists of one or more SMILES strings plus, when available, a ligand conformer or bound ligand file. The product bundle $\mathcal{S}_{\mathrm{prod}}$ is optional but important for MMKcat because product-conditioned turnover and feedback effects may otherwise be invisible. The assay bundle $\eta$ contains metadata such as pH, temperature, and organism class. In the current repository, Kcat-mode records are invalid if they lack any of the substrate keys `substrate_smiles`, `Smiles`, `smiles`, or `ligand_smiles`; this is enforced by an explicit metadata-validation stage before active-learning rounds begin.
-
-Admissibility is oracle specific. KcatNet is admissible whenever a protein sequence and substrate SMILES are available. MMKcat is admissible whenever the essential modalities are present and the missing modalities match one of the mask families allowed by the current deployment configuration. GraphKcat is admissible only when the candidate enzyme structure can be materialized and a ligand conformer is available or can be embedded reliably enough to extract the catalytic pocket. These admissibility rules should be stored as metadata and treated as first-class control flow, not as informal comments in an experiment notebook.
-
-\subsection{KcatNet protocol as the wide catalytic screen}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{KcatNet.png}
-    \caption{KcatNet Architecture}
-    \label{fig:placeholder}
-\end{figure}
-
-
-KcatNet is the catalytic analogue of a wide semi-dense screening oracle. In simplified form, we may write
-\begin{equation}
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}(x,\mathcal{R}) =
-    f_{\mathrm{KN}}\!\Big(
-    E_{\mathrm{ProtT5}}(s_x),
-    E_{\mathrm{ESM}}(s_x),
-    G_{\mathrm{sub}}(\mathcal{S}_{\mathrm{sub}})
+    q(R)=
+    \Big(
+    r_{\mathrm{lig}}^{\mathrm{align}}(R),
+    N_{\mathrm{contact}}(R),
+    d_{\min}^{\mathrm{pocket\text{-}lig}}(R),
+    r_{\mathrm{pocket}}(R)
     \Big),
 \end{equation}
-where $s_x$ is the designed enzyme sequence, $E_{\mathrm{ProtT5}}$ and $E_{\mathrm{ESM}}$ denote the two pretrained protein-language branches, and $G_{\mathrm{sub}}$ denotes the substrate graph or molecular representation. The local implementation uses protein graph message passing, motif and residue pooling, explicit protein-ligand interaction layers, and a final scalar regression head. For methodology purposes, the important point is not the exact hidden size but the division of labor: KcatNet encodes sequence plus substrate with enough geometry-aware inductive bias to be useful at scale, but without requiring a full catalytic-pocket structure pipeline.
+where $r_{\mathrm{lig}}^{\mathrm{align}}$ is ligand RMSD after Kabsch alignment on pocket atoms, $N_{\mathrm{contact}}$ is the heavy-atom pocket-ligand contact count, $d_{\min}^{\mathrm{pocket\text{-}lig}}$ is the minimum pocket-ligand heavy-atom distance, and $r_{\mathrm{pocket}}$ is local pocket RMSD.
 
-The recommended KcatNet protocol inside active learning is therefore simple. Materialize or validate the substrate SMILES, run KcatNet on a wide filtered subset, and attach the output as a turnover label in log space together with an uncertainty estimate. A conservative uncertainty estimate can be obtained from checkpoint disagreement or from a fixed deployment variance when a single released checkpoint is used. The present repository uses the latter as a default and stores $kcatnet_std$ together with $kcatnet_log10$.
-
-\subsection{MMKcat protocol as the missing-modality catalytic oracle}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{MMKcat.png}
-    \caption{MMKcat Architecture}
-    \label{fig:placeholder}
-\end{figure}
-
-MMKcat is designed for the realistic situation in which catalytic supervision is multimodal but some channels are missing. Let the modality vector be
+The corresponding hard productive indicator is
 \begin{equation}
-    z = \big(z_{\mathrm{sub}}, z_{\mathrm{enz-seq}}, z_{\mathrm{enz-graph}}, z_{\mathrm{prod}}\big),
+I_{\mathrm{gNAC}}(R)=
+\mathbf{1}\Big[
+r_{\mathrm{lig}}^{\mathrm{align}}(R)\le r_{\max}
+\wedge
+N_{\mathrm{contact}}(R)\ge c_{\min}
+\wedge
+d_{\min}^{\mathrm{pocket\text{-}lig}}(R)\ge d_{\mathrm{safe}}
+\wedge
+r_{\mathrm{pocket}}(R)\le p_{\max}
+\Big].
 \end{equation}
-and let $m\in\{0,1\}^4$ denote a binary modality mask. MMKcat predicts
+With replicated UMA trajectories $R_t^{(k)}$, the productive-pose occupancy estimator is
 \begin{equation}
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}(m) = f_{\mathrm{MM}}(z\odot m),
-\end{equation}
-then aggregates across a family of admissible masks $\mathcal{M}_{\mathrm{mask}}$:
-\begin{equation}
-    \mu_{\mathrm{MM}}(x,\mathcal{R}) = \frac{1}{|\mathcal{M}_{\mathrm{mask}}|}\sum_{m\in\mathcal{M}_{\mathrm{mask}}}\widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}(m),\qquad
-    \sigma_{\mathrm{MM}}^2(x,\mathcal{R}) = \Var_{m\in\mathcal{M}_{\mathrm{mask}}}\big[\widehat \ell_{k_{\rm cat}}^{\mathrm{MM}}(m)\big].
-\end{equation}
-This is more than a convenient implementation trick. It gives the methodology a principled uncertainty source that is directly tied to missing information: mask disagreement measures how much the predicted turnover changes as modalities are withheld.
-
-In the local repository, MMKcat materializes an enzyme graph through an ESMFold-to-graph pipeline, uses substrate SMILES and optional product SMILES, and averages predictions across a deployment mask set such as `1111;1110;1101;1100`. Methodologically, MMKcat should be treated neither as a last-resort fallback nor as a replacement for GraphKcat. Its role is to preserve catalytic supervision on a broader region of data space than GraphKcat can cover and to expose sensitivity to missing modalities explicitly.
-
-\subsection{GraphKcat protocol as the pocket-aware structural catalytic oracle}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{GraphKcat1.png}
-    \caption{GraphKcat Architecture}
-    \label{fig:placeholder}
-\end{figure}
-
-GraphKcat is the structure-aware catalytic refinement branch. Given a protein structure and ligand geometry, it extracts a catalytic pocket around the ligand, computes ligand and protein embeddings, and predicts three kinetic quantities jointly:
-\begin{equation}
-    \Big(
-    \widehat \ell_{k_{\rm cat}}^{\mathrm{GK}},
-    \widehat \ell_{K_M}^{\mathrm{GK}},
-    \widehat \ell_{\mathrm{eff}}^{\mathrm{GK}}
-    \Big)(x,\mathcal{R})
+    \widehat p_{\mathrm{gNAC}}
     =
-    f_{\mathrm{GK}}\!\Big(
-    G_{\mathrm{pocket}}(x,\mathcal{S}_{\mathrm{sub}}),
-    E_{\mathrm{ESM2}}(s_x),
-    E_{\mathrm{UniMol}}(\mathcal{S}_{\mathrm{sub}}),
-    \eta
-    \Big).
+    \frac{1}{\sum_{k=1}^{K}T_k}
+    \sum_{k=1}^{K}\sum_{t=1}^{T_k}
+    I_{\mathrm{gNAC}}\!\left(R_t^{(k)}\right),
 \end{equation}
-The pocket graph is the essential difference between GraphKcat and the wide-stage predictors. It lets the catalytic signal depend explicitly on pocket geometry rather than only on sequence and substrate identity. For design, this matters because large changes in catalytic activity can arise from a handful of pocket residues even when the rest of the protein remains close to its seed sequence.
+and the conformational gating free energy is
+\begin{equation}
+\label{eq:ucatgate}
+    \widehat{\Delta G}_{\mathrm{gate}}
+    =
+    -RT\log\!\left(
+    \frac{\widehat p_{\mathrm{gNAC}}}{1-\widehat p_{\mathrm{gNAC}}}
+    \right).
+\end{equation}
+The implementation additionally records soft productive scores, productive visit counts, dwell times, first-hit times, effective sample size, lower confidence bounds on $\widehat p_{\mathrm{gNAC}}$, and instability penalties such as persistent undersafe pocket-ligand contacts.
 
-The practical protocol is: materialize a protein PDB, materialize or embed a ligand conformer, extract the pocket with the fixed cutoff used by the deployed GraphKcat configuration, and score the example. If a ligand conformer cannot be generated or the structure cannot be materialized, the example should be deemed ineligible for GraphKcat rather than silently backfilled.
+\subsection{Forward and reverse steered whole-enzyme UMA dynamics}
 
-\subsection{Multi-oracle catalytic calibration and uncertainty}
+The second catalytic question is how difficult it is to move the full enzyme-ligand system between the reactant-bound and product-bound basins once those endpoint complexes are known. To probe that pathway, the repository runs forward pulls from $A$ to $B$ and, by default, reverse pulls from $B$ back to $A$. Let $\mathcal{M}$ be the mapped ligand-atom set shared across the two endpoint complexes after pocket alignment. The steering potential is
+\begin{equation}
+    U_{\mathrm{steer}}(R,t)
+    =
+    \sum_{i\in\mathcal{M}}
+    \frac{k_{\mathrm{steer}}}{2}
+    \left\|
+    r_i-r_i^\star(\lambda_t)
+    \right\|^2,
+\end{equation}
+where $\lambda_t$ is the pulling progress parameter and $r_i^\star(\lambda_t)$ interpolates between the reactant-bound and product-bound ligand coordinates. To prevent irrelevant global drift, the protocol also applies weak harmonic anchors to non-pocket protein heavy atoms:
+\begin{equation}
+    U_{\mathrm{anchor}}(R)
+    =
+    \sum_{j\in\mathcal{A}_{\mathrm{anchor}}}
+    \frac{k_{\mathrm{anchor}}}{2}
+    \left\|
+    r_j-r_j^{(0)}
+    \right\|^2.
+\end{equation}
+The total steered potential is therefore
+\begin{equation}
+    U_{\mathrm{tot}}(R,t)=U_{\mathrm{UMA}}(R)+U_{\mathrm{steer}}(R,t)+U_{\mathrm{anchor}}(R).
+\end{equation}
 
-Because the catalytic stack contains overlapping predictors, calibration and uncertainty must be explicit. KcatNet uncertainty should include checkpoint or ensemble disagreement when available. MMKcat uncertainty should include mask disagreement by construction. GraphKcat uncertainty should include at least checkpoint uncertainty, ligand-conformer sensitivity, and sensitivity to the pocket extraction procedure. When the same candidate is scored by multiple catalytic branches, disagreement should be retained as a signal rather than averaged away. This is the reason Eq.~\eqref{eq:catfusion} contains an explicit agreement penalty.
+For each pull, the runtime records cumulative nonequilibrium work,
+\begin{equation}
+    W = \int_0^\tau \frac{\partial U_{\mathrm{steer}}(R,t)}{\partial t}\,dt,
+\end{equation}
+and builds a work profile along the pulling schedule. These work traces are not treated as exact equilibrium barriers, but they are highly informative. They reveal whether the path between endpoint basins is mechanically smooth, whether it contains large hysteresis, whether hidden gating coordinates appear, and where near-transition-state-like structures should be harvested.
 
-Calibration should be performed per channel and per admissibility regime. Turnover calibration does not imply $K_M$ calibration, and sequence-plus-substrate calibration does not imply pocket-conditioned calibration. A practical strategy is to fit monotone or spline-based calibration maps for $\widehat \ell_{k_{\rm cat}}^{\mathrm{KN}}$, $\mu_{\mathrm{MM}}$, and each GraphKcat channel separately, then fuse the calibrated channels with reliability gating.
+\subsection{Jarzynski profiles, near-transition-state harvesting, and optional path umbrella PMFs}
+
+Repeated nonequilibrium pulls permit a free-energy-like reconstruction along the steering schedule. The repository uses a Jarzynski-style estimate
+\begin{equation}
+    \Delta F(\lambda)
+    =
+    -\beta^{-1}\log
+    \left\langle
+    e^{-\beta W(\lambda)}
+    \right\rangle
+\end{equation}
+as a default path profile \citep{jarzynski1997nonequilibrium}. The forward and reverse work distributions can also be diagnosed through the Crooks fluctuation relation \citep{crooks1999entropy}. In practice, the implemented catalytic stage uses these quantities conservatively: as barrier surrogates, as pathway-quality diagnostics, and as a way to extract useful frames rather than as a license to claim exact kinetics.
+
+The repository explicitly harvests near-transition-state-like structures from the steered trajectories. They are not asserted to be the true transition-state ensemble. Instead, they are ranked by local work accumulation, midpoint symmetry along the path, and balanced distance from both endpoint basins. This makes them useful seeds for the optional PMF stage.
+
+When the PMF stage is enabled, the code builds umbrella windows from the sMD-derived path images. Let $x_{\mathcal{M}}(R)$ denote the mapped ligand coordinates in the current frame and $x_j^\star$ the target ligand coordinates for window $j$. The umbrella bias is
+\begin{equation}
+    U_j(R)=U_{\mathrm{UMA}}(R)+\frac{k_{\mathrm{win}}}{2}\left\|x_{\mathcal{M}}(R)-x_j^\star\right\|^2+U_{\mathrm{anchor}}(R).
+\end{equation}
+Biased samples are then reweighted through an MBAR-style free-energy reconstruction to produce a PMF along the path progress variable. The resulting barrier estimate $\widehat{\Delta G}_{\mathrm{PMF}}^\ddagger$ is preferred whenever the PMF succeeds. This use of steered trajectories as PMF seeds closely follows the logic of nonequilibrium-to-equilibrium path reconstruction and Hummer--Szabo-style thinking, while remaining operationally grounded in the actual repository code path \citep{hummer2001free}.
+
+\subsection{Catalytic scalar used by the default Method~III implementation}
+
+The default implemented catalytic scalar is a transition-state-style log-rate proxy:
+\begin{equation}
+    \widehat \ell_{\mathrm{UMAcat}}
+    =
+    \log_{10}\!\left(\frac{k_B T}{h}\right)
+    -
+    \frac{\widehat{\Delta G}_{\mathrm{gate}}+\widehat{\Delta G}_{\mathrm{bar}}}{RT\ln 10},
+\end{equation}
+where
+\begin{equation}
+    \widehat{\Delta G}_{\mathrm{bar}}
+    =
+    \begin{cases}
+        \widehat{\Delta G}_{\mathrm{PMF}}^\ddagger, & \text{if PMF is enabled and succeeds},\\
+        \widehat{\Delta G}_{\mathrm{sMD}}^\ddagger, & \text{otherwise.}
+    \end{cases}
+\end{equation}
+This quantity is not claimed to be an exact experimental $\logkcat$. It is a physically structured catalytic proxy that penalizes both poor conformational preorganization and large reaction-path barriers. That distinction is important because two enzyme candidates with similar predictive turnover can differ strongly in how often they enter productive poses or how much nonequilibrium work is required to move between endpoint basins.
+
+\subsection{GraphKcat as the default learned catalytic refinement branch}
+
+GraphKcat remains essential because the dynamical catalytic branch and the learned structural branch answer complementary questions. Whole-enzyme UMA asks whether the full enzyme-ligand system dynamically supports productive organization and a reasonable endpoint-to-endpoint path. GraphKcat asks whether a pocket-aware learned representation of the current enzyme-ligand geometry is consistent with high catalytic turnover and favorable catalytic microenvironment features \citep{luo2025graphkcat}. In the current repository implementation, GraphKcat is run \emph{first} on LigandMPNN-packed mutant structures, not on the undeformed seed structure. This avoids a misleading prefilter in which catalytic pocket scoring would otherwise be inherited from the seed geometry rather than from the actual mutant-specific packed structure.
+
+The implemented GraphKcat controller also uses model-derived uncertainty rather than a fixed scalar heuristic. With Monte Carlo dropout samples indexed by $s\in\{1,\ldots,S\}$,
+\begin{equation}
+    \widehat \ell_{\mathrm{GK}}(x)
+    =
+    \frac{1}{S}\sum_{s=1}^{S}\widehat \ell_{\mathrm{GK}}^{(s)}(x),
+    \qquad
+    \widehat \sigma_{\mathrm{GK}}^2(x)
+    =
+    \frac{1}{S-1}\sum_{s=1}^{S}\left(\widehat \ell_{\mathrm{GK}}^{(s)}(x)-\widehat \ell_{\mathrm{GK}}(x)\right)^2.
+\end{equation}
+The prefilter score is then
+\begin{equation}
+    z_{\mathrm{GK}}^{\mathrm{risk}}(x)
+    =
+    \widehat \ell_{\mathrm{GK}}(x)-\kappa_{\mathrm{GK}}\widehat \sigma_{\mathrm{GK}}(x),
+\end{equation}
+and only the top fraction of candidates by $z_{\mathrm{GK}}^{\mathrm{risk}}$ are passed onward to the expensive whole-enzyme UMA branch. In the current repository defaults this fraction is $50\%$. The fused Method~III reward then uses the GraphKcat turnover channel together with the UMA-cat log-rate proxy and an agreement penalty. This makes GraphKcat the default learned catalytic refinement oracle for the self-contained catalytic RL path.
+
+\subsection{Catalytic uncertainty propagation in log-rate units}
+
+The current repository implementation also treats catalytic uncertainty in physically consistent units. Let $\widehat p_{\mathrm{gNAC}}$ denote the productive-pose occupancy estimate and $\widehat \sigma_{p}$ its uncertainty. A first-order uncertainty map for the gating free energy is
+\begin{equation}
+    \widehat \sigma_{\mathrm{gate}}
+    \approx
+    RT\frac{\widehat \sigma_p}{\widehat p_{\mathrm{gNAC}}(1-\widehat p_{\mathrm{gNAC}})}.
+\end{equation}
+Let $\widehat \sigma_{\mathrm{PMF}}$ denote the PMF barrier uncertainty when PMF is enabled, $\widehat \sigma_{\mathrm{sMD}}$ the steered-barrier uncertainty otherwise, and let
+\begin{equation}
+    \Delta_{\mathrm{FR}}
+    =
+    \left|\widehat{\Delta G}_{\mathrm{sMD}}^{\ddagger,\mathrm{fwd}}-\widehat{\Delta G}_{\mathrm{sMD}}^{\ddagger,\mathrm{rev}}\right|
+\end{equation}
+denote the forward-reverse mismatch. The implemented barrier uncertainty is
+\begin{equation}
+    \widehat \sigma_{\mathrm{bar}}^2
+    =
+    \begin{cases}
+        \widehat \sigma_{\mathrm{PMF}}^2, & \text{if PMF is enabled and succeeds},\\[4pt]
+        \widehat \sigma_{\mathrm{sMD}}^2 + \dfrac{1}{4}\Delta_{\mathrm{FR}}^2, & \text{otherwise.}
+    \end{cases}
+\end{equation}
+The final catalytic log-rate uncertainty propagated into reward fusion is therefore
+\begin{equation}
+    \widehat \sigma_{\ell_{\mathrm{UMAcat}}}
+    =
+    \frac{\sqrt{\widehat \sigma_{\mathrm{gate}}^2+\widehat \sigma_{\mathrm{bar}}^2}}{RT\ln 10}.
+\end{equation}
+This is a materially stronger formulation than mixing occupancy uncertainty and work variance directly in incompatible units.
+
+\subsection{Where KcatNet and MMKcat still fit}
+
+KcatNet and MMKcat are not removed from the methodology. KcatNet remains a useful wide predictive turnover screen when only sequence and substrate metadata are available \citep{pan2026kcatnet}. MMKcat remains the right missing-modality catalytic branch when products or structure channels are incomplete \citep{sun2025mmkcat}. They are therefore retained as auxiliary branches, ablations, and data-expansion tools. The key change is that they are no longer the default feedback loop for catalytic RL in this repository. The default loop is now whole-enzyme UMA dynamics plus GraphKcat.
 
 \subsection{Catalytic-oracle routing in active learning}
 
-The active-learning routing logic is intentionally asymmetric. KcatNet is the default wide-stage screen. MMKcat is run whenever missing-modality robustness is needed or when products are available and one wants a second wide-stage view of turnover. GraphKcat is reserved for a smaller structure-qualified subset. This routing is not an implementation accident; it is the catalytic counterpart of the SPURS $\rightarrow$ BioEmu $\rightarrow$ UMA hierarchy. The value of the hierarchy is that it preserves diversity and throughput while still making room for a pocket-aware refinement stage.
-
-In the present manuscript, catalytic routing is also the mechanism that keeps the paper honest. The current repository already supports Kcat-only active-learning rounds built around KcatNet, GraphKcat, and MMKcat. The broader proposed methodology simply generalizes that logic and places it on equal conceptual footing with the thermostability and binding branches.
+The active-learning routing logic is intentionally asymmetric. The broad stage is now a real dynamics stage, not merely a predictive filter. First repack the full candidate pool onto reactant-bound and product-bound endpoint complexes and run GraphKcat with MC-dropout on those packed mutant structures. Second, keep the top risk-adjusted GraphKcat tranche and select the expensive catalytic batch from within that screened set. Third, run the broad whole-enzyme UMA screen, then forward and reverse steered UMA dynamics, and optionally a path umbrella PMF. KcatNet and MMKcat can still be inserted as additional predictive branches, but the default implemented control loop is
+\[
+\text{LigandMPNN}\rightarrow\text{GraphKcat risk-adjusted prefilter}\rightarrow\text{whole-enzyme UMA broad screen}\rightarrow\text{sMD / optional PMF}\rightarrow\text{fused reward}.
+\]
+This is the catalytic counterpart of the SPURS $\rightarrow$ BioEmu $\rightarrow$ UMA hierarchy, except that the default catalytic high-fidelity signal now comes from a physically explicit enzyme-ligand dynamics protocol rather than from a purely supervised turnover regressor.
 
 
 \section{Data curation, splits, and training corpora}
@@ -1848,18 +2029,20 @@ BioEmu samples per candidate during training & 2048 & 512--4096 & Enough to esti
 BioEmu sample count for shortlisted candidates & 10k & 5k--20k & Matches the scale used in the BioEmu paper for more stable ensemble estimates \citep{lewis2024bioemu}. \\
 BioEmu evaluation rate in \methodI{} & 25\% & 15--50\% & BioEmu is cheap enough to screen a sizable fraction of terminal candidates. \\
 UMA evaluation rate in \methodI{} & 3\% overall & 1--5\% overall & Sensible default under moderate compute. \\
-KcatNet evaluation rate in catalytic \methodI{} or \methodIII{} & 10--40\% of filtered pool & 5--60\% & Wide catalytic screen when substrate metadata are available. \\
-MMKcat evaluation rate in catalytic \methodI{} or \methodIII{} & 5--25\% of filtered pool & 0--40\% & Missing-modality catalytic branch; increase when product channels are available or structure channels are noisy. \\
-GraphKcat evaluation rate in catalytic \methodI{} or \methodIII{} & 1--10\% of filtered pool & 1--20\% & Narrower pocket-aware catalytic refinement branch. \\
+UMA-cat broad-screen evaluation rate in catalytic \methodI{} or \methodIII{} & 5--15\% of filtered pool & 1--25\% & Broad whole-enzyme equilibrium catalytic screen before narrower structural refinement. \\
+UMA-cat sMD evaluation rate in catalytic \methodI{} or \methodIII{} & same as broad UMA-cat batch & task dependent & By default the repository runs forward and reverse steering on the same catalytic batch once endpoints are packed. \\
+UMA-cat PMF finalist rate & 0--10\% of catalytic batch & 0--20\% & Optional path umbrella refinement for finalists; off by default because it is materially more expensive. \\
+GraphKcat evaluation rate in catalytic \methodI{} or \methodIII{} & 50--100\% of candidate pool & 10--100\% & Packed-structure catalytic prefilter before the expensive whole-enzyme UMA stage. \\
 GraphKcat pocket cutoff & $8\,\angstrom$ & 6--10 \angstrom & Matches the current GraphKcat preprocessing setting in the repository. \\
-Kcat fusion weights $(w_{\mathrm{KN}},w_{\mathrm{GK}},w_{\mathrm{agree}})$ & $(0.55,0.55,0.15)$ & task dependent & Matches the current repository defaults for catalytic fusion before further tuning. \\
+Catalytic fusion weights $(w_{\mathrm{UCAT}},w_{\mathrm{GK}},w_{\mathrm{agree}})$ & $(0.90,0.55,0.20)$ & task dependent & Matches the current repository defaults for UMA-cat plus GraphKcat fusion before further tuning. \\
 Whole-protein UMA atom budget & 8000 atoms & 4000--10000 & Matches the documented large-system MD example while keeping the primary protocol conservative \citep{fairchem2025github}. \\
 BioEmu-dominant switch & $N_{\mathrm{atom}}>8000$ or weak whole-protein UMA calibration & 7000--10000 & Makes the large-protein setting explicit rather than implicit. \\
 MD timestep for UMA molecular runs & $0.1\,$fs & $0.05$--$0.25\,$fs after validation & Conservative value taken from FAIR Chemistry examples \citep{fairchem2025github}. \\
 Whole-protein UMA temperature ladder & 300, 330, 360, 390, 420 K & tune around expected fold class & Supports thermostability curves rather than a single-temperature score. \\
 Production time per temperature (screening) & 25 ps & 10--50 ps & Adequate for ranking during training; extend for shortlisted candidates. \\
 Replicate trajectories per temperature & 4 & 2--8 & Needed for uncertainty estimation. \\
-Local fallback radius for UMA & $8\,\angstrom$ & $6$--$10\,\angstrom$ & Used only when the whole prepared system exceeds budget or when local rescoring is desired. \\
+sMD images per replica & 24 & 8--64 & Repository default for the catalytic endpoint-to-endpoint steering schedule. \\
+Path-PMF umbrella windows & 16 & 8--32 & Repository default for optional catalytic PMF refinement seeded from sMD path images. \\
 \bottomrule
 \end{longtable}
 
@@ -1916,9 +2099,9 @@ Surrogate ensemble size & $8$ & $4$--$16$ & Increase when epistemic uncertainty 
 Student proposal pool per round & $50$k candidates & $10^4$--$10^5$ & One-shot generation is cheap enough that oversampling is usually beneficial. \\
 BioEmu batch size per round & $512$ candidates & $128$--$2048$ & BioEmu should screen a much wider set than UMA in every round. \\
 UMA batch size per round & $64$ candidates & $16$--$128$ & Match to the available UMA budget and desired turnaround time. \\
-KcatNet wide-stage batch size per round & $1024$ candidates & $256$--$4096$ & Matches the default catalytic round budget in the repository and keeps catalytic screening broad. \\
-GraphKcat narrow-stage batch size per round & $256$ candidates & $64$--$1024$ & Pocket-aware catalytic refinement should remain narrower than the wide-stage catalytic screen. \\
-MMKcat mask family & `1111;1110;1101;1100` & task dependent & Default deployment mask family for missing-modality catalytic inference. \\
+UMA-cat broad-stage batch size per round & $256$ candidates & $64$--$1024$ & Matches the default catalytic round budget in the repository and keeps the whole-enzyme dynamics stage tractable. \\
+GraphKcat prefilter batch size per round & candidate pool or its largest feasible packed subset & task dependent & In the implemented catalytic specialization, GraphKcat runs before UMA-cat and should screen as much of the packed pool as budget allows. \\
+PMF finalist quota & $0$ by default & task dependent & Optional catalytic path-PMF refinement is disabled by default and only enabled for finalists. \\
 Teacher-student control token set & $\{\beta, q, \rho\}$ & task-specific & Reward temperature $\beta$, target reward quantile $q$, and oracle-mixture tag $\rho$ are the most useful starting controls. \\
 Student KL tolerance on held-out candidate pool & $0.10$ nats/token & $0.05$--$0.20$ & If exceeded, retrain or enlarge the student before the next round. \\
 High-order evaluation quota & $30\%$ of expensive batch & $20$--$40\%$ & Protects coverage of large-Hamming-distance modes. \\
@@ -1956,7 +2139,7 @@ Evaluate whether whole-protein UMA-derived signals are stable across replicate t
 On a calibration set, measure agreement between SPURS, BioEmu, and UMA. Low agreement is not necessarily a problem, but systematic disagreement on specific mutation classes (for example solvent-exposed charge flips, buried aromatic packing, or local unfolding around glycine or proline insertions) should inform reward weights, reliability gates, and acquisition priorities. In the large-protein setting, the critical comparison is usually SPURS versus BioEmu on the wide pool and BioEmu versus UMA on the small physically focused subset.
 
 \paragraph{Step 5: catalytic-oracle calibration and disagreement.}
-On reaction-conditioned enzyme datasets, evaluate KcatNet, MMKcat, GraphKcat, and their fused catalytic score against experimental $\kcat$, $\Km$, and $\kcatKm$ when each quantity is available. Report performance stratified by metadata completeness, because MMKcat is expected to behave differently when products are present versus absent and GraphKcat is only meaningful when structure and ligand geometry are available. Cross-oracle disagreement is especially informative here: large disagreement between KcatNet and GraphKcat often signals that sequence-level turnover cues and pocket-level mechanistic cues are pointing in different directions.
+On reaction-conditioned enzyme datasets, evaluate the whole-enzyme UMA catalytic proxy, GraphKcat, and their fused catalytic score against experimental $\kcat$, $\Km$, and $\kcatKm$ when each quantity is available. The broad whole-enzyme UMA branch should be analyzed separately into its constituent parts: productive-pose occupancy, gating free energy, sMD barrier, PMF barrier when enabled, and the resulting log-rate proxy. GraphKcat should be stratified by whether the structure and ligand geometry were fully materialized without repair. Cross-oracle disagreement is especially informative here: large disagreement between the dynamical catalytic proxy and GraphKcat often signals that static pocket features and explicit endpoint-to-endpoint dynamics are pointing in different directions. KcatNet and MMKcat should still be evaluated as auxiliary predictive baselines or missing-modality controls, but they are no longer the primary implemented catalytic feedback loop.
 
 \subsection{Teacher-student validation for \methodIII{}}
 
@@ -1981,7 +2164,7 @@ For terminal samples generated on held-out backbones, report:
     \item \textbf{Mutation-order profile:} histogram of $K(x)$ among accepted candidates, together with the fraction of accepted candidates in the explicit double-mutant setting and the higher-order setting.
     \item \textbf{Structure plausibility:} \packunc, terminal purity or entropy, self-consistency pass rate, and backbone RMSD to the target after structure prediction with BioEmu where applicable.
     \item \textbf{Cross-oracle agreement:} pairwise agreement between SPURS, BioEmu, and UMA on the shortlisted candidates.
-    \item \textbf{Catalytic quality:} best-of-$N$ and top-$k$ fused catalytic reward, together with the distributions of predicted $\logkcat$, $\logKm$, and $\logeff$ on catalytic tasks.
+    \item \textbf{Catalytic quality:} best-of-$N$ and top-$k$ fused catalytic reward, together with the distributions of productive-pose occupancy, UMA-cat log-rate proxy, GraphKcat turnover, and, when enabled, PMF barrier estimates on catalytic tasks.
     \item \textbf{Large-protein breakdown:} all metrics above repeated on the subset whose prepared systems exceed the whole-protein UMA setting.
 \end{enumerate}
 
@@ -2000,9 +2183,11 @@ A method paper of this kind is not credible without ablations. The minimum requi
     \item \textbf{LigandMPNN replacement of the SPURS ProteinMPNN branch.} For ligand-rich tasks, and optionally also for monomers and PPIs, replace the structure branch with LigandMPNN and repeat calibration and training \citep{dauparas2025ligandmpnn}.
     \item \textbf{Teacher-free one-shot baseline.} Train the same one-shot ADFLIP student used in \methodIII{} directly on reward-weighted replay data without a GFlowNet teacher.
     \item \textbf{Large-protein setting switch.} Compare hard BioEmu-dominant routing versus softer reliability gating above $8000$ atoms.
-    \item \textbf{No MMKcat branch.} Measure the effect of removing missing-modality catalytic supervision, especially on examples with missing product metadata.
-    \item \textbf{No GraphKcat branch.} Measure the effect of removing pocket-aware structural catalytic refinement and relying only on KcatNet or MMKcat.
-    \item \textbf{Catalytic-only versus joint reward.} Compare a catalytic-only Kcat-mode teacher against the joint stability-binding-catalysis reward on the same enzyme tasks.
+    \item \textbf{No reverse sMD branch.} Measure the effect of dropping reverse pulls and the forward-reverse consistency diagnostics.
+    \item \textbf{No PMF branch.} Measure the effect of using only the sMD barrier surrogate without path umbrella refinement.
+    \item \textbf{No GraphKcat branch.} Measure the effect of removing pocket-aware structural catalytic refinement and relying only on the whole-enzyme UMA catalytic proxy.
+    \item \textbf{Auxiliary KcatNet/MMKcat reinstatement.} Compare the default UMA-cat plus GraphKcat path against variants that add KcatNet or MMKcat as extra predictive catalytic channels.
+    \item \textbf{Catalytic-only versus joint reward.} Compare a catalytic-only teacher against the joint stability-binding-catalysis reward on the same enzyme tasks.
 \end{enumerate}
 At least one ablation table should be stratified by prepared-system atom count or sequence length, because that is the central setting where BioEmu is expected to change the behavior of the method.
 
@@ -2067,6 +2252,10 @@ Catalytic branches can fail for reasons that stability branches never see. A sub
 
 GraphKcat depends on protein structure and ligand geometry. If the protein structure is mis-packed, if the ligand conformer is badly embedded, or if the wrong pocket is extracted, the resulting prediction can be confidently wrong. This is not an argument against GraphKcat; it is an argument for routing discipline. GraphKcat should be used only when its structural prerequisites are satisfied, and its predictions should remain coupled to structure-quality diagnostics rather than being treated as a free extra label.
 
+\subsection{sMD coordinate mismatch and hysteresis}
+
+Steered catalytic dynamics can fail for a different reason: the pulling coordinate may be physically misaligned with the true reactive pathway. In that case the work distribution becomes broad, forward and reverse pulls separate strongly, and the harvested path images may reflect steering artifacts rather than the dominant reactive channel. The mitigation is to treat forward-reverse mismatch, dissipated work, and path hysteresis as first-class diagnostics, to harvest near-transition-state-like structures conservatively rather than declaring them exact transition states, and to prefer PMF refinement only when the steered path shows adequate continuity and overlap.
+
 \subsection{MMKcat mask collapse}
 
 MMKcat is valuable precisely because it exposes missing-modality sensitivity, but that also creates a new failure mode: mask collapse. If all admissible masks produce nearly identical predictions because the model has learned to ignore the optional channels, the method gives the appearance of robustness without actually extracting information from the missing-modality training mechanism. The mitigation is to monitor mask disagreement, to report performance stratified by mask family, and to treat vanishing disagreement as a diagnostic that needs explanation rather than as an automatic positive.
@@ -2081,7 +2270,7 @@ A second responsibility issue is scientific rather than biosafety-related: it is
 
 \section{Conclusion}
 
-This paper has specified a complete methodology for GFlowNet fine-tuning of ADFLIP toward thermostable, affinity-aware, and catalysis-aware fixed-backbone protein design. The central idea is to turn ADFLIP from a full-atom inverse folding model into a reward-proportional sequence sampler over variable-order edit trajectories rooted at ADFLIP seed sequences, and then to complement those edit-trajectory methods with a one-shot deployment option. SPURS provides the dense cheap stability branch: baseline-aware mutation landscapes plus explicit single- and double-mutant supervision with conservative higher-order handling, now extended in complex settings into a bound-versus-separated cSPURS objective for protein--protein and protein--ligand tasks. BioEmu provides the fast whole-chain dynamics branch: sequence-conditioned equilibrium ensembles whose derived folded-basin statistics, global unfolding and folded-basin features can be calibrated into a scalable thermostability signal \citep{lewis2024bioemu}. UMA provides the highest-fidelity MLIP-MD branch: calibrated whole-protein thermostability estimates up to roughly $8000$ atoms, with local or hybrid fallback beyond that setting. KcatNet, MMKcat, and GraphKcat provide the catalytic branch: wide turnover prediction, missing-modality robustness, and pocket-aware kinetic refinement, respectively \citep{pan2026kcatnet,luo2025graphkcat,sun2025mmkcat}. The updated manuscript also generalized the generator and reward to monomers, multimers, protein--protein interfaces, protein--ligand systems, and reaction-conditioned enzyme tasks by exploiting ADFLIP's native all-atom complex conditioning and by translating oracle outputs into component stability, binding free-energy, and catalytic-kinetic terms. We developed three concrete training protocols. \methodI{} interleaves all oracle families online using asynchronous dynamics and catalytic acquisition plus hierarchical reward correction. \methodII{} separates broad cheap-oracle exploration from dynamics refinement and then targeted high-fidelity rescoring before optional distillation. \methodIII{} follows the round-based biological-sequence active-learning style of prior GFlowNet work, using an uncertainty-aware teacher GFlowNet and a one-shot ADFLIP student for non-iterative proposal generation; in the catalytic specialization already implemented in this repository, the wide stage is KcatNet/MMKcat and the narrow structural stage is GraphKcat.
+This paper has specified a complete methodology for GFlowNet fine-tuning of ADFLIP toward thermostable, affinity-aware, and catalysis-aware fixed-backbone protein design. The central idea is to turn ADFLIP from a full-atom inverse folding model into a reward-proportional sequence sampler over variable-order edit trajectories rooted at ADFLIP seed sequences, and then to complement those edit-trajectory methods with a one-shot deployment option. SPURS provides the dense cheap stability branch: baseline-aware mutation landscapes plus explicit single- and double-mutant supervision with conservative higher-order handling, now extended in complex settings into a bound-versus-separated cSPURS objective for protein--protein and protein--ligand tasks. BioEmu provides the fast whole-chain dynamics branch: sequence-conditioned equilibrium ensembles whose derived folded-basin statistics, global unfolding and folded-basin features can be calibrated into a scalable thermostability signal \citep{lewis2024bioemu}. UMA provides the highest-fidelity MLIP-MD branch: calibrated whole-protein thermostability estimates up to roughly $8000$ atoms, with local or hybrid fallback beyond that setting. The catalytic branch is now equally explicit. KcatNet, MMKcat, and GraphKcat remain important learned kinetic predictors \citep{pan2026kcatnet,luo2025graphkcat,sun2025mmkcat}, but the default catalytic RL specialization implemented in this repository uses whole-enzyme UMA equilibrium screening, forward and reverse steered endpoint-to-endpoint dynamics, optional path umbrella PMFs, and GraphKcat as an orthogonal structural catalytic refinement oracle. The updated manuscript also generalized the generator and reward to monomers, multimers, protein--protein interfaces, protein--ligand systems, and reaction-conditioned enzyme tasks by exploiting ADFLIP's native all-atom complex conditioning and by translating oracle outputs into component stability, binding free-energy, and catalytic-kinetic terms. We developed three concrete training protocols. \methodI{} interleaves all oracle families online using asynchronous dynamics and catalytic acquisition plus hierarchical reward correction. \methodII{} separates broad cheap-oracle exploration from dynamics refinement and then targeted high-fidelity rescoring before optional distillation. \methodIII{} follows the round-based biological-sequence active-learning style of prior GFlowNet work and is now instantiated in the repository as an actual trajectory-balance teacher over canonical edit trajectories plus a one-shot student for non-iterative proposal generation. In the catalytic specialization already implemented in this repository, the broad stage is a real whole-enzyme UMA catalytic screen, the first learned prefilter is packed-structure GraphKcat with MC-dropout uncertainty, and the narrower expensive stage remains the UMA catalytic dynamics stack.
 
 Just as importantly, the manuscript has made the large-protein setting explicit. The FAIR Chemistry release now documents large-system MD execution including an $8000$-atom worked example and reported throughput on $100$k$+$-atom systems \citep{fairchem2025github}, so whole-protein UMA-MD is a realistic branch rather than a hypothetical one. But the public OMol25 evidence remains rooted in chemically rich systems up to about $350$ atoms \citep{levine2025omol25}, so the scientifically conservative design is to combine UMA with a dedicated protein-equilibrium emulator rather than to rely on UMA alone. BioEmu is precisely that complement: a fast, protein-specific, dynamics-aware oracle trained from structural data, more than 200 milliseconds of MD, and large-scale experimental stabilities \citep{lewis2024bioemu}. In the large-protein setting above roughly $8000$--$10000$ atoms, the updated methodology therefore lets BioEmu carry the whole-chain dynamics burden while UMA contributes targeted local or hybrid corrections.
 
@@ -2208,8 +2397,8 @@ PPO editor &  &  &  &  &  &  \\
     \item Validate SPURS calibration on held-out natural proteins before running de novo design.
     \item Validate BioEmu calibration separately on BioEmu-eligible proteins and on the large-protein setting where it is expected to dominate the whole-chain dynamics signal.
     \item Use whole-protein UMA-MD up to roughly $8000$ atoms when the prepared system fits the budget; switch to BioEmu-dominant whole-chain screening above that size or when whole-protein UMA calibration degrades, and reserve UMA for local or hybrid corrections.
-    \item Validate catalytic metadata explicitly: every Kcat-mode record should carry substrate metadata, and every GraphKcat-qualified record should carry a structure plus ligand geometry.
-    \item Calibrate KcatNet, MMKcat, and GraphKcat separately before fusing them, and log disagreement rather than averaging it away.
+    \item Validate catalytic metadata explicitly: every catalytic record should carry substrate metadata, reactant-bound and product-bound endpoint complexes, protein chain IDs, and pocket positions before the default UMA-cat loop begins.
+    \item Calibrate the whole-enzyme UMA catalytic proxy and GraphKcat separately before fusing them, and log disagreement rather than averaging it away; treat KcatNet and MMKcat as auxiliary predictive branches rather than the default catalytic control loop.
     \item Log both direct and corrected expensive rewards separately.
     \item Preserve a frozen copy of the initial ADFLIP for anchor loss and rollback.
     \item For \methodIII{}, log teacher-student KL, top-$k$ overlap, and high-order tail coverage every active-learning round.
@@ -2218,7 +2407,7 @@ PPO editor &  &  &  &  &  &  \\
 
 \section{Appendix E: bibliography notes and source provenance}
 
-The methodology in this manuscript was derived from eight primary source clusters reviewed in detail: the ADFLIP ICML paper for all-atom inverse folding, multistate conditioning, and training-free guidance, the SPURS article for scalable thermostability prediction, the BioEmu preprint for scalable equilibrium-ensemble emulation and stability-relevant protein dynamics, the core GFlowNet theory papers, the 2021--2022 GFlowNet literature on non-iterative diverse candidate generation and biological sequence active learning, the UMA or OMol25 releases for MLIP-based molecular simulation and data provenance, and the KcatNet, GraphKcat, and MMKcat papers for catalytic turnover and kinetic-parameter prediction \citep{yi2025adflip,li2026spurs,lewis2024bioemu,bengio2021noniter,bengio2023gflownet,malkin2022trajectory,madan2023subtb,jain2022bioseqgfn,wood2025uma,levine2025omol25,pan2026kcatnet,luo2025graphkcat,sun2025mmkcat}. In addition, the updated large-system deployment scope in this paper is informed both by the FAIR Chemistry public documentation of large-system UMA-MD execution, including a worked $8000$-atom example and reported throughput on larger systems, and by the BioEmu results on scalable equilibrium sampling and protein stability estimation \citep{fairchem2025github,lewis2024bioemu}. All proposed additions beyond those sources are explicitly framed as methodological proposals rather than established results.
+The methodology in this manuscript was derived from nine primary source clusters reviewed in detail: the ADFLIP ICML paper for all-atom inverse folding, multistate conditioning, and training-free guidance, the SPURS article for scalable thermostability prediction, the BioEmu preprint for scalable equilibrium-ensemble emulation and stability-relevant protein dynamics, the core GFlowNet theory papers, the 2021--2022 GFlowNet literature on non-iterative diverse candidate generation and biological sequence active learning, the UMA or OMol25 releases for MLIP-based molecular simulation and data provenance, the KcatNet, GraphKcat, and MMKcat papers for catalytic turnover and kinetic-parameter prediction, and the nonequilibrium free-energy literature underlying Jarzynski, Crooks, and Hummer--Szabo style path reconstruction \citep{yi2025adflip,li2026spurs,lewis2024bioemu,bengio2021noniter,bengio2023gflownet,malkin2022trajectory,madan2023subtb,jain2022bioseqgfn,wood2025uma,levine2025omol25,pan2026kcatnet,luo2025graphkcat,sun2025mmkcat,jarzynski1997nonequilibrium,crooks1999entropy,hummer2001free}. In addition, the updated large-system deployment scope in this paper is informed both by the FAIR Chemistry public documentation of large-system UMA-MD execution, including a worked $8000$-atom example and reported throughput on larger systems, and by the BioEmu results on scalable equilibrium sampling and protein stability estimation \citep{fairchem2025github,lewis2024bioemu}. All proposed additions beyond those sources are explicitly framed as methodological proposals rather than established results.
 
 \begin{thebibliography}{99}
 
@@ -2276,6 +2465,21 @@ Bowen Jing, Stephan Eismann, Patricia Suriana, Raphael Townshend, and Ron Dror.
 Minsu Kim, Joohwan Ko, Dinghuai Zhang, Ling Pan, Taeyoung Yun, Woochang Kim, Jinkyoo Park, and Yoshua Bengio.
 \newblock Learning to Scale Logits for Temperature-Conditional GFlowNets.
 \newblock In \emph{NeurIPS AI for Science Workshop}, 2023.
+
+\bibitem[Crooks(1999)]{crooks1999entropy}
+Gavin E. Crooks.
+\newblock Entropy production fluctuation theorem and the nonequilibrium work relation for free energy differences.
+\newblock \emph{Physical Review E}, 60(3):2721--2726, 1999.
+
+\bibitem[Hummer and Szabo(2001)]{hummer2001free}
+Gerhard Hummer and Attila Szabo.
+\newblock Free energy reconstruction from nonequilibrium single-molecule pulling experiments.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 98(7):3658--3661, 2001.
+
+\bibitem[Jarzynski(1997)]{jarzynski1997nonequilibrium}
+Christopher Jarzynski.
+\newblock Nonequilibrium equality for free energy differences.
+\newblock \emph{Physical Review Letters}, 78(14):2690--2693, 1997.
 
 \bibitem[Levine et~al.(2025)Levine et~al.]{levine2025omol25}
 Daniel S. Levine, Muhammed Shuaibi, Evan Walter Clark Spotte-Smith, et~al.
