@@ -2,6 +2,20 @@
 
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Blog%20Post-ffcc4d)](https://huggingface.co/blog/AmelieSchreiber/thermogfn-if) [![bioRxiv](https://img.shields.io/badge/bioRxiv-Preprint-007a33.svg)](https://www.biorxiv.org/) [![Paper](https://img.shields.io/badge/PDF-Download%20Paper-blue)](./assets/paper/main.pdf)
 
+## Training Paradigms 
+### UMA MLIP only GFlowNets Training 
+<p align="center">
+  <img src="./assets/png/uma-training.png" width="600" alt="UMA only GFlowNets Training Diagram">
+</p>
+
+### Full GFlowNets with Kinetic Oracle-feedback Training 
+<p align="center">
+  <img src="./assets/png/ThermoGFN-IF-oracle-training.png" width="600" alt="Full Oracle Feedback GFlowNets Training Diagram">
+</p>
+
+### Binding Affinity and Thermostability GFlowNets Training Paradigms 
+The binding affinity and thermostability GFlowNets style RL training paradigms are similar, with Tm utilizing the addition BioEmu, and SPURS oracles, and affinity leaning on UMA more. 
+
 ThermoGFN-IF implementation scaffold for multi-fidelity protein design with Method III-first training.
 
 Important implementation note:
@@ -89,9 +103,24 @@ Primary runtime configs:
 `config/uma_cat_m3_default.yaml` is the default self-contained catalytic RL config and includes:
 
 - generator backend and LigandMPNN packing controls,
+- prepared-endpoint conditioning controls:
+  - OpenMM hydrogenation at fixed pH,
+  - heuristic first-shell water insertion,
+  - short UMA `FIRE` relaxation before dynamics,
 - UMA catalytic broad-screen controls,
-- forward / reverse sMD controls,
+- forward / reverse sMD controls with:
+  - `300 K` Langevin dynamics,
+  - `0.05 fs` timestep,
+  - explicit friction in `ps^-1`,
+  - weak whole-backbone endpoint guidance,
+  - stronger pocket guidance,
+  - interpolated `CA` elastic-network fold prior,
+  - chemistry-aware ligand bond schedules for bond retention / breaking / forming,
+  - reduced Cartesian steering on reactive atoms,
+  - coherent COM steering on stable ligand fragments,
+  - hard rejection of paths that create excess ligand bonds or severe close contacts,
 - optional PMF controls,
+- sMD quality gates used to suppress unstable PMF seeds,
 - optional GraphKcat refinement controls,
 - catalytic fusion weights,
 - Method III round budgets for `uma_cat_budget` and `graphkcat_budget`,
@@ -227,6 +256,32 @@ The default config is:
 
 - `config/uma_cat_m3_default.yaml`
 
+Dataset-wide sMD quality is now validated against three classes of failure, not just endpoint RMSD:
+
+- fold distortion via interpolated `CA` elastic-network deviation,
+- severe protein-ligand clashes via close-contact counts,
+- nonphysical ligand graph changes via excess-bond counts.
+
+The helper validator is:
+
+```bash
+conda run --no-capture-output -n mora-uma python scripts/prep/oracles/validate_uma_smd_protocol.py \
+  --config config/uma_cat_m3_default.yaml \
+  --dataset-path runs/tmp/uma_cat_rf3_train.jsonl \
+  --output runs/tmp/uma_smd_validation_panel.json \
+  --sample-size 8 \
+  --seed 13
+```
+
+That validator uses the same prepared-endpoint and sMD defaults as the catalytic training config and reports:
+
+- endpoint/product RMSD metrics,
+- pocket and backbone drift,
+- `CA` network RMS deviation,
+- close-contact counts,
+- excess ligand bond counts,
+- pass/fail fraction under the configured sMD quality gates.
+
 Default active oracle env bindings:
 
 ```yaml
@@ -241,9 +296,22 @@ Default catalytic routing in that config:
 - `generator.backend = ligandmpnn`
 - `round.graphkcat_prefilter_fraction = 0.0`
 - `round.graphkcat_budget = 0`
+- `oracles.uma_cat.preparation.hydrogens = 1`
+- `oracles.uma_cat.preparation.first_shell_waters = 1`
+- `oracles.uma_cat.preparation.relax_steps = 25`
 - `oracles.uma_cat.broad.steps = 1000` with `replicas = 3`
-- `oracles.uma_cat.smd.images = 32`, `steps_per_image = 40`, `replicas = 3`
-- `oracles.uma_cat.smd.k_steer_eva2 = 1.5` for gentler steering than the earlier default
+- `oracles.uma_cat.smd.images = 96`, `steps_per_image = 24`, `replicas = 2`
+- `oracles.uma_cat.smd.temperature_k = 300.0`
+- `oracles.uma_cat.smd.timestep_fs = 0.05`
+- `oracles.uma_cat.smd.friction_ps_inv = 2.0`
+- `oracles.uma_cat.smd.k_steer_eva2 = 0.02`
+- `oracles.uma_cat.smd.k_global_eva2 = 0.02`
+- `oracles.uma_cat.smd.k_local_eva2 = 0.15`
+- `oracles.uma_cat.smd.k_anchor_eva2 = 0.0`
+- `oracles.uma_cat.smd.ca_network.sequential_k_eva2 = 6.0`
+- `oracles.uma_cat.smd.ca_network.contact_k_eva2 = 0.35`
+- `oracles.uma_cat.smd.force_clip_eva = 0.75`
+- `oracles.uma_cat.smd.quality.require_pass_for_pmf = 1`
 - `oracles.uma_cat.smd.enabled = true`
 - `oracles.uma_cat.smd.reverse = true`
 - `oracles.uma_cat.pmf.enabled = false`
@@ -364,6 +432,14 @@ What this stage computes:
 - forward/reverse mismatch `uma_cat_forward_reverse_gap_kcal_mol`
 - near-TS candidate count `uma_cat_near_ts_count`
 - final catalytic scalar `uma_cat_log10_rate_proxy`
+- structural quality telemetry:
+  - `uma_cat_final_product_rmsd_a`
+  - `uma_cat_final_pocket_rmsd_a`
+  - `uma_cat_final_backbone_rmsd_a`
+  - `uma_cat_max_product_rmsd_a`
+  - `uma_cat_max_pocket_rmsd_a`
+  - `uma_cat_max_backbone_rmsd_a`
+  - `uma_cat_smd_quality_pass`
 
 Per-candidate artifacts are written under `--artifact-root`, including:
 
@@ -375,6 +451,37 @@ Per-candidate artifacts are written under `--artifact-root`, including:
 - `smd_reverse_summary.json`
 - `smd_near_ts.json`
 - `pmf_summary.json`
+
+### Validate the UMA sMD protocol on a dataset panel
+
+Use this before promoting new sMD/PMF settings broadly:
+
+```bash
+conda run -n mora-uma python scripts/prep/oracles/validate_uma_smd_protocol.py \
+  --dataset-path runs/tmp/uma_cat_rf3_train.jsonl \
+  --output runs/tmp/uma_smd_validation_panel.json \
+  --sample-size 4 \
+  --sample-mode stratified_length \
+  --device cuda:0 \
+  --calculator-workers 1
+```
+
+This validator:
+
+- samples a small panel across sequence-length strata,
+- prepares endpoints with hydrogens and first-shell waters,
+- relaxes endpoints under UMA,
+- runs the current sMD protocol,
+- reports aggregate RMSD quality metrics and pass rates.
+
+The output JSON includes:
+
+- `final_product_rmsd_mean_a`
+- `max_product_rmsd_mean_a`
+- `max_pocket_rmsd_mean_a`
+- `max_backbone_rmsd_mean_a`
+- `n_quality_pass`
+- `quality_pass_fraction`
 
 ### Run GraphKcat on the same packed candidates
 

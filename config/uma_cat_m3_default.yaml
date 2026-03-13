@@ -44,10 +44,25 @@ oracles:
     device: cuda:0
     calculator_workers: 1
     max_atoms: 12000
+    protocol:
+      max_reactive_bonds: 8
+      max_reactive_atoms: 12
+      max_reactive_fraction: 0.35
+    preparation:
+      hydrogens: 1
+      first_shell_waters: 1
+      ph: 7.4
+      max_first_shell_waters: 12
+      water_shell_distance_a: 2.8
+      water_clash_distance_a: 2.1
+      water_bridge_distance_min_a: 4.2
+      water_bridge_distance_max_a: 6.6
+      relax_steps: 25
+      relax_fmax_eva: 0.2
     broad:
       temperature_k: 300.0
       timestep_fs: 0.1
-      friction_per_fs: 0.01
+      friction_ps_inv: 1.0
       steps: 1000
       replicas: 3
       save_every: 20
@@ -60,22 +75,42 @@ oracles:
     smd:
       enabled: true
       reverse: true
-      timestep_fs: 0.1
-      friction_per_fs: 0.01
-      images: 32
-      steps_per_image: 40
-      replicas: 3
-      k_steer_eva2: 1.5
-      k_anchor_eva2: 0.05
-      force_clip_eva: 20.0
+      temperature_k: 300.0
+      timestep_fs: 0.05
+      friction_ps_inv: 2.0
+      images: 96
+      steps_per_image: 48
+      replicas: 2
+      k_steer_eva2: 0.01
+      k_global_eva2: 0.03
+      k_local_eva2: 0.15
+      k_anchor_eva2: 0.01
+      ca_network:
+        sequential_k_eva2: 12.0
+        contact_k_eva2: 0.50
+        contact_cutoff_a: 8.0
+      force_clip_eva: 0.35
+      production_warmup_steps: 40
+      quality:
+        max_final_product_rmsd_a: 1.75
+        max_max_product_rmsd_a: 5.0
+        max_max_pocket_rmsd_a: 4.0
+        max_max_backbone_rmsd_a: 3.0
+        max_max_ca_network_rms_a: 0.75
+        max_max_close_contacts: 0
+        max_max_excess_bond_count: 0
+        require_pass_for_pmf: 1
     pmf:
       enabled: false
       every_n_rounds: 1
       windows: 20
-      steps_per_window: 200
+      steps_per_window: 320
       save_every: 10
       replicas: 2
       k_window_eva2: 2.0
+      k_local_eva2: 0.08
+      window_relax_steps: 32
+      window_equilibrate_steps: 64
   graphkcat:
     model_root: models/GraphKcat
     checkpoint: models/GraphKcat/checkpoint/paper.pt

@@ -99,14 +99,49 @@ def main() -> int:
     parser.add_argument("--uma-calculator-workers", type=int, default=None)
     parser.add_argument("--uma-max-atoms", type=int, default=None)
     parser.add_argument("--uma-temperature-k", type=float, default=None)
+    parser.add_argument("--uma-broad-timestep-fs", type=float, default=None)
+    parser.add_argument("--uma-broad-friction-ps-inv", type=float, default=None)
     parser.add_argument("--uma-broad-steps", type=int, default=None)
     parser.add_argument("--uma-broad-replicas", type=int, default=None)
     parser.add_argument("--uma-broad-save-every", type=int, default=None)
+    parser.add_argument("--uma-prepare-hydrogens", type=int, default=None)
+    parser.add_argument("--uma-add-first-shell-waters", type=int, default=None)
+    parser.add_argument("--uma-preparation-ph", type=float, default=None)
+    parser.add_argument("--uma-max-first-shell-waters", type=int, default=None)
+    parser.add_argument("--uma-water-shell-distance-a", type=float, default=None)
+    parser.add_argument("--uma-water-clash-distance-a", type=float, default=None)
+    parser.add_argument("--uma-water-bridge-distance-min-a", type=float, default=None)
+    parser.add_argument("--uma-water-bridge-distance-max-a", type=float, default=None)
+    parser.add_argument("--uma-relax-prepared-steps", type=int, default=None)
+    parser.add_argument("--uma-relax-prepared-fmax-eva", type=float, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-bonds", type=int, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-atoms", type=int, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-fraction", type=float, default=None)
     parser.add_argument("--uma-run-smd", type=int, default=None)
     parser.add_argument("--uma-run-reverse-smd", type=int, default=None)
+    parser.add_argument("--uma-smd-temperature-k", type=float, default=None)
+    parser.add_argument("--uma-smd-timestep-fs", type=float, default=None)
+    parser.add_argument("--uma-smd-friction-ps-inv", type=float, default=None)
     parser.add_argument("--uma-smd-images", type=int, default=None)
     parser.add_argument("--uma-smd-steps-per-image", type=int, default=None)
     parser.add_argument("--uma-smd-replicas", type=int, default=None)
+    parser.add_argument("--uma-smd-k-steer-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-global-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-local-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-anchor-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-sequential-k-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-contact-k-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-contact-cutoff-a", type=float, default=None)
+    parser.add_argument("--uma-smd-force-clip-eva", type=float, default=None)
+    parser.add_argument("--uma-smd-production-warmup-steps", type=int, default=None)
+    parser.add_argument("--uma-quality-max-final-product-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-product-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-pocket-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-backbone-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-ca-network-rms-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-close-contacts", type=int, default=None)
+    parser.add_argument("--uma-quality-max-max-excess-bond-count", type=int, default=None)
+    parser.add_argument("--uma-quality-require-smd-pass-for-pmf", type=int, default=None)
     parser.add_argument("--uma-run-pmf", type=int, default=None)
     parser.add_argument("--uma-run-pmf-every", type=int, default=None)
     parser.add_argument("--uma-pmf-windows", type=int, default=None)
@@ -114,6 +149,9 @@ def main() -> int:
     parser.add_argument("--uma-pmf-save-every", type=int, default=None)
     parser.add_argument("--uma-pmf-replicas", type=int, default=None)
     parser.add_argument("--uma-pmf-k-window-eva2", type=float, default=None)
+    parser.add_argument("--uma-pmf-k-local-eva2", type=float, default=None)
+    parser.add_argument("--uma-pmf-window-relax-steps", type=int, default=None)
+    parser.add_argument("--uma-pmf-window-equilibrate-steps", type=int, default=None)
 
     parser.add_argument("--graphkcat-model-root", default=None)
     parser.add_argument("--graphkcat-checkpoint", default=None)
@@ -351,20 +389,58 @@ def main() -> int:
             "--uma-calculator-workers": args.uma_calculator_workers,
             "--uma-max-atoms": args.uma_max_atoms,
             "--uma-temperature-k": args.uma_temperature_k,
+            "--uma-broad-timestep-fs": args.uma_broad_timestep_fs,
+            "--uma-broad-friction-ps-inv": args.uma_broad_friction_ps_inv,
             "--uma-broad-steps": args.uma_broad_steps,
             "--uma-broad-replicas": args.uma_broad_replicas,
             "--uma-broad-save-every": args.uma_broad_save_every,
+            "--uma-prepare-hydrogens": args.uma_prepare_hydrogens,
+            "--uma-add-first-shell-waters": args.uma_add_first_shell_waters,
+            "--uma-preparation-ph": args.uma_preparation_ph,
+            "--uma-max-first-shell-waters": args.uma_max_first_shell_waters,
+            "--uma-water-shell-distance-a": args.uma_water_shell_distance_a,
+            "--uma-water-clash-distance-a": args.uma_water_clash_distance_a,
+            "--uma-water-bridge-distance-min-a": args.uma_water_bridge_distance_min_a,
+            "--uma-water-bridge-distance-max-a": args.uma_water_bridge_distance_max_a,
+            "--uma-relax-prepared-steps": args.uma_relax_prepared_steps,
+            "--uma-relax-prepared-fmax-eva": args.uma_relax_prepared_fmax_eva,
+            "--uma-protocol-max-reactive-bonds": args.uma_protocol_max_reactive_bonds,
+            "--uma-protocol-max-reactive-atoms": args.uma_protocol_max_reactive_atoms,
+            "--uma-protocol-max-reactive-fraction": args.uma_protocol_max_reactive_fraction,
             "--uma-run-smd": args.uma_run_smd,
             "--uma-run-reverse-smd": args.uma_run_reverse_smd,
+            "--uma-smd-temperature-k": args.uma_smd_temperature_k,
+            "--uma-smd-timestep-fs": args.uma_smd_timestep_fs,
+            "--uma-smd-friction-ps-inv": args.uma_smd_friction_ps_inv,
             "--uma-smd-images": args.uma_smd_images,
             "--uma-smd-steps-per-image": args.uma_smd_steps_per_image,
             "--uma-smd-replicas": args.uma_smd_replicas,
+            "--uma-smd-k-steer-eva2": args.uma_smd_k_steer_eva2,
+            "--uma-smd-k-global-eva2": args.uma_smd_k_global_eva2,
+            "--uma-smd-k-local-eva2": args.uma_smd_k_local_eva2,
+            "--uma-smd-k-anchor-eva2": args.uma_smd_k_anchor_eva2,
+            "--uma-smd-ca-network-sequential-k-eva2": args.uma_smd_ca_network_sequential_k_eva2,
+            "--uma-smd-ca-network-contact-k-eva2": args.uma_smd_ca_network_contact_k_eva2,
+            "--uma-smd-ca-network-contact-cutoff-a": args.uma_smd_ca_network_contact_cutoff_a,
+            "--uma-smd-force-clip-eva": args.uma_smd_force_clip_eva,
+            "--uma-smd-production-warmup-steps": args.uma_smd_production_warmup_steps,
+            "--uma-quality-max-final-product-rmsd-a": args.uma_quality_max_final_product_rmsd_a,
+            "--uma-quality-max-max-product-rmsd-a": args.uma_quality_max_max_product_rmsd_a,
+            "--uma-quality-max-max-pocket-rmsd-a": args.uma_quality_max_max_pocket_rmsd_a,
+            "--uma-quality-max-max-backbone-rmsd-a": args.uma_quality_max_max_backbone_rmsd_a,
+            "--uma-quality-max-max-ca-network-rms-a": args.uma_quality_max_max_ca_network_rms_a,
+            "--uma-quality-max-max-close-contacts": args.uma_quality_max_max_close_contacts,
+            "--uma-quality-max-max-excess-bond-count": args.uma_quality_max_max_excess_bond_count,
+            "--uma-quality-require-smd-pass-for-pmf": args.uma_quality_require_smd_pass_for_pmf,
             "--uma-run-pmf": effective_uma_run_pmf,
             "--uma-pmf-windows": args.uma_pmf_windows,
             "--uma-pmf-steps-per-window": args.uma_pmf_steps_per_window,
             "--uma-pmf-save-every": args.uma_pmf_save_every,
             "--uma-pmf-replicas": args.uma_pmf_replicas,
             "--uma-pmf-k-window-eva2": args.uma_pmf_k_window_eva2,
+            "--uma-pmf-k-local-eva2": args.uma_pmf_k_local_eva2,
+            "--uma-pmf-window-relax-steps": args.uma_pmf_window_relax_steps,
+            "--uma-pmf-window-equilibrate-steps": args.uma_pmf_window_equilibrate_steps,
             "--graphkcat-model-root": args.graphkcat_model_root,
             "--graphkcat-checkpoint": args.graphkcat_checkpoint,
             "--graphkcat-cfg": args.graphkcat_cfg,

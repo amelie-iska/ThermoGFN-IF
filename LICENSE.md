@@ -183,7 +183,7 @@ TO THE MAXIMUM EXTENT PERMITTED BY LAW, LICENSOR WILL NOT BE LIABLE FOR ANY INDI
 
 To obtain an **Enterprise Commercial License Agreement** (permission + compensation terms), contact:
 
-- **Email:** <INSERT_LICENSING_EMAIL>
+- **Email:** <INSERT_LICENSING_EMAIL> 
 - **Subject line:** “ThermoGFN-IF Enterprise License Request”
 
 ---

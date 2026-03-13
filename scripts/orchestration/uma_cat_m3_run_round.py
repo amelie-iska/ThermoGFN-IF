@@ -158,20 +158,58 @@ def main() -> int:
     parser.add_argument("--uma-calculator-workers", type=int, default=None)
     parser.add_argument("--uma-max-atoms", type=int, default=None)
     parser.add_argument("--uma-temperature-k", type=float, default=None)
+    parser.add_argument("--uma-broad-timestep-fs", type=float, default=None)
+    parser.add_argument("--uma-broad-friction-ps-inv", type=float, default=None)
     parser.add_argument("--uma-broad-steps", type=int, default=None)
     parser.add_argument("--uma-broad-replicas", type=int, default=None)
     parser.add_argument("--uma-broad-save-every", type=int, default=None)
+    parser.add_argument("--uma-prepare-hydrogens", type=int, default=None)
+    parser.add_argument("--uma-add-first-shell-waters", type=int, default=None)
+    parser.add_argument("--uma-preparation-ph", type=float, default=None)
+    parser.add_argument("--uma-max-first-shell-waters", type=int, default=None)
+    parser.add_argument("--uma-water-shell-distance-a", type=float, default=None)
+    parser.add_argument("--uma-water-clash-distance-a", type=float, default=None)
+    parser.add_argument("--uma-water-bridge-distance-min-a", type=float, default=None)
+    parser.add_argument("--uma-water-bridge-distance-max-a", type=float, default=None)
+    parser.add_argument("--uma-relax-prepared-steps", type=int, default=None)
+    parser.add_argument("--uma-relax-prepared-fmax-eva", type=float, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-bonds", type=int, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-atoms", type=int, default=None)
+    parser.add_argument("--uma-protocol-max-reactive-fraction", type=float, default=None)
     parser.add_argument("--uma-run-smd", type=int, default=None)
     parser.add_argument("--uma-run-reverse-smd", type=int, default=None)
+    parser.add_argument("--uma-smd-temperature-k", type=float, default=None)
+    parser.add_argument("--uma-smd-timestep-fs", type=float, default=None)
+    parser.add_argument("--uma-smd-friction-ps-inv", type=float, default=None)
     parser.add_argument("--uma-smd-images", type=int, default=None)
     parser.add_argument("--uma-smd-steps-per-image", type=int, default=None)
     parser.add_argument("--uma-smd-replicas", type=int, default=None)
+    parser.add_argument("--uma-smd-k-steer-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-global-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-local-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-k-anchor-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-sequential-k-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-contact-k-eva2", type=float, default=None)
+    parser.add_argument("--uma-smd-ca-network-contact-cutoff-a", type=float, default=None)
+    parser.add_argument("--uma-smd-force-clip-eva", type=float, default=None)
+    parser.add_argument("--uma-smd-production-warmup-steps", type=int, default=None)
+    parser.add_argument("--uma-quality-max-final-product-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-product-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-pocket-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-backbone-rmsd-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-ca-network-rms-a", type=float, default=None)
+    parser.add_argument("--uma-quality-max-max-close-contacts", type=int, default=None)
+    parser.add_argument("--uma-quality-max-max-excess-bond-count", type=int, default=None)
+    parser.add_argument("--uma-quality-require-smd-pass-for-pmf", type=int, default=None)
     parser.add_argument("--uma-run-pmf", type=int, default=None)
     parser.add_argument("--uma-pmf-windows", type=int, default=None)
     parser.add_argument("--uma-pmf-steps-per-window", type=int, default=None)
     parser.add_argument("--uma-pmf-save-every", type=int, default=None)
     parser.add_argument("--uma-pmf-replicas", type=int, default=None)
     parser.add_argument("--uma-pmf-k-window-eva2", type=float, default=None)
+    parser.add_argument("--uma-pmf-k-local-eva2", type=float, default=None)
+    parser.add_argument("--uma-pmf-window-relax-steps", type=int, default=None)
+    parser.add_argument("--uma-pmf-window-equilibrate-steps", type=int, default=None)
 
     parser.add_argument("--graphkcat-model-root", default=None)
     parser.add_argument("--graphkcat-checkpoint", default=None)
@@ -308,6 +346,16 @@ def main() -> int:
     args.uma_temperature_k = float(
         args.uma_temperature_k if args.uma_temperature_k is not None else cfg_get(cfg, "oracles.uma_cat.broad.temperature_k", 300.0)
     )
+    args.uma_broad_timestep_fs = float(
+        args.uma_broad_timestep_fs
+        if args.uma_broad_timestep_fs is not None
+        else cfg_get(cfg, "oracles.uma_cat.broad.timestep_fs", 0.1)
+    )
+    args.uma_broad_friction_ps_inv = float(
+        args.uma_broad_friction_ps_inv
+        if args.uma_broad_friction_ps_inv is not None
+        else cfg_get(cfg, "oracles.uma_cat.broad.friction_ps_inv", 1.0)
+    )
     args.uma_broad_steps = int(
         args.uma_broad_steps if args.uma_broad_steps is not None else cfg_get(cfg, "oracles.uma_cat.broad.steps", 500)
     )
@@ -317,11 +365,91 @@ def main() -> int:
     args.uma_broad_save_every = int(
         args.uma_broad_save_every if args.uma_broad_save_every is not None else cfg_get(cfg, "oracles.uma_cat.broad.save_every", 10)
     )
+    args.uma_prepare_hydrogens = int(
+        args.uma_prepare_hydrogens
+        if args.uma_prepare_hydrogens is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.hydrogens", 1)
+    )
+    args.uma_add_first_shell_waters = int(
+        args.uma_add_first_shell_waters
+        if args.uma_add_first_shell_waters is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.first_shell_waters", 1)
+    )
+    args.uma_preparation_ph = float(
+        args.uma_preparation_ph
+        if args.uma_preparation_ph is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.ph", 7.4)
+    )
+    args.uma_max_first_shell_waters = int(
+        args.uma_max_first_shell_waters
+        if args.uma_max_first_shell_waters is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.max_first_shell_waters", 12)
+    )
+    args.uma_water_shell_distance_a = float(
+        args.uma_water_shell_distance_a
+        if args.uma_water_shell_distance_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.water_shell_distance_a", 2.8)
+    )
+    args.uma_water_clash_distance_a = float(
+        args.uma_water_clash_distance_a
+        if args.uma_water_clash_distance_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.water_clash_distance_a", 2.1)
+    )
+    args.uma_water_bridge_distance_min_a = float(
+        args.uma_water_bridge_distance_min_a
+        if args.uma_water_bridge_distance_min_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.water_bridge_distance_min_a", 4.2)
+    )
+    args.uma_water_bridge_distance_max_a = float(
+        args.uma_water_bridge_distance_max_a
+        if args.uma_water_bridge_distance_max_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.water_bridge_distance_max_a", 6.6)
+    )
+    args.uma_relax_prepared_steps = int(
+        args.uma_relax_prepared_steps
+        if args.uma_relax_prepared_steps is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.relax_steps", 25)
+    )
+    args.uma_relax_prepared_fmax_eva = float(
+        args.uma_relax_prepared_fmax_eva
+        if args.uma_relax_prepared_fmax_eva is not None
+        else cfg_get(cfg, "oracles.uma_cat.preparation.relax_fmax_eva", 0.2)
+    )
+    args.uma_protocol_max_reactive_bonds = int(
+        args.uma_protocol_max_reactive_bonds
+        if args.uma_protocol_max_reactive_bonds is not None
+        else cfg_get(cfg, "oracles.uma_cat.protocol.max_reactive_bonds", 8)
+    )
+    args.uma_protocol_max_reactive_atoms = int(
+        args.uma_protocol_max_reactive_atoms
+        if args.uma_protocol_max_reactive_atoms is not None
+        else cfg_get(cfg, "oracles.uma_cat.protocol.max_reactive_atoms", 12)
+    )
+    args.uma_protocol_max_reactive_fraction = float(
+        args.uma_protocol_max_reactive_fraction
+        if args.uma_protocol_max_reactive_fraction is not None
+        else cfg_get(cfg, "oracles.uma_cat.protocol.max_reactive_fraction", 0.35)
+    )
     args.uma_run_smd = int(
         args.uma_run_smd if args.uma_run_smd is not None else cfg_get(cfg, "oracles.uma_cat.smd.enabled", True)
     )
     args.uma_run_reverse_smd = int(
         args.uma_run_reverse_smd if args.uma_run_reverse_smd is not None else cfg_get(cfg, "oracles.uma_cat.smd.reverse", True)
+    )
+    args.uma_smd_temperature_k = float(
+        args.uma_smd_temperature_k
+        if args.uma_smd_temperature_k is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.temperature_k", args.uma_temperature_k)
+    )
+    args.uma_smd_timestep_fs = float(
+        args.uma_smd_timestep_fs
+        if args.uma_smd_timestep_fs is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.timestep_fs", 0.05)
+    )
+    args.uma_smd_friction_ps_inv = float(
+        args.uma_smd_friction_ps_inv
+        if args.uma_smd_friction_ps_inv is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.friction_ps_inv", 2.0)
     )
     args.uma_smd_images = int(
         args.uma_smd_images if args.uma_smd_images is not None else cfg_get(cfg, "oracles.uma_cat.smd.images", 24)
@@ -333,6 +461,91 @@ def main() -> int:
     )
     args.uma_smd_replicas = int(
         args.uma_smd_replicas if args.uma_smd_replicas is not None else cfg_get(cfg, "oracles.uma_cat.smd.replicas", 2)
+    )
+    args.uma_smd_k_steer_eva2 = float(
+        args.uma_smd_k_steer_eva2
+        if args.uma_smd_k_steer_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.k_steer_eva2", 0.02)
+    )
+    args.uma_smd_k_global_eva2 = float(
+        args.uma_smd_k_global_eva2
+        if args.uma_smd_k_global_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.k_global_eva2", 0.02)
+    )
+    args.uma_smd_k_local_eva2 = float(
+        args.uma_smd_k_local_eva2
+        if args.uma_smd_k_local_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.k_local_eva2", 0.15)
+    )
+    args.uma_smd_k_anchor_eva2 = float(
+        args.uma_smd_k_anchor_eva2
+        if args.uma_smd_k_anchor_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.k_anchor_eva2", 0.0)
+    )
+    args.uma_smd_ca_network_sequential_k_eva2 = float(
+        args.uma_smd_ca_network_sequential_k_eva2
+        if args.uma_smd_ca_network_sequential_k_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.ca_network.sequential_k_eva2", 6.0)
+    )
+    args.uma_smd_ca_network_contact_k_eva2 = float(
+        args.uma_smd_ca_network_contact_k_eva2
+        if args.uma_smd_ca_network_contact_k_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.ca_network.contact_k_eva2", 0.35)
+    )
+    args.uma_smd_ca_network_contact_cutoff_a = float(
+        args.uma_smd_ca_network_contact_cutoff_a
+        if args.uma_smd_ca_network_contact_cutoff_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.ca_network.contact_cutoff_a", 8.0)
+    )
+    args.uma_smd_force_clip_eva = float(
+        args.uma_smd_force_clip_eva
+        if args.uma_smd_force_clip_eva is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.force_clip_eva", 0.75)
+    )
+    args.uma_smd_production_warmup_steps = int(
+        args.uma_smd_production_warmup_steps
+        if args.uma_smd_production_warmup_steps is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.production_warmup_steps", 40)
+    )
+    args.uma_quality_max_final_product_rmsd_a = float(
+        args.uma_quality_max_final_product_rmsd_a
+        if args.uma_quality_max_final_product_rmsd_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_final_product_rmsd_a", 1.75)
+    )
+    args.uma_quality_max_max_product_rmsd_a = float(
+        args.uma_quality_max_max_product_rmsd_a
+        if args.uma_quality_max_max_product_rmsd_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_product_rmsd_a", 5.0)
+    )
+    args.uma_quality_max_max_pocket_rmsd_a = float(
+        args.uma_quality_max_max_pocket_rmsd_a
+        if args.uma_quality_max_max_pocket_rmsd_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_pocket_rmsd_a", 4.0)
+    )
+    args.uma_quality_max_max_backbone_rmsd_a = float(
+        args.uma_quality_max_max_backbone_rmsd_a
+        if args.uma_quality_max_max_backbone_rmsd_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_backbone_rmsd_a", 3.0)
+    )
+    args.uma_quality_max_max_ca_network_rms_a = float(
+        args.uma_quality_max_max_ca_network_rms_a
+        if args.uma_quality_max_max_ca_network_rms_a is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_ca_network_rms_a", 0.75)
+    )
+    args.uma_quality_max_max_close_contacts = int(
+        args.uma_quality_max_max_close_contacts
+        if args.uma_quality_max_max_close_contacts is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_close_contacts", 0)
+    )
+    args.uma_quality_max_max_excess_bond_count = int(
+        args.uma_quality_max_max_excess_bond_count
+        if args.uma_quality_max_max_excess_bond_count is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.max_max_excess_bond_count", 0)
+    )
+    args.uma_quality_require_smd_pass_for_pmf = int(
+        args.uma_quality_require_smd_pass_for_pmf
+        if args.uma_quality_require_smd_pass_for_pmf is not None
+        else cfg_get(cfg, "oracles.uma_cat.smd.quality.require_pass_for_pmf", 1)
     )
     args.uma_run_pmf = int(
         args.uma_run_pmf if args.uma_run_pmf is not None else cfg_get(cfg, "oracles.uma_cat.pmf.enabled", False)
@@ -357,6 +570,21 @@ def main() -> int:
         args.uma_pmf_k_window_eva2
         if args.uma_pmf_k_window_eva2 is not None
         else cfg_get(cfg, "oracles.uma_cat.pmf.k_window_eva2", 2.0)
+    )
+    args.uma_pmf_k_local_eva2 = float(
+        args.uma_pmf_k_local_eva2
+        if args.uma_pmf_k_local_eva2 is not None
+        else cfg_get(cfg, "oracles.uma_cat.pmf.k_local_eva2", 0.08)
+    )
+    args.uma_pmf_window_relax_steps = int(
+        args.uma_pmf_window_relax_steps
+        if args.uma_pmf_window_relax_steps is not None
+        else cfg_get(cfg, "oracles.uma_cat.pmf.window_relax_steps", 32)
+    )
+    args.uma_pmf_window_equilibrate_steps = int(
+        args.uma_pmf_window_equilibrate_steps
+        if args.uma_pmf_window_equilibrate_steps is not None
+        else cfg_get(cfg, "oracles.uma_cat.pmf.window_equilibrate_steps", 64)
     )
 
     args.graphkcat_model_root = str(
@@ -929,11 +1157,39 @@ def main() -> int:
         f"--candidate-path {_q(packed_for_uma)} --output-path {_q(uma_scored)} --artifact-root {_q(round_dir / 'data' / 'uma_artifacts')} "
         f"--model-name {_q(args.uma_model_name)} --device {_q(args.uma_device)} --calculator-workers {args.uma_calculator_workers} "
         f"--max-atoms {args.uma_max_atoms} --temperature-k {args.uma_temperature_k} "
+        f"--broad-timestep-fs {args.uma_broad_timestep_fs} --broad-friction-ps-inv {args.uma_broad_friction_ps_inv} "
         f"--broad-steps {args.uma_broad_steps} --broad-replicas {args.uma_broad_replicas} --broad-save-every {args.uma_broad_save_every} "
+        f"--prepare-hydrogens {args.uma_prepare_hydrogens} --add-first-shell-waters {args.uma_add_first_shell_waters} "
+        f"--preparation-ph {args.uma_preparation_ph} --max-first-shell-waters {args.uma_max_first_shell_waters} "
+        f"--water-shell-distance-a {args.uma_water_shell_distance_a} --water-clash-distance-a {args.uma_water_clash_distance_a} "
+        f"--water-bridge-distance-min-a {args.uma_water_bridge_distance_min_a} --water-bridge-distance-max-a {args.uma_water_bridge_distance_max_a} "
+        f"--relax-prepared-steps {args.uma_relax_prepared_steps} --relax-prepared-fmax-eva {args.uma_relax_prepared_fmax_eva} "
+        f"--protocol-max-reactive-bonds {args.uma_protocol_max_reactive_bonds} --protocol-max-reactive-atoms {args.uma_protocol_max_reactive_atoms} "
+        f"--protocol-max-reactive-fraction {args.uma_protocol_max_reactive_fraction} "
         f"--run-smd {args.uma_run_smd} --run-reverse-smd {args.uma_run_reverse_smd} "
+        f"--smd-temperature-k {args.uma_smd_temperature_k} --smd-timestep-fs {args.uma_smd_timestep_fs} --smd-friction-ps-inv {args.uma_smd_friction_ps_inv} "
         f"--smd-images {args.uma_smd_images} --smd-steps-per-image {args.uma_smd_steps_per_image} --smd-replicas {args.uma_smd_replicas} "
+        f"--smd-k-steer-eva2 {args.uma_smd_k_steer_eva2} --smd-k-global-eva2 {args.uma_smd_k_global_eva2} "
+        f"--smd-k-local-eva2 {args.uma_smd_k_local_eva2} "
+        f"--smd-k-anchor-eva2 {args.uma_smd_k_anchor_eva2} "
+        f"--smd-ca-network-sequential-k-eva2 {args.uma_smd_ca_network_sequential_k_eva2} "
+        f"--smd-ca-network-contact-k-eva2 {args.uma_smd_ca_network_contact_k_eva2} "
+        f"--smd-ca-network-contact-cutoff-a {args.uma_smd_ca_network_contact_cutoff_a} "
+        f"--smd-force-clip-eva {args.uma_smd_force_clip_eva} "
+        f"--smd-production-warmup-steps {args.uma_smd_production_warmup_steps} "
+        f"--quality-max-final-product-rmsd-a {args.uma_quality_max_final_product_rmsd_a} "
+        f"--quality-max-max-product-rmsd-a {args.uma_quality_max_max_product_rmsd_a} "
+        f"--quality-max-max-pocket-rmsd-a {args.uma_quality_max_max_pocket_rmsd_a} "
+        f"--quality-max-max-backbone-rmsd-a {args.uma_quality_max_max_backbone_rmsd_a} "
+        f"--quality-max-max-ca-network-rms-a {args.uma_quality_max_max_ca_network_rms_a} "
+        f"--quality-max-max-close-contacts {args.uma_quality_max_max_close_contacts} "
+        f"--quality-max-max-excess-bond-count {args.uma_quality_max_max_excess_bond_count} "
+        f"--quality-require-smd-pass-for-pmf {args.uma_quality_require_smd_pass_for_pmf} "
         f"--run-pmf {args.uma_run_pmf} --pmf-windows {args.uma_pmf_windows} --pmf-steps-per-window {args.uma_pmf_steps_per_window} "
         f"--pmf-save-every {args.uma_pmf_save_every} --pmf-replicas {args.uma_pmf_replicas} --pmf-k-window-eva2 {args.uma_pmf_k_window_eva2} "
+        f"--pmf-k-local-eva2 {args.uma_pmf_k_local_eva2} "
+        f"--pmf-window-relax-steps {args.uma_pmf_window_relax_steps} "
+        f"--pmf-window-equilibrate-steps {args.uma_pmf_window_equilibrate_steps} "
         f"--summary-path {_q(uma_summary_path)} "
         f"--log-level {_q(args.log_level)} {'--no-progress' if args.no_progress else ''}"
     )
