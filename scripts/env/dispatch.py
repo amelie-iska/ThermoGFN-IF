@@ -166,12 +166,21 @@ def main() -> int:
     site_export = ""
     if env_site is not None:
         site_export = f'export PYTHONPATH="{env_site}"; '
+    preload_export = ""
+    if env_prefix is not None:
+        llvm_preload = env_prefix / "lib" / "libLLVM-15.so"
+        if llvm_preload.exists():
+            preload_export = (
+                f'export LD_PRELOAD="{llvm_preload}'
+                '${LD_PRELOAD:+:$LD_PRELOAD}"; '
+            )
 
     wrapped_cmd = (
         'unset PYTHONHOME PYTHONPATH VIRTUAL_ENV __PYVENV_LAUNCHER__; '
         'export PYTHONNOUSERSITE=1; '
         f"{path_export}"
         f"{site_export}"
+        f"{preload_export}"
         f'export HF_HOME="${{HF_HOME:-{hf_home}}}"; '
         f'export HUGGINGFACE_HUB_CACHE="${{HUGGINGFACE_HUB_CACHE:-{hub_cache}}}"; '
         f'export TRANSFORMERS_CACHE="${{TRANSFORMERS_CACHE:-{tx_cache}}}"; '

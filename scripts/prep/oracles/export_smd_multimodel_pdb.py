@@ -30,7 +30,7 @@ def main() -> int:
     parser.add_argument("--output-pdb", required=True, help="Output multi-MODEL PDB path")
     parser.add_argument("--output-summary-json", default="", help="Optional output path for fresh sMD summary")
     parser.add_argument("--reverse", type=int, default=0, help="Run reverse product->reactant pull instead")
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--calculator-workers", type=int, default=1)
     parser.add_argument("--temperature-k", type=float, default=300.0)
@@ -62,9 +62,6 @@ def main() -> int:
 
     root = _repo_root()
     sys.path.insert(0, str(root))
-    fairchem_src = root / "models" / "fairchem" / "src"
-    if fairchem_src.exists():
-        sys.path.insert(0, str(fairchem_src))
 
     from train.thermogfn.uma_cat_runtime import run_steered_uma_dynamics
 

@@ -4,12 +4,15 @@ import unittest
 import numpy as np
 
 from train.thermogfn.uma_cat_runtime import (
+    SUPPORTED_UMA_MODEL_NAMES,
     StructureData,
     _build_smd_record_steps,
     _gating_delta_g_std_kcal_mol,
+    _get_uma_calculator,
     _jarzynski_profile,
     _project_reaction_progress_lambda,
     analyze_endpoint_protocol,
+    assess_smd_quality,
     build_guided_ligand_path_targets,
     build_interpolated_ca_elastic_network,
     build_ligand_graph_model,
@@ -19,6 +22,7 @@ from train.thermogfn.uma_cat_runtime import (
     match_backbone_ca_indices,
     match_backbone_heavy_indices,
     radius_of_gyration,
+    run_steered_uma_dynamics,
     summarize_catalytic_screen,
 )
 from train.thermogfn.uma_cat_reward import KB_KCAL_MOL_K
@@ -200,7 +204,7 @@ class TestUmaCatRuntime(unittest.TestCase):
         np.testing.assert_array_equal(left_idx, np.asarray([0, 1, 2, 3], dtype=np.int64))
         np.testing.assert_array_equal(right_idx, np.asarray([0, 1, 2, 3], dtype=np.int64))
 
-    def test_build_ligand_restraint_model_turns_broken_bond_off(self):
+    def test_build_ligand_restraint_model_rejects_topology_change_schedules(self):
         react = StructureData(
             path="react",
             positions=np.asarray(
@@ -237,14 +241,16 @@ class TestUmaCatRuntime(unittest.TestCase):
             ligand_indices=np.asarray([0, 1], dtype=np.int64),
             mapping=mapping,
         )
-        self.assertEqual(model["bond_pairs"].shape[0], 1)
-        self.assertAlmostEqual(float(model["bond_start_force_constants"][0]), 6.0, places=6)
-        self.assertAlmostEqual(float(model["bond_end_force_constants"][0]), 0.0, places=6)
+        self.assertEqual(model["bond_pairs"].shape[0], 0)
+        self.assertEqual(model["bond_start_force_constants"].shape[0], 0)
+        self.assertEqual(model["bond_end_force_constants"].shape[0], 0)
         self.assertEqual(int(model["reactive_atom_count"]), 2)
-        np.testing.assert_allclose(model["steer_weights"], np.asarray([1.0, 1.0], dtype=float), atol=1e-8)
-        self.assertEqual(model["steering_mode"], "reactive_center")
+        np.testing.assert_allclose(model["steer_weights"], np.asarray([0.0, 0.0], dtype=float), atol=1e-8)
+        self.assertEqual(model["steering_mode"], "topology_change_unsupported")
+        self.assertFalse(model["steering_confident"])
+        self.assertIn("topology_change_not_supported_for_uma_smd", model["quality_reason"])
 
-    def test_build_guided_ligand_path_targets_uses_internal_morph_for_reactive_center(self):
+    def test_build_guided_ligand_path_targets_requires_topology_preserving_endpoint(self):
         react = StructureData(
             path="react",
             positions=np.asarray(
@@ -272,11 +278,12 @@ class TestUmaCatRuntime(unittest.TestCase):
                 dtype=float,
             ),
         }
-        graph_model = {
-            "steering_mode": "reactive_center",
-            "symbols": ["C", "C"],
-        }
         lambdas = np.asarray([0.0, 0.5, 1.0], dtype=float)
+        graph_model = build_ligand_graph_model(
+            reactant=react,
+            ligand_indices=np.asarray([0, 1], dtype=np.int64),
+            mapping=mapping,
+        )
         path, mode, _ = build_guided_ligand_path_targets(
             reactant=react,
             ligand_indices=np.asarray([0, 1], dtype=np.int64),
@@ -284,11 +291,36 @@ class TestUmaCatRuntime(unittest.TestCase):
             lambdas=lambdas,
             graph_model=graph_model,
         )
-        self.assertEqual(mode, "reactive_center_internal_morph")
+        self.assertEqual(mode, "topology_preserving_endpoint")
         np.testing.assert_allclose(path[0], react.positions[[0, 1]], atol=1e-8)
         np.testing.assert_allclose(path[-1], mapping["product_aligned_positions"][[0, 1]], atol=1e-8)
 
-    def test_build_ligand_graph_model_gates_large_reactive_center(self):
+        topology_change_mapping = {
+            "reactant_indices": np.asarray([0, 1], dtype=np.int64),
+            "product_indices": np.asarray([0, 1], dtype=np.int64),
+            "product_aligned_positions": np.asarray(
+                [
+                    [0.2, 0.5, 0.0],
+                    [4.0, 0.5, 0.0],
+                ],
+                dtype=float,
+            ),
+        }
+        topology_change_graph = build_ligand_graph_model(
+            reactant=react,
+            ligand_indices=np.asarray([0, 1], dtype=np.int64),
+            mapping=topology_change_mapping,
+        )
+        with self.assertRaisesRegex(ValueError, "topology-preserving"):
+            build_guided_ligand_path_targets(
+                reactant=react,
+                ligand_indices=np.asarray([0, 1], dtype=np.int64),
+                mapping=topology_change_mapping,
+                lambdas=lambdas,
+                graph_model=topology_change_graph,
+            )
+
+    def test_build_ligand_graph_model_rejects_large_topology_changes(self):
         ligand_positions = np.asarray([[1.4 * i, 0.0, 0.0] for i in range(14)], dtype=float)
         product_positions = np.asarray([[4.0 * i, 0.0, 0.0] for i in range(14)], dtype=float)
         react = StructureData(
@@ -325,7 +357,7 @@ class TestUmaCatRuntime(unittest.TestCase):
             ligand_indices=np.asarray(list(range(14)), dtype=np.int64),
             mapping=mapping,
         )
-        self.assertEqual(graph["steering_mode"], "component_pose_only")
+        self.assertEqual(graph["steering_mode"], "topology_change_unsupported")
         self.assertFalse(graph["steering_confident"])
         model = build_ligand_restraint_model(
             reactant=react,
@@ -334,9 +366,9 @@ class TestUmaCatRuntime(unittest.TestCase):
             graph_model=graph,
         )
         self.assertEqual(model["bond_pairs"].shape[0], 0)
-        self.assertEqual(model["steering_mode"], "component_pose_only")
+        self.assertEqual(model["steering_mode"], "topology_change_unsupported")
 
-    def test_build_ligand_restraint_model_tracks_reactive_center(self):
+    def test_build_ligand_restraint_model_does_not_create_topology_change_springs(self):
         react = StructureData(
             path="react",
             positions=np.asarray(
@@ -377,7 +409,7 @@ class TestUmaCatRuntime(unittest.TestCase):
             ligand_indices=np.asarray([0, 1, 2, 3], dtype=np.int64),
             mapping=mapping,
         )
-        self.assertEqual(graph["steering_mode"], "reactive_center")
+        self.assertEqual(graph["steering_mode"], "topology_change_unsupported")
         self.assertGreaterEqual(len(graph["formed_bonds"]), 1)
         model = build_ligand_restraint_model(
             reactant=react,
@@ -385,10 +417,11 @@ class TestUmaCatRuntime(unittest.TestCase):
             mapping=mapping,
             graph_model=graph,
         )
-        self.assertGreaterEqual(int(model["bond_pairs"].shape[0]), 1)
-        self.assertEqual(model["steering_mode"], "reactive_center")
+        self.assertEqual(int(model["bond_pairs"].shape[0]), 0)
+        self.assertEqual(model["steering_mode"], "topology_change_unsupported")
+        self.assertIn("topology_change_not_supported_for_uma_smd", model["quality_reason"])
 
-    def test_analyze_endpoint_protocol_respects_threshold_override(self):
+    def test_analyze_endpoint_protocol_rejects_topology_change_for_pmf(self):
         react = StructureData(
             path="react",
             positions=np.asarray(
@@ -432,8 +465,8 @@ class TestUmaCatRuntime(unittest.TestCase):
             ligand_chain_id="B",
             pocket_positions=[10, 11],
         )
-        self.assertEqual(default_bundle["protocol_meta"]["protocol_mode"], "reactive_center")
-        self.assertTrue(default_bundle["protocol_meta"]["pmf_eligible"])
+        self.assertEqual(default_bundle["protocol_meta"]["protocol_mode"], "unsupported_reactive_path")
+        self.assertFalse(default_bundle["protocol_meta"]["pmf_eligible"])
         strict_bundle = analyze_endpoint_protocol(
             reactant=react,
             product=prod,
@@ -444,8 +477,87 @@ class TestUmaCatRuntime(unittest.TestCase):
             max_reactive_atoms=1,
             max_reactive_fraction=0.1,
         )
-        self.assertEqual(strict_bundle["protocol_meta"]["protocol_mode"], "conformational_endpoint")
+        self.assertEqual(strict_bundle["protocol_meta"]["protocol_mode"], "unsupported_reactive_path")
         self.assertFalse(strict_bundle["protocol_meta"]["pmf_eligible"])
+
+    def test_run_steered_uma_dynamics_short_circuits_unsupported_path_before_calculator(self):
+        react = StructureData(
+            path="react",
+            positions=np.asarray(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],
+                    [1.0, 1.0, 0.0],
+                ],
+                dtype=float,
+            ),
+            symbols=["C", "C", "C", "C"],
+            atom_names=["CA", "CA", "L1", "L2"],
+            residue_names=["ALA", "GLY", "LIG", "LIG"],
+            chain_ids=["A", "A", "B", "B"],
+            residue_ids=[10, 11, 1, 1],
+            group_pdb=["ATOM", "ATOM", "HETATM", "HETATM"],
+        )
+        prod = StructureData(
+            path="prod",
+            positions=np.asarray(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],
+                    [4.0, 1.0, 0.0],
+                ],
+                dtype=float,
+            ),
+            symbols=["C", "C", "C", "C"],
+            atom_names=["CA", "CA", "L1", "L2"],
+            residue_names=["ALA", "GLY", "LIG", "LIG"],
+            chain_ids=["A", "A", "B", "B"],
+            residue_ids=[10, 11, 1, 1],
+            group_pdb=["ATOM", "ATOM", "HETATM", "HETATM"],
+        )
+
+        out = run_steered_uma_dynamics(
+            reactant_complex_path="unused_react.pdb",
+            product_complex_path="unused_prod.pdb",
+            reactant_structure=react,
+            product_structure=prod,
+            protein_chain_id="A",
+            ligand_chain_id="B",
+            pocket_positions=[10, 11],
+            temperature_k=300.0,
+            timestep_fs=0.05,
+            friction_ps_inv=2.0,
+            images=2,
+            steps_per_image=1,
+            replicas=1,
+            k_steer_eva2=0.02,
+            k_global_eva2=0.02,
+            k_local_eva2=0.15,
+            k_anchor_eva2=0.0,
+            equilibrate_endpoint_steps=0,
+            model_name="uma-s-1p2",
+            device="cpu",
+            prepare_hydrogens=False,
+            add_first_shell_waters=False,
+        )
+        self.assertEqual(out["status"], "unsupported_reactive_path")
+        self.assertEqual(out["trajectory_protocol"]["mode"], "not_run_unsupported_reactive_path")
+        self.assertFalse(out["mapping"]["reactive_barrier_valid"])
+        self.assertEqual(out["endpoint_rows"], [])
+
+        quality = assess_smd_quality(
+            out,
+            max_final_product_rmsd_a=1.0,
+            max_max_product_rmsd_a=1.0,
+            max_max_pocket_rmsd_a=1.0,
+            max_max_backbone_rmsd_a=1.0,
+        )
+        self.assertFalse(quality["pass"])
+        self.assertEqual(quality["protocol_mode"], "unsupported_reactive_path")
+        self.assertIsInstance(quality["worst_max_close_contacts"], int)
+        self.assertIsInstance(quality["worst_max_excess_bond_count"], int)
 
     def test_bond_pairs_contribute_to_reaction_progress_lambda(self):
         lam = _project_reaction_progress_lambda(
@@ -543,6 +655,13 @@ class TestUmaCatRuntime(unittest.TestCase):
         sigma = _gating_delta_g_std_kcal_mol(0.1, 0.02, 300.0)
         self.assertGreater(sigma, 0.0)
 
+    def test_get_uma_calculator_rejects_unsupported_model_before_loading(self):
+        with self.assertRaisesRegex(ValueError, "unsupported UMA model"):
+            _get_uma_calculator("not-a-real-uma-model", "cpu", workers=1)
+
+    def test_supported_uma_models_include_cached_default(self):
+        self.assertIn("uma-s-1p2", SUPPORTED_UMA_MODEL_NAMES)
+
     def test_summarize_uses_physical_log_rate_uncertainty(self):
         broad = {
             "status": "ok",
@@ -557,6 +676,12 @@ class TestUmaCatRuntime(unittest.TestCase):
         }
         smd = {
             "status": "ok",
+            "mapping": {
+                "protocol_mode": "topology_preserving_endpoint",
+                "protocol_reason": "topology_preserving_endpoint",
+                "reactive_barrier_valid": True,
+                "pmf_eligible": True,
+            },
             "delta_g_smd_barrier_kcal_mol": 4.0,
             "delta_g_smd_barrier_std_kcal_mol": 1.0,
             "delta_g_react_to_prod_kcal_mol": 1.2,
@@ -595,6 +720,12 @@ class TestUmaCatRuntime(unittest.TestCase):
         }
         smd = {
             "status": "ok",
+            "mapping": {
+                "protocol_mode": "topology_preserving_endpoint",
+                "protocol_reason": "topology_preserving_endpoint",
+                "reactive_barrier_valid": True,
+                "pmf_eligible": True,
+            },
             "delta_g_smd_barrier_kcal_mol": 4.0,
             "delta_g_smd_barrier_std_kcal_mol": 1.0,
             "mean_final_work_kcal_mol": 2.0,
@@ -619,7 +750,7 @@ class TestUmaCatRuntime(unittest.TestCase):
         self.assertEqual(out["uma_cat_barrier_source"], "pmf")
         self.assertAlmostEqual(out["uma_cat_delta_g_barrier_std_kcal_mol"], 0.4, places=6)
 
-    def test_summarize_marks_nonreactive_protocol_as_diagnostic(self):
+    def test_summarize_refuses_rate_for_invalid_barrier_protocol(self):
         broad = {
             "status": "ok",
             "p_gnac": 0.1,
@@ -657,7 +788,9 @@ class TestUmaCatRuntime(unittest.TestCase):
         self.assertEqual(out["uma_cat_protocol_reason"], "too_many_graph_edits")
         self.assertFalse(out["uma_cat_reactive_barrier_valid"])
         self.assertFalse(out["uma_cat_pmf_eligible"])
-        self.assertEqual(out["uma_cat_barrier_source"], "diagnostic_smd")
+        self.assertEqual(out["uma_cat_barrier_source"], "none")
+        self.assertEqual(out["uma_cat_status"], "invalid_barrier")
+        self.assertLessEqual(out["uma_cat_log10_rate_proxy"], -1.0e5)
 
 
 if __name__ == "__main__":

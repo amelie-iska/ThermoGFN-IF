@@ -393,7 +393,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--candidate-path", required=True)
     parser.add_argument("--output-path", required=True)
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--temps", default="300,330,360,390,420")
     parser.add_argument("--replicates", type=int, default=4)
     parser.add_argument("--workers", type=int, default=1)

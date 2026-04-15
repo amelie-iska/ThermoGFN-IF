@@ -21,23 +21,25 @@ ThermoGFN-IF implementation scaffold for multi-fidelity protein design with Meth
 Important implementation note:
 
 - the edit-trajectory GFlowNet formulation in the paper is the target methodology,
-- the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment.
+- the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment,
+- the default trainable generator / packer for current experiments is **LigandMPNN**. ADFLIP is retained only as an ablation backend to train later.
 
-The default catalytic path is nevertheless fully real in its oracle stack: whole-enzyme UMA broad screening, forward and reverse sMD, optional PMF, and fused reward-based dataset updates. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands include metal or inorganic fragments outside the current GraphKcat ligand vocabulary. Multi-fragment ligands composed of supported GraphKcat atom types are now accepted and can be scored when GraphKcat is enabled explicitly.
+The default catalytic path uses real FAIRChem/ASE UMA calculations where the protocol is physically supported: whole-enzyme UMA broad screening is always an actual `omol` UMA Langevin MD stage, while sMD / PMF barrier labels are emitted only for fully mapped topology-preserving reactant/product ligand endpoints. Topology-changing ligand pairs, incomplete atom maps, or unsupported reaction paths are marked unsupported instead of being pushed through a Cartesian morph or an artificial bond-breaking / bond-forming schedule. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands include metal or inorganic fragments outside the current GraphKcat ligand vocabulary. Multi-fragment ligands composed of supported GraphKcat atom types are now accepted and can be scored when GraphKcat is enabled explicitly.
 
 ## Required conda environments
 
 Default catalytic RL path (`UMA-cat` only):
 
 - `ligandmpnn_env`
-- `mora-uma`
+- `fairchem` with `fairchem-core` installed
+
 Legacy / non-default stability-binding pipeline:
 
 - `spurs`
 - `bioemu`
 - `uma-qc`
 
-Optional legacy generator backend:
+Optional generator ablation backend:
 
 - `ADFLIP`
 
@@ -45,8 +47,10 @@ Minimal readiness checks for the default catalytic path:
 
 ```bash
 conda run -n ligandmpnn_env python -c "import torch; print(torch.cuda.is_available())"
-conda run -n mora-uma python -c "import fairchem"
+conda run -n fairchem python -c "from fairchem.core import FAIRChemCalculator, pretrained_mlip; print(pretrained_mlip.pretrained_checkpoint_path_from_name('uma-s-1p2'))"
 ```
+
+Do not prepend `./models/fairchem/src` to `PYTHONPATH` for production UMA runs. The checked-in FairChem source snapshot is older than the installed `fairchem` package and cannot load the cached `uma-s-1p2` checkpoint schema.
 
 Full production-path readiness checks for the older stability/binding pipeline:
 
@@ -81,8 +85,26 @@ Current ready split:
 
 - canonical path: `rfd3-data/rfd3_splits/unconditional_monomer_protrek35m`
 - legacy alias still accepted by the prep scripts: `data/rfd3_splits/unconditional_monomer_protrek35m`
+- current local catalytic RF3 pair split: `rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt`
+- copied catalytic endpoint assets: `rfd3-data/rf3_reactzyme_catalyst_gt/endpoints/{reactant,product}`
+- current config-driven Catalyst-GT training JSONL: `runs/bootstrap/uma_cat_catalyst_gt_train.jsonl`
 
 Future splits can be plugged in when generated under `rfd3-data/rfd3_splits/` or the legacy `data/rfd3_splits/` alias.
+
+The current catalytic split is self-contained for this checkout: all referenced
+reactant-bound and product-bound CIF endpoints have been copied into
+`rfd3-data/rf3_reactzyme_catalyst_gt/endpoints`, and the split JSON files point
+at those local paths. Older catalytic split snapshots may still contain absolute
+RF3 endpoint paths from the machine where RF3 was run; do not use those for a
+new run until their endpoints are materialized locally and the split validator
+passes.
+
+The current config-driven training JSONL was materialized from the Catalyst-GT
+train split and contains `142` training rows. Rebuild it at any time with:
+
+```bash
+bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh --rebuild-dataset --dry-run --no-progress
+```
 
 ## Configuration (single source of truth)
 
@@ -90,6 +112,8 @@ Primary runtime configs:
 
 - `config/m3_default.yaml` for the older stability/binding Method III path
 - `config/uma_cat_m3_default.yaml` for the default catalytic Method III path
+- `config/uma_cat_catalyst_gt_graphkcat_8round.yaml` for the current
+  config-driven 8-round Catalyst-GT catalytic run with GraphKcat enabled
 
 `config/m3_default.yaml` includes:
 
@@ -115,10 +139,9 @@ Primary runtime configs:
   - weak whole-backbone endpoint guidance,
   - stronger pocket guidance,
   - interpolated `CA` elastic-network fold prior,
-  - chemistry-aware ligand bond schedules for bond retention / breaking / forming,
-  - reduced Cartesian steering on reactive atoms,
-  - coherent COM steering on stable ligand fragments,
-  - hard rejection of paths that create excess ligand bonds or severe close contacts,
+  - topology-preserving mapped-ligand endpoint pose steering only,
+  - no ligand bond-breaking, bond-forming, internal-morph, or incomplete-map fallback path construction,
+  - hard rejection of unsupported topology-changing paths and of paths that create excess ligand bonds or severe close contacts,
 - optional PMF controls,
 - sMD quality gates used to suppress unstable PMF seeds,
 - optional GraphKcat refinement controls,
@@ -126,7 +149,36 @@ Primary runtime configs:
 - Method III round budgets for `uma_cat_budget` and `graphkcat_budget`,
 - W&B defaults under `logging.wandb` for round-level and experiment-level telemetry.
 
+`config/uma_cat_catalyst_gt_graphkcat_8round.yaml` is the current training
+entrypoint config for the local Catalyst-GT split. It sets:
+
+- `run.run_id = uma_cat_catalyst_gt_graphkcat_8round`
+- `run.output_root = runs/uma_cat_catalyst_gt_graphkcat_8round`
+- `data.split_root = rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt`
+- `data.dataset_path = runs/bootstrap/uma_cat_catalyst_gt_train.jsonl`
+- `method3.rounds = 8`
+- `generator.backend = ligandmpnn`
+- `oracles.envs.uma_cat = fairchem`
+- `oracles.uma_cat.model_name = uma-s-1p2`
+- `oracles.envs.graphkcat = apodock`
+- `round.graphkcat_prefilter_fraction = 1.0`
+- `round.uma_cat_budget = 4`
+- `round.pool_size = 128`
+- `oracles.fusion.w_graphkcat = 0.55`
+- `oracles.fusion.w_agreement = 0.20`
+- `logging.wandb.enabled = true`
+- `logging.wandb.mode = auto`
+
+The corresponding launcher is:
+
+```bash
+bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh
+```
+
 All updated orchestration scripts accept `--config` and allow CLI overrides.
+`scripts/orchestration/uma_cat_m3_run_experiment.py` can now read `run.run_id`,
+`run.output_root`, and `data.dataset_path` directly from the YAML, so the
+current Catalyst-GT run does not require a long list of CLI flags.
 
 ## Bootstrap pipeline (D0 creation)
 
@@ -223,13 +275,23 @@ This is now the primary catalytic Method III path in the repo. It is self-contai
 Core idea:
 
 - build catalytic candidates from RF3 reactant-bound and product-bound outputs,
+- train / deploy the current Method III student through LigandMPNN packing and proposal infrastructure,
 - repack the selected student candidates with LigandMPNN,
-- run a broad whole-enzyme UMA equilibrium screen from the reactant-bound basin,
-- optionally run forward and reverse steered UMA dynamics between reactant-bound and product-bound states,
-- optionally reconstruct a path umbrella PMF from the sMD-derived path,
-- use UMA-cat as the default catalytic oracle during RL.
+- run a broad whole-enzyme UMA equilibrium screen from the reactant-bound basin using FAIRChem `FAIRChemCalculator(..., task_name="omol")`,
+- optionally run forward and reverse steered UMA dynamics only when the reactant/product ligand endpoints are fully atom-mapped and topology-preserving,
+- optionally reconstruct a path umbrella PMF only from that validated topology-preserving sMD path,
+- use UMA-cat as the default catalytic oracle during RL only when it emits real, quality-gated labels.
 
-The implemented catalytic scalar is a transition-state-style log-rate proxy:
+Real UMA contract:
+
+- Supported production model names are `uma-s-1p2`, `uma-s-1p1`, and `uma-m-1p1`; this checkout defaults to the cached `uma-s-1p2` checkpoint.
+- The runtime constructs `FAIRChemCalculator(pretrained_mlip.get_predict_unit(<model>, ...), task_name="omol")`.
+- UMA runtime scripts use the installed `fairchem` package in the active conda environment. Do not prepend the checked-in `./models/fairchem/src` tree for production runs unless that tree is upgraded to the same FairChem version as the installed package; the cached `uma-s-1p2` checkpoint requires the newer package API.
+- Unsupported model names fail before any scoring starts.
+- Incomplete ligand atom mappings and topology-changing reactant/product ligand graphs do not receive sMD, PMF, or `log10 k_proxy` labels. Those rows keep broad-screen telemetry and are marked `unsupported_reactive_path`.
+- The implementation plan and removal policy are recorded in `planning/UMA-REAL-MD-REIMPLEMENTATION.md`.
+
+For supported topology-preserving endpoint paths, the implemented catalytic scalar is a transition-state-style log-rate proxy:
 
 ```text
 log10 k_proxy = log10(k_B T / h) - (Delta G_gate + Delta G_barrier) / (RT ln 10)
@@ -239,6 +301,8 @@ where:
 
 - `Delta G_gate` comes from productive-pose / gNAC occupancy in the broad whole-enzyme UMA screen,
 - `Delta G_barrier` comes from the PMF if enabled, otherwise from the sMD Jarzynski-style barrier estimate.
+
+If the barrier source is unsupported or missing, `uma_cat_barrier_source` is `none`, `uma_cat_status` is not `ok`, and the row is not treated as a valid UMA-cat reward source.
 
 The default catalytic uncertainty propagated into reward fusion is also physically structured:
 
@@ -265,7 +329,7 @@ Dataset-wide sMD quality is now validated against three classes of failure, not 
 The helper validator is:
 
 ```bash
-conda run --no-capture-output -n mora-uma python scripts/prep/oracles/validate_uma_smd_protocol.py \
+conda run --no-capture-output -n fairchem python scripts/prep/oracles/validate_uma_smd_protocol.py \
   --config config/uma_cat_m3_default.yaml \
   --dataset-path runs/tmp/uma_cat_rf3_train.jsonl \
   --output runs/tmp/uma_smd_validation_panel.json \
@@ -288,7 +352,7 @@ Default active oracle env bindings:
 oracles:
   envs:
     packer: ligandmpnn_env
-    uma_cat: mora-uma
+    uma_cat: fairchem
 ```
 
 Default catalytic routing in that config:
@@ -296,6 +360,9 @@ Default catalytic routing in that config:
 - `generator.backend = ligandmpnn`
 - `round.graphkcat_prefilter_fraction = 0.0`
 - `round.graphkcat_budget = 0`
+- `oracles.packer.parse_atoms_with_zero_occupancy = 1` for the copied RF3
+  endpoint CIFs, which preserve many generated atom coordinates with zero
+  occupancy fields
 - `oracles.uma_cat.preparation.hydrogens = 1`
 - `oracles.uma_cat.preparation.first_shell_waters = 1`
 - `oracles.uma_cat.preparation.relax_steps = 25`
@@ -329,12 +396,19 @@ That means the default round order is:
 
 GraphKcat is still available as an optional auxiliary oracle, but it is not part of the default path because many catalytic reactant/product ligands in the RF3-derived dataset are disconnected, metal-containing, or otherwise incompatible with the current GraphKcat preprocessing stack.
 
+For the current Catalyst-GT 8-round run, GraphKcat is intentionally on. That
+run uses `config/uma_cat_catalyst_gt_graphkcat_8round.yaml`, packs the generated
+pool for GraphKcat, scores the pool under `apodock`, prefilters with
+GraphKcat uncertainty, then sends the selected subset to the real UMA-cat broad
+MD / eligible sMD path. KcatNet is not part of this UMA-cat runner; it remains a
+separate legacy Kcat loop.
+
 ### Tested RF3-to-catalytic dataset build
 
 This bridge uses prepared RF3 inputs plus the finished reactant/product RF3 outputs:
 
 ```bash
-conda run -n mora-uma python scripts/rf3/build_uma_cat_dataset.py \
+python scripts/rf3/build_uma_cat_dataset.py \
   --prepared-input-root runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7 \
   --reactant-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant \
   --product-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/product \
@@ -360,10 +434,10 @@ The same builder can also consume the new RF3 split root directly:
 
 ```bash
 python scripts/rf3/build_uma_cat_dataset.py \
-  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt \
   --split train \
-  --output-path runs/tmp/uma_cat_rf3_train.jsonl \
-  --run-id uma_cat_rf3_train \
+  --output-path runs/tmp/uma_cat_catalyst_gt_train.jsonl \
+  --run-id uma_cat_catalyst_gt \
   --round-id 0
 ```
 
@@ -396,14 +470,14 @@ This writes:
 
 ### Run whole-enzyme UMA catalytic scoring
 
-Broad screen + forward/reverse sMD + PMF smoke command:
+Broad screen + forward/reverse sMD + PMF smoke command. The broad screen always runs real UMA MD. sMD and PMF produce barrier labels only for fully mapped topology-preserving endpoints; unsupported ligand graph changes are marked explicitly and are not converted into rate labels.
 
 ```bash
-conda run -n mora-uma python scripts/prep/oracles/uma_catalytic_score.py \
+conda run --no-capture-output -n fairchem python scripts/prep/oracles/uma_catalytic_score.py \
   --candidate-path runs/tmp/uma_cat_smoke_packed.jsonl \
   --output-path runs/tmp/uma_cat_smoke_scored.jsonl \
   --artifact-root runs/tmp/uma_cat_smoke_artifacts \
-  --model-name uma-s-1p1 \
+  --model-name uma-s-1p2 \
   --device cuda:0 \
   --calculator-workers 1 \
   --temperature-k 300 \
@@ -426,12 +500,13 @@ What this stage computes:
 
 - broad productive-pose occupancy `uma_cat_p_gnac`
 - gating free energy `uma_cat_delta_g_gate_kcal_mol`
-- forward and reverse work statistics
-- sMD barrier `uma_cat_delta_g_smd_barrier_kcal_mol`
-- optional PMF barrier `uma_cat_delta_g_pmf_barrier_kcal_mol`
+- protocol status and eligibility fields (`uma_cat_status`, `uma_cat_protocol_mode`, `uma_cat_protocol_reason`, `uma_cat_barrier_source`)
+- forward and reverse work statistics for supported topology-preserving sMD
+- sMD barrier `uma_cat_delta_g_smd_barrier_kcal_mol` only when the sMD barrier is valid
+- optional PMF barrier `uma_cat_delta_g_pmf_barrier_kcal_mol` only when PMF is protocol-eligible and passes quality gates
 - forward/reverse mismatch `uma_cat_forward_reverse_gap_kcal_mol`
 - near-TS candidate count `uma_cat_near_ts_count`
-- final catalytic scalar `uma_cat_log10_rate_proxy`
+- final catalytic scalar `uma_cat_log10_rate_proxy` only when `uma_cat_status == "ok"`
 - structural quality telemetry:
   - `uma_cat_final_product_rmsd_a`
   - `uma_cat_final_pocket_rmsd_a`
@@ -457,7 +532,7 @@ Per-candidate artifacts are written under `--artifact-root`, including:
 Use this before promoting new sMD/PMF settings broadly:
 
 ```bash
-conda run -n mora-uma python scripts/prep/oracles/validate_uma_smd_protocol.py \
+conda run --no-capture-output -n fairchem python scripts/prep/oracles/validate_uma_smd_protocol.py \
   --dataset-path runs/tmp/uma_cat_rf3_train.jsonl \
   --output runs/tmp/uma_smd_validation_panel.json \
   --sample-size 4 \
@@ -537,67 +612,230 @@ The fused rows include:
 - `score`
 - `reward`
 
-### Run a full UMA-cat Method III round
+### Run a catalytic test training round
+
+Start with a tiny real round that exercises the Method III teacher/student,
+LigandMPNN packing, real `uma-s-1p2` broad MD through the installed `fairchem`
+package, catalytic reward fusion, and dataset append. Leave sMD and PMF off for
+the first test so failures are easier to localize.
+
+Build a small RF3 catalytic JSONL:
+
+```bash
+python scripts/rf3/build_uma_cat_dataset.py \
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt \
+  --split train \
+  --output-path runs/tmp/uma_cat_catalyst_gt_train_test.jsonl \
+  --run-id uma_cat_catalyst_gt_test_train \
+  --round-id 0 \
+  --limit 8 \
+  --no-progress
+```
+
+If this writes zero usable rows, inspect one retained split record and verify
+that `reactant_complex_path` and `product_complex_path` exist under
+`rfd3-data/rf3_reactzyme_catalyst_gt/endpoints`. Re-run
+`scripts/rf3/validate_protrek_rf3_split.py` after any path repair.
+
+Select one row for the first test:
+
+```bash
+head -n 1 runs/tmp/uma_cat_catalyst_gt_train_test.jsonl > runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl
+```
+
+Run the first broad-UMA training smoke:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_catalyst_gt_test_train_broad \
+  --round-id 0 \
+  --dataset-path runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl \
+  --output-dir runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000 \
+  --pool-size 2 \
+  --uma-cat-budget 1 \
+  --graphkcat-prefilter-fraction 0.0 \
+  --graphkcat-budget 0 \
+  --teacher-steps 8 \
+  --student-steps 8 \
+  --packer-sc-num-denoising-steps 1 \
+  --packer-sc-num-samples 1 \
+  --packer-parse-atoms-with-zero-occupancy 1 \
+  --uma-env-name fairchem \
+  --uma-model-name uma-s-1p2 \
+  --uma-prepare-hydrogens 0 \
+  --uma-add-first-shell-waters 0 \
+  --uma-relax-prepared-steps 0 \
+  --uma-broad-steps 3 \
+  --uma-broad-replicas 1 \
+  --uma-broad-save-every 1 \
+  --uma-run-smd 0 \
+  --uma-run-reverse-smd 0 \
+  --uma-run-pmf 0 \
+  --step-heartbeat-sec 20 \
+  --no-progress
+```
+
+Expected outputs:
+
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/uma_artifacts/*/broad_rows.jsonl`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/uma_scored_round_0.jsonl`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/D_1.jsonl`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/metrics/round_metrics.json`
+
+Quick output check:
+
+```bash
+conda run --no-capture-output -n fairchem python - <<'PY'
+import json
+from pathlib import Path
+
+root = Path("runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000")
+rows = [
+    json.loads(line)
+    for line in (root / "data/uma_scored_round_0.jsonl").read_text().splitlines()
+    if line.strip()
+]
+print("rows", len(rows))
+for row in rows:
+    print(
+        row.get("candidate_id"),
+        row.get("uma_cat_status"),
+        row.get("uma_cat_p_gnac"),
+        row.get("uma_cat_barrier_source"),
+    )
+print("artifact dirs", len(list((root / "data/uma_artifacts").glob("*"))))
+PY
+```
+
+After the broad test passes, run a tiny sMD smoke on the same one-row dataset:
+
+```bash
+python scripts/orchestration/uma_cat_m3_run_round.py \
+  --config config/uma_cat_m3_default.yaml \
+  --run-id uma_cat_catalyst_gt_test_train_smd \
+  --round-id 0 \
+  --dataset-path runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl \
+  --output-dir runs/tmp/uma_cat_catalyst_gt_test_train_smd/round_000 \
+  --pool-size 2 \
+  --uma-cat-budget 1 \
+  --graphkcat-prefilter-fraction 0.0 \
+  --graphkcat-budget 0 \
+  --teacher-steps 8 \
+  --student-steps 8 \
+  --packer-sc-num-denoising-steps 1 \
+  --packer-sc-num-samples 1 \
+  --packer-parse-atoms-with-zero-occupancy 1 \
+  --uma-env-name fairchem \
+  --uma-model-name uma-s-1p2 \
+  --uma-prepare-hydrogens 0 \
+  --uma-add-first-shell-waters 0 \
+  --uma-relax-prepared-steps 0 \
+  --uma-broad-steps 3 \
+  --uma-broad-replicas 1 \
+  --uma-broad-save-every 1 \
+  --uma-run-smd 1 \
+  --uma-run-reverse-smd 1 \
+  --uma-smd-images 2 \
+  --uma-smd-steps-per-image 1 \
+  --uma-smd-replicas 1 \
+  --uma-run-pmf 0 \
+  --step-heartbeat-sec 20 \
+  --no-progress
+```
+
+For RF3 ligand pairs with different reactant/product molecular graphs, this
+stage may report `unsupported_reactive_path` rather than a barrier. That is a
+valid strict failure mode: the code is refusing to invent a topology-changing
+sMD coordinate instead of returning a fake barrier label.
+
+On the current local `catalyst_gt` one-row smoke, the sMD-enabled command
+completes the full round and records:
+
+- `uma_cat_status = unsupported_reactive_path`
+- `uma_cat_protocol_reason = incomplete_atom_mapping`
+- `uma_cat_barrier_source = none`
+- `uma_cat_log10_rate_proxy = -1000000.0`
+
+That is the expected output for an endpoint pair whose ligand atoms cannot be
+mapped into a topology-preserving reactive path.
+
+### Run a production-sized UMA-cat Method III round
+
+Once the one-row test passes, scale only one dimension at a time: candidate
+pool, UMA budget, broad MD length, then sMD/PMF. A starting production-style
+command is:
 
 ```bash
 python scripts/orchestration/uma_cat_m3_run_round.py \
   --config config/uma_cat_m3_default.yaml \
   --run-id uma_cat_demo \
   --round-id 0 \
-  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
+  --dataset-path runs/tmp/uma_cat_catalyst_gt_train_test.jsonl \
   --output-dir runs/uma_cat_demo/round_000 \
   --pool-size 50000 \
   --uma-cat-budget 256 \
   --graphkcat-prefilter-fraction 0.0 \
-  --graphkcat-budget 0
-```
-
-Dry-run version:
-
-```bash
-python scripts/orchestration/uma_cat_m3_run_round.py \
-  --config config/uma_cat_m3_default.yaml \
-  --run-id uma_cat_smoke_round \
-  --round-id 0 \
-  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
-  --output-dir runs/tmp/uma_cat_round_dry \
-  --pool-size 4 \
-  --uma-cat-budget 1 \
-  --graphkcat-prefilter-fraction 0.0 \
   --graphkcat-budget 0 \
-  --teacher-steps 1 \
-  --student-steps 1 \
-  --dry-run \
-  --no-progress
+  --uma-env-name fairchem \
+  --uma-model-name uma-s-1p2
 ```
 
 ### Run a multi-round UMA-cat Method III experiment
 
+For the Catalyst-GT split with GraphKcat enabled, use the config-driven
+8-round wrapper. This keeps budgets, oracle routing, W&B settings, and output
+paths in YAML rather than in a long CLI command:
+
 ```bash
-python scripts/orchestration/uma_cat_m3_run_experiment.py \
-  --config config/uma_cat_m3_default.yaml \
-  --run-id uma_cat_demo \
-  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
-  --output-root runs/uma_cat_demo \
-  --num-rounds 8
+bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh
 ```
 
-Dry-run version:
+To force cloud W&B sync for the same config:
 
 ```bash
-python scripts/orchestration/uma_cat_m3_run_experiment.py \
-  --config config/uma_cat_m3_default.yaml \
-  --run-id uma_cat_smoke_exp \
-  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
-  --output-root runs/tmp/uma_cat_experiment_dry \
-  --num-rounds 1 \
-  --pool-size 4 \
-  --uma-cat-budget 1 \
-  --graphkcat-budget 0 \
-  --teacher-steps 1 \
-  --student-steps 1 \
-  --dry-run \
-  --no-progress
+WANDB_MODE=online bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh
+```
+
+The wrapper uses:
+
+- config: `config/uma_cat_catalyst_gt_graphkcat_8round.yaml`
+- split: `rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt`
+- generated training JSONL: `runs/bootstrap/uma_cat_catalyst_gt_train.jsonl`
+- output root: `runs/uma_cat_catalyst_gt_graphkcat_8round`
+- rounds: `8`
+- generator / packer: LigandMPNN
+- UMA env/model: `fairchem` / `uma-s-1p2`
+- GraphKcat env: `apodock`
+- GraphKcat prefilter: enabled with `round.graphkcat_prefilter_fraction = 1.0`
+- W&B: enabled from the config in `auto` mode
+
+The wrapper will build `runs/bootstrap/uma_cat_catalyst_gt_train.jsonl` from
+the split if that JSONL is missing. A dry-run has been checked end-to-end: it
+materialized `142` Catalyst-GT train rows and constructed all 8 round commands
+without launching expensive training or oracle stages.
+
+The wrapper now preflights required conda env presence from the config before
+launching. With GraphKcat enabled, `apodock` must exist; otherwise the wrapper
+fails immediately instead of after teacher training and LigandMPNN packing.
+
+To rebuild the Catalyst-GT JSONL from the split before launching:
+
+```bash
+bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh --rebuild-dataset
+```
+
+To validate command construction without running training:
+
+```bash
+bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh --dry-run --no-progress
+```
+
+The underlying experiment runner also supports config-only invocation:
+
+```bash
+conda run --no-capture-output -n fairchem python scripts/orchestration/uma_cat_m3_run_experiment.py \
+  --config config/uma_cat_catalyst_gt_graphkcat_8round.yaml
 ```
 
 ### W\&B, progress bars, and structured logs
@@ -621,9 +859,11 @@ export WANDB_API_KEY=...
 python scripts/orchestration/uma_cat_m3_run_experiment.py \
   --config config/uma_cat_m3_default.yaml \
   --run-id uma_cat_demo_online \
-  --dataset-path runs/bootstrap/uma_cat_D_0_train.jsonl \
+  --dataset-path runs/tmp/uma_cat_catalyst_gt_train_test.jsonl \
   --output-root runs/uma_cat_demo_online \
   --num-rounds 2 \
+  --uma-env-name fairchem \
+  --uma-model-name uma-s-1p2 \
   --wandb-mode online \
   --wandb-project thermogfn \
   --wandb-group uma_cat_demo
@@ -661,101 +901,100 @@ Progress reporting is also layered intentionally:
 - oracle stages: their own tqdm or staged logging where available;
 - every long-running subprocess still emits heartbeat-style log lines via `--step-heartbeat-sec`.
 
-Use `--no-progress` only when you need log-only operation, for example in CI or when redirecting output to a file.
+Use `--no-progress` only when you need log-only operation, for example in CI or when redirecting output to a file. W&B is used by default through `logging.wandb.enabled: true` and `mode: auto`; pass `--wandb-enabled 0` only for explicit local debugging or CI runs that must not create a W&B run.
 
 ### Practical notes
 
 - The implemented `Method III` controller is now a real trajectory-balance GFlowNet teacher over the canonical edit DAG, followed by one-shot student distillation.
 - The teacher uses explicit `STOP -> position -> amino-acid` factorization on canonical edit trajectories reconstructed from labeled candidates, with per-seed `log Z` and a TB loss on terminal reward.
 - The deployed student is still one shot. It is distilled from teacher samples into `K`, position, and residue-replacement marginals so deployment remains fast while teacher training remains truly reward-proportional.
-- The default catalytic path contains no mock scoring branch: LigandMPNN packing, UMA broad screening, sMD, and optional PMF are all real runtime stages.
+- The default catalytic path contains no mock scoring branch: LigandMPNN packing and UMA broad screening are real runtime stages, and sMD/PMF are real FAIRChem/ASE stages only for topology-preserving endpoint protocols.
+- Topology-changing ligand endpoints, incomplete ligand maps, and unsupported reaction paths are not morphed through artificial bond schedules; they are marked `unsupported_reactive_path` and do not contribute a valid `log10 k_proxy`.
 - `oracles.uma_cat.smd.enabled` and `oracles.uma_cat.smd.reverse` control forward/reverse steering.
 - `oracles.uma_cat.pmf.enabled` toggles the PMF stage. It is off by default because it is materially more expensive.
 - `oracles.uma_cat.pmf.every_n_rounds` controls PMF cadence when PMF is enabled. `1` means every round, `2` means every other round, and so on.
 - The default UMA profile is now intentionally higher quality than the earlier smoke-style settings: longer broad screening, more replicas, and gentler but longer sMD pulls.
-- The broad screen, sMD, and PMF are all real FAIRChem/ASE runs through `mora-uma`; this path does not use static proxy replacements.
+- The broad screen, supported sMD, and supported PMF are all real FAIRChem/ASE runs through the installed `fairchem` environment; this path does not use static proxy replacements.
 - GraphKcat remains available as an optional auxiliary oracle, but it is disabled in the default catalytic training preset because the RF3-derived catalytic ligands frequently violate its single-fragment organic preprocessing assumptions.
 - The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
 - Round and experiment manifests now record per-stage peak VRAM from `nvidia-smi`, and the GraphKcat summary JSON records peak VRAM for the `predict.py` stage as well.
 
-### Tested end-to-end real rounds
+### Current validation status
 
-The following real rounds completed successfully after the current fixes.
-
-Bootstrap catalytic round:
+The UMA runtime is now guarded by focused unit tests that enforce the no-fallback policy:
 
 ```bash
-python scripts/orchestration/uma_cat_m3_run_round.py \
-  --config config/uma_cat_m3_default.yaml \
-  --run-id uma_cat_round_real_v3 \
-  --round-id 0 \
-  --dataset-path runs/tmp/uma_cat_smoke_dataset_1.jsonl \
-  --output-dir runs/tmp/uma_cat_round_real_v3 \
-  --pool-size 2 \
-  --uma-cat-budget 1 \
-  --graphkcat-budget 0 \
-  --graphkcat-prefilter-fraction 0.0 \
-  --teacher-steps 1 \
-  --student-steps 1 \
-  --uma-broad-steps 1 \
-  --uma-broad-replicas 1 \
-  --uma-broad-save-every 1 \
-  --uma-run-smd 1 \
-  --uma-run-reverse-smd 1 \
-  --uma-smd-images 2 \
-  --uma-smd-steps-per-image 1 \
-  --uma-smd-replicas 1 \
-  --uma-run-pmf 0 \
-  --step-heartbeat-sec 20 \
-  --no-progress
+conda run -n fairchem python -m unittest tests.test_uma_cat_runtime -v
 ```
 
-Strict labeled round with actual TB teacher training on oracle-derived reward:
+These tests check that:
+
+- unsupported UMA model names fail before model loading,
+- topology-changing ligand endpoints do not create bond-breaking or bond-forming spring schedules,
+- incomplete or topology-changing ligand paths do not create guided sMD paths,
+- invalid sMD protocols use `uma_cat_barrier_source = none`,
+- invalid protocols do not receive a usable `uma_cat_log10_rate_proxy`,
+- valid topology-preserving sMD / PMF summaries still propagate physical uncertainty correctly.
+
+Before promoting a new production protocol, run a real UMA smoke or panel validation in the `fairchem` environment and inspect the generated trajectories:
 
 ```bash
-python scripts/orchestration/uma_cat_m3_run_round.py \
-  --config config/uma_cat_m3_default.yaml \
-  --run-id uma_cat_tb_round_v2 \
-  --round-id 1 \
-  --dataset-path runs/tmp/uma_cat_round_real_v3/data/D_1.jsonl \
-  --output-dir runs/tmp/uma_cat_tb_round_v2 \
-  --pool-size 2 \
-  --uma-cat-budget 1 \
-  --graphkcat-budget 0 \
-  --graphkcat-prefilter-fraction 0.0 \
-  --teacher-steps 64 \
-  --student-steps 128 \
-  --uma-broad-steps 1 \
-  --uma-broad-replicas 1 \
-  --uma-broad-save-every 1 \
-  --uma-run-smd 1 \
-  --uma-run-reverse-smd 1 \
-  --uma-smd-images 2 \
-  --uma-smd-steps-per-image 1 \
-  --uma-smd-replicas 1 \
-  --uma-run-pmf 0 \
-  --step-heartbeat-sec 20 \
-  --no-progress
+conda run -n fairchem python scripts/prep/oracles/run_uma_unbiased_md.py \
+  --structure-path path/to/reactant_complex.pdb \
+  --protein-chain-id A \
+  --ligand-chain-id B \
+  --pocket-positions 10,25,40 \
+  --output-pdb runs/tmp/uma_real_md_smoke.pdb \
+  --output-summary-json runs/tmp/uma_real_md_smoke_summary.json \
+  --model-name uma-s-1p2 \
+  --device cuda:0 \
+  --production-steps 100 \
+  --record-every 10
 ```
 
-The strict labeled round passed all round gates, including teacher-student evaluation:
+Accept the smoke only if the summary has finite energies, the output PDB contains continuous MD frames, and the trajectory does not introduce severe clashes or fold-scale distortion.
 
-- `teacher_mode = trajectory_balance_gflownet`
-- `is_true_gflownet = true`
-- `teacher_student_kl = 0.0`
+Local engine smoke completed on this checkout with the cached `uma-s-1p2` checkpoint:
 
-The full catalytic round completed:
+```bash
+conda run --no-capture-output -n fairchem python scripts/prep/oracles/run_uma_unbiased_md.py \
+  --structure-path models/bioemu/tests/training/chignolin.pdb \
+  --protein-chain-id A \
+  --output-pdb runs/tmp/uma_chignolin_smoke.pdb \
+  --output-summary-json runs/tmp/uma_chignolin_smoke_summary.json \
+  --model-name uma-s-1p2 \
+  --device cuda:0 \
+  --prepare-hydrogens 0 \
+  --add-first-shell-waters 0 \
+  --warmup-steps 0 \
+  --production-steps 3 \
+  --record-every 1
+```
 
-- surrogate fit
-- trajectory-balance teacher fit
-- student distillation
-- UMA subset packing with LigandMPNN
-- UMA-cat broad screen
-- forward and reverse sMD
-- catalytic fusion
-- dataset append
-- design metrics
-- teacher-student evaluation
+That smoke wrote four continuous frames, used `FAIRChemCalculator(..., task_name="omol")`, and reported finite positions, energies, and forces with `smoke_quality_pass = true`. This verifies the installed FairChem engine, checkpoint cache, calculator wiring, and MD output path; it is not a substitute for a production-length protein-ligand validation panel.
+
+Local enzyme-reactant smoke also completed on the copied catalytic endpoint
+assets after LigandMPNN packing:
+
+```bash
+conda run --no-capture-output -n fairchem python scripts/prep/oracles/run_uma_unbiased_md.py \
+  --structure-path runs/tmp/uma_cat_catalyst_gt_packed_smoke_structures/2044cfc7891b8745/reactant/packed_complex.pdb \
+  --protein-chain-id A \
+  --pocket-positions 10,11,12,13,14,15,16,17,18,19,20,21,22,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,225,226,227,228,229,230,231,232,233,234,235,236,237,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421 \
+  --output-pdb runs/tmp/uma_catalyst_gt_enzyme_reactant_smoke.pdb \
+  --output-summary-json runs/tmp/uma_catalyst_gt_enzyme_reactant_smoke_summary.json \
+  --model-name uma-s-1p2 \
+  --device cuda:0 \
+  --prepare-hydrogens 0 \
+  --add-first-shell-waters 0 \
+  --warmup-steps 0 \
+  --production-steps 3 \
+  --record-every 1
+```
+
+That smoke used `uma_task_name = omol`, prepared `3509` atoms, wrote four PDB
+models, reported finite positions / energies / forces, and passed
+`smoke_quality_pass = true`.
 
 ## Legacy Kcat-only disjoint stage (KcatNet + GraphKcat)
 
@@ -1341,6 +1580,26 @@ conda create -n protrek python=3.10 -y
 conda run -n protrek pip install -r models/ProTrek/requirements.txt
 ```
 
+The current checkout has the 35M ProTrek checkpoint materialized at:
+
+- `models/ProTrek/weights/ProTrek_35M/ProTrek_35M.pt`
+
+The current local catalytic split was built from paired enzyme-reactant and
+enzyme-product endpoint structures, then the endpoint CIFs were copied into this
+repo so downstream training does not depend on an external checkout:
+
+- split root: `rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt`
+- endpoint root: `rfd3-data/rf3_reactzyme_catalyst_gt/endpoints`
+- train/test count: 142 / 40 paired enzyme-reaction examples
+
+Validate those local paths before training:
+
+```bash
+conda run --no-capture-output -n fairchem python scripts/rf3/validate_protrek_rf3_split.py \
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt \
+  --output rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt/metadata/validation_report.json
+```
+
 For RF3 pairs `i` and `j`, the structural similarity is the maximum cosine similarity across all cross-state comparisons:
 
 - reactant-reactant,
@@ -1359,7 +1618,7 @@ Preferred one-command wrapper:
 
 ```bash
 bash scripts/run_protrek_split_rf3_pairs.sh \
-  --output-dir rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --output-dir rfd3-data/rfd3_splits/<new_rf3_pair_split> \
   --seq-threshold 0.90 \
   --structure-threshold 0.90 \
   --test-fraction 0.20 \
@@ -1383,7 +1642,7 @@ conda run -n protrek python scripts/rf3/protrek_cluster_split_rf3_pairs.py \
   --prepared-input-root runs/rf3_reactzyme_inputs_smiles_full_with_msa_v7 \
   --reactant-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/reactant \
   --product-root runs/rf3_reactzyme_out_smiles_full_sharded_v9/product \
-  --output-dir rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
+  --output-dir rfd3-data/rfd3_splits/<new_rf3_pair_split> \
   --foldseek-bin models/ProTrek/bin/foldseek \
   --weights-dir models/ProTrek/weights/ProTrek_35M \
   --seq-threshold 0.90 \
@@ -1398,8 +1657,8 @@ Validate the split before using it:
 
 ```bash
 python scripts/rf3/validate_protrek_rf3_split.py \
-  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m \
-  --output rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m/metadata/validation_report.json
+  --split-root rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt \
+  --output rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt/metadata/validation_report.json
 ```
 
 The split root contains:
@@ -1440,9 +1699,10 @@ Notes:
   - `THERMOGFN_NO_PROGRESS=1` to disable tqdm globally.
 - Any unavailable dependency (weights, model cache, permissions, network, environment) now fails immediately.
 - Required runtime prerequisites for successful round execution:
-  - writable Hugging Face cache directory for `spurs` and `bioemu` environments (or pre-populated local model assets),
-  - network access to model artifact hosts unless caches are already populated,
-  - valid FAIRChem/UMA runtime in `uma-qc`.
+  - writable Hugging Face cache directory for gated model assets unless caches are already populated,
+  - cached `facebook/UMA` checkpoint available to the `fairchem` environment for the default catalytic path,
+  - valid `fairchem` runtime for UMA-cat, plus `ligandmpnn_env` for packing,
+  - legacy `spurs`, `bioemu`, and `uma-qc` environments only for the older stability/binding path.
 
 ## Existing generation utilities
 

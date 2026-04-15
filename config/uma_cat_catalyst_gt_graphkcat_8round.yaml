@@ -1,0 +1,165 @@
+run:
+  run_id: uma_cat_catalyst_gt_graphkcat_8round
+  output_root: runs/uma_cat_catalyst_gt_graphkcat_8round
+  seed: 13
+  strict_gates: true
+
+data:
+  split_root: rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt
+  split: train
+  dataset_path: runs/bootstrap/uma_cat_catalyst_gt_train.jsonl
+
+generator:
+  backend: ligandmpnn
+  ligandmpnn:
+    env_name: ligandmpnn_env
+    model_type: ligand_mpnn
+    checkpoint: ""
+    use_atom_context: 1
+    parse_atoms_with_zero_occupancy: 1
+    run_heartbeat_sec: 5
+    batch_size: 1
+    number_of_batches: 1
+    temperature: 0.2
+
+oracles:
+  envs:
+    packer: ligandmpnn_env
+    uma_cat: fairchem
+    graphkcat: apodock
+  packer:
+    model_root: models/LigandMPNN
+    checkpoint_sc: models/LigandMPNN/model_params/ligandmpnn_sc_v_32_002_16.pt
+    device: cuda:0
+    pack_with_ligand_context: 1
+    repack_everything: 1
+    sc_num_denoising_steps: 3
+    sc_num_samples: 16
+    parse_atoms_with_zero_occupancy: 1
+    force_hetatm: 1
+  uma_cat:
+    model_name: uma-s-1p2
+    device: cuda:0
+    calculator_workers: 1
+    max_atoms: 12000
+    protocol:
+      max_reactive_bonds: 8
+      max_reactive_atoms: 12
+      max_reactive_fraction: 0.35
+    preparation:
+      hydrogens: 1
+      first_shell_waters: 1
+      ph: 7.4
+      max_first_shell_waters: 12
+      water_shell_distance_a: 2.8
+      water_clash_distance_a: 2.1
+      water_bridge_distance_min_a: 4.2
+      water_bridge_distance_max_a: 6.6
+      relax_steps: 25
+      relax_fmax_eva: 0.2
+    broad:
+      temperature_k: 300.0
+      timestep_fs: 0.1
+      friction_ps_inv: 1.0
+      steps: 1000
+      replicas: 3
+      save_every: 20
+      contact_cutoff_a: 4.5
+      ligand_rmsd_max_a: 2.5
+      pocket_rmsd_max_a: 2.0
+      min_contacts: 4
+      min_distance_safe_a: 1.5
+      anchor_stride: 6
+    smd:
+      enabled: true
+      reverse: true
+      temperature_k: 300.0
+      timestep_fs: 0.05
+      friction_ps_inv: 2.0
+      images: 96
+      steps_per_image: 48
+      replicas: 2
+      k_steer_eva2: 0.01
+      k_global_eva2: 0.03
+      k_local_eva2: 0.15
+      k_anchor_eva2: 0.01
+      ca_network:
+        sequential_k_eva2: 12.0
+        contact_k_eva2: 0.50
+        contact_cutoff_a: 8.0
+      force_clip_eva: 0.35
+      production_warmup_steps: 40
+      quality:
+        max_final_product_rmsd_a: 1.75
+        max_max_product_rmsd_a: 5.0
+        max_max_pocket_rmsd_a: 4.0
+        max_max_backbone_rmsd_a: 3.0
+        max_max_ca_network_rms_a: 0.75
+        max_max_close_contacts: 0
+        max_max_excess_bond_count: 0
+        require_pass_for_pmf: 1
+    pmf:
+      enabled: false
+      every_n_rounds: 1
+      windows: 20
+      steps_per_window: 320
+      save_every: 10
+      replicas: 2
+      k_window_eva2: 2.0
+      k_local_eva2: 0.08
+      window_relax_steps: 32
+      window_equilibrate_steps: 64
+  graphkcat:
+    model_root: models/GraphKcat
+    checkpoint: models/GraphKcat/checkpoint/paper.pt
+    cfg: TrainConfig_kcat_enz
+    batch_size: 2
+    device: cuda:0
+    distance_cutoff_a: 8.0
+    std_default: 0.25
+    mc_dropout_samples: 8
+    mc_dropout_seed: 13
+    heartbeat_sec: 30
+  fusion:
+    w_uma_cat: 0.90
+    w_graphkcat: 0.55
+    w_agreement: 0.20
+    kappa_uma_cat: 1.0
+    kappa_graphkcat: 1.0
+
+round:
+  pool_size: 128
+  uma_cat_budget: 4
+  graphkcat_budget: 32
+  graphkcat_prefilter_fraction: 1.0
+  graphkcat_prefilter_risk_kappa: 0.5
+  max_checkpoints: 5
+  step_heartbeat_sec: 30
+
+method3:
+  rounds: 8
+  surrogate_ensemble_size: 8
+  teacher_steps: 30000
+  teacher_gamma_off: 0.5
+  student_steps: 15000
+
+logging:
+  wandb:
+    enabled: true
+    project: thermogfn
+    entity: null
+    mode: auto
+    group: uma_cat_catalyst_gt_graphkcat
+    tags:
+      - uma-cat
+      - catalyst-gt
+      - graphkcat
+      - method3
+      - real-uma
+    run_name: uma_cat_catalyst_gt_graphkcat_8round
+
+env:
+  required:
+    - ligandmpnn_env
+    - fairchem
+    - apodock

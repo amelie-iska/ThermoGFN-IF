@@ -1,5 +1,9 @@
 # ThermoGFN-IF Implementation Plan (Codebase-Aligned, Method III First)
 
+## Current Implementation Override
+
+This older planning document is retained for historical context. For current implementation work, the default trainable generator / packer is **LigandMPNN**. ADFLIP is an ablation backend to train later, not the default model. For current UMA catalytic dynamics policy, use `planning/UMA-REAL-MD-REIMPLEMENTATION.md`.
+
 ## 0) Objective and Scope
 
 This plan updates and strengthens the previous implementation plan using the **actual repository structure** and model code currently in `./`.
@@ -923,7 +927,7 @@ Wrapper requirements:
 Source-anchored facts:
 - Runtime environment for this repo implementation: conda env `uma-qc`.
 - `models/fairchem/README.md` specifies ASE + `FAIRChemCalculator` usage.
-- Predictor API: `pretrained_mlip.get_predict_unit("uma-s-1p1"|"uma-m-1p1", ...)`.
+- Predictor API: `pretrained_mlip.get_predict_unit("uma-s-1p2"|"uma-s-1p1"|"uma-m-1p1", ...)`.
 - Molecular task for protein-like systems: `task_name="omol"`.
 - MD examples use ASE Langevin at `0.1 fs`.
 - Multi-GPU acceleration uses `workers=N`.
@@ -931,7 +935,7 @@ Source-anchored facts:
 Wrapper requirements:
 - `scripts/prep/oracles/uma_md_screen.py` must:
   - execute in env `uma-qc` (never in `ADFLIP`, `spurs`, or `bioemu` envs).
-  - expose `--model-name` (`uma-s-1p1` default; `uma-m-1p1` optional).
+  - expose `--model-name` (`uma-s-1p2` default; `uma-s-1p1` and `uma-m-1p1` optional).
   - expose `--workers` and `--inference-settings`.
   - implement whole-protein vs local/hybrid routing based on prepared atom count and policy gates.
   - run temperature ladder `300/330/360/390/420 K` with replicate control.
@@ -1037,7 +1041,7 @@ Standard exit codes:
   - `--candidate-path`
   - `--output-path`
 - optional:
-  - `--model-name` (default `uma-s-1p1`)
+  - `--model-name` (default `uma-s-1p2`)
   - `--workers` (default 1)
   - `--temps` (default `300,330,360,390,420`)
   - `--replicates` (default 4)
@@ -1506,7 +1510,7 @@ from ase import units
 from ase.md.langevin import Langevin
 from fairchem.core import pretrained_mlip, FAIRChemCalculator
 
-predictor = pretrained_mlip.get_predict_unit("uma-s-1p1", device="cuda")
+predictor = pretrained_mlip.get_predict_unit("uma-s-1p2", device="cuda")
 calc = FAIRChemCalculator(predictor, task_name="omol")
 
 atoms.calc = calc
@@ -1524,7 +1528,7 @@ Dispatch wrapper example:
 ```bash
 python scripts/env/dispatch.py \
   --env-name uma-qc \
-  --cmd "python scripts/prep/oracles/uma_md_screen.py --candidate-path runs/R1/rounds/round_000/data/bioemu_scored_round_0.parquet --output-path runs/R1/rounds/round_000/data/uma_scored_round_0.parquet --model-name uma-s-1p1 --temps 300,330,360,390,420 --replicates 4"
+  --cmd "python scripts/prep/oracles/uma_md_screen.py --candidate-path runs/R1/rounds/round_000/data/bioemu_scored_round_0.parquet --output-path runs/R1/rounds/round_000/data/uma_scored_round_0.parquet --model-name uma-s-1p2 --temps 300,330,360,390,420 --replicates 4"
 ```
 
 ## 26.6 Wrapper coding requirement

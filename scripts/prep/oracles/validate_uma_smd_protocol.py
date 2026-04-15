@@ -78,7 +78,7 @@ def main() -> int:
     parser.add_argument("--sample-size", type=int, default=3)
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--sample-mode", choices=["random", "stratified_length"], default="stratified_length")
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--calculator-workers", type=int, default=1)
     parser.add_argument("--temperature-k", type=float, default=None)
@@ -120,9 +120,6 @@ def main() -> int:
 
     root = _repo_root()
     sys.path.insert(0, str(root))
-    fairchem_src = root / "models" / "fairchem" / "src"
-    if fairchem_src.exists():
-        sys.path.insert(0, str(fairchem_src))
 
     from train.thermogfn.config_utils import cfg_get, load_yaml_config
     from train.thermogfn.io_utils import read_records, write_json
@@ -136,7 +133,7 @@ def main() -> int:
     logger = configure_logging("validate.uma_smd", level="INFO")
     cfg_path = _resolve_path(root, args.config)
     cfg = load_yaml_config(cfg_path)
-    args.model_name = str(args.model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p1"))
+    args.model_name = str(args.model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p2"))
     args.device = str(args.device or cfg_get(cfg, "oracles.uma_cat.device", "cuda:0"))
     args.calculator_workers = int(
         args.calculator_workers if args.calculator_workers is not None else cfg_get(cfg, "oracles.uma_cat.calculator_workers", 1)
@@ -389,7 +386,7 @@ def main() -> int:
             rep = dict(smd.get("replica_summaries", [{}])[0] or {})
             report = {
                 "candidate_id": row.get("candidate_id"),
-                "status": "ok",
+                "status": str(smd.get("status", "error")),
                 "mapping": smd.get("mapping", {}),
                 "replica": rep,
                 "protocol_mode": str((smd.get("mapping", {}) or {}).get("protocol_mode", "unknown")),

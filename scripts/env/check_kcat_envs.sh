@@ -14,7 +14,19 @@ fi
 
 mkdir -p "$(dirname "$OUT_JSON")"
 
-python - <<'PY' "$REPO_ROOT" "$OUT_JSON" "$RUN_HEALTH" "${REQUIRED_ENVS[@]}"
+PYTHON_BIN="${PYTHON:-}"
+if [[ -z "$PYTHON_BIN" ]]; then
+  if command -v python >/dev/null 2>&1; then
+    PYTHON_BIN="python"
+  elif command -v python3 >/dev/null 2>&1; then
+    PYTHON_BIN="python3"
+  else
+    echo "Could not find python or python3 on PATH" >&2
+    exit 127
+  fi
+fi
+
+"$PYTHON_BIN" - <<'PY' "$REPO_ROOT" "$OUT_JSON" "$RUN_HEALTH" "${REQUIRED_ENVS[@]}"
 import json
 import sys
 from pathlib import Path

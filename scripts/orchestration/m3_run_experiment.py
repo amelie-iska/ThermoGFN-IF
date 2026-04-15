@@ -293,7 +293,7 @@ def main() -> int:
         args.bioemu_sort_by_length_desc = bool(cfg_get(cfg, "oracles.bioemu.sort_by_length_desc", True))
     if args.bioemu_filter_samples is None:
         args.bioemu_filter_samples = bool(cfg_get(cfg, "oracles.bioemu.filter_samples", False))
-    args.uma_model_name = str(args.uma_model_name or cfg_get(cfg, "oracles.uma.model_name", "uma-s-1p1"))
+    args.uma_model_name = str(args.uma_model_name or cfg_get(cfg, "oracles.uma.model_name", "uma-s-1p2"))
     args.uma_workers = int(args.uma_workers if args.uma_workers is not None else cfg_get(cfg, "oracles.uma.workers", 1))
     args.uma_replicates = int(
         args.uma_replicates if args.uma_replicates is not None else cfg_get(cfg, "oracles.uma.replicates", 4)

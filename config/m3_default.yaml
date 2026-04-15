@@ -66,7 +66,7 @@ oracles:
     sort_by_length_desc: true
     filter_samples: false
   uma:
-    model_name: uma-s-1p1
+    model_name: uma-s-1p2
     workers: 1
     replicates: 4
     temps: "300,330,360,390,420"

@@ -95,6 +95,11 @@ _EQUILIBRATED_STRUCTURE_CACHE: dict[
 ] = {}
 
 
+UMA_REAL_TASK_NAME = "omol"
+SUPPORTED_UMA_MODEL_NAMES = {"uma-s-1p2", "uma-s-1p1", "uma-m-1p1"}
+INVALID_LOG10_RATE_PROXY = -1.0e6
+
+
 def load_structure(path: str | Path) -> StructureData:
     p = Path(path).resolve()
     key = str(p)
@@ -1302,94 +1307,6 @@ def build_connectivity_aware_ligand_path_targets(
     return np.asarray(frames, dtype=np.float64)
 
 
-def build_component_rigid_ligand_path_targets(
-    *,
-    reactant_positions: np.ndarray,
-    product_positions: np.ndarray,
-    components: list[list[int]],
-    lambdas: np.ndarray,
-) -> np.ndarray:
-    reactant_positions = np.asarray(reactant_positions, dtype=np.float64)
-    product_positions = np.asarray(product_positions, dtype=np.float64)
-    lambdas = np.asarray(lambdas, dtype=np.float64)
-
-    frames: list[np.ndarray] = []
-    for lam in lambdas.tolist():
-        frame = np.zeros_like(reactant_positions, dtype=np.float64)
-        for comp in components:
-            comp_idx = np.asarray(comp, dtype=np.int64)
-            start = reactant_positions[comp_idx]
-            end = product_positions[comp_idx]
-            if len(comp_idx) >= 3:
-                rot_end, _trans_end = kabsch_align(end, start)
-                rots = Rotation.from_matrix(np.stack([np.eye(3, dtype=np.float64), rot_end], axis=0))
-                rot = Slerp([0.0, 1.0], rots)([float(lam)]).as_matrix()[0]
-                start_cent = start.mean(axis=0)
-                end_cent = end.mean(axis=0)
-                centered = start - start_cent[None, :]
-                center = (1.0 - float(lam)) * start_cent + float(lam) * end_cent
-                frame[comp_idx] = centered @ rot.T + center[None, :]
-            else:
-                frame[comp_idx] = (1.0 - float(lam)) * start + float(lam) * end
-        frames.append(frame)
-    return np.asarray(frames, dtype=np.float64)
-
-
-def build_reaction_center_hybrid_ligand_path_targets(
-    *,
-    reactant_positions: np.ndarray,
-    product_positions: np.ndarray,
-    components: list[list[int]],
-    reactive_atoms_local: np.ndarray,
-    lambdas: np.ndarray,
-) -> np.ndarray:
-    reactant_positions = np.asarray(reactant_positions, dtype=np.float64)
-    product_positions = np.asarray(product_positions, dtype=np.float64)
-    lambdas = np.asarray(lambdas, dtype=np.float64)
-    reactive_set = set(np.asarray(reactive_atoms_local, dtype=np.int64).tolist())
-
-    frames: list[np.ndarray] = []
-    for lam in lambdas.tolist():
-        frame = np.zeros_like(reactant_positions, dtype=np.float64)
-        for comp in components:
-            comp_idx = np.asarray(comp, dtype=np.int64)
-            start = reactant_positions[comp_idx]
-            end = product_positions[comp_idx]
-            if reactive_set.intersection(int(idx) for idx in comp_idx.tolist()):
-                frame[comp_idx] = (1.0 - float(lam)) * start + float(lam) * end
-                continue
-            if len(comp_idx) >= 3:
-                rot_end, _trans_end = kabsch_align(end, start)
-                rots = Rotation.from_matrix(np.stack([np.eye(3, dtype=np.float64), rot_end], axis=0))
-                rot = Slerp([0.0, 1.0], rots)([float(lam)]).as_matrix()[0]
-                start_cent = start.mean(axis=0)
-                end_cent = end.mean(axis=0)
-                centered = start - start_cent[None, :]
-                center = (1.0 - float(lam)) * start_cent + float(lam) * end_cent
-                frame[comp_idx] = centered @ rot.T + center[None, :]
-            else:
-                frame[comp_idx] = (1.0 - float(lam)) * start + float(lam) * end
-        frames.append(frame)
-    return np.asarray(frames, dtype=np.float64)
-
-
-def build_internal_morph_ligand_path_targets(
-    *,
-    reactant_positions: np.ndarray,
-    product_positions: np.ndarray,
-    lambdas: np.ndarray,
-) -> np.ndarray:
-    reactant_positions = np.asarray(reactant_positions, dtype=np.float64)
-    product_positions = np.asarray(product_positions, dtype=np.float64)
-    lambdas = np.asarray(lambdas, dtype=np.float64)
-    if reactant_positions.shape != product_positions.shape or reactant_positions.ndim != 2:
-        raise ValueError("reactant_positions and product_positions must have matching shape [n_atoms, 3]")
-    frames = []
-    for lam in lambdas.tolist():
-        frames.append((1.0 - float(lam)) * reactant_positions + float(lam) * product_positions)
-    return np.asarray(frames, dtype=np.float64)
-
-
 def _empty_support_model() -> dict[str, np.ndarray]:
     return {
         "support_pairs": np.zeros((0, 2), dtype=np.int64),
@@ -1399,145 +1316,16 @@ def _empty_support_model() -> dict[str, np.ndarray]:
     }
 
 
-def _bond_adjacency(
-    n_atoms: int,
-    bonds: set[tuple[int, int]],
-) -> list[set[int]]:
-    adjacency = [set() for _ in range(int(n_atoms))]
-    for i, j in bonds:
-        adjacency[int(i)].add(int(j))
-        adjacency[int(j)].add(int(i))
-    return adjacency
-
-
-def _ordered_pair(i: int, j: int) -> tuple[int, int]:
-    if int(i) <= int(j):
-        return int(i), int(j)
-    return int(j), int(i)
-
-
-def _choose_anchor_neighbor(
-    atom_idx: int,
-    *,
-    primary_adjacency: list[set[int]],
-    secondary_adjacency: list[set[int]],
-    forbidden_idx: int,
-) -> int | None:
-    primary = sorted(int(x) for x in primary_adjacency[int(atom_idx)] if int(x) != int(forbidden_idx))
-    if primary:
-        return int(primary[0])
-    secondary = sorted(int(x) for x in secondary_adjacency[int(atom_idx)] if int(x) != int(forbidden_idx))
-    if secondary:
-        return int(secondary[0])
-    return None
-
-
-def build_reaction_cv_model(
-    *,
-    reactant_positions: np.ndarray,
-    product_positions: np.ndarray,
-    reactant_bonds: set[tuple[int, int]],
-    product_bonds: set[tuple[int, int]],
-    stable_bonds: set[tuple[int, int]],
-    reactant_components: list[np.ndarray],
-    broken_bonds: set[tuple[int, int]],
-    formed_bonds: set[tuple[int, int]],
-) -> dict[str, Any]:
-    start = np.asarray(reactant_positions, dtype=np.float64)
-    end = np.asarray(product_positions, dtype=np.float64)
-    n_atoms = int(start.shape[0])
-    react_adj = _bond_adjacency(n_atoms, reactant_bonds)
-    prod_adj = _bond_adjacency(n_atoms, product_bonds)
-    stable_adj = _bond_adjacency(n_atoms, stable_bonds)
-
-    component_lookup: dict[int, int] = {}
-    component_start_coms: list[np.ndarray] = []
-    component_end_coms: list[np.ndarray] = []
-    for comp_idx, comp in enumerate(reactant_components):
-        comp_arr = np.asarray(comp, dtype=np.int64)
-        for atom_idx in comp_arr.tolist():
-            component_lookup[int(atom_idx)] = int(comp_idx)
-        component_start_coms.append(np.mean(start[comp_arr], axis=0))
-        component_end_coms.append(np.mean(end[comp_arr], axis=0))
-
-    component_pair_indices: list[list[int]] = []
-    component_pair_start_distances: list[float] = []
-    component_pair_end_distances: list[float] = []
-    component_pair_force_constants: list[float] = []
-    seen_component_pairs: set[tuple[int, int]] = set()
-
-    aux_pairs: list[list[int]] = []
-    aux_start_distances: list[float] = []
-    aux_end_distances: list[float] = []
-    aux_force_constants: list[float] = []
-    seen_aux_pairs: set[tuple[int, int]] = set()
-
-    def _add_aux_pair(i: int, j: int, *, force_constant: float) -> None:
-        pair = _ordered_pair(i, j)
-        if pair in seen_aux_pairs:
-            return
-        start_d = float(np.linalg.norm(start[pair[0]] - start[pair[1]]))
-        end_d = float(np.linalg.norm(end[pair[0]] - end[pair[1]]))
-        if abs(end_d - start_d) <= 1e-3:
-            return
-        seen_aux_pairs.add(pair)
-        aux_pairs.append([int(pair[0]), int(pair[1])])
-        aux_start_distances.append(float(start_d))
-        aux_end_distances.append(float(end_d))
-        aux_force_constants.append(float(force_constant))
-
-    for i, j in sorted(formed_bonds | broken_bonds):
-        pair = _ordered_pair(i, j)
-        if pair in formed_bonds:
-            left_comp = component_lookup.get(int(pair[0]))
-            right_comp = component_lookup.get(int(pair[1]))
-            if left_comp is not None and right_comp is not None and left_comp != right_comp:
-                comp_pair = _ordered_pair(left_comp, right_comp)
-                if comp_pair not in seen_component_pairs:
-                    seen_component_pairs.add(comp_pair)
-                    start_dist = float(
-                        np.linalg.norm(
-                            np.asarray(component_start_coms[comp_pair[0]], dtype=np.float64)
-                            - np.asarray(component_start_coms[comp_pair[1]], dtype=np.float64),
-                        )
-                    )
-                    end_dist = float(
-                        np.linalg.norm(
-                            np.asarray(component_end_coms[comp_pair[0]], dtype=np.float64)
-                            - np.asarray(component_end_coms[comp_pair[1]], dtype=np.float64),
-                        )
-                    )
-                    component_pair_indices.append([int(comp_pair[0]), int(comp_pair[1])])
-                    component_pair_start_distances.append(float(start_dist))
-                    component_pair_end_distances.append(float(end_dist))
-                    component_pair_force_constants.append(2.5)
-
-        left_neighbor = _choose_anchor_neighbor(
-            int(pair[0]),
-            primary_adjacency=stable_adj,
-            secondary_adjacency=react_adj if pair in broken_bonds else prod_adj,
-            forbidden_idx=int(pair[1]),
-        )
-        if left_neighbor is not None:
-            _add_aux_pair(left_neighbor, int(pair[1]), force_constant=2.0)
-        right_neighbor = _choose_anchor_neighbor(
-            int(pair[1]),
-            primary_adjacency=stable_adj,
-            secondary_adjacency=react_adj if pair in broken_bonds else prod_adj,
-            forbidden_idx=int(pair[0]),
-        )
-        if right_neighbor is not None:
-            _add_aux_pair(int(pair[0]), right_neighbor, force_constant=2.0)
-
+def _empty_reaction_cv_model() -> dict[str, np.ndarray]:
     return {
-        "component_pair_indices": np.asarray(component_pair_indices, dtype=np.int64),
-        "component_pair_start_distances": np.asarray(component_pair_start_distances, dtype=np.float64),
-        "component_pair_end_distances": np.asarray(component_pair_end_distances, dtype=np.float64),
-        "component_pair_force_constants": np.asarray(component_pair_force_constants, dtype=np.float64),
-        "aux_pairs": np.asarray(aux_pairs, dtype=np.int64),
-        "aux_start_distances": np.asarray(aux_start_distances, dtype=np.float64),
-        "aux_end_distances": np.asarray(aux_end_distances, dtype=np.float64),
-        "aux_force_constants": np.asarray(aux_force_constants, dtype=np.float64),
+        "component_pair_indices": np.zeros((0, 2), dtype=np.int64),
+        "component_pair_start_distances": np.zeros((0,), dtype=np.float64),
+        "component_pair_end_distances": np.zeros((0,), dtype=np.float64),
+        "component_pair_force_constants": np.zeros((0,), dtype=np.float64),
+        "aux_pairs": np.zeros((0, 2), dtype=np.int64),
+        "aux_start_distances": np.zeros((0,), dtype=np.float64),
+        "aux_end_distances": np.zeros((0,), dtype=np.float64),
+        "aux_force_constants": np.zeros((0,), dtype=np.float64),
     }
 
 
@@ -1572,10 +1360,8 @@ def build_component_pocket_support_model(
 
     react_local = np.asarray(graph_model["reactant_positions_local"], dtype=np.float64)
     prod_local = np.asarray(graph_model["product_positions_local"], dtype=np.float64)
-    steering_mode = str(graph_model.get("steering_mode", "component_pose_only"))
-    if steering_mode == "reactive_center":
-        base_force_constant = 0.75
-    elif steering_mode == "component_pose_only":
+    steering_mode = str(graph_model.get("steering_mode", "topology_change_unsupported"))
+    if steering_mode == "topology_preserving_endpoint":
         base_force_constant = 2.0
     else:
         base_force_constant = 2.5
@@ -1652,8 +1438,8 @@ def build_ligand_graph_model(
     mapped_prod = np.asarray(mapping["product_indices"], dtype=np.int64)
     product_aligned = np.asarray(mapping["product_aligned_positions"], dtype=np.float64)
 
-    fallback_groups = [np.asarray([int(idx)], dtype=np.int64) for idx in ligand_indices.tolist()]
-    fallback_start_coms = np.asarray(
+    unmapped_groups = [np.asarray([int(idx)], dtype=np.int64) for idx in ligand_indices.tolist()]
+    unmapped_start_coms = np.asarray(
         [np.asarray(reactant.positions[int(idx)], dtype=np.float64) for idx in ligand_indices.tolist()],
         dtype=np.float64,
     )
@@ -1663,12 +1449,12 @@ def build_ligand_graph_model(
             "reactant_positions_local": np.asarray(reactant.positions[ligand_indices], dtype=np.float64),
             "product_positions_local": np.asarray(reactant.positions[ligand_indices], dtype=np.float64),
             "symbols": [str(reactant.symbols[int(idx)]) for idx in ligand_indices.tolist()],
-            "reactant_components": [list(group.tolist()) for group in fallback_groups],
-            "stable_components": [list(group.tolist()) for group in fallback_groups],
-            "component_groups": fallback_groups,
-            "component_start_coms": fallback_start_coms,
-            "component_end_coms": fallback_start_coms.copy(),
-            "steering_mode": "unmapped_fallback",
+            "reactant_components": [list(group.tolist()) for group in unmapped_groups],
+            "stable_components": [list(group.tolist()) for group in unmapped_groups],
+            "component_groups": unmapped_groups,
+            "component_start_coms": unmapped_start_coms,
+            "component_end_coms": unmapped_start_coms.copy(),
+            "steering_mode": "unsupported_incomplete_mapping",
             "steering_confident": False,
             "broken_bond_count": 0,
             "formed_bond_count": 0,
@@ -1713,21 +1499,26 @@ def build_ligand_graph_model(
         reactive_fraction <= float(max_reactive_fraction)
         or int(len(ligand_indices)) <= int(max_reactive_atoms)
     )
-    steering_confident = (
+    topology_preserving = reactive_bond_count == 0
+    topology_change_in_range = (
         reactive_bond_count <= int(max_reactive_bonds)
         and reactive_atom_count <= int(max_reactive_atoms)
         and fraction_gate_ok
     )
-    steering_mode = "reactive_center" if steering_confident and reactive_bond_count > 0 else "component_pose_only"
+    steering_confident = bool(topology_preserving)
+    steering_mode = "topology_preserving_endpoint" if topology_preserving else "topology_change_unsupported"
     quality_reasons: list[str] = []
-    if reactive_bond_count > int(max_reactive_bonds):
-        quality_reasons.append("too_many_graph_edits")
-    if reactive_atom_count > int(max_reactive_atoms):
-        quality_reasons.append("too_many_reactive_atoms")
-    if not fraction_gate_ok:
-        quality_reasons.append("reactive_fraction_too_large")
-    if reactive_bond_count == 0:
-        quality_reasons.append("no_detected_graph_edits")
+    if not topology_preserving:
+        quality_reasons.append("topology_change_not_supported_for_uma_smd")
+        if not topology_change_in_range:
+            if reactive_bond_count > int(max_reactive_bonds):
+                quality_reasons.append("too_many_graph_edits")
+            if reactive_atom_count > int(max_reactive_atoms):
+                quality_reasons.append("too_many_reactive_atoms")
+            if not fraction_gate_ok:
+                quality_reasons.append("reactive_fraction_too_large")
+    else:
+        quality_reasons.append("topology_preserving_endpoint")
 
     reactant_components = [np.asarray(comp, dtype=np.int64) for comp in graph_edits["reactant_components"]]
     component_start_coms = np.asarray(
@@ -1738,16 +1529,7 @@ def build_ligand_graph_model(
         [np.mean(end[comp], axis=0) for comp in reactant_components],
         dtype=np.float64,
     )
-    reaction_cv_model = build_reaction_cv_model(
-        reactant_positions=start,
-        product_positions=end,
-        reactant_bonds=set(graph_edits["reactant_bonds"]),
-        product_bonds=set(graph_edits["product_bonds"]),
-        stable_bonds=set(graph_edits["stable_bonds"]),
-        reactant_components=reactant_components,
-        broken_bonds=set(graph_edits["broken_bonds"]),
-        formed_bonds=set(graph_edits["formed_bonds"]),
-    )
+    reaction_cv_model = _empty_reaction_cv_model()
 
     return {
         "full_mapping": True,
@@ -1783,7 +1565,7 @@ def build_ligand_graph_model(
         "aux_start_distances": np.asarray(reaction_cv_model["aux_start_distances"], dtype=np.float64),
         "aux_end_distances": np.asarray(reaction_cv_model["aux_end_distances"], dtype=np.float64),
         "aux_force_constants": np.asarray(reaction_cv_model["aux_force_constants"], dtype=np.float64),
-        "quality_reason": ",".join(quality_reasons) if quality_reasons else "trusted_reactive_center",
+        "quality_reason": ",".join(quality_reasons),
     }
 
 
@@ -1795,24 +1577,24 @@ def classify_ligand_protocol_mode(
 ) -> dict[str, Any]:
     steering_mode = str(steering_mode or "").strip() or "unknown"
     quality_reason = str(quality_reason or "").strip()
-    if steering_mode == "reactive_center" and bool(steering_confident):
+    if steering_mode == "topology_preserving_endpoint" and bool(steering_confident):
         return {
-            "protocol_mode": "reactive_center",
-            "protocol_reason": quality_reason or "trusted_reactive_center",
+            "protocol_mode": "topology_preserving_endpoint",
+            "protocol_reason": quality_reason or "topology_preserving_endpoint",
             "reactive_barrier_valid": True,
             "pmf_eligible": True,
         }
-    if steering_mode == "component_pose_only":
-        if quality_reason == "incomplete_atom_mapping":
-            return {
-                "protocol_mode": "unsupported_reactive_path",
-                "protocol_reason": quality_reason,
-                "reactive_barrier_valid": False,
-                "pmf_eligible": False,
-            }
+    if steering_mode == "unsupported_incomplete_mapping":
         return {
-            "protocol_mode": "conformational_endpoint",
-            "protocol_reason": quality_reason or "component_pose_only",
+            "protocol_mode": "unsupported_reactive_path",
+            "protocol_reason": quality_reason or "incomplete_atom_mapping",
+            "reactive_barrier_valid": False,
+            "pmf_eligible": False,
+        }
+    if steering_mode == "topology_change_unsupported":
+        return {
+            "protocol_mode": "unsupported_reactive_path",
+            "protocol_reason": quality_reason or "topology_change_not_supported_for_uma_smd",
             "reactive_barrier_valid": False,
             "pmf_eligible": False,
         }
@@ -1894,6 +1676,16 @@ def build_guided_ligand_path_targets(
         mapping=mapping,
     ) if graph_model is None else graph_model
 
+    if not (len(mapped_react) == len(ligand_indices) and np.array_equal(np.sort(mapped_react), np.sort(ligand_indices))):
+        raise ValueError("cannot build UMA ligand steering path without a complete endpoint atom mapping")
+
+    if str(graph_model.get("steering_mode", "")) != "topology_preserving_endpoint":
+        raise ValueError(
+            "UMA sMD/PMF only supports topology-preserving endpoint steering; "
+            f"got steering_mode={graph_model.get('steering_mode')} "
+            f"reason={graph_model.get('quality_reason', '')}"
+        )
+
     if len(mapped_react) == len(ligand_indices) and np.array_equal(np.sort(mapped_react), np.sort(ligand_indices)):
         reorder = []
         prod_lookup = {int(ridx): int(pidx) for ridx, pidx in zip(mapped_react.tolist(), mapped_prod.tolist(), strict=False)}
@@ -1901,28 +1693,15 @@ def build_guided_ligand_path_targets(
             reorder.append(prod_lookup[int(ridx)])
         start = reactant.positions[ligand_indices].copy()
         end = product_aligned[np.asarray(reorder, dtype=np.int64)].copy()
-        if graph_model["steering_mode"] == "reactive_center":
-            path = build_internal_morph_ligand_path_targets(
-                reactant_positions=start,
-                product_positions=end,
-                lambdas=lambdas,
-            )
-            return np.asarray(path, dtype=np.float64), "reactive_center_internal_morph", graph_model
         path = build_connectivity_aware_ligand_path_targets(
             reactant_positions=start,
             product_positions=end,
             symbols=list(graph_model["symbols"]),
             lambdas=lambdas,
         )
-        return np.asarray(path, dtype=np.float64), "connectivity_aware_endpoint", graph_model
+        return np.asarray(path, dtype=np.float64), "topology_preserving_endpoint", graph_model
 
-    path = build_rigid_ligand_path_targets(
-        ligand_positions=reactant.positions[ligand_indices],
-        matched_start_positions=reactant.positions[mapped_react],
-        matched_end_positions=product_aligned[mapped_prod],
-        lambdas=lambdas,
-    )
-    return path, "rigid_fallback", graph_model
+    raise AssertionError("unreachable complete-mapping branch failed")
 
 
 def build_ligand_restraint_model(
@@ -1962,7 +1741,7 @@ def build_ligand_restraint_model(
             "reactive_atom_count": 0,
             "allowed_bonds": set(),
             "ligand_symbols": list(graph_model["symbols"]),
-            "steering_mode": str(graph_model.get("steering_mode", "unmapped_fallback")),
+            "steering_mode": str(graph_model.get("steering_mode", "unsupported_incomplete_mapping")),
             "steering_confident": bool(graph_model.get("steering_confident", False)),
             "component_pair_indices": np.zeros((0, 2), dtype=np.int64),
             "component_pair_start_distances": np.zeros((0,), dtype=np.float64),
@@ -1977,10 +1756,13 @@ def build_ligand_restraint_model(
     start = np.asarray(graph_model["reactant_positions_local"], dtype=np.float64)
     end = np.asarray(graph_model["product_positions_local"], dtype=np.float64)
     symbols = list(graph_model["symbols"])
+    reactive_atoms_local = np.asarray(graph_model["reactive_atoms_local"], dtype=np.int64)
     react_bonds = set(graph_model["reactant_bonds"])
     prod_bonds = set(graph_model["product_bonds"])
-    reactive_atoms_local = np.asarray(graph_model["reactive_atoms_local"], dtype=np.int64)
     union_bonds = sorted(react_bonds | prod_bonds)
+    # No ligand bond breaking/forming schedules are used in production. UMA supplies
+    # the physical forces; biased MD is limited to endpoint pose restraints for
+    # topology-preserving mapped ligands.
     bond_pairs: list[list[int]] = []
     bond_start_distances: list[float] = []
     bond_end_distances: list[float] = []
@@ -1988,30 +1770,6 @@ def build_ligand_restraint_model(
     bond_end_lambdas: list[float] = []
     bond_start_force_constants: list[float] = []
     bond_end_force_constants: list[float] = []
-
-    for i, j in union_bonds:
-        start_d = float(np.linalg.norm(start[i] - start[j]))
-        end_d = float(np.linalg.norm(end[i] - end[j]))
-        if str(graph_model.get("steering_mode", "")) != "reactive_center":
-            continue
-        if (i, j) in react_bonds and (i, j) in prod_bonds:
-            lam0, lam1 = 0.0, 1.0
-            k_start, k_end = 10.0, 10.0
-        elif (i, j) in react_bonds:
-            lam0, lam1 = 0.0, 0.50
-            k_start, k_end = 6.0, 0.0
-            end_d = min(2.0, max(start_d + 0.35, 1.65))
-        else:
-            lam0, lam1 = 0.50, 1.0
-            k_start, k_end = 0.0, 6.0
-            start_d = min(2.0, max(end_d + 0.35, 1.65))
-        bond_pairs.append([int(ligand_indices[i]), int(ligand_indices[j])])
-        bond_start_distances.append(float(start_d))
-        bond_end_distances.append(float(end_d))
-        bond_start_lambdas.append(float(lam0))
-        bond_end_lambdas.append(float(lam1))
-        bond_start_force_constants.append(float(k_start))
-        bond_end_force_constants.append(float(k_end))
 
     repulsion_pairs: list[list[int]] = []
     repulsion_min_distances: list[float] = []
@@ -2025,12 +1783,10 @@ def build_ligand_restraint_model(
             repulsion_min_distances.append(2.30)
             repulsion_force_constants.append(12.0)
 
-    if str(graph_model.get("steering_mode", "")) == "reactive_center":
-        steer_weights = np.zeros(len(ligand_indices), dtype=np.float64)
-        if reactive_atoms_local.size > 0:
-            steer_weights[reactive_atoms_local] = 1.0
+    if str(graph_model.get("steering_mode", "")) == "topology_preserving_endpoint":
+        steer_weights = np.ones(len(ligand_indices), dtype=np.float64)
     else:
-        steer_weights = np.full(len(ligand_indices), max(float(context_atom_steer_scale), 0.50), dtype=np.float64)
+        steer_weights = np.zeros(len(ligand_indices), dtype=np.float64)
 
     return {
         "bond_pairs": np.asarray(bond_pairs, dtype=np.int64),
@@ -2052,7 +1808,7 @@ def build_ligand_restraint_model(
         "reactive_atom_count": int(len(reactive_atoms_local)),
         "allowed_bonds": set(graph_model["allowed_bonds"]),
         "ligand_symbols": list(symbols),
-        "steering_mode": str(graph_model.get("steering_mode", "component_pose_only")),
+        "steering_mode": str(graph_model.get("steering_mode", "topology_change_unsupported")),
         "steering_confident": bool(graph_model.get("steering_confident", False)),
         "component_pair_indices": np.asarray(graph_model.get("component_pair_indices", np.zeros((0, 2), dtype=np.int64)), dtype=np.int64),
         "component_pair_start_distances": np.asarray(graph_model.get("component_pair_start_distances", np.zeros((0,), dtype=np.float64)), dtype=np.float64),
@@ -2062,7 +1818,7 @@ def build_ligand_restraint_model(
         "aux_start_distances": np.asarray(graph_model.get("aux_start_distances", np.zeros((0,), dtype=np.float64)), dtype=np.float64),
         "aux_end_distances": np.asarray(graph_model.get("aux_end_distances", np.zeros((0,), dtype=np.float64)), dtype=np.float64),
         "aux_force_constants": np.asarray(graph_model.get("aux_force_constants", np.zeros((0,), dtype=np.float64)), dtype=np.float64),
-        "quality_reason": str(graph_model.get("quality_reason", "trusted_reactive_center")),
+        "quality_reason": str(graph_model.get("quality_reason", "topology_change_not_supported_for_uma_smd")),
     }
 
 
@@ -2311,7 +2067,13 @@ def _count_visits(binary_series: list[int]) -> tuple[int, float, float]:
 
 
 def _get_uma_calculator(model_name: str, device: str, workers: int = 1):
-    key = (str(model_name), str(device), int(workers))
+    model_name = str(model_name)
+    if model_name not in SUPPORTED_UMA_MODEL_NAMES:
+        raise ValueError(
+            f"unsupported UMA model '{model_name}'. "
+            f"Supported real FAIRChem UMA checkpoints are: {sorted(SUPPORTED_UMA_MODEL_NAMES)}"
+        )
+    key = (model_name, str(device), int(workers))
     if key in _CALCULATOR_CACHE:
         return _CALCULATOR_CACHE[key]
     from fairchem.core import FAIRChemCalculator, pretrained_mlip
@@ -2324,8 +2086,10 @@ def _get_uma_calculator(model_name: str, device: str, workers: int = 1):
     kwargs = {"device": fairchem_device}
     if int(workers) > 1:
         kwargs["workers"] = int(workers)
-    predictor = pretrained_mlip.get_predict_unit(str(model_name), **kwargs)
-    calc = FAIRChemCalculator(predictor, task_name="omol")
+    predictor = pretrained_mlip.get_predict_unit(model_name, **kwargs)
+    calc = FAIRChemCalculator(predictor, task_name=UMA_REAL_TASK_NAME)
+    setattr(calc, "thermogfn_uma_model_name", model_name)
+    setattr(calc, "thermogfn_uma_task_name", UMA_REAL_TASK_NAME)
     _CALCULATOR_CACHE[key] = calc
     return calc
 
@@ -2389,51 +2153,6 @@ def _scheduled_pair_energy_forces(
         pair_force = -float(k_pair) * float(delta) * unit_vec
         forces[i] += pair_force
         forces[j] -= pair_force
-    return float(energy), forces
-
-
-def _scheduled_component_pair_distance_energy_forces(
-    positions: np.ndarray,
-    *,
-    component_groups: list[np.ndarray],
-    component_pair_indices: np.ndarray,
-    start_distances: np.ndarray,
-    end_distances: np.ndarray,
-    force_constants: np.ndarray,
-    lam: float,
-) -> tuple[float, np.ndarray]:
-    forces = np.zeros_like(positions, dtype=np.float64)
-    energy = 0.0
-    pair_idx = np.asarray(component_pair_indices, dtype=np.int64)
-    if pair_idx.size == 0:
-        return float(energy), forces
-    start_d = np.asarray(start_distances, dtype=np.float64).reshape(-1)
-    end_d = np.asarray(end_distances, dtype=np.float64).reshape(-1)
-    ks = np.asarray(force_constants, dtype=np.float64).reshape(-1)
-    for idx, comp_pair in enumerate(pair_idx.tolist()):
-        left_idx, right_idx = int(comp_pair[0]), int(comp_pair[1])
-        if left_idx >= len(component_groups) or right_idx >= len(component_groups):
-            continue
-        left_members = np.asarray(component_groups[left_idx], dtype=np.int64)
-        right_members = np.asarray(component_groups[right_idx], dtype=np.int64)
-        if left_members.size == 0 or right_members.size == 0:
-            continue
-        left_com = np.mean(np.asarray(positions[left_members], dtype=np.float64), axis=0)
-        right_com = np.mean(np.asarray(positions[right_members], dtype=np.float64), axis=0)
-        vec = left_com - right_com
-        dist = float(np.linalg.norm(vec))
-        if dist <= 1e-8:
-            continue
-        target = (1.0 - float(lam)) * float(start_d[idx]) + float(lam) * float(end_d[idx])
-        k_pair = float(ks[idx])
-        if k_pair <= 1e-12:
-            continue
-        delta = dist - target
-        unit_vec = vec / dist
-        energy += 0.5 * k_pair * float(delta * delta)
-        com_force = -k_pair * float(delta) * unit_vec
-        forces[left_members] += com_force / float(left_members.size)
-        forces[right_members] -= com_force / float(right_members.size)
     return float(energy), forces
 
 
@@ -3463,6 +3182,54 @@ def run_steered_uma_dynamics(
         max_reactive_fraction=float(max_reactive_fraction),
     )
     mapping = protocol_bundle["mapping"]
+    protocol_meta = dict(protocol_bundle["protocol_meta"])
+    if not bool(protocol_meta.get("reactive_barrier_valid", False)):
+        ligand_restraints = protocol_bundle["ligand_restraints"]
+        return {
+            "status": "unsupported_reactive_path",
+            "mapping": {
+                "shared_atom_count": int(mapping.get("shared_atom_count", 0)),
+                "element_counts": mapping.get("element_counts", {}),
+                "exact_name_matches": int(mapping.get("exact_name_matches", 0)),
+                "ligand_path_mode": "not_run",
+                "alignment_mode": str(mapping.get("alignment_mode", "unknown")),
+                "alignment_atom_count": int(mapping.get("alignment_atom_count", 0)),
+                "global_backbone_atom_count": 0,
+                "ca_network_atom_count": 0,
+                "elastic_pair_count": 0,
+                "broken_bond_count": int(ligand_restraints.get("broken_bond_count", 0)),
+                "formed_bond_count": int(ligand_restraints.get("formed_bond_count", 0)),
+                "reactive_atom_count": int(ligand_restraints.get("reactive_atom_count", 0)),
+                "steering_mode": str(protocol_bundle.get("steering_mode", "unsupported_reactive_path")),
+                "steering_confident": bool(ligand_restraints.get("steering_confident", False)),
+                "quality_reason": str(ligand_restraints.get("quality_reason", "")),
+                "protocol_mode": str(protocol_meta.get("protocol_mode", "unsupported_reactive_path")),
+                "protocol_reason": str(protocol_meta.get("protocol_reason", "")),
+                "reactive_barrier_valid": False,
+                "pmf_eligible": False,
+            },
+            "trajectory_protocol": {
+                "mode": "not_run_unsupported_reactive_path",
+                "reason": str(protocol_meta.get("protocol_reason", "")),
+                "total_md_steps": 0,
+                "record_steps": [],
+                "production_warmup_steps": 0,
+            },
+            "replica_summaries": [],
+            "endpoint_rows": [],
+            "near_ts_candidates": [],
+            "path_lambdas": [],
+            "path_targets": [],
+            "lambdas": [],
+            "jarzynski_free_profile_kcal_mol": [],
+            "delta_g_smd_barrier_kcal_mol": 0.0,
+            "delta_g_smd_barrier_std_kcal_mol": 0.0,
+            "delta_g_react_to_prod_kcal_mol": 0.0,
+            "delta_g_react_to_prod_std_kcal_mol": 0.0,
+            "mean_final_work_kcal_mol": 0.0,
+            "std_final_work_kcal_mol": 0.0,
+            "trajectory_multimodel_pdb": "",
+        }
     pocket_react_idx, pocket_prod_idx = match_identity_indices(
         reactant,
         product,
@@ -3557,12 +3324,11 @@ def run_steered_uma_dynamics(
     )
     ligand_restraints = protocol_bundle["ligand_restraints"]
     steering_mode = str(protocol_bundle["steering_mode"] or ligand_path_mode)
-    protocol_meta = dict(protocol_bundle["protocol_meta"])
     effective_k_steer = float(k_steer_eva2)
     effective_k_global = float(k_global_eva2)
     effective_k_local = float(k_local_eva2)
     effective_k_anchor = float(k_anchor_eva2)
-    if steering_mode != "reactive_center":
+    if steering_mode != "topology_preserving_endpoint":
         effective_k_steer = max(effective_k_steer, 0.03)
         effective_k_global = max(effective_k_global, 0.08)
         effective_k_local = max(effective_k_local, 0.35)
@@ -3618,7 +3384,7 @@ def run_steered_uma_dynamics(
     production_path_lambdas = rigid_path_lambdas.copy()
     production_path_targets = guided_path_targets.copy()
     active_local_indices = np.arange(len(ligand_idx), dtype=np.int64)
-    if steering_mode == "reactive_center":
+    if steering_mode == "topology_preserving_endpoint":
         reactive_local = np.asarray(ligand_graph_model.get("reactive_atoms_local", np.zeros((0,), dtype=np.int64)), dtype=np.int64)
         if reactive_local.size > 0:
             active_local_indices = reactive_local.copy()
@@ -4178,14 +3944,14 @@ def run_path_umbrella_pmf(
     protocol_meta = dict(protocol_bundle["protocol_meta"])
     if not bool(protocol_meta["pmf_eligible"]):
         raise ValueError(
-            "PMF requires reactive-center protocol mode; "
+            "PMF requires a topology-preserving fully mapped endpoint protocol; "
             f"got protocol_mode={protocol_meta['protocol_mode']} "
             f"reason={protocol_meta['protocol_reason']}"
         )
     effective_k_global = float(k_global_eva2)
     effective_k_local = float(k_local_eva2)
     effective_k_anchor = float(k_anchor_eva2)
-    if steering_mode != "reactive_center":
+    if steering_mode != "topology_preserving_endpoint":
         effective_k_global = max(effective_k_global, 0.08)
         effective_k_local = max(effective_k_local, 0.35)
         effective_k_anchor = max(effective_k_anchor, 0.02)
@@ -4232,7 +3998,7 @@ def run_path_umbrella_pmf(
             raise ValueError("path_targets must have shape [n_images, n_atoms, 3]")
 
     active_local_indices = np.arange(len(steered_indices), dtype=np.int64)
-    if steering_mode == "reactive_center":
+    if steering_mode == "topology_preserving_endpoint":
         reactive_local = np.asarray(ligand_graph_model.get("reactive_atoms_local", np.zeros((0,), dtype=np.int64)), dtype=np.int64)
         if reactive_local.size > 0:
             active_local_indices = reactive_local.copy()
@@ -4431,7 +4197,9 @@ def summarize_catalytic_screen(
     pmf: dict[str, Any] | None,
     temperature_k: float,
 ) -> dict[str, Any]:
-    status = "ok" if broad.get("status") == "ok" and (smd is None or smd.get("status") == "ok") and (pmf is None or pmf.get("status") == "ok") else "error"
+    broad_ok = broad.get("status") == "ok"
+    smd_ok = smd is not None and smd.get("status") == "ok"
+    pmf_ok = pmf is not None and pmf.get("status") == "ok"
     rep_summaries = list(smd.get("replica_summaries", [])) if smd else []
     mapping = dict(smd.get("mapping", {})) if smd else {}
     def _rep_mean(key: str) -> float:
@@ -4442,17 +4210,36 @@ def summarize_catalytic_screen(
     dg_bar_pmf = float(pmf.get("delta_g_pmf_barrier_kcal_mol", 0.0)) if pmf else 0.0
     protocol_mode = str(mapping.get("protocol_mode", "none" if smd is None else "unknown"))
     protocol_reason = str(mapping.get("protocol_reason", ""))
-    reactive_barrier_valid = bool(mapping.get("reactive_barrier_valid", smd is not None))
+    reactive_barrier_valid = bool(mapping.get("reactive_barrier_valid", False))
     pmf_eligible = bool(mapping.get("pmf_eligible", reactive_barrier_valid))
-    use_pmf = pmf is not None and pmf.get("status") == "ok"
+    valid_smd_barrier = bool(smd_ok and reactive_barrier_valid)
+    use_pmf = bool(pmf_ok and reactive_barrier_valid)
+    if not broad_ok:
+        status = "error"
+    elif not valid_smd_barrier:
+        if smd is None:
+            status = "broad_only"
+        elif smd.get("status") == "unsupported_reactive_path" or protocol_mode == "unsupported_reactive_path":
+            status = "unsupported_reactive_path"
+        else:
+            status = "invalid_barrier"
+    elif pmf is not None and not pmf_ok:
+        status = "error"
+    else:
+        status = "ok"
     dg_bar = dg_bar_pmf if use_pmf else dg_bar_smd
     dg_gate_std = float(broad.get("delta_g_gate_std_kcal_mol", 0.0))
     smd_barrier_std = float(smd.get("delta_g_smd_barrier_std_kcal_mol", 0.0)) if smd else 0.0
     pmf_barrier_std = float(pmf.get("delta_g_pmf_barrier_std_kcal_mol", 0.0)) if pmf else 0.0
-    log_rate = log10_rate_proxy(dg_gate, dg_bar, temperature_k=float(temperature_k))
     mean_work = float(smd.get("mean_final_work_kcal_mol", 0.0)) if smd else 0.0
     reverse_gap = float(smd.get("forward_reverse_gap_kcal_mol", 0.0)) if smd else 0.0
     barrier_std = pmf_barrier_std if use_pmf else math.sqrt(smd_barrier_std**2 + (0.5 * reverse_gap) ** 2)
+    if not valid_smd_barrier and not use_pmf:
+        dg_bar = 0.0
+        barrier_std = 1.0e6
+        log_rate = INVALID_LOG10_RATE_PROXY
+    else:
+        log_rate = log10_rate_proxy(dg_gate, dg_bar, temperature_k=float(temperature_k))
     rt_ln10 = KB_KCAL_MOL_K * float(temperature_k) * math.log(10.0)
     uncertainty = float(math.sqrt(dg_gate_std**2 + barrier_std**2) / max(1e-12, rt_ln10))
     near_ts_count = len(smd.get("near_ts_candidates", [])) if smd else 0
@@ -4475,7 +4262,7 @@ def summarize_catalytic_screen(
         "uma_cat_delta_g_pmf_barrier_std_kcal_mol": float(pmf_barrier_std),
         "uma_cat_delta_g_pmf_react_to_prod_kcal_mol": float(pmf.get("delta_g_pmf_react_to_prod_kcal_mol", 0.0)) if pmf else 0.0,
         "uma_cat_delta_g_pmf_react_to_prod_std_kcal_mol": float(pmf.get("delta_g_pmf_react_to_prod_std_kcal_mol", 0.0)) if pmf else 0.0,
-        "uma_cat_barrier_source": "pmf" if use_pmf else ("smd" if reactive_barrier_valid else "diagnostic_smd"),
+        "uma_cat_barrier_source": "pmf" if use_pmf else ("smd" if valid_smd_barrier else "none"),
         "uma_cat_delta_g_barrier_std_kcal_mol": float(barrier_std),
         "uma_cat_protocol_mode": protocol_mode,
         "uma_cat_protocol_reason": protocol_reason,
@@ -4517,20 +4304,25 @@ def assess_smd_quality(
     max_max_protein_rg_drift_a: float = float("inf"),
 ) -> dict[str, Any]:
     if not smd or smd.get("status") != "ok":
+        mapping = dict((smd or {}).get("mapping", {}))
+        status = str((smd or {}).get("status") or "missing")
+        protocol_mode = str(mapping.get("protocol_mode", status))
+        protocol_reason = str(mapping.get("protocol_reason", status))
+        reason = "missing_or_failed_smd" if not smd else protocol_mode
         return {
             "pass": False,
-            "reasons": ["missing_or_failed_smd"],
-            "protocol_mode": "missing",
-            "protocol_reason": "missing_or_failed_smd",
-            "reactive_barrier_valid": False,
-            "pmf_eligible": False,
+            "reasons": [reason],
+            "protocol_mode": protocol_mode,
+            "protocol_reason": protocol_reason,
+            "reactive_barrier_valid": bool(mapping.get("reactive_barrier_valid", False)),
+            "pmf_eligible": bool(mapping.get("pmf_eligible", False)),
             "worst_final_product_rmsd_a": float("inf"),
             "worst_max_product_rmsd_a": float("inf"),
             "worst_max_pocket_rmsd_a": float("inf"),
             "worst_max_backbone_rmsd_a": float("inf"),
             "worst_max_ca_network_rms_a": float("inf"),
-            "worst_max_close_contacts": float("inf"),
-            "worst_max_excess_bond_count": float("inf"),
+            "worst_max_close_contacts": 0,
+            "worst_max_excess_bond_count": 0,
             "worst_max_nonpocket_backbone_rmsd_a": float("inf"),
             "worst_max_protein_rg_drift_a": float("inf"),
         }

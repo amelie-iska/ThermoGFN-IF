@@ -31,7 +31,7 @@ def main() -> int:
     parser.add_argument("--output-path", required=True)
     parser.add_argument("--artifact-root", required=True)
     parser.add_argument("--summary-path", default="")
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--calculator-workers", type=int, default=1)
     parser.add_argument("--temperature-k", type=float, default=300.0)
@@ -102,9 +102,6 @@ def main() -> int:
     t0 = time.perf_counter()
     root = _repo_root()
     sys.path.insert(0, str(root))
-    fairchem_src = root / "models" / "fairchem" / "src"
-    if fairchem_src.exists():
-        sys.path.insert(0, str(fairchem_src))
 
     from train.thermogfn.io_utils import read_records, write_json, write_records
     from train.thermogfn.metrics_utils import summarize_uma_cat_rows
@@ -427,7 +424,10 @@ def main() -> int:
                 summary["uma_cat_smd_quality_worst_max_ca_network_rms_a"] = float(smd_quality.get("worst_max_ca_network_rms_a", 0.0))
                 summary["uma_cat_smd_quality_worst_max_close_contacts"] = int(smd_quality.get("worst_max_close_contacts", 0))
                 summary["uma_cat_smd_quality_worst_max_excess_bond_count"] = int(smd_quality.get("worst_max_excess_bond_count", 0))
-                if not bool(smd_quality.get("pass", False)):
+                if (
+                    not bool(smd_quality.get("pass", False))
+                    and str(summary.get("uma_cat_status", "")) not in {"unsupported_reactive_path", "broad_only", "invalid_barrier"}
+                ):
                     summary["uma_cat_status"] = "quality_fail"
                     summary["uma_cat_error"] = "smd_quality_fail:" + ",".join(str(x) for x in smd_quality.get("reasons", []))
             if bool(args.run_pmf) and pmf is None and pmf_skip_reason:

@@ -78,7 +78,7 @@ def main() -> int:
     parser.add_argument("--sample-size", type=int, default=0)
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--sample-mode", choices=["random", "stratified_length"], default="stratified_length")
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--calculator-workers", type=int, default=1)
     parser.add_argument("--prepare-hydrogens", type=int, default=None)
@@ -99,9 +99,6 @@ def main() -> int:
 
     root = _repo_root()
     sys.path.insert(0, str(root))
-    fairchem_src = root / "models" / "fairchem" / "src"
-    if fairchem_src.exists():
-        sys.path.insert(0, str(fairchem_src))
 
     from train.thermogfn.config_utils import cfg_get, load_yaml_config
     from train.thermogfn.io_utils import read_records, write_json
@@ -116,7 +113,7 @@ def main() -> int:
     logger = configure_logging("profile.uma_protocol", level="INFO")
     cfg_path = _resolve_path(root, args.config)
     cfg = load_yaml_config(cfg_path)
-    args.model_name = str(args.model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p1"))
+    args.model_name = str(args.model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p2"))
     args.device = str(args.device or cfg_get(cfg, "oracles.uma_cat.device", "cuda:0"))
     args.calculator_workers = int(
         args.calculator_workers if args.calculator_workers is not None else cfg_get(cfg, "oracles.uma_cat.calculator_workers", 1)

@@ -215,7 +215,29 @@ repair_torch_runtime() {
 }
 
 validate_imports() {
-  conda run -n "$ENV_NAME" bash -lc "if [[ -f \"\$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then export LD_PRELOAD=\"\$CONDA_PREFIX/lib/libLLVM-15.so\${LD_PRELOAD:+:\$LD_PRELOAD}\"; fi; cd '$REPO_ROOT/models/GraphKcat' && python predict.py --help"
+  conda run -n "$ENV_NAME" bash -lc "if [[ -f \"\$CONDA_PREFIX/lib/libLLVM-15.so\" ]]; then export LD_PRELOAD=\"\$CONDA_PREFIX/lib/libLLVM-15.so\${LD_PRELOAD:+:\$LD_PRELOAD}\"; fi; python -c 'import esm; import huggingface_hub; from unimol_tools import UniMolRepr'; cd '$REPO_ROOT/models/GraphKcat' && python predict.py --help"
+}
+
+install_activation_hook() {
+  local env_prefix
+  env_prefix="$(conda run -n "$ENV_NAME" python -c 'import sys; print(sys.prefix)')"
+  mkdir -p "$env_prefix/etc/conda/activate.d" "$env_prefix/etc/conda/deactivate.d"
+  cat >"$env_prefix/etc/conda/activate.d/graphkcat_torch_preload.sh" <<'HOOK'
+if [[ -f "$CONDA_PREFIX/lib/libLLVM-15.so" ]]; then
+  export GRAPHKCAT_OLD_LD_PRELOAD="${LD_PRELOAD:-}"
+  export LD_PRELOAD="$CONDA_PREFIX/lib/libLLVM-15.so${LD_PRELOAD:+:$LD_PRELOAD}"
+fi
+HOOK
+  cat >"$env_prefix/etc/conda/deactivate.d/graphkcat_torch_preload.sh" <<'HOOK'
+if [[ -n "${GRAPHKCAT_OLD_LD_PRELOAD+x}" ]]; then
+  if [[ -n "$GRAPHKCAT_OLD_LD_PRELOAD" ]]; then
+    export LD_PRELOAD="$GRAPHKCAT_OLD_LD_PRELOAD"
+  else
+    unset LD_PRELOAD
+  fi
+  unset GRAPHKCAT_OLD_LD_PRELOAD
+fi
+HOOK
 }
 
 validate_imports_with_runtime_repair() {
@@ -282,7 +304,15 @@ run_conda_step \
 echo "[graphkcat-env] upgrading pip"
 conda run -n "$ENV_NAME" python -m pip install --upgrade pip
 
-run_pip_step "install-pip-runtime" "fair-esm==2.0.0" "unimol-tools==0.1.4.post1"
+run_pip_step \
+  "install-pip-runtime" \
+  "fair-esm==2.0.0" \
+  "unimol-tools==0.1.4.post1" \
+  "huggingface_hub" \
+  "hf_transfer"
+
+echo "[graphkcat-env] installing activation hook"
+install_activation_hook
 
 echo "[graphkcat-env] validating imports"
 validate_imports_with_runtime_repair

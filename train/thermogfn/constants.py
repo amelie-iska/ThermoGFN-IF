@@ -1,7 +1,7 @@
 """Project-wide constants."""
 
 REQUIRED_ENVS = ("ligandmpnn_env", "spurs", "bioemu", "uma-qc")
-OPTIONAL_ENVS = ("ADFLIP", "KcatNet", "apodock", "graphkcat", "protrek", "foundry", "rfd3", "mora-uma")
+OPTIONAL_ENVS = ("ADFLIP", "KcatNet", "apodock", "graphkcat", "protrek", "foundry", "rfd3", "fairchem", "mora-uma")
 
 AMINO_ACIDS = "ACDEFGHIKLMNPQRSTVWY"
 

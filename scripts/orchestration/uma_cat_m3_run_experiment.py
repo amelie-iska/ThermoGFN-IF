@@ -64,9 +64,9 @@ def _read_json_if_exists(path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="config/uma_cat_m3_default.yaml")
-    parser.add_argument("--run-id", required=True)
-    parser.add_argument("--dataset-path", required=True)
-    parser.add_argument("--output-root", required=True)
+    parser.add_argument("--run-id", default=None)
+    parser.add_argument("--dataset-path", default=None)
+    parser.add_argument("--output-root", default=None)
     parser.add_argument("--num-rounds", type=int, default=None)
     parser.add_argument("--start-round", type=int, default=0)
     parser.add_argument("--pool-size", type=int, default=None)
@@ -199,6 +199,19 @@ def main() -> int:
     if not cfg_path.is_absolute():
         cfg_path = root / cfg_path
     cfg = load_yaml_config(cfg_path)
+
+    args.run_id = str(args.run_id or cfg_get(cfg, "run.run_id", "thermogfn_uma_cat_experiment"))
+    args.dataset_path = str(
+        args.dataset_path
+        or cfg_get(
+            cfg,
+            "data.dataset_path",
+            cfg_get(cfg, "data.bootstrap.d0_train_path", ""),
+        )
+    )
+    args.output_root = str(args.output_root or cfg_get(cfg, "run.output_root", f"runs/{args.run_id}"))
+    if not args.dataset_path:
+        parser.error("--dataset-path is required unless data.dataset_path or data.bootstrap.d0_train_path is set in config")
 
     args.num_rounds = int(args.num_rounds if args.num_rounds is not None else cfg_get(cfg, "method3.rounds", 8))
     args.pool_size = int(args.pool_size if args.pool_size is not None else cfg_get(cfg, "round.pool_size", 50000))

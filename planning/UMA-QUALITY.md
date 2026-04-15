@@ -1,5 +1,7 @@
 # UMA Quality Plan
 
+Current implementation note: this remediation plan is superseded for production behavior by `planning/UMA-REAL-MD-REIMPLEMENTATION.md`. The current runtime supports real FAIRChem/ASE `omol` UMA broad screening and only topology-preserving mapped-endpoint sMD/PMF labels. Topology-changing endpoints are explicitly unsupported until a separate validated chemistry-aware CV layer exists.
+
 ## Objective
 
 Upgrade the current UMA-based catalytic dynamics stack so that:

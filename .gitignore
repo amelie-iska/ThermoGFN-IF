@@ -4,3 +4,10 @@ __pycache__/
 *.pyo
 *.tar
 *.tar.gz
+runs/dryrun/
+runs/tmp/
+runs/env_status*.json
+runs/uma_cat_*/
+wandb/
+models/GraphKcat/logs/unimol_tools_*.log
+models/ProTrek/weights/ProTrek_35M/ProTrek_35M.pt

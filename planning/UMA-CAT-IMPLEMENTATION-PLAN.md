@@ -1,5 +1,7 @@
 # Self-Contained UMA-Cat + GraphKcat Method III Plan
 
+Current implementation note: the default trainable generator / packer is LigandMPNN. ADFLIP is an ablation backend for later. The current UMA runtime policy is stricter than the original draft here: topology-changing ligand endpoints and incomplete maps are marked unsupported for sMD/PMF barrier labels rather than forced through morph or bond-schedule paths. See `planning/UMA-REAL-MD-REIMPLEMENTATION.md`.
+
 ## Objective
 
 Implement and document a real catalytic GFlowNet-style RL tuning path for LigandMPNN that is fully self-contained inside this repository and uses:
@@ -327,7 +329,7 @@ conda run -n mora-uma python scripts/prep/oracles/uma_catalytic_score.py \
   --candidate-path runs/tmp/uma_cat_smoke_packed.jsonl \
   --output-path runs/tmp/uma_cat_smoke_scored.jsonl \
   --artifact-root runs/tmp/uma_cat_smoke_artifacts \
-  --model-name uma-s-1p1 \
+  --model-name uma-s-1p2 \
   --device cuda:0 \
   --calculator-workers 1 \
   --temperature-k 300 \

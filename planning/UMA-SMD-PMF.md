@@ -1,5 +1,7 @@
 # UMA sMD / PMF Rebuild Plan
 
+Current implementation note: this document records the diagnosis that led to the rebuild. The enforced runtime policy now lives in `planning/UMA-REAL-MD-REIMPLEMENTATION.md`: real FAIRChem/ASE `omol` UMA MD only, no internal ligand morphs, no incomplete-map fallbacks, and no sMD/PMF barrier labels for topology-changing endpoints.
+
 ## Status
 
 The current UMA-based sMD / PMF stack is not acceptable for production, publication, or training-time catalytic labels.

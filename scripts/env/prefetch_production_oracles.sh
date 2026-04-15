@@ -281,8 +281,8 @@ run_with_heartbeat "uma-qc" timeout "${PREFETCH_TIMEOUT_SEC}" conda run --no-cap
 from time import perf_counter
 from fairchem.core import pretrained_mlip
 t0 = perf_counter()
-print('[prefetch][uma] fetching uma-s-1p1', flush=True)
-predictor = pretrained_mlip.get_predict_unit('uma-s-1p1', device='cpu')
+print('[prefetch][uma] fetching uma-s-1p2', flush=True)
+predictor = pretrained_mlip.get_predict_unit('uma-s-1p2', device='cpu')
 print(f'[prefetch][uma] ready type={type(predictor).__name__}', flush=True)
 print(f'[prefetch][uma] complete elapsed={perf_counter()-t0:.2f}s', flush=True)
 PY

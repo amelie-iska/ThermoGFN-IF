@@ -295,7 +295,7 @@ def main() -> int:
     args.student_steps = int(args.student_steps if args.student_steps is not None else cfg_get(cfg, "method3.student_steps", 15000))
 
     args.packer_env_name = str(args.packer_env_name or cfg_get(cfg, "oracles.envs.packer", "ligandmpnn_env"))
-    args.uma_env_name = str(args.uma_env_name or cfg_get(cfg, "oracles.envs.uma_cat", "mora-uma"))
+    args.uma_env_name = str(args.uma_env_name or cfg_get(cfg, "oracles.envs.uma_cat", "fairchem"))
     args.graphkcat_env_name = str(args.graphkcat_env_name or cfg_get(cfg, "oracles.envs.graphkcat", "apodock"))
 
     args.ligandmpnn_root = str(args.ligandmpnn_root or cfg_get(cfg, "oracles.packer.model_root", "models/LigandMPNN"))
@@ -335,7 +335,7 @@ def main() -> int:
         else cfg_get(cfg, "oracles.packer.force_hetatm", 1)
     )
 
-    args.uma_model_name = str(args.uma_model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p1"))
+    args.uma_model_name = str(args.uma_model_name or cfg_get(cfg, "oracles.uma_cat.model_name", "uma-s-1p2"))
     args.uma_device = str(args.uma_device or cfg_get(cfg, "oracles.uma_cat.device", "cuda:0"))
     args.uma_calculator_workers = int(
         args.uma_calculator_workers

@@ -1,0 +1,29 @@
+{
+  "counts": {
+    "test": 40,
+    "train": 142
+  },
+  "elapsed_s": 0.005388609002693556,
+  "errors": [],
+  "ok": true,
+  "split_root": "/home/iska/Documents/amelie/bio/ThermoGFN-1/ThermoGFN-IF/rfd3-data/rfd3_splits/rf3_reactzyme_protrek35m_catalyst_gt",
+  "summary": {
+    "endpoint_asset_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints",
+    "endpoint_assets_materialized": true,
+    "n_combined_clusters": 71,
+    "n_pairs": 182,
+    "n_seq_clusters": 71,
+    "n_structure_clusters": 165,
+    "n_test": 40,
+    "n_train": 142,
+    "prepared_input_root": "rfd3-data/rf3_reactzyme_catalyst_gt",
+    "product_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints/product",
+    "reactant_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints/reactant",
+    "seed": 13,
+    "seq_threshold": 0.9,
+    "structure_similarity_mode": "max_cross_state",
+    "structure_threshold": 0.9,
+    "test_fraction_actual": 0.21978021978021978,
+    "test_fraction_requested": 0.2
+  }
+}

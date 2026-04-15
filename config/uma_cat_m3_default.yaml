@@ -18,7 +18,7 @@ generator:
     model_type: ligand_mpnn
     checkpoint: ""
     use_atom_context: 1
-    parse_atoms_with_zero_occupancy: 0
+    parse_atoms_with_zero_occupancy: 1
     run_heartbeat_sec: 5
     batch_size: 1
     number_of_batches: 1
@@ -27,7 +27,7 @@ generator:
 oracles:
   envs:
     packer: ligandmpnn_env
-    uma_cat: mora-uma
+    uma_cat: fairchem
     graphkcat: apodock
   packer:
     model_root: models/LigandMPNN
@@ -37,10 +37,10 @@ oracles:
     repack_everything: 1
     sc_num_denoising_steps: 3
     sc_num_samples: 16
-    parse_atoms_with_zero_occupancy: 0
+    parse_atoms_with_zero_occupancy: 1
     force_hetatm: 1
   uma_cat:
-    model_name: uma-s-1p1
+    model_name: uma-s-1p2
     device: cuda:0
     calculator_workers: 1
     max_atoms: 12000
@@ -161,8 +161,9 @@ logging:
 env:
   required:
     - ligandmpnn_env
-    - mora-uma
+    - fairchem
   optional:
+    - mora-uma
     - apodock
     - ADFLIP
     - KcatNet

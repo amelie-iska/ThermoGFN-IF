@@ -1,0 +1,19 @@
+{
+  "n_pairs": 182,
+  "n_train": 142,
+  "n_test": 40,
+  "test_fraction_requested": 0.2,
+  "test_fraction_actual": 0.21978021978021978,
+  "seq_threshold": 0.9,
+  "structure_threshold": 0.9,
+  "structure_similarity_mode": "max_cross_state",
+  "seed": 13,
+  "n_seq_clusters": 71,
+  "n_structure_clusters": 165,
+  "n_combined_clusters": 71,
+  "prepared_input_root": "rfd3-data/rf3_reactzyme_catalyst_gt",
+  "reactant_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints/reactant",
+  "product_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints/product",
+  "endpoint_assets_materialized": true,
+  "endpoint_asset_root": "rfd3-data/rf3_reactzyme_catalyst_gt/endpoints"
+}

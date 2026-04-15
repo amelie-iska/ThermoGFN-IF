@@ -57,7 +57,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--output-pdb", default=DEFAULT_OUTPUT_PDB)
     parser.add_argument("--output-summary-json", default=DEFAULT_OUTPUT_SUMMARY)
-    parser.add_argument("--model-name", default="uma-s-1p1")
+    parser.add_argument("--model-name", default="uma-s-1p2")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--calculator-workers", type=int, default=1)
     parser.add_argument("--temperature-k", type=float, default=300.0)
@@ -86,9 +86,6 @@ def main() -> int:
 
     root = _repo_root()
     sys.path.insert(0, str(root))
-    fairchem_src = root / "models" / "fairchem" / "src"
-    if fairchem_src.exists():
-        sys.path.insert(0, str(fairchem_src))
 
     from ase import units
     from ase.md.langevin import Langevin
@@ -103,7 +100,6 @@ def main() -> int:
         write_multimodel_pdb,
     )
 
-    dataset_path = _resolve_path(root, args.dataset_path)
     stage_bar = tqdm(
         total=6,
         desc="uma-md:stages",
@@ -111,7 +107,18 @@ def main() -> int:
         dynamic_ncols=True,
     )
     stage_bar.set_postfix_str("load-record")
-    record = _load_candidate_record(dataset_path, str(args.candidate_id))
+    if args.structure_path.strip():
+        record = {
+            "candidate_id": Path(args.structure_path).stem,
+            "sequence": "",
+            "reactant_complex_path": args.structure_path,
+            "protein_chain_id": args.protein_chain_id.strip(),
+            "ligand_chain_id": args.ligand_chain_id.strip() or None,
+            "pocket_positions": [],
+        }
+    else:
+        dataset_path = _resolve_path(root, args.dataset_path)
+        record = _load_candidate_record(dataset_path, str(args.candidate_id))
     stage_bar.update(1)
 
     structure_path = (
@@ -119,7 +126,7 @@ def main() -> int:
         if args.structure_path.strip()
         else _resolve_path(root, record["reactant_complex_path"])
     )
-    protein_chain_id = args.protein_chain_id.strip() or str(record["protein_chain_id"])
+    protein_chain_id = args.protein_chain_id.strip() or str(record.get("protein_chain_id") or "")
     ligand_chain_id = args.ligand_chain_id.strip() or record.get("ligand_chain_id")
     if args.pocket_positions.strip():
         pocket_positions = [int(tok.strip()) for tok in args.pocket_positions.split(",") if tok.strip()]
@@ -300,6 +307,23 @@ def main() -> int:
         except Exception:
             peak_vram_gb = None
 
+    energies = np.asarray([float(meta["energy_eV"]) for meta in frame_meta], dtype=np.float64)
+    frame_displacements = (
+        np.asarray(
+            [
+                float(np.max(np.linalg.norm(frames[i] - frames[i - 1], axis=1)))
+                for i in range(1, len(frames))
+            ],
+            dtype=np.float64,
+        )
+        if len(frames) > 1
+        else np.zeros((0,), dtype=np.float64)
+    )
+    final_forces = np.asarray(atoms.get_forces(), dtype=np.float64)
+    finite_positions = bool(all(np.isfinite(frame).all() for frame in frames))
+    finite_energies = bool(np.isfinite(energies).all())
+    finite_forces = bool(np.isfinite(final_forces).all())
+
     summary = {
         "candidate_id": record.get("candidate_id"),
         "sequence_length": len(str(record.get("sequence", ""))),
@@ -309,6 +333,7 @@ def main() -> int:
         "ligand_chain_id": ligand_chain_id,
         "pocket_positions": pocket_positions,
         "model_name": args.model_name,
+        "uma_task_name": getattr(calc, "thermogfn_uma_task_name", "omol"),
         "device": args.device,
         "calculator_workers": int(args.calculator_workers),
         "temperature_k": float(args.temperature_k),
@@ -323,7 +348,17 @@ def main() -> int:
         "add_first_shell_waters": bool(args.add_first_shell_waters),
         "peak_vram_gb": peak_vram_gb,
         "output_pdb": str(output_pdb),
+        "initial_energy_eV": float(energies[0]),
         "final_energy_eV": float(frame_meta[-1]["energy_eV"]),
+        "min_energy_eV": float(np.min(energies)),
+        "max_energy_eV": float(np.max(energies)),
+        "energy_span_eV": float(np.max(energies) - np.min(energies)),
+        "final_force_norm_eva": float(np.linalg.norm(final_forces)),
+        "max_frame_displacement_a": float(np.max(frame_displacements)) if frame_displacements.size else 0.0,
+        "finite_positions": finite_positions,
+        "finite_energies": finite_energies,
+        "finite_forces": finite_forces,
+        "smoke_quality_pass": bool(finite_positions and finite_energies and finite_forces),
     }
     output_summary.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
     write_bar.set_postfix_str(output_summary.name)
