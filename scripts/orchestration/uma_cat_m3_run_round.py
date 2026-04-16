@@ -94,26 +94,55 @@ def _gate_report(round_dir: Path, strict_gates: bool) -> tuple[bool, dict]:
     metrics_path = round_dir / "metrics" / "round_metrics.json"
     student_path = round_dir / "metrics" / "student_metrics.json"
     teacher_student_path = round_dir / "metrics" / "teacher_student_eval.json"
+    generator_path = round_dir / "models" / "ligandmpnn_generator_metrics.json"
     summary_path = round_dir / "manifests" / "append_summary.json"
+    uma_summary_paths = sorted((round_dir / "metrics").glob("uma_cat_summary_round_*.json"))
+    graph_summary_paths = sorted((round_dir / "metrics").glob("graphkcat_pool_summary_round_*.json"))
     report = {"pass": True, "checks": {}, "strict": strict_gates}
 
     m = json.loads(metrics_path.read_text()) if metrics_path.exists() else {}
     s = json.loads(student_path.read_text()) if student_path.exists() else {}
     if not s and teacher_student_path.exists():
         s = json.loads(teacher_student_path.read_text())
+    g = json.loads(generator_path.read_text()) if generator_path.exists() else {}
     a = json.loads(summary_path.read_text()) if summary_path.exists() else {}
 
     n_next = int(a.get("n_next", 0))
     report["checks"]["gate_a_n_next_positive"] = n_next > 0
 
-    kl = float(s.get("teacher_student_kl", 0.0))
-    report["checks"]["gate_b_kl"] = kl <= 0.15
+    if g:
+        gen_ckpt = Path(str(g.get("checkpoint", "")))
+        final_loss = float(g.get("final", {}).get("loss", 0.0) or 0.0)
+        report["checks"]["gate_b_generator_trained"] = (
+            gen_ckpt.exists()
+            and int(g.get("n_records_featurized", 0)) > 0
+            and math.isfinite(final_loss)
+            and final_loss > 0.0
+        )
+    else:
+        kl = float(s.get("teacher_student_kl", 0.0))
+        report["checks"]["gate_b_kl"] = kl <= 0.15
 
     unique_fraction = float(m.get("unique_fraction", 0.0))
     report["checks"]["gate_c_unique_fraction"] = unique_fraction >= 0.5
 
     best_reward = float(m.get("best_reward", 0.0))
     report["checks"]["gate_d_best_reward"] = best_reward > 0.0
+
+    if uma_summary_paths:
+        uma = json.loads(uma_summary_paths[-1].read_text())
+        uma_ok_fraction = float(uma.get("ok_fraction", 0.0) or 0.0)
+        report["checks"]["gate_e_uma_cat_success"] = uma_ok_fraction > 0.0
+        if int(uma.get("smd_quality_evaluated_count", 0) or 0) > 0:
+            report["checks"]["gate_f_uma_smd_quality"] = float(
+                uma.get("smd_quality_pass_fraction", 0.0) or 0.0
+            ) > 0.0
+    else:
+        report["checks"]["gate_e_uma_cat_success"] = False
+
+    if graph_summary_paths:
+        graph = json.loads(graph_summary_paths[-1].read_text())
+        report["checks"]["gate_g_graphkcat_success"] = float(graph.get("ok_fraction", 0.0) or 0.0) > 0.0
 
     report["pass"] = all(report["checks"].values())
     if strict_gates and not report["pass"]:
@@ -138,6 +167,28 @@ def main() -> int:
     parser.add_argument("--teacher-steps", type=int, default=None)
     parser.add_argument("--teacher-gamma-off", type=float, default=None)
     parser.add_argument("--student-steps", type=int, default=None)
+
+    parser.add_argument("--generator-backend", default=None)
+    parser.add_argument("--ligandmpnn-sequence-checkpoint", default=None)
+    parser.add_argument("--ligandmpnn-model-type", default=None)
+    parser.add_argument("--ligandmpnn-train-objective", default=None)
+    parser.add_argument("--ligandmpnn-train-steps", type=int, default=None)
+    parser.add_argument("--ligandmpnn-train-batch-size", type=int, default=None)
+    parser.add_argument("--ligandmpnn-learning-rate", type=float, default=None)
+    parser.add_argument("--ligandmpnn-weight-decay", type=float, default=None)
+    parser.add_argument("--ligandmpnn-train-scope", default=None)
+    parser.add_argument("--ligandmpnn-reward-weight-mode", default=None)
+    parser.add_argument("--ligandmpnn-baseline-weight", type=float, default=None)
+    parser.add_argument("--ligandmpnn-anchor-l2", type=float, default=None)
+    parser.add_argument("--ligandmpnn-max-records", type=int, default=None)
+    parser.add_argument("--ligandmpnn-reward-floor", type=float, default=None)
+    parser.add_argument("--ligandmpnn-tb-labeled-fraction", type=float, default=None)
+    parser.add_argument("--ligandmpnn-sample-temperature", type=float, default=None)
+    parser.add_argument("--ligandmpnn-sample-batch-size", type=int, default=None)
+    parser.add_argument("--ligandmpnn-mutable-mode", default=None)
+    parser.add_argument("--ligandmpnn-min-mutations", type=int, default=None)
+    parser.add_argument("--ligandmpnn-max-mutations", type=int, default=None)
+    parser.add_argument("--ligandmpnn-pocket-fraction", type=float, default=None)
 
     parser.add_argument("--packer-env-name", default=None)
     parser.add_argument("--uma-env-name", default=None)
@@ -293,6 +344,97 @@ def main() -> int:
         args.teacher_gamma_off if args.teacher_gamma_off is not None else cfg_get(cfg, "method3.teacher_gamma_off", 0.5)
     )
     args.student_steps = int(args.student_steps if args.student_steps is not None else cfg_get(cfg, "method3.student_steps", 15000))
+
+    args.generator_backend = str(args.generator_backend or cfg_get(cfg, "generator.backend", "ligandmpnn")).lower()
+    args.ligandmpnn_model_type = str(args.ligandmpnn_model_type or cfg_get(cfg, "generator.ligandmpnn.model_type", "ligand_mpnn"))
+    args.ligandmpnn_sequence_checkpoint = str(
+        args.ligandmpnn_sequence_checkpoint
+        or cfg_get(cfg, "generator.ligandmpnn.checkpoint", "")
+        or "models/LigandMPNN/model_params/ligandmpnn_v_32_010_25.pt"
+    )
+    args.ligandmpnn_train_steps = int(
+        args.ligandmpnn_train_steps
+        if args.ligandmpnn_train_steps is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.steps", max(1, args.student_steps))
+    )
+    args.ligandmpnn_train_objective = str(
+        args.ligandmpnn_train_objective
+        or cfg_get(cfg, "generator.ligandmpnn.train.objective", "trajectory_balance")
+    )
+    args.ligandmpnn_train_batch_size = int(
+        args.ligandmpnn_train_batch_size
+        if args.ligandmpnn_train_batch_size is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.batch_size", 1)
+    )
+    args.ligandmpnn_learning_rate = float(
+        args.ligandmpnn_learning_rate
+        if args.ligandmpnn_learning_rate is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.learning_rate", 1e-5)
+    )
+    args.ligandmpnn_weight_decay = float(
+        args.ligandmpnn_weight_decay
+        if args.ligandmpnn_weight_decay is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.weight_decay", 1e-4)
+    )
+    args.ligandmpnn_train_scope = str(
+        args.ligandmpnn_train_scope or cfg_get(cfg, "generator.ligandmpnn.train.train_scope", "decoder")
+    )
+    args.ligandmpnn_reward_weight_mode = str(
+        args.ligandmpnn_reward_weight_mode or cfg_get(cfg, "generator.ligandmpnn.train.reward_weight_mode", "reward")
+    )
+    args.ligandmpnn_baseline_weight = float(
+        args.ligandmpnn_baseline_weight
+        if args.ligandmpnn_baseline_weight is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.baseline_weight", 0.1)
+    )
+    args.ligandmpnn_anchor_l2 = float(
+        args.ligandmpnn_anchor_l2
+        if args.ligandmpnn_anchor_l2 is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.anchor_l2", 1e-6)
+    )
+    args.ligandmpnn_max_records = int(
+        args.ligandmpnn_max_records
+        if args.ligandmpnn_max_records is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.max_records", 0)
+    )
+    args.ligandmpnn_reward_floor = float(
+        args.ligandmpnn_reward_floor
+        if args.ligandmpnn_reward_floor is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.reward_floor", 1e-3)
+    )
+    args.ligandmpnn_tb_labeled_fraction = float(
+        args.ligandmpnn_tb_labeled_fraction
+        if args.ligandmpnn_tb_labeled_fraction is not None
+        else cfg_get(cfg, "generator.ligandmpnn.train.tb_labeled_fraction", 0.75)
+    )
+    args.ligandmpnn_sample_temperature = float(
+        args.ligandmpnn_sample_temperature
+        if args.ligandmpnn_sample_temperature is not None
+        else cfg_get(cfg, "generator.ligandmpnn.sample.temperature", cfg_get(cfg, "generator.ligandmpnn.temperature", 0.2))
+    )
+    args.ligandmpnn_sample_batch_size = int(
+        args.ligandmpnn_sample_batch_size
+        if args.ligandmpnn_sample_batch_size is not None
+        else cfg_get(cfg, "generator.ligandmpnn.sample.batch_size", cfg_get(cfg, "generator.ligandmpnn.batch_size", 1))
+    )
+    args.ligandmpnn_mutable_mode = str(
+        args.ligandmpnn_mutable_mode or cfg_get(cfg, "generator.ligandmpnn.sample.mutable_mode", "pocket_random")
+    )
+    args.ligandmpnn_min_mutations = int(
+        args.ligandmpnn_min_mutations
+        if args.ligandmpnn_min_mutations is not None
+        else cfg_get(cfg, "generator.ligandmpnn.sample.min_mutations", 3)
+    )
+    args.ligandmpnn_max_mutations = int(
+        args.ligandmpnn_max_mutations
+        if args.ligandmpnn_max_mutations is not None
+        else cfg_get(cfg, "generator.ligandmpnn.sample.max_mutations", 12)
+    )
+    args.ligandmpnn_pocket_fraction = float(
+        args.ligandmpnn_pocket_fraction
+        if args.ligandmpnn_pocket_fraction is not None
+        else cfg_get(cfg, "generator.ligandmpnn.sample.pocket_fraction", 0.75)
+    )
 
     args.packer_env_name = str(args.packer_env_name or cfg_get(cfg, "oracles.envs.packer", "ligandmpnn_env"))
     args.uma_env_name = str(args.uma_env_name or cfg_get(cfg, "oracles.envs.uma_cat", "fairchem"))
@@ -693,13 +835,15 @@ def main() -> int:
             "graphkcat_prefilter_fraction": args.graphkcat_prefilter_fraction,
             "teacher_steps": args.teacher_steps,
             "student_steps": args.student_steps,
+            "generator_backend": args.generator_backend,
+            "ligandmpnn_train_steps": args.ligandmpnn_train_steps,
             "strict_gates": args.strict_gates,
             "config_path": str(cfg_path),
         },
     )
 
     logger.info(
-        "UMA-cat round start run_id=%s round_id=%d dataset=%s pool=%d uma_budget=%d graph_budget=%d graph_prefilter_fraction=%.3f strict=%s dry_run=%s cfg=%s",
+        "UMA-cat round start run_id=%s round_id=%d dataset=%s pool=%d uma_budget=%d graph_budget=%d graph_prefilter_fraction=%.3f generator=%s strict=%s dry_run=%s cfg=%s",
         args.run_id,
         args.round_id,
         args.dataset_path,
@@ -707,6 +851,7 @@ def main() -> int:
         args.uma_cat_budget,
         args.graphkcat_budget,
         args.graphkcat_prefilter_fraction,
+        args.generator_backend,
         args.strict_gates,
         args.dry_run,
         cfg_path,
@@ -730,13 +875,27 @@ def main() -> int:
     teacher_history_path = round_dir / "metrics" / f"teacher_history_round_{args.round_id}.jsonl"
     student_metrics_path = round_dir / "models" / "student_metrics.json"
     student_history_path = round_dir / "metrics" / f"student_history_round_{args.round_id}.jsonl"
-    pool_metrics_path = round_dir / "metrics" / f"student_pool_metrics_round_{args.round_id}.json"
+    generator_metrics_path = round_dir / "models" / "ligandmpnn_generator_metrics.json"
+    generator_history_path = round_dir / "metrics" / f"ligandmpnn_generator_history_round_{args.round_id}.jsonl"
+    pool_metrics_path = round_dir / "metrics" / (
+        f"ligandmpnn_pool_metrics_round_{args.round_id}.json"
+        if args.generator_backend == "ligandmpnn"
+        else f"student_pool_metrics_round_{args.round_id}.json"
+    )
     graph_pool_summary_path = round_dir / "metrics" / f"graphkcat_pool_summary_round_{args.round_id}.json"
     graph_selected_summary_path = round_dir / "metrics" / f"graphkcat_selected_summary_round_{args.round_id}.json"
     uma_summary_path = round_dir / "metrics" / f"uma_cat_summary_round_{args.round_id}.json"
 
     def _phase_step(idx: int, local_step: int = 0) -> int:
-        return int(idx) * 1000 + int(local_step)
+        # Histories can contain thousands of trainer steps. Reserve a large
+        # per-stage interval and put stage summaries near the interval tail so
+        # W&B's global step remains monotonic after child histories are logged.
+        stride = 100_000
+        tail_start = 90_000
+        local = int(local_step)
+        if local in {997, 998, 999}:
+            local = tail_start + local
+        return int(idx) * stride + local
 
     def _log_json_metrics(prefix: str, path: Path, *, idx: int) -> None:
         payload = _read_json_if_exists(path)
@@ -763,6 +922,8 @@ def main() -> int:
             _log_history("surrogate/history", surrogate_history_path, idx=idx)
         elif name == "train_teacher":
             _log_history("teacher/history", teacher_history_path, idx=idx)
+        elif name == "train_ligandmpnn_generator":
+            _log_history("ligandmpnn_generator/history", generator_history_path, idx=idx)
         elif name == "distill_student":
             _log_history("student/history", student_history_path, idx=idx)
     def _post_step_summary_metrics(name: str, idx: int) -> None:
@@ -770,11 +931,14 @@ def main() -> int:
             _log_json_metrics("surrogate", surrogate_metrics_path, idx=idx)
         elif name == "train_teacher":
             _log_json_metrics("teacher", teacher_metrics_path, idx=idx)
+        elif name == "train_ligandmpnn_generator":
+            _log_json_metrics("ligandmpnn_generator", generator_metrics_path, idx=idx)
         elif name == "distill_student":
             _log_json_metrics("student", student_metrics_path, idx=idx)
         elif name == "generate_pool":
-            _log_records_summary("student/pool_records", pool, idx=idx)
-            _log_json_metrics("student/pool", pool_metrics_path, idx=idx)
+            pool_prefix = "ligandmpnn_generator/pool" if args.generator_backend == "ligandmpnn" else "student/pool"
+            _log_records_summary(f"{pool_prefix}_records", pool, idx=idx)
+            _log_json_metrics(pool_prefix, pool_metrics_path, idx=idx)
         elif name == "graphkcat_score_pool":
             _log_json_metrics("graphkcat/pool", graph_pool_summary_path, idx=idx)
         elif name == "prefilter_graphkcat":
@@ -850,6 +1014,20 @@ def main() -> int:
     surrogate_ckpt = round_dir / "models" / f"surrogate_round_{args.round_id}.ckpt"
     teacher_ckpt = round_dir / "models" / f"teacher_round_{args.round_id}.ckpt"
     student_ckpt = round_dir / "models" / f"student_round_{args.round_id}.ckpt"
+    ligandmpnn_generator_ckpt = round_dir / "models" / (
+        f"ligandmpnn_gflownet_round_{args.round_id}.pt"
+        if args.ligandmpnn_train_objective == "trajectory_balance"
+        else f"ligandmpnn_generator_round_{args.round_id}.pt"
+    )
+    previous_ligandmpnn_generator_ckpt = (
+        round_dir.parent / f"round_{args.round_id - 1:03d}" / "models" / (
+            f"ligandmpnn_gflownet_round_{args.round_id - 1}.pt"
+            if args.ligandmpnn_train_objective == "trajectory_balance"
+            else f"ligandmpnn_generator_round_{args.round_id - 1}.pt"
+        )
+        if args.round_id > 0
+        else None
+    )
     pool = round_dir / "data" / f"candidate_pool_round_{args.round_id}.jsonl"
     graph_pool_packed = round_dir / "data" / f"candidate_pool_packed_round_{args.round_id}.jsonl"
     graph_pool_scored = round_dir / "data" / f"graphkcat_pool_scored_round_{args.round_id}.jsonl"
@@ -931,61 +1109,186 @@ def main() -> int:
                 *( ["--no-progress"] if args.no_progress else [] ),
             ]),
         ),
-        (
-            "distill_student",
-            _dispatch_wrap(args.uma_env_name, [
-                "python",
-                str(root / "scripts/train/m3_distill_student.py"),
-                "--teacher-ckpt",
-                str(teacher_ckpt),
-                "--input-dr",
-                str(dataset_path),
-                "--output-dir",
-                str(round_dir / "models"),
-                "--round-id",
-                str(args.round_id),
-                "--steps",
-                str(args.student_steps),
-                "--history-path",
-                str(student_history_path),
-                "--metrics-every",
-                "100",
-                "--max-checkpoints",
-                str(args.max_checkpoints),
-                "--seed",
-                str(args.seed),
-                "--log-level",
-                args.log_level,
-                *( ["--no-progress"] if args.no_progress else [] ),
-            ]),
-        ),
-        (
-            "generate_pool",
-            _dispatch_wrap(args.uma_env_name, [
-                "python",
-                str(root / "scripts/train/m3_generate_student_pool.py"),
-                "--student-ckpt",
-                str(student_ckpt),
-                "--input-dr",
-                str(dataset_path),
-                "--output-path",
-                str(pool),
-                "--run-id",
-                args.run_id,
-                "--round-id",
-                str(args.round_id),
-                "--pool-size",
-                str(args.pool_size),
-                "--metrics-path",
-                str(pool_metrics_path),
-                "--seed",
-                str(args.seed),
-                "--log-level",
-                args.log_level,
-                *( ["--no-progress"] if args.no_progress else [] ),
-            ]),
-        ),
     ]
+
+    if args.generator_backend == "ligandmpnn":
+        previous_ckpt_args: list[str] = []
+        if previous_ligandmpnn_generator_ckpt is not None and previous_ligandmpnn_generator_ckpt.exists():
+            previous_ckpt_args = ["--previous-checkpoint", str(previous_ligandmpnn_generator_ckpt)]
+        pre_oracle_steps.extend(
+            [
+                (
+                    "train_ligandmpnn_generator",
+                    _dispatch_wrap(args.packer_env_name, [
+                        "python",
+                        str(root / "scripts/train/m3_train_ligandmpnn_generator.py"),
+                        "--input-dr",
+                        str(dataset_path),
+                        "--output-dir",
+                        str(round_dir / "models"),
+                        "--round-id",
+                        str(args.round_id),
+                        "--ligandmpnn-root",
+                        str(args.ligandmpnn_root),
+                        "--base-checkpoint",
+                        str(args.ligandmpnn_sequence_checkpoint),
+                        *previous_ckpt_args,
+                        "--model-type",
+                        str(args.ligandmpnn_model_type),
+                        "--device",
+                        str(args.packer_device),
+                        "--objective",
+                        str(args.ligandmpnn_train_objective),
+                        "--steps",
+                        str(args.ligandmpnn_train_steps),
+                        "--batch-size",
+                        str(args.ligandmpnn_train_batch_size),
+                        "--learning-rate",
+                        str(args.ligandmpnn_learning_rate),
+                        "--weight-decay",
+                        str(args.ligandmpnn_weight_decay),
+                        "--train-scope",
+                        str(args.ligandmpnn_train_scope),
+                        "--reward-weight-mode",
+                        str(args.ligandmpnn_reward_weight_mode),
+                        "--baseline-weight",
+                        str(args.ligandmpnn_baseline_weight),
+                        "--anchor-l2",
+                        str(args.ligandmpnn_anchor_l2),
+                        "--max-records",
+                        str(args.ligandmpnn_max_records),
+                        "--reward-floor",
+                        str(args.ligandmpnn_reward_floor),
+                        "--tb-labeled-fraction",
+                        str(args.ligandmpnn_tb_labeled_fraction),
+                        "--use-atom-context",
+                        str(cfg_get(cfg, "generator.ligandmpnn.use_atom_context", 1)),
+                        "--parse-atoms-with-zero-occupancy",
+                        str(args.packer_parse_atoms_with_zero_occupancy),
+                        "--temperature",
+                        str(args.ligandmpnn_sample_temperature),
+                        "--history-path",
+                        str(generator_history_path),
+                        "--metrics-every",
+                        "25",
+                        "--max-checkpoints",
+                        str(args.max_checkpoints),
+                        "--seed",
+                        str(args.seed),
+                        "--log-level",
+                        args.log_level,
+                        *( ["--no-progress"] if args.no_progress else [] ),
+                    ]),
+                ),
+                (
+                    "generate_pool",
+                    _dispatch_wrap(args.packer_env_name, [
+                        "python",
+                        str(root / "scripts/train/m3_generate_ligandmpnn_pool.py"),
+                        "--generator-ckpt",
+                        str(ligandmpnn_generator_ckpt),
+                        "--input-dr",
+                        str(dataset_path),
+                        "--output-path",
+                        str(pool),
+                        "--run-id",
+                        args.run_id,
+                        "--round-id",
+                        str(args.round_id),
+                        "--ligandmpnn-root",
+                        str(args.ligandmpnn_root),
+                        "--model-type",
+                        str(args.ligandmpnn_model_type),
+                        "--device",
+                        str(args.packer_device),
+                        "--pool-size",
+                        str(args.pool_size),
+                        "--sample-batch-size",
+                        str(args.ligandmpnn_sample_batch_size),
+                        "--temperature",
+                        str(args.ligandmpnn_sample_temperature),
+                        "--mutable-mode",
+                        str(args.ligandmpnn_mutable_mode),
+                        "--min-mutations",
+                        str(args.ligandmpnn_min_mutations),
+                        "--max-mutations",
+                        str(args.ligandmpnn_max_mutations),
+                        "--pocket-fraction",
+                        str(args.ligandmpnn_pocket_fraction),
+                        "--use-atom-context",
+                        str(cfg_get(cfg, "generator.ligandmpnn.use_atom_context", 1)),
+                        "--parse-atoms-with-zero-occupancy",
+                        str(args.packer_parse_atoms_with_zero_occupancy),
+                        "--metrics-path",
+                        str(pool_metrics_path),
+                        "--seed",
+                        str(args.seed),
+                        "--log-level",
+                        args.log_level,
+                        *( ["--no-progress"] if args.no_progress else [] ),
+                    ]),
+                ),
+            ]
+        )
+    else:
+        pre_oracle_steps.extend(
+            [
+                (
+                    "distill_student",
+                    _dispatch_wrap(args.uma_env_name, [
+                        "python",
+                        str(root / "scripts/train/m3_distill_student.py"),
+                        "--teacher-ckpt",
+                        str(teacher_ckpt),
+                        "--input-dr",
+                        str(dataset_path),
+                        "--output-dir",
+                        str(round_dir / "models"),
+                        "--round-id",
+                        str(args.round_id),
+                        "--steps",
+                        str(args.student_steps),
+                        "--history-path",
+                        str(student_history_path),
+                        "--metrics-every",
+                        "100",
+                        "--max-checkpoints",
+                        str(args.max_checkpoints),
+                        "--seed",
+                        str(args.seed),
+                        "--log-level",
+                        args.log_level,
+                        *( ["--no-progress"] if args.no_progress else [] ),
+                    ]),
+                ),
+                (
+                    "generate_pool",
+                    _dispatch_wrap(args.uma_env_name, [
+                        "python",
+                        str(root / "scripts/train/m3_generate_student_pool.py"),
+                        "--student-ckpt",
+                        str(student_ckpt),
+                        "--input-dr",
+                        str(dataset_path),
+                        "--output-path",
+                        str(pool),
+                        "--run-id",
+                        args.run_id,
+                        "--round-id",
+                        str(args.round_id),
+                        "--pool-size",
+                        str(args.pool_size),
+                        "--metrics-path",
+                        str(pool_metrics_path),
+                        "--seed",
+                        str(args.seed),
+                        "--log-level",
+                        args.log_level,
+                        *( ["--no-progress"] if args.no_progress else [] ),
+                    ]),
+                ),
+            ]
+        )
 
     if args.graphkcat_prefilter_fraction > 0.0:
         graph_prefilter_budget = max(
@@ -1091,7 +1394,7 @@ def main() -> int:
             )
         )
 
-    total_steps = len(pre_oracle_steps) + 1 + 4
+    total_steps = len(pre_oracle_steps) + 1 + (3 if args.generator_backend == "ligandmpnn" else 4)
     if args.graphkcat_prefilter_fraction <= 0.0:
         total_steps += 1
     if args.graphkcat_prefilter_fraction <= 0.0 and args.graphkcat_budget > 0:
@@ -1307,20 +1610,23 @@ def main() -> int:
                 str(round_dir / "metrics" / "round_metrics.json"),
             ]),
         ),
-        (
-            "eval_teacher_student",
-            _dispatch_wrap(args.uma_env_name, [
-                "python",
-                str(root / "scripts/eval/eval_m3_teacher_student.py"),
-                "--teacher-ckpt",
-                str(teacher_ckpt),
-                "--student-ckpt",
-                str(student_ckpt),
-                "--output",
-                str(round_dir / "metrics" / "teacher_student_eval.json"),
-            ]),
-        ),
     ]
+    if args.generator_backend != "ligandmpnn":
+        tail_steps.append(
+            (
+                "eval_teacher_student",
+                _dispatch_wrap(args.uma_env_name, [
+                    "python",
+                    str(root / "scripts/eval/eval_m3_teacher_student.py"),
+                    "--teacher-ckpt",
+                    str(teacher_ckpt),
+                    "--student-ckpt",
+                    str(student_ckpt),
+                    "--output",
+                    str(round_dir / "metrics" / "teacher_student_eval.json"),
+                ]),
+            )
+        )
     for name, cmd in tail_steps:
         rc = run_step(name, cmd)
         if rc != 0:

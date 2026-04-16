@@ -21,17 +21,19 @@ ThermoGFN-IF implementation scaffold for multi-fidelity protein design with Meth
 Important implementation note:
 
 - the edit-trajectory GFlowNet formulation in the paper is the target methodology,
-- the currently implemented `Method III` training loop in this repo is now a **real trajectory-balance GFlowNet teacher** over canonical edit trajectories, followed by one-shot student distillation for fast deployment,
-- the default trainable generator / packer for current experiments is **LigandMPNN**. ADFLIP is retained only as an ablation backend to train later.
+- the current default catalytic `Method III` loop now performs actual **trajectory-balance GFlowNet fine-tuning of LigandMPNN** every round and samples the next candidate pool from that tuned LigandMPNN checkpoint,
+- the separate lightweight one-shot student sampler is no longer the default deployed catalytic generator,
+- ADFLIP is retained only as an ablation backend to train later.
 
-The default catalytic path uses real FAIRChem/ASE UMA calculations where the protocol is physically supported: whole-enzyme UMA broad screening is always an actual `omol` UMA Langevin MD stage, while sMD / PMF barrier labels are emitted only for fully mapped topology-preserving reactant/product ligand endpoints. Topology-changing ligand pairs, incomplete atom maps, or unsupported reaction paths are marked unsupported instead of being pushed through a Cartesian morph or an artificial bond-breaking / bond-forming schedule. GraphKcat support remains in the repo, but it is disabled by default in the catalytic RL loop because many RF3-derived catalytic ligands include metal or inorganic fragments outside the current GraphKcat ligand vocabulary. Multi-fragment ligands composed of supported GraphKcat atom types are now accepted and can be scored when GraphKcat is enabled explicitly.
+The default catalytic path uses real FAIRChem/ASE UMA calculations where the protocol is physically supported: whole-enzyme UMA broad screening is always an actual `omol` UMA Langevin MD stage, while sMD / PMF barrier labels are emitted only for fully mapped topology-preserving reactant/product ligand endpoints. Topology-changing ligand pairs, incomplete atom maps, or unsupported reaction paths are marked unsupported instead of being pushed through a Cartesian morph or an artificial bond-breaking / bond-forming schedule. GraphKcat is enabled by default as an auxiliary prefilter/refinement oracle. For disconnected reactant mixtures, the wrapper scores the largest bonded carbon-containing substrate fragment and records the selected `graphkcat_input_smiles`, so GraphKcat is not treated as a full reaction-mixture oracle.
 
 ## Required conda environments
 
-Default catalytic RL path (`UMA-cat` only):
+Default catalytic RL path (`UMA-cat` plus GraphKcat):
 
 - `ligandmpnn_env`
 - `fairchem` with `fairchem-core` installed
+- `apodock`
 
 Legacy / non-default stability-binding pipeline:
 
@@ -47,7 +49,8 @@ Minimal readiness checks for the default catalytic path:
 
 ```bash
 conda run -n ligandmpnn_env python -c "import torch; print(torch.cuda.is_available())"
-conda run -n fairchem python -c "from fairchem.core import FAIRChemCalculator, pretrained_mlip; print(pretrained_mlip.pretrained_checkpoint_path_from_name('uma-s-1p2'))"
+conda run -n fairchem python -c "import openmm; from fairchem.core import FAIRChemCalculator, pretrained_mlip; print(openmm.version.version); print(pretrained_mlip.pretrained_checkpoint_path_from_name('uma-s-1p2'))"
+conda run -n apodock python -c "import huggingface_hub, rdkit, torch; print('graphkcat env ok')"
 ```
 
 Do not prepend `./models/fairchem/src` to `PYTHONPATH` for production UMA runs. The checked-in FairChem source snapshot is older than the installed `fairchem` package and cannot load the cached `uma-s-1p2` checkpoint schema.
@@ -117,16 +120,16 @@ Primary runtime configs:
 
 `config/m3_default.yaml` includes:
 
-- generator backend and LigandMPNN generation controls (`batch_size`, `number_of_batches`, `temperature`, atom-context flags),
+- generator backend and LigandMPNN generation controls,
 - Method III round controls (`pool_size`, `bioemu_budget`, `uma_budget`, checkpoint retention),
-- teacher/student/surrogate knobs (`surrogate_ensemble_size`, `teacher_steps`, `teacher_gamma_off`, `student_steps`),
+- legacy teacher/student/surrogate knobs (`surrogate_ensemble_size`, `teacher_steps`, `teacher_gamma_off`, `student_steps`),
 - oracle settings (`spurs repo/chain`, `bioemu model+num_samples`, `uma model+workers+replicates`),
 - BioEmu VRAM-aware batching (`oracles.bioemu.batch_size_100`, `oracles.bioemu.auto_batch_from_vram`, `oracles.bioemu.target_vram_frac`, min/max bounds),
 - periodic test sizing and final inference selection (`periodic_eval.num_candidates`, `inference.final.num_candidates`, `inference.final.top_k`).
 
 `config/uma_cat_m3_default.yaml` is the default self-contained catalytic RL config and includes:
 
-- generator backend and LigandMPNN packing controls,
+- generator backend, real LigandMPNN sequence fine-tuning controls, pocket-biased LigandMPNN sampling controls, and LigandMPNN side-chain packing controls,
 - prepared-endpoint conditioning controls:
   - OpenMM hydrogenation at fixed pH,
   - heuristic first-shell water insertion,
@@ -162,8 +165,15 @@ entrypoint config for the local Catalyst-GT split. It sets:
 - `oracles.uma_cat.model_name = uma-s-1p2`
 - `oracles.envs.graphkcat = apodock`
 - `round.graphkcat_prefilter_fraction = 1.0`
-- `round.uma_cat_budget = 4`
+- `round.uma_cat_budget = 16`
 - `round.pool_size = 128`
+- `generator.ligandmpnn.train.enabled = true`
+- `generator.ligandmpnn.train.objective = trajectory_balance`
+- `generator.ligandmpnn.train.steps = 15000`
+- `generator.ligandmpnn.train.train_scope = decoder`
+- `generator.ligandmpnn.sample.mutable_mode = pocket_random`
+- `generator.ligandmpnn.sample.min_mutations = 3`
+- `generator.ligandmpnn.sample.max_mutations = 12`
 - `oracles.fusion.w_graphkcat = 0.55`
 - `oracles.fusion.w_agreement = 0.20`
 - `logging.wandb.enabled = true`
@@ -174,6 +184,72 @@ The corresponding launcher is:
 ```bash
 bash scripts/orchestration/run_uma_cat_catalyst_gt_8round.sh
 ```
+
+### Real LigandMPNN GFlowNet fine-tuning
+
+For catalytic runs, LigandMPNN is now the default trainable sequence
+generator. Each round writes:
+
+- `runs/<run_id>/round_<id>/models/ligandmpnn_gflownet_round_<id>.pt`
+- `runs/<run_id>/round_<id>/models/ligandmpnn_generator_metrics.json`
+- `runs/<run_id>/round_<id>/metrics/ligandmpnn_generator_history_round_<id>.jsonl`
+- `runs/<run_id>/round_<id>/metrics/ligandmpnn_pool_metrics_round_<id>.json`
+
+The generator training script runs an actual optimizer step through
+LigandMPNN's differentiable `ProteinMPNN.score(...)` path. The default
+objective is trajectory balance over canonical edit trajectories reconstructed
+from the current round dataset:
+
+```text
+L_TB = (log Z(seed) + log P_F^LigandMPNN(traj) - log R(x) - log P_B(traj | x))^2
+```
+
+where `P_F^LigandMPNN` is computed from real LigandMPNN residue logits at each
+intermediate edited sequence state, `R(x)` is the positive fused oracle reward,
+and `P_B` is the uniform reverse trajectory probability for the edit set. The
+checkpoint also stores the trainable stop head and per-seed `log Z` table under
+`thermogfn_gflownet_state`. A small supervised NLL term is kept as an auxiliary
+anchor so early rounds with only baseline rows do not leave the decoder
+unconstrained; `reward_weighted_nll` remains available only as an explicit
+fallback objective.
+
+The default trainable scope is `decoder`, which updates `W_s`, the decoder
+layers, and `W_out` while keeping the structural encoder stable. Use
+`generator.ligandmpnn.train.train_scope: full` only when the labeled dataset and
+GPU budget are large enough to justify full-model fine-tuning.
+
+Candidate generation samples from the tuned LigandMPNN checkpoint. The default
+`pocket_random` mask fixes most of the chain and lets LigandMPNN redesign a
+small pocket-biased residue subset:
+
+```yaml
+generator:
+  backend: ligandmpnn
+  ligandmpnn:
+    checkpoint: models/LigandMPNN/model_params/ligandmpnn_v_32_010_25.pt
+    train:
+      enabled: true
+      objective: trajectory_balance
+      steps: 15000
+      train_scope: decoder
+      learning_rate: 1.0e-5
+      reward_weight_mode: reward
+      baseline_weight: 0.10
+      reward_floor: 1.0e-3
+      tb_labeled_fraction: 0.75
+      anchor_l2: 1.0e-6
+    sample:
+      mutable_mode: pocket_random
+      min_mutations: 3
+      max_mutations: 12
+      pocket_fraction: 0.75
+      temperature: 0.2
+```
+
+This still uses real LigandMPNN autoregressive sampling for the mutable
+positions; it simply keeps the rest of the seed sequence fixed so catalytic
+rounds do not default to whole-enzyme redesigns with hundreds of mutations.
+Set `mutable_mode: full_chain` only for deliberate full redesign experiments.
 
 All updated orchestration scripts accept `--config` and allow CLI overrides.
 `scripts/orchestration/uma_cat_m3_run_experiment.py` can now read `run.run_id`,
@@ -275,8 +351,10 @@ This is now the primary catalytic Method III path in the repo. It is self-contai
 Core idea:
 
 - build catalytic candidates from RF3 reactant-bound and product-bound outputs,
-- train / deploy the current Method III student through LigandMPNN packing and proposal infrastructure,
-- repack the selected student candidates with LigandMPNN,
+- fit the round surrogate and trajectory-balance teacher for reward modeling and diagnostics,
+- fine-tune the real LigandMPNN sequence generator on the current round dataset,
+- sample the next candidate pool from the tuned LigandMPNN checkpoint with ligand atom context and a pocket-biased mutation mask,
+- repack the selected generated candidates with LigandMPNN side-chain packing,
 - run a broad whole-enzyme UMA equilibrium screen from the reactant-bound basin using FAIRChem `FAIRChemCalculator(..., task_name="omol")`,
 - optionally run forward and reverse steered UMA dynamics only when the reactant/product ligand endpoints are fully atom-mapped and topology-preserving,
 - optionally reconstruct a path umbrella PMF only from that validated topology-preserving sMD path,
@@ -358,8 +436,8 @@ oracles:
 Default catalytic routing in that config:
 
 - `generator.backend = ligandmpnn`
-- `round.graphkcat_prefilter_fraction = 0.0`
-- `round.graphkcat_budget = 0`
+- `round.graphkcat_prefilter_fraction = 1.0`
+- `round.graphkcat_budget = 256`
 - `oracles.packer.parse_atoms_with_zero_occupancy = 1` for the copied RF3
   endpoint CIFs, which preserve many generated atom coordinates with zero
   occupancy fields
@@ -383,18 +461,24 @@ Default catalytic routing in that config:
 - `oracles.uma_cat.smd.reverse = true`
 - `oracles.uma_cat.pmf.enabled = false`
 - `oracles.uma_cat.pmf.windows = 20`, `steps_per_window = 200`, `replicas = 2` when PMF is enabled
-- GraphKcat disabled by default in the RL loop
+- GraphKcat enabled by default as a packed-structure auxiliary prefilter
 - SPURS, BioEmu, KcatNet, MMKcat, and thermostability UMA are not part of this default RL loop
 
 That means the default round order is:
 
-1. student proposes the pool
-2. UMA-cat acquisition selects the expensive subset
-3. LigandMPNN packs that selected subset onto the endpoint complexes
-4. UMA-cat runs broad dynamics plus optional sMD / PMF
-5. fused reward is computed from UMA-cat
+1. surrogate and TB teacher are fit on `D_r`
+2. LigandMPNN sequence weights are trajectory-balance fine-tuned and saved as `ligandmpnn_gflownet_round_<r>.pt`
+3. the tuned LigandMPNN checkpoint proposes the candidate pool
+4. UMA-cat acquisition selects the expensive subset
+5. LigandMPNN packs that selected subset onto the endpoint complexes
+6. UMA-cat runs broad dynamics plus optional sMD / PMF
+7. fused reward is computed and appended into `D_{r+1}`
 
-GraphKcat is still available as an optional auxiliary oracle, but it is not part of the default path because many catalytic reactant/product ligands in the RF3-derived dataset are disconnected, metal-containing, or otherwise incompatible with the current GraphKcat preprocessing stack.
+GraphKcat is part of the default path as an auxiliary oracle. It still rejects
+unsupported elements and invalid chemistry, but disconnected supported reactant
+mixtures are normalized to the largest bonded carbon-containing substrate
+fragment for GraphKcat scoring, with the exact selected input recorded on each
+row.
 
 For the current Catalyst-GT 8-round run, GraphKcat is intentionally on. That
 run uses `config/uma_cat_catalyst_gt_graphkcat_8round.yaml`, packs the generated
@@ -579,6 +663,13 @@ conda run -n apodock python scripts/prep/oracles/graphkcat_score.py \
 By default this wrapper now:
 
 - materializes the **packed mutant protein structure** for GraphKcat scoring,
+- normalizes disconnected reactant mixtures into the largest bonded
+  carbon-containing substrate fragment before GraphKcat scoring,
+- writes the exact `graphkcat_input_smiles`, ligand source, fragment policy,
+  and input-fragment count on each scored row,
+- retries RDKit conformer generation with deterministic ETKDGv3 seeds,
+  chirality-relaxed fallback, random-coordinate fallback, and MMFF/UFF
+  optimization fallback,
 - runs MC-dropout predictive inference,
 - writes:
   - `graphkcat_log_kcat`
@@ -614,7 +705,8 @@ The fused rows include:
 
 ### Run a catalytic test training round
 
-Start with a tiny real round that exercises the Method III teacher/student,
+Start with a tiny real round that exercises the Method III teacher diagnostics,
+actual LigandMPNN sequence-generator fine-tuning, LigandMPNN candidate sampling,
 LigandMPNN packing, real `uma-s-1p2` broad MD through the installed `fairchem`
 package, catalytic reward fusion, and dataset append. Leave sMD and PMF off for
 the first test so failures are easier to localize.
@@ -643,7 +735,39 @@ Select one row for the first test:
 head -n 1 runs/tmp/uma_cat_catalyst_gt_train_test.jsonl > runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl
 ```
 
-Run the first broad-UMA training smoke:
+Optional generator-only smoke before launching UMA:
+
+```bash
+conda run --no-capture-output -n ligandmpnn_env python scripts/train/m3_train_ligandmpnn_generator.py \
+  --input-dr runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl \
+  --output-dir runs/tmp/ligandmpnn_gfn_smoke/models \
+  --round-id 0 \
+  --ligandmpnn-root models/LigandMPNN \
+  --base-checkpoint models/LigandMPNN/model_params/ligandmpnn_v_32_010_25.pt \
+  --device cuda:0 \
+  --objective trajectory_balance \
+  --steps 1 \
+  --max-records 1 \
+  --no-progress
+
+conda run --no-capture-output -n ligandmpnn_env python scripts/train/m3_generate_ligandmpnn_pool.py \
+  --generator-ckpt runs/tmp/ligandmpnn_gfn_smoke/models/ligandmpnn_gflownet_round_0.pt \
+  --input-dr runs/tmp/uma_cat_catalyst_gt_train_test_1.jsonl \
+  --output-path runs/tmp/ligandmpnn_gfn_smoke/candidate_pool.jsonl \
+  --run-id ligandmpnn_gfn_smoke \
+  --round-id 0 \
+  --ligandmpnn-root models/LigandMPNN \
+  --device cuda:0 \
+  --pool-size 2 \
+  --mutable-mode pocket_random \
+  --min-mutations 3 \
+  --max-mutations 8 \
+  --no-progress
+```
+
+Run the first broad-UMA training smoke. This intentionally disables GraphKcat
+so the test isolates the UMA runtime and avoids loading the large ESM2/Uni-Mol
+GraphKcat stack:
 
 ```bash
 python scripts/orchestration/uma_cat_m3_run_round.py \
@@ -657,7 +781,10 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --graphkcat-prefilter-fraction 0.0 \
   --graphkcat-budget 0 \
   --teacher-steps 8 \
-  --student-steps 8 \
+  --ligandmpnn-train-steps 8 \
+  --ligandmpnn-max-records 1 \
+  --ligandmpnn-min-mutations 3 \
+  --ligandmpnn-max-mutations 8 \
   --packer-sc-num-denoising-steps 1 \
   --packer-sc-num-samples 1 \
   --packer-parse-atoms-with-zero-occupancy 1 \
@@ -678,8 +805,11 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
 
 Expected outputs:
 
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/models/ligandmpnn_gflownet_round_0.pt`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/metrics/ligandmpnn_generator_history_round_0.jsonl`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/metrics/ligandmpnn_pool_metrics_round_0.json`
 - `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/uma_artifacts/*/broad_rows.jsonl`
-- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/uma_scored_round_0.jsonl`
+- `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/uma_cat_scored_round_0.jsonl`
 - `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/data/D_1.jsonl`
 - `runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000/metrics/round_metrics.json`
 
@@ -693,7 +823,7 @@ from pathlib import Path
 root = Path("runs/tmp/uma_cat_catalyst_gt_test_train_broad/round_000")
 rows = [
     json.loads(line)
-    for line in (root / "data/uma_scored_round_0.jsonl").read_text().splitlines()
+    for line in (root / "data/uma_cat_scored_round_0.jsonl").read_text().splitlines()
     if line.strip()
 ]
 print("rows", len(rows))
@@ -708,7 +838,8 @@ print("artifact dirs", len(list((root / "data/uma_artifacts").glob("*"))))
 PY
 ```
 
-After the broad test passes, run a tiny sMD smoke on the same one-row dataset:
+After the broad test passes, run a tiny sMD smoke on the same one-row dataset.
+This also keeps GraphKcat disabled so the sMD quality path is isolated:
 
 ```bash
 python scripts/orchestration/uma_cat_m3_run_round.py \
@@ -722,7 +853,10 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --graphkcat-prefilter-fraction 0.0 \
   --graphkcat-budget 0 \
   --teacher-steps 8 \
-  --student-steps 8 \
+  --ligandmpnn-train-steps 8 \
+  --ligandmpnn-max-records 1 \
+  --ligandmpnn-min-mutations 3 \
+  --ligandmpnn-max-mutations 8 \
   --packer-sc-num-denoising-steps 1 \
   --packer-sc-num-samples 1 \
   --packer-parse-atoms-with-zero-occupancy 1 \
@@ -775,8 +909,8 @@ python scripts/orchestration/uma_cat_m3_run_round.py \
   --output-dir runs/uma_cat_demo/round_000 \
   --pool-size 50000 \
   --uma-cat-budget 256 \
-  --graphkcat-prefilter-fraction 0.0 \
-  --graphkcat-budget 0 \
+  --graphkcat-prefilter-fraction 1.0 \
+  --graphkcat-budget 256 \
   --uma-env-name fairchem \
   --uma-model-name uma-s-1p2
 ```
@@ -804,10 +938,13 @@ The wrapper uses:
 - generated training JSONL: `runs/bootstrap/uma_cat_catalyst_gt_train.jsonl`
 - output root: `runs/uma_cat_catalyst_gt_graphkcat_8round`
 - rounds: `8`
-- generator / packer: LigandMPNN
+- trainable generator: LigandMPNN sequence model, checkpointed every round
+- candidate sampler: tuned LigandMPNN with `pocket_random` mutable mask
+- side-chain packer: LigandMPNN side-chain packer
 - UMA env/model: `fairchem` / `uma-s-1p2`
 - GraphKcat env: `apodock`
 - GraphKcat prefilter: enabled with `round.graphkcat_prefilter_fraction = 1.0`
+- UMA-cat budget: `round.uma_cat_budget = 16`
 - W&B: enabled from the config in `auto` mode
 
 The wrapper will build `runs/bootstrap/uma_cat_catalyst_gt_train.jsonl` from
@@ -818,6 +955,10 @@ without launching expensive training or oracle stages.
 The wrapper now preflights required conda env presence from the config before
 launching. With GraphKcat enabled, `apodock` must exist; otherwise the wrapper
 fails immediately instead of after teacher training and LigandMPNN packing.
+Strict round gates also require at least one successful UMA-cat result, and
+when sMD quality diagnostics are emitted, at least one quality-passing sMD
+trajectory. This prevents a round from passing on GraphKcat-only or fallback
+reward labels when UMA failed.
 
 To rebuild the Catalyst-GT JSONL from the split before launching:
 
@@ -873,23 +1014,25 @@ The current implementation logs all of the following into W\&B and to structured
 
 - surrogate bootstrap metrics: bootstrap index, bootstrap size, target mean/std, coefficient norm;
 - trajectory-balance teacher metrics: `loss`, `off_loss`, `on_loss`, `reg_loss`, `delta_abs`, `lr`, `grad_norm_pre_clip`, `grad_norm_post_clip`, `mean_stop_prob`, `mean_log_z`;
-- student-distillation metrics: sampled-fraction, sampled mutation-count mean, mutation-count entropy, distinct sampled `K`, distinct seed families;
-- generated-pool summary metrics: pool size, mutation-order summary, sequence uniqueness;
+- LigandMPNN GFlowNet metrics: checkpoint path, source checkpoint, objective, train scope, trainable parameter count, TB loss, TB residual, log reward, supervised NLL auxiliary loss, anchor loss, and gradient norm;
+- generated LigandMPNN pool metrics: pool size, mutation-order summary, sequence uniqueness, mutable-mask mode, and sampled `K`;
+- student-distillation metrics only for non-default ablation backends that still use the lightweight one-shot student;
 - GraphKcat pool and selected-set summaries, including success fraction and mean predicted `log_kcat`;
 - UMA-cat summary metrics, including success fraction and mean catalytic `log10_rate_proxy`;
-- round-level summaries, teacher-student evaluation summaries, append summaries, and gate reports.
+- round-level summaries, generator-training summaries, append summaries, and gate reports.
 
 For a catalytic round, the main metric files are:
 
 - `runs/<run_id>/round_<id>/metrics/surrogate_history_round_<id>.jsonl`
 - `runs/<run_id>/round_<id>/metrics/teacher_history_round_<id>.jsonl`
-- `runs/<run_id>/round_<id>/metrics/student_history_round_<id>.jsonl`
-- `runs/<run_id>/round_<id>/metrics/student_pool_metrics_round_<id>.json`
+- `runs/<run_id>/round_<id>/models/ligandmpnn_gflownet_round_<id>.pt`
+- `runs/<run_id>/round_<id>/models/ligandmpnn_generator_metrics.json`
+- `runs/<run_id>/round_<id>/metrics/ligandmpnn_generator_history_round_<id>.jsonl`
+- `runs/<run_id>/round_<id>/metrics/ligandmpnn_pool_metrics_round_<id>.json`
 - `runs/<run_id>/round_<id>/metrics/graphkcat_pool_summary_round_<id>.json`
 - `runs/<run_id>/round_<id>/metrics/graphkcat_selected_summary_round_<id>.json`
 - `runs/<run_id>/round_<id>/metrics/uma_cat_summary_round_<id>.json`
 - `runs/<run_id>/round_<id>/metrics/round_metrics.json`
-- `runs/<run_id>/round_<id>/metrics/teacher_student_eval.json`
 - `runs/<run_id>/round_<id>/manifests/append_summary.json`
 - `runs/<run_id>/round_<id>/manifests/round_gate_report.json`
 
@@ -897,7 +1040,7 @@ Progress reporting is also layered intentionally:
 
 - experiment runner: one tqdm bar over rounds;
 - round runner: one tqdm bar over orchestration steps;
-- trainer steps: detailed per-step logging for the surrogate, TB teacher, and student distillation;
+- trainer steps: detailed per-step logging for the surrogate, TB teacher, and LigandMPNN generator fine-tuning;
 - oracle stages: their own tqdm or staged logging where available;
 - every long-running subprocess still emits heartbeat-style log lines via `--step-heartbeat-sec`.
 
@@ -905,9 +1048,12 @@ Use `--no-progress` only when you need log-only operation, for example in CI or 
 
 ### Practical notes
 
-- The implemented `Method III` controller is now a real trajectory-balance GFlowNet teacher over the canonical edit DAG, followed by one-shot student distillation.
+- The default implemented catalytic `Method III` controller now trajectory-balance fine-tunes the actual LigandMPNN sequence generator each round.
+- The separate trajectory-balance teacher over the canonical edit DAG remains active for reward modeling and diagnostics.
 - The teacher uses explicit `STOP -> position -> amino-acid` factorization on canonical edit trajectories reconstructed from labeled candidates, with per-seed `log Z` and a TB loss on terminal reward.
-- The deployed student is still one shot. It is distilled from teacher samples into `K`, position, and residue-replacement marginals so deployment remains fast while teacher training remains truly reward-proportional.
+- The LigandMPNN generator training script uses the same canonical trajectory idea, but computes edit-action probabilities from real LigandMPNN logits and backpropagates the TB objective into the LigandMPNN decoder by default.
+- The non-default lightweight one-shot student path is retained only for ablations and legacy comparison.
+- The deployed default candidate pool is sampled from `ligandmpnn_gflownet_round_<id>.pt`, using ligand context and a configurable mutable-residue mask.
 - The default catalytic path contains no mock scoring branch: LigandMPNN packing and UMA broad screening are real runtime stages, and sMD/PMF are real FAIRChem/ASE stages only for topology-preserving endpoint protocols.
 - Topology-changing ligand endpoints, incomplete ligand maps, and unsupported reaction paths are not morphed through artificial bond schedules; they are marked `unsupported_reactive_path` and do not contribute a valid `log10 k_proxy`.
 - `oracles.uma_cat.smd.enabled` and `oracles.uma_cat.smd.reverse` control forward/reverse steering.
@@ -915,11 +1061,49 @@ Use `--no-progress` only when you need log-only operation, for example in CI or 
 - `oracles.uma_cat.pmf.every_n_rounds` controls PMF cadence when PMF is enabled. `1` means every round, `2` means every other round, and so on.
 - The default UMA profile is now intentionally higher quality than the earlier smoke-style settings: longer broad screening, more replicas, and gentler but longer sMD pulls.
 - The broad screen, supported sMD, and supported PMF are all real FAIRChem/ASE runs through the installed `fairchem` environment; this path does not use static proxy replacements.
-- GraphKcat remains available as an optional auxiliary oracle, but it is disabled in the default catalytic training preset because the RF3-derived catalytic ligands frequently violate its single-fragment organic preprocessing assumptions.
+- GraphKcat is enabled in the default catalytic training preset as an auxiliary prefilter/refinement oracle. The wrapper handles disconnected reactant mixtures by scoring the largest bonded carbon-containing substrate fragment and recording the exact GraphKcat input fields on output rows.
 - The default telemetry path is also real: the round/experiment runners ingest child histories and oracle summaries back into W\&B rather than emitting only parent-process timestamps.
 - Round and experiment manifests now record per-stage peak VRAM from `nvidia-smi`, and the GraphKcat summary JSON records peak VRAM for the `predict.py` stage as well.
 
 ### Current validation status
+
+LigandMPNN trajectory-balance GFlowNet fine-tuning was smoke-tested with real
+model code:
+
+```bash
+conda run --no-capture-output -n ligandmpnn_env python scripts/train/m3_train_ligandmpnn_generator.py \
+  --input-dr runs/bootstrap/uma_cat_catalyst_gt_train.jsonl \
+  --output-dir runs/tmp/ligandmpnn_gfn_smoke/models \
+  --round-id 0 \
+  --ligandmpnn-root models/LigandMPNN \
+  --base-checkpoint models/LigandMPNN/model_params/ligandmpnn_v_32_010_25.pt \
+  --device cuda:0 \
+  --objective trajectory_balance \
+  --steps 1 \
+  --max-records 1 \
+  --no-progress
+
+conda run --no-capture-output -n ligandmpnn_env python scripts/train/m3_generate_ligandmpnn_pool.py \
+  --generator-ckpt runs/tmp/ligandmpnn_gfn_smoke/models/ligandmpnn_gflownet_round_0.pt \
+  --input-dr runs/bootstrap/uma_cat_catalyst_gt_train.jsonl \
+  --output-path runs/tmp/ligandmpnn_gfn_smoke/candidate_pool.jsonl \
+  --metrics-path runs/tmp/ligandmpnn_gfn_smoke/ligandmpnn_pool_metrics_round_0.json \
+  --run-id ligandmpnn_gfn_smoke \
+  --round-id 0 \
+  --ligandmpnn-root models/LigandMPNN \
+  --device cuda:0 \
+  --pool-size 2 \
+  --mutable-mode pocket_random \
+  --min-mutations 3 \
+  --max-mutations 12 \
+  --no-progress
+```
+
+The smoke run performs a real backward pass through `ProteinMPNN.score(...)`,
+writes `ligandmpnn_gflownet_round_0.pt`, samples schema-valid candidates from
+that checkpoint with `generator_training_objective = trajectory_balance`, and
+verifies the generated candidates can be side-chain packed by
+`scripts/prep/oracles/ligandmpnn_pack_candidates.py`.
 
 The UMA runtime is now guarded by focused unit tests that enforce the no-fallback policy:
 
@@ -1701,7 +1885,7 @@ Notes:
 - Required runtime prerequisites for successful round execution:
   - writable Hugging Face cache directory for gated model assets unless caches are already populated,
   - cached `facebook/UMA` checkpoint available to the `fairchem` environment for the default catalytic path,
-  - valid `fairchem` runtime for UMA-cat, plus `ligandmpnn_env` for packing,
+  - valid `fairchem` runtime for UMA-cat, `ligandmpnn_env` for sequence generation/packing, and `apodock` for GraphKcat,
   - legacy `spurs`, `bioemu`, and `uma-qc` environments only for the older stability/binding path.
 
 ## Existing generation utilities

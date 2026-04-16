@@ -14,13 +14,31 @@ generator:
   ligandmpnn:
     env_name: ligandmpnn_env
     model_type: ligand_mpnn
-    checkpoint: ""
+    checkpoint: models/LigandMPNN/model_params/ligandmpnn_v_32_010_25.pt
     use_atom_context: 1
     parse_atoms_with_zero_occupancy: 1
     run_heartbeat_sec: 5
-    batch_size: 1
-    number_of_batches: 1
-    temperature: 0.2
+    train:
+      enabled: true
+      objective: trajectory_balance
+      steps: 15000
+      batch_size: 1
+      learning_rate: 1.0e-5
+      weight_decay: 1.0e-4
+      train_scope: decoder
+      reward_weight_mode: reward
+      baseline_weight: 0.10
+      reward_floor: 1.0e-3
+      tb_labeled_fraction: 0.75
+      anchor_l2: 1.0e-6
+      max_records: 0
+    sample:
+      batch_size: 1
+      temperature: 0.2
+      mutable_mode: pocket_random
+      min_mutations: 3
+      max_mutations: 12
+      pocket_fraction: 0.75
 
 oracles:
   envs:
@@ -129,7 +147,7 @@ oracles:
 
 round:
   pool_size: 128
-  uma_cat_budget: 4
+  uma_cat_budget: 16
   graphkcat_budget: 32
   graphkcat_prefilter_fraction: 1.0
   graphkcat_prefilter_risk_kappa: 0.5
@@ -139,7 +157,7 @@ round:
 method3:
   rounds: 8
   surrogate_ensemble_size: 8
-  teacher_steps: 30000
+  teacher_steps: 3000
   teacher_gamma_off: 0.5
   student_steps: 15000
 

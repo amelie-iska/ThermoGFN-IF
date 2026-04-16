@@ -118,49 +118,178 @@ def _materialize_protein_pdb(rec: dict, protein_out: Path, root: Path) -> None:
     raise ValueError(f"unsupported protein source extension: {source}")
 
 
-def _materialize_ligand_sdf(rec: dict, ligand_out: Path, root: Path) -> str:
-    ligand_path = rec.get("ligand_path")
-    if ligand_path:
-        p = Path(str(ligand_path))
-        if not p.is_absolute():
-            p = root / p
-        if p.exists() and p.suffix.lower() == ".sdf":
-            shutil.copy2(p, ligand_out)
-            return str(ligand_out)
+def _validate_sdf_has_conformer(path: Path) -> None:
+    from rdkit import Chem
 
+    mol = None
+    for sanitize in (True, False):
+        mol = Chem.MolFromMolFile(str(path), sanitize=sanitize, removeHs=False)
+        if mol is not None and mol.GetNumAtoms() > 0 and mol.GetNumConformers() > 0:
+            return
+    raise ValueError(f"ligand SDF is not parseable or has no conformer: {path}")
+
+
+def _pick_graphkcat_substrate_mol(smiles: str, *, candidate_id: str | None = None):
+    """Return the molecule GraphKcat should score from a possibly disconnected mixture."""
+    from rdkit import Chem
+
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        raise ValueError(f"invalid substrate smiles for candidate_id={candidate_id}: {smiles}")
+
+    unsupported_atoms = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - GRAPHKCAT_SUPPORTED_ATOMS)
+    if unsupported_atoms:
+        raise ValueError(
+            "GraphKcat unsupported ligand atom types for candidate_id="
+            f"{candidate_id}: {','.join(unsupported_atoms)}"
+        )
+
+    fragments = list(Chem.GetMolFrags(mol, asMols=True, sanitizeFrags=True))
+    if not fragments:
+        raise ValueError(f"GraphKcat found no ligand fragments for candidate_id={candidate_id}")
+
+    bonded = [frag for frag in fragments if frag.GetNumBonds() > 0]
+    if not bonded:
+        raise ValueError(f"GraphKcat requires a bonded substrate molecule for candidate_id={candidate_id}")
+
+    def sort_key(frag):
+        symbols = [atom.GetSymbol() for atom in frag.GetAtoms()]
+        has_carbon = any(sym == "C" for sym in symbols)
+        heavy_atoms = sum(1 for atom in frag.GetAtoms() if atom.GetAtomicNum() > 1)
+        return (1 if has_carbon else 0, heavy_atoms, frag.GetNumBonds(), frag.GetNumAtoms())
+
+    selected = max(bonded, key=sort_key)
+    selected_smiles = Chem.MolToSmiles(selected, canonical=True, isomericSmiles=True)
+    policy = "full_smiles" if len(fragments) == 1 else "largest_bonded_carbon_fragment"
+    return selected, selected_smiles, policy, len(fragments)
+
+
+def _embed_molecule_robust(mol, *, candidate_id: str | None = None):
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+
+    # Work on a copy so callers can still inspect the original sanitized molecule.
+    mol_h = Chem.AddHs(Chem.Mol(mol))
+    attempts: list[tuple[int, bool, bool]] = []
+    for seed in (13, 29, 73, 173, 997, 2027):
+        attempts.append((seed, True, False))
+    for seed in (13, 73, 997):
+        attempts.append((seed, False, False))
+    for seed in (13, 73, 997):
+        attempts.append((seed, False, True))
+
+    last_code = None
+    for seed, enforce_chirality, random_coords in attempts:
+        trial = Chem.Mol(mol_h)
+        params = AllChem.ETKDGv3()
+        params.randomSeed = int(seed)
+        params.enforceChirality = bool(enforce_chirality)
+        params.useRandomCoords = bool(random_coords)
+        params.useSmallRingTorsions = True
+        params.useMacrocycleTorsions = True
+        try:
+            params.maxAttempts = 2000
+        except AttributeError:
+            pass
+        code = AllChem.EmbedMolecule(trial, params)
+        last_code = code
+        if code != 0:
+            continue
+        _optimize_embedded_molecule(trial)
+        return trial, {
+            "seed": int(seed),
+            "enforce_chirality": bool(enforce_chirality),
+            "use_random_coords": bool(random_coords),
+        }
+
+    # Final fallback: many conformers with random coordinates, then use the first valid conformer.
+    trial = Chem.Mol(mol_h)
+    params = AllChem.ETKDGv3()
+    params.randomSeed = 31013
+    params.enforceChirality = False
+    params.useRandomCoords = True
+    params.useSmallRingTorsions = True
+    params.useMacrocycleTorsions = True
+    ids = list(AllChem.EmbedMultipleConfs(trial, numConfs=24, params=params))
+    if ids:
+        keep = int(ids[0])
+        for conf_id in ids[1:]:
+            trial.RemoveConformer(int(conf_id))
+        _optimize_embedded_molecule(trial, conf_id=keep)
+        return trial, {
+            "seed": 31013,
+            "enforce_chirality": False,
+            "use_random_coords": True,
+            "multi_conf_fallback": True,
+        }
+
+    raise RuntimeError(
+        f"RDKit embedding failed for candidate_id={candidate_id}; last_embed_code={last_code}"
+    )
+
+
+def _optimize_embedded_molecule(mol, *, conf_id: int = -1) -> None:
+    from rdkit.Chem import AllChem
+
+    try:
+        if AllChem.MMFFHasAllMoleculeParams(mol):
+            props = AllChem.MMFFGetMoleculeProperties(mol)
+            if props is not None:
+                AllChem.MMFFOptimizeMolecule(mol, mmffVariant="MMFF94s", confId=conf_id, maxIters=500)
+                return
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        AllChem.UFFOptimizeMolecule(mol, confId=conf_id, maxIters=500)
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _materialize_ligand_sdf(rec: dict, ligand_out: Path, root: Path) -> dict[str, object]:
+    ligand_path = rec.get("ligand_path")
     smiles = _pick_substrate_smiles(rec)
     if not smiles:
         raise ValueError(
             f"missing ligand path and substrate smiles for candidate_id={rec.get('candidate_id')}"
         )
+    selected_mol, selected_smiles, policy, n_fragments = _pick_graphkcat_substrate_mol(
+        smiles,
+        candidate_id=str(rec.get("candidate_id") or ""),
+    )
+
+    if ligand_path and policy == "full_smiles":
+        p = Path(str(ligand_path))
+        if not p.is_absolute():
+            p = root / p
+        if p.exists() and p.suffix.lower() == ".sdf":
+            shutil.copy2(p, ligand_out)
+            _validate_sdf_has_conformer(ligand_out)
+            return {
+                "path": str(ligand_out),
+                "smiles": selected_smiles,
+                "source": "existing_sdf",
+                "fragment_policy": policy,
+                "n_fragments": int(n_fragments),
+            }
 
     from rdkit import Chem
-    from rdkit.Chem import AllChem
 
-    mol = Chem.MolFromSmiles(smiles)
-    if mol is None:
-        raise ValueError(f"invalid substrate smiles for candidate_id={rec.get('candidate_id')}: {smiles}")
-    unsupported_atoms = sorted({atom.GetSymbol() for atom in mol.GetAtoms()} - GRAPHKCAT_SUPPORTED_ATOMS)
-    if unsupported_atoms:
-        raise ValueError(
-            "GraphKcat unsupported ligand atom types for candidate_id="
-            f"{rec.get('candidate_id')}: {','.join(unsupported_atoms)}"
-        )
-    if mol.GetNumBonds() == 0:
-        raise ValueError(
-            f"GraphKcat requires a bonded substrate molecule for candidate_id={rec.get('candidate_id')}"
-        )
-    mol = Chem.AddHs(mol)
-    if AllChem.EmbedMolecule(mol, AllChem.ETKDG()) != 0:
-        raise RuntimeError(f"RDKit embedding failed for candidate_id={rec.get('candidate_id')}")
-    try:
-        AllChem.MMFFOptimizeMolecule(mol)
-    except Exception:  # noqa: BLE001
-        pass
+    mol, embed_info = _embed_molecule_robust(
+        selected_mol,
+        candidate_id=str(rec.get("candidate_id") or ""),
+    )
     writer = Chem.SDWriter(str(ligand_out))
     writer.write(mol)
     writer.close()
-    return str(ligand_out)
+    _validate_sdf_has_conformer(ligand_out)
+    return {
+        "path": str(ligand_out),
+        "smiles": selected_smiles,
+        "source": "rdkit_etkdg",
+        "fragment_policy": policy,
+        "n_fragments": int(n_fragments),
+        "embed_info": embed_info,
+    }
 
 
 def _graphkcat_subprocess_env(base_env: dict[str, str]) -> dict[str, str]:
@@ -298,6 +427,7 @@ def main() -> int:
 
             fieldnames = ["id", "complex", "ligand", "protein", "Organism", "substrate", "Smiles", "pH", "Temp"]
             prep_errors: dict[str, str] = {}
+            graph_inputs: dict[str, dict[str, object]] = {}
             with csv_path.open("w", newline="", encoding="utf-8") as fh:
                 writer = csv.DictWriter(fh, fieldnames=fieldnames)
                 writer.writeheader()
@@ -315,17 +445,18 @@ def main() -> int:
                         ligand_path = cdir / f"{cid}_ligand.sdf"
 
                         _materialize_protein_pdb(rec, protein_path, root)
-                        _materialize_ligand_sdf(rec, ligand_path, root)
+                        ligand_info = _materialize_ligand_sdf(rec, ligand_path, root)
 
-                        smiles = _pick_substrate_smiles(rec)
+                        smiles = str(ligand_info["smiles"])
                         if not smiles:
                             raise ValueError(f"missing substrate smiles for candidate_id={cid}")
+                        graph_inputs[cid] = dict(ligand_info)
 
                         writer.writerow(
                             {
                                 "id": cid,
                                 "complex": "",
-                                "ligand": str(ligand_path),
+                                "ligand": str(ligand_info["path"]),
                                 "protein": str(protein_path),
                                 "Organism": rec.get("Organism") or rec.get("organism") or args.organism_default,
                                 "substrate": rec.get("substrate") or "",
@@ -403,6 +534,13 @@ def main() -> int:
             for rec in iter_progress(rows, total=len(rows), desc="graphkcat:merge", no_progress=args.no_progress):
                 row = dict(rec)
                 cid = str(rec.get("candidate_id") or "").strip()
+                if cid in graph_inputs:
+                    row["graphkcat_input_smiles"] = graph_inputs[cid].get("smiles")
+                    row["graphkcat_ligand_source"] = graph_inputs[cid].get("source")
+                    row["graphkcat_fragment_policy"] = graph_inputs[cid].get("fragment_policy")
+                    row["graphkcat_input_fragment_count"] = graph_inputs[cid].get("n_fragments")
+                    if graph_inputs[cid].get("embed_info") is not None:
+                        row["graphkcat_embed_info"] = graph_inputs[cid].get("embed_info")
                 if cid in prep_errors:
                     row["graphkcat_status"] = "error"
                     row["graphkcat_error"] = prep_errors[cid]

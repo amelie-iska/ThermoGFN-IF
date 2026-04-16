@@ -53,9 +53,36 @@ def summarize_graphkcat_rows(rows: list[dict]) -> dict[str, Any]:
     valid = [row for row in rows if str(row.get("graphkcat_status", "")) == "ok"]
     log_kcat = [float(v) for v in (_safe_float(row.get("graphkcat_log_kcat")) for row in valid) if v is not None]
     stds = [float(v) for v in (_safe_float(row.get("graphkcat_std")) for row in valid) if v is not None]
+    error_counts: Counter[str] = Counter()
+    fragment_policy_counts = Counter(str(row.get("graphkcat_fragment_policy", "missing")) for row in rows)
+    ligand_source_counts = Counter(str(row.get("graphkcat_ligand_source", "missing")) for row in rows)
+    for row in rows:
+        if str(row.get("graphkcat_status", "")) == "ok":
+            continue
+        msg = str(row.get("graphkcat_error", "")).lower()
+        if "rdkit embedding failed" in msg:
+            key = "rdkit_embedding_failed"
+        elif "missing prediction" in msg:
+            key = "missing_prediction"
+        elif "unsupported ligand atom" in msg:
+            key = "unsupported_ligand_atom"
+        elif "bonded substrate" in msg or "no bond" in msg:
+            key = "unbonded_ligand"
+        elif "invalid substrate smiles" in msg:
+            key = "invalid_smiles"
+        elif "pocket" in msg:
+            key = "pocket_parse_or_empty"
+        elif "protein" in msg:
+            key = "protein_parse_or_empty"
+        else:
+            key = "other"
+        error_counts[key] += 1
     return {
         "n": len(rows),
         "status_counts": dict(status_counts),
+        "error_counts": dict(error_counts),
+        "fragment_policy_counts": dict(fragment_policy_counts),
+        "ligand_source_counts": dict(ligand_source_counts),
         "ok_fraction": float(len(valid)) / max(len(rows), 1),
         "log_kcat": _summary_stats(log_kcat),
         "std": _summary_stats(stds),
@@ -76,10 +103,23 @@ def summarize_uma_cat_rows(rows: list[dict]) -> dict[str, Any]:
         for v in (_safe_float(row.get("uma_cat_delta_g_chem_kcal_mol")) for row in valid)
         if v is not None
     ]
+    quality_flags = []
+    for row in valid:
+        value = row.get("uma_cat_smd_quality_pass")
+        if value is None:
+            continue
+        if isinstance(value, bool):
+            quality_flags.append(bool(value))
+        else:
+            quality_flags.append(str(value).strip().lower() in {"1", "true", "yes", "ok", "pass"})
+    quality_pass_count = sum(1 for value in quality_flags if value)
     return {
         "n": len(rows),
         "status_counts": dict(status_counts),
         "ok_fraction": float(len(valid)) / max(len(rows), 1),
+        "smd_quality_evaluated_count": int(len(quality_flags)),
+        "smd_quality_pass_count": int(quality_pass_count),
+        "smd_quality_pass_fraction": float(quality_pass_count) / max(len(quality_flags), 1),
         "log10_rate_proxy": _summary_stats(rate_proxy),
         "p_gnac": _summary_stats(p_gnac),
         "delta_g_chem_kcal_mol": _summary_stats(barrier),
